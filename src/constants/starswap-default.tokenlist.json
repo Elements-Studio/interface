@@ -1,0 +1,22 @@
+{
+  "name": "Starswap Default List",
+  "timestamp": "2021-01-21T23:57:10.982Z",
+  "version": {
+    "major": 2,
+    "minor": 0,
+    "patch": 0
+  },
+  "tags": {},
+  "logoURI": "ipfs://QmNa8mQkrNKp1WEEeGjFezDmDeodkWRevGFN8JCV7b4Xir",
+  "keywords": ["starswap", "default"],
+  "tokens": [
+    {
+      "chainId": 251,
+      "address": "0x9350502a3af6c617e9a42fa9e306a385::BX_USDT::BX_USDT",
+      "name": "BX_USDT",
+      "symbol": "BX_USDT",
+      "decimals": 9,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    }
+  ]
+}
