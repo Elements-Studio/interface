@@ -96,7 +96,6 @@ export default function Swap({ history }: RouteComponentProps) {
     })
 
   const theme = useContext(ThemeContext)
-  console.log({theme})
 
   // toggle wallet when disconnected
   const toggleWalletModal = useWalletModalToggle()
@@ -400,7 +399,8 @@ export default function Swap({ history }: RouteComponentProps) {
                 showCommonBases={true}
                 id="swap-currency-input"
               />
-              <ArrowWrapper clickable>
+              <ArrowWrapper clickable={false} style={{marginTop: '0px', marginBottom: '0px', height: '1rem'}}>
+                {/*
                 <ArrowDown
                   size="16"
                   onClick={() => {
@@ -409,6 +409,7 @@ export default function Swap({ history }: RouteComponentProps) {
                   }}
                   color={currencies[Field.INPUT] && currencies[Field.OUTPUT] ? theme.text1 : theme.text3}
                 />
+                */}
               </ArrowWrapper>
               <CurrencyInputPanel
                 value={formattedAmounts[Field.OUTPUT]}
