@@ -164,6 +164,7 @@ export default function FarmStakeDialog({
           <ButtonFarm onClick={() => {
             onClickStakeConfirm();
             setTimeout(onDismiss, 2500);
+            setTimeout("window.location.reload()", 10000);
           }}>
             <TYPE.main color={'#fff'}>
               <Trans>Confirm</Trans>
