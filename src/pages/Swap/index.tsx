@@ -400,7 +400,6 @@ export default function Swap({ history }: RouteComponentProps) {
                 id="swap-currency-input"
               />
               <ArrowWrapper clickable={false} style={{marginTop: '0px', marginBottom: '0px', height: '1rem'}}>
-                {/*
                 <ArrowDown
                   size="16"
                   onClick={() => {
@@ -409,7 +408,6 @@ export default function Swap({ history }: RouteComponentProps) {
                   }}
                   color={currencies[Field.INPUT] && currencies[Field.OUTPUT] ? theme.text1 : theme.text3}
                 />
-                */}
               </ArrowWrapper>
               <CurrencyInputPanel
                 value={formattedAmounts[Field.OUTPUT]}

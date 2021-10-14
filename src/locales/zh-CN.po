@@ -354,8 +354,8 @@ msgid "By adding this list you are implicitly trusting that the data is correct.
 msgstr "添加此代币列表代表您信任其数据是正确的。任何人都可以创建代币列表，包括创建假冒实际列表的造假版本，以及自我声称代表了某项目的代币列表。"
 
 #: src/components/WalletModal/index.tsx
-msgid "By connecting a wallet, you agree to Uniswap Labs’ <0>Terms of Service</0> and acknowledge that you have read and understand the <1>Uniswap protocol disclaimer</1>."
-msgstr "通过连接钱包，您同意接受 Uniswap 实验室的<0>服务条款</0>，并确认您已阅读和理解<1>Uniswap协议免责声明</1>。"
+msgid "By connecting a wallet, you agree to Starswap Labs’ <0>Terms of Service</0> and acknowledge that you have read and understand the <1>Starswap protocol disclaimer</1>."
+msgstr "通过连接钱包，您同意接受 Starswap 实验室的<0>服务条款</0>，并确认您已阅读和理解<1>Starswap协议免责声明</1>。"
 
 #: src/components/farm/FarmStakeDialog.tsx
 #: src/components/farm/FarmHarvestDialog.tsx
