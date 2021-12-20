@@ -3,6 +3,9 @@ import { Currency, Token } from '@uniswap/sdk-core'
 import { SupportedChainId } from './chains'
 import {
   BX_USDT,
+  FAI,
+  XUSDT,
+  XETH,
   USDX,
   AMPL,
   DAI,
@@ -63,7 +66,10 @@ const WETH_ONLY: ChainTokenList = {
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
   // [1]: [...WETH_ONLY[1], DAI, USDC, USDT, WBTC],
-  [SupportedChainId.BARNARD]: [BX_USDT[SupportedChainId.BARNARD]],
+  // [SupportedChainId.BARNARD]: [BX_USDT[SupportedChainId.BARNARD]],
+  [SupportedChainId.BARNARD]: [XUSDT[SupportedChainId.BARNARD]],
+  // [SupportedChainId.BARNARD]: [XETH[SupportedChainId.BARNARD]],
+  // [SupportedChainId.BARNARD]: [FAI[SupportedChainId.BARNARD]],
   // [SupportedChainId.BARNARD]: [USDX[SupportedChainId.BARNARD]],
 }
 export const ADDITIONAL_BASES: { [chainId: number]: { [tokenAddress: string]: Token[] } } = {
@@ -98,7 +104,10 @@ export const CUSTOM_BASES: { [chainId: number]: { [tokenAddress: string]: Token[
  */
 export const COMMON_BASES: ChainCurrencyList = {
   // [1]: [ExtendedStar.onChain(1), DAI, USDC, USDT, WBTC, WETH9_EXTENDED[1]],
-  [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), BX_USDT[SupportedChainId.BARNARD]],
+  // [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), BX_USDT[SupportedChainId.BARNARD]],
+  [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), XUSDT[SupportedChainId.BARNARD]],
+  // [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), XETH[SupportedChainId.BARNARD]],
+  // [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), FAI[SupportedChainId.BARNARD]],
   // [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), USDX[SupportedChainId.BARNARD]],
   [3]: [ExtendedStar.onChain(3), WETH9_EXTENDED[3]],
   [4]: [ExtendedStar.onChain(4), WETH9_EXTENDED[4]],
