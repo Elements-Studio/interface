@@ -3,6 +3,33 @@ import { Token, Star } from '@starcoin/starswap-sdk-core'
 import { UNI_ADDRESS } from './addresses'
 import { SupportedChainId } from './chains'
 
+export const FAI: { [chainId: number]: Token } = {
+  [SupportedChainId.BARNARD]: new Token(
+    SupportedChainId.BARNARD,
+    '0xfe125d419811297dfab03c61efec0bc9::FAI::FAI',
+    9,
+    'FAI',
+    'FAI'
+  ),
+}
+export const XETH: { [chainId: number]: Token } = {
+  [SupportedChainId.BARNARD]: new Token(
+    SupportedChainId.BARNARD,
+    '0x2d81a0427d64ff61b11ede9085efa5ad::XETH::XETH',
+    18,
+    'XETH',
+    'XETH'
+  ),
+}
+export const XUSDT: { [chainId: number]: Token } = {
+  [SupportedChainId.BARNARD]: new Token(
+    SupportedChainId.BARNARD,
+    '0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT',
+    9,
+    'XUSDT',
+    'XUSDT'
+  ),
+}
 export const BX_USDT: { [chainId: number]: Token } = {
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
