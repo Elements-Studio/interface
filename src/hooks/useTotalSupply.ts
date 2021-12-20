@@ -17,5 +17,5 @@ export function useTotalSupply(token?: Currency): CurrencyAmount<Token> | undefi
 
 export function useTotalSupply2(pair?: Pair): CurrencyAmount<Token> | undefined {
   const { data: totalLiquidity } = useTotalLiquidity(pair?.token0.address, pair?.token1.address)
-  return pair && totalLiquidity ? CurrencyAmount.fromRawAmount(pair.liquidityToken, totalLiquidity[0]) : undefined
+  return pair && totalLiquidity ? CurrencyAmount.fromRawAmount(pair.liquidityToken, totalLiquidity[0].toString()) : undefined
 }
