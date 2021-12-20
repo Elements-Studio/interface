@@ -92,7 +92,8 @@ export default function FarmStakeDialog({
 
   async function onClickStakeConfirm() {
     try {
-      const functionId = '0x3db7a2da7444995338a2413b151ee437::TokenSwapFarmScript::stake';
+      // const functionId = '0x3db7a2da7444995338a2413b151ee437::TokenSwapFarmScript::stake';
+      const functionId = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapFarmScript::stake';
       const strTypeArgs = [tokenX, tokenY];
       const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
 
