@@ -3,6 +3,7 @@ import flatMap from 'lodash.flatmap'
 import { useMemo } from 'react'
 import { ADDITIONAL_BASES, BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES } from '../constants/routing'
 import { useActiveWeb3React } from './web3'
+import { XUSDT, FAI, XETH } from '../constants/tokens'
 
 export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Currency): [Token, Token][] {
   const { chainId } = useActiveWeb3React()
@@ -16,6 +17,15 @@ export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Cur
     const additionalA = tokenA ? ADDITIONAL_BASES[chainId]?.[tokenA.address] ?? [] : []
     const additionalB = tokenB ? ADDITIONAL_BASES[chainId]?.[tokenB.address] ?? [] : []
 
+    if (tokenB?.address === '0xfe125d419811297dfab03c61efec0bc9::FAI::FAI') {
+      return [FAI[chainId]]
+    }
+    if (tokenB?.address === '0x2d81a0427d64ff61b11ede9085efa5ad::XETH::XETH') {
+      return [XETH[chainId]]
+    }
+    if (tokenB?.address === '0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT') {
+      return [XUSDT[chainId]]
+    }
     return [...common, ...additionalA, ...additionalB]
   }, [chainId, tokenA, tokenB])
 
