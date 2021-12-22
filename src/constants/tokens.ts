@@ -3,6 +3,15 @@ import { Token, Star } from '@starcoin/starswap-sdk-core'
 import { UNI_ADDRESS } from './addresses'
 import { SupportedChainId } from './chains'
 
+export const STC: { [chainId: number]: Token } = {
+  [SupportedChainId.BARNARD]: new Token(
+    SupportedChainId.BARNARD,
+    '0x00000000000000000000000000000001::STC::STC',
+    9,
+    'STC',
+    'STC'
+  ),
+}
 export const FAI: { [chainId: number]: Token } = {
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,

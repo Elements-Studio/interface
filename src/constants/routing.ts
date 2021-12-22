@@ -3,6 +3,7 @@ import { Currency, Token } from '@uniswap/sdk-core'
 import { SupportedChainId } from './chains'
 import {
   BX_USDT,
+  STC,
   FAI,
   XUSDT,
   XETH,
@@ -67,7 +68,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
   // [1]: [...WETH_ONLY[1], DAI, USDC, USDT, WBTC],
   // [SupportedChainId.BARNARD]: [BX_USDT[SupportedChainId.BARNARD]],
-  [SupportedChainId.BARNARD]: [XUSDT[SupportedChainId.BARNARD], XETH[SupportedChainId.BARNARD], FAI[SupportedChainId.BARNARD]],
+  [SupportedChainId.BARNARD]: [XUSDT[SupportedChainId.BARNARD], XETH[SupportedChainId.BARNARD], FAI[SupportedChainId.BARNARD], STC[SupportedChainId.BARNARD]],
   // [SupportedChainId.BARNARD]: [XUSDT[SupportedChainId.BARNARD]],
   // [SupportedChainId.BARNARD]: [XETH[SupportedChainId.BARNARD]],
   // [SupportedChainId.BARNARD]: [FAI[SupportedChainId.BARNARD]],
