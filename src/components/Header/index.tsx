@@ -321,9 +321,11 @@ export default function Header() {
           <UniIcon>
             <img height={'42px'} src={darkMode ? LogoDark : Logo} alt="logo" />
           </UniIcon>
+          {/*
           <Text style={{ fontFamily: 'Qualy' }}>
             STARSWAP
           </Text>
+          */}
         </Title>
       </HeaderRow>
       <HeaderLinks>
@@ -352,12 +354,9 @@ export default function Header() {
         <StyledNavLink id={`farm-nav-link`} to={'/farm'}>
           <Trans>Farm</Trans>
         </StyledNavLink>
-        */}
-        {/*
         <StyledNavLink id={`stake-nav-link`} to={'/vote'}>
           <Trans>Vote</Trans>
         </StyledNavLink>
-        */}
         <StyledExternalLink id={`stake-nav-link`} href={'https://poll.starcoin.org'}>
           <Trans>Vote</Trans>
           <sup>↗</sup>
@@ -366,6 +365,7 @@ export default function Header() {
           <Trans>Explorer</Trans>
           <sup>↗</sup>
         </StyledExternalLink>
+        */}
       </HeaderLinks>
       <HeaderControls>
         <HeaderElement>
@@ -401,7 +401,9 @@ export default function Header() {
           <StyledMenuButton onClick={() => toggleDarkMode()}>
             {darkMode ? <Moon size={20} /> : <Sun size={20} />}
           </StyledMenuButton>
-          <Menu />
+          {/*
+            <Menu />
+          */}
         </HeaderElementWrap>
       </HeaderControls>
     </HeaderFrame>
