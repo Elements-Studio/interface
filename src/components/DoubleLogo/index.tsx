@@ -19,9 +19,14 @@ export interface DoubleCurrencyLogoProps {
 const HigherLogo = styled(CurrencyLogo)`
   z-index: 2;
 `
+/*
 const CoveredLogo = styled(CurrencyLogo)<{ sizeraw: number }>`
   position: absolute;
   left: ${({ sizeraw }) => '-' + (sizeraw / 2).toString() + 'px'} !important;
+`
+*/
+const CoveredLogo = styled(CurrencyLogo)<{ sizeraw: number }>`
+  margin-left: 4px !important;
 `
 
 export default function DoubleCurrencyLogo({
