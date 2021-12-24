@@ -13,8 +13,8 @@ import { useSTCBalances } from 'state/wallet/hooks'
 import styled from 'styled-components/macro'
 // import Logo from '../../assets/svg/logo.svg'
 // import LogoDark from '../../assets/svg/logo_white.svg'
-import Logo from '../../assets/svg/starcoin_logo.svg'
-import LogoDark from '../../assets/svg/starcoin_logo.svg'
+import Logo from '../../assets/svg/starswap_logo.svg'
+import LogoDark from '../../assets/svg/starswap_logo_blue.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { ExternalLink, TYPE } from '../../theme'
 import ClaimModal from '../claim/ClaimModal'
@@ -195,7 +195,9 @@ const UniIcon = styled.div`
   transition: transform 0.3s ease;
   :hover {
     transform: rotate(-5deg);
-  }
+  };
+  display: flex;
+  align-items: center;
 `
 
 const activeClassName = 'ACTIVE'
@@ -316,9 +318,9 @@ export default function Header() {
       </Modal>
       <HeaderRow>
         <Title href=".">
-          {/* <UniIcon>
-            <img height={'36px'} src={darkMode ? LogoDark : Logo} alt="logo" />
-          </UniIcon> */}
+          <UniIcon>
+            <img height={'42px'} src={darkMode ? LogoDark : Logo} alt="logo" />
+          </UniIcon>
           <Text style={{ fontFamily: 'Qualy' }}>
             STARSWAP
           </Text>
@@ -346,9 +348,11 @@ export default function Header() {
         >
           <Trans>Pool</Trans>
         </StyledNavLink>
+        {/*
         <StyledNavLink id={`farm-nav-link`} to={'/farm'}>
           <Trans>Farm</Trans>
         </StyledNavLink>
+        */}
         {/*
         <StyledNavLink id={`stake-nav-link`} to={'/vote'}>
           <Trans>Vote</Trans>
