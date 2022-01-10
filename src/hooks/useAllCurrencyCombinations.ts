@@ -18,13 +18,13 @@ export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Cur
     const additionalB = tokenB ? ADDITIONAL_BASES[chainId]?.[tokenB.address] ?? [] : []
 
     if (tokenB?.address === '0xfe125d419811297dfab03c61efec0bc9::FAI::FAI') {
-      return [FAI[chainId]]
+      return [STC[chainId], FAI[chainId]]
     }
     if (tokenB?.address === '0x2d81a0427d64ff61b11ede9085efa5ad::XETH::XETH') {
-      return [XETH[chainId]]
+      return [STC[chainId], XETH[chainId]]
     }
     if (tokenB?.address === '0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT') {
-      return [XUSDT[chainId]]
+      return [STC[chainId], XUSDT[chainId]]
     }
     if (tokenB?.address === '0x00000000000000000000000000000001::STC::STC') {
       return [STC[chainId]]
