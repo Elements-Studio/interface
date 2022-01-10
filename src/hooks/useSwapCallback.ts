@@ -236,6 +236,8 @@ export function useSwapCallback(
   trade: V2Trade<Currency, Currency, TradeType> | V3Trade<Currency, Currency, TradeType> | undefined, // trade to execute, required
   allowedSlippage: Percent, // in bips
   recipientAddressOrName: string | null, // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
+  amountIn: number | string,
+  amountOut: number | string,
   signatureData: SignatureData | undefined | null
 ): { state: SwapCallbackState; callback: null | (() => Promise<string>); error: string | null } {
   const { account, chainId, library } = useActiveWeb3React()
@@ -366,12 +368,16 @@ export function useSwapCallback(
         )(
           trade.inputAmount.currency.wrapped.address,
           trade.outputAmount.currency.wrapped.address,
+          amountIn,
+          amountOut
+          /*
           (trade.tradeType === TradeType.EXACT_INPUT ? trade.inputAmount : trade.maximumAmountIn(allowedSlippage))
             .multiply(trade.inputAmount.decimalScale)
             .toExact(),
           (trade.tradeType === TradeType.EXACT_INPUT ? trade.minimumAmountOut(allowedSlippage) : trade.outputAmount)
             .multiply(trade.outputAmount.decimalScale)
             .toExact()
+          */
         ).catch((error) => {
           // if the user rejected the tx, pass this along
           if (error?.code === 4001) {
