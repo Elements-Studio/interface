@@ -90,6 +90,11 @@ export const ADDITIONAL_BASES: { [chainId: number]: { [tokenAddress: string]: To
     [WBTC.address]: [renBTC],
     [renBTC.address]: [WBTC],
   },
+  [251]: {
+    '0xfe125d419811297dfab03c61efec0bc9::FAI::FAI': [STC[251]],
+    '0x2d81a0427d64ff61b11ede9085efa5ad::XETH::XETH': [STC[251]],
+    '0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT': [STC[251]],
+  }
 }
 /**
  * Some tokens can only be swapped via certain pairs, so we override the list of bases that are considered for these
