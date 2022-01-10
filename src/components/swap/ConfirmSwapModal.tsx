@@ -31,6 +31,8 @@ function tradeMeaningfullyDiffers(
 
 export default function ConfirmSwapModal({
   trade,
+  amountIn,
+  amountOut,
   originalTrade,
   onAcceptChanges,
   allowedSlippage,
@@ -44,6 +46,8 @@ export default function ConfirmSwapModal({
 }: {
   isOpen: boolean
   trade: V2Trade<Currency, Currency, TradeType> | V3Trade<Currency, Currency, TradeType> | undefined
+  amountIn: string | number,
+  amountOut: string | number,
   originalTrade: V2Trade<Currency, Currency, TradeType> | V3Trade<Currency, Currency, TradeType> | undefined
   attemptingTxn: boolean
   txHash: string | undefined
@@ -71,6 +75,8 @@ export default function ConfirmSwapModal({
     return trade ? (
       <SwapModalHeader
         trade={trade}
+        amountIn={amountIn}
+        amountOut={amountOut}
         allowedSlippage={allowedSlippage}
         recipient={recipient}
         showAcceptChanges={showAcceptChanges}
