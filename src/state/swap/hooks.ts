@@ -136,10 +136,17 @@ export function useDerivedSwapInfo(toggledVersion: Version): {
     recipient,
   } = useSwapState()
 
+  console.log('inputCurrencyId', inputCurrencyId)
+  console.log('outputCurrencyId', outputCurrencyId)
+
   const inputCurrency = useCurrency(inputCurrencyId)
   const outputCurrency = useCurrency(outputCurrencyId)
   const recipientLookup = useENS(recipient ?? undefined)
   const to: string | null = (recipient === null ? account : recipientLookup.address) ?? null
+
+  console.log('inputCurrency', inputCurrency)
+  console.log('outputCurrency', outputCurrency)
+  console.log('typedValue', typedValue)
 
   const relevantTokenBalances = useCurrencyBalances(account ?? undefined, [
     inputCurrency ?? undefined,
@@ -159,8 +166,36 @@ export function useDerivedSwapInfo(toggledVersion: Version): {
   // const bestV3TradeExactIn = useBestV3TradeExactIn(isExactIn ? parsedAmount : undefined, outputCurrency ?? undefined)
   // const bestV3TradeExactOut = useBestV3TradeExactOut(inputCurrency ?? undefined, !isExactIn ? parsedAmount : undefined)
 
-  const v2Trade = isExactIn ? bestV2TradeExactIn : bestV2TradeExactOut
+  // const v2Trade = isExactIn ? bestV2TradeExactIn : bestV2TradeExactOut
+  const v2Trade = bestV2TradeExactIn
   // const v3Trade = (isExactIn ? bestV3TradeExactIn : bestV3TradeExactOut) ?? undefined
+
+  /*
+  let currencyBalances;
+  let currencies;
+
+  if (outputCurrencyId === 'STC') {
+    currencyBalances = {
+      [Field.INPUT]: relevantTokenBalances[0],
+      [Field.OUTPUT]: relevantTokenBalances[1],
+    }
+
+    currencies: { [field in Field]?: Currency } = {
+      [Field.INPUT]: inputCurrency ?? undefined,
+      [Field.OUTPUT]: outputCurrency ?? undefined,
+    }
+  } else {
+    currencyBalances = {
+      [Field.OUTPUT]: relevantTokenBalances[0],
+      [Field.INPUT]: relevantTokenBalances[1],
+    }
+
+    currencies: { [field in Field]?: Currency } = {
+      [Field.OUTPUT]: inputCurrency ?? undefined,
+      [Field.INTPUT]: outputCurrency ?? undefined,
+    }
+  }
+  */
 
   const currencyBalances = {
     [Field.INPUT]: relevantTokenBalances[0],
@@ -208,6 +243,8 @@ export function useDerivedSwapInfo(toggledVersion: Version): {
   if (balanceIn && amountIn && balanceIn.lessThan(amountIn)) {
     inputError = t`Insufficient ${amountIn.currency.symbol} balance`
   }
+
+  console.log('v2Trade', v2Trade)
 
   return {
     currencies,

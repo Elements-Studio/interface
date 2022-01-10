@@ -58,6 +58,7 @@ import { isTradeBetter } from '../../utils/isTradeBetter'
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
 import { warningSeverity } from '../../utils/prices'
 import AppBody from '../AppBody'
+import { useGetAmountOut } from 'hooks/useTokenSwapRouter'
 
 const StyledInfo = styled(Info)`
   opacity: 0.4;
@@ -127,6 +128,9 @@ export default function Swap({ history }: RouteComponentProps) {
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
   const { address: recipientAddress } = useENSAddress(recipient)
 
+  console.log('showwrap', showWrap)
+  console.log('trade input amount', JSON.stringify(trade?.inputAmount))
+  console.log('trade output amount', JSON.stringify(trade?.outputAmount.toSignificant(6)))
   const parsedAmounts = useMemo(
     () =>
       showWrap
@@ -141,6 +145,7 @@ export default function Swap({ history }: RouteComponentProps) {
     [independentField, parsedAmount, showWrap, trade]
   )
 
+
   const fiatValueInput = useUSDCValue(parsedAmounts[Field.INPUT])
   const fiatValueOutput = useUSDCValue(parsedAmounts[Field.OUTPUT])
   const priceImpact = computeFiatValuePriceImpact(fiatValueInput, fiatValueOutput)
@@ -148,6 +153,8 @@ export default function Swap({ history }: RouteComponentProps) {
   const { onSwitchTokens, onCurrencySelection, onUserInput, onChangeRecipient } = useSwapActionHandlers()
   const isValid = !swapInputError
   const dependentField: Field = independentField === Field.INPUT ? Field.OUTPUT : Field.INPUT
+
+  console.log('parsed amount dependent field', parsedAmounts[dependentField]?.toSignificant(6))
 
   const handleTypeInput = useCallback(
     (value: string) => {
@@ -183,6 +190,8 @@ export default function Swap({ history }: RouteComponentProps) {
     txHash: undefined,
   })
 
+  console.log({tradeToConfirm})
+
   const formattedAmounts = {
     [independentField]: typedValue,
     [dependentField]: showWrap
@@ -193,6 +202,43 @@ export default function Swap({ history }: RouteComponentProps) {
   const userHasSpecifiedInputOutput = Boolean(
     currencies[Field.INPUT] && currencies[Field.OUTPUT] && parsedAmounts[independentField]?.greaterThan(JSBI.BigInt(0))
   )
+
+  console.log('trade', trade)
+  const inputCurrency = trade?.inputAmount.currency;
+  const outputCurrency = trade?.outputAmount.currency;
+  let inputTag;
+  let outputTag;
+  let inputPrecision;
+  let outputPrecision;
+  if (inputCurrency?.isNative === true) {
+    inputTag = '0x00000000000000000000000000000001::STC::STC';
+    inputPrecision = 9;
+  } else {
+    inputTag = trade ? JSON.parse(JSON.stringify(inputCurrency))._checksummedAddress: '';
+    inputPrecision = trade ? JSON.parse(JSON.stringify(inputCurrency)).tokenInfo.decimals : 0;
+  }
+  if (outputCurrency?.isNative === true) {
+    outputTag = '0x00000000000000000000000000000001::STC::STC';
+    outputPrecision = 9;
+  } else {
+    outputTag = trade ? JSON.parse(JSON.stringify(outputCurrency))._checksummedAddress: '';
+    outputPrecision = trade ? JSON.parse(JSON.stringify(outputCurrency)).tokenInfo.decimals : 0;
+  }
+  console.log('input currency tag', inputTag)
+  console.log('output currency tag', outputTag)
+  console.log('input currency precision', inputPrecision)
+  console.log('output currency precision', outputPrecision)
+  console.log('indenpentdentField', independentField)
+  console.log('formatedAmounts', formattedAmounts)
+  console.log('formatedAmounts, input', formattedAmounts[Field.INPUT])
+  console.log('formatedAmounts, output', formattedAmounts[Field.OUTPUT])
+ 
+  let amountIn = 0;
+  amountIn = Number(formattedAmounts[Field.INPUT]) * Math.pow(10, inputPrecision) || 0;
+  const { data: amountOut } = useGetAmountOut(inputTag, outputTag, amountIn) || 0;
+  console.log('amountIn', amountIn)
+  console.log('amountOut', amountOut)
+
   const routeNotFound = !trade?.route
   const isLoadingRoute = toggledVersion === Version.v3 && V3TradeState.LOADING === v3TradeState
 
@@ -239,6 +285,8 @@ export default function Swap({ history }: RouteComponentProps) {
     trade,
     allowedSlippage,
     recipient,
+    amountIn,
+    amountOut? amountOut[0] : 0,
     undefined
     // signatureData
   )
@@ -371,6 +419,8 @@ export default function Swap({ history }: RouteComponentProps) {
           <ConfirmSwapModal
             isOpen={showConfirm}
             trade={trade}
+            amountIn={formattedAmounts[Field.INPUT]}
+            amountOut={amountOut ? (amountOut[0] / Math.pow(10, outputPrecision)).toFixed(4).toString() : ''}
             originalTrade={tradeToConfirm}
             onAcceptChanges={handleAcceptChanges}
             attemptingTxn={attemptingTxn}
@@ -410,7 +460,7 @@ export default function Swap({ history }: RouteComponentProps) {
                 />
               </ArrowWrapper>
               <CurrencyInputPanel
-                value={formattedAmounts[Field.OUTPUT]}
+                value={amountOut ? (amountOut[0] / Math.pow(10, outputPrecision)).toFixed(4).toString() : ''} // value={formattedAmounts[Field.OUTPUT]}
                 onUserInput={handleTypeOutput}
                 label={independentField === Field.INPUT && !showWrap ? <Trans>To (at least)</Trans> : <Trans>To</Trans>}
                 showMaxButton={false}
@@ -493,7 +543,8 @@ export default function Swap({ history }: RouteComponentProps) {
                     </ButtonGray>
                   )}
                 </RowFixed>
-                {trade ? (
+                {/*
+                trade ? (
                   <RowFixed>
                     <TradePrice
                       price={trade.executionPrice}
@@ -506,7 +557,8 @@ export default function Swap({ history }: RouteComponentProps) {
                       <StyledInfo />
                     </MouseoverTooltipContent>
                   </RowFixed>
-                ) : null}
+                ) : null
+              */}
               </Row>
             )}
 
