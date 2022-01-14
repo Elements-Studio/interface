@@ -242,7 +242,7 @@ export default function Farm({ history }: RouteComponentProps) {
                   </Text>
                   <QuestionHelper
                     text={
-                      <Trans>Tips of APR: blablabla...</Trans>
+                      <Trans>Annual Percentage Rate</Trans>
                     }
                   />
                 </RowFixed>
@@ -257,7 +257,9 @@ export default function Farm({ history }: RouteComponentProps) {
                   </Text>
                   <QuestionHelper
                     text={
-                      <Trans>Tips of APR: Multiplier...</Trans>
+                      <Trans>The Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.<br /><br />
+                      For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.<br /><br />
+                      This amount is already included in all APR calculations for the farm.</Trans>
                     }
                   />
                 </RowFixed>
