@@ -66,12 +66,12 @@ export default function Farm({ history }: RouteComponentProps) {
   }
 
   const { data, error } = useSWR(
-    // "http://a1277180fcb764735801852ac3de308f-21096515.ap-northeast-1.elb.amazonaws.com:80/v1/starswap/lpTokenFarms",
+    // `http://k8s-default-starswap-af6ced600d-1022591271.ap-northeast-1.elb.amazonaws.com/${network}/v1/lpTokenFarms`,
     `https://swap-api.starcoin.org/${network}/v1/lpTokenFarms`,
     fetcher
   );
 
-
+  
   // if (error) return "An error has occurred.";
   // if (!data) return "Loading...";
   if (error) return null;
@@ -238,11 +238,11 @@ export default function Farm({ history }: RouteComponentProps) {
                 </Text>
                 <RowFixed>
                   <Text fontSize={16} fontWeight={500}>
-                    41.95%
+                    {item.estimatedApy}%
                   </Text>
                   <QuestionHelper
                     text={
-                      <Trans>Allow high price impact trades and skip the confirm screen. Use at your own risk.</Trans>
+                      <Trans>Tips of APR: blablabla...</Trans>
                     }
                   />
                 </RowFixed>
@@ -257,7 +257,7 @@ export default function Farm({ history }: RouteComponentProps) {
                   </Text>
                   <QuestionHelper
                     text={
-                      <Trans>Allow high price impact trades and skip the confirm screen. Use at your own risk.</Trans>
+                      <Trans>Tips of APR: Multiplier...</Trans>
                     }
                   />
                 </RowFixed>
