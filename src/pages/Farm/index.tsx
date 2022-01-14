@@ -1,10 +1,12 @@
 import { Trans } from '@lingui/macro'
 import { useCallback, useContext, useState } from 'react'
+import { ChevronDown, ChevronUp } from 'react-feather'
 import styled, { ThemeContext } from 'styled-components'
 import { RouteComponentProps, Link } from 'react-router-dom'
 import { Text } from 'rebass'
+import QuestionHelper from '../../components/QuestionHelper'
 import Row, { AutoRow, RowFixed, RowBetween } from '../../components/Row'
-import { TYPE } from '../../theme'
+import { TYPE,IconWrapper } from '../../theme'
 import { ButtonFarm } from '../../components/Button'
 import { AutoColumn } from '../../components/Column'
 import FarmTitle from '../../components/farm/FarmTitle'
@@ -21,6 +23,10 @@ import { useActiveWeb3React } from 'hooks/web3'
 
 import axios from 'axios';
 import useSWR from "swr";
+
+export const FixedHeightRow = styled(RowBetween)`
+  height: 30px;
+`
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
@@ -214,11 +220,10 @@ export default function Farm({ history }: RouteComponentProps) {
                   </TYPE.black>
                 </RowFixed>
               </FarmRow>
-              {/*
-              <FarmRow style={{ marginTop: '10px', background: '#2FD8B2', marginBottom: '30px' }}>
+              {/* <FarmRow style={{ marginTop: '10px', background: '#2FD8B2', marginBottom: '30px' }}>
                 <RowFixed>
                   <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Estimated annualized rate of return:</Trans>
+                    <Trans>Estimated annualized rate of return:</Trans>       
                   </TYPE.black>
                 </RowFixed>
                 <RowFixed>
@@ -226,8 +231,37 @@ export default function Farm({ history }: RouteComponentProps) {
                     {item.estimatedApy}
                   </TYPE.black>
                 </RowFixed>
-              </FarmRow>
-              */}
+              </FarmRow> */}
+              <FixedHeightRow>
+                <Text fontSize={16} fontWeight={500}>
+                  <Trans>APR</Trans>
+                </Text>
+                <RowFixed>
+                  <Text fontSize={16} fontWeight={500}>
+                    41.95%
+                  </Text>
+                  <QuestionHelper
+                    text={
+                      <Trans>Allow high price impact trades and skip the confirm screen. Use at your own risk.</Trans>
+                    }
+                  />
+                </RowFixed>
+              </FixedHeightRow>
+              <FixedHeightRow>
+                <Text fontSize={16} fontWeight={500}>
+                  <Trans>Multiplier</Trans>
+                </Text>
+                <RowFixed>
+                  <Text fontSize={16} fontWeight={500}>
+                    40x
+                  </Text>
+                  <QuestionHelper
+                    text={
+                      <Trans>Allow high price impact trades and skip the confirm screen. Use at your own risk.</Trans>
+                    }
+                  />
+                </RowFixed>
+              </FixedHeightRow>
               <ButtonFarm as={Link} to={`/farm/${item.liquidityTokenFarmId.liquidityTokenId.tokenXId}/${item.liquidityTokenFarmId.liquidityTokenId.tokenYId}`}>
                 <TYPE.main color={'#fff'}>
                   <Trans>Stake</Trans>
