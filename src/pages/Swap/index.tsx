@@ -460,7 +460,7 @@ export default function Swap({ history }: RouteComponentProps) {
                 />
               </ArrowWrapper>
               <CurrencyInputPanel
-                value={amountOut ? (amountOut[0] / Math.pow(10, outputPrecision)).toFixed(4).toString() : ''} // value={formattedAmounts[Field.OUTPUT]}
+                value={formattedAmounts[Field.OUTPUT]}
                 onUserInput={handleTypeOutput}
                 label={independentField === Field.INPUT && !showWrap ? <Trans>To (at least)</Trans> : <Trans>To</Trans>}
                 showMaxButton={false}
