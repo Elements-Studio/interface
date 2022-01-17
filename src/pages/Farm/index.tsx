@@ -242,7 +242,7 @@ export default function Farm({ history }: RouteComponentProps) {
                   </Text>
                   <QuestionHelper
                     text={
-                      <Trans>Annual Percentage Rate</Trans>
+                      <Trans>The estimated annualized percentage yield of rewards.</Trans>
                     }
                   />
                 </RowFixed>
