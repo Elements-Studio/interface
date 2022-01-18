@@ -128,23 +128,23 @@ function useSwapCallArguments(
         deadline: deadline.toString(),
         ...(signatureData
           ? {
-              inputTokenPermit:
-                'allowed' in signatureData
-                  ? {
-                      expiry: signatureData.deadline,
-                      nonce: signatureData.nonce,
-                      s: signatureData.s,
-                      r: signatureData.r,
-                      v: signatureData.v as any,
-                    }
-                  : {
-                      deadline: signatureData.deadline,
-                      amount: signatureData.amount,
-                      s: signatureData.s,
-                      r: signatureData.r,
-                      v: signatureData.v as any,
-                    },
-            }
+            inputTokenPermit:
+              'allowed' in signatureData
+                ? {
+                  expiry: signatureData.deadline,
+                  nonce: signatureData.nonce,
+                  s: signatureData.s,
+                  r: signatureData.r,
+                  v: signatureData.v as any,
+                }
+                : {
+                  deadline: signatureData.deadline,
+                  amount: signatureData.amount,
+                  s: signatureData.s,
+                  r: signatureData.r,
+                  v: signatureData.v as any,
+                },
+          }
           : {}),
       })
       if (argentWalletContract && trade.inputAmount.currency.isToken) {
@@ -224,9 +224,8 @@ export function swapErrorToUserReadableMessage(error: any): string {
         console.error(error, reason)
         return t`An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3.`
       }
-      return t`Unknown error${
-        reason ? `: "${reason}"` : ''
-      }. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3.`
+      return t`Unknown error${ reason ? `: "${ reason }"` : ''
+        }. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3.`
   }
 }
 
@@ -236,8 +235,6 @@ export function useSwapCallback(
   trade: V2Trade<Currency, Currency, TradeType> | V3Trade<Currency, Currency, TradeType> | undefined, // trade to execute, required
   allowedSlippage: Percent, // in bips
   recipientAddressOrName: string | null, // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
-  amountIn: number | string,
-  amountOut: number | string,
   signatureData: SignatureData | undefined | null
 ): { state: SwapCallbackState; callback: null | (() => Promise<string>); error: string | null } {
   const { account, chainId, library } = useActiveWeb3React()
@@ -368,16 +365,12 @@ export function useSwapCallback(
         )(
           trade.inputAmount.currency.wrapped.address,
           trade.outputAmount.currency.wrapped.address,
-          amountIn,
-          amountOut
-          /*
           (trade.tradeType === TradeType.EXACT_INPUT ? trade.inputAmount : trade.maximumAmountIn(allowedSlippage))
             .multiply(trade.inputAmount.decimalScale)
             .toExact(),
           (trade.tradeType === TradeType.EXACT_INPUT ? trade.minimumAmountOut(allowedSlippage) : trade.outputAmount)
             .multiply(trade.outputAmount.decimalScale)
             .toExact()
-          */
         ).catch((error) => {
           // if the user rejected the tx, pass this along
           if (error?.code === 4001) {
@@ -386,7 +379,7 @@ export function useSwapCallback(
             // otherwise, the error was unexpected and we need to convey that
             // console.error(`Swap failed`, error, address, calldata, value)
 
-            throw new Error(`Swap failed: ${swapErrorToUserReadableMessage(error)}`)
+            throw new Error(`Swap failed: ${ swapErrorToUserReadableMessage(error) }`)
           }
         })
       },

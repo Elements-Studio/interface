@@ -233,12 +233,6 @@ export default function Swap({ history }: RouteComponentProps) {
   console.log('formatedAmounts, input', formattedAmounts[Field.INPUT])
   console.log('formatedAmounts, output', formattedAmounts[Field.OUTPUT])
  
-  let amountIn = 0;
-  amountIn = Number(formattedAmounts[Field.INPUT]) * Math.pow(10, inputPrecision) || 0;
-  const { data: amountOut } = useGetAmountOut(inputTag, outputTag, amountIn) || 0;
-  console.log('amountIn', amountIn)
-  console.log('amountOut', amountOut)
-
   const routeNotFound = !trade?.route
   const isLoadingRoute = toggledVersion === Version.v3 && V3TradeState.LOADING === v3TradeState
 
@@ -285,8 +279,6 @@ export default function Swap({ history }: RouteComponentProps) {
     trade,
     allowedSlippage,
     recipient,
-    amountIn,
-    amountOut? amountOut[0] : 0,
     undefined
     // signatureData
   )
@@ -419,8 +411,6 @@ export default function Swap({ history }: RouteComponentProps) {
           <ConfirmSwapModal
             isOpen={showConfirm}
             trade={trade}
-            amountIn={formattedAmounts[Field.INPUT]}
-            amountOut={amountOut ? (amountOut[0] / Math.pow(10, outputPrecision)).toFixed(4).toString() : ''}
             originalTrade={tradeToConfirm}
             onAcceptChanges={handleAcceptChanges}
             attemptingTxn={attemptingTxn}
