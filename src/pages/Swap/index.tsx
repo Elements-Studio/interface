@@ -146,8 +146,10 @@ export default function Swap({ history }: RouteComponentProps) {
   )
 
 
-  const fiatValueInput = useUSDCValue(parsedAmounts[Field.INPUT])
-  const fiatValueOutput = useUSDCValue(parsedAmounts[Field.OUTPUT])
+  // const fiatValueInput = useUSDCValue(parsedAmounts[Field.INPUT])
+  // const fiatValueOutput = useUSDCValue(parsedAmounts[Field.OUTPUT])
+  const fiatValueInput = null
+  const fiatValueOutput = null
   const priceImpact = computeFiatValuePriceImpact(fiatValueInput, fiatValueOutput)
 
   const { onSwitchTokens, onCurrencySelection, onUserInput, onChangeRecipient } = useSwapActionHandlers()
@@ -533,8 +535,7 @@ export default function Swap({ history }: RouteComponentProps) {
                     </ButtonGray>
                   )}
                 </RowFixed>
-                {/*
-                trade ? (
+                {trade ? (
                   <RowFixed>
                     <TradePrice
                       price={trade.executionPrice}
@@ -547,8 +548,7 @@ export default function Swap({ history }: RouteComponentProps) {
                       <StyledInfo />
                     </MouseoverTooltipContent>
                   </RowFixed>
-                ) : null
-              */}
+                ) : null}
               </Row>
             )}
 
