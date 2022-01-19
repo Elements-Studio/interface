@@ -91,9 +91,10 @@ export const ADDITIONAL_BASES: { [chainId: number]: { [tokenAddress: string]: To
     [renBTC.address]: [WBTC],
   },
   [251]: {
-    '0xfe125d419811297dfab03c61efec0bc9::FAI::FAI': [STC[251]],
-    '0x2d81a0427d64ff61b11ede9085efa5ad::XETH::XETH': [STC[251]],
-    '0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT': [STC[251]],
+    [FAI[251].address]: [STC[251]],
+    [XETH[251].address]: [STC[251]],
+    [XUSDT[251].address]: [STC[251]],
+    [STC[251].address]: [FAI[251], XETH[251], XUSDT[251]],
   }
 }
 /**
@@ -112,7 +113,7 @@ export const CUSTOM_BASES: { [chainId: number]: { [tokenAddress: string]: Token[
 export const COMMON_BASES: ChainCurrencyList = {
   // [1]: [ExtendedStar.onChain(1), DAI, USDC, USDT, WBTC, WETH9_EXTENDED[1]],
   // [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), BX_USDT[SupportedChainId.BARNARD]],
-  [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), XUSDT[SupportedChainId.BARNARD], XETH[SupportedChainId.BARNARD], FAI[SupportedChainId.BARNARD]],
+  // [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), XUSDT[SupportedChainId.BARNARD], XETH[SupportedChainId.BARNARD], FAI[SupportedChainId.BARNARD]],
   // [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), XETH[SupportedChainId.BARNARD]],
   // [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), FAI[SupportedChainId.BARNARD]],
   // [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), USDX[SupportedChainId.BARNARD]],
