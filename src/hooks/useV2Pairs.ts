@@ -19,7 +19,7 @@ export enum PairState {
 function _unique(matrix: any) {
   let res: any[] = [];
   matrix.map((item: any) => {
-    res.push(item.sort((a: any, b: any) => a.localeCompare(b)).toString());
+    item && res.push(item.sort((a: any, b: any) => a.localeCompare(b)).toString());
   })
   return [...new Set(res)].map(item => item.split(','));
 }
@@ -44,6 +44,7 @@ export function useV2Pairs(currencies: [Currency | undefined, Currency | undefin
       }),
     [tokens]
   )
+
   const pairAddressesUnique = _unique(pairAddresses)
   // const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const { data: results, isValidating } = useBatchGetReserves(pairAddresses)
