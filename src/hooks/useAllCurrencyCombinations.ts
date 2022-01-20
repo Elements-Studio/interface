@@ -35,7 +35,9 @@ export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Cur
   })
   const bases = _uniqueArrayByKey(basesDirect, 'address')
   const basePairs: [Token, Token][] = useMemo(
-    () => flatMap(bases, (base): [Token, Token][] => bases.map((otherBase: Token) => [base, otherBase])),
+    () => flatMap(bases, (base): [Token, Token][] => bases.map((otherBase: Token) => {
+      return base.address === tokenA?.address && otherBase.address === tokenB?.address && [base, otherBase]
+    })).filter(item => item),
     [bases]
   )
   return useMemo(
