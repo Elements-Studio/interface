@@ -107,7 +107,7 @@ export const CUSTOM_BASES: { [chainId: number]: { [tokenAddress: string]: Token[
  */
 export const COMMON_BASES: ChainCurrencyList = {
   // [1]: [ExtendedStar.onChain(1), DAI, USDC, USDT, WBTC, WETH9_EXTENDED[1]],
-  [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), XUSDT[SupportedChainId.BARNARD], FAI[SupportedChainId.BARNARD], WEN[SupportedChainId.BARNARD], SHARE[SupportedChainId.BARNARD]],
+  [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), XUSDT[SupportedChainId.BARNARD], FAI[SupportedChainId.BARNARD]],
   [3]: [ExtendedStar.onChain(3), WETH9_EXTENDED[3]],
   [4]: [ExtendedStar.onChain(4), WETH9_EXTENDED[4]],
   [5]: [ExtendedStar.onChain(5), WETH9_EXTENDED[5]],
