@@ -16,6 +16,14 @@ export enum PairState {
   INVALID,
 }
 
+function _unique(matrix: any) {
+  let res: any[] = [];
+  matrix.map((item: any) => {
+    res.push(item.sort((a: any, b: any) => a.localeCompare(b)).toString());
+  })
+  return [...new Set(res)].map(item => item.split(','));
+}
+
 export function useV2Pairs(currencies: [Currency | undefined, Currency | undefined][]): [PairState, Pair | null][] {
   const tokens = useMemo(
     () => currencies.map(([currencyA, currencyB]) => [currencyA?.wrapped, currencyB?.wrapped]),
@@ -31,12 +39,12 @@ export function useV2Pairs(currencies: [Currency | undefined, Currency | undefin
           !tokenA.equals(tokenB) &&
           V2_FACTORY_ADDRESSES[tokenA.chainId]
           ? // ? computePairAddress({ factoryAddress: V2_FACTORY_ADDRESSES[tokenA.chainId], tokenA, tokenB })
-            [tokenA.address, tokenB.address]
+          [tokenA.address, tokenB.address]
           : undefined
       }),
     [tokens]
   )
-
+  const pairAddressesUnique = _unique(pairAddresses)
   // const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const { data: results, isValidating } = useBatchGetReserves(pairAddresses)
 
