@@ -83,7 +83,7 @@ export function tryParseAmount<T extends Currency>(value?: string, currency?: T)
     }
   } catch (error) {
     // should fail if the user specifies too many decimal places of precision (or maybe exceed max uint?)
-    console.debug(`Failed to parse input amount: "${value}"`, error)
+    console.debug(`Failed to parse input amount: "${ value }"`, error)
   }
   // necessary for all paths to return a value
   return undefined
@@ -124,6 +124,7 @@ export function useDerivedSwapInfo(toggledVersion: Version): {
   toggledTrade: V2Trade<Currency, Currency, TradeType> | V3Trade<Currency, Currency, TradeType> | undefined
   allowedSlippage: Percent
 } {
+  console.log('useDerivedSwapInfo')
   const { account } = useActiveWeb3React()
 
   const [singleHopOnly] = useUserSingleHopOnly()
@@ -136,65 +137,35 @@ export function useDerivedSwapInfo(toggledVersion: Version): {
     recipient,
   } = useSwapState()
 
-  console.log('inputCurrencyId', inputCurrencyId)
-  console.log('outputCurrencyId', outputCurrencyId)
+  console.log({ independentField, typedValue, inputCurrencyId, outputCurrencyId, recipient })
 
   const inputCurrency = useCurrency(inputCurrencyId)
   const outputCurrency = useCurrency(outputCurrencyId)
   const recipientLookup = useENS(recipient ?? undefined)
   const to: string | null = (recipient === null ? account : recipientLookup.address) ?? null
 
-  console.log('inputCurrency', inputCurrency)
-  console.log('outputCurrency', outputCurrency)
-  console.log('typedValue', typedValue)
+  console.log({ inputCurrency, outputCurrency, recipientLookup, to })
 
   const relevantTokenBalances = useCurrencyBalances(account ?? undefined, [
     inputCurrency ?? undefined,
     outputCurrency ?? undefined,
   ])
-
   const isExactIn: boolean = independentField === Field.INPUT
   const parsedAmount = tryParseAmount(typedValue, (isExactIn ? inputCurrency : outputCurrency) ?? undefined)
 
+  console.log('singleHopOnly', singleHopOnly, 'maxHops', singleHopOnly ? 1 : undefined)
   const bestV2TradeExactIn = useV2TradeExactIn(isExactIn ? parsedAmount : undefined, outputCurrency ?? undefined, {
     maxHops: singleHopOnly ? 1 : undefined,
   })
   const bestV2TradeExactOut = useV2TradeExactOut(inputCurrency ?? undefined, !isExactIn ? parsedAmount : undefined, {
     maxHops: singleHopOnly ? 1 : undefined,
   })
-
+  console.log({ isExactIn, parsedAmount, bestV2TradeExactIn, bestV2TradeExactOut })
   // const bestV3TradeExactIn = useBestV3TradeExactIn(isExactIn ? parsedAmount : undefined, outputCurrency ?? undefined)
   // const bestV3TradeExactOut = useBestV3TradeExactOut(inputCurrency ?? undefined, !isExactIn ? parsedAmount : undefined)
 
   const v2Trade = isExactIn ? bestV2TradeExactIn : bestV2TradeExactOut
   // const v3Trade = (isExactIn ? bestV3TradeExactIn : bestV3TradeExactOut) ?? undefined
-
-  /*
-  let currencyBalances;
-  let currencies;
-
-  if (outputCurrencyId === 'STC') {
-    currencyBalances = {
-      [Field.INPUT]: relevantTokenBalances[0],
-      [Field.OUTPUT]: relevantTokenBalances[1],
-    }
-
-    currencies: { [field in Field]?: Currency } = {
-      [Field.INPUT]: inputCurrency ?? undefined,
-      [Field.OUTPUT]: outputCurrency ?? undefined,
-    }
-  } else {
-    currencyBalances = {
-      [Field.OUTPUT]: relevantTokenBalances[0],
-      [Field.INPUT]: relevantTokenBalances[1],
-    }
-
-    currencies: { [field in Field]?: Currency } = {
-      [Field.OUTPUT]: inputCurrency ?? undefined,
-      [Field.INTPUT]: outputCurrency ?? undefined,
-    }
-  }
-  */
 
   const currencyBalances = {
     [Field.INPUT]: relevantTokenBalances[0],
@@ -205,6 +176,9 @@ export function useDerivedSwapInfo(toggledVersion: Version): {
     [Field.INPUT]: inputCurrency ?? undefined,
     [Field.OUTPUT]: outputCurrency ?? undefined,
   }
+
+  // console.log({ currencyBalances })
+  // console.log({ currencies })
 
   let inputError: string | undefined
   if (!account) {
@@ -240,10 +214,8 @@ export function useDerivedSwapInfo(toggledVersion: Version): {
   const [balanceIn, amountIn] = [currencyBalances[Field.INPUT], v2Trade?.maximumAmountIn(allowedSlippage)]
 
   if (balanceIn && amountIn && balanceIn.lessThan(amountIn)) {
-    inputError = t`Insufficient ${amountIn.currency.symbol} balance`
+    inputError = t`Insufficient ${ amountIn.currency.symbol } balance`
   }
-
-  console.log('v2Trade', v2Trade)
 
   return {
     currencies,

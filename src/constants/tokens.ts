@@ -21,15 +21,15 @@ export const FAI: { [chainId: number]: Token } = {
     'FAI'
   ),
 }
-export const XETH: { [chainId: number]: Token } = {
-  [SupportedChainId.BARNARD]: new Token(
-    SupportedChainId.BARNARD,
-    '0x2d81a0427d64ff61b11ede9085efa5ad::XETH::XETH',
-    18,
-    'XETH',
-    'XETH'
-  ),
-}
+// export const XETH: { [chainId: number]: Token } = {
+//   [SupportedChainId.BARNARD]: new Token(
+//     SupportedChainId.BARNARD,
+//     '0x2d81a0427d64ff61b11ede9085efa5ad::XETH::XETH',
+//     18,
+//     'XETH',
+//     'XETH'
+//   ),
+// }
 export const XUSDT: { [chainId: number]: Token } = {
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
@@ -39,22 +39,40 @@ export const XUSDT: { [chainId: number]: Token } = {
     'XUSDT'
   ),
 }
-export const BX_USDT: { [chainId: number]: Token } = {
+// export const BX_USDT: { [chainId: number]: Token } = {
+//   [SupportedChainId.BARNARD]: new Token(
+//     SupportedChainId.BARNARD,
+//     '0x9350502a3af6c617e9a42fa9e306a385::BX_USDT::BX_USDT',
+//     9,
+//     'BX_USDT',
+//     'BX_USDT'
+//   ),
+// }
+// export const USDX: { [chainId: number]: Token } = {
+//   [SupportedChainId.BARNARD]: new Token(
+//     SupportedChainId.BARNARD,
+//     '0xbd7e8be8fae9f60f2f5136433e36a091::Usdx::Usdx',
+//     9,
+//     'Usdx',
+//     'Usdx'
+//   ),
+// }
+export const WEN: { [chainId: number]: Token } = {
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
-    '0x9350502a3af6c617e9a42fa9e306a385::BX_USDT::BX_USDT',
+    '0x88e2677b89841cd4ee7c15535798e1c8::WEN::WEN',
     9,
-    'BX_USDT',
-    'BX_USDT'
+    'WEN',
+    'Wen'
   ),
 }
-export const USDX: { [chainId: number]: Token } = {
+export const SHARE: { [chainId: number]: Token } = {
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
-    '0xbd7e8be8fae9f60f2f5136433e36a091::Usdx::Usdx',
+    '0x88e2677b89841cd4ee7c15535798e1c8::SHARE::SHARE',
     9,
-    'Usdx',
-    'Usdx'
+    'SHARE',
+    'Share'
   ),
 }
 export const AMPL = new Token(

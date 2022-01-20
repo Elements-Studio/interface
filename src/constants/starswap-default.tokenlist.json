@@ -20,17 +20,25 @@
     },
     {
       "chainId": 251,
-      "address": "0x2d81a0427d64ff61b11ede9085efa5ad::XETH::XETH",
-      "name": "XETH",
-      "symbol": "XETH",
-      "decimals": 18,
+      "address": "0xfe125d419811297dfab03c61efec0bc9::FAI::FAI",
+      "name": "FAI",
+      "symbol": "FAI",
+      "decimals": 9,
       "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
     },
     {
       "chainId": 251,
-      "address": "0xfe125d419811297dfab03c61efec0bc9::FAI::FAI",
-      "name": "FAI",
-      "symbol": "FAI",
+      "address": "0x88e2677b89841cd4ee7c15535798e1c8::WEN::WEN",
+      "name": "WEN",
+      "symbol": "WEN",
+      "decimals": 9,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    },
+    {
+      "chainId": 251,
+      "address": "0x88e2677b89841cd4ee7c15535798e1c8::SHARE::SHARE",
+      "name": "SHARE",
+      "symbol": "SHARE",
       "decimals": 9,
       "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
     }

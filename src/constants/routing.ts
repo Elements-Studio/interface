@@ -2,12 +2,11 @@
 import { Currency, Token } from '@uniswap/sdk-core'
 import { SupportedChainId } from './chains'
 import {
-  BX_USDT,
   STC,
   FAI,
   XUSDT,
-  XETH,
-  USDX,
+  WEN,
+  SHARE,
   AMPL,
   DAI,
   ExtendedStar,
@@ -67,12 +66,7 @@ const WETH_ONLY: ChainTokenList = {
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
   // [1]: [...WETH_ONLY[1], DAI, USDC, USDT, WBTC],
-  // [SupportedChainId.BARNARD]: [BX_USDT[SupportedChainId.BARNARD]],
-  [SupportedChainId.BARNARD]: [XUSDT[SupportedChainId.BARNARD], XETH[SupportedChainId.BARNARD], FAI[SupportedChainId.BARNARD], STC[SupportedChainId.BARNARD]],
-  // [SupportedChainId.BARNARD]: [XUSDT[SupportedChainId.BARNARD]],
-  // [SupportedChainId.BARNARD]: [XETH[SupportedChainId.BARNARD]],
-  // [SupportedChainId.BARNARD]: [FAI[SupportedChainId.BARNARD]],
-  // [SupportedChainId.BARNARD]: [USDX[SupportedChainId.BARNARD]],
+  [SupportedChainId.BARNARD]: [STC[SupportedChainId.BARNARD], XUSDT[SupportedChainId.BARNARD], FAI[SupportedChainId.BARNARD], WEN[SupportedChainId.BARNARD], SHARE[SupportedChainId.BARNARD]],
 }
 export const ADDITIONAL_BASES: { [chainId: number]: { [tokenAddress: string]: Token[] } } = {
   [1]: {
@@ -92,9 +86,10 @@ export const ADDITIONAL_BASES: { [chainId: number]: { [tokenAddress: string]: To
   },
   [251]: {
     [FAI[251].address]: [STC[251]],
-    [XETH[251].address]: [STC[251]],
     [XUSDT[251].address]: [STC[251]],
-    [STC[251].address]: [FAI[251], XETH[251], XUSDT[251]],
+    [WEN[251].address]: [STC[251]],
+    [SHARE[251].address]: [STC[251]],
+    [STC[251].address]: [FAI[251], XUSDT[251], WEN[251], SHARE[251]],
   }
 }
 /**
@@ -112,11 +107,7 @@ export const CUSTOM_BASES: { [chainId: number]: { [tokenAddress: string]: Token[
  */
 export const COMMON_BASES: ChainCurrencyList = {
   // [1]: [ExtendedStar.onChain(1), DAI, USDC, USDT, WBTC, WETH9_EXTENDED[1]],
-  // [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), BX_USDT[SupportedChainId.BARNARD]],
-  // [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), XUSDT[SupportedChainId.BARNARD], XETH[SupportedChainId.BARNARD], FAI[SupportedChainId.BARNARD]],
-  // [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), XETH[SupportedChainId.BARNARD]],
-  // [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), FAI[SupportedChainId.BARNARD]],
-  // [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), USDX[SupportedChainId.BARNARD]],
+  [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), XUSDT[SupportedChainId.BARNARD], FAI[SupportedChainId.BARNARD], WEN[SupportedChainId.BARNARD], SHARE[SupportedChainId.BARNARD]],
   [3]: [ExtendedStar.onChain(3), WETH9_EXTENDED[3]],
   [4]: [ExtendedStar.onChain(4), WETH9_EXTENDED[4]],
   [5]: [ExtendedStar.onChain(5), WETH9_EXTENDED[5]],

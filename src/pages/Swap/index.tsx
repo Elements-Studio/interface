@@ -156,8 +156,6 @@ export default function Swap({ history }: RouteComponentProps) {
   const isValid = !swapInputError
   const dependentField: Field = independentField === Field.INPUT ? Field.OUTPUT : Field.INPUT
 
-  console.log('parsed amount dependent field', parsedAmounts[dependentField]?.toSignificant(6))
-
   const handleTypeInput = useCallback(
     (value: string) => {
       onUserInput(Field.INPUT, value)
@@ -192,8 +190,6 @@ export default function Swap({ history }: RouteComponentProps) {
     txHash: undefined,
   })
 
-  console.log({tradeToConfirm})
-
   const formattedAmounts = {
     [independentField]: typedValue,
     [dependentField]: showWrap
@@ -205,7 +201,6 @@ export default function Swap({ history }: RouteComponentProps) {
     currencies[Field.INPUT] && currencies[Field.OUTPUT] && parsedAmounts[independentField]?.greaterThan(JSBI.BigInt(0))
   )
 
-  console.log('trade', trade)
   const inputCurrency = trade?.inputAmount.currency;
   const outputCurrency = trade?.outputAmount.currency;
   let inputTag;
@@ -226,14 +221,7 @@ export default function Swap({ history }: RouteComponentProps) {
     outputTag = trade ? JSON.parse(JSON.stringify(outputCurrency))._checksummedAddress: '';
     outputPrecision = trade ? JSON.parse(JSON.stringify(outputCurrency)).tokenInfo.decimals : 0;
   }
-  console.log('input currency tag', inputTag)
-  console.log('output currency tag', outputTag)
-  console.log('input currency precision', inputPrecision)
-  console.log('output currency precision', outputPrecision)
-  console.log('indenpentdentField', independentField)
   console.log('formatedAmounts', formattedAmounts)
-  console.log('formatedAmounts, input', formattedAmounts[Field.INPUT])
-  console.log('formatedAmounts, output', formattedAmounts[Field.OUTPUT])
  
   const routeNotFound = !trade?.route
   const isLoadingRoute = toggledVersion === Version.v3 && V3TradeState.LOADING === v3TradeState

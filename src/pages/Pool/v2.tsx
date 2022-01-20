@@ -24,7 +24,7 @@ import { useStakingInfo, StakingInfo } from '../../state/stake/hooks'
 import { BIG_INT_ZERO } from '../../constants/misc'
 import { Pair } from '@starcoin/starswap-v2-sdk'
 import { Trans } from '@lingui/macro'
-import { BX_USDT, ExtendedStar } from 'constants/tokens'
+import { ExtendedStar } from 'constants/tokens'
 import { CurrencyAmount, Token } from '@starcoin/starswap-sdk-core'
 
 const PageWrapper = styled(AutoColumn)`
