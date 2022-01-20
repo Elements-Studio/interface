@@ -3,45 +3,39 @@ import flatMap from 'lodash.flatmap'
 import { useMemo } from 'react'
 import { ADDITIONAL_BASES, BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES } from '../constants/routing'
 import { useActiveWeb3React } from './web3'
-import { STC, STAR, XUSDT, FAI, WEN, SHARE } from '../constants/tokens'
-import { WrappedTokenInfo } from '../state/lists/wrappedTokenInfo'
+
+const _uniqueArrayByKey = (oriArray: any[], key: string) => {
+  const hash: any = {};
+  const newArray = oriArray.reduce((item, next) => {
+    if (!hash[next[key]]) {
+      (hash[next[key]] = true && item.push(next));
+    }
+    return item;
+  }, []);
+  return newArray;
+}
 
 export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Currency): [Token, Token][] {
   const { chainId } = useActiveWeb3React()
 
   const [tokenA, tokenB] = chainId ? [currencyA?.wrapped, currencyB?.wrapped] : [undefined, undefined]
-
-  const bases: Token[] = useMemo(() => {
+  const basesAll: Token[] = useMemo(() => {
     if (!chainId) return []
 
     const common = BASES_TO_CHECK_TRADES_AGAINST[chainId] ?? []
-    const adddressTokenA = tokenA ? (tokenA instanceof WrappedTokenInfo ? tokenA?.tokenInfo.address : tokenA.address) : ''
+    const adddressTokenA = tokenA?.address || ''
     const additionalA = tokenA ? ADDITIONAL_BASES[chainId]?.[adddressTokenA] ?? [] : []
-    const adddressTokenB = tokenB ? (tokenB instanceof WrappedTokenInfo ? tokenB?.tokenInfo.address : tokenB.address) : ''
+    const adddressTokenB = tokenB?.address || ''
     const additionalB = tokenB ? ADDITIONAL_BASES[chainId]?.[adddressTokenB] ?? [] : []
-    if (tokenB?.address === STAR[chainId].address) {
-      return [STC[chainId], STAR[chainId]]
-    }
-    if (tokenB?.address === FAI[chainId].address) {
-      return [STC[chainId], FAI[chainId]]
-    }
-    if (tokenB?.address === XUSDT[chainId].address) {
-      return [STC[chainId], XUSDT[chainId]]
-    }
-    if (tokenB?.address === WEN[chainId].address) {
-      return [STC[chainId], WEN[chainId]]
-    }
-    if (tokenB?.address === SHARE[chainId].address) {
-      return [STC[chainId], SHARE[chainId]]
-    }
-    if (tokenB?.address === STC[chainId].address) {
-      return [STC[chainId]]
-    }
+
     return [...common, ...additionalA, ...additionalB]
   }, [chainId, tokenA, tokenB])
-
+  const basesDirect = basesAll.filter((token) => {
+    return token.address === tokenA?.address || token.address === tokenB?.address
+  })
+  const bases = _uniqueArrayByKey(basesDirect, 'address')
   const basePairs: [Token, Token][] = useMemo(
-    () => flatMap(bases, (base): [Token, Token][] => bases.map((otherBase) => [base, otherBase])),
+    () => flatMap(bases, (base): [Token, Token][] => bases.map((otherBase: Token) => [base, otherBase])),
     [bases]
   )
   return useMemo(
@@ -51,9 +45,9 @@ export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Cur
           // the direct pair
           [tokenA, tokenB],
           // token A against all bases
-          ...bases.map((base): [Token, Token] => [tokenA, base]),
+          ...bases.map((base: Token): [Token, Token] => [tokenA, base]),
           // token B against all bases
-          ...bases.map((base): [Token, Token] => [tokenB, base]),
+          ...bases.map((base: Token): [Token, Token] => [tokenB, base]),
           // each base against all bases
           ...basePairs,
         ]
