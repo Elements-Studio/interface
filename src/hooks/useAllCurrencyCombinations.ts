@@ -40,17 +40,18 @@ export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Cur
     })).filter(item => item),
     [bases]
   )
+
   return useMemo(
     () =>
       tokenA && tokenB
         ? [
-          // the direct pair
-          [tokenA, tokenB],
-          // token A against all bases
-          ...bases.map((base: Token): [Token, Token] => [tokenA, base]),
-          // token B against all bases
-          ...bases.map((base: Token): [Token, Token] => [tokenB, base]),
-          // each base against all bases
+          // // the direct pair
+          // [tokenA, tokenB],
+          // // token A against all bases
+          // ...bases.map((base: Token): [Token, Token] => [tokenA, base]),
+          // // token B against all bases
+          // ...bases.map((base: Token): [Token, Token] => [tokenB, base]),
+          // // each base against all bases
           ...basePairs,
         ]
           .filter((tokens): tokens is [Token, Token] => Boolean(tokens[0] && tokens[1]))
