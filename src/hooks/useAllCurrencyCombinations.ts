@@ -3,7 +3,7 @@ import flatMap from 'lodash.flatmap'
 import { useMemo } from 'react'
 import { ADDITIONAL_BASES, BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES } from '../constants/routing'
 import { useActiveWeb3React } from './web3'
-import { STC, XUSDT, FAI, WEN, SHARE } from '../constants/tokens'
+import { STC, STAR, XUSDT, FAI, WEN, SHARE } from '../constants/tokens'
 import { WrappedTokenInfo } from '../state/lists/wrappedTokenInfo'
 
 export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Currency): [Token, Token][] {
@@ -19,6 +19,9 @@ export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Cur
     const additionalA = tokenA ? ADDITIONAL_BASES[chainId]?.[adddressTokenA] ?? [] : []
     const adddressTokenB = tokenB ? (tokenB instanceof WrappedTokenInfo ? tokenB?.tokenInfo.address : tokenB.address) : ''
     const additionalB = tokenB ? ADDITIONAL_BASES[chainId]?.[adddressTokenB] ?? [] : []
+    if (tokenB?.address === STAR[chainId].address) {
+      return [STC[chainId], STAR[chainId]]
+    }
     if (tokenB?.address === FAI[chainId].address) {
       return [STC[chainId], FAI[chainId]]
     }

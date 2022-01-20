@@ -21,6 +21,15 @@ export const FAI: { [chainId: number]: Token } = {
     'FAI'
   ),
 }
+export const STAR: { [chainId: number]: Token } = {
+  [SupportedChainId.BARNARD]: new Token(
+    SupportedChainId.BARNARD,
+    '0x4783d08fb16990bd35d83f3e23bf93b8::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
+}
 // export const XETH: { [chainId: number]: Token } = {
 //   [SupportedChainId.BARNARD]: new Token(
 //     SupportedChainId.BARNARD,
