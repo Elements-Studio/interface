@@ -3495,10 +3495,10 @@
     read-bigint "^0.1.6"
     ws "7.2.3"
 
-"@starcoin/starswap-sdk-core@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/@starcoin/starswap-sdk-core/-/starswap-sdk-core-0.2.1.tgz#7e24606c6b912df427a86f6696f14e3f1ee7a79a"
-  integrity sha512-0/kwHdYMmju/lHx27I94ubhln2Es9TkJPwp8Qrb+Dx7WpkGOaOp3PRM3Ty/LTAT76iF1O47eyLbX02X5aVJqZw==
+"@starcoin/starswap-sdk-core@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@starcoin/starswap-sdk-core/-/starswap-sdk-core-0.3.0.tgz#779fcbac25f067901408ff6d4a9eba9a967dff89"
+  integrity sha512-MFgzcSYnYVgcD+gT36n4TsQAoD0AgbzZe7RqrhaYDiZKxd5RI9WZRGlRX5wt5ZOBCIEZdfCUl9WAv7Ac1En98g==
   dependencies:
     "@starcoin/stc-util" "^0.4.1"
     big.js "^5.2.2"
@@ -3507,12 +3507,12 @@
     tiny-invariant "^1.1.0"
     toformat "^2.0.0"
 
-"@starcoin/starswap-v2-sdk@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@starcoin/starswap-v2-sdk/-/starswap-v2-sdk-0.1.4.tgz#8cbce2706e5f5c80dd81cf0b2e7a709d6289196e"
-  integrity sha512-phYTaEF/AEwT54FObHviGeKHn5wZRWEAd8HSopfa2Oj+soTOB/z43s25ktUl7ymYhPhgKwjwk8z4DB1xnLl48w==
+"@starcoin/starswap-v2-sdk@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@starcoin/starswap-v2-sdk/-/starswap-v2-sdk-0.2.1.tgz#3e61e498f669d4941036754aa97943366305e219"
+  integrity sha512-nW3vPcND+zhr5LbRmYHwmvyq7ubj+0/n5RWovzyJzVVNLCxlyR3dNHu8iCGdjIdTE3fx2WiypVgwtFdmp7RfvA==
   dependencies:
-    "@starcoin/starswap-sdk-core" "^0.2.1"
+    "@starcoin/starswap-sdk-core" "^0.3.0"
     "@starcoin/stc-util" "^0.4.1"
     tiny-invariant "^1.1.0"
     tiny-warning "^1.0.3"
