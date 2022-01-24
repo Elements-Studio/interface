@@ -353,6 +353,9 @@ export default function Header() {
         <StyledNavLink id={`farm-nav-link`} to={'/farm'}>
           <Trans>Farm</Trans>
         </StyledNavLink>
+        <StyledNavLink id={`stake-nav-link`} to={'/stake'}>
+          <Trans>Stake</Trans>
+        </StyledNavLink>
         {/*
         <StyledNavLink id={`stake-nav-link`} to={'/vote'}>
           <Trans>Vote</Trans>
