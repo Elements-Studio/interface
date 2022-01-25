@@ -13,8 +13,8 @@ import { useSTCBalances } from 'state/wallet/hooks'
 import styled from 'styled-components/macro'
 // import Logo from '../../assets/svg/logo.svg'
 // import LogoDark from '../../assets/svg/logo_white.svg'
-import Logo from '../../assets/svg/starswap_logo.svg'
-import LogoDark from '../../assets/svg/starswap_logo_blue.svg'
+import Logo from '../../assets/images/starswap_logo_blue.jpg'
+import LogoDark from '../../assets/images/starswap_logo_blue.jpg'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { ExternalLink, TYPE } from '../../theme'
 import ClaimModal from '../claim/ClaimModal'
@@ -319,7 +319,7 @@ export default function Header() {
       <HeaderRow>
         <Title href=".">
           <UniIcon>
-            <img height={'42px'} src={darkMode ? LogoDark : Logo} alt="logo" />
+            <img height={'60px'} src={darkMode ? LogoDark : Logo} alt="logo" />
           </UniIcon>
           {/*
           <Text style={{ fontFamily: 'Qualy' }}>
