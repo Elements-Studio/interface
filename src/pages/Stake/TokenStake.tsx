@@ -16,6 +16,7 @@ import GetAllStakeDialog from '../../components/farm/GetAllStakeDialog'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import STCLogo from '../../assets/images/stc.png'
 import STCBlueLogo from '../../assets/images/stc_logo_blue.png'
+import StarswapBlueLogo from '../../assets/images/starswap_logo_star_round.jpg'
 import PortisIcon from '../../assets/images/portisIcon.png'
 import ArbitrumLogo from '../../assets/svg/arbitrum_logo.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
@@ -245,8 +246,10 @@ export default function FarmStake({
           <FarmCard>
             <AutoColumn justify="center">
               <RowFixed>
-                <StyledEthereumLogo src={STCBlueLogo} style={{ marginRight: '1.25rem' }} size={'48px'} />
+                <StyledEthereumLogo src={StarswapBlueLogo} style={{ marginRight: '1.25rem' }} size={'48px'} />
+                {/*
                 <StyledEthereumLogo src={EthereumLogo} size={'48px'} />
+                */}
               </RowFixed>
               {/*
               <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{tokenY}/{tokenX}</TYPE.body>
