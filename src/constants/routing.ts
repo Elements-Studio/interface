@@ -65,7 +65,7 @@ const WETH_ONLY: ChainTokenList = {
 }
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
-  ...WETH_ONLY,
+  // ...WETH_ONLY,
   // [1]: [...WETH_ONLY[1], DAI, USDC, USDT, WBTC],
   [SupportedChainId.BARNARD]: [STC[SupportedChainId.BARNARD]],
 }
@@ -84,14 +84,6 @@ export const ADDITIONAL_BASES: { [chainId: number]: { [tokenAddress: string]: To
     [FXS.address]: [FRAX],
     [WBTC.address]: [renBTC],
     [renBTC.address]: [WBTC],
-  },
-  [251]: {
-    [STAR[251].address]: [STC[251]],
-    [FAI[251].address]: [STC[251]],
-    [XUSDT[251].address]: [STC[251]],
-    [WEN[251].address]: [STC[251]],
-    [SHARE[251].address]: [STC[251]],
-    [STC[251].address]: [STAR[251], FAI[251], XUSDT[251], WEN[251], SHARE[251]],
   }
 }
 /**
