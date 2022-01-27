@@ -9,6 +9,7 @@ import { ButtonFarm, ButtonBorder } from '../../components/Button'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
 import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
 import FarmCard from '../../components/farm/FarmCard'
+import MyStakeListTitle from '../../components/Stake/MyStakeListTitle'
 import TokenStakeDialog from '../../components/Stake/TokenStakeDialog'
 // import FarmHarvestDialog from '../../components/Stake/TokenHarvestDialog'
 import TokenUnstakeDialog from '../../components/Stake/TokenUnstakeDialog'
@@ -25,7 +26,9 @@ import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import { useLookupTBDGain, useUserStaked } from 'hooks/useTokenSwapFarmScript'
 import { useUserLiquidity } from 'hooks/useTokenSwapRouter'
 import useSWR from 'swr'
+import axios from 'axios';
 
+const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
 const Container = styled.div`
   width: auto;
@@ -74,11 +77,14 @@ export default function FarmStake({
   let hasStake = false
 
   const { account, chainId } = useActiveWeb3React()
+  console.log({token})
 
   if (account) {
     hasAccount = true;
     address = account.toLowerCase();
   }
+
+  const STAR_address = '0x4783d08fb16990bd35d83f3e23bf93b8::STAR::STAR'
   // const userSTCBalance = useSTCBalances(address ? [address] : [])?.[address ?? '']
 
   const x = "0x1::STC::STC";
@@ -88,6 +94,7 @@ export default function FarmStake({
   // const lpTokenScalingFactor = 1000000000000000000;
   const lpTokenScalingFactor = 1000000000;
   const tbdScalingFactor = 1000000000;
+  const starScalingFactor = 1000000000;
 
   const tbdGain:any = useLookupTBDGain(address, x, y)?.data || 0;
   const userLiquidity:any = useUserLiquidity(address, x, y)?.data || 0;
@@ -162,12 +169,18 @@ export default function FarmStake({
   */
   // const alreadStake = 1000;
 
-  /*
-  const { data: results } = useSWR(addresses.length ? [provider, 'getBalance', ...addresses] : null, () =>
-    Promise.all(addresses.map((address) => provider!.getBalance(address)))
+  const { data: starBalance } = useSWR([address].length ? [provider, 'getBalance', ...address] : null, () =>
+    provider.getBalance(address, STAR_address)
   )
-  */
-  // console.log({results})
+
+  let { data: myStakeList, error } = useSWR(
+    // "http://a1277180fcb764735801852ac3de308f-21096515.ap-northeast-1.elb.amazonaws.com:80/v1/starswap/farmingTvlInUsd",
+    `https://swap-api.starcoin.org/barnard/v1/syrupStakes?accountAddress=${address}&tokenId=${token}`,
+    fetcher
+  );
+
+  myStakeList.pop(myStakeList[0])
+
 
   // const LPTokenAddress = '0x3db7a2da7444995338a2413b151ee437::TokenSwap::LiquidityToken<0x00000000000000000000000000000001::STC::STC, 0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT>'
   // const LPTokenAddress = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwap::LiquidityToken<0x00000000000000000000000000000001::STC::STC, 0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT>'
@@ -217,76 +230,84 @@ export default function FarmStake({
           <FarmCard>
             <AutoColumn justify="center">
               <RowFixed>
-                <StyledEthereumLogo src={ArbitrumLogo} size={'48px'} />
+                <StyledEthereumLogo src={StarswapBlueLogo} size={'48px'} />
               </RowFixed>
               <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>
-                <Trans>TBD Earned</Trans>
+                <Trans>STAR Balance</Trans>
               </TYPE.body>
               <TYPE.body color={'#FE7F8D'} fontSize={16} style={{ marginTop: '16px' }}>
                 {
                   hasAccount ? (
                     <BalanceText style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                      {tbdGain / tbdScalingFactor} <Trans>TBD</Trans>
+                      {starBalance ? (Number(starBalance) / starScalingFactor) : 0} <Trans>STAR</Trans>
                     </BalanceText>
                   ) : null
                 }
               </TYPE.body>
               <ButtonFarm style={{ marginTop: '16px' }}
-                disabled={!hasAccount || !(tbdGain > 0)}
-                onClick={() => { setHarvestDialogOpen(true) }} 
+                disabled={!hasAccount || !(starBalance ? (starBalance > 0) : false)}
+                onClick={() => { setStakeDialogOpen(true) }} 
               >
                 <TYPE.main color={'#FE7F8D'}>
                   <BalanceText color={'#fff'} style={{ flexShrink: 0}} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                    <Trans>Harvest</Trans>
+                    <Trans>Stake</Trans>
                   </BalanceText>
                 </TYPE.main>
               </ButtonFarm>
             </AutoColumn>
           </FarmCard>
-          <FarmCard>
-            <AutoColumn justify="center">
-              <RowFixed>
-                <StyledEthereumLogo src={StarswapBlueLogo} style={{ marginRight: '1.25rem' }} size={'48px'} />
-                {/*
-                <StyledEthereumLogo src={EthereumLogo} size={'48px'} />
-                */}
-              </RowFixed>
-              {/*
-              <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{tokenY}/{tokenX}</TYPE.body>
-              */}
-              <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{token}</TYPE.body>
-              <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>{userStaked / lpTokenScalingFactor}</TYPE.body>
-                {!hasAccount ? (
-                  <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
-                    <TYPE.black fontSize="20px" color={'#FE7F8D'}>
-                      <Trans>Connect Wallet</Trans>
-                    </TYPE.black>
-                  </ButtonBorder>
-                ) : (
-                  !isAuthorization ? (
-                    <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
-                      <TYPE.black fontSize="20px" color={'#FE7F8D'}>
-                        <Trans>Authorization</Trans>
-                      </TYPE.black>
-                    </ButtonBorder>
-                  ) : (
-                    <RowBetween style={{ marginTop: '16px' }}>
-                      <ButtonFarm onClick={() => { setStakeDialogOpen(true) }} disabled={!(userLiquidity > 0)}>
-                        <TYPE.main color={'#fff'}>
-                          <Trans>Stake</Trans>
-                        </TYPE.main>
-                      </ButtonFarm>
-                      <ButtonBorder onClick={() => { setUnstakeDialogOpen(true) }} disabled={!hasStake} marginLeft={16}>
-                        <TYPE.black fontSize={20}>
-                          <Trans>Unstake</Trans>
+        </AutoRow>
+        <MyStakeListTitle />
+        { (myStakeList && myStakeList.length > 0) ? myStakeList.map((item:any)=> (
+            <AutoRow justify="center">
+              <FarmCard>
+                <AutoColumn justify="center">
+                  <RowFixed>
+                    <StyledEthereumLogo src={StarswapBlueLogo} style={{ marginRight: '1.25rem' }} size={'48px'} />
+                  </RowFixed>
+                  {/*
+                  <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{tokenY}/{tokenX}</TYPE.body>
+                  */}
+                  <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{token}</TYPE.body>
+                  <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>{item.amount / starScalingFactor}</TYPE.body>
+                    {!hasAccount ? (
+                      <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
+                        <TYPE.black fontSize="20px" color={'#FE7F8D'}>
+                          <Trans>Connect Wallet</Trans>
                         </TYPE.black>
                       </ButtonBorder>
-                    </RowBetween>
-                  )
-                )}
-            </AutoColumn>
-          </FarmCard>
-        </AutoRow>
+                    ) : (
+                      !isAuthorization ? (
+                        <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
+                          <TYPE.black fontSize="20px" color={'#FE7F8D'}>
+                            <Trans>Authorization</Trans>
+                          </TYPE.black>
+                        </ButtonBorder>
+                      ) : (
+                        <RowBetween style={{ marginTop: '16px' }}>
+                          <ButtonFarm onClick={() => { setStakeDialogOpen(true) }} disabled={!(userLiquidity > 0)}>
+                            <TYPE.main color={'#fff'}>
+                              <Trans>Stake</Trans>
+                            </TYPE.main>
+                          </ButtonFarm>
+                          <ButtonBorder onClick={() => { setUnstakeDialogOpen(true) }} disabled={!hasStake} marginLeft={16}>
+                            <TYPE.black fontSize={20}>
+                              <Trans>Unstake</Trans>
+                            </TYPE.black>
+                          </ButtonBorder>
+                        </RowBetween>
+                      )
+                    )}
+                </AutoColumn>
+              </FarmCard>
+            </AutoRow>
+          )
+        ) : (
+          <AutoRow justify="center">
+            <h3>No Staking</h3>
+          </AutoRow>
+        )
+        }
         {/*
         <AutoRow justify="flex-end">
           <StyledGetLink as={Link} to={`/add/v2/${tokenY}`}>
