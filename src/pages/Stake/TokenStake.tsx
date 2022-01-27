@@ -179,7 +179,7 @@ export default function FarmStake({
     fetcher
   );
 
-  myStakeList.pop(myStakeList[0])
+  myStakeList = myStakeList ? myStakeList.pop(myStakeList[0]) : []
 
 
   // const LPTokenAddress = '0x3db7a2da7444995338a2413b151ee437::TokenSwap::LiquidityToken<0x00000000000000000000000000000001::STC::STC, 0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT>'
