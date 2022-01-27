@@ -17,7 +17,7 @@ import GetAllStakeDialog from '../../components/farm/GetAllStakeDialog'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import STCLogo from '../../assets/images/stc.png'
 import STCBlueLogo from '../../assets/images/stc_logo_blue.png'
-import StarswapBlueLogo from '../../assets/images/starswap_logo_star_round.jpg'
+import StarswapBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
 import PortisIcon from '../../assets/images/portisIcon.png'
 import ArbitrumLogo from '../../assets/svg/arbitrum_logo.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
@@ -43,7 +43,6 @@ const BalanceText = styled(Text)`
 const StyledEthereumLogo = styled.img<{ size: string }>`
   width: ${({ size }) => size};
   height: ${({ size }) => size};
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.075);
   border-radius: 4px;
 `
 
