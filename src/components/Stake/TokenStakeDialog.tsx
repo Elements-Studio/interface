@@ -15,6 +15,11 @@ import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import BigNumber from 'bignumber.js';
 import { arrayify, hexlify } from '@ethersproject/bytes';
 import { utils, bcs } from '@starcoin/starcoin';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
 const Container = styled.div`
   border-radius: 20px;
@@ -22,6 +27,17 @@ const Container = styled.div`
   width: 100%;
   height: 88px;
   margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+`
+
+const RadioContainer = styled.div`
+  border-radius: 20px;
+  border: 1px solid ${({ theme }) => theme.inputBorder};
+  width: 100%;
+  margin-top: 16px;
+  padding-top: 12px;
+  padding-left: 16px;
   display: flex;
   justify-content: space-between;
 `
@@ -63,16 +79,16 @@ const Input = styled.input`
 
 interface FarmStakeDialogProps {
   token: any,
-  lpTokenBalance: number,
-  lpTokenScalingFactor: number,
+  stakeTokenBalance: number,
+  stakeTokenScalingFactor: number,
   isOpen: boolean
   onDismiss: () => void
 }
 
 export default function FarmStakeDialog({
   token,
-  lpTokenBalance,
-  lpTokenScalingFactor,
+  stakeTokenBalance,
+  stakeTokenScalingFactor,
   onDismiss,
   isOpen,
 }: FarmStakeDialogProps) {
@@ -83,6 +99,11 @@ export default function FarmStakeDialog({
   const theme = useContext(ThemeContext)
   
   const [stakeNumber, setStakeNumber] = useState<any>('')
+  const [duration, setDuration] = useState<any>('');
+
+  const handleDurationChange = (event:any) => {
+    setDuration(event.target.value);
+  };
 
   function parseStakeNumber(value: string) {
     setStakeNumber(value)
@@ -136,7 +157,7 @@ export default function FarmStakeDialog({
         </AutoRow>
         <RowBetween style={{ marginTop: '8px' }}>
           <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
-            <Trans>LP Token Balance</Trans>：{lpTokenBalance / lpTokenScalingFactor}
+            <Trans>STAR Balance</Trans>：{stakeTokenBalance / stakeTokenScalingFactor}
           </TYPE.black>
         </RowBetween>
         <Container>
@@ -147,13 +168,26 @@ export default function FarmStakeDialog({
             style={{ height: '28px', width: '100%', background: 'transparent', textAlign: 'left', marginTop: '28px', marginLeft: '18px' }}
           />
           <ColumnRight style={{ marginRight: '24px', textAlign: 'right' }}>
-            <ButtonText style={{ marginTop: '28px', lineHeight: '28px' }} onClick={() => { setStakeNumber((lpTokenBalance / lpTokenScalingFactor).toString()) }}>
+            <ButtonText style={{ marginTop: '28px', lineHeight: '28px' }} onClick={() => { setStakeNumber((stakeTokenBalance / stakeTokenScalingFactor).toString()) }}>
               <TYPE.black fontWeight={500} fontSize={20} color={'#FD748D'} style={{ lineHeight: '28px' }}>
                 <Trans>MAX</Trans>
               </TYPE.black>
             </ButtonText>
           </ColumnRight>
         </Container>
+        <RadioContainer>
+          <FormControl component="fieldset">
+            <FormLabel component="legend"><Trans>Duration</Trans></FormLabel>
+            <RadioGroup aria-label="duration" name="duration" value={duration} onChange={handleDurationChange}>
+              <FormControlLabel value="7" control={<Radio />} label="7 Days" />
+              <FormControlLabel value="14" control={<Radio />} label="14 Days" />
+              <FormControlLabel value="30" control={<Radio />} label="30 Days" />
+              <FormControlLabel value="60" control={<Radio />} label="60 Days" />
+              <FormControlLabel value="90" control={<Radio />} label="90 Days" />
+              <FormControlLabel value="365" disabled control={<Radio />} label="(365 Days)" />
+            </RadioGroup>
+          </FormControl>
+        </RadioContainer>
         <RowBetween style={{ marginTop: '24px' }}>
           <ButtonBorder marginRight={22} onClick={onDismiss} >
             <TYPE.black fontSize={20}>
