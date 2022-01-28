@@ -38,8 +38,6 @@ export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Cur
         ]
           .filter((tokens): tokens is [Token, Token] => Boolean(tokens[0] && tokens[1]))
           .filter(([t0, t1]) => t0.address !== t1.address)
-          // in case t0::t1 pair is not exists on chain, will cause useSWR broken later
-          .filter(([t0, t1]) => t0.address === STCAddress || t1.address === STCAddress)
           .filter(([tokenA, tokenB]) => {
             if (!chainId) return true
             const customBases = CUSTOM_BASES[chainId]

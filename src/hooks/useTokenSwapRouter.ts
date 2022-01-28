@@ -15,7 +15,7 @@ export function useUserLiquidity(signer?: string, x?: string, y?: string) {
     signer && x && y ? [provider, 'liquidity', signer, x, y] : null,
     async () =>
       (await provider.callV2({
-        function_id: `${PREFIX}liquidity`,
+        function_id: `${ PREFIX }liquidity`,
         type_args: [x!, y!],
         args: [signer!],
       })) as [number]
@@ -31,7 +31,7 @@ export function useTotalLiquidity(x?: string, y?: string) {
     x && y ? [provider, 'total_liquidity', x, y] : null,
     async () =>
       (await provider.call({
-        function_id: `${PREFIX}total_liquidity`,
+        function_id: `${ PREFIX }total_liquidity`,
         type_args: [x!, y!],
         args: [],
       })) as [number]
@@ -54,21 +54,31 @@ export function useTotalLiquidity(x?: string, y?: string) {
 //   )
 // }
 
+async function useGetReserves(provider: any, pair: any) {
+  let result
+  try {
+    result = await provider.call({
+      function_id: `${ PREFIX }get_reserves`,
+      type_args: pair,
+      args: [],
+    })
+  } catch (error) {
+    result = [0, 0]
+  }
+  return result
+}
+
 export function useBatchGetReserves(pairs: ([string, string] | undefined)[]) {
   const provider = useStarcoinProvider()
   return useSWR(
     pairs.length
-      ? [provider, 'batch_get_reserves', ...pairs.map((pair) => (pair ? `${pair[0]}${pair[1]}` : ''))]
+      ? [provider, 'batch_get_reserves', ...pairs.map((pair) => (pair ? `${ pair[0] }${ pair[1] }` : ''))]
       : null,
     () =>
       Promise.all(
         pairs.map(async (pair) =>
           pair
-            ? ((await provider.call({
-                function_id: `${PREFIX}get_reserves`,
-                type_args: pair,
-                args: [],
-              })) as [number, number])
+            ? ((await useGetReserves(provider, pair)) as [number, number])
             : []
         )
       )
@@ -101,9 +111,9 @@ export function useGetAmountOut(token_x_tag?: string, token_y_tag?: string, amou
     token_x_tag && token_y_tag && amount_in ? [provider, 'get_amount_out', token_x_tag, token_y_tag, amount_in] : null,
     async () =>
       (await provider.callV2({
-        function_id: `${PREFIX_SCRIPTS}get_amount_out`,
+        function_id: `${ PREFIX_SCRIPTS }get_amount_out`,
         type_args: [token_x_tag!, token_y_tag!],
-        args: [`${amount_in!.toString()}u128`],
+        args: [`${ amount_in!.toString() }u128`],
       })) as [number]
   )
 }

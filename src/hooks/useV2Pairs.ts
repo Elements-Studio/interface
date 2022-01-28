@@ -51,7 +51,7 @@ export function useV2Pairs(currencies: [Currency | undefined, Currency | undefin
 
   return useMemo(() => {
     return (
-      results?.map((result, i) => {
+      results?.map((result: any, i: number) => {
         // const { result: reserves, loading } = result
         const reserves = result
         const tokenA = tokens[i][0]
