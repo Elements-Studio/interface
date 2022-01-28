@@ -64,7 +64,7 @@ const Input = styled.input`
 interface FarmUnstakeDialogProps {
   token: any,
   userStaked: number,
-  lpTokenScalingFactor: number,
+  stakeTokenScalingFactor: number,
   isOpen: boolean
   onDismiss: () => void
 }
@@ -72,7 +72,7 @@ interface FarmUnstakeDialogProps {
 export default function FarmUnstakeDialog({
   token,
   userStaked,
-  lpTokenScalingFactor,
+  stakeTokenScalingFactor,
   onDismiss,
   isOpen,
 }: FarmUnstakeDialogProps) {
@@ -131,12 +131,12 @@ export default function FarmUnstakeDialog({
       <ColumnCenter style={{ padding: '27px 32px'}}>
         <AutoRow>
           <TYPE.black fontWeight={500} fontSize={20}>
-            <Trans>Unstake LP Token</Trans>
+            <Trans>Unstake STAR</Trans>
           </TYPE.black>
         </AutoRow>
         <RowBetween style={{ marginTop: '8px' }}>
           <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
-            <Trans>Staked LP Token</Trans>：{userStaked / lpTokenScalingFactor}
+            <Trans>Staked STAR</Trans>：{userStaked / stakeTokenScalingFactor}
           </TYPE.black>
         </RowBetween>
         <Container>
@@ -147,7 +147,7 @@ export default function FarmUnstakeDialog({
             style={{ height: '28px', background: 'transparent', textAlign: 'left', marginTop: '28px', marginLeft: '18px' }}
           />
           <ColumnRight style={{ marginRight: '25px', textAlign: 'right' }}>
-            <ButtonText style={{ marginTop: '28px', lineHeight: '28px' }} onClick={() => { setUnstakeNumber((userStaked / lpTokenScalingFactor).toString()) }}>
+            <ButtonText style={{ marginTop: '28px', lineHeight: '28px' }} onClick={() => { setUnstakeNumber((userStaked / stakeTokenScalingFactor).toString()) }}>
               <TYPE.black fontWeight={500} fontSize={20} color={'#FD748D'} style={{ lineHeight: '28px' }}>
                 <Trans>MAX</Trans>
               </TYPE.black>
