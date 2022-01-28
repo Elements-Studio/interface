@@ -76,7 +76,6 @@ export default function FarmStake({
   let hasStake = false
 
   const { account, chainId } = useActiveWeb3React()
-  console.log({token})
 
   if (account) {
     hasAccount = true;
@@ -172,14 +171,13 @@ export default function FarmStake({
     provider.getBalance(address, STAR_address)
   )
 
-  let { data: myStakeList, error } = useSWR(
+  let myStakeList = [];
+  let { data, error } = useSWR(
     // "http://a1277180fcb764735801852ac3de308f-21096515.ap-northeast-1.elb.amazonaws.com:80/v1/starswap/farmingTvlInUsd",
     `https://swap-api.starcoin.org/barnard/v1/syrupStakes?accountAddress=${address}&tokenId=${token}`,
     fetcher
   );
-
-  myStakeList = myStakeList ? myStakeList.pop(myStakeList[0]) : []
-
+  myStakeList = data ? data : []
 
   // const LPTokenAddress = '0x3db7a2da7444995338a2413b151ee437::TokenSwap::LiquidityToken<0x00000000000000000000000000000001::STC::STC, 0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT>'
   // const LPTokenAddress = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwap::LiquidityToken<0x00000000000000000000000000000001::STC::STC, 0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT>'
@@ -284,21 +282,35 @@ export default function FarmStake({
                         </ButtonBorder>
                       ) : (
                         <RowBetween style={{ marginTop: '16px' }}>
+                          {/*
                           <ButtonFarm onClick={() => { setStakeDialogOpen(true) }} disabled={!(userLiquidity > 0)}>
                             <TYPE.main color={'#fff'}>
                               <Trans>Stake</Trans>
                             </TYPE.main>
                           </ButtonFarm>
                           <ButtonBorder onClick={() => { setUnstakeDialogOpen(true) }} disabled={!hasStake} marginLeft={16}>
-                            <TYPE.black fontSize={20}>
+                            <TYPE.main fontSize={20}>
                               <Trans>Unstake</Trans>
                             </TYPE.black>
                           </ButtonBorder>
+                          */}
+                          <ButtonFarm onClick={() => { setUnstakeDialogOpen(true) }} disabled={!(hasStake)}>
+                            <TYPE.main color={'#fff'}>
+                              <Trans>Unstake</Trans>
+                            </TYPE.main>
+                          </ButtonFarm>
                         </RowBetween>
                       )
                     )}
                 </AutoColumn>
               </FarmCard>
+              <TokenUnstakeDialog
+                userStaked={item.amount}
+                stakeTokenScalingFactor={starScalingFactor}
+                token={token}
+                isOpen={unstakeDialogOpen}
+                onDismiss={handleDismissUnstake}
+              />
             </AutoRow>
           )
         ) : (
@@ -329,19 +341,21 @@ export default function FarmStake({
       />
       */}
       <TokenStakeDialog
-        lpTokenBalance={userLiquidity}
-        lpTokenScalingFactor={lpTokenScalingFactor}
-        token={x}
+        stakeTokenBalance={Number(starBalance) || 0}
+        stakeTokenScalingFactor={starScalingFactor}
+        token={token}
         isOpen={stakeDialogOpen}
         onDismiss={handleDismissStake}
       />
+      {/*
       <TokenUnstakeDialog
         userStaked={userStaked}
-        lpTokenScalingFactor={lpTokenScalingFactor}
+        stakeTokenScalingFactor={starScalingFactor}
         token={x}
         isOpen={unstakeDialogOpen}
         onDismiss={handleDismissUnstake}
       />
+      */}
       {/*
       <GetAllStakeDialog
         isOpen={allStakeDialogOpen}
