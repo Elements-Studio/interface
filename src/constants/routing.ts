@@ -68,6 +68,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   // ...WETH_ONLY,
   // [1]: [...WETH_ONLY[1], DAI, USDC, USDT, WBTC],
   [SupportedChainId.BARNARD]: [STC[SupportedChainId.BARNARD]],
+  [SupportedChainId.PROXIMA]: [STC[SupportedChainId.PROXIMA]],
 }
 export const ADDITIONAL_BASES: { [chainId: number]: { [tokenAddress: string]: Token[] } } = {
   [1]: {
@@ -102,6 +103,7 @@ export const CUSTOM_BASES: { [chainId: number]: { [tokenAddress: string]: Token[
 export const COMMON_BASES: ChainCurrencyList = {
   // [1]: [ExtendedStar.onChain(1), DAI, USDC, USDT, WBTC, WETH9_EXTENDED[1]],
   [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), STAR[SupportedChainId.BARNARD], XUSDT[SupportedChainId.BARNARD], FAI[SupportedChainId.BARNARD]],
+  [SupportedChainId.PROXIMA]: [ExtendedStar.onChain(SupportedChainId.PROXIMA), STAR[SupportedChainId.PROXIMA], XUSDT[SupportedChainId.PROXIMA], FAI[SupportedChainId.PROXIMA]],
   [3]: [ExtendedStar.onChain(3), WETH9_EXTENDED[3]],
   [4]: [ExtendedStar.onChain(4), WETH9_EXTENDED[4]],
   [5]: [ExtendedStar.onChain(5), WETH9_EXTENDED[5]],
@@ -117,6 +119,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
   // [1]: [...WETH_ONLY[1], DAI, USDC, USDT, WBTC],
   [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD).wrapped],
+  [SupportedChainId.PROXIMA]: [ExtendedStar.onChain(SupportedChainId.PROXIMA).wrapped],
 }
 export const PINNED_PAIRS: { readonly [chainId: number]: [Token, Token][] } = {
   [1]: [
