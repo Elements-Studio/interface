@@ -1,6 +1,6 @@
 export enum SupportedChainId {
   MAINNET = 1,
-  PROXIMA = 2,
+  PROXIMA = 252,
   BARNARD = 251,
   HALLEY = 253,
   ROPSTEN = 3,
