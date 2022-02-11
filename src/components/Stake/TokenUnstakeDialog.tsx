@@ -63,7 +63,7 @@ const Input = styled.input`
 
 interface FarmUnstakeDialogProps {
   token: any,
-  userStaked: number,
+  unstakeId: any,
   stakeTokenScalingFactor: number,
   isOpen: boolean
   onDismiss: () => void
@@ -71,7 +71,7 @@ interface FarmUnstakeDialogProps {
 
 export default function FarmUnstakeDialog({
   token,
-  userStaked,
+  unstakeId,
   stakeTokenScalingFactor,
   onDismiss,
   isOpen,
@@ -82,21 +82,24 @@ export default function FarmUnstakeDialog({
 
   const theme = useContext(ThemeContext)
   
+  /*
   const [unstakeNumber, setUnstakeNumber] = useState<any>('')
 
   function parseUnstakeNumber(value: string) {
     setUnstakeNumber(value)
   }
+  */
 
   async function onClickUnstakeConfirm() {
     try {
       // const functionId = '0x3db7a2da7444995338a2413b151ee437::TokenSwapFarmScript::unstake';
-      const functionId = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapFarmScript::unstake';
-      const strTypeArgs = [token];
+      const functionId = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapSyrupScript::unstake';
+      const strTypeArgs = ['0x4783d08fb16990bd35d83f3e23bf93b8::STAR::STAR'];
       const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
 
-      const unstakeAmount = new BigNumber(unstakeNumber).times('1000000000'); // unstakeAmount * 1e9
+      // const unstakeAmount = new BigNumber(unstakeNumber).times('1000000000'); // unstakeAmount * 1e9
 
+      /*
       const unstakeAmountSCSHex = (function () {
         const se = new bcs.BcsSerializer();
         se.serializeU128(new BigNumber(unstakeAmount).toNumber());
@@ -104,6 +107,19 @@ export default function FarmUnstakeDialog({
       })();
       const args = [
         arrayify(unstakeAmountSCSHex)
+      ];
+      */
+     console.log({unstakeId})
+     console.log({token})
+      const unstakeIdSCSHex = (function () {
+        const se = new bcs.BcsSerializer();
+        console.log('a')
+        se.serializeU64(parseInt(unstakeId));
+        console.log('a')
+        return hexlify(se.getBytes());
+      })();
+      const args = [
+        arrayify(unstakeIdSCSHex)
       ];
 
       const scriptFunction = utils.tx.encodeScriptFunction(
@@ -134,11 +150,14 @@ export default function FarmUnstakeDialog({
             <Trans>Unstake STAR</Trans>
           </TYPE.black>
         </AutoRow>
+        {/*
         <RowBetween style={{ marginTop: '8px' }}>
           <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
             <Trans>Staked STAR</Trans>：{userStaked / stakeTokenScalingFactor}
           </TYPE.black>
         </RowBetween>
+        */}
+        {/*
         <Container>
           <Input
             placeholder={'0.0'}
@@ -154,6 +173,7 @@ export default function FarmUnstakeDialog({
             </ButtonText>
           </ColumnRight>
         </Container>
+        */}
         <RowBetween style={{ marginTop: '24px' }}>
           <ButtonBorder marginRight={22} onClick={onDismiss} >
             <TYPE.black fontSize={20}>
@@ -162,8 +182,8 @@ export default function FarmUnstakeDialog({
           </ButtonBorder>
           <ButtonFarm onClick={() => {
             onClickUnstakeConfirm();
-            setTimeout(onDismiss, 2500);
-            setTimeout("window.location.reload()", 10000);
+            setTimeout(onDismiss, 30000);
+            setTimeout("window.location.reload()", 60000);
           }}>
             <TYPE.main color={'#fff'}>
               <Trans>Confirm</Trans>
