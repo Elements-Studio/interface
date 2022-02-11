@@ -4,6 +4,7 @@ import { useStarcoinProvider } from './useStarcoinProvider'
 // const PREFIX = '0xbd7e8be8fae9f60f2f5136433e36a091::TokenSwapRouter::'
 // const PREFIX = '0x3db7a2da7444995338a2413b151ee437::TokenSwapFarmScript::'
 const PREFIX = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapFarmScript::'
+const SYRUP_PREFIX = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapSyrupScript::'
 
 /**
  * 查询当前签名者在某代币对下的流动性
@@ -66,6 +67,22 @@ export function useUserStaked(address?: string, x?: string, y?: string) {
         type_args: [x!, y!],
         args: [address!],
       })) as [number]
+  )
+}
+
+/**
+ * 查询某用户已经质押的STAR Token数量
+ */
+export function useUserStarStaked(address?: string, token?: string) {
+  const provider = useStarcoinProvider()
+  return useSWR(
+    token ? [provider, 'query_stake_list', address, token] : null,
+    async () =>
+      (await provider.callV2({
+        function_id: `${SYRUP_PREFIX}query_stake_list`,
+        type_args: [token!],
+        args: [address!],
+      })) as [number] 
   )
 }
 
