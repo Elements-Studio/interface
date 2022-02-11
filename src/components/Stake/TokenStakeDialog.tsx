@@ -103,27 +103,38 @@ export default function FarmStakeDialog({
 
   const handleDurationChange = (event:any) => {
     setDuration(event.target.value);
+    console.log({duration})
   };
 
   function parseStakeNumber(value: string) {
     setStakeNumber(value)
+    console.log({stakeNumber})
   }
 
   async function onClickStakeConfirm() {
     try {
       // const functionId = '0x3db7a2da7444995338a2413b151ee437::TokenSwapFarmScript::stake';
-      const functionId = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapFarmScript::stake';
-      const strTypeArgs = [token];
+      const functionId = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapSyrupScript::stake';
+      // const strTypeArgs = [token];
+      const strTypeArgs = ['0x4783d08fb16990bd35d83f3e23bf93b8::STAR::STAR'];
       const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
 
-      const stakeAmount = new BigNumber(stakeNumber).times('1000000000'); // stakeAmount * 1e9
+      const stakeAmount = new BigNumber(parseFloat(stakeNumber)).times('1000000000'); // stakeAmount * 1e9
+      // const stakeAmount = 50; // stakeAmount * 1e9
+      const stakeDuration = duration;
 
+      const stakeDurationSCSHex = (function () {
+        const se = new bcs.BcsSerializer();
+        se.serializeU64(new BigNumber(stakeDuration).toNumber());
+        return hexlify(se.getBytes());
+      })();
       const stakeAmountSCSHex = (function () {
         const se = new bcs.BcsSerializer();
         se.serializeU128(new BigNumber(stakeAmount).toNumber());
         return hexlify(se.getBytes());
       })();
       const args = [
+        arrayify(stakeDurationSCSHex),
         arrayify(stakeAmountSCSHex)
       ];
 
@@ -179,12 +190,16 @@ export default function FarmStakeDialog({
           <FormControl component="fieldset">
             <FormLabel component="legend"><Trans>Duration</Trans></FormLabel>
             <RadioGroup aria-label="duration" name="duration" value={duration} onChange={handleDurationChange}>
-              <FormControlLabel value="7" control={<Radio />} label="7 Days" />
-              <FormControlLabel value="14" control={<Radio />} label="14 Days" />
-              <FormControlLabel value="30" control={<Radio />} label="30 Days" />
-              <FormControlLabel value="60" control={<Radio />} label="60 Days" />
-              <FormControlLabel value="90" control={<Radio />} label="90 Days" />
-              <FormControlLabel value="365" disabled control={<Radio />} label="(365 Days)" />
+              <FormControlLabel value="10" control={<Radio />} label="10 Seconds" />
+              <FormControlLabel value="100" control={<Radio />} label="100 Seconds" />
+              <FormControlLabel value="3600" control={<Radio />} label="1 hour" />
+              <FormControlLabel value="86400" control={<Radio />} label="1 Day" />
+              <FormControlLabel value="604800" control={<Radio />} label="7 Days" />
+              <FormControlLabel value="1209600" control={<Radio />} label="14 Days" />
+              <FormControlLabel value="2592000" control={<Radio />} label="30 Days" />
+              <FormControlLabel value="5184000" control={<Radio />} label="60 Days" />
+              <FormControlLabel value="7776000" control={<Radio />} label="90 Days" />
+              <FormControlLabel value="31536000" disabled control={<Radio />} label="(365 Days)" />
             </RadioGroup>
           </FormControl>
         </RadioContainer>
@@ -196,8 +211,8 @@ export default function FarmStakeDialog({
           </ButtonBorder>
           <ButtonFarm onClick={() => {
             onClickStakeConfirm();
-            setTimeout(onDismiss, 2500);
-            setTimeout("window.location.reload()", 10000);
+            setTimeout(onDismiss, 30000);
+            setTimeout("window.location.reload()", 60000);
           }}>
             <TYPE.main color={'#fff'}>
               <Trans>Confirm</Trans>
