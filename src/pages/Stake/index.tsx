@@ -64,6 +64,11 @@ export default function Farm({ history }: RouteComponentProps) {
   if (chainId === 1) {
     network = 'main';
   }
+  if (chainId === 252) {
+    network = 'proxima';
+  }
+
+  console.log({network})
 
   /*
   const { data, error } = useSWR(
