@@ -11,6 +11,13 @@ export const STC: { [chainId: number]: Token } = {
     'STC',
     'STC'
   ),
+  [SupportedChainId.PROXIMA]: new Token(
+    SupportedChainId.PROXIMA,
+    '0x00000000000000000000000000000001::STC::STC',
+    9,
+    'STC',
+    'STC'
+  ),
 }
 export const FAI: { [chainId: number]: Token } = {
   [SupportedChainId.BARNARD]: new Token(
@@ -20,10 +27,24 @@ export const FAI: { [chainId: number]: Token } = {
     'FAI',
     'FAI'
   ),
+  [SupportedChainId.PROXIMA]: new Token(
+    SupportedChainId.PROXIMA,
+    '0xfe125d419811297dfab03c61efec0bc9::FAI::FAI',
+    9,
+    'FAI',
+    'FAI'
+  ),
 }
 export const STAR: { [chainId: number]: Token } = {
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
+    '0x4783d08fb16990bd35d83f3e23bf93b8::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
+  [SupportedChainId.PROXIMA]: new Token(
+    SupportedChainId.PROXIMA,
     '0x4783d08fb16990bd35d83f3e23bf93b8::STAR::STAR',
     9,
     'STAR',
@@ -42,6 +63,13 @@ export const STAR: { [chainId: number]: Token } = {
 export const XUSDT: { [chainId: number]: Token } = {
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
+    '0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT',
+    9,
+    'XUSDT',
+    'XUSDT'
+  ),
+  [SupportedChainId.PROXIMA]: new Token(
+    SupportedChainId.PROXIMA,
     '0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT',
     9,
     'XUSDT',
@@ -74,10 +102,24 @@ export const WEN: { [chainId: number]: Token } = {
     'WEN',
     'Wen'
   ),
+  [SupportedChainId.PROXIMA]: new Token(
+    SupportedChainId.PROXIMA,
+    '0x88e2677b89841cd4ee7c15535798e1c8::WEN::WEN',
+    9,
+    'WEN',
+    'Wen'
+  ),
 }
 export const SHARE: { [chainId: number]: Token } = {
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
+    '0x88e2677b89841cd4ee7c15535798e1c8::SHARE::SHARE',
+    9,
+    'SHARE',
+    'Share'
+  ),
+  [SupportedChainId.PROXIMA]: new Token(
+    SupportedChainId.PROXIMA,
     '0x88e2677b89841cd4ee7c15535798e1c8::SHARE::SHARE',
     9,
     'SHARE',
@@ -201,6 +243,7 @@ export const UNI: { [chainId: number]: Token } = {
 export const WETH9_EXTENDED: { [chainId: number]: Token } = {
   ...WETH9,
   [SupportedChainId.BARNARD]: Star.onChain(SupportedChainId.BARNARD).wrapped,
+  [SupportedChainId.PROXIMA]: Star.onChain(SupportedChainId.PROXIMA).wrapped,
   [SupportedChainId.ARBITRUM_ONE]: new Token(
     SupportedChainId.ARBITRUM_ONE,
     '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
