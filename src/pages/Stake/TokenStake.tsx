@@ -23,7 +23,7 @@ import ArbitrumLogo from '../../assets/svg/arbitrum_logo.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { useSTCBalances, useTokenBalance } from 'state/wallet/hooks'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
-import { useLookupTBDGain, useUserStaked } from 'hooks/useTokenSwapFarmScript'
+import { useLookupTBDGain, useUserStaked, useUserStarStaked } from 'hooks/useTokenSwapFarmScript'
 import { useUserLiquidity } from 'hooks/useTokenSwapRouter'
 import useSWR from 'swr'
 import axios from 'axios';
@@ -73,9 +73,17 @@ export default function FarmStake({
   let address = '';
   let hasAccount = false;
   let isAuthorization = true
-  let hasStake = false
+  let hasStake = true
+  let network = 'barnard';
 
   const { account, chainId } = useActiveWeb3React()
+
+  if (chainId === 1) {
+    network = 'main';
+  }
+  if (chainId === 252) {
+    network = 'proxima';
+  }
 
   if (account) {
     hasAccount = true;
@@ -97,8 +105,9 @@ export default function FarmStake({
   const tbdGain:any = useLookupTBDGain(address, x, y)?.data || 0;
   const userLiquidity:any = useUserLiquidity(address, x, y)?.data || 0;
   const userStaked:any = useUserStaked(address, x, y)?.data || 0;
-  if (userStaked[0] > 0) {
-    hasStake = true;
+  const userStarStaked:any = useUserStarStaked(address, STAR_address)?.data || [];
+  if (userStarStaked === [] || userStarStaked[0]?.length > 0) {
+    hasStake = false;
   }
 
 
@@ -174,10 +183,11 @@ export default function FarmStake({
   let myStakeList = [];
   let { data, error } = useSWR(
     // "http://a1277180fcb764735801852ac3de308f-21096515.ap-northeast-1.elb.amazonaws.com:80/v1/starswap/farmingTvlInUsd",
-    `https://swap-api.starcoin.org/barnard/v1/syrupStakes?accountAddress=${address}&tokenId=${token}`,
+    `https://swap-api.starcoin.org/${network}/v1/syrupStakes?accountAddress=${address}&tokenId=${token}`,
     fetcher
   );
   myStakeList = data ? data : []
+  console.log({myStakeList})
 
   // const LPTokenAddress = '0x3db7a2da7444995338a2413b151ee437::TokenSwap::LiquidityToken<0x00000000000000000000000000000001::STC::STC, 0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT>'
   // const LPTokenAddress = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwap::LiquidityToken<0x00000000000000000000000000000001::STC::STC, 0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT>'
@@ -203,6 +213,7 @@ export default function FarmStake({
   const [ harvestDialogOpen, setHarvestDialogOpen ] = useState(false)
   const [ allStakeDialogOpen, setAllStakeDialogOpen ] = useState(false)
   const [ unstakeDialogOpen, setUnstakeDialogOpen ] = useState(false)
+  const [ unstakeId, setUnstakeId ] = useState('')
 
   const handleDismissStake = useCallback(() => {
     setStakeDialogOpen(false)
@@ -219,6 +230,12 @@ export default function FarmStake({
   const handleDismissUnstake = useCallback(() => {
     setUnstakeDialogOpen(false)
   }, [setUnstakeDialogOpen])
+
+  function handleUnstakeId(e:any) {
+    console.log(e.target.id);
+    console.log(e.currentTarget.id);
+    setUnstakeId(e.target.id);
+  };
 
   return (
     <>
@@ -256,7 +273,7 @@ export default function FarmStake({
         </AutoRow>
         <MyStakeListTitle />
         { (myStakeList && myStakeList.length > 0) ? myStakeList.map((item:any)=> (
-            <AutoRow justify="center">
+            <AutoRow justify="center" key={item.id}>
               <FarmCard>
                 <AutoColumn justify="center">
                   <RowFixed>
@@ -266,7 +283,10 @@ export default function FarmStake({
                   <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{tokenY}/{tokenX}</TYPE.body>
                   */}
                   <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{token}</TYPE.body>
-                  <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>{item.amount / starScalingFactor}</TYPE.body>
+                  <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>ID: {item.id}</TYPE.body>
+                  <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>{(parseInt(item.amount) / starScalingFactor).toString()}</TYPE.body>
+                  <TYPE.body fontSize={16} style={{ marginTop: '16px' }}>Start: {(new Date(item.startTime*1000)+'').slice(4,24)}</TYPE.body>
+                  <TYPE.body fontSize={16} style={{ marginTop: '16px' }}>End: {(new Date(item.endTime*1000)+'').slice(4,24)}</TYPE.body>
                     {!hasAccount ? (
                       <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
                         <TYPE.black fontSize="20px" color={'#FE7F8D'}>
@@ -294,9 +314,11 @@ export default function FarmStake({
                             </TYPE.black>
                           </ButtonBorder>
                           */}
-                          <ButtonFarm onClick={() => { setUnstakeDialogOpen(true) }} disabled={!(hasStake)}>
+                          <ButtonFarm id={item.id} onClick={(e) => { handleUnstakeId(e); console.log('click'); setUnstakeDialogOpen(true);  }} disabled={item.endTime > (Date.now() / 1000)}>
                             <TYPE.main color={'#fff'}>
-                              <Trans>Unstake</Trans>
+                              { (item.endTime > (Date.now() / 1000)) ? 
+                                <Trans>Wait</Trans> : <Trans>Unstake</Trans>
+                              }
                             </TYPE.main>
                           </ButtonFarm>
                         </RowBetween>
@@ -304,13 +326,6 @@ export default function FarmStake({
                     )}
                 </AutoColumn>
               </FarmCard>
-              <TokenUnstakeDialog
-                userStaked={item.amount}
-                stakeTokenScalingFactor={starScalingFactor}
-                token={token}
-                isOpen={unstakeDialogOpen}
-                onDismiss={handleDismissUnstake}
-              />
             </AutoRow>
           )
         ) : (
@@ -346,6 +361,13 @@ export default function FarmStake({
         token={token}
         isOpen={stakeDialogOpen}
         onDismiss={handleDismissStake}
+      />
+      <TokenUnstakeDialog
+        unstakeId={unstakeId}
+        stakeTokenScalingFactor={starScalingFactor}
+        token={token}
+        isOpen={unstakeDialogOpen}
+        onDismiss={handleDismissUnstake}
       />
       {/*
       <TokenUnstakeDialog
