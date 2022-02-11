@@ -49,6 +49,22 @@
       "symbol": "SHARE",
       "decimals": 9,
       "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    },
+    {
+      "chainId": 252,
+      "address": "0x4783d08fb16990bd35d83f3e23bf93b8::STAR::STAR",
+      "name": "STAR",
+      "symbol": "STAR",
+      "decimals": 9,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    },
+    {
+      "chainId": 252,
+      "address": "0xfe125d419811297dfab03c61efec0bc9::FAI::FAI",
+      "name": "FAI",
+      "symbol": "FAI",
+      "decimals": 9,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
     }
   ]
 }
