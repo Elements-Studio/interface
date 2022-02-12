@@ -1,4 +1,5 @@
 import useSWR from 'swr'
+import axios from 'axios'
 import { useStarcoinProvider } from './useStarcoinProvider'
 
 // const PREFIX = '0xbd7e8be8fae9f60f2f5136433e36a091::TokenSwapRouter::'
@@ -63,25 +64,17 @@ async function useGetReserves(provider: any, pair: any) {
       args: [],
     })
   } catch (error) {
+    // will fail if pair is not exists on chain 
     result = [0, 0]
   }
   return result
 }
 
 export function useBatchGetReserves(pairs: ([string, string] | undefined)[]) {
-  const provider = useStarcoinProvider()
+  const url = 'https://swap-api.starcoin.org/barnard/v1/getTokenPairReservesList'
   return useSWR(
-    pairs.length
-      ? [provider, 'batch_get_reserves', ...pairs.map((pair) => (pair ? `${ pair[0] }${ pair[1] }` : ''))]
-      : null,
-    () =>
-      Promise.all(
-        pairs.map(async (pair) =>
-          pair
-            ? ((await useGetReserves(provider, pair)) as [number, number])
-            : []
-        )
-      )
+    pairs.length ? JSON.stringify(pairs) : null,  // convert array to string as key for caching
+    (pairsStr: string) => axios.post(url, JSON.parse(pairsStr)).then(res => res.data)
   )
 }
 
