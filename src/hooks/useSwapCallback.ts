@@ -239,13 +239,10 @@ export function useSwapCallback(
 ): { state: SwapCallbackState; callback: null | (() => Promise<string>); error: string | null } {
   const { account, chainId, library } = useActiveWeb3React()
 
-  // const swapCalls = useSwapCallArguments(trade, allowedSlippage, recipientAddressOrName, signatureData)
-
-  // const addTransaction = useTransactionAdder()
-
   const { address: recipientAddress } = useENS(recipientAddressOrName)
   const recipient = recipientAddressOrName === null ? account : recipientAddress
-
+  const path = trade && (trade instanceof V2Trade ? trade.route.path : trade.route.tokenPath) || []
+  const midPath = path.slice(1, path.length - 1)
   const handleSwapExactTokenForToken = useSwapExactTokenForToken(account ?? undefined)
   const handleSwapTokenForExactToken = useSwapTokenForExactToken(account ?? undefined)
 
@@ -264,107 +261,12 @@ export function useSwapCallback(
     return {
       state: SwapCallbackState.VALID,
       callback: async function onSwap(): Promise<string> {
-        // const estimatedCalls: SwapCallEstimate[] = await Promise.all(
-        //   swapCalls.map((call) => {
-        //     const { address, calldata, value } = call
-
-        //     const tx =
-        //       !value || isZero(value)
-        //         ? { from: account, to: address, data: calldata }
-        //         : {
-        //             from: account,
-        //             to: address,
-        //             data: calldata,
-        //             value,
-        //           }
-
-        //     return library
-        //       .estimateGas(tx)
-        //       .then((gasEstimate) => {
-        //         return {
-        //           call,
-        //           gasEstimate,
-        //         }
-        //       })
-        //       .catch((gasError) => {
-        //         console.debug('Gas estimate failed, trying eth_call to extract error', call)
-
-        //         return library
-        //           .call(tx)
-        //           .then((result) => {
-        //             console.debug('Unexpected successful call after failed estimate gas', call, gasError, result)
-        //             return { call, error: new Error('Unexpected issue with estimating the gas. Please try again.') }
-        //           })
-        //           .catch((callError) => {
-        //             console.debug('Call threw error', call, callError)
-        //             return { call, error: new Error(swapErrorToUserReadableMessage(callError)) }
-        //           })
-        //       })
-        //   })
-        // )
-
-        // a successful estimation is a bignumber gas estimate and the next call is also a bignumber gas estimate
-        // let bestCallOption: SuccessfulCall | SwapCallEstimate | undefined = estimatedCalls.find(
-        //   (el, ix, list): el is SuccessfulCall =>
-        //     'gasEstimate' in el && (ix === list.length - 1 || 'gasEstimate' in list[ix + 1])
-        // )
-
-        // check if any calls errored with a recognizable error
-        // if (!bestCallOption) {
-        //   const errorCalls = estimatedCalls.filter((call): call is FailedCall => 'error' in call)
-        //   if (errorCalls.length > 0) throw errorCalls[errorCalls.length - 1].error
-        //   const firstNoErrorCall = estimatedCalls.find<SwapCallEstimate>(
-        //     (call): call is SwapCallEstimate => !('error' in call)
-        //   )
-        //   if (!firstNoErrorCall) throw new Error('Unexpected error. Could not estimate gas for the swap.')
-        //   bestCallOption = firstNoErrorCall
-        // }
-
-        // const {
-        //   call: { address, calldata, value },
-        // } = bestCallOption
-
-        // return library
-        //   .getSigner()
-        //   .sendTransaction({
-        //     from: account,
-        //     to: address,
-        //     data: calldata,
-        //     // let the wallet try if we can't estimate the gas
-        //     ...('gasEstimate' in bestCallOption ? { gasLimit: calculateGasMargin(bestCallOption.gasEstimate) } : {}),
-        //     ...(value && !isZero(value) ? { value } : {}),
-        //   })
-        //   .then((response) => {
-        // const inputSymbol = trade.inputAmount.currency.symbol
-        // const outputSymbol = trade.outputAmount.currency.symbol
-        // const inputAmount = trade.inputAmount.toSignificant(4)
-        // const outputAmount = trade.outputAmount.toSignificant(4)
-        //
-        // const base = `Swap ${inputAmount} ${inputSymbol} for ${outputAmount} ${outputSymbol}`
-        // const withRecipient =
-        //   recipient === account
-        //     ? base
-        //     : `${base} to ${
-        //         recipientAddressOrName && isAddress(recipientAddressOrName)
-        //           ? shortenAddress(recipientAddressOrName)
-        //           : recipientAddressOrName
-        //       }`
-        //
-        // const tradeVersion = getTradeVersion(trade)
-        //
-        // const withVersion = tradeVersion === Version.v3 ? withRecipient : `${withRecipient} on ${tradeVersion}`
-        //
-        // addTransaction(response, {
-        //   summary: withVersion,
-        // })
-
-        //   return response.hash
-        // })
         return (
           trade.tradeType === TradeType.EXACT_INPUT ? handleSwapExactTokenForToken : handleSwapTokenForExactToken
         )(
           trade.inputAmount.currency.wrapped.address,
           trade.outputAmount.currency.wrapped.address,
+          midPath,
           (trade.tradeType === TradeType.EXACT_INPUT ? trade.inputAmount : trade.maximumAmountIn(allowedSlippage))
             .multiply(trade.inputAmount.decimalScale)
             .toExact(),

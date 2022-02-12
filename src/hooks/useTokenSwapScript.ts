@@ -1,5 +1,6 @@
 import { bcs, utils } from '@starcoin/starcoin'
 import { arrayify, hexlify } from '@ethersproject/bytes'
+import { Token } from '@starcoin/starswap-sdk-core'
 import { useCallback } from 'react'
 import { useStarcoinProvider } from './useStarcoinProvider'
 import { TransactionPayloadVariantScriptFunction } from '@starcoin/starcoin/dist/src/lib/runtime/starcoin_types'
@@ -25,7 +26,7 @@ export function useRegisterSwapPair(signer?: string) {
   const provider = useStarcoinProvider()
   return useCallback(
     async (x: string, y: string) => {
-      const functionId = `${PREFIX}register_swap_pair`
+      const functionId = `${ PREFIX }register_swap_pair`
       const tyArgs = utils.tx.encodeStructTypeTags([x, y])
       const args: Uint8Array[] = []
       const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
@@ -45,9 +46,19 @@ export function useSwapExactTokenForToken(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
   return useCallback(
-    async (x: string, y: string, amount_x_in: number | string, amount_y_out_min: number | string) => {
-      const functionId = `${PREFIX}swap_exact_token_for_token`
-      const tyArgs = utils.tx.encodeStructTypeTags([x, y])
+    async (x: string, y: string, midPath: Token[], amount_x_in: number | string, amount_y_out_min: number | string) => {
+      let functionId
+      let tyArgs
+      if (midPath.length === 1) {
+        // X -> R -> Y
+        functionId = `${ PREFIX }swap_exact_token_for_token_router2`
+        tyArgs = utils.tx.encodeStructTypeTags([x, midPath[0].address, y])
+      } else {
+        // X -> Y
+        functionId = `${ PREFIX }swap_exact_token_for_token`
+        tyArgs = utils.tx.encodeStructTypeTags([x, y])
+      }
+
       const args = [arrayify(serializeU128(amount_x_in)), arrayify(serializeU128(amount_y_out_min))]
       const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
       const transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
@@ -67,9 +78,18 @@ export function useSwapTokenForExactToken(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
   return useCallback(
-    async (x: string, y: string, amount_x_in_max: number | string, amount_y_out: number | string) => {
-      const functionId = `${PREFIX}swap_token_for_exact_token`
-      const tyArgs = utils.tx.encodeStructTypeTags([x, y])
+    async (x: string, y: string, midPath: Token[], amount_x_in_max: number | string, amount_y_out: number | string) => {
+      let functionId
+      let tyArgs
+      if (midPath.length === 1) {
+        // X <- R <- Y
+        functionId = `${ PREFIX }swap_token_for_exact_token_router2`
+        tyArgs = utils.tx.encodeStructTypeTags([x, midPath[0].address, y])
+      } else {
+        // X <- Y
+        functionId = `${ PREFIX }swap_token_for_exact_token`
+        tyArgs = utils.tx.encodeStructTypeTags([x, y])
+      }
       const args = [arrayify(serializeU128(amount_x_in_max)), arrayify(serializeU128(amount_y_out))]
       const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
       const transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
@@ -97,7 +117,7 @@ export function useAddLiquidity(signer?: string) {
       amount_x_min: number | string,
       amount_y_min: number | string
     ) => {
-      const functionId = `${PREFIX}add_liquidity`
+      const functionId = `${ PREFIX }add_liquidity`
       const tyArgs = utils.tx.encodeStructTypeTags([x, y])
       const args = [
         arrayify(serializeU128(amount_x_desired)),
@@ -130,7 +150,7 @@ export function useRemoveLiquidity(signer?: string) {
       amount_x_min: number | string,
       amount_y_min: number | string
     ) => {
-      const functionId = `${PREFIX}remove_liquidity`
+      const functionId = `${ PREFIX }remove_liquidity`
       const tyArgs = utils.tx.encodeStructTypeTags([x, y])
       const args = [
         arrayify(serializeU128(liquidity)),
