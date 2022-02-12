@@ -6,7 +6,6 @@ import { AdvancedSwapDetails } from 'components/swap/AdvancedSwapDetails'
 import { SwapNetworkAlert } from 'components/swap/SwapNetworkAlert'
 import UnsupportedCurrencyFooter from 'components/swap/UnsupportedCurrencyFooter'
 import { MouseoverTooltip, MouseoverTooltipContent } from 'components/Tooltip'
-import { useSwapExactTokenForToken } from 'hooks/useTokenSwapScript'
 import JSBI from 'jsbi'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { ArrowDown, ArrowLeft, CheckCircle, HelpCircle, Info } from 'react-feather'
@@ -58,7 +57,6 @@ import { isTradeBetter } from '../../utils/isTradeBetter'
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
 import { warningSeverity } from '../../utils/prices'
 import AppBody from '../AppBody'
-import { useGetAmountOut } from 'hooks/useTokenSwapRouter'
 
 const StyledInfo = styled(Info)`
   opacity: 0.4;

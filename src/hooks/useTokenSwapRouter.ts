@@ -5,7 +5,6 @@ import { useStarcoinProvider } from './useStarcoinProvider'
 // const PREFIX = '0xbd7e8be8fae9f60f2f5136433e36a091::TokenSwapRouter::'
 // const PREFIX = '0x3db7a2da7444995338a2413b151ee437::TokenSwapRouter::'
 const PREFIX = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapRouter::'
-const PREFIX_SCRIPTS = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapScripts::'
 
 /**
  * 查询当前签名者在某代币对下的流动性
@@ -93,23 +92,6 @@ export function useBatchGetReserves(pairs: ([string, string] | undefined)[]) {
 //       })) as [number]
 //   )
 // }
-
-/**
- * 根据换入额度计算换出额度，固定千分之三手续费
- */
-export function useGetAmountOut(token_x_tag?: string, token_y_tag?: string, amount_in?: number | string) {
-  const provider = useStarcoinProvider()
-  console.log(token_x_tag, token_y_tag, amount_in?.toString())
-  return useSWR(
-    token_x_tag && token_y_tag && amount_in ? [provider, 'get_amount_out', token_x_tag, token_y_tag, amount_in] : null,
-    async () =>
-      (await provider.callV2({
-        function_id: `${ PREFIX_SCRIPTS }get_amount_out`,
-        type_args: [token_x_tag!, token_y_tag!],
-        args: [`${ amount_in!.toString() }u128`],
-      })) as [number]
-  )
-}
 
 /**
  * 根据换入额度计算换出额度，固定千分之三手续费
