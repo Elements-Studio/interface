@@ -83,7 +83,8 @@ export default function FarmStake({
 
   const x = "0x1::STC::STC";
   // const y = "0x9350502a3af6c617e9a42fa9e306a385::BX_USDT::BX_USDT";
-  const y = "0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT";
+  // const y = "0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT";
+  const y = "0xfe125d419811297dfab03c61efec0bc9::FAI::FAI";
 
   // const lpTokenScalingFactor = 1000000000000000000;
   const lpTokenScalingFactor = 1000000000;

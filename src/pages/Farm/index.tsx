@@ -64,6 +64,11 @@ export default function Farm({ history }: RouteComponentProps) {
   if (chainId === 1) {
     network = 'main';
   }
+  if (chainId === 252) {
+    network = 'proxima';
+  }
+
+  const lpTokenScalingFactor = 1000000000000000000;
 
   const { data, error } = useSWR(
     // `http://k8s-default-starswap-af6ced600d-1022591271.ap-northeast-1.elb.amazonaws.com/${network}/v1/lpTokenFarms`,
@@ -204,7 +209,7 @@ export default function Farm({ history }: RouteComponentProps) {
                 </RowFixed>
                 <RowFixed>
                   <TYPE.black fontSize={14}>
-                    {item.tvlInUsd}
+                    {Number(item.tvlInUsd / lpTokenScalingFactor)}
                   </TYPE.black>
                 </RowFixed>
               </FarmRow>
