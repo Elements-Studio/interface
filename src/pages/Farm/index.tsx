@@ -81,7 +81,7 @@ export default function Farm({ history }: RouteComponentProps) {
   // if (!data) return "Loading...";
   if (error) return null;
   if (!data) return null;
-  const list = data.filter((item:any)=>item.description==='STC / FAI');
+  const list = data;
 
   // const darkMode = useIsDarkMode();
 
