@@ -2,6 +2,7 @@ import { Trans } from '@lingui/macro'
 import { useMemo } from 'react'
 import ReactGA from 'react-ga'
 import styled from 'styled-components/macro'
+import { useActiveWeb3React } from 'hooks/web3'
 import { StyledInternalLink, TYPE } from '../../theme'
 
 import axios from 'axios';
@@ -27,10 +28,18 @@ const TitleTotal = styled.div<{ margin?: string; maxWidth?: string }>`
 `
 
 export default function FarmTitle() {
+    let network = 'barnard';
+    const { chainId } = useActiveWeb3React()
+    if (chainId === 1) {
+      network = 'main';
+    }
+    if (chainId === 252) {
+      network = 'proxima';
+    }
 
     const { data, error } = useSWR(
       // "http://a1277180fcb764735801852ac3de308f-21096515.ap-northeast-1.elb.amazonaws.com:80/v1/starswap/farmingTvlInUsd",
-      "https://swap-api.starcoin.org/barnard/v1/farmingTvlInUsd",
+      `https://swap-api.starcoin.org/${network}/v1/farmingTvlInUsd`,
       fetcher
     );
 
