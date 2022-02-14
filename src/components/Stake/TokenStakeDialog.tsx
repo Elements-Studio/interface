@@ -20,6 +20,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import CircularProgress from '@mui/material/CircularProgress'
 
 const Container = styled.div`
   border-radius: 20px;
@@ -100,6 +101,7 @@ export default function FarmStakeDialog({
   
   const [stakeNumber, setStakeNumber] = useState<any>('')
   const [duration, setDuration] = useState<any>('');
+  const [loading, setLoading] = useState(false);
 
   const handleDurationChange = (event:any) => {
     setDuration(event.target.value);
@@ -205,6 +207,15 @@ export default function FarmStakeDialog({
             </RadioGroup>
           </FormControl>
         </RadioContainer>
+        {loading && (
+          <CircularProgress
+            size={64}
+            sx={{
+              marginTop: '10px',
+              zIndex: 1,
+            }}
+          />
+        )}
         <RowBetween style={{ marginTop: '24px' }}>
           <ButtonBorder marginRight={22} onClick={onDismiss} >
             <TYPE.black fontSize={20}>
@@ -213,6 +224,7 @@ export default function FarmStakeDialog({
           </ButtonBorder>
           <ButtonFarm onClick={() => {
             onClickStakeConfirm();
+            setLoading(true);
             setTimeout(onDismiss, 30000);
             setTimeout("window.location.reload()", 60000);
           }}>
