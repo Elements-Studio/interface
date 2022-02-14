@@ -10,6 +10,7 @@ import Column, { AutoColumn, ColumnCenter, ColumnRight } from '../Column'
 import Row, { RowBetween, AutoRow } from '../Row'
 import Modal from '../Modal'
 import { ButtonFarm, ButtonBorder, ButtonText } from 'components/Button'
+import CircularProgress from '@mui/material/CircularProgress'
 import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import BigNumber from 'bignumber.js'
@@ -81,6 +82,8 @@ export default function FarmUnstakeDialog({
   const { account, chainId } = useActiveWeb3React()
 
   const theme = useContext(ThemeContext)
+
+  const [loading, setLoading] = useState(false);
   
   /*
   const [unstakeNumber, setUnstakeNumber] = useState<any>('')
@@ -109,13 +112,11 @@ export default function FarmUnstakeDialog({
         arrayify(unstakeAmountSCSHex)
       ];
       */
-     console.log({unstakeId})
-     console.log({token})
+     // console.log({unstakeId})
+     // console.log({token})
       const unstakeIdSCSHex = (function () {
         const se = new bcs.BcsSerializer();
-        console.log('a')
         se.serializeU64(parseInt(unstakeId));
-        console.log('a')
         return hexlify(se.getBytes());
       })();
       const args = [
@@ -174,6 +175,15 @@ export default function FarmUnstakeDialog({
           </ColumnRight>
         </Container>
         */}
+        {loading && (
+          <CircularProgress
+            size={64}
+            sx={{
+              marginTop: '10px',
+              zIndex: 1
+            }}
+          />
+        )}
         <RowBetween style={{ marginTop: '24px' }}>
           <ButtonBorder marginRight={22} onClick={onDismiss} >
             <TYPE.black fontSize={20}>
@@ -182,6 +192,7 @@ export default function FarmUnstakeDialog({
           </ButtonBorder>
           <ButtonFarm onClick={() => {
             onClickUnstakeConfirm();
+            setLoading(true);
             setTimeout(onDismiss, 30000);
             setTimeout("window.location.reload()", 60000);
           }}>
