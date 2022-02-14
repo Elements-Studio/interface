@@ -16,6 +16,7 @@ import GetAllStakeDialog from '../../components/farm/GetAllStakeDialog'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import STCLogo from '../../assets/images/stc.png'
 import STCBlueLogo from '../../assets/images/stc_logo_blue.png'
+import StarswapBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
 import PortisIcon from '../../assets/images/portisIcon.png'
 import ArbitrumLogo from '../../assets/svg/arbitrum_logo.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
@@ -216,16 +217,16 @@ export default function FarmStake({
           <FarmCard>
             <AutoColumn justify="center">
               <RowFixed>
-                <StyledEthereumLogo src={ArbitrumLogo} size={'48px'} />
+                <StyledEthereumLogo src={StarswapBlueLogo} size={'48px'} />
               </RowFixed>
               <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>
-                <Trans>TBD Earned</Trans>
+                <Trans>STAR Earned</Trans>
               </TYPE.body>
               <TYPE.body color={'#FE7F8D'} fontSize={16} style={{ marginTop: '16px' }}>
                 {
                   hasAccount ? (
                     <BalanceText style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                      {tbdGain / tbdScalingFactor} <Trans>TBD</Trans>
+                      {tbdGain / tbdScalingFactor} <Trans>STAR</Trans>
                     </BalanceText>
                   ) : null
                 }
@@ -284,7 +285,7 @@ export default function FarmStake({
         <AutoRow justify="flex-end">
           <StyledGetLink as={Link} to={`/add/v2/${tokenY}`}>
             <TYPE.black fontWeight={500} fontSize={14} color={'#FB578C'} style={{ lineHeight: '20px' }}>
-              <Trans>Obtain</Trans> STC/BX_USDT LP Token
+              <Trans>Obtain</Trans> STC/FAI LP Token
             </TYPE.black>
           </StyledGetLink>
         </AutoRow>

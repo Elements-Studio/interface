@@ -133,12 +133,12 @@ export default function FarmHarvestDialog({
       <ColumnCenter style={{ padding: '27px 32px'}}>
         <AutoRow>
           <TYPE.black fontWeight={500} fontSize={20}>
-            <Trans>Harvest TBD</Trans>
+            <Trans>Harvest STAR</Trans>
           </TYPE.black>
         </AutoRow>
         <RowBetween style={{ marginTop: '8px' }}>
           <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
-            <Trans>TBD Earned</Trans>：{tbdEarned / tbdScalingFactor}
+            <Trans>STAR Earned</Trans>：{tbdEarned / tbdScalingFactor}
           </TYPE.black>
         </RowBetween>
         <Container>

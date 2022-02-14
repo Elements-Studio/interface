@@ -44,7 +44,7 @@ export default function FarmTitle() {
       <>
         <Container>
           <Trans>
-            Earn TBD Tokens by Staking LP Tokens
+            Earn STAR Tokens by Staking LP Tokens
           </Trans>
         </Container>
         <TitleTotal>
