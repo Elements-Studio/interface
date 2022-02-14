@@ -232,8 +232,8 @@ export default function FarmStake({
   }, [setUnstakeDialogOpen])
 
   function handleUnstakeId(e:any) {
-    console.log(e.target.id);
-    console.log(e.currentTarget.id);
+    // console.log(e.target.id);
+    // console.log(e.currentTarget.id);
     setUnstakeId(e.target.id);
   };
 
@@ -287,6 +287,7 @@ export default function FarmStake({
                   <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>{(parseInt(item.amount) / starScalingFactor).toString()}</TYPE.body>
                   <TYPE.body fontSize={16} style={{ marginTop: '16px' }}>Start: {(new Date(item.startTime*1000)+'').slice(4,24)}</TYPE.body>
                   <TYPE.body fontSize={16} style={{ marginTop: '16px' }}>End: {(new Date(item.endTime*1000)+'').slice(4,24)}</TYPE.body>
+                  <TYPE.body fontSize={16} style={{ marginTop: '16px' }}>Stepwise Multiplier: {item.stepwiseMultiplier}</TYPE.body>
                     {!hasAccount ? (
                       <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
                         <TYPE.black fontSize="20px" color={'#FE7F8D'}>
