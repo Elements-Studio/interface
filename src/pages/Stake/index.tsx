@@ -68,6 +68,8 @@ export default function Farm({ history }: RouteComponentProps) {
     network = 'proxima';
   }
 
+  const starScalingFactor = 1000000000;
+
   /*
   const { data, error } = useSWR(
     // `http://k8s-default-starswap-af6ced600d-1022591271.ap-northeast-1.elb.amazonaws.com/${network}/v1/lpTokenFarms`,
@@ -94,6 +96,7 @@ export default function Farm({ history }: RouteComponentProps) {
   if (error) return null;
   if (!pool) return null;
   const list = pool.filter((item:any)=>item.description==='STAR');
+  console.log({list})
 
   // const darkMode = useIsDarkMode();
 
@@ -235,7 +238,7 @@ export default function Farm({ history }: RouteComponentProps) {
                 </RowFixed>
                 <RowFixed>
                   <TYPE.black fontSize={14}>
-                    {item.totalStakeAmount || 0}
+                    {Number(item.totalStakeAmount / starScalingFactor) || 0}
                   </TYPE.black>
                 </RowFixed>
               </FarmRow>
