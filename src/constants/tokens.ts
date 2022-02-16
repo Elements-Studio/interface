@@ -38,14 +38,14 @@ export const FAI: { [chainId: number]: Token } = {
 export const STAR: { [chainId: number]: Token } = {
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
-    '0x4783d08fb16990bd35d83f3e23bf93b8::STAR::STAR',
+    '0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR',
     9,
     'STAR',
     'Star'
   ),
   [SupportedChainId.PROXIMA]: new Token(
     SupportedChainId.PROXIMA,
-    '0x4783d08fb16990bd35d83f3e23bf93b8::STAR::STAR',
+    '0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR',
     9,
     'STAR',
     'Star'

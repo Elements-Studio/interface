@@ -93,7 +93,7 @@ export default function FarmHarvestDialog({
   async function onClickHarvestConfirm() {
     try {
       // const functionId = '0x3db7a2da7444995338a2413b151ee437::TokenSwapFarmScript::harvest';
-      const functionId = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapFarmScript::harvest';
+      const functionId = '0x8c109349c6bd91411d6bc962e080c4a3::TokenSwapFarmScript::harvest';
       const strTypeArgs = [tokenX, tokenY];
       const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
 

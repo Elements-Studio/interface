@@ -8,7 +8,7 @@ import { useTransactionExpirationSecs } from './useTransactionDeadline'
 
 // const PREFIX = '0xbd7e8be8fae9f60f2f5136433e36a091::TokenSwapScripts::'
 // const PREFIX = '0x3db7a2da7444995338a2413b151ee437::TokenSwapScripts::'
-const PREFIX = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapScripts::'
+const PREFIX = '0x8c109349c6bd91411d6bc962e080c4a3::TokenSwapScripts::'
 
 function serializeU128(value: string | number): string {
   const se = new bcs.BcsSerializer()
