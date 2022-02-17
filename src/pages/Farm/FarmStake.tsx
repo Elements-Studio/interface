@@ -73,6 +73,9 @@ export default function FarmStake({
   let isAuthorization = true
   let hasStake = false
 
+  console.log({tokenX})
+  console.log({tokenY})
+
   const { account, chainId } = useActiveWeb3React()
 
   if (account) {
@@ -84,7 +87,17 @@ export default function FarmStake({
   const x = "0x1::STC::STC";
   // const y = "0x9350502a3af6c617e9a42fa9e306a385::BX_USDT::BX_USDT";
   // const y = "0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT";
-  const y = "0xfe125d419811297dfab03c61efec0bc9::FAI::FAI";
+  // const y = "0xfe125d419811297dfab03c61efec0bc9::FAI::FAI";
+  let y;
+  if (tokenY === 'STAR' || tokenX === 'STAR') {
+    y = "0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR";
+  }
+  if (tokenY === 'FAI' || tokenX === 'FAI') {
+    y = "0xfe125d419811297dfab03c61efec0bc9::FAI::FAI";
+  }
+  if (tokenY === 'XUSDT' || tokenX === 'XUSDT') {
+    y = "0xb6d69dd935edf7f2054acf12eb884df8::XUSDT::XUSDT";
+  }
 
   // const lpTokenScalingFactor = 1000000000000000000;
   const lpTokenScalingFactor = 1000000000;
