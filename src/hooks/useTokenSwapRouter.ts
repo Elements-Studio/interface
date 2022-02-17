@@ -1,6 +1,8 @@
 import useSWR from 'swr'
 import axios from 'axios'
+import { useActiveWeb3React } from './web3'
 import { useStarcoinProvider } from './useStarcoinProvider'
+import getCurrentNetwork from '../utils/getCurrentNetwork'
 
 // const PREFIX = '0xbd7e8be8fae9f60f2f5136433e36a091::TokenSwapRouter::'
 // const PREFIX = '0x3db7a2da7444995338a2413b151ee437::TokenSwapRouter::'
@@ -70,7 +72,9 @@ async function useGetReserves(provider: any, pair: any) {
 }
 
 export function useBatchGetReserves(pairs: ([string, string] | undefined)[]) {
-  const url = 'https://swap-api.starcoin.org/barnard/v1/getTokenPairReservesList'
+  const { chainId } = useActiveWeb3React()
+  const network = getCurrentNetwork(chainId)
+  const url = `https://swap-api.starcoin.org/${ network }/v1/getTokenPairReservesList`
   return useSWR(
     pairs.length ? JSON.stringify(pairs) : null,  // convert array to string as key for caching
     (pairsStr: string) => axios.post(url, JSON.parse(pairsStr)).then(res => res.data)
