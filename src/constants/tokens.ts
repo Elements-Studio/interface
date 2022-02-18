@@ -61,13 +61,6 @@ export const STAR: { [chainId: number]: Token } = {
 //   ),
 // }
 export const XUSDT: { [chainId: number]: Token } = {
-  [SupportedChainId.BARNARD]: new Token(
-    SupportedChainId.BARNARD,
-    '0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT',
-    9,
-    'XUSDT',
-    'XUSDT'
-  ),
   [SupportedChainId.PROXIMA]: new Token(
     SupportedChainId.PROXIMA,
     '0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT',
