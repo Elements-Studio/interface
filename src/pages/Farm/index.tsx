@@ -258,7 +258,7 @@ export default function Farm({ history }: RouteComponentProps) {
                 </Text>
                 <RowFixed>
                   <Text fontSize={16} fontWeight={500}>
-                    40x
+                    { item.rewardMultiplier || 0 }x
                   </Text>
                   <QuestionHelper
                     text={
