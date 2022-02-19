@@ -1,6 +1,6 @@
 import JSBI from 'jsbi'
 import { CurrencyAmount, Token } from '@uniswap/sdk-core'
-import { TransactionResponse } from '@ethersproject/providers'
+import { TransactionResponse } from '@starcoin/providers'
 import { useEffect, useState } from 'react'
 import { UNI } from '../../constants/tokens'
 import { useActiveWeb3React } from '../../hooks/web3'
@@ -43,11 +43,11 @@ function fetchClaimFile(key: string): Promise<{ [address: string]: UserClaimData
   return (
     FETCH_CLAIM_FILE_PROMISES[key] ??
     (FETCH_CLAIM_FILE_PROMISES[key] = fetch(
-      `https://raw.githubusercontent.com/Uniswap/mrkl-drop-data-chunks/final/chunks/${key}.json`
+      `https://raw.githubusercontent.com/Uniswap/mrkl-drop-data-chunks/final/chunks/${ key }.json`
     )
       .then((res) => res.json())
       .catch((error) => {
-        console.error(`Failed to get claim file mapping for starting address ${key}`, error)
+        console.error(`Failed to get claim file mapping for starting address ${ key }`, error)
         delete FETCH_CLAIM_FILE_PROMISES[key]
       }))
   )
@@ -72,15 +72,15 @@ function fetchClaim(account: string): Promise<UserClaimData> {
               return startingAddress
             }
           } else {
-            throw new Error(`Claim for ${formatted} was not found in partial search`)
+            throw new Error(`Claim for ${ formatted } was not found in partial search`)
           }
         }
-        throw new Error(`Claim for ${formatted} was not found after searching all mappings`)
+        throw new Error(`Claim for ${ formatted } was not found after searching all mappings`)
       })
       .then(fetchClaimFile)
       .then((result) => {
         if (result[formatted]) return result[formatted]
-        throw new Error(`Claim for ${formatted} was not found in claim file!`)
+        throw new Error(`Claim for ${ formatted } was not found in claim file!`)
       })
       .catch((error) => {
         console.debug('Claim fetch failed', error)
@@ -165,7 +165,7 @@ export function useClaimCallback(account: string | null | undefined): {
         .claim(...args, { value: null, gasLimit: calculateGasMargin(estimatedGasLimit) })
         .then((response: TransactionResponse) => {
           addTransaction(response, {
-            summary: `Claimed ${unclaimedAmount?.toSignificant(4)} UNI`,
+            summary: `Claimed ${ unclaimedAmount?.toSignificant(4) } UNI`,
             claim: { recipient: account },
           })
           return response.hash

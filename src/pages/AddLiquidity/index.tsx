@@ -1,5 +1,5 @@
 import { useCallback, useContext, useMemo, useState } from 'react'
-import { TransactionResponse } from '@ethersproject/providers'
+import { TransactionResponse } from '@starcoin/providers'
 import { Currency, CurrencyAmount, Percent } from '@uniswap/sdk-core'
 import { AlertTriangle, AlertCircle } from 'react-feather'
 import ReactGA from 'react-ga'

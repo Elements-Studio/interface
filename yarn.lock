@@ -3634,6 +3634,31 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@starcoin/providers@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@starcoin/providers/-/providers-0.1.2.tgz#f9ef69ffaef774c2d3a58f514cfe1af6c17b91e4"
+  integrity sha512-cqIJzssoSRFl2bInvg/iKK/v852ZWoMTuP+5iuxTsTOeYp6Ei8wBke8jMozikFt6rnOonDzEfCipCaVsyTUJRQ==
+  dependencies:
+    "@ethersproject/abstract-provider" "^5.2.0"
+    "@ethersproject/abstract-signer" "^5.2.0"
+    "@ethersproject/address" "^5.2.0"
+    "@ethersproject/basex" "^5.2.0"
+    "@ethersproject/bignumber" "^5.2.0"
+    "@ethersproject/bytes" "^5.2.0"
+    "@ethersproject/constants" "^5.2.0"
+    "@ethersproject/hash" "^5.2.0"
+    "@ethersproject/logger" "^5.2.0"
+    "@ethersproject/networks" "^5.2.0"
+    "@ethersproject/properties" "^5.2.0"
+    "@ethersproject/random" "^5.2.0"
+    "@ethersproject/rlp" "^5.2.0"
+    "@ethersproject/sha2" "^5.2.0"
+    "@ethersproject/strings" "^5.2.0"
+    "@ethersproject/transactions" "^5.2.0"
+    "@ethersproject/web" "^5.2.0"
+    bech32 "1.1.4"
+    ws "7.2.3"
+
 "@starcoin/starcoin@^1.5.3":
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/@starcoin/starcoin/-/starcoin-1.5.3.tgz#b75c763f1ec68b149da674852eb73b4717dd7ea1"

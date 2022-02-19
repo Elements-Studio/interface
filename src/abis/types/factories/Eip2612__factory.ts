@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Signer, utils } from "ethers";
-import { Provider } from "@ethersproject/providers";
+import { Provider } from "@starcoin/providers";
 import type { Eip2612, Eip2612Interface } from "../Eip2612";
 
 const _abi = [

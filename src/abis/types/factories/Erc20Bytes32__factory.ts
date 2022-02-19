@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Signer, utils } from "ethers";
-import { Provider } from "@ethersproject/providers";
+import { Provider } from "@starcoin/providers";
 import type { Erc20Bytes32, Erc20Bytes32Interface } from "../Erc20Bytes32";
 
 const _abi = [

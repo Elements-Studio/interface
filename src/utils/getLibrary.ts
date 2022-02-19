@@ -1,4 +1,4 @@
-import { Web3Provider } from '@ethersproject/providers'
+import { Web3Provider } from '@starcoin/providers'
 import { SupportedChainId } from '../constants/chains'
 
 const NETWORK_POLLING_INTERVALS: { [chainId: number]: number } = {
@@ -12,8 +12,8 @@ export default function getLibrary(provider: any): Web3Provider {
     typeof provider.chainId === 'number'
       ? provider.chainId
       : typeof provider.chainId === 'string'
-      ? parseInt(provider.chainId)
-      : 'any'
+        ? parseInt(provider.chainId)
+        : 'any'
   )
   library.pollingInterval = 15_000
   library.detectNetwork().then((network) => {
