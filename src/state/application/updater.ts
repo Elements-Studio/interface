@@ -35,10 +35,12 @@ export default function Updater(): null {
 
     setState({ chainId, blockNumber: null })
 
-    library
-      .getBlockNumber()
+    library.send('chain.info', [])
+      .then((chainInfo: any) => {
+        return chainInfo && chainInfo.head ? chainInfo.head.number : 0;
+      })
       .then(blockNumberCallback)
-      .catch((error) => console.error(`Failed to get block number for chainId: ${chainId}`, error))
+      .catch((error) => console.error(`Failed to get block number for chainId: ${ chainId }`, error))
 
     library.on('block', blockNumberCallback)
     return () => {
