@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
-import { Provider, TransactionRequest } from "@ethersproject/providers";
+import { Provider, TransactionRequest } from "@starcoin/providers";
 import type { V3Migrator, V3MigratorInterface } from "../V3Migrator";
 
 const _abi = [

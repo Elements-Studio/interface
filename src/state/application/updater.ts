@@ -18,6 +18,7 @@ export default function Updater(): null {
 
   const blockNumberCallback = useCallback(
     (blockNumber: number) => {
+      console.log('blockNumberCallback', blockNumber)
       setState((state) => {
         if (chainId === state.chainId) {
           if (typeof state.blockNumber !== 'number') return { chainId, blockNumber }
@@ -35,10 +36,12 @@ export default function Updater(): null {
 
     setState({ chainId, blockNumber: null })
 
-    library
-      .getBlockNumber()
+    library.send('chain.info', [])
+      .then((chainInfo: any) => {
+        return chainInfo && chainInfo.head ? chainInfo.head.number : 0;
+      })
       .then(blockNumberCallback)
-      .catch((error) => console.error(`Failed to get block number for chainId: ${chainId}`, error))
+      .catch((error) => console.error(`Failed to get block number for chainId: ${ chainId }`, error))
 
     library.on('block', blockNumberCallback)
     return () => {

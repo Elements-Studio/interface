@@ -1,4 +1,4 @@
-import { TransactionResponse } from '@ethersproject/providers'
+import { TransactionResponse } from '@starcoin/providers'
 import { useCallback, useMemo } from 'react'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 

@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Signer, utils } from "ethers";
-import { Provider } from "@ethersproject/providers";
+import { Provider } from "@starcoin/providers";
 import type { IERC20Minimal, IERC20MinimalInterface } from "../IERC20Minimal";
 
 const _abi = [

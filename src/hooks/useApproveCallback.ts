@@ -1,5 +1,5 @@
 import { MaxUint256 } from '@ethersproject/constants'
-import { TransactionResponse } from '@ethersproject/providers'
+import { TransactionResponse } from '@starcoin/providers'
 import { CurrencyAmount, Percent, Currency, TradeType } from '@uniswap/sdk-core'
 import { Trade as V2Trade } from '@starcoin/starswap-v2-sdk'
 import { Trade as V3Trade } from '@uniswap/v3-sdk'
@@ -114,8 +114,8 @@ export function useApproveCallbackFromTrade(
       ? trade instanceof V2Trade
         ? V2_ROUTER_ADDRESS[chainId]
         : trade instanceof V3Trade
-        ? v3SwapRouterAddress
-        : undefined
+          ? v3SwapRouterAddress
+          : undefined
       : undefined
   )
 }

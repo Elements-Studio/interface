@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
-import { Provider, TransactionRequest } from "@ethersproject/providers";
+import { Provider, TransactionRequest } from "@starcoin/providers";
 import type { UniswapV3Pool, UniswapV3PoolInterface } from "../UniswapV3Pool";
 
 const _abi = [

@@ -4,7 +4,7 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 
-import { JsonRpcProvider } from '@ethersproject/providers'
+import { JsonRpcProvider } from '@starcoin/providers'
 import { Wallet } from '@ethersproject/wallet'
 import { Eip1193Bridge } from '@ethersproject/experimental/lib/eip1193-bridge'
 
@@ -15,10 +15,10 @@ const TEST_PRIVATE_KEY = '0xe580410d7c37d26c6ad1a837bbae46bc27f9066a466fb3a66e77
 // address of the above key
 export const TEST_ADDRESS_NEVER_USE = new Wallet(TEST_PRIVATE_KEY).address
 
-export const TEST_ADDRESS_NEVER_USE_SHORTENED = `${TEST_ADDRESS_NEVER_USE.substr(
+export const TEST_ADDRESS_NEVER_USE_SHORTENED = `${ TEST_ADDRESS_NEVER_USE.substr(
   0,
   6
-)}...${TEST_ADDRESS_NEVER_USE.substr(-4, 4)}`
+) }...${ TEST_ADDRESS_NEVER_USE.substr(-4, 4) }`
 
 class CustomizedBridge extends Eip1193Bridge {
   chainId = 4
@@ -75,7 +75,7 @@ class CustomizedBridge extends Eip1193Bridge {
 
 // sets up the injected provider to be a mock ethereum provider with the given mnemonic/index
 Cypress.Commands.overwrite('visit', (original, url, options) => {
-  return original(url.startsWith('/') && url.length > 2 && !url.startsWith('/#') ? `/#${url}` : url, {
+  return original(url.startsWith('/') && url.length > 2 && !url.startsWith('/#') ? `/#${ url }` : url, {
     ...options,
     onBeforeLoad(win) {
       options && options.onBeforeLoad && options.onBeforeLoad(win)

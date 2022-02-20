@@ -1,5 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber'
-import { TransactionResponse } from '@ethersproject/providers'
+import { TransactionResponse } from '@starcoin/providers'
 import { Currency, CurrencyAmount, Percent } from '@starcoin/starswap-sdk-core'
 import { useCallback, useContext, useState } from 'react'
 import { Plus } from 'react-feather'

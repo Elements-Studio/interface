@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Signer, utils } from "ethers";
-import { Provider } from "@ethersproject/providers";
+import { Provider } from "@starcoin/providers";
 import type { Weth, WethInterface } from "../Weth";
 
 const _abi = [

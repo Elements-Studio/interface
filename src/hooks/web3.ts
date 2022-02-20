@@ -1,4 +1,4 @@
-import { Web3Provider } from '@ethersproject/providers'
+import { Web3Provider } from '@starcoin/providers'
 import { useWeb3React as useWeb3ReactCore } from '@starcoin/starswap-web3-core'
 import { Web3ReactContextInterface } from '@starcoin/starswap-web3-core/dist/types'
 import { useEffect, useState } from 'react'
