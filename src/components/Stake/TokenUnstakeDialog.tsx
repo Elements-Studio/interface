@@ -96,8 +96,8 @@ export default function FarmUnstakeDialog({
   async function onClickUnstakeConfirm() {
     try {
       // const functionId = '0x3db7a2da7444995338a2413b151ee437::TokenSwapFarmScript::unstake';
-      const functionId = '0x8c109349c6bd91411d6bc962e080c4a3::TokenSwapSyrupScript::unstake';
-      const strTypeArgs = ['0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR'];
+      const functionId = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapSyrupScript::unstake';
+      const strTypeArgs = ['0x4783d08fb16990bd35d83f3e23bf93b8::STAR::STAR'];
       const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
 
       // const unstakeAmount = new BigNumber(unstakeNumber).times('1000000000'); // unstakeAmount * 1e9

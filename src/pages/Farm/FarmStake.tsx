@@ -90,13 +90,13 @@ export default function FarmStake({
   // const y = "0xfe125d419811297dfab03c61efec0bc9::FAI::FAI";
   let y;
   if (tokenY === 'STAR' || tokenX === 'STAR') {
-    y = "0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR";
+    y = "0x4783d08fb16990bd35d83f3e23bf93b8::STAR::STAR";
   }
   if (tokenY === 'FAI' || tokenX === 'FAI') {
     y = "0xfe125d419811297dfab03c61efec0bc9::FAI::FAI";
   }
   if (tokenY === 'XUSDT' || tokenX === 'XUSDT') {
-    y = "0xb6d69dd935edf7f2054acf12eb884df8::XUSDT::XUSDT";
+    y = "0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT";
   }
 
   // const lpTokenScalingFactor = 1000000000000000000;
@@ -116,7 +116,7 @@ export default function FarmStake({
   /*
   const tbdGainParams = {
     // function_id: "0x3db7a2da7444995338a2413b151ee437:TokenSwapFarmScript::lookup_gain", 
-    function_id: "0x8c109349c6bd91411d6bc962e080c4a3:TokenSwapFarmScript::lookup_gain", 
+    function_id: "0x4783d08fb16990bd35d83f3e23bf93b8:TokenSwapFarmScript::lookup_gain", 
     type_args: [
         "0x1::STC::STC",
         // "0x9350502a3af6c617e9a42fa9e306a385::BX_USDT::BX_USDT"
@@ -135,7 +135,7 @@ export default function FarmStake({
   /*
   const liquidityParams = {
     // function_id: "0x3db7a2da7444995338a2413b151ee437::TokenSwapRouter::liquidity", 
-    function_id: "0x8c109349c6bd91411d6bc962e080c4a3::TokenSwapRouter::liquidity", 
+    function_id: "0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapRouter::liquidity", 
     type_args: [
         "0x1::STC::STC",
         // "0x9350502a3af6c617e9a42fa9e306a385::BX_USDT::BX_USDT"
@@ -155,7 +155,7 @@ export default function FarmStake({
   /* 
   const alreadyStakeParams = {
     // function_id: "0x3db7a2da7444995338a2413b151ee437::TokenSwapFarmScript::query_stake", 
-    function_id: "0x8c109349c6bd91411d6bc962e080c4a3::TokenSwapFarmScript::query_stake", 
+    function_id: "0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapFarmScript::query_stake", 
     type_args: [
         "0x1::STC::STC",
         // "0x9350502a3af6c617e9a42fa9e306a385::BX_USDT::BX_USDT"
@@ -184,7 +184,7 @@ export default function FarmStake({
   // console.log({results})
 
   // const LPTokenAddress = '0x3db7a2da7444995338a2413b151ee437::TokenSwap::LiquidityToken<0x00000000000000000000000000000001::STC::STC, 0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT>'
-  // const LPTokenAddress = '0x8c109349c6bd91411d6bc962e080c4a3::TokenSwap::LiquidityToken<0x00000000000000000000000000000001::STC::STC, 0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT>'
+  // const LPTokenAddress = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwap::LiquidityToken<0x00000000000000000000000000000001::STC::STC, 0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT>'
   // const userLPTokenBalance = useTokenBalance(address ? address : '', LPTokenAddress);
   // console.log({userLPTokenBalance})
   /*

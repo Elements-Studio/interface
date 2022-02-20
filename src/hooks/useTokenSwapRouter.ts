@@ -6,7 +6,7 @@ import getCurrentNetwork from '../utils/getCurrentNetwork'
 
 // const PREFIX = '0xbd7e8be8fae9f60f2f5136433e36a091::TokenSwapRouter::'
 // const PREFIX = '0x3db7a2da7444995338a2413b151ee437::TokenSwapRouter::'
-const PREFIX = '0x8c109349c6bd91411d6bc962e080c4a3::TokenSwapRouter::'
+const PREFIX = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapRouter::'
 
 /**
  * 查询当前签名者在某代币对下的流动性

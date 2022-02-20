@@ -3,8 +3,8 @@ import { useStarcoinProvider } from './useStarcoinProvider'
 
 // const PREFIX = '0xbd7e8be8fae9f60f2f5136433e36a091::TokenSwapRouter::'
 // const PREFIX = '0x3db7a2da7444995338a2413b151ee437::TokenSwapFarmScript::'
-const PREFIX = '0x8c109349c6bd91411d6bc962e080c4a3::TokenSwapFarmScript::'
-const SYRUP_PREFIX = '0x8c109349c6bd91411d6bc962e080c4a3::TokenSwapSyrupScript::'
+const PREFIX = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapFarmScript::'
+const SYRUP_PREFIX = '0x4783d08fb16990bd35d83f3e23bf93b8::TokenSwapSyrupScript::'
 
 /**
  * 查询当前签名者在某代币对下的流动性
@@ -31,7 +31,7 @@ export function useTotalLiquidity(x?: string, y?: string) {
     x && y ? [provider, 'total_liquidity', x, y] : null,
     async () =>
       (await provider.call({
-        function_id: `${PREFIX}total_liquidity`,
+        function_id: `${ PREFIX }total_liquidity`,
         type_args: [x!, y!],
         args: [],
       })) as [number]
@@ -47,7 +47,7 @@ export function useLookupTBDGain(address?: string, x?: string, y?: string) {
     x && y ? [provider, 'lookup_gain', address, x, y] : null,
     async () =>
       (await provider.callV2({
-        function_id: `${PREFIX}lookup_gain`,
+        function_id: `${ PREFIX }lookup_gain`,
         type_args: [x!, y!],
         args: [address!],
       })) as [number]
@@ -63,7 +63,7 @@ export function useUserStaked(address?: string, x?: string, y?: string) {
     x && y ? [provider, 'query_stake', address, x, y] : null,
     async () =>
       (await provider.callV2({
-        function_id: `${PREFIX}query_stake`,
+        function_id: `${ PREFIX }query_stake`,
         type_args: [x!, y!],
         args: [address!],
       })) as [number]
@@ -79,10 +79,10 @@ export function useUserStarStaked(address?: string, token?: string) {
     token ? [provider, 'query_stake_list', address, token] : null,
     async () =>
       (await provider.callV2({
-        function_id: `${SYRUP_PREFIX}query_stake_list`,
+        function_id: `${ SYRUP_PREFIX }query_stake_list`,
         type_args: [token!],
         args: [address!],
-      })) as [number] 
+      })) as [number]
   )
 }
 
@@ -106,17 +106,17 @@ export function useBatchGetReserves(pairs: ([string, string] | undefined)[]) {
   const provider = useStarcoinProvider()
   return useSWR(
     pairs.length
-      ? [provider, 'batch_get_reserves', ...pairs.map((pair) => (pair ? `${pair[0]}${pair[1]}` : ''))]
+      ? [provider, 'batch_get_reserves', ...pairs.map((pair) => (pair ? `${ pair[0] }${ pair[1] }` : ''))]
       : null,
     () =>
       Promise.all(
         pairs.map(async (pair) =>
           pair
             ? ((await provider.call({
-                function_id: `${PREFIX}get_reserves`,
-                type_args: pair,
-                args: [],
-              })) as [number, number])
+              function_id: `${ PREFIX }get_reserves`,
+              type_args: pair,
+              args: [],
+            })) as [number, number])
             : []
         )
       )
