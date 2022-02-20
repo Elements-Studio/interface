@@ -183,7 +183,7 @@ export default function FarmStake({
   let myStakeList = [];
   let { data, error } = useSWR(
     // "http://a1277180fcb764735801852ac3de308f-21096515.ap-northeast-1.elb.amazonaws.com:80/v1/starswap/farmingTvlInUsd",
-    `https://swap-api.starcoin.org/${network}/v1/syrupStakes?accountAddress=${address}&tokenId=${token}`,
+    `https://swap-api.starcoin.org/${network}-old/v1/syrupStakes?accountAddress=${address}&tokenId=${token}`,
     fetcher
   );
   myStakeList = data ? data : []

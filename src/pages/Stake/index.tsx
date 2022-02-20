@@ -72,21 +72,21 @@ export default function Farm({ history }: RouteComponentProps) {
 
   /*
   const { data, error } = useSWR(
-    // `http://k8s-default-starswap-af6ced600d-1022591271.ap-northeast-1.elb.amazonaws.com/${network}/v1/lpTokenFarms`,
-    `https://swap-api.starcoin.org/${network}/v1/lpTokenFarms`,
+    // `http://k8s-default-starswap-af6ced600d-1022591271.ap-northeast-1.elb.amazonaws.com/${network}-old/v1/lpTokenFarms`,
+    `https://swap-api.starcoin.org/${network}-old/v1/lpTokenFarms`,
     fetcher
   );
   */
   const { data: pool, error } = useSWR(
-    // `http://k8s-default-starswap-af6ced600d-1022591271.ap-northeast-1.elb.amazonaws.com/${network}/v1/lpTokenFarms`,
-    `https://swap-api.starcoin.org/${network}/v1/syrupPools`,
+    // `http://k8s-default-starswap-af6ced600d-1022591271.ap-northeast-1.elb.amazonaws.com/${network}-old/v1/lpTokenFarms`,
+    `https://swap-api.starcoin.org/${network}-old/v1/syrupPools`,
     fetcher
   );
 
   /*
   const { data: poolInUSD, error: error2 } = useSWR(
-    // `http://k8s-default-starswap-af6ced600d-1022591271.ap-northeast-1.elb.amazonaws.com/${network}/v1/lpTokenFarms`,
-    `https://swap-api.starcoin.org/${network}/v1/syrupPoolsTvlInUsd`,
+    // `http://k8s-default-starswap-af6ced600d-1022591271.ap-northeast-1.elb.amazonaws.com/${network}-old/v1/lpTokenFarms`,
+    `https://swap-api.starcoin.org/${network}-old/v1/syrupPoolsTvlInUsd`,
     fetcher
   );
   */
