@@ -80,6 +80,13 @@ export const XUSDT: { [chainId: number]: Token } = {
     'XUSDT',
     'XUSDT'
   ),
+  [SupportedChainId.BARNARD]: new Token(
+    SupportedChainId.BARNARD,
+    '0xb6d69dd935edf7f2054acf12eb884df8::XUSDT::XUSDT',
+    9,
+    'XUSDT',
+    'XUSDT'
+  ),
   [SupportedChainId.PROXIMA]: new Token(
     SupportedChainId.PROXIMA,
     '0xb6d69dd935edf7f2054acf12eb884df8::XUSDT::XUSDT',
@@ -116,13 +123,6 @@ export const XUSDT: { [chainId: number]: Token } = {
 //   ),
 // }
 export const WEN: { [chainId: number]: Token } = {
-  [SupportedChainId.MAINNET]: new Token(
-    SupportedChainId.MAINNET,
-    '0x88e2677b89841cd4ee7c15535798e1c8::WEN::WEN',
-    9,
-    'WEN',
-    'Wen'
-  ),
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
     '0x88e2677b89841cd4ee7c15535798e1c8::WEN::WEN',
@@ -139,13 +139,6 @@ export const WEN: { [chainId: number]: Token } = {
   ),
 }
 export const SHARE: { [chainId: number]: Token } = {
-  [SupportedChainId.MAINNET]: new Token(
-    SupportedChainId.MAINNET,
-    '0x88e2677b89841cd4ee7c15535798e1c8::SHARE::SHARE',
-    9,
-    'SHARE',
-    'Share'
-  ),
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
     '0x88e2677b89841cd4ee7c15535798e1c8::SHARE::SHARE',
@@ -277,6 +270,7 @@ export const UNI: { [chainId: number]: Token } = {
 
 export const WETH9_EXTENDED: { [chainId: number]: Token } = {
   ...WETH9,
+  [SupportedChainId.MAINNET]: Star.onChain(SupportedChainId.MAINNET).wrapped,
   [SupportedChainId.BARNARD]: Star.onChain(SupportedChainId.BARNARD).wrapped,
   [SupportedChainId.PROXIMA]: Star.onChain(SupportedChainId.PROXIMA).wrapped,
   [SupportedChainId.ARBITRUM_ONE]: new Token(
