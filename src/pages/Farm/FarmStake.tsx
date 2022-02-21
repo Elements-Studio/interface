@@ -96,7 +96,7 @@ export default function FarmStake({
     y = "0xfe125d419811297dfab03c61efec0bc9::FAI::FAI";
   }
   if (tokenY === 'XUSDT' || tokenX === 'XUSDT') {
-    y = "0xb6d69dd935edf7f2054acf12eb884df8::XUSDT::XUSDT";
+    y = "0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT";
   }
 
   // const lpTokenScalingFactor = 1000000000000000000;
