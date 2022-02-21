@@ -20,7 +20,7 @@ import STCBlueLogo from '../../assets/images/stc_logo_blue.png'
 import PortisIcon from '../../assets/images/portisIcon.png'
 import { useIsDarkMode } from '../../state/user/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
-
+import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import axios from 'axios';
 import useSWR from "swr";
 
@@ -59,14 +59,8 @@ const FarmRow = styled(RowBetween)`
 
 
 export default function Farm({ history }: RouteComponentProps) {
-  let network = 'barnard';
   const { account, chainId } = useActiveWeb3React()
-  if (chainId === 1) {
-    network = 'main';
-  }
-  if (chainId === 252) {
-    network = 'proxima';
-  }
+  const network = getCurrentNetwork(chainId)
 
   const lpTokenScalingFactor = 1000000000;
 

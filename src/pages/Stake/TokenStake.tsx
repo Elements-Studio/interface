@@ -26,6 +26,7 @@ import { useSTCBalances, useTokenBalance } from 'state/wallet/hooks'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import { useLookupTBDGain, useUserStaked, useUserStarStaked } from 'hooks/useTokenSwapFarmScript'
 import { useUserLiquidity } from 'hooks/useTokenSwapRouter'
+import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import useSWR from 'swr'
 import axios from 'axios';
 
@@ -75,16 +76,9 @@ export default function FarmStake({
   let hasAccount = false;
   let isAuthorization = true
   let hasStake = true
-  let network = 'barnard';
 
   const { account, chainId } = useActiveWeb3React()
-
-  if (chainId === 1) {
-    network = 'main';
-  }
-  if (chainId === 252) {
-    network = 'proxima';
-  }
+  const network = getCurrentNetwork(chainId)
 
   if (account) {
     hasAccount = true;

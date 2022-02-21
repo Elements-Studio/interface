@@ -4,7 +4,7 @@ import ReactGA from 'react-ga'
 import { useActiveWeb3React } from 'hooks/web3'
 import styled from 'styled-components/macro'
 import { StyledInternalLink, TYPE } from '../../theme'
-
+import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import axios from 'axios';
 import useSWR from "swr";
 
@@ -28,14 +28,8 @@ const TitleTotal = styled.div<{ margin?: string; maxWidth?: string }>`
 `
 
 export default function FarmTitle() {
-    let network = 'barnard';
     const { chainId } = useActiveWeb3React()
-    if (chainId === 1) {
-      network = 'main';
-    }
-    if (chainId === 252) {
-      network = 'proxima';
-    }
+    const network = getCurrentNetwork(chainId)
 
     const { data, error } = useSWR(
       // "http://a1277180fcb764735801852ac3de308f-21096515.ap-northeast-1.elb.amazonaws.com:80/v1/starswap/farmingTvlInUsd",

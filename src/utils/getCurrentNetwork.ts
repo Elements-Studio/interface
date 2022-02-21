@@ -1,18 +1,5 @@
-export default function getCurrentNetwork(chainId: number | undefined) {
+import { STCSCAN_SUFFIXES } from './getExplorerLink'
 
-  let network;
-  switch (chainId) {
-    case 251:
-      network = 'barnard';
-      break;
-    case 252:
-      network = 'proxima';
-      break;
-    case 253:
-      network = 'halley';
-      break;
-    default:
-      network = 'main';
-  }
-  return network;
+export default function getCurrentNetwork(chainId: number | undefined) {
+  return STCSCAN_SUFFIXES[chainId ? chainId : 1]
 }

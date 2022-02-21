@@ -1,6 +1,6 @@
 import { SupportedChainId } from '../constants/chains'
 
-const STCSCAN_SUFFIXES: { [chainId: number]: string } = {
+export const STCSCAN_SUFFIXES: { [chainId: number]: string } = {
   [SupportedChainId.MAINNET]: 'main',
   [SupportedChainId.PROXIMA]: 'proxima',
   [SupportedChainId.BARNARD]: 'barnard',
@@ -47,21 +47,21 @@ export function getExplorerLink(chainId: number, data: string, type: ExplorerDat
   //   }
   // }
 
-  const prefix = `https://stcscan.io/${STCSCAN_SUFFIXES[chainId] ?? ''}`
+  const prefix = `https://stcscan.io/${ STCSCAN_SUFFIXES[chainId] ?? '' }`
 
   switch (type) {
     case ExplorerDataType.TRANSACTION:
-      return `${prefix}/transactions/detail/${data}`
+      return `${ prefix }/transactions/detail/${ data }`
 
     // case ExplorerDataType.TOKEN:
     //   return `${prefix}/token/${data}`
 
     case ExplorerDataType.BLOCK:
-      return `${prefix}/blocks/detail/${data}`
+      return `${ prefix }/blocks/detail/${ data }`
 
     case ExplorerDataType.ADDRESS:
-      return `${prefix}/address/${data}`
+      return `${ prefix }/address/${ data }`
     default:
-      return `${prefix}`
+      return `${ prefix }`
   }
 }
