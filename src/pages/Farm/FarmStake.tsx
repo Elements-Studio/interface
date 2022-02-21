@@ -3,6 +3,7 @@ import { useCallback, useContext, useState } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
+import { STC, STAR, FAI, XUSDT } from '../../constants/tokens'
 import Row, { AutoRow, RowFixed, RowBetween } from '../../components/Row'
 import { TYPE } from '../../theme'
 import { ButtonFarm, ButtonBorder } from '../../components/Button'
@@ -84,19 +85,16 @@ export default function FarmStake({
   }
   // const userSTCBalance = useSTCBalances(address ? [address] : [])?.[address ?? '']
 
-  const x = "0x1::STC::STC";
-  // const y = "0x9350502a3af6c617e9a42fa9e306a385::BX_USDT::BX_USDT";
-  // const y = "0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT";
-  // const y = "0xfe125d419811297dfab03c61efec0bc9::FAI::FAI";
+  const x = STC[(chainId ? chainId : 1)].address;
   let y;
   if (tokenY === 'STAR' || tokenX === 'STAR') {
-    y = "0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR";
+    y = STAR[(chainId ? chainId : 1)].address;
   }
   if (tokenY === 'FAI' || tokenX === 'FAI') {
-    y = "0xfe125d419811297dfab03c61efec0bc9::FAI::FAI";
+    y = FAI[(chainId ? chainId : 1)].address;
   }
   if (tokenY === 'XUSDT' || tokenX === 'XUSDT') {
-    y = "0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT";
+    y = XUSDT[(chainId ? chainId : 1)].address;
   }
 
   // const lpTokenScalingFactor = 1000000000000000000;

@@ -10,6 +10,7 @@ import styled, { ThemeContext } from 'styled-components'
 import Column, { AutoColumn, ColumnCenter, ColumnRight } from '../Column'
 import Row, { RowBetween, AutoRow } from '../Row'
 import Modal from '../Modal'
+import { STAR } from '../../constants/tokens'
 import { ButtonFarm, ButtonBorder, ButtonText } from 'components/Button'
 import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
@@ -117,8 +118,7 @@ export default function FarmStakeDialog({
   async function onClickStakeConfirm() {
     try {
       const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapSyrupScript::stake`;
-      // const strTypeArgs = [token];
-      const strTypeArgs = ['0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR'];
+      const strTypeArgs = [STAR[(chainId ? chainId : 1)].address];
       const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
 
       const stakeAmount = new BigNumber(parseFloat(stakeNumber)).times('1000000000'); // stakeAmount * 1e9

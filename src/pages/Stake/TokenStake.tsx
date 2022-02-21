@@ -21,6 +21,7 @@ import StarswapBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
 import PortisIcon from '../../assets/images/portisIcon.png'
 import ArbitrumLogo from '../../assets/svg/arbitrum_logo.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
+import { STC, STAR, XUSDT } from '../../constants/tokens'
 import { useSTCBalances, useTokenBalance } from 'state/wallet/hooks'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import { useLookupTBDGain, useUserStaked, useUserStarStaked } from 'hooks/useTokenSwapFarmScript'
@@ -89,13 +90,11 @@ export default function FarmStake({
     hasAccount = true;
     address = account.toLowerCase();
   }
-
-  const STAR_address = '0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR'
+  const STAR_address = STAR[(chainId ? chainId : 1)].address
   // const userSTCBalance = useSTCBalances(address ? [address] : [])?.[address ?? '']
 
-  const x = "0x1::STC::STC";
-  // const y = "0x9350502a3af6c617e9a42fa9e306a385::BX_USDT::BX_USDT";
-  const y = "0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT";
+  const x = STC[(chainId ? chainId : 1)].address
+  const y = XUSDT[(chainId ? chainId : 1)].address
 
   // const lpTokenScalingFactor = 1000000000000000000;
   const lpTokenScalingFactor = 1000000000;
