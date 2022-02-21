@@ -126,9 +126,6 @@ export default function Swap({ history }: RouteComponentProps) {
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
   const { address: recipientAddress } = useENSAddress(recipient)
 
-  console.log('showwrap', showWrap)
-  console.log('trade input amount', JSON.stringify(trade?.inputAmount))
-  console.log('trade output amount', JSON.stringify(trade?.outputAmount.toSignificant(6)))
   const parsedAmounts = useMemo(
     () =>
       showWrap
@@ -219,7 +216,6 @@ export default function Swap({ history }: RouteComponentProps) {
     outputTag = trade ? JSON.parse(JSON.stringify(outputCurrency))._checksummedAddress: '';
     outputPrecision = trade ? JSON.parse(JSON.stringify(outputCurrency)).tokenInfo.decimals : 0;
   }
-  console.log('formatedAmounts', formattedAmounts)
  
   const routeNotFound = !trade?.route
   const isLoadingRoute = toggledVersion === Version.v3 && V3TradeState.LOADING === v3TradeState
