@@ -1,14 +1,13 @@
 import { bcs, utils } from '@starcoin/starcoin'
 import { arrayify, hexlify } from '@ethersproject/bytes'
 import { Token } from '@starcoin/starswap-sdk-core'
+import { FACTORY_ADDRESS as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
 import { useCallback } from 'react'
 import { useStarcoinProvider } from './useStarcoinProvider'
 import { TransactionPayloadVariantScriptFunction } from '@starcoin/starcoin/dist/src/lib/runtime/starcoin_types'
 import { useTransactionExpirationSecs } from './useTransactionDeadline'
 
-// const PREFIX = '0xbd7e8be8fae9f60f2f5136433e36a091::TokenSwapScripts::'
-// const PREFIX = '0x3db7a2da7444995338a2413b151ee437::TokenSwapScripts::'
-const PREFIX = '0x8c109349c6bd91411d6bc962e080c4a3::TokenSwapScripts::'
+const PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapScripts::`
 
 function serializeU128(value: string | number): string {
   const se = new bcs.BcsSerializer()

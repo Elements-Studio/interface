@@ -1,4 +1,5 @@
 import { Currency, Token } from '@uniswap/sdk-core'
+import { FACTORY_ADDRESS as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
 import { KeyboardEvent, RefObject, useCallback, useEffect, useMemo, useRef, useState, useContext } from 'react'
 import ReactGA from 'react-ga'
 import { t, Trans } from '@lingui/macro'
@@ -115,8 +116,7 @@ export default function FarmStakeDialog({
 
   async function onClickStakeConfirm() {
     try {
-      // const functionId = '0x3db7a2da7444995338a2413b151ee437::TokenSwapFarmScript::stake';
-      const functionId = '0x8c109349c6bd91411d6bc962e080c4a3::TokenSwapSyrupScript::stake';
+      const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapSyrupScript::stake`;
       // const strTypeArgs = [token];
       const strTypeArgs = ['0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR'];
       const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);

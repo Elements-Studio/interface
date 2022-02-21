@@ -1,12 +1,11 @@
 import useSWR from 'swr'
 import axios from 'axios'
+import { FACTORY_ADDRESS as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
 import { useActiveWeb3React } from './web3'
 import { useStarcoinProvider } from './useStarcoinProvider'
 import getCurrentNetwork from '../utils/getCurrentNetwork'
 
-// const PREFIX = '0xbd7e8be8fae9f60f2f5136433e36a091::TokenSwapRouter::'
-// const PREFIX = '0x3db7a2da7444995338a2413b151ee437::TokenSwapRouter::'
-const PREFIX = '0x8c109349c6bd91411d6bc962e080c4a3::TokenSwapRouter::'
+const PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapRouter::`
 
 /**
  * 查询当前签名者在某代币对下的流动性
