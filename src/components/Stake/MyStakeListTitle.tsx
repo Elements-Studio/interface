@@ -33,7 +33,7 @@ export default function FarmTitle() {
     const { chainId } = useActiveWeb3React()
     const network = getCurrentNetwork(chainId)
     const { data, error } = useSWR(
-      `https://swap-api.starcoin.org/${network}-new/v1/syrupPoolTvlInUsd`,
+      `https://swap-api.starcoin.org/${network}/v1/syrupPoolTvlInUsd`,
       fetcher
     );
 

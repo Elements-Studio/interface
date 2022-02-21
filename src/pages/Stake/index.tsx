@@ -65,7 +65,7 @@ export default function Farm({ history }: RouteComponentProps) {
   const starScalingFactor = 1000000000;
 
   const { data: pool, error } = useSWR(
-    `https://swap-api.starcoin.org/${network}-new/v1/syrupPools`,
+    `https://swap-api.starcoin.org/${network}/v1/syrupPools`,
     fetcher
   );
   
