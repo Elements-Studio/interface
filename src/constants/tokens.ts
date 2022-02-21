@@ -4,6 +4,13 @@ import { UNI_ADDRESS } from './addresses'
 import { SupportedChainId } from './chains'
 
 export const STC: { [chainId: number]: Token } = {
+  [SupportedChainId.MAINNET]: new Token(
+    SupportedChainId.MAINNET,
+    '0x00000000000000000000000000000001::STC::STC',
+    9,
+    'STC',
+    'STC'
+  ),
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
     '0x00000000000000000000000000000001::STC::STC',
@@ -20,6 +27,13 @@ export const STC: { [chainId: number]: Token } = {
   ),
 }
 export const FAI: { [chainId: number]: Token } = {
+  [SupportedChainId.MAINNET]: new Token(
+    SupportedChainId.MAINNET,
+    '0xfe125d419811297dfab03c61efec0bc9::FAI::FAI',
+    9,
+    'FAI',
+    'FAI'
+  ),
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
     '0xfe125d419811297dfab03c61efec0bc9::FAI::FAI',
@@ -36,6 +50,13 @@ export const FAI: { [chainId: number]: Token } = {
   ),
 }
 export const STAR: { [chainId: number]: Token } = {
+  [SupportedChainId.MAINNET]: new Token(
+    SupportedChainId.MAINNET,
+    '0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
     '0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR',
@@ -51,6 +72,22 @@ export const STAR: { [chainId: number]: Token } = {
     'Star'
   ),
 }
+export const XUSDT: { [chainId: number]: Token } = {
+  [SupportedChainId.MAINNET]: new Token(
+    SupportedChainId.MAINNET,
+    '0xb6d69dd935edf7f2054acf12eb884df8::XUSDT::XUSDT',
+    9,
+    'XUSDT',
+    'XUSDT'
+  ),
+  [SupportedChainId.PROXIMA]: new Token(
+    SupportedChainId.PROXIMA,
+    '0xb6d69dd935edf7f2054acf12eb884df8::XUSDT::XUSDT',
+    9,
+    'XUSDT',
+    'XUSDT'
+  ),
+}
 // export const XETH: { [chainId: number]: Token } = {
 //   [SupportedChainId.BARNARD]: new Token(
 //     SupportedChainId.BARNARD,
@@ -60,15 +97,6 @@ export const STAR: { [chainId: number]: Token } = {
 //     'XETH'
 //   ),
 // }
-export const XUSDT: { [chainId: number]: Token } = {
-  [SupportedChainId.PROXIMA]: new Token(
-    SupportedChainId.PROXIMA,
-    '0xb6d69dd935edf7f2054acf12eb884df8::XUSDT::XUSDT',
-    9,
-    'XUSDT',
-    'XUSDT'
-  ),
-}
 // export const BX_USDT: { [chainId: number]: Token } = {
 //   [SupportedChainId.BARNARD]: new Token(
 //     SupportedChainId.BARNARD,
@@ -88,6 +116,13 @@ export const XUSDT: { [chainId: number]: Token } = {
 //   ),
 // }
 export const WEN: { [chainId: number]: Token } = {
+  [SupportedChainId.MAINNET]: new Token(
+    SupportedChainId.MAINNET,
+    '0x88e2677b89841cd4ee7c15535798e1c8::WEN::WEN',
+    9,
+    'WEN',
+    'Wen'
+  ),
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
     '0x88e2677b89841cd4ee7c15535798e1c8::WEN::WEN',
@@ -104,6 +139,13 @@ export const WEN: { [chainId: number]: Token } = {
   ),
 }
 export const SHARE: { [chainId: number]: Token } = {
+  [SupportedChainId.MAINNET]: new Token(
+    SupportedChainId.MAINNET,
+    '0x88e2677b89841cd4ee7c15535798e1c8::SHARE::SHARE',
+    9,
+    'SHARE',
+    'Share'
+  ),
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
     '0x88e2677b89841cd4ee7c15535798e1c8::SHARE::SHARE',
