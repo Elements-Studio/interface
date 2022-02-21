@@ -33,8 +33,7 @@ export default function FarmTitle() {
     const { chainId } = useActiveWeb3React()
     const network = getCurrentNetwork(chainId)
     const { data, error } = useSWR(
-      // "http://a1277180fcb764735801852ac3de308f-21096515.ap-northeast-1.elb.amazonaws.com:80/v1/starswap/farmingTvlInUsd",
-      `https://swap-api.starcoin.org/${network}/v1/syrupPoolTvlInUsd`,
+      `https://swap-api.starcoin.org/${network}-new/v1/syrupPoolTvlInUsd`,
       fetcher
     );
 

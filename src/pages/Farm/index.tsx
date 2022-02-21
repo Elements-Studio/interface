@@ -65,8 +65,7 @@ export default function Farm({ history }: RouteComponentProps) {
   const lpTokenScalingFactor = 1000000000;
 
   const { data, error } = useSWR(
-    // `http://k8s-default-starswap-af6ced600d-1022591271.ap-northeast-1.elb.amazonaws.com/${network}/v1/lpTokenFarms`,
-    `https://swap-api.starcoin.org/${network}/v1/lpTokenFarms`,
+    `https://swap-api.starcoin.org/${network}-new/v1/lpTokenFarms`,
     fetcher
   );
 
