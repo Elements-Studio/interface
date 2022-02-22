@@ -30,6 +30,12 @@ import useSWR from 'swr'
 
 const Container = styled.div`
   width: auto;
+  button:disabled {
+    background: #EDEEF2!important;
+    div {
+      color: #565A69!important;
+    }
+  }
 `
 
 const BalanceText = styled(Text)`

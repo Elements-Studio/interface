@@ -34,6 +34,13 @@ const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
 const Container = styled.div`
   width: auto;
+
+  button:disabled {
+    background: #EDEEF2!important;
+    div {
+      color: #565A69!important;
+    }
+  }
 `
 
 const BalanceText = styled(Text)`
