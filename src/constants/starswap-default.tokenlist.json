@@ -43,6 +43,22 @@
       "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
     },
     {
+      "chainId": 251,
+      "address": "0x2d81a0427d64ff61b11ede9085efa5ad::XETH::XETH",
+      "name": "XETH",
+      "symbol": "XETH",
+      "decimals": 9,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    },
+    {
+      "chainId": 251,
+      "address": "0x2d81a0427d64ff61b11ede9085efa5ad::XUSDT::XUSDT",
+      "name": "XUSDT",
+      "symbol": "XUSDT",
+      "decimals": 18,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    },
+    {
       "chainId": 252,
       "address": "0x4783d08fb16990bd35d83f3e23bf93b8::STAR::STAR",
       "name": "STAR",
