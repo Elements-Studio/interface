@@ -73,13 +73,6 @@ export const STAR: { [chainId: number]: Token } = {
   ),
 }
 export const XUSDT: { [chainId: number]: Token } = {
-  [SupportedChainId.MAINNET]: new Token(
-    SupportedChainId.MAINNET,
-    '0xb6d69dd935edf7f2054acf12eb884df8::XUSDT::XUSDT',
-    9,
-    'XUSDT',
-    'XUSDT'
-  ),
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
     '0xb6d69dd935edf7f2054acf12eb884df8::XUSDT::XUSDT',

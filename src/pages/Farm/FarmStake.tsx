@@ -93,9 +93,6 @@ export default function FarmStake({
   if (tokenY === 'FAI' || tokenX === 'FAI') {
     y = FAI[(chainId ? chainId : 1)].address;
   }
-  if (tokenY === 'XUSDT' || tokenX === 'XUSDT') {
-    y = XUSDT[(chainId ? chainId : 1)].address;
-  }
 
   // const lpTokenScalingFactor = 1000000000000000000;
   const lpTokenScalingFactor = 1000000000;
