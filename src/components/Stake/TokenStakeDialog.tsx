@@ -196,14 +196,14 @@ export default function FarmStakeDialog({
               <FormControlLabel value="10" control={<Radio />} label="10 Seconds" />
               <FormControlLabel value="86400" control={<Radio />} label="1 Day" />
               <FormControlLabel value="31536000" disabled control={<Radio />} label="(365 Days)" />
-              */}
               <FormControlLabel value="100" control={<Radio />} label="100 Seconds" />
               <FormControlLabel value="3600" control={<Radio />} label="1 hour" />
-              <FormControlLabel value="604800" control={<Radio />} label="7 Days" />
-              <FormControlLabel value="1209600" control={<Radio />} label="14 Days" />
-              <FormControlLabel value="2592000" control={<Radio />} label="30 Days" />
-              <FormControlLabel value="5184000" control={<Radio />} label="60 Days" />
-              <FormControlLabel value="7776000" control={<Radio />} label="90 Days" />
+              */}
+              <FormControlLabel value="604800" control={<Radio />} label="7 Days (2x)" />
+              <FormControlLabel value="1209600" control={<Radio />} label="14 Days (3x)" />
+              <FormControlLabel value="2592000" control={<Radio />} label="30 Days (4x)" />
+              <FormControlLabel value="5184000" control={<Radio />} label="60 Days (6x)" />
+              <FormControlLabel value="7776000" control={<Radio />} label="90 Days (8x)" />
             </RadioGroup>
           </FormControl>
         </RadioContainer>
