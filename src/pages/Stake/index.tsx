@@ -269,7 +269,7 @@ export default function Farm({ history }: RouteComponentProps) {
               </FarmRow> */}
               <FixedHeightRow>
                 <Text fontSize={16} fontWeight={500}>
-                  <Trans>APR</Trans>
+                  <Trans>Base APR</Trans>
                 </Text>
                 <RowFixed>
                   <Text fontSize={16} fontWeight={500}>
@@ -282,6 +282,7 @@ export default function Farm({ history }: RouteComponentProps) {
                   />
                 </RowFixed>
               </FixedHeightRow>
+              {/*
               <FixedHeightRow>
                 <Text fontSize={16} fontWeight={500}>
                   <Trans>Stepwise Multiplier</Trans>
@@ -299,6 +300,7 @@ export default function Farm({ history }: RouteComponentProps) {
                   />
                 </RowFixed>
               </FixedHeightRow>
+              */}
               <ButtonFarm as={Link} to={`/stake/STAR`}>
                 <TYPE.main color={'#fff'}>
                   <Trans>Stake</Trans>
