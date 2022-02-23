@@ -26,7 +26,9 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const v2USDCTrade = useV2TradeExactOut(currency, amountOut, {
     maxHops: 2,
   })
-  const v3USDCTrade = useBestV3TradeExactOut(currency, amountOut)
+
+  // const v3USDCTrade = useBestV3TradeExactOut(currency, amountOut)
+  const v3USDCTrade = { trade: null }
 
   return useMemo(() => {
     if (!currency || !stablecoin) {
@@ -42,9 +44,9 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
     if (v2USDCTrade) {
       const { numerator, denominator } = v2USDCTrade.route.midPrice
       return new Price(currency, stablecoin, denominator, numerator)
-    } else if (v3USDCTrade.trade) {
-      const { numerator, denominator } = v3USDCTrade.trade.route.midPrice
-      return new Price(currency, stablecoin, denominator, numerator)
+      // } else if (v3USDCTrade.trade) {
+      //   const { numerator, denominator } = v3USDCTrade.trade.route.midPrice
+      //   return new Price(currency, stablecoin, denominator, numerator)
     }
 
     return undefined
