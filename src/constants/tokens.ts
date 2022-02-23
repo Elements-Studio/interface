@@ -29,7 +29,7 @@ export const STC: { [chainId: number]: Token } = {
 export const FAI: { [chainId: number]: Token } = {
   [SupportedChainId.MAINNET]: new Token(
     SupportedChainId.MAINNET,
-    '0xfe125d419811297dfab03c61efec0bc9::FAI::FAI',
+    '0x4ffcc98f43ce74668264a0cf6eebe42b::FAI::FAI',
     9,
     'FAI',
     'FAI'
