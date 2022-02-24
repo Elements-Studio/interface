@@ -213,7 +213,7 @@ export default function FarmStake({
         <AutoRow justify="flex-end">
           <StyledGetLink as={Link} to={`/add/v2/${tokenY}`}>
             <TYPE.black fontWeight={500} fontSize={14} color={'#FB578C'} style={{ lineHeight: '20px' }}>
-              <Trans>Obtain</Trans> STC/FAI LP Token
+              <Trans>Obtain</Trans> {tokenY}/{tokenX} LP Token
             </TYPE.black>
           </StyledGetLink>
         </AutoRow>
