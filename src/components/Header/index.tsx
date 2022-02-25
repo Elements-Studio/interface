@@ -356,6 +356,10 @@ export default function Header() {
         <StyledNavLink id={`stake-nav-link`} to={'/stake'}>
           <Trans>Stake</Trans>
         </StyledNavLink>
+        <StyledExternalLink id={`starswap-docs`} href={'https://elementx.gitbook.io/starswap_zh/'}>
+          <Trans>Docs</Trans>
+          <sup>↗</sup>
+        </StyledExternalLink>
         {/*
         <StyledNavLink id={`stake-nav-link`} to={'/vote'}>
           <Trans>Vote</Trans>
