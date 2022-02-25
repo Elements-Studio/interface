@@ -947,6 +947,10 @@ msgstr "Learn"
 msgid "Learn more"
 msgstr "Learn more"
 
+#: src/components/Header/index.tsx
+msgid "Docs"
+msgstr "Docs"
+
 #: src/components/claim/ClaimModal.tsx
 #: src/pages/Pool/PositionPage.tsx
 msgid "Liquidity"
