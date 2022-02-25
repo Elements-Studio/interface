@@ -18,6 +18,7 @@ import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import STCLogo from '../../assets/images/stc.png'
 import STCBlueLogo from '../../assets/images/stc_logo_blue.png'
 import StarswapBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
+import FAILogo from '../../assets/images/fai_token_logo.png'
 import PortisIcon from '../../assets/images/portisIcon.png'
 import ArbitrumLogo from '../../assets/svg/arbitrum_logo.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
@@ -80,9 +81,6 @@ export default function FarmStake({
   let isAuthorization = true
   let hasStake = false
 
-  console.log({tokenX})
-  console.log({tokenY})
-
   const { account, chainId } = useActiveWeb3React()
 
   if (account) {
@@ -106,11 +104,17 @@ export default function FarmStake({
 
   const tbdGain:any = useLookupTBDGain(address, x, y)?.data || 0;
   const userLiquidity:any = useUserLiquidity(address, x, y)?.data || 0;
-  const userStaked:any = useUserStaked(address, x, y)?.data || 0;
-  if (userStaked[0] > 0) {
-    hasStake = true;
+  // const userStaked:any = useUserStaked(address, x, y)?.data || 0;
+  const { data, error } = useUserStaked(address, x, y);
+  let userStaked: any = 0;
+  if (error) {
+    console.log(error)
+  } else {
+    userStaked = data || 0;
+    if (userStaked[0] > 0) {
+      hasStake = true;
+    }
   }
-
 
   const provider = useStarcoinProvider()
 
@@ -172,7 +176,7 @@ export default function FarmStake({
             <AutoColumn justify="center">
               <RowFixed>
                 <StyledEthereumLogo src={STCBlueLogo} style={{ marginRight: '1.25rem' }} size={'48px'} />
-                <StyledEthereumLogo src={EthereumLogo} size={'48px'} />
+                <StyledEthereumLogo src={tokenX === 'STAR' ? StarswapBlueLogo : FAILogo } size={'48px'} />
               </RowFixed>
               <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{tokenY}/{tokenX}</TYPE.body>
               <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>{userStaked / lpTokenScalingFactor}</TYPE.body>
