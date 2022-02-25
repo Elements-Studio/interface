@@ -285,6 +285,10 @@ msgstr "正在批准 {0}"
 msgid "Arbitrum Explorer"
 msgstr "Arbitrum 浏览器"
 
+#: src/components/Header/index.tsx
+msgid "Docs"
+msgstr "文档"
+
 #: src/components/Header/NetworkCard.tsx
 msgid "Arbitrum Token Bridge"
 msgstr "Arbitrum 代币桥"
