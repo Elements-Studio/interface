@@ -16,7 +16,9 @@ import CurrencyLogo from '../../components/CurrencyLogo'
 import { marginTop, maxWidth, paddingTop } from 'styled-system'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import STCLogo from '../../assets/images/stc.png'
+import FAILogo from '../../assets/images/fai_token_logo.png'
 import STCBlueLogo from '../../assets/images/stc_logo_blue.png'
+import StarswapBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
 import PortisIcon from '../../assets/images/portisIcon.png'
 import { useIsDarkMode } from '../../state/user/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
@@ -176,7 +178,7 @@ export default function Farm({ history }: RouteComponentProps) {
               <AutoColumn justify="center">
                 <RowFixed>
                   <StyledEthereumLogo src={STCBlueLogo} size={'48px'} />
-                  <StyledEthereumLogo src={EthereumLogo} style={{ marginRight: '1.25rem' }} size={'48px'} />
+                  <StyledEthereumLogo src={item.liquidityTokenFarmId.liquidityTokenId.tokenXId === 'STAR' ? StarswapBlueLogo : FAILogo } style={{ marginRight: '1.25rem' }} size={'48px'} />
                 </RowFixed>
                 <Text fontSize={16} marginTop={23}>
                   {item.liquidityTokenFarmId.liquidityTokenId.tokenYId}/{item.liquidityTokenFarmId.liquidityTokenId.tokenXId}
