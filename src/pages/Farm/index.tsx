@@ -271,7 +271,7 @@ export default function Farm({ history }: RouteComponentProps) {
                   />
                 </RowFixed>
               </FixedHeightRow>
-              <ButtonFarm as={Link} to={`/farm/${item.liquidityTokenFarmId.liquidityTokenId.tokenXId}/${item.liquidityTokenFarmId.liquidityTokenId.tokenYId}`}>
+              <ButtonFarm as={Link} to={(window.starcoin && account)? `/farm/${item.liquidityTokenFarmId.liquidityTokenId.tokenXId}/${item.liquidityTokenFarmId.liquidityTokenId.tokenYId}` : `/farm`}>
                 <TYPE.main color={'#fff'}>
                   <Trans>Stake</Trans>
                 </TYPE.main>
