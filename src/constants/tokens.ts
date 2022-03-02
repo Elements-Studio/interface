@@ -4,6 +4,13 @@ import { UNI_ADDRESS } from './addresses'
 import { SupportedChainId } from './chains'
 
 export const STC: { [chainId: number]: Token } = {
+  [SupportedChainId.MAINNET]: new Token(
+    SupportedChainId.MAINNET,
+    '0x00000000000000000000000000000001::STC::STC',
+    9,
+    'STC',
+    'STC'
+  ),
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
     '0x00000000000000000000000000000001::STC::STC',
@@ -20,6 +27,13 @@ export const STC: { [chainId: number]: Token } = {
   ),
 }
 export const FAI: { [chainId: number]: Token } = {
+  [SupportedChainId.MAINNET]: new Token(
+    SupportedChainId.MAINNET,
+    '0xfe125d419811297dfab03c61efec0bc9::FAI::FAI',
+    9,
+    'FAI',
+    'FAI'
+  ),
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
     '0xfe125d419811297dfab03c61efec0bc9::FAI::FAI',
@@ -36,6 +50,13 @@ export const FAI: { [chainId: number]: Token } = {
   ),
 }
 export const STAR: { [chainId: number]: Token } = {
+  [SupportedChainId.MAINNET]: new Token(
+    SupportedChainId.MAINNET,
+    '0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
     '0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR',
@@ -61,6 +82,13 @@ export const STAR: { [chainId: number]: Token } = {
 //   ),
 // }
 export const XUSDT: { [chainId: number]: Token } = {
+  [SupportedChainId.MAINNET]: new Token(
+    SupportedChainId.MAINNET,
+    '0xb6d69dd935edf7f2054acf12eb884df8::XUSDT::XUSDT',
+    9,
+    'XUSDT',
+    'XUSDT'
+  ),
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
     '0xb6d69dd935edf7f2054acf12eb884df8::XUSDT::XUSDT',
@@ -242,6 +270,7 @@ export const UNI: { [chainId: number]: Token } = {
 
 export const WETH9_EXTENDED: { [chainId: number]: Token } = {
   ...WETH9,
+  [SupportedChainId.MAINNET]: Star.onChain(SupportedChainId.MAINNET).wrapped,
   [SupportedChainId.BARNARD]: Star.onChain(SupportedChainId.BARNARD).wrapped,
   [SupportedChainId.PROXIMA]: Star.onChain(SupportedChainId.PROXIMA).wrapped,
   [SupportedChainId.ARBITRUM_ONE]: new Token(
