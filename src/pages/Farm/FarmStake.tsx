@@ -27,6 +27,7 @@ import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import { useLookupTBDGain, useUserStaked } from 'hooks/useTokenSwapFarmScript'
 import { useUserLiquidity } from 'hooks/useTokenSwapRouter'
 import useSWR from 'swr'
+import { useIsDarkMode } from '../../state/user/hooks'
 
 
 const Container = styled.div`
@@ -82,6 +83,8 @@ export default function FarmStake({
   let hasStake = false
 
   const { account, chainId } = useActiveWeb3React()
+
+  const darkMode = useIsDarkMode();
 
   if (account) {
     hasAccount = true;

@@ -5,7 +5,9 @@ import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import STCLogo from '../../assets/images/stc.png'
 import STCBlueLogo from '../../assets/images/stc_logo_blue.png'
 import STARLogo from '../../assets/images/starswap_logo_star_round.jpg'
+import STARBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
 import FAILogo from '../../assets/images/fai_token_logo.png'
+import FAIBlueLogo from '../../assets/images/fai_token_logo_blue.png'
 import useHttpLocations from '../../hooks/useHttpLocations'
 import { WrappedTokenInfo } from '../../state/lists/wrappedTokenInfo'
 import Logo from '../Logo'
@@ -74,8 +76,14 @@ export default function CurrencyLogo({
     }
     return <StyledEthereumLogo src={STCLogo} size={size} style={style} {...rest} />
   } else if (currency?.symbol === 'STAR'){
+    if (darkMode) {
+      return <StyledEthereumLogo src={STARBlueLogo} size={size} style={style} {...rest} />
+    }
     return <StyledEthereumLogo src={STARLogo} size={size} style={style} {...rest} />
   } else if (currency?.symbol === 'FAI'){
+    if (darkMode) {
+      return <StyledEthereumLogo src={FAIBlueLogo} size={size} style={style} {...rest} />
+    }
     return <StyledEthereumLogo src={FAILogo} size={size} style={style} {...rest} />
   } else {
     return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} {...rest} />
