@@ -4,7 +4,7 @@ import ReactGA from 'react-ga'
 import styled from 'styled-components/macro'
 import { useActiveWeb3React } from 'hooks/web3'
 import { StyledInternalLink, TYPE } from '../../theme'
-import getCurrentNetwork from '../../utils/getCurrentNetwork'
+
 import axios from 'axios';
 import useSWR from "swr";
 
@@ -28,8 +28,14 @@ const TitleTotal = styled.div<{ margin?: string; maxWidth?: string }>`
 `
 
 export default function FarmTitle() {
+    let network = 'barnard';
     const { chainId } = useActiveWeb3React()
-    const network = getCurrentNetwork(chainId)
+    if (chainId === 1) {
+      network = 'main';
+    }
+    if (chainId === 252) {
+      network = 'proxima';
+    }
 
     const lpTokenScalingFactor = 1000000000;
 
@@ -53,7 +59,7 @@ export default function FarmTitle() {
           </Trans>
         </Container>
         <TitleTotal>
-          <Trans>Total Value Locked in USDT</Trans>: {Number(tvlUSD / lpTokenScalingFactor)}
+          <Trans>Total Value Locked in USDT</Trans>: {Number(tvlUSD)}
         </TitleTotal>
       </>
     )
