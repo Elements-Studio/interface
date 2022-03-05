@@ -273,7 +273,7 @@ export default function Farm({ history }: RouteComponentProps) {
                 </Text>
                 <RowFixed>
                   <Text fontSize={16} fontWeight={500}>
-                    {item.estimatedApy * 10}%
+                    {item.estimatedApy * 2} ~ {item.estimatedApy * 8}%
                   </Text>
                   <QuestionHelper
                     text={
