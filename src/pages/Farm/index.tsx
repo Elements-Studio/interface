@@ -50,7 +50,6 @@ const fetcher = (
 const StyledEthereumLogo = styled.img<{ size: string }>`
   width: ${({ size }) => size};
   height: ${({ size }) => size};
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.075);
   border-radius: 4px;
 `
 const FarmRow = styled(RowBetween)`
