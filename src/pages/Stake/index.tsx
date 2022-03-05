@@ -64,26 +64,10 @@ export default function Farm({ history }: RouteComponentProps) {
 
   const starScalingFactor = 1000000000;
 
-  /*
-  const { data, error } = useSWR(
-    // `http://k8s-default-starswap-af6ced600d-1022591271.ap-northeast-1.elb.amazonaws.com/${network}/v1/lpTokenFarms`,
-    `https://swap-api.starcoin.org/${network}/v1/lpTokenFarms`,
-    fetcher
-  );
-  */
   const { data: pool, error } = useSWR(
-    // `http://k8s-default-starswap-af6ced600d-1022591271.ap-northeast-1.elb.amazonaws.com/${network}/v1/lpTokenFarms`,
     `https://swap-api.starcoin.org/${network}/v1/syrupPools`,
     fetcher
   );
-
-  /*
-  const { data: poolInUSD, error: error2 } = useSWR(
-    // `http://k8s-default-starswap-af6ced600d-1022591271.ap-northeast-1.elb.amazonaws.com/${network}/v1/lpTokenFarms`,
-    `https://swap-api.starcoin.org/${network}/v1/syrupPoolsTvlInUsd`,
-    fetcher
-  );
-  */
   
   // if (error) return "An error has occurred.";
   // if (!data) return "Loading...";
@@ -285,7 +269,7 @@ export default function Farm({ history }: RouteComponentProps) {
               </FarmRow> */}
               <FixedHeightRow>
                 <Text fontSize={16} fontWeight={500}>
-                  <Trans>APR</Trans>
+                  <Trans>Base APR</Trans>
                 </Text>
                 <RowFixed>
                   <Text fontSize={16} fontWeight={500}>

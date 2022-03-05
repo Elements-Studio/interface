@@ -29,7 +29,7 @@ export const STC: { [chainId: number]: Token } = {
 export const FAI: { [chainId: number]: Token } = {
   [SupportedChainId.MAINNET]: new Token(
     SupportedChainId.MAINNET,
-    '0xfe125d419811297dfab03c61efec0bc9::FAI::FAI',
+    '0x4ffcc98f43ce74668264a0cf6eebe42b::FAI::FAI',
     9,
     'FAI',
     'FAI'
@@ -72,15 +72,6 @@ export const STAR: { [chainId: number]: Token } = {
     'Star'
   ),
 }
-// export const XETH: { [chainId: number]: Token } = {
-//   [SupportedChainId.BARNARD]: new Token(
-//     SupportedChainId.BARNARD,
-//     '0x2d81a0427d64ff61b11ede9085efa5ad::XETH::XETH',
-//     18,
-//     'XETH',
-//     'XETH'
-//   ),
-// }
 export const XUSDT: { [chainId: number]: Token } = {
   [SupportedChainId.MAINNET]: new Token(
     SupportedChainId.MAINNET,
@@ -104,6 +95,15 @@ export const XUSDT: { [chainId: number]: Token } = {
     'XUSDT'
   ),
 }
+// export const XETH: { [chainId: number]: Token } = {
+//   [SupportedChainId.BARNARD]: new Token(
+//     SupportedChainId.BARNARD,
+//     '0x2d81a0427d64ff61b11ede9085efa5ad::XETH::XETH',
+//     18,
+//     'XETH',
+//     'XETH'
+//   ),
+// }
 // export const BX_USDT: { [chainId: number]: Token } = {
 //   [SupportedChainId.BARNARD]: new Token(
 //     SupportedChainId.BARNARD,

@@ -94,17 +94,9 @@ export default function FarmStake({
   const STAR_address = STAR[(chainId ? chainId : 1)].address
   // const userSTCBalance = useSTCBalances(address ? [address] : [])?.[address ?? '']
 
-  const x = STC[(chainId ? chainId : 1)].address
-  const y = XUSDT[(chainId ? chainId : 1)].address
-
   // const lpTokenScalingFactor = 1000000000000000000;
-  const lpTokenScalingFactor = 1000000000;
-  const tbdScalingFactor = 1000000000;
   const starScalingFactor = 1000000000;
 
-  const tbdGain:any = useLookupTBDGain(address, x, y)?.data || 0;
-  const userLiquidity:any = useUserLiquidity(address, x, y)?.data || 0;
-  const userStaked:any = useUserStaked(address, x, y)?.data || 0;
   const userStarStaked:any = useUserStarStaked(address, STAR_address)?.data || [];
   if (userStarStaked === [] || userStarStaked[0]?.length > 0) {
     hasStake = false;
