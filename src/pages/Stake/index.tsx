@@ -269,11 +269,71 @@ export default function Farm({ history }: RouteComponentProps) {
               </FarmRow> */}
               <FixedHeightRow>
                 <Text fontSize={16} fontWeight={500}>
-                  <Trans>Base APR</Trans>
+                  <Trans>Base APR-7 Days(2x)</Trans>
                 </Text>
                 <RowFixed>
                   <Text fontSize={16} fontWeight={500}>
-                    {item.estimatedApy * 2} ~ {item.estimatedApy * 8}%
+                    {item.estimatedApy * 2}%
+                  </Text>
+                  <QuestionHelper
+                    text={
+                      <Trans>The estimated annualized percentage yield of rewards.</Trans>
+                    }
+                  />
+                </RowFixed>
+              </FixedHeightRow>
+              <FixedHeightRow>
+                <Text fontSize={16} fontWeight={500}>
+                  <Trans>Base APR-14 Days(3x)</Trans>
+                </Text>
+                <RowFixed>
+                  <Text fontSize={16} fontWeight={500}>
+                    {item.estimatedApy * 3}%
+                  </Text>
+                  <QuestionHelper
+                    text={
+                      <Trans>The estimated annualized percentage yield of rewards.</Trans>
+                    }
+                  />
+                </RowFixed>
+              </FixedHeightRow>
+              <FixedHeightRow>
+                <Text fontSize={16} fontWeight={500}>
+                  <Trans>Base APR-30 Days(4x)</Trans>
+                </Text>
+                <RowFixed>
+                  <Text fontSize={16} fontWeight={500}>
+                    {item.estimatedApy * 4}%
+                  </Text>
+                  <QuestionHelper
+                    text={
+                      <Trans>The estimated annualized percentage yield of rewards.</Trans>
+                    }
+                  />
+                </RowFixed>
+              </FixedHeightRow>
+              <FixedHeightRow>
+                <Text fontSize={16} fontWeight={500}>
+                  <Trans>Base APR-60 Days(6x)</Trans>
+                </Text>
+                <RowFixed>
+                  <Text fontSize={16} fontWeight={500}>
+                    {item.estimatedApy * 6}%
+                  </Text>
+                  <QuestionHelper
+                    text={
+                      <Trans>The estimated annualized percentage yield of rewards.</Trans>
+                    }
+                  />
+                </RowFixed>
+              </FixedHeightRow>
+              <FixedHeightRow>
+                <Text fontSize={16} fontWeight={500}>
+                  <Trans>Base APR-90 Days(8x)</Trans>
+                </Text>
+                <RowFixed>
+                  <Text fontSize={16} fontWeight={500}>
+                    {item.estimatedApy * 8}%
                   </Text>
                   <QuestionHelper
                     text={
