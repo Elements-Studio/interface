@@ -19,6 +19,7 @@ import STCLogo from '../../assets/images/stc.png'
 import STCBlueLogo from '../../assets/images/stc_logo_blue.png'
 import StarswapBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
 import FAILogo from '../../assets/images/fai_token_logo.png'
+import FAIBlueLogo from '../../assets/images/fai_token_logo_blue.png'
 import PortisIcon from '../../assets/images/portisIcon.png'
 import ArbitrumLogo from '../../assets/svg/arbitrum_logo.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
@@ -49,7 +50,6 @@ const BalanceText = styled(Text)`
 const StyledEthereumLogo = styled.img<{ size: string }>`
   width: ${({ size }) => size};
   height: ${({ size }) => size};
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.075);
   border-radius: 4px;
 `
 
@@ -182,7 +182,7 @@ export default function FarmStake({
             <AutoColumn justify="center">
               <RowFixed>
                 <StyledEthereumLogo src={STCBlueLogo} style={{ marginRight: '1.25rem' }} size={'48px'} />
-                <StyledEthereumLogo src={tokenX === 'STAR' ? StarswapBlueLogo : FAILogo } size={'48px'} />
+                <StyledEthereumLogo src={tokenX === 'STAR' ? StarswapBlueLogo : (darkMode ? FAIBlueLogo : FAILogo) } size={'48px'} />
               </RowFixed>
               <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{tokenY}/{tokenX}</TYPE.body>
               <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>{userStaked / lpTokenScalingFactor}</TYPE.body>
