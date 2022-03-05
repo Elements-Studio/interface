@@ -206,7 +206,7 @@ export default function Farm({ history }: RouteComponentProps) {
                 </RowFixed>
                 <RowFixed>
                   <TYPE.black fontSize={14}>
-                    {Number(item.tvlInUsd / lpTokenScalingFactor)}
+                    {Number(item.tvlInUsd)}
                   </TYPE.black>
                 </RowFixed>
               </FarmRow>
