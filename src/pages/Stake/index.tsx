@@ -165,7 +165,18 @@ export default function Farm({ history }: RouteComponentProps) {
     },
   ]
   */
-
+  const tips = (base: any) =>{
+    return (
+    <>
+    <Trans>The estimated annualized percentage yield of rewards.</Trans><br/><br/>
+    <Trans>7 Days(2x) = { (base * 2).toFixed(4)}%</Trans><br/>
+    <Trans>14 Days(3x) = { (base * 3).toFixed(4)}%</Trans><br/>
+    <Trans>30 Days(4x) = { (base * 4).toFixed(4)}%</Trans><br/>
+    <Trans>60 Days(6x) = { (base * 6).toFixed(4)}%</Trans><br/>
+    <Trans>90 Days(8x) = { (base * 8).toFixed(4)}%</Trans>
+    </>
+    )
+  }
   return (
     <>
       <StakeTitle />
@@ -269,80 +280,18 @@ export default function Farm({ history }: RouteComponentProps) {
               </FarmRow> */}
               <FixedHeightRow>
                 <Text fontSize={16} fontWeight={500}>
-                  <Trans>Base APR-7 Days(2x)</Trans>
+                  <Trans>&nbsp;&nbsp;&nbsp;&nbsp;APR</Trans>
                 </Text>
                 <RowFixed>
                   <Text fontSize={16} fontWeight={500}>
-                    {item.estimatedApy * 2}%
+                    {(item.estimatedApy* 2).toFixed(2)}% ~ {(item.estimatedApy*8).toFixed(2)}%
                   </Text>
                   <QuestionHelper
-                    text={
-                      <Trans>The estimated annualized percentage yield of rewards.</Trans>
-                    }
+                    text={tips(item.estimatedApy)}
                   />
                 </RowFixed>
               </FixedHeightRow>
-              <FixedHeightRow>
-                <Text fontSize={16} fontWeight={500}>
-                  <Trans>Base APR-14 Days(3x)</Trans>
-                </Text>
-                <RowFixed>
-                  <Text fontSize={16} fontWeight={500}>
-                    {item.estimatedApy * 3}%
-                  </Text>
-                  <QuestionHelper
-                    text={
-                      <Trans>The estimated annualized percentage yield of rewards.</Trans>
-                    }
-                  />
-                </RowFixed>
-              </FixedHeightRow>
-              <FixedHeightRow>
-                <Text fontSize={16} fontWeight={500}>
-                  <Trans>Base APR-30 Days(4x)</Trans>
-                </Text>
-                <RowFixed>
-                  <Text fontSize={16} fontWeight={500}>
-                    {item.estimatedApy * 4}%
-                  </Text>
-                  <QuestionHelper
-                    text={
-                      <Trans>The estimated annualized percentage yield of rewards.</Trans>
-                    }
-                  />
-                </RowFixed>
-              </FixedHeightRow>
-              <FixedHeightRow>
-                <Text fontSize={16} fontWeight={500}>
-                  <Trans>Base APR-60 Days(6x)</Trans>
-                </Text>
-                <RowFixed>
-                  <Text fontSize={16} fontWeight={500}>
-                    {item.estimatedApy * 6}%
-                  </Text>
-                  <QuestionHelper
-                    text={
-                      <Trans>The estimated annualized percentage yield of rewards.</Trans>
-                    }
-                  />
-                </RowFixed>
-              </FixedHeightRow>
-              <FixedHeightRow>
-                <Text fontSize={16} fontWeight={500}>
-                  <Trans>Base APR-90 Days(8x)</Trans>
-                </Text>
-                <RowFixed>
-                  <Text fontSize={16} fontWeight={500}>
-                    {item.estimatedApy * 8}%
-                  </Text>
-                  <QuestionHelper
-                    text={
-                      <Trans>The estimated annualized percentage yield of rewards.</Trans>
-                    }
-                  />
-                </RowFixed>
-              </FixedHeightRow>
-              <FixedHeightRow>
+              {/* <FixedHeightRow>
                 <Text fontSize={16} fontWeight={500}>
                   <Trans>Stepwise Multiplier</Trans>
                 </Text>
@@ -358,7 +307,7 @@ export default function Farm({ history }: RouteComponentProps) {
                     }
                   />
                 </RowFixed>
-              </FixedHeightRow>
+              </FixedHeightRow> */}
               <ButtonFarm as={Link} to={(window.starcoin && account) ? `/stake/STAR` : '/stake'}>
                 <TYPE.main color={'#fff'}>
                   <Trans>Stake</Trans>
