@@ -742,8 +742,54 @@ msgid "Duration"
 msgstr "Duration"
 
 #: src/components/farm/FarmTitle.tsx
-msgid "Earn STAR Tokens by Staking LP Tokens"
-msgstr "Earn STAR Tokens by Staking LP Tokens"
+msgid "Earn STAR by Staking LP Tokens"
+msgstr "Earn STAR by Staking LP Tokens"
+
+#: src/pages/farm/index.tsx
+#: src/pages/Stake/index.tsx
+#~ msgid "APR"
+#~ msgstr "APR"
+#~ msgid "Multiplier"
+#~ msgstr "Multiplier"
+
+#: src/pages/Stake/index.tsx
+#~ msgid "Token Address"
+#~ msgstr "Token Address"
+#~ msgid "Total Stake Amount"
+#~ msgstr "Total Stake Amount"
+#~ msgid "Reward Token"
+#~ msgstr "Reward Token"
+#~ msgid "Pool Created"
+#~ msgstr "Pool Created"
+#~ msgid "Pool Updated"
+#~ msgstr "Pool Updated"
+
+#: src/pages/Stake/TokenStake.tsx
+#~ msgid "STAR Balance"
+#~ msgstr "STAR Balance"
+#~ msgid "Start"
+#~ msgstr "Start"
+#~ msgid "End"
+#~ msgstr "End"
+#~ msgid "Stepwise Multiplier"
+#~ msgstr "Stepwise Multiplier"
+#~ msgid "Expected Gain"
+#~ msgstr "Expected Gain"
+#~ msgid "My Stakings"
+#~ msgstr "My Stakings"
+#~ msgid "No Staking"
+#~ msgstr "No Staking"
+#~ msgid "Wait"
+#~ msgstr "Wait"
+#~ msgid "Stake"
+#~ msgstr "Stake"
+#~ msgid "Unstake"
+#~ msgstr "Unstake"
+#~ msgid "Duration"
+#~ msgstr "Duration"
+#~ msgid "Days"
+#~ msgstr "Days"
+
 
 #: 
 #~ msgid "Earn TBD Tokens by Staking LP Tokens"

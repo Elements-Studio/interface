@@ -956,9 +956,59 @@ msgstr "流动资金提供者手续费"
 #~ msgid "Liquidity providers earn a 0.25% fee on all trades proportional to their share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
 #~ msgstr "流动资金提供者在所有交易中按其在流动池中的份额获得0.25%的手续费。手续费按实时累计方式添加到流动池中，可与流动资金一起赎回。"
 
+#: src/components/farm/FarmTitle.tsx
+msgid "Earn STAR by Staking LP Tokens"
+msgstr "质押 LP Token 以赚取 STAR"
+
 #: 
 #~ msgid "Lists"
 #~ msgstr "列表"
+
+#: src/pages/farm/index.tsx
+#: src/pages/Stake/index.tsx
+#~ msgid "APR"
+#~ msgstr "年化收益率"
+#~ msgid "Multiplier"
+#~ msgstr "倍率"
+
+#: src/pages/Stake/index.tsx
+#~ msgid "Token Address"
+#~ msgstr "代币地址"
+#~ msgid "Total Stake Amount"
+#~ msgstr "锁仓总量"
+#~ msgid "Reward Token"
+#~ msgstr "奖励代币"
+#~ msgid "Pool Created"
+#~ msgstr "质押池创建时间"
+#~ msgid "Pool Updated"
+#~ msgstr "质押池更新时间"
+
+#: src/pages/Stake/TokenStake.tsx
+#~ msgid "STAR Balance"
+#~ msgstr "STAR 余额"
+#~ msgid "Start"
+#~ msgstr "起始"
+#~ msgid "End"
+#~ msgstr "终止"
+#~ msgid "Stepwise Multiplier"
+#~ msgstr "阶梯倍率"
+#~ msgid "Expected Gain"
+#~ msgstr "预期收益"
+#~ msgid "My Stakings"
+#~ msgstr "我的质押"
+#~ msgid "No Staking"
+#~ msgstr "暂无质押"
+#~ msgid "Wait"
+#~ msgstr "等待"
+#~ msgid "Stake"
+#~ msgstr "质押"
+#~ msgid "Unstake"
+#~ msgstr "赎回"
+#~ msgid "Duration"
+#~ msgstr "期限"
+#~ msgid "Days"
+#~ msgstr "天"
+
 
 #: src/components/SearchModal/ManageLists.tsx
 msgid "Loaded"

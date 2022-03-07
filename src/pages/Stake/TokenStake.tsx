@@ -127,7 +127,7 @@ export default function FarmStake({
   // if (!data) return "Loading...";
   // if (error) return null;
   // if (!pool) return null;
-  const poolList = pool.filter((item:any)=>item.description==='STAR');
+  const poolList = pool ?  pool.filter((item:any)=>item.description==='STAR') : [];
 
   // console.log({poolList})
 
@@ -207,10 +207,10 @@ export default function FarmStake({
                   <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{token}</TYPE.body>
                   <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>ID: {item.id}</TYPE.body>
                   <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>{(parseInt(item.amount) / starScalingFactor).toString()}</TYPE.body>
-                  <TYPE.body fontSize={16} style={{ marginTop: '16px' }}>Start: {(new Date(item.startTime*1000)+'').slice(4,24)}</TYPE.body>
-                  <TYPE.body fontSize={16} style={{ marginTop: '16px' }}>End: {(new Date(item.endTime*1000)+'').slice(4,24)}</TYPE.body>
-                  <TYPE.body fontSize={16} style={{ marginTop: '16px' }}>Stepwise Multiplier: {item.stepwiseMultiplier}</TYPE.body>
-                  <TYPE.body fontSize={16} style={{ color: 'red', marginTop: '16px' }}>Expected Gain: {Number(item.expectedGain / starScalingFactor) || 0 }</TYPE.body>
+                  <TYPE.body fontSize={16} style={{ marginTop: '16px' }}><Trans>Start</Trans>: {(new Date(item.startTime*1000)+'').slice(4,24)}</TYPE.body>
+                  <TYPE.body fontSize={16} style={{ marginTop: '16px' }}><Trans>End</Trans>: {(new Date(item.endTime*1000)+'').slice(4,24)}</TYPE.body>
+                  <TYPE.body fontSize={16} style={{ marginTop: '16px' }}><Trans>Stepwise Multiplier</Trans>: {item.stepwiseMultiplier}</TYPE.body>
+                  <TYPE.body fontSize={16} style={{ color: 'red', marginTop: '16px' }}><Trans>Expected Gain</Trans>: {Number(item.expectedGain / starScalingFactor) || 0 }</TYPE.body>
                     {!hasAccount ? (
                       <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
                         <TYPE.black fontSize="20px" color={'#FE7F8D'}>
@@ -254,7 +254,7 @@ export default function FarmStake({
           )
         ) : (
           <AutoRow justify="center">
-            <h3>No Staking</h3>
+            <h3><Trans>No Staking</Trans></h3>
           </AutoRow>
         )
         }

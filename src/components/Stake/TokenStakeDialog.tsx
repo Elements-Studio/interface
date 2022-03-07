@@ -201,11 +201,11 @@ export default function FarmStakeDialog({
               <FormControlLabel value="100" control={<Radio />} label="100 Seconds" />
               <FormControlLabel value="3600" control={<Radio />} label="1 hour" />
               */}
-              <FormControlLabel value="604800" control={<Radio />} label={`7 Days (2x)  ${(pool[0].estimatedApy*2).toFixed(4)}%`}/>
-              <FormControlLabel value="1209600" control={<Radio />} label={`14 Days (3x)  ${(pool[0].estimatedApy*3).toFixed(4)}%`}/>
-              <FormControlLabel value="2592000" control={<Radio />} label={`30 Days (4x)  ${(pool[0].estimatedApy*4).toFixed(4)}%`}/>
-              <FormControlLabel value="5184000" control={<Radio />} label={`60 Days (6x)  ${(pool[0].estimatedApy*6).toFixed(4)}%`}/>
-              <FormControlLabel value="7776000" control={<Radio />} label={`90 Days (8x)  ${(pool[0].estimatedApy*8).toFixed(4)}%`}/>
+              <FormControlLabel value="604800" control={<Radio />} label={`7 Days (2x)  ${pool !== [] ? (pool[0].estimatedApy*2).toFixed(4) : ''}%`}/>
+              <FormControlLabel value="1209600" control={<Radio />} label={`14 Days (3x)  ${pool !== [] ? (pool[0].estimatedApy*3).toFixed(4) : ''}%`}/>
+              <FormControlLabel value="2592000" control={<Radio />} label={`30 Days (4x)  ${pool !== [] ? (pool[0].estimatedApy*4).toFixed(4) : ''}%`}/>
+              <FormControlLabel value="5184000" control={<Radio />} label={`60 Days (6x)  ${pool !== [] ? (pool[0].estimatedApy*6).toFixed(4) : ''}%`}/>
+              <FormControlLabel value="7776000" control={<Radio />} label={`90 Days (8x)  ${pool !== [] ? (pool[0].estimatedApy*8).toFixed(4) : ''}%`}/>
             </RadioGroup>
           </FormControl>
         </RadioContainer>
