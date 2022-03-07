@@ -82,6 +82,7 @@ const Input = styled.input`
 
 interface FarmStakeDialogProps {
   token: any,
+  pool: any,
   stakeTokenBalance: number,
   stakeTokenScalingFactor: number,
   isOpen: boolean
@@ -90,6 +91,7 @@ interface FarmStakeDialogProps {
 
 export default function FarmStakeDialog({
   token,
+  pool,
   stakeTokenBalance,
   stakeTokenScalingFactor,
   onDismiss,
@@ -107,12 +109,12 @@ export default function FarmStakeDialog({
 
   const handleDurationChange = (event:any) => {
     setDuration(event.target.value);
-    console.log({duration})
+    // console.log({duration})
   };
 
   function parseStakeNumber(value: string) {
     setStakeNumber(value)
-    console.log({stakeNumber})
+    // console.log({stakeNumber})
   }
 
   async function onClickStakeConfirm() {
@@ -199,11 +201,11 @@ export default function FarmStakeDialog({
               <FormControlLabel value="100" control={<Radio />} label="100 Seconds" />
               <FormControlLabel value="3600" control={<Radio />} label="1 hour" />
               */}
-              <FormControlLabel value="604800" control={<Radio />} label="7 Days (2x)" />
-              <FormControlLabel value="1209600" control={<Radio />} label="14 Days (3x)" />
-              <FormControlLabel value="2592000" control={<Radio />} label="30 Days (4x)" />
-              <FormControlLabel value="5184000" control={<Radio />} label="60 Days (6x)" />
-              <FormControlLabel value="7776000" control={<Radio />} label="90 Days (8x)" />
+              <FormControlLabel value="604800" control={<Radio />} label={`7 Days (2x)  ${(pool[0].estimatedApy*2).toFixed(4)}%`}/>
+              <FormControlLabel value="1209600" control={<Radio />} label={`14 Days (3x)  ${(pool[0].estimatedApy*3).toFixed(4)}%`}/>
+              <FormControlLabel value="2592000" control={<Radio />} label={`30 Days (4x)  ${(pool[0].estimatedApy*4).toFixed(4)}%`}/>
+              <FormControlLabel value="5184000" control={<Radio />} label={`60 Days (6x)  ${(pool[0].estimatedApy*6).toFixed(4)}%`}/>
+              <FormControlLabel value="7776000" control={<Radio />} label={`90 Days (8x)  ${(pool[0].estimatedApy*8).toFixed(4)}%`}/>
             </RadioGroup>
           </FormControl>
         </RadioContainer>

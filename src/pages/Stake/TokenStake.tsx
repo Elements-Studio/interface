@@ -118,6 +118,19 @@ export default function FarmStake({
   myStakeList = data ? data : []
   console.log({myStakeList})
 
+  const { data: pool } = useSWR(
+    `https://swap-api.starcoin.org/${network}/v1/syrupPools`,
+    fetcher
+  );
+  
+  // if (error) return "An error has occurred.";
+  // if (!data) return "Loading...";
+  // if (error) return null;
+  // if (!pool) return null;
+  const poolList = pool.filter((item:any)=>item.description==='STAR');
+
+  // console.log({poolList})
+
   const [ stakeDialogOpen, setStakeDialogOpen ] = useState(false)
   const [ harvestDialogOpen, setHarvestDialogOpen ] = useState(false)
   const [ allStakeDialogOpen, setAllStakeDialogOpen ] = useState(false)
@@ -270,6 +283,7 @@ export default function FarmStake({
         stakeTokenBalance={Number(starBalance) || 0}
         stakeTokenScalingFactor={starScalingFactor}
         token={token}
+        pool={poolList}
         isOpen={stakeDialogOpen}
         onDismiss={handleDismissStake}
       />
