@@ -245,7 +245,7 @@ msgstr "数额"
 
 #: src/hooks/useSwapCallback.ts
 msgid "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
-msgstr "尝试执行此兑换时发生错误。您可能需要增加滑点限制。如果还是不行，则可能是您正在交易的代币与Uniswap不兼容。注：Uniswap V3不兼容转账时带扣除费用（fee-on-transfer）的代币和弹性供应（rebase）代币。"
+msgstr "尝试执行此兑换时发生错误。您可能需要增加滑点限制。如果还是不行，则可能是您正在交易的代币与Starswap不兼容。注：Starswap不兼容转账时带扣除费用（fee-on-transfer）的代币和弹性供应（rebase）代币。"
 
 #: 
 #~ msgid "Analytics"
@@ -802,7 +802,7 @@ msgstr "赞成"
 
 #: src/pages/MigrateV2/index.tsx
 msgid "For each pool shown below, click migrate to remove your liquidity from Uniswap V2 and deposit it into Uniswap V3."
-msgstr "对于下面显示的每个流动池，单击“迁移”以从 Uniswap V2 赎回您的流动资金，并将其注入到 Uniswap V3。"
+msgstr "对于下面显示的每个流动池，单击“迁移”以从 Starswap 赎回您的流动资金，并将其注入到 Starswap。"
 
 #: src/components/swap/SwapModalHeader.tsx
 #: src/pages/Swap/index.tsx
@@ -1050,7 +1050,7 @@ msgstr "迁移V2流动资金"
 
 #: src/pages/MigrateV2/index.tsx
 msgid "Migrate your liquidity tokens from Uniswap V2 to Uniswap V3."
-msgstr "将您的流动资金从 Uniswap V2 迁移到 Uniswap V3。"
+msgstr "将您的流动资金从 Starswap 迁移到 Starswap。"
 
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
 msgid "Migrating"
@@ -1515,7 +1515,7 @@ msgstr "输出代币无法进行转账。输出代币可能有些问题。"
 
 #: src/hooks/useSwapCallback.ts
 msgid "The output token cannot be transferred. There may be an issue with the output token. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
-msgstr "无法对输出代币进行转账。输出代币可能有些问题。注：转账时额外抽取费用（fee-on-transfer）的代币和弹性供应（rebase）代币都与Uniswap V3不兼容。"
+msgstr "无法对输出代币进行转账。输出代币可能有些问题。注：转账时额外抽取费用（fee-on-transfer）的代币和弹性供应（rebase）代币都与 Starswap 不兼容。"
 
 #: src/components/Badge/RangeBadge.tsx
 msgid "The price of this pool is outside of your selected range. Your position is not currently earning fees."
@@ -1555,7 +1555,7 @@ msgstr "该工具将安全地将您的 {0} 流动资金迁移到 V3。该过程�
 
 #: src/hooks/useSwapCallback.ts
 msgid "This transaction will not succeed due to price movement. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
-msgstr "由于兑换率变动，此交易将不会成功。尝试增加您的滑点容差。注：转账时额外抽取费用（fee-on-transfer）的代币和弹性供应（rebase）代币都与Uniswap V3不兼容。"
+msgstr "由于兑换率变动，此交易将不会成功。尝试增加您的滑点容差。注：转账时额外抽取费用（fee-on-transfer）的代币和弹性供应（rebase）代币都与 Starswap 不兼容。"
 
 #: src/hooks/useSwapCallback.ts
 msgid "This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance."
@@ -1684,7 +1684,7 @@ msgstr "Uniswap 治理"
 
 #: src/pages/Pool/CTACards.tsx
 msgid "Uniswap V3 is here!"
-msgstr "Uniswap V3 已发布！"
+msgstr "Starswap 已发布！"
 
 #: 
 #~ msgid "Uniswap available in: <0>{0}</0>"
@@ -1708,7 +1708,7 @@ msgstr "未知来源"
 
 #: src/hooks/useSwapCallback.ts
 msgid "Unknown error{0}. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
-msgstr "未知错误{0}。尝试增加您的滑点容差。注：转账时额外抽取费用（fee-on-transfer）的代币和弹性供应（rebase）代币都与Uniswap V3不兼容。"
+msgstr "未知错误{0}。尝试增加您的滑点容差。注：转账时额外抽取费用（fee-on-transfer）的代币和弹性供应（rebase）代币都与 Starswap 不兼容。"
 
 #: src/pages/Vote/VotePage.tsx
 #: src/pages/Vote/index.tsx
@@ -1894,7 +1894,7 @@ msgstr "您正在创建一个流动池"
 
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
 msgid "You are the first liquidity provider for this Uniswap V3 pool. Your liquidity will migrate at the current {0} price."
-msgstr "您是此 Uniswap V3 流动池的第一个流动资金提供者。您的流动资金将以当前的 {0} 兑换率迁移。"
+msgstr "您是此 Starswap 流动池的第一个流动资金提供者。您的流动资金将以当前的 {0} 兑换率迁移。"
 
 #: src/pages/AddLiquidityV2/index.tsx
 msgid "You are the first liquidity provider."
@@ -1930,7 +1930,7 @@ msgstr "您必须有 {formattedProposalThreshold} 票才能提交提案"
 
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
 msgid "You should only deposit liquidity into Uniswap V3 at a price you believe is correct. <0/>If the price seems incorrect, you can either make a swap to move the price or wait for someone else to do so."
-msgstr "请确保以您认为是正确的兑换率来将流动资金注入到 Uniswap V3。 <0/>如果兑换率看起来不正确，您可以进行兑换交易以移动兑换率，或者等待别人进行此操作。"
+msgstr "请确保以您认为是正确的兑换率来将流动资金注入到 Starswap。 <0/>如果兑换率看起来不正确，您可以进行兑换交易以移动兑换率，或者等待别人进行此操作。"
 
 #: src/pages/RemoveLiquidity/V3.tsx
 msgid "You will also collect fees earned from this position."

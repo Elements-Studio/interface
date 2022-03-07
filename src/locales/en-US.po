@@ -83,17 +83,37 @@ msgstr "0.3% fee"
 msgid "1% fee"
 msgstr "1% fee"
 
+#: src/pages/Stake/index.tsx
+msgid "14 Days(3x) = {0}%"
+msgstr "14 Days(3x) = {0}%"
+
 #: src/pages/RemoveLiquidity/V3.tsx
 msgid "25%"
 msgstr "25%"
+
+#: src/pages/Stake/index.tsx
+msgid "30 Days(4x) = {0}%"
+msgstr "30 Days(4x) = {0}%"
 
 #: src/pages/RemoveLiquidity/V3.tsx
 msgid "50%"
 msgstr "50%"
 
+#: src/pages/Stake/index.tsx
+msgid "60 Days(6x) = {0}%"
+msgstr "60 Days(6x) = {0}%"
+
+#: src/pages/Stake/index.tsx
+msgid "7 Days(2x) = {0}%"
+msgstr "7 Days(2x) = {0}%"
+
 #: src/pages/RemoveLiquidity/V3.tsx
 msgid "75%"
 msgstr "75%"
+
+#: src/pages/Stake/index.tsx
+msgid "90 Days(8x) = {0}%"
+msgstr "90 Days(8x) = {0}%"
 
 #: src/pages/Vote/VotePage.tsx
 msgid "<0/> All Proposals"
@@ -139,6 +159,11 @@ msgstr "<0>🎉 </0>Welcome to team Unicorn :) <1>🎉</1>"
 #: src/pages/Vote/index.tsx
 msgid "A minimum threshold of 0.25% of the total UNI supply is required to submit proposals"
 msgstr "A minimum threshold of 0.25% of the total UNI supply is required to submit proposals"
+
+#: src/pages/Farm/index.tsx
+#: src/pages/Stake/index.tsx
+msgid "APR"
+msgstr "APR"
 
 #: src/components/Menu/index.tsx
 msgid "About"
@@ -222,7 +247,7 @@ msgstr "Allow high price impact trades and skip the confirm screen. Use at your 
 
 #: src/pages/Swap/index.tsx
 msgid "Allow the Uniswap Protocol to use your {0}"
-msgstr "Allow the Uniswap Protocol to use your {0}"
+msgstr "Allow the Starswap Protocol to use your {0}"
 
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
 msgid "Allowed"
@@ -238,7 +263,7 @@ msgstr "Amount"
 
 #: src/hooks/useSwapCallback.ts
 msgid "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
-msgstr "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
+msgstr "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note: fee on transfer and rebase tokens are incompatible with Starswap."
 
 #: 
 #~ msgid "Analytics"
@@ -288,13 +313,14 @@ msgstr "Are you sure?"
 
 #: src/components/claim/ClaimModal.tsx
 msgid "As a member of the Uniswap community you may claim UNI to be used for voting and governance.<0/><1/><2>Read more about UNI</2>"
-msgstr "As a member of the Uniswap community you may claim UNI to be used for voting and governance.<0/><1/><2>Read more about UNI</2>"
+msgstr "As a member of the Starswap community you may claim UNI to be used for voting and governance.<0/><1/><2>Read more about UNI</2>"
 
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
 msgid "At least {0} {1} and {2} {3} will be refunded to your wallet due to selected price range."
 msgstr "At least {0} {1} and {2} {3} will be refunded to your wallet due to selected price range."
 
 #: src/pages/Farm/FarmStake.tsx
+#: src/pages/Stake/TokenStake.tsx
 msgid "Authorization"
 msgstr "Authorization"
 
@@ -321,6 +347,10 @@ msgstr "Balance:"
 #: src/components/CurrencyInputPanel/index.tsx
 msgid "Balance: {0} {1}"
 msgstr "Balance: {0} {1}"
+
+#: 
+#~ msgid "Base APR"
+#~ msgstr "Base APR"
 
 #: src/components/FeeSelector/index.tsx
 msgid "Best for exotic pairs."
@@ -352,8 +382,12 @@ msgstr "By connecting a wallet, you agree to Starswap Labs’ <0>Terms of Servic
 
 #: 
 #~ msgid "By connecting a wallet, you agree to Uniswap Labs’ <0>Terms of Service</0> and acknowledge that you have read and understand the <1>Uniswap protocol disclaimer</1>."
-#~ msgstr "By connecting a wallet, you agree to Uniswap Labs’ <0>Terms of Service</0> and acknowledge that you have read and understand the <1>Uniswap protocol disclaimer</1>."
+#~ msgstr "By connecting a wallet, you agree to Starswap Labs’ <0>Terms of Service</0> and acknowledge that you have read and understand the <1>Starswap protocol disclaimer</1>."
 
+#: src/components/Stake/GetAllStakeDialog.tsx
+#: src/components/Stake/TokenHarvestDialog.tsx
+#: src/components/Stake/TokenStakeDialog.tsx
+#: src/components/Stake/TokenUnstakeDialog.tsx
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/components/farm/FarmStakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
@@ -487,6 +521,10 @@ msgstr "Collecting fees will withdraw currently available fees for you."
 msgid "Common bases"
 msgstr "Common bases"
 
+#: src/components/Stake/GetAllStakeDialog.tsx
+#: src/components/Stake/TokenHarvestDialog.tsx
+#: src/components/Stake/TokenStakeDialog.tsx
+#: src/components/Stake/TokenUnstakeDialog.tsx
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/components/farm/FarmStakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
@@ -516,6 +554,7 @@ msgstr "Confirm this transaction in your wallet"
 #: src/pages/Farm/FarmStake.tsx
 #: src/pages/Register/index.tsx
 #: src/pages/RemoveLiquidity/index.tsx
+#: src/pages/Stake/TokenStake.tsx
 #: src/pages/Swap/index.tsx
 #: src/state/burn/hooks.ts
 #: src/state/burn/v3/hooks.ts
@@ -647,7 +686,7 @@ msgstr "Deposit to Arbitrum"
 
 #: src/pages/Earn/index.tsx
 msgid "Deposit your Liquidity Provider tokens to receive UNI, the Uniswap protocol governance token."
-msgstr "Deposit your Liquidity Provider tokens to receive UNI, the Uniswap protocol governance token."
+msgstr "Deposit your Liquidity Provider tokens to receive UNI, the Starswap protocol governance token."
 
 #: src/components/earn/UnstakingModal.tsx
 msgid "Deposited liquidity:"
@@ -689,6 +728,7 @@ msgstr "Discord"
 msgid "Dismiss"
 msgstr "Dismiss"
 
+#: src/components/Header/index.tsx
 #: src/components/Menu/index.tsx
 msgid "Docs"
 msgstr "Docs"
@@ -697,13 +737,21 @@ msgstr "Docs"
 msgid "Don’t see one of your v2 positions? <0>Import it.</0>"
 msgstr "Don’t see one of your v2 positions? <0>Import it.</0>"
 
+#: src/components/Stake/TokenStakeDialog.tsx
+msgid "Duration"
+msgstr "Duration"
+
 #: src/components/farm/FarmTitle.tsx
-msgid "Earn TBD Tokens by Staking LP Tokens"
-msgstr "Earn TBD Tokens by Staking LP Tokens"
+msgid "Earn STAR Tokens by Staking LP Tokens"
+msgstr "Earn STAR Tokens by Staking LP Tokens"
+
+#: 
+#~ msgid "Earn TBD Tokens by Staking LP Tokens"
+#~ msgstr "Earn TBD Tokens by Staking LP Tokens"
 
 #: src/components/vote/DelegateModal.tsx
 msgid "Earned UNI tokens represent voting shares in Uniswap governance."
-msgstr "Earned UNI tokens represent voting shares in Uniswap governance."
+msgstr "Earned UNI tokens represent voting shares in Starswap governance."
 
 #: src/state/burn/v3/hooks.ts
 msgid "Enter a percent"
@@ -772,11 +820,11 @@ msgstr "Expert mode turns off the confirm transaction prompt and allows high sli
 
 #: src/pages/Pool/CTACards.tsx
 msgid "Explore popular pools on Uniswap Analytics."
-msgstr "Explore popular pools on Uniswap Analytics."
+msgstr "Explore popular pools on Starswap Analytics."
 
-#: src/components/Header/index.tsx
-msgid "Explorer"
-msgstr "Explorer"
+#: 
+#~ msgid "Explorer"
+#~ msgstr "Explorer"
 
 #: 
 #: 
@@ -785,6 +833,7 @@ msgstr "Explorer"
 #~ msgstr "Extract"
 
 #: src/components/Header/index.tsx
+#: src/components/Stake/FarmHeader.tsx
 #: src/components/farm/FarmHeader.tsx
 msgid "Farm"
 msgstr "Farm"
@@ -799,7 +848,7 @@ msgstr "For"
 
 #: src/pages/MigrateV2/index.tsx
 msgid "For each pool shown below, click migrate to remove your liquidity from Uniswap V2 and deposit it into Uniswap V3."
-msgstr "For each pool shown below, click migrate to remove your liquidity from Uniswap V2 and deposit it into Uniswap V3."
+msgstr "For each pool shown below, click migrate to remove your liquidity from Starswap and deposit it into Starswap."
 
 #: src/components/swap/SwapModalHeader.tsx
 #: src/pages/Swap/index.tsx
@@ -819,6 +868,10 @@ msgid "Harvest"
 msgstr "Harvest"
 
 #: src/components/farm/FarmHarvestDialog.tsx
+msgid "Harvest STAR"
+msgstr "Harvest STAR"
+
+#: src/components/Stake/TokenHarvestDialog.tsx
 msgid "Harvest TBD"
 msgstr "Harvest TBD"
 
@@ -947,10 +1000,6 @@ msgstr "Learn"
 msgid "Learn more"
 msgstr "Learn more"
 
-#: src/components/Header/index.tsx
-msgid "Docs"
-msgstr "Docs"
-
 #: src/components/claim/ClaimModal.tsx
 #: src/pages/Pool/PositionPage.tsx
 msgid "Liquidity"
@@ -987,6 +1036,8 @@ msgstr "Loaded"
 msgid "Loading"
 msgstr "Loading"
 
+#: src/components/Stake/TokenHarvestDialog.tsx
+#: src/components/Stake/TokenStakeDialog.tsx
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/components/farm/FarmStakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
@@ -1065,7 +1116,7 @@ msgstr "Migrate V2 liquidity"
 
 #: src/pages/MigrateV2/index.tsx
 msgid "Migrate your liquidity tokens from Uniswap V2 to Uniswap V3."
-msgstr "Migrate your liquidity tokens from Uniswap V2 to Uniswap V3."
+msgstr "Migrate your liquidity tokens from Starswap to Starswap."
 
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
 msgid "Migrating"
@@ -1091,6 +1142,14 @@ msgstr "Minimum received"
 #: src/pages/Pool/index.tsx
 msgid "More"
 msgstr "More"
+
+#: src/pages/Farm/index.tsx
+msgid "Multiplier"
+msgstr "Multiplier"
+
+#: src/components/Stake/MyStakeListTitle.tsx
+msgid "My Stakings"
+msgstr "My Stakings"
 
 #: src/pages/Pool/index.tsx
 msgid "New Position"
@@ -1203,6 +1262,10 @@ msgstr "Please type the word \"{confirmWord}\" to enable expert mode."
 msgid "Pool"
 msgstr "Pool"
 
+#: src/pages/Stake/index.tsx
+msgid "Pool Created"
+msgstr "Pool Created"
+
 #: src/pages/PoolFinder/index.tsx
 msgid "Pool Found!"
 msgstr "Pool Found!"
@@ -1210,6 +1273,10 @@ msgstr "Pool Found!"
 #: src/pages/Earn/Manage.tsx
 msgid "Pool Rate"
 msgstr "Pool Rate"
+
+#: src/pages/Stake/index.tsx
+msgid "Pool Updated"
+msgstr "Pool Updated"
 
 #: src/components/earn/PoolCard.tsx
 msgid "Pool rate"
@@ -1307,7 +1374,7 @@ msgstr "Read more about UNI"
 
 #: src/pages/Vote/index.tsx
 msgid "Read more about Uniswap governance"
-msgstr "Read more about Uniswap governance"
+msgstr "Read more about Starswap governance"
 
 #: 
 #~ msgid "Read more about providing liquidity"
@@ -1379,9 +1446,28 @@ msgstr "Restricts swaps to direct pairs only."
 msgid "Return"
 msgstr "Return"
 
+#: src/pages/Stake/index.tsx
+msgid "Reward Token"
+msgstr "Reward Token"
+
 #: src/components/swap/AdvancedSwapDetails.tsx
 msgid "Route"
 msgstr "Route"
+
+#: src/pages/Farm/FarmStake.tsx
+#: src/pages/Stake/TokenStake.tsx
+msgid "STAR"
+msgstr "STAR"
+
+#: src/components/Stake/TokenStakeDialog.tsx
+#: src/pages/Stake/TokenStake.tsx
+msgid "STAR Balance"
+msgstr "STAR Balance"
+
+#: src/components/farm/FarmHarvestDialog.tsx
+#: src/pages/Farm/FarmStake.tsx
+msgid "STAR Earned"
+msgstr "STAR Earned"
 
 #: src/components/SearchModal/CurrencySearch.tsx
 msgid "Search name or paste address"
@@ -1470,14 +1556,25 @@ msgstr "Some assets are not available through this interface because they may no
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
+#: src/components/Header/index.tsx
 #: src/pages/Farm/FarmStake.tsx
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/TokenStake.tsx
+#: src/pages/Stake/index.tsx
 msgid "Stake"
 msgstr "Stake"
 
 #: src/components/farm/FarmStakeDialog.tsx
 msgid "Stake LP Token"
 msgstr "Stake LP Token"
+
+#: src/components/Stake/TokenStakeDialog.tsx
+msgid "Stake Token"
+msgstr "Stake Token"
+
+#: src/components/Stake/StakeTitle.tsx
+msgid "Stake to Earn"
+msgstr "Stake to Earn"
 
 #: src/components/farm/FarmUnstakeDialog.tsx
 msgid "Staked LP Token"
@@ -1490,6 +1587,10 @@ msgstr "Starswap available in: <0>{0}</0>"
 #: src/pages/Earn/Manage.tsx
 msgid "Step 1. Get UNI-V2 Liquidity tokens"
 msgstr "Step 1. Get UNI-V2 Liquidity tokens"
+
+#: 
+#~ msgid "Stepwise Multiplier"
+#~ msgstr "Stepwise Multiplier"
 
 #: src/state/governance/hooks.ts
 msgid "Submitted new proposal"
@@ -1532,12 +1633,11 @@ msgstr "Swapping {0} {1} for {2} {3}"
 msgid "Switch to Ethereum"
 msgstr "Switch to Ethereum"
 
-#: src/pages/Farm/FarmStake.tsx
-msgid "TBD"
-msgstr "TBD"
+#: 
+#~ msgid "TBD"
+#~ msgstr "TBD"
 
-#: src/components/farm/FarmHarvestDialog.tsx
-#: src/pages/Farm/FarmStake.tsx
+#: src/components/Stake/TokenHarvestDialog.tsx
 msgid "TBD Earned"
 msgstr "TBD Earned"
 
@@ -1546,16 +1646,30 @@ msgstr "TBD Earned"
 #~ msgstr "TVL in USD"
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/index.tsx
 msgid "TVL in USDT"
 msgstr "TVL in USDT"
 
 #: src/components/Popups/ClaimPopup.tsx
 msgid "Thanks for being part of the Uniswap community <0/>"
-msgstr "Thanks for being part of the Uniswap community <0/>"
+msgstr "Thanks for being part of the Starswap community <0/>"
+
+#: src/pages/Farm/index.tsx
+msgid "The Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.<0/><1/>For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.<2/><3/>This amount is already included in all APR calculations for the farm."
+msgstr "The Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.<0/><1/>For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.<2/><3/>This amount is already included in all APR calculations for the farm."
+
+#: 
+#~ msgid "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.<0/><1/>For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.<2/><3/>This amount is already included in all APR calculations for the farm."
+#~ msgstr "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.<0/><1/>For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.<2/><3/>This amount is already included in all APR calculations for the farm."
 
 #: src/hooks/useSwapCallback.ts
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
-msgstr "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
+msgstr "The Starswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
+
+#: src/pages/Farm/index.tsx
+#: src/pages/Stake/index.tsx
+msgid "The estimated annualized percentage yield of rewards."
+msgstr "The estimated annualized percentage yield of rewards."
 
 #: src/hooks/useSwapCallback.ts
 msgid "The input token cannot be transferred. There may be an issue with the input token."
@@ -1571,7 +1685,7 @@ msgstr "The output token cannot be transferred. There may be an issue with the o
 
 #: src/hooks/useSwapCallback.ts
 msgid "The output token cannot be transferred. There may be an issue with the output token. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
-msgstr "The output token cannot be transferred. There may be an issue with the output token. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
+msgstr "The output token cannot be transferred. There may be an issue with the output token. Note: fee on transfer and rebase tokens are incompatible with Starswap."
 
 #: src/components/Badge/RangeBadge.tsx
 msgid "The price of this pool is outside of your selected range. Your position is not currently earning fees."
@@ -1595,8 +1709,9 @@ msgstr "These tokens are commonly paired with other tokens."
 
 #: src/components/swap/SwapNetworkAlert.tsx
 msgid "This is an alpha release of Uniswap on the Arbitrum network. You must bridge L1 assets to the network to swap them."
-msgstr "This is an alpha release of Uniswap on the Arbitrum network. You must bridge L1 assets to the network to swap them."
+msgstr "This is an alpha release of Starswap on the Arbitrum network. You must bridge L1 assets to the network to swap them."
 
+#: src/components/Stake/GetAllStakeDialog.tsx
 #: src/components/farm/GetAllStakeDialog.tsx
 msgid "This operation extracts all pledged liquidity quotas and rewards. Do you continue to perform the operation?"
 msgstr "This operation extracts all pledged liquidity quotas and rewards. Do you continue to perform the operation?"
@@ -1611,7 +1726,7 @@ msgstr "This tool will safely migrate your {0} liquidity to V3. The process is c
 
 #: src/hooks/useSwapCallback.ts
 msgid "This transaction will not succeed due to price movement. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
-msgstr "This transaction will not succeed due to price movement. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
+msgstr "This transaction will not succeed due to price movement. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Starswap."
 
 #: src/hooks/useSwapCallback.ts
 msgid "This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance."
@@ -1636,6 +1751,10 @@ msgstr "To (at least)"
 msgid "Toggle Expert Mode"
 msgstr "Toggle Expert Mode"
 
+#: src/pages/Stake/index.tsx
+msgid "Token Address"
+msgstr "Token Address"
+
 #: src/pages/Farm/index.tsx
 msgid "Token Pair"
 msgstr "Token Pair"
@@ -1652,10 +1771,15 @@ msgstr "Tokens from inactive lists. Import specific tokens below or click Manage
 msgid "Top pools"
 msgstr "Top pools"
 
+#: src/pages/Stake/index.tsx
+msgid "Total Stake Amount"
+msgstr "Total Stake Amount"
+
 #: src/components/Header/UniBalanceContent.tsx
 msgid "Total Supply"
 msgstr "Total Supply"
 
+#: src/components/Stake/StakeTitle.tsx
 #: src/components/farm/FarmTitle.tsx
 msgid "Total Value Locked in USDT"
 msgstr "Total Value Locked in USDT"
@@ -1719,7 +1843,7 @@ msgstr "UNI price:"
 
 #: src/pages/Vote/index.tsx
 msgid "UNI tokens represent voting shares in Uniswap governance. You can vote on each proposal yourself or delegate your votes to a third party."
-msgstr "UNI tokens represent voting shares in Uniswap governance. You can vote on each proposal yourself or delegate your votes to a third party."
+msgstr "UNI tokens represent voting shares in Starswap governance. You can vote on each proposal yourself or delegate your votes to a third party."
 
 #: 
 #~ msgid "UNI {0}/{1} Burned"
@@ -1748,27 +1872,27 @@ msgstr "Unclaimed:"
 
 #: src/pages/Vote/index.tsx
 msgid "Uniswap Governance"
-msgstr "Uniswap Governance"
+msgstr "Starswap Governance"
 
 #: src/pages/Pool/CTACards.tsx
 msgid "Uniswap V3 is here!"
-msgstr "Uniswap V3 is here!"
+msgstr "Starswap is here!"
 
 #: 
 #~ msgid "Uniswap available in: <0>{0}</0>"
-#~ msgstr "Uniswap available in: <0>{0}</0>"
+#~ msgstr "Starswap available in: <0>{0}</0>"
 
 #: src/pages/Earn/index.tsx
 msgid "Uniswap liquidity mining"
-msgstr "Uniswap liquidity mining"
+msgstr "Starswap liquidity mining"
 
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
 msgid "Uniswap migration contract↗"
-msgstr "Uniswap migration contract↗"
+msgstr "Starswap migration contract↗"
 
 #: src/components/swap/SwapNetworkAlert.tsx
 msgid "Uniswap on <0>Arbitrum</0>"
-msgstr "Uniswap on <0>Arbitrum</0>"
+msgstr "Starswap on <0>Arbitrum</0>"
 
 #: src/components/SearchModal/ImportToken.tsx
 msgid "Unknown Source"
@@ -1776,7 +1900,7 @@ msgstr "Unknown Source"
 
 #: src/hooks/useSwapCallback.ts
 msgid "Unknown error{0}. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
-msgstr "Unknown error{0}. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
+msgstr "Unknown error{0}. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Starswap."
 
 #: src/pages/Vote/VotePage.tsx
 #: src/pages/Vote/index.tsx
@@ -1792,12 +1916,17 @@ msgid "Unlocking Votes"
 msgstr "Unlocking Votes"
 
 #: src/pages/Farm/FarmStake.tsx
+#: src/pages/Stake/TokenStake.tsx
 msgid "Unstake"
 msgstr "Unstake"
 
 #: src/components/farm/FarmUnstakeDialog.tsx
 msgid "Unstake LP Token"
 msgstr "Unstake LP Token"
+
+#: src/components/Stake/TokenUnstakeDialog.tsx
+msgid "Unstake STAR"
+msgstr "Unstake STAR"
 
 #: src/pages/AddLiquidity/index.tsx
 #: src/pages/AddLiquidityV2/index.tsx
@@ -1872,9 +2001,9 @@ msgstr "View on Stcscan"
 msgid "View transaction on Explorer"
 msgstr "View transaction on Explorer"
 
-#: src/components/Header/index.tsx
-msgid "Vote"
-msgstr "Vote"
+#: 
+#~ msgid "Vote"
+#~ msgstr "Vote"
 
 #: src/pages/Vote/VotePage.tsx
 msgid "Vote Against"
@@ -1901,6 +2030,10 @@ msgstr "Voting ended {0}"
 #: src/pages/Vote/VotePage.tsx
 msgid "Voting ends approximately {0}"
 msgstr "Voting ends approximately {0}"
+
+#: src/pages/Stake/TokenStake.tsx
+msgid "Wait"
+msgstr "Wait"
 
 #: src/components/TransactionConfirmationModal/index.tsx
 msgid "Waiting For Confirmation"
@@ -1971,7 +2104,7 @@ msgstr "You are creating a pool"
 
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
 msgid "You are the first liquidity provider for this Uniswap V3 pool. Your liquidity will migrate at the current {0} price."
-msgstr "You are the first liquidity provider for this Uniswap V3 pool. Your liquidity will migrate at the current {0} price."
+msgstr "You are the first liquidity provider for this Starswap pool. Your liquidity will migrate at the current {0} price."
 
 #: src/pages/AddLiquidityV2/index.tsx
 msgid "You are the first liquidity provider."
@@ -1999,7 +2132,7 @@ msgstr "You must connect an account."
 
 #: src/pages/Swap/index.tsx
 msgid "You must give the Uniswap smart contracts permission to use your {0}. You only have to do this once per token."
-msgstr "You must give the Uniswap smart contracts permission to use your {0}. You only have to do this once per token."
+msgstr "You must give the Starswap smart contracts permission to use your {0}. You only have to do this once per token."
 
 #: src/pages/CreateProposal/index.tsx
 msgid "You must have {formattedProposalThreshold} votes to submit a proposal"
@@ -2007,7 +2140,7 @@ msgstr "You must have {formattedProposalThreshold} votes to submit a proposal"
 
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
 msgid "You should only deposit liquidity into Uniswap V3 at a price you believe is correct. <0/>If the price seems incorrect, you can either make a swap to move the price or wait for someone else to do so."
-msgstr "You should only deposit liquidity into Uniswap V3 at a price you believe is correct. <0/>If the price seems incorrect, you can either make a swap to move the price or wait for someone else to do so."
+msgstr "You should only deposit liquidity into Starswap at a price you believe is correct. <0/>If the price seems incorrect, you can either make a swap to move the price or wait for someone else to do so."
 
 #: src/pages/RemoveLiquidity/V3.tsx
 msgid "You will also collect fees earned from this position."
