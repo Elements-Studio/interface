@@ -23,6 +23,11 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import CircularProgress from '@mui/material/CircularProgress'
+import useSWR from 'swr'
+import axios from 'axios'
+import getCurrentNetwork from '../../utils/getCurrentNetwork'
+
+const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
 const Container = styled.div`
   border-radius: 20px;
@@ -82,7 +87,6 @@ const Input = styled.input`
 
 interface FarmStakeDialogProps {
   token: any,
-  pool: any,
   stakeTokenBalance: number,
   stakeTokenScalingFactor: number,
   isOpen: boolean
@@ -91,7 +95,6 @@ interface FarmStakeDialogProps {
 
 export default function FarmStakeDialog({
   token,
-  pool,
   stakeTokenBalance,
   stakeTokenScalingFactor,
   onDismiss,
@@ -100,12 +103,24 @@ export default function FarmStakeDialog({
 
   const starcoinProvider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
+  const network = getCurrentNetwork(chainId)
 
   const theme = useContext(ThemeContext)
   
   const [stakeNumber, setStakeNumber] = useState<any>('')
   const [duration, setDuration] = useState<any>('');
   const [loading, setLoading] = useState(false);
+
+  const { data: pool, error } = useSWR(
+    `https://swap-api.starcoin.org/${network}/v1/syrupPools`,
+    fetcher
+  );
+
+  // if (error) return "An error has occurred.";
+  // if (!data) return "Loading...";
+  if (error) return null;
+  if (!pool) return null;
+  const poolList = pool ?  pool.filter((item:any)=>item.description==='STAR') : [];
 
   const handleDurationChange = (event:any) => {
     setDuration(event.target.value);
@@ -201,11 +216,11 @@ export default function FarmStakeDialog({
               <FormControlLabel value="100" control={<Radio />} label="100 Seconds" />
               <FormControlLabel value="3600" control={<Radio />} label="1 hour" />
               */}
-              <FormControlLabel value="604800" control={<Radio />} label={`7 Days (2x)  ${pool !== [] ? (pool[0].estimatedApy*2).toFixed(4) : ''}%`}/>
-              <FormControlLabel value="1209600" control={<Radio />} label={`14 Days (3x)  ${pool !== [] ? (pool[0].estimatedApy*3).toFixed(4) : ''}%`}/>
-              <FormControlLabel value="2592000" control={<Radio />} label={`30 Days (4x)  ${pool !== [] ? (pool[0].estimatedApy*4).toFixed(4) : ''}%`}/>
-              <FormControlLabel value="5184000" control={<Radio />} label={`60 Days (6x)  ${pool !== [] ? (pool[0].estimatedApy*6).toFixed(4) : ''}%`}/>
-              <FormControlLabel value="7776000" control={<Radio />} label={`90 Days (8x)  ${pool !== [] ? (pool[0].estimatedApy*8).toFixed(4) : ''}%`}/>
+              <FormControlLabel value="604800" control={<Radio />} label={`7 Days (2x)  ${poolList !== [] ? (poolList[0].estimatedApy*2).toFixed(4) : ''}%`}/>
+              <FormControlLabel value="1209600" control={<Radio />} label={`14 Days (3x)  ${poolList !== [] ? (poolList[0].estimatedApy*3).toFixed(4) : ''}%`}/>
+              <FormControlLabel value="2592000" control={<Radio />} label={`30 Days (4x)  ${poolList !== [] ? (poolList[0].estimatedApy*4).toFixed(4) : ''}%`}/>
+              <FormControlLabel value="5184000" control={<Radio />} label={`60 Days (6x)  ${poolList !== [] ? (poolList[0].estimatedApy*6).toFixed(4) : ''}%`}/>
+              <FormControlLabel value="7776000" control={<Radio />} label={`90 Days (8x)  ${poolList !== [] ? (poolList[0].estimatedApy*8).toFixed(4) : ''}%`}/>
             </RadioGroup>
           </FormControl>
         </RadioContainer>
