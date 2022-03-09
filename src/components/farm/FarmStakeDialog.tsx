@@ -172,6 +172,11 @@ export default function FarmStakeDialog({
             </TYPE.main>
           </ButtonFarm>
         </RowBetween>
+        <RowBetween style={{ marginTop: '24px' }}>
+          <TYPE.main color={'#FB578C'} fontSize={14}>
+            <Trans>Note: Stake operation will harvest your previously earned STAR automatically.</Trans>
+          </TYPE.main>
+        </RowBetween>
       </ColumnCenter>
     </Modal>
   )

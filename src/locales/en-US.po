@@ -649,6 +649,9 @@ msgstr "Current price"
 msgid "Current {0} Price:"
 msgstr "Current {0} Price:"
 
+#~ msgid "Days"
+#~ msgstr "Days"
+
 #: src/components/vote/DelegateModal.tsx
 msgid "Delegate Votes"
 msgstr "Delegate Votes"
@@ -745,52 +748,6 @@ msgstr "Duration"
 msgid "Earn STAR by Staking LP Tokens"
 msgstr "Earn STAR by Staking LP Tokens"
 
-#: src/pages/farm/index.tsx
-#: src/pages/Stake/index.tsx
-#~ msgid "APR"
-#~ msgstr "APR"
-#~ msgid "Multiplier"
-#~ msgstr "Multiplier"
-
-#: src/pages/Stake/index.tsx
-#~ msgid "Token Address"
-#~ msgstr "Token Address"
-#~ msgid "Total Stake Amount"
-#~ msgstr "Total Stake Amount"
-#~ msgid "Reward Token"
-#~ msgstr "Reward Token"
-#~ msgid "Pool Created"
-#~ msgstr "Pool Created"
-#~ msgid "Pool Updated"
-#~ msgstr "Pool Updated"
-
-#: src/pages/Stake/TokenStake.tsx
-#~ msgid "STAR Balance"
-#~ msgstr "STAR Balance"
-#~ msgid "Start"
-#~ msgstr "Start"
-#~ msgid "End"
-#~ msgstr "End"
-#~ msgid "Stepwise Multiplier"
-#~ msgstr "Stepwise Multiplier"
-#~ msgid "Expected Gain"
-#~ msgstr "Expected Gain"
-#~ msgid "My Stakings"
-#~ msgstr "My Stakings"
-#~ msgid "No Staking"
-#~ msgstr "No Staking"
-#~ msgid "Wait"
-#~ msgstr "Wait"
-#~ msgid "Stake"
-#~ msgstr "Stake"
-#~ msgid "Unstake"
-#~ msgstr "Unstake"
-#~ msgid "Duration"
-#~ msgstr "Duration"
-#~ msgid "Days"
-#~ msgstr "Days"
-
-
 #: 
 #~ msgid "Earn TBD Tokens by Staking LP Tokens"
 #~ msgstr "Earn TBD Tokens by Staking LP Tokens"
@@ -798,6 +755,10 @@ msgstr "Earn STAR by Staking LP Tokens"
 #: src/components/vote/DelegateModal.tsx
 msgid "Earned UNI tokens represent voting shares in Uniswap governance."
 msgstr "Earned UNI tokens represent voting shares in Starswap governance."
+
+#: src/pages/Stake/TokenStake.tsx
+msgid "End"
+msgstr "End"
 
 #: src/state/burn/v3/hooks.ts
 msgid "Enter a percent"
@@ -859,6 +820,10 @@ msgstr "Error importing list"
 #: src/components/SearchModal/CurrencyList.tsx
 msgid "Expanded results from inactive Token Lists"
 msgstr "Expanded results from inactive Token Lists"
+
+#: src/pages/Stake/TokenStake.tsx
+msgid "Expected Gain"
+msgstr "Expected Gain"
 
 #: src/components/Settings/index.tsx
 msgid "Expert mode turns off the confirm transaction prompt and allows high slippage trades that often result in bad rates and lost funds."
@@ -1201,6 +1166,10 @@ msgstr "My Stakings"
 msgid "New Position"
 msgstr "New Position"
 
+#: src/pages/Stake/TokenStake.tsx
+msgid "No Staking"
+msgstr "No Staking"
+
 #: src/pages/MigrateV2/index.tsx
 msgid "No V2 Liquidity found."
 msgstr "No V2 Liquidity found."
@@ -1225,6 +1194,15 @@ msgstr "No proposals found."
 #: src/components/SearchModal/CurrencySearch.tsx
 msgid "No results found."
 msgstr "No results found."
+
+#: 
+#~ msgid "Note: Stake operation will harvest your previously earned STAR automatically."
+#~ msgstr "Note: Stake operation will harvest your previously earned STAR automatically."
+
+#: src/components/Stake/TokenStakeDialog.tsx
+#: src/components/farm/FarmStakeDialog.tsx
+msgid "Note: Stake operation will harvest your previsously earned STAR automatically."
+msgstr "Note: Stake operation will harvest your previsously earned STAR automatically."
 
 #: src/components/Toggle/ListToggle.tsx
 msgid "OFF"
@@ -1630,13 +1608,17 @@ msgstr "Staked LP Token"
 msgid "Starswap available in: <0>{0}</0>"
 msgstr "Starswap available in: <0>{0}</0>"
 
+#: src/pages/Stake/TokenStake.tsx
+msgid "Start"
+msgstr "Start"
+
 #: src/pages/Earn/Manage.tsx
 msgid "Step 1. Get UNI-V2 Liquidity tokens"
 msgstr "Step 1. Get UNI-V2 Liquidity tokens"
 
-#: 
-#~ msgid "Stepwise Multiplier"
-#~ msgstr "Stepwise Multiplier"
+#: src/pages/Stake/TokenStake.tsx
+msgid "Stepwise Multiplier"
+msgstr "Stepwise Multiplier"
 
 #: src/state/governance/hooks.ts
 msgid "Submitted new proposal"
