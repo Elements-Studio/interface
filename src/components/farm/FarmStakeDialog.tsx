@@ -16,6 +16,7 @@ import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import BigNumber from 'bignumber.js';
 import { arrayify, hexlify } from '@ethersproject/bytes';
 import { utils, bcs } from '@starcoin/starcoin';
+import CircularProgress from '@mui/material/CircularProgress'
 
 const Container = styled.div`
   border-radius: 20px;
@@ -86,6 +87,7 @@ export default function FarmStakeDialog({
   const theme = useContext(ThemeContext)
   
   const [stakeNumber, setStakeNumber] = useState<any>('')
+  const [loading, setLoading] = useState(false);
 
   function parseStakeNumber(value: string) {
     setStakeNumber(value)
@@ -119,9 +121,21 @@ export default function FarmStakeDialog({
         return hexlify(se.getBytes());
       })();
 
-      await starcoinProvider.getSigner().sendUncheckedTransaction({
+      const response = await starcoinProvider.getSigner().sendUncheckedTransaction({
         data: payloadInHex,
       });
+      console.log({ response });
+      setLoading(true);
+      setInterval(async () => {
+        const txnInfo = await starcoinProvider.getTransactionInfo(response);
+        console.log({txnInfo})
+        if (txnInfo.status === 'Executed') {
+          setLoading(false);
+          onDismiss();
+          clearInterval();
+          window.location.reload();
+        }
+      }, 3000);
     } catch (error) {
       console.error(error);
     }
@@ -156,6 +170,15 @@ export default function FarmStakeDialog({
             </ButtonText>
           </ColumnRight>
         </Container>
+        {loading && (
+          <CircularProgress
+            size={64}
+            sx={{
+              marginTop: '10px',
+              zIndex: 1,
+            }}
+          />
+        )}
         <RowBetween style={{ marginTop: '24px' }}>
           <ButtonBorder marginRight={22} onClick={onDismiss} >
             <TYPE.black fontSize={20}>
@@ -164,8 +187,8 @@ export default function FarmStakeDialog({
           </ButtonBorder>
           <ButtonFarm onClick={() => {
             onClickStakeConfirm();
-            setTimeout(onDismiss, 2500);
-            setTimeout("window.location.reload()", 10000);
+            // setTimeout(onDismiss, 2500);
+            // setTimeout("window.location.reload()", 10000);
           }}>
             <TYPE.main color={'#fff'}>
               <Trans>Confirm</Trans>
