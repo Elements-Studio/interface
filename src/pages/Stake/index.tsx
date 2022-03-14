@@ -169,11 +169,11 @@ export default function Farm({ history }: RouteComponentProps) {
     return (
     <>
     <Trans>The estimated annualized percentage yield of rewards.</Trans><br/><br/>
-    <Trans>7 Days(2x) = { (base * 2).toFixed(4)}%</Trans><br/>
-    <Trans>14 Days(3x) = { (base * 3).toFixed(4)}%</Trans><br/>
-    <Trans>30 Days(4x) = { (base * 4).toFixed(4)}%</Trans><br/>
-    <Trans>60 Days(6x) = { (base * 6).toFixed(4)}%</Trans><br/>
-    <Trans>90 Days(8x) = { (base * 8).toFixed(4)}%</Trans>
+    <Trans>7 Days</Trans>(2x) = { base ? (base * 2).toFixed(4) : ''}%<br/>
+    <Trans>14 Days</Trans>(3x) = { base ? (base * 3).toFixed(4) : ''}%<br/>
+    <Trans>30 Days</Trans>(4x) = { base ? (base * 4).toFixed(4) : ''}%<br/>
+    <Trans>60 Days</Trans>(6x) = { base ? (base * 6).toFixed(4) : ''}%<br/>
+    <Trans>90 Days</Trans>(8x) = { base ? (base * 8).toFixed(4) : ''}%
     </>
     )
   }
