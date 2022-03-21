@@ -65,7 +65,7 @@ export default function Farm({ history }: RouteComponentProps) {
   const starScalingFactor = 1000000000;
 
   const { data: pool, error } = useSWR(
-    `https://swap-api.starcoin.org/${network}/v1/syrupPools`,
+    `https://swap-api.starswap.xyz/${network}/v1/syrupPools`,
     fetcher
   );
   
@@ -174,13 +174,17 @@ export default function Farm({ history }: RouteComponentProps) {
     <Trans>30 Days</Trans>(4x) = { base ? (base * 4).toFixed(4) : '0'}%<br/>
     <Trans>60 Days</Trans>(6x) = { base ? (base * 6).toFixed(4) : '0'}%<br/>
     <Trans>90 Days</Trans>(8x) = { base ? (base * 8).toFixed(4) : '0'}%
+    <br/>
+    <br/>
+    <Trans>STAR Stake APR Formula</Trans>
+    <br/>
     </>
     )
   }
   return (
     <>
       <StakeTitle />
-      <AutoRow justify="center" style={{ paddingTop: '50px', maxWidth: '1200px' }}>
+      <AutoRow justify="center" style={{ paddingTop: '30px', maxWidth: '1200px' }}>
         {list ? list.map((item:any,index:any) => (
             <FarmCard key={index}>
               <AutoColumn justify="center">
@@ -218,7 +222,7 @@ export default function Farm({ history }: RouteComponentProps) {
                   </TYPE.black>
                 </RowFixed>
               </FarmRow>
-              <FarmRow style={{ marginTop: '10px', marginBottom: '20px' }}>
+              <FarmRow style={{ marginTop: '10px', marginBottom: '10px' }}>
                 <RowFixed>
                   <TYPE.black fontWeight={400} fontSize={14}>
                     <Trans>Total Stake Amount</Trans>
@@ -230,7 +234,7 @@ export default function Farm({ history }: RouteComponentProps) {
                   </TYPE.black>
                 </RowFixed>
               </FarmRow>
-              <FarmRow style={{ marginTop: '10px', marginBottom: '20px' }}>
+              <FarmRow style={{ marginTop: '10px', marginBottom: '10px' }}>
                 <RowFixed>
                   <TYPE.black fontWeight={400} fontSize={14}>
                     <Trans>Reward Token</Trans>
@@ -242,7 +246,19 @@ export default function Farm({ history }: RouteComponentProps) {
                   </TYPE.black>
                 </RowFixed>
               </FarmRow>
-              <FarmRow style={{ marginTop: '10px', marginBottom: '20px' }}>
+              <FarmRow style={{ marginTop: '10px', marginBottom: '10px' }}>
+                <RowFixed>
+                  <TYPE.black fontWeight={400} fontSize={14}>
+                    <Trans>Daily Reward</Trans>
+                  </TYPE.black>
+                </RowFixed>
+                <RowFixed>
+                  <TYPE.black fontSize={14}>
+                    {Number(item.dailyReward / starScalingFactor) || 0}
+                  </TYPE.black>
+                </RowFixed>
+              </FarmRow>
+              <FarmRow style={{ marginTop: '10px', marginBottom: '10px' }}>
                 <RowFixed>
                   <TYPE.black fontWeight={400} fontSize={14}>
                     <Trans>Pool Created</Trans>
@@ -278,7 +294,7 @@ export default function Farm({ history }: RouteComponentProps) {
                   </TYPE.black>
                 </RowFixed>
               </FarmRow> */}
-              <FixedHeightRow>
+              <FixedHeightRow marginBottom={16}>
                 <Text fontSize={16} fontWeight={500}>
                   <Trans>&nbsp;&nbsp;&nbsp;&nbsp;APR</Trans>
                 </Text>

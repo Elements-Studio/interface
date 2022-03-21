@@ -67,9 +67,10 @@ export default function Farm({ history }: RouteComponentProps) {
   const darkMode = useIsDarkMode();
 
   const lpTokenScalingFactor = 1000000000;
+  const starScalingFactor = 1000000000;
 
   const { data, error } = useSWR(
-    `https://swap-api.starcoin.org/${network}/v1/lpTokenFarms`,
+    `https://swap-api.starswap.xyz/${network}/v1/lpTokenFarms`,
     fetcher
   );
 
@@ -210,7 +211,7 @@ export default function Farm({ history }: RouteComponentProps) {
                   </TYPE.black>
                 </RowFixed>
               </FarmRow>
-              <FarmRow style={{ marginTop: '10px', marginBottom: '20px' }}>
+              <FarmRow style={{ marginTop: '10px', marginBottom: '10px' }}>
                 <RowFixed>
                   <TYPE.black fontWeight={400} fontSize={14}>
                     <Trans>Harvest Token</Trans>
@@ -219,6 +220,18 @@ export default function Farm({ history }: RouteComponentProps) {
                 <RowFixed>
                   <TYPE.black fontSize={14}>
                     {item.rewardTokenId}
+                  </TYPE.black>
+                </RowFixed>
+              </FarmRow>
+              <FarmRow style={{ marginTop: '10px', marginBottom: '20px' }}>
+                <RowFixed>
+                  <TYPE.black fontWeight={400} fontSize={14}>
+                    <Trans>Daily Reward</Trans>
+                  </TYPE.black>
+                </RowFixed>
+                <RowFixed>
+                  <TYPE.black fontSize={14}>
+                    {Number(item.dailyReward / starScalingFactor) || 0}
                   </TYPE.black>
                 </RowFixed>
               </FarmRow>
@@ -244,12 +257,12 @@ export default function Farm({ history }: RouteComponentProps) {
                   </Text>
                   <QuestionHelper
                     text={
-                      <Trans>The estimated annualized percentage yield of rewards.</Trans>
+                      <Trans>The estimated annualized percentage yield of rewards</Trans>
                     }
                   />
                 </RowFixed>
               </FixedHeightRow>
-              <FixedHeightRow>
+              <FixedHeightRow marginBottom={16}>
                 <Text fontSize={16} fontWeight={500}>
                   <Trans>Multiplier</Trans>
                 </Text>
