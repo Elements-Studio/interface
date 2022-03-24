@@ -172,6 +172,17 @@ export default function Farm({ history }: RouteComponentProps) {
   ]
   */
 
+  const farmAPRTips = () =>{
+    return (
+    <>
+    <Trans>The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.</Trans><br/><br/>
+    <Trans>For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.</Trans><br /><br />
+    <Trans>This amount is already included in all APR calculations for the farm.</Trans>
+    <br/>
+    </>
+    )
+  }
+
   return (
     <>
       <FarmTitle />
@@ -271,11 +282,7 @@ export default function Farm({ history }: RouteComponentProps) {
                     { item.rewardMultiplier || 0 }x
                   </Text>
                   <QuestionHelper
-                    text={
-                      <Trans>The Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.<br /><br />
-                      For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.<br /><br />
-                      This amount is already included in all APR calculations for the farm.</Trans>
-                    }
+                    text={farmAPRTips()}
                   />
                 </RowFixed>
               </FixedHeightRow>

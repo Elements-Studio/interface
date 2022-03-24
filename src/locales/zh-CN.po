@@ -976,6 +976,12 @@ msgstr "质押 LP Token 以赚取 STAR"
 #~ msgstr "预计年化收益率APR = (池子每秒释放量 * 池子倍率 * 365天 * 24小时 * 3600秒) / 池子TVL"
 #~ msgid "Daily Reward"
 #~ msgstr "单日奖励"
+#~ msgid "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."
+#~ msgstr "阶梯倍率代表每个农场从每个区块产生的所有STAR中所占的比例。"
+#~ msgid "For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block."
+#~ msgstr "比如，1倍率的农场每个区块获得1 STAR，40倍率的农场每个区块获得40 STAR。"
+#~ msgid "This amount is already included in all APR calculations for the farm."
+#~ msgstr "农场中所有APR的计算中已经包含该数量。"
 
 #: src/pages/Stake/index.tsx
 #~ msgid "Token Address"
@@ -990,6 +996,10 @@ msgstr "质押 LP Token 以赚取 STAR"
 #~ msgstr "质押池创建时间"
 #~ msgid "Pool Updated"
 #~ msgstr "质押池更新时间"
+#~ msgid "The estimated annualized percentage yield of rewards."
+#~ msgstr "奖励的预计年化收益率"
+#~ msgid "Days"
+#~ msgstr "天"
 
 #: src/pages/Stake/TokenStake.tsx
 #~ msgid "STAR Balance"

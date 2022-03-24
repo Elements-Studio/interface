@@ -169,11 +169,11 @@ export default function Farm({ history }: RouteComponentProps) {
     return (
     <>
     <Trans>The estimated annualized percentage yield of rewards.</Trans><br/><br/>
-    <Trans>7 Days</Trans>(2x) = { base ? (base * 2).toFixed(4) : '0'}%<br/>
-    <Trans>14 Days</Trans>(3x) = { base ? (base * 3).toFixed(4) : '0'}%<br/>
-    <Trans>30 Days</Trans>(4x) = { base ? (base * 4).toFixed(4) : '0'}%<br/>
-    <Trans>60 Days</Trans>(6x) = { base ? (base * 6).toFixed(4) : '0'}%<br/>
-    <Trans>90 Days</Trans>(8x) = { base ? (base * 8).toFixed(4) : '0'}%
+    7<Trans>Days</Trans>(2x) = { base ? (base * 2).toFixed(4) : '0'}%<br/>
+    14<Trans>Days</Trans>(3x) = { base ? (base * 3).toFixed(4) : '0'}%<br/>
+    30<Trans>Days</Trans>(4x) = { base ? (base * 4).toFixed(4) : '0'}%<br/>
+    60<Trans>Days</Trans>(6x) = { base ? (base * 6).toFixed(4) : '0'}%<br/>
+    90<Trans>Days</Trans>(8x) = { base ? (base * 8).toFixed(4) : '0'}%
     <br/>
     <br/>
     <Trans>STAR Stake APR Formula</Trans>

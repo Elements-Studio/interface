@@ -1518,12 +1518,22 @@ msgstr "STAR Earned"
 #: src/pages/Stake/index.tsx
 msgid "STAR Stake APR Formula"
 msgstr "Pool APR = (Pool's Release per second  * Pool's Stepwise Multiplier * 365 days * 24 hours * 3600 seconds) / Pool TVL"
+msgid "The estimated annualized percentage yield of rewards."
+msgstr "The estimated annualized percentage yield of rewards."
+msgid "Days"
+msgstr " Days"
 
 #: src/pages/farm/index.tsx
 msgid "The estimated annualized percentage yield of rewards"
 msgstr "The estimated annualized percentage yield of rewards = (Pool's Release per second  * Pool's Multiplier * 365 days * 24 hours * 3600 seconds) / Pool TVL"
 msgid "Daily Reward"
 msgstr "Daily Reward"
+msgid "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."
+msgstr "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."
+msgid "For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block."
+msgstr "For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block."
+msgid "This amount is already included in all APR calculations for the farm."
+msgstr "This amount is already included in all APR calculations for the farm."
 
 #: src/components/SearchModal/CurrencySearch.tsx
 msgid "Search name or paste address"
