@@ -121,7 +121,7 @@ const InternalMenuItem = styled(Link)`
   }
 `
 
-const CODE_LINK = 'https://github.com/starcoinorg/starswap-interface'
+const CODE_LINK = 'https://github.com/Elements-Studio/'
 
 export default function Menu() {
   const { account } = useActiveWeb3React()
@@ -141,13 +141,7 @@ export default function Menu() {
 
       {open && (
         <MenuFlyout>
-          <MenuItem href="https://starcoin.org/">
-            <Info size={14} />
-            <div>
-              <Trans>About</Trans>
-            </div>
-          </MenuItem>
-          <MenuItem href="https://developer.starcoin.org/">
+          <MenuItem href="https://docs.starswap.xyz/">
             <BookOpen size={14} />
             <div>
               <Trans>Docs</Trans>
@@ -159,16 +153,22 @@ export default function Menu() {
               <Trans>Code</Trans>
             </div>
           </MenuItem>
+          <MenuItem href="https://t.me/StarswapEN">
+            <MessageCircle size={14} />
+            <div>
+              <Trans>Telegram</Trans>
+            </div>
+          </MenuItem>
+          <MenuItem href="https://twitter.com/StarswapEN">
+            <PieChart size={14} />
+            <div>
+              <Trans>Twitter</Trans>
+            </div>
+          </MenuItem>
           <MenuItem href="https://discord.com/invite/96tKt5exaE">
             <MessageCircle size={14} />
             <div>
               <Trans>Discord</Trans>
-            </div>
-          </MenuItem>
-          <MenuItem href="https://twitter.com/starcoinstc">
-            <PieChart size={14} />
-            <div>
-              <Trans>Twitter</Trans>
             </div>
           </MenuItem>
           {/*
