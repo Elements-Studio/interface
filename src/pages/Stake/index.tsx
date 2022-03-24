@@ -324,7 +324,14 @@ export default function Farm({ history }: RouteComponentProps) {
                   />
                 </RowFixed>
               </FixedHeightRow> */}
-              <ButtonFarm as={Link} to={(window.starcoin && account) ? `/stake/STAR` : '/stake'}>
+              <ButtonFarm as={Link}
+                to={(window.starcoin && account) ? `/stake/STAR` : '/stake'}
+                onClick={() => {
+                  if (!(window.starcoin && account)) {
+                    alert('Please Connect StarMask Wallet First! \n请先链接StarMask钱包');
+                  }
+                }}
+              >
                 <TYPE.main color={'#fff'}>
                   <Trans>Stake</Trans>
                 </TYPE.main>

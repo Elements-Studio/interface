@@ -286,7 +286,13 @@ export default function Farm({ history }: RouteComponentProps) {
                   />
                 </RowFixed>
               </FixedHeightRow>
-              <ButtonFarm as={Link} to={(window.starcoin && account)? `/farm/${item.liquidityTokenFarmId.liquidityTokenId.tokenXId}/${item.liquidityTokenFarmId.liquidityTokenId.tokenYId}` : `/farm`}>
+              <ButtonFarm as={Link}
+                to={(window.starcoin && account)? `/farm/${item.liquidityTokenFarmId.liquidityTokenId.tokenXId}/${item.liquidityTokenFarmId.liquidityTokenId.tokenYId}` : `/farm`}
+                onClick={() => {
+                  if (!(window.starcoin && account)) {
+                    alert('Please Connect StarMask Wallet First! \n请先链接StarMask钱包');
+                  }
+              }}>
                 <TYPE.main color={'#fff'}>
                   <Trans>Stake</Trans>
                 </TYPE.main>
