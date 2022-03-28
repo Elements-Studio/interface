@@ -23,13 +23,21 @@ export function SwitchLocaleLink() {
   const location = useLocation()
   const qs = useParsedQueryString()
 
-  if (browserLocale && (browserLocale !== DEFAULT_LOCALE || activeLocale !== DEFAULT_LOCALE)) {
+  // if (browserLocale && (browserLocale !== DEFAULT_LOCALE || activeLocale !== DEFAULT_LOCALE)) {
+  if (browserLocale) {
     let targetLocale: SupportedLocale
     if (activeLocale === browserLocale) {
       targetLocale = DEFAULT_LOCALE
     } else {
       targetLocale = browserLocale
     }
+
+    if (activeLocale === 'en-US') {
+      targetLocale = 'zh-CN'
+    } else {
+      targetLocale = 'en-US'
+    }
+
 
     const target = {
       ...location,
