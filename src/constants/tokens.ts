@@ -123,6 +123,13 @@ export const XUSDT: { [chainId: number]: Token } = {
 //   ),
 // }
 export const WEN: { [chainId: number]: Token } = {
+  [SupportedChainId.MAINNET]: new Token(
+    SupportedChainId.MAINNET,
+    '0xbf60b00855c92fe725296a436101c8c6::WEN::WEN',
+    9,
+    'WEN',
+    'Wen'
+  ),
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
     '0x88e2677b89841cd4ee7c15535798e1c8::WEN::WEN',
