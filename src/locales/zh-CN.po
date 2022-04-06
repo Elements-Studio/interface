@@ -839,6 +839,8 @@ msgstr "来源 (最多为)"
 #: src/pages/Farm/index.tsx
 msgid "Harvest"
 msgstr "收获"
+msgid "Boost APR"
+msgstr "强化版收益率"
 
 #: src/pages/Pool/index.tsx
 msgid "Hide"
@@ -992,6 +994,8 @@ msgstr "质押 LP Token 以赚取 STAR"
 #: src/pages/farm/index.tsx
 #~ msgid "The estimated annualized percentage yield of rewards"
 #~ msgstr "预计年化收益率APR = (池子每秒释放量 * 池子倍率 * 365天 * 24小时 * 3600秒) / 池子TVL"
+#~ msgid "The boosted estimated annualized percentage yield of rewards"
+#~ msgstr "强化版预计年化收益率APR = [1, 2.5] * (池子每秒释放量 * 池子倍率 * 365天 * 24小时 * 3600秒) / 池子TVL"
 #~ msgid "Daily Reward"
 #~ msgstr "单日奖励"
 #~ msgid "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."

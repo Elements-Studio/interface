@@ -1526,6 +1526,8 @@ msgstr " Days"
 #: src/pages/farm/index.tsx
 msgid "The estimated annualized percentage yield of rewards"
 msgstr "The estimated annualized percentage yield of rewards = (Pool's Release per second  * Pool's Multiplier * 365 days * 24 hours * 3600 seconds) / Pool TVL"
+msgid "The boosted estimated annualized percentage yield of rewards"
+msgstr "The boosted estimated annualized percentage yield of rewards = [1, 2.5] * (Pool's Release per second  * Pool's Multiplier * 365 days * 24 hours * 3600 seconds) / Pool TVL"
 msgid "Daily Reward"
 msgstr "Daily Reward"
 msgid "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."
@@ -1737,6 +1739,8 @@ msgstr "TBD Earned"
 #: src/pages/Stake/index.tsx
 msgid "TVL in USDT"
 msgstr "TVL in USDT"
+msgid "Boost APR"
+msgstr "Boost APR"
 
 #: src/components/Popups/ClaimPopup.tsx
 msgid "Thanks for being part of the Uniswap community <0/>"

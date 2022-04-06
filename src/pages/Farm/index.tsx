@@ -273,6 +273,21 @@ export default function Farm({ history }: RouteComponentProps) {
                   />
                 </RowFixed>
               </FixedHeightRow>
+              <FixedHeightRow>
+                <Text fontSize={16} fontWeight={500}>
+                  <Trans>Boost APR</Trans>
+                </Text>
+                <RowFixed>
+                  <Text fontSize={16} fontWeight={500}>
+                    {(item.estimatedApy).toFixed(2)}% ~ {(item.estimatedApy * 2.5).toFixed(2)}%
+                  </Text>
+                  <QuestionHelper
+                    text={
+                      <Trans>The boosted estimated annualized percentage yield of rewards</Trans>
+                    }
+                  />
+                </RowFixed>
+              </FixedHeightRow>
               <FixedHeightRow marginBottom={16}>
                 <Text fontSize={16} fontWeight={500}>
                   <Trans>Multiplier</Trans>
