@@ -28,8 +28,12 @@ import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import { useLookupTBDGain, useUserStaked } from 'hooks/useTokenSwapFarmScript'
 import { useUserLiquidity } from 'hooks/useTokenSwapRouter'
 import useSWR from 'swr'
+import axios from 'axios'
 import { useIsDarkMode } from '../../state/user/hooks'
+import getCurrentNetwork from '../../utils/getCurrentNetwork'
 
+
+const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
 const Container = styled.div`
   width: auto;
@@ -51,6 +55,13 @@ const StyledEthereumLogo = styled.img<{ size: string }>`
   width: ${({ size }) => size};
   height: ${({ size }) => size};
   border-radius: 4px;
+`
+
+const FarmRow = styled(RowBetween)`
+  background: ${({ theme }) => theme.bg7};
+  line-height: 20px;
+  border-radius: 8px;
+  padding: 6px 16px;
 `
 
 const StyledGetLink = styled.a`
@@ -104,9 +115,20 @@ export default function FarmStake({
     y = XUSDT[(chainId ? chainId : 1)].address;
   }
 
+  const network = getCurrentNetwork(chainId)
+
+  const { data: lpStakingData, error: errorLP } = useSWR(
+    `https://swap-api.starswap.xyz/${network}/v1/getAccountFarmStakeInfo?tokenXId=${tokenX}&tokenYId=${tokenY}&accountAddress=${address}`,
+    fetcher
+  );
+
+  console.log({lpStakingData})
+
   // const lpTokenScalingFactor = 1000000000000000000;
   const lpTokenScalingFactor = 1000000000;
   const tbdScalingFactor = 1000000000;
+  const starScalingFactor = 1000000000;
+  const stcScalingFactor = 1000000000;
 
   const tbdGain:any = useLookupTBDGain(address, x, y)?.data || 0;
   const userLiquidity:any = useUserLiquidity(address, x, y)?.data || 0;
@@ -121,6 +143,7 @@ export default function FarmStake({
       hasStake = true;
     }
   }
+
 
   const provider = useStarcoinProvider()
 
@@ -214,6 +237,120 @@ export default function FarmStake({
                     </RowBetween>
                   )
                 )}
+            </AutoColumn>
+          </FarmCard>
+        </AutoRow>
+        <AutoRow justify="center">
+          <FarmCard>
+            <AutoColumn justify="center">
+              {/*
+              <RowFixed>
+                <StyledEthereumLogo src={StarswapBlueLogo} size={'48px'} />
+              </RowFixed>
+              */}
+              <TYPE.body fontSize={24} style={{ marginTop: '0px' }}>
+                <Trans>LP Token Staking Status</Trans>
+              </TYPE.body>
+              { lpStakingData ? (
+              <>
+              <FarmRow style={{ marginTop: '20px' }}>
+                <RowFixed>
+                  <TYPE.black fontWeight={400} fontSize={14}>
+                    <Trans>Staked Liquidity</Trans>
+                  </TYPE.black>
+                </RowFixed>
+                <RowFixed>
+                  <TYPE.black fontSize={14}>
+                    {Number(lpStakingData.stakedLiquidity / lpTokenScalingFactor)}
+                  </TYPE.black>
+                </RowFixed>
+              </FarmRow>
+              <FarmRow style={{ marginTop: '10px' }}>
+                <RowFixed>
+                  <TYPE.black fontWeight={400} fontSize={14}>
+                    <Trans>Farm Total Liquidity</Trans>
+                  </TYPE.black>
+                </RowFixed>
+                <RowFixed>
+                  <TYPE.black fontSize={14}>
+                    {Number(lpStakingData.farmTotalLiquidity / lpTokenScalingFactor)}
+                  </TYPE.black>
+                </RowFixed>
+              </FarmRow>
+              <FarmRow style={{ marginTop: '10px' }}>
+                <RowFixed>
+                  <TYPE.black fontWeight={400} fontSize={14}>
+                    <Trans>Percentage</Trans>
+                  </TYPE.black>
+                </RowFixed>
+                <RowFixed>
+                  <TYPE.black fontSize={14}>
+                    {Number(lpStakingData.sharePercentage)}
+                  </TYPE.black>
+                </RowFixed>
+              </FarmRow>
+              <FarmRow style={{ marginTop: '10px' }}>
+                <RowFixed>
+                  <TYPE.black fontWeight={400} fontSize={14}>
+                    <Trans>Staked Amount In USD</Trans>
+                  </TYPE.black>
+                </RowFixed>
+                <RowFixed>
+                  <TYPE.black fontSize={14}>
+                    {Number(lpStakingData.stakedAmountInUsd)}
+                  </TYPE.black>
+                </RowFixed>
+              </FarmRow>
+              <FarmRow style={{ marginTop: '10px' }}>
+                <RowFixed>
+                  <TYPE.black fontWeight={400} fontSize={14}>
+                    <Trans>Token X</Trans>
+                  </TYPE.black>
+                </RowFixed>
+                <RowFixed>
+                  <TYPE.black fontSize={14}>
+                    {lpStakingData.tokenXAmount.tokenId}
+                  </TYPE.black>
+                </RowFixed>
+              </FarmRow>
+              <FarmRow style={{ marginTop: '10px' }}>
+                <RowFixed>
+                  <TYPE.black fontWeight={400} fontSize={14}>
+                    <Trans>Token X Amount</Trans>
+                  </TYPE.black>
+                </RowFixed>
+                <RowFixed>
+                  <TYPE.black fontSize={14}>
+                    {Number(lpStakingData.tokenXAmount.amount / starScalingFactor)}
+                  </TYPE.black>
+                </RowFixed>
+              </FarmRow>
+              <FarmRow style={{ marginTop: '10px' }}>
+                <RowFixed>
+                  <TYPE.black fontWeight={400} fontSize={14}>
+                    <Trans>Token Y</Trans>
+                  </TYPE.black>
+                </RowFixed>
+                <RowFixed>
+                  <TYPE.black fontSize={14}>
+                    {lpStakingData.tokenYAmount.tokenId}
+                  </TYPE.black>
+                </RowFixed>
+              </FarmRow>
+              <FarmRow style={{ marginTop: '10px' }}>
+                <RowFixed>
+                  <TYPE.black fontWeight={400} fontSize={14}>
+                    <Trans>Token Y Amount</Trans>
+                  </TYPE.black>
+                </RowFixed>
+                <RowFixed>
+                  <TYPE.black fontSize={14}>
+                    {Number(lpStakingData.tokenYAmount.amount / stcScalingFactor)}
+                  </TYPE.black>
+                </RowFixed>
+              </FarmRow>
+              </>
+              ) : null }
             </AutoColumn>
           </FarmCard>
         </AutoRow>
