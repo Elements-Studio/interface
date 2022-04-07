@@ -897,6 +897,8 @@ msgstr "Get support on Discord"
 #: src/pages/Farm/FarmStake.tsx
 msgid "Harvest"
 msgstr "Harvest"
+msgid "Boost"
+msgstr "Boost"
 
 #: src/components/farm/FarmHarvestDialog.tsx
 msgid "Harvest STAR"

@@ -1215,6 +1215,8 @@ msgstr "务必在详细了解此模式应用后才使用此模式操作。"
 #: src/pages/Farm/FarmStake.tsx
 msgid "Obtain"
 msgstr "获取"
+msgid "Boost"
+msgstr "增强收益"
 
 #: 
 #~ msgid "Off"
