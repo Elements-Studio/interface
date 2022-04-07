@@ -13,11 +13,13 @@ import FarmCard from '../../components/farm/FarmCard'
 import FarmStakeDialog from '../../components/farm/FarmStakeDialog'
 import FarmHarvestDialog from '../../components/farm/FarmHarvestDialog'
 import FarmUnstakeDialog from '../../components/farm/FarmUnstakeDialog'
+import FarmBoostDialog from '../../components/farm/FarmBoostDialog'
 import GetAllStakeDialog from '../../components/farm/GetAllStakeDialog'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import STCLogo from '../../assets/images/stc.png'
 import STCBlueLogo from '../../assets/images/stc_logo_blue.png'
 import StarswapBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
+import BoostFlame from '../../assets/svg/boost_flame.png'
 import FAILogo from '../../assets/images/fai_token_logo.png'
 import FAIBlueLogo from '../../assets/images/fai_token_logo_blue.png'
 import PortisIcon from '../../assets/images/portisIcon.png'
@@ -122,7 +124,7 @@ export default function FarmStake({
     fetcher
   );
 
-  console.log({lpStakingData})
+  // console.log({lpStakingData})
 
   // const lpTokenScalingFactor = 1000000000000000000;
   const lpTokenScalingFactor = 1000000000;
@@ -151,6 +153,7 @@ export default function FarmStake({
   const [ harvestDialogOpen, setHarvestDialogOpen ] = useState(false)
   const [ allStakeDialogOpen, setAllStakeDialogOpen ] = useState(false)
   const [ unstakeDialogOpen, setUnstakeDialogOpen ] = useState(false)
+  const [ boostDialogOpen, setBoostDialogOpen ] = useState(false)
 
   const handleDismissStake = useCallback(() => {
     setStakeDialogOpen(false)
@@ -167,6 +170,10 @@ export default function FarmStake({
   const handleDismissUnstake = useCallback(() => {
     setUnstakeDialogOpen(false)
   }, [setUnstakeDialogOpen])
+
+  const handleDismissBoost = useCallback(() => {
+    setBoostDialogOpen(false)
+  }, [setBoostDialogOpen])
 
   return (
     <>
@@ -240,7 +247,36 @@ export default function FarmStake({
             </AutoColumn>
           </FarmCard>
         </AutoRow>
-        <AutoRow justify="center">
+        <AutoRow justify="center" style={{alignItems: 'start'}}>
+          <FarmCard>
+            <AutoColumn justify="center">
+              <RowFixed>
+                <StyledEthereumLogo src={BoostFlame} size={'60px'} style={{width: '45px'}} />
+              </RowFixed>
+              <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>
+                <Trans>Boost Factor</Trans>
+              </TYPE.body>
+              <TYPE.body color={'#FE7F8D'} fontSize={16} style={{ marginTop: '16px' }}>
+                {
+                  hasAccount ? (
+                    <BalanceText style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                      {tbdGain / tbdScalingFactor}<Trans>x</Trans>
+                    </BalanceText>
+                  ) : null
+                }
+              </TYPE.body>
+              <ButtonFarm style={{ marginTop: '16px' }}
+                disabled={!hasAccount || !(tbdGain > 0)}
+                onClick={() => { setBoostDialogOpen(true) }} 
+              >
+                <TYPE.main color={'#FE7F8D'}>
+                  <BalanceText color={'#fff'} style={{ flexShrink: 0}} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                    <Trans>Boost</Trans>
+                  </BalanceText>
+                </TYPE.main>
+              </ButtonFarm>
+            </AutoColumn>
+          </FarmCard>
           <FarmCard>
             <AutoColumn justify="center">
               {/*
@@ -386,6 +422,14 @@ export default function FarmStake({
         tokenY={y}
         isOpen={unstakeDialogOpen}
         onDismiss={handleDismissUnstake}
+      />
+      <FarmBoostDialog
+        userStaked={userStaked}
+        lpTokenScalingFactor={lpTokenScalingFactor}
+        tokenX={x}
+        tokenY={y}
+        isOpen={boostDialogOpen}
+        onDismiss={handleDismissBoost}
       />
       {/*
       <GetAllStakeDialog
