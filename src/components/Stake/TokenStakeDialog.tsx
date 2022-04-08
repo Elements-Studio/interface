@@ -224,6 +224,14 @@ export default function FarmStakeDialog({
             </RadioGroup>
           </FormControl>
         </RadioContainer>
+        <RadioContainer>
+          <FormControl component="fieldset">
+            <FormLabel component="legend"><Trans>veSTAR Reward</Trans></FormLabel>
+            <TYPE.black fontWeight={500} fontSize={24} style={{ marginTop: '10px', lineHeight: '20px', marginBottom: '12px'}}>
+              { (stakeNumber && duration) ? (stakeNumber * (duration / 86400) / 365).toFixed(4) : 0}
+            </TYPE.black>
+          </FormControl>
+        </RadioContainer>
         {loading && (
           <CircularProgress
             size={64}
@@ -242,6 +250,7 @@ export default function FarmStakeDialog({
           <ButtonFarm onClick={() => {
             onClickStakeConfirm();
             setLoading(true);
+            alert(`You will receive ${(stakeNumber * (duration / 86400) / 365).toFixed(4)} veSTAR when redeemed \n 赎回时您将会获得${(stakeNumber * (duration / 86400) / 365).toFixed(4)}个 veSTAR`);
             setTimeout(onDismiss, 30000);
             setTimeout("window.location.reload()", 60000);
           }}>
