@@ -1049,6 +1049,13 @@ msgstr "质押 LP Token 以赚取 STAR"
 #~ msgid "Days"
 #~ msgstr "天"
 
+#: src/components/Stake/TokenStakeDialog.tsx
+#: src/pages/Stake/TokenStake.tsx
+msgid "STAR Balance"
+msgstr "STAR 余额"
+msgid "veSTAR Reward"
+msgstr "veSTAR 奖励"
+
 #: src/components/farm/FarmStakeDialog.tsx
 #~ msgid "Note: Stake operation will harvest your previously earned STAR automatically."
 #~ msgstr "注意：质押(Stake)操作同时会自动收获之前质押所得的STAR奖励"

@@ -1511,6 +1511,8 @@ msgstr "STAR"
 #: src/pages/Stake/TokenStake.tsx
 msgid "STAR Balance"
 msgstr "STAR Balance"
+msgid "veSTAR Reward"
+msgstr "veSTAR Reward"
 
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/pages/Farm/FarmStake.tsx
