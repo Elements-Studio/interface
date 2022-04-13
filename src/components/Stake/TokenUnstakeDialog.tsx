@@ -20,50 +20,14 @@ import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
 
 const Container = styled.div`
-  border-radius: 20px;
-  border: 1px solid ${({ theme }) => theme.inputBorder};
   width: 100%;
-  height: 88px;
-  margin-top: 16px;
-  display: flex;
-  justify-content: space-between;
-`
-
-const Input = styled.input`
-  color: ${({ theme }) => theme.text1};
-  width: 0;
-  position: relative;
-  font-weight: 500;
-  outline: none;
-  border: none;
-  flex: 1 1 auto;
-  background-color: ${({ theme }) => theme.bg1};
-  font-size: 24px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0px;
-  -webkit-appearance: textfield;
-  text-align: right;
-
-  ::-webkit-search-decoration {
-    -webkit-appearance: none;
-  }
-
-  [type='number'] {
-    -moz-appearance: textfield;
-  }
-
-  ::-webkit-outer-spin-button,
-  ::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-  }
-
-  ::placeholder {
-    color: ${({ theme }) => theme.text4};
+  button:disabled {
+    background: #EDEEF2!important;
+    div {
+      color: #565A69!important;
+    }
   }
 `
-
 interface FarmUnstakeDialogProps {
   token: any,
   unstakeId: any,
@@ -79,7 +43,6 @@ export default function FarmUnstakeDialog({
   onDismiss,
   isOpen,
 }: FarmUnstakeDialogProps) {
-
   const starcoinProvider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
 
@@ -87,34 +50,12 @@ export default function FarmUnstakeDialog({
 
   const [loading, setLoading] = useState(false);
   
-  /*
-  const [unstakeNumber, setUnstakeNumber] = useState<any>('')
-
-  function parseUnstakeNumber(value: string) {
-    setUnstakeNumber(value)
-  }
-  */
-
   async function onClickUnstakeConfirm() {
     try {
       const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapSyrupScript::unstake`;
       const strTypeArgs = [STAR[(chainId ? chainId : 1)].address];
       const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
 
-      // const unstakeAmount = new BigNumber(unstakeNumber).times('1000000000'); // unstakeAmount * 1e9
-
-      /*
-      const unstakeAmountSCSHex = (function () {
-        const se = new bcs.BcsSerializer();
-        se.serializeU128(new BigNumber(unstakeAmount).toNumber());
-        return hexlify(se.getBytes());
-      })();
-      const args = [
-        arrayify(unstakeAmountSCSHex)
-      ];
-      */
-     // console.log({unstakeId})
-     // console.log({token})
       const unstakeIdSCSHex = (function () {
         const se = new bcs.BcsSerializer();
         se.serializeU64(parseInt(unstakeId));
@@ -143,7 +84,6 @@ export default function FarmUnstakeDialog({
     }
     return false;
   }
- 
   return (
     <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={ theme.bgCard }>
       <ColumnCenter style={{ padding: '27px 32px'}}>
@@ -152,30 +92,6 @@ export default function FarmUnstakeDialog({
             <Trans>Unstake STAR</Trans>
           </TYPE.black>
         </AutoRow>
-        {/*
-        <RowBetween style={{ marginTop: '8px' }}>
-          <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
-            <Trans>Staked STAR</Trans>：{userStaked / stakeTokenScalingFactor}
-          </TYPE.black>
-        </RowBetween>
-        */}
-        {/*
-        <Container>
-          <Input
-            placeholder={'0.0'}
-            value={unstakeNumber}
-            onChange={(e) => parseUnstakeNumber(e.target.value)}
-            style={{ height: '28px', background: 'transparent', textAlign: 'left', marginTop: '28px', marginLeft: '18px' }}
-          />
-          <ColumnRight style={{ marginRight: '25px', textAlign: 'right' }}>
-            <ButtonText style={{ marginTop: '28px', lineHeight: '28px' }} onClick={() => { setUnstakeNumber((userStaked / stakeTokenScalingFactor).toString()) }}>
-              <TYPE.black fontWeight={500} fontSize={20} color={'#FD748D'} style={{ lineHeight: '28px' }}>
-                <Trans>MAX</Trans>
-              </TYPE.black>
-            </ButtonText>
-          </ColumnRight>
-        </Container>
-        */}
         {loading && (
           <CircularProgress
             size={64}
@@ -185,23 +101,29 @@ export default function FarmUnstakeDialog({
             }}
           />
         )}
-        <RowBetween style={{ marginTop: '24px' }}>
-          <ButtonBorder marginRight={22} onClick={onDismiss} >
-            <TYPE.black fontSize={20}>
-              <Trans>Cancel</Trans>
-            </TYPE.black>
-          </ButtonBorder>
-          <ButtonFarm onClick={() => {
-            onClickUnstakeConfirm();
-            setLoading(true);
-            setTimeout(onDismiss, 30000);
-            setTimeout("window.location.reload()", 60000);
-          }}>
-            <TYPE.main color={'#fff'}>
-              <Trans>Confirm</Trans>
-            </TYPE.main>
-          </ButtonFarm>
-        </RowBetween>
+        <Container>
+          <RowBetween style={{ marginTop: '24px' }}>
+            <ButtonBorder marginRight={22} onClick={()=>{
+              setLoading(false);
+              onDismiss();
+              }} >
+              <TYPE.black fontSize={20}>
+                <Trans>Cancel</Trans>
+              </TYPE.black>
+            </ButtonBorder>
+            <ButtonFarm id='sss' disabled={loading} onClick={() => {
+              console.log({loading})
+              onClickUnstakeConfirm();
+              setLoading(true);
+              setTimeout(onDismiss, 30000);
+              setTimeout("window.location.reload()", 60000);
+            }}>
+              <TYPE.main color={'#fff'}>
+                <Trans>Confirm</Trans>
+              </TYPE.main>
+            </ButtonFarm>
+          </RowBetween>
+        </Container>
       </ColumnCenter>
     </Modal>
   )

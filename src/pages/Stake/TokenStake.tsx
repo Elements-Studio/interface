@@ -141,10 +141,8 @@ export default function FarmStake({
     setUnstakeDialogOpen(false)
   }, [setUnstakeDialogOpen])
 
-  function handleUnstakeId(e:any) {
-    // console.log(e.target.id);
-    // console.log(e.currentTarget.id);
-    setUnstakeId(e.target.id);
+  function handleUnstakeId(id:any) {
+    setUnstakeId(id);
   };
 
   return (
@@ -226,7 +224,7 @@ export default function FarmStake({
                             </TYPE.black>
                           </ButtonBorder>
                           */}
-                          <ButtonFarm id={item.id} onClick={(e) => { handleUnstakeId(e); console.log('click'); setUnstakeDialogOpen(true);  }} disabled={item.endTime > (Date.now() / 1000)}>
+                          <ButtonFarm id={item.id} onClick={() => { handleUnstakeId(item.id); console.log('click', item.id); setUnstakeDialogOpen(true);  }} disabled={item.endTime > (Date.now() / 1000)}>
                             <TYPE.main color={'#fff'}>
                               { (item.endTime > (Date.now() / 1000)) ? 
                                 <Trans>Wait</Trans> : <Trans>Unstake</Trans>
