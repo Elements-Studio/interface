@@ -108,7 +108,7 @@ export default function FarmStakeDialog({
   const theme = useContext(ThemeContext)
   
   const [stakeNumber, setStakeNumber] = useState<any>('')
-  const [duration, setDuration] = useState<any>('');
+  const [duration, setDuration] = useState<any>(604800);
   const [loading, setLoading] = useState(false);
 
   const { data: pool, error } = useSWR(
@@ -122,6 +122,12 @@ export default function FarmStakeDialog({
   if (!pool) return null;
   const poolList = pool ?  pool.filter((item:any)=>item.description==='STAR') : [];
 
+  const onCancle = () =>{
+    setStakeNumber(0);
+    setDuration(604800);
+    onDismiss();
+
+  }
   const handleDurationChange = (event:any) => {
     setDuration(event.target.value);
     // console.log({duration})
@@ -242,7 +248,7 @@ export default function FarmStakeDialog({
           />
         )}
         <RowBetween style={{ marginTop: '24px' }}>
-          <ButtonBorder marginRight={22} onClick={onDismiss} >
+          <ButtonBorder marginRight={22} onClick={onCancle} >
             <TYPE.black fontSize={20}>
               <Trans>Cancel</Trans>
             </TYPE.black>
