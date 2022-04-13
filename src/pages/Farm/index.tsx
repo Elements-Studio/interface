@@ -218,7 +218,7 @@ export default function Farm({ history }: RouteComponentProps) {
                 </RowFixed>
                 <RowFixed>
                   <TYPE.black fontSize={14}>
-                    {Number(item.tvlInUsd)}
+                    {Number(item.tvlInUsd).toFixed(2)}
                   </TYPE.black>
                 </RowFixed>
               </FarmRow>
@@ -264,7 +264,7 @@ export default function Farm({ history }: RouteComponentProps) {
                 </Text>
                 <RowFixed>
                   <Text fontSize={16} fontWeight={500}>
-                    {item.estimatedApy}%
+                    {item.estimatedApy.toFixed(2)}%
                   </Text>
                   <QuestionHelper
                     text={

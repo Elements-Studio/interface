@@ -218,7 +218,7 @@ export default function Farm({ history }: RouteComponentProps) {
                 </RowFixed>
                 <RowFixed>
                   <TYPE.black fontSize={14}>
-                    {item.tvlInUsd || 0}
+                    {item.tvlInUsd.toFixed(2) || 0}
                   </TYPE.black>
                 </RowFixed>
               </FarmRow>
@@ -230,7 +230,7 @@ export default function Farm({ history }: RouteComponentProps) {
                 </RowFixed>
                 <RowFixed>
                   <TYPE.black fontSize={14}>
-                    {Number(item.totalStakeAmount / starScalingFactor) || 0}
+                    {Number(item.totalStakeAmount / starScalingFactor).toFixed(2) || 0}
                   </TYPE.black>
                 </RowFixed>
               </FarmRow>

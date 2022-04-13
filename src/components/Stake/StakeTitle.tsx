@@ -41,7 +41,7 @@ export default function FarmTitle() {
     // if (!data) return "Loading...";
     // if (error) return null;
     // if (!data) return null;
-    const tvlUSD = data || 0;
+    const tvlUSD = data.toFixed(2) || 0;
 
     return (
       <>
