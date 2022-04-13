@@ -85,20 +85,13 @@ export default function FarmUnstakeDialog({
 
   const theme = useContext(ThemeContext)
   
-  const [unstakeNumber, setUnstakeNumber] = useState<any>('')
-
-  function parseUnstakeNumber(value: string) {
-    setUnstakeNumber(value)
-  }
-
   async function onClickUnstakeConfirm() {
     try {
       const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapFarmScript::unstake`;
       const strTypeArgs = [tokenX, tokenY];
       const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
 
-      const unstakeAmount = new BigNumber(unstakeNumber).times('1000000000'); // unstakeAmount * 1e9
-
+      const unstakeAmount = new BigNumber(userStaked);
       const unstakeAmountSCSHex = (function () {
         const se = new bcs.BcsSerializer();
         se.serializeU128(new BigNumber(unstakeAmount).toNumber());
@@ -138,24 +131,9 @@ export default function FarmUnstakeDialog({
         </AutoRow>
         <RowBetween style={{ marginTop: '8px' }}>
           <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
-            <Trans>Staked LP Token</Trans>：{userStaked / lpTokenScalingFactor}
+            <Trans>Staked LP Token</Trans>：{userStaked / lpTokenScalingFactor} {tokenX.split('::')[2]}/{tokenY.split('::')[2]}
           </TYPE.black>
         </RowBetween>
-        <Container>
-          <Input
-            placeholder={'0.0'}
-            value={unstakeNumber}
-            onChange={(e) => parseUnstakeNumber(e.target.value)}
-            style={{ height: '28px', background: 'transparent', textAlign: 'left', marginTop: '28px', marginLeft: '18px' }}
-          />
-          <ColumnRight style={{ marginRight: '25px', textAlign: 'right' }}>
-            <ButtonText style={{ marginTop: '28px', lineHeight: '28px' }} onClick={() => { setUnstakeNumber((userStaked / lpTokenScalingFactor).toString()) }}>
-              <TYPE.black fontWeight={500} fontSize={20} color={'#FD748D'} style={{ lineHeight: '28px' }}>
-                <Trans>MAX</Trans>
-              </TYPE.black>
-            </ButtonText>
-          </ColumnRight>
-        </Container>
         <RowBetween style={{ marginTop: '24px' }}>
           <ButtonBorder marginRight={22} onClick={onDismiss} >
             <TYPE.black fontSize={20}>

@@ -191,7 +191,7 @@ export default function FarmStake({
                 {
                   hasAccount ? (
                     <BalanceText style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                      {tbdGain / tbdScalingFactor} <Trans>STAR</Trans>
+                      {tbdGain / tbdScalingFactor}
                     </BalanceText>
                   ) : null
                 }
