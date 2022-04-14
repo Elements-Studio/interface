@@ -65,7 +65,7 @@ const Input = styled.input`
 interface FarmUnstakeDialogProps {
   tokenX: any,
   tokenY: any,
-  userStaked: number,
+  veStarAmount: number,
   lpTokenScalingFactor: number,
   isOpen: boolean
   onDismiss: () => void
@@ -74,7 +74,7 @@ interface FarmUnstakeDialogProps {
 export default function FarmUnstakeDialog({
   tokenX,
   tokenY,
-  userStaked,
+  veStarAmount,
   lpTokenScalingFactor,
   onDismiss,
   isOpen,
@@ -87,18 +87,18 @@ export default function FarmUnstakeDialog({
   
   async function onClickUnstakeConfirm() {
     try {
-      const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapFarmScript::unstake`;
+      const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapFarmScript::boost`;
       const strTypeArgs = [tokenX, tokenY];
       const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
 
-      const unstakeAmount = new BigNumber(userStaked);
-      const unstakeAmountSCSHex = (function () {
+      const boostAmount = new BigNumber(veStarAmount);
+      const boostAmountSCSHex = (function () {
         const se = new bcs.BcsSerializer();
-        se.serializeU128(new BigNumber(unstakeAmount).toNumber());
+        se.serializeU128(new BigNumber(boostAmount).toNumber());
         return hexlify(se.getBytes());
       })();
       const args = [
-        arrayify(unstakeAmountSCSHex)
+        arrayify(boostAmountSCSHex)
       ];
 
       const scriptFunction = utils.tx.encodeScriptFunction(
@@ -131,7 +131,7 @@ export default function FarmUnstakeDialog({
         </AutoRow>
         <RowBetween style={{ marginTop: '8px' }}>
           <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
-            <Trans>Staked LP Token</Trans>：{userStaked / lpTokenScalingFactor} {tokenX.split('::')[2]}/{tokenY.split('::')[2]}
+            <Trans>VeStar:</Trans>：{veStarAmount / lpTokenScalingFactor}
           </TYPE.black>
         </RowBetween>
         <RowBetween style={{ marginTop: '24px' }}>

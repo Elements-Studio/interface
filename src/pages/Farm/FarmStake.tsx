@@ -119,6 +119,16 @@ export default function FarmStake({
 
   const network = getCurrentNetwork(chainId)
 
+  const { data: veStarAmount, error: errorVeStar } = useSWR(
+    `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmount?accountAddress=${address}`,
+    fetcher
+  );
+
+  const { data: boostFactor, error: errorBF } = useSWR(
+    `https://swap-api.starswap.xyz/${network}/v1/getAccountFarmBoostFactor?tokenXId=${tokenX}&tokenYId=${tokenY}&accountAddress=${address}`,
+    fetcher
+  );
+
   const { data: lpStakingData, error: errorLP } = useSWR(
     `https://swap-api.starswap.xyz/${network}/v1/getAccountFarmStakeInfo?tokenXId=${tokenX}&tokenYId=${tokenY}&accountAddress=${address}`,
     fetcher
@@ -260,7 +270,7 @@ export default function FarmStake({
                 {
                   hasAccount ? (
                     <BalanceText style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                      {tbdGain / tbdScalingFactor}<Trans>x</Trans>
+                      {boostFactor}<Trans>x</Trans>
                     </BalanceText>
                   ) : null
                 }
@@ -424,7 +434,7 @@ export default function FarmStake({
         onDismiss={handleDismissUnstake}
       />
       <FarmBoostDialog
-        userStaked={userStaked}
+        veStarAmount={veStarAmount}
         lpTokenScalingFactor={lpTokenScalingFactor}
         tokenX={x}
         tokenY={y}
