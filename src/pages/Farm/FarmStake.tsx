@@ -124,7 +124,7 @@ export default function FarmStake({
     fetcher
   );
 
-  const { data: boostFactor, error: errorBF } = useSWR(
+  const { data: boostFactorOrigin, error: errorBF } = useSWR(
     `https://swap-api.starswap.xyz/${network}/v1/getAccountFarmBoostFactor?tokenXId=${tokenX}&tokenYId=${tokenY}&accountAddress=${address}`,
     fetcher
   );
@@ -142,6 +142,8 @@ export default function FarmStake({
   const starScalingFactor = 1000000000;
   const stcScalingFactor = 1000000000;
 
+  // boostFactor stored in Move is mulitpied by 100, 1.05 => 105
+  const boostFactor = boostFactorOrigin? boostFactorOrigin/ 100 : 0;
   const tbdGain:any = useLookupTBDGain(address, x, y)?.data || 0;
   const userLiquidity:any = useUserLiquidity(address, x, y)?.data || 0;
   // const userStaked:any = useUserStaked(address, x, y)?.data || 0;
