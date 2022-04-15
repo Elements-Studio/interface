@@ -1,31 +1,22 @@
 import { Trans } from '@lingui/macro'
-import { useCallback, useContext, useState } from 'react'
-import styled, { ThemeContext } from 'styled-components'
-import { Link, RouteComponentProps } from 'react-router-dom'
+import { useCallback, useState } from 'react'
+import styled from 'styled-components'
+import { RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
-import Row, { AutoRow, RowFixed, RowBetween } from '../../components/Row'
+import { AutoRow, RowFixed, RowBetween } from '../../components/Row'
 import { TYPE } from '../../theme'
 import { ButtonFarm, ButtonBorder } from '../../components/Button'
-import { AutoColumn, ColumnCenter } from '../../components/Column'
+import { AutoColumn } from '../../components/Column'
 import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
 import FarmCard from '../../components/farm/FarmCard'
 import MyStakeListTitle from '../../components/Stake/MyStakeListTitle'
 import TokenStakeDialog from '../../components/Stake/TokenStakeDialog'
-// import FarmHarvestDialog from '../../components/Stake/TokenHarvestDialog'
 import TokenUnstakeDialog from '../../components/Stake/TokenUnstakeDialog'
-import GetAllStakeDialog from '../../components/farm/GetAllStakeDialog'
-import EthereumLogo from '../../assets/images/ethereum-logo.png'
-import STCLogo from '../../assets/images/stc.png'
-import STCBlueLogo from '../../assets/images/stc_logo_blue.png'
 import StarswapBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
-import PortisIcon from '../../assets/images/portisIcon.png'
-import ArbitrumLogo from '../../assets/svg/arbitrum_logo.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
-import { STC, STAR, XUSDT } from '../../constants/tokens'
-import { useSTCBalances, useTokenBalance } from 'state/wallet/hooks'
+import { STAR } from '../../constants/tokens'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
-import { useLookupTBDGain, useUserStaked, useUserStarStaked } from 'hooks/useTokenSwapFarmScript'
-import { useUserLiquidity } from 'hooks/useTokenSwapRouter'
+import { useUserStarStaked } from 'hooks/useTokenSwapFarmScript'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import useSWR from 'swr'
 import axios from 'axios';
@@ -66,24 +57,6 @@ const StyledEthereumLogo = styled.img<{ size: string }>`
   border-radius: 4px;
 `
 
-const StyledGetLink = styled.a`
-  text-decoration: underline;
-  cursor: pointer;
-  font-weight: 500;
-  color: #FB578C;
-  margin-top: 20px;
-  margin-right: 20px;
-
-  :hover {
-    text-decoration: underline;
-    opacity: 0.9;
-  }
-
-  :focus {
-    outline: none;
-    text-decoration: underline;
-  }
-`
 export default function FarmStake({
   match: {
     params: { token },
@@ -103,16 +76,13 @@ export default function FarmStake({
     address = account.toLowerCase();
   }
   const STAR_address = STAR[(chainId ? chainId : 1)].address
-  // const userSTCBalance = useSTCBalances(address ? [address] : [])?.[address ?? '']
 
-  // const lpTokenScalingFactor = 1000000000000000000;
   const starScalingFactor = 1000000000;
 
   const userStarStaked:any = useUserStarStaked(address, STAR_address)?.data || [];
   if (userStarStaked === [] || userStarStaked[0]?.length > 0) {
     hasStake = false;
   }
-
 
   const provider = useStarcoinProvider()
 
@@ -122,14 +92,13 @@ export default function FarmStake({
 
   let myStakeList = [];
 
-  const { data: veStarAmount, error: errorVeStar } = useSWR(
+  const { data: veStarAmount } = useSWR(
     `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmount?accountAddress=${address}`,
     fetcher
   );
   const veStarScalingFactor = 1000000000;
 
-  let { data, error } = useSWR(
-    // "http://a1277180fcb764735801852ac3de308f-21096515.ap-northeast-1.elb.amazonaws.com:80/v1/starswap/farmingTvlInUsd",
+  let { data } = useSWR(
     `https://swap-api.starswap.xyz/${network}/v1/syrupStakes?accountAddress=${address}&tokenId=${token}`,
     fetcher
   );
@@ -138,22 +107,12 @@ export default function FarmStake({
   // if (!data) return "Loading...";
 
   const [ stakeDialogOpen, setStakeDialogOpen ] = useState(false)
-  const [ harvestDialogOpen, setHarvestDialogOpen ] = useState(false)
-  const [ allStakeDialogOpen, setAllStakeDialogOpen ] = useState(false)
   const [ unstakeDialogOpen, setUnstakeDialogOpen ] = useState(false)
   const [ unstakeId, setUnstakeId ] = useState('')
 
   const handleDismissStake = useCallback(() => {
     setStakeDialogOpen(false)
   }, [setStakeDialogOpen])
-
-  const handleDismissHarvest = useCallback(() => {
-    setHarvestDialogOpen(false)
-  }, [setHarvestDialogOpen])
-
-  const handleDismissAllStake = useCallback(() => {
-    setAllStakeDialogOpen(false)
-  }, [setAllStakeDialogOpen])
 
   const handleDismissUnstake = useCallback(() => {
     setUnstakeDialogOpen(false)
@@ -208,9 +167,6 @@ export default function FarmStake({
                   <RowFixed>
                     <StyledEthereumLogo src={StarswapBlueLogo} style={{ marginRight: '1.25rem' }} size={'48px'} />
                   </RowFixed>
-                  {/*
-                  <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{tokenY}/{tokenX}</TYPE.body>
-                  */}
                   <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{token}</TYPE.body>
                   <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>ID: {item.id}</TYPE.body>
                   <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>{(parseInt(item.amount) / starScalingFactor).toString()}</TYPE.body>
@@ -233,18 +189,6 @@ export default function FarmStake({
                         </ButtonBorder>
                       ) : (
                         <RowBetween style={{ marginTop: '16px' }}>
-                          {/*
-                          <ButtonFarm onClick={() => { setStakeDialogOpen(true) }} disabled={!(userLiquidity > 0)}>
-                            <TYPE.main color={'#fff'}>
-                              <Trans>Stake</Trans>
-                            </TYPE.main>
-                          </ButtonFarm>
-                          <ButtonBorder onClick={() => { setUnstakeDialogOpen(true) }} disabled={!hasStake} marginLeft={16}>
-                            <TYPE.main fontSize={20}>
-                              <Trans>Unstake</Trans>
-                            </TYPE.black>
-                          </ButtonBorder>
-                          */}
                           <ButtonFarm id={item.id} onClick={() => { handleUnstakeId(item.id); console.log('click', item.id); setUnstakeDialogOpen(true);  }} disabled={item.endTime > (Date.now() / 1000)}>
                             <TYPE.main color={'#fff'}>
                               { (item.endTime > (Date.now() / 1000)) ? 
@@ -265,27 +209,8 @@ export default function FarmStake({
           </AutoRow>
         )
         }
-        {/*
-        <AutoRow justify="flex-end">
-          <StyledGetLink as={Link} to={`/add/v2/${tokenY}`}>
-            <TYPE.black fontWeight={500} fontSize={14} color={'#FB578C'} style={{ lineHeight: '20px' }}>
-              <Trans>Obtain</Trans> STC/BX_USDT LP Token
-            </TYPE.black>
-          </StyledGetLink>
-        </AutoRow>
-        */}
       </Container>
       <SwitchLocaleLink />
-      {/*
-      <FarmHarvestDialog
-        tbdEarned={tbdGain}
-        tbdScalingFactor={tbdScalingFactor}
-        tokenX={x}
-        tokenY={y}
-        isOpen={harvestDialogOpen}
-        onDismiss={handleDismissHarvest}
-      />
-      */}
       <TokenStakeDialog
         stakeTokenBalance={Number(starBalance) || 0}
         stakeTokenScalingFactor={starScalingFactor}
@@ -300,21 +225,6 @@ export default function FarmStake({
         isOpen={unstakeDialogOpen}
         onDismiss={handleDismissUnstake}
       />
-      {/*
-      <TokenUnstakeDialog
-        userStaked={userStaked}
-        stakeTokenScalingFactor={starScalingFactor}
-        token={x}
-        isOpen={unstakeDialogOpen}
-        onDismiss={handleDismissUnstake}
-      />
-      */}
-      {/*
-      <GetAllStakeDialog
-        isOpen={allStakeDialogOpen}
-        onDismiss={handleDismissAllStake}
-      />
-      */}
     </>
   )
 }
