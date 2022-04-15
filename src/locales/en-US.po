@@ -83,9 +83,9 @@ msgstr "0.25% fee"
 msgid "1% fee"
 msgstr "1% fee"
 
-#: src/pages/Stake/index.tsx
-msgid "14 Days"
-msgstr "14 Days"
+#: 
+#~ msgid "14 Days"
+#~ msgstr "14 Days"
 
 #: 
 #~ msgid "14 Days(3x) = {0}%"
@@ -95,9 +95,9 @@ msgstr "14 Days"
 msgid "25%"
 msgstr "25%"
 
-#: src/pages/Stake/index.tsx
-msgid "30 Days"
-msgstr "30 Days"
+#: 
+#~ msgid "30 Days"
+#~ msgstr "30 Days"
 
 #: 
 #~ msgid "30 Days(4x) = {0}%"
@@ -107,17 +107,17 @@ msgstr "30 Days"
 msgid "50%"
 msgstr "50%"
 
-#: src/pages/Stake/index.tsx
-msgid "60 Days"
-msgstr "60 Days"
+#: 
+#~ msgid "60 Days"
+#~ msgstr "60 Days"
 
 #: 
 #~ msgid "60 Days(6x) = {0}%"
 #~ msgstr "60 Days(6x) = {0}%"
 
-#: src/pages/Stake/index.tsx
-msgid "7 Days"
-msgstr "7 Days"
+#: 
+#~ msgid "7 Days"
+#~ msgstr "7 Days"
 
 #: 
 #~ msgid "7 Days(2x) = {0}%"
@@ -127,9 +127,9 @@ msgstr "7 Days"
 msgid "75%"
 msgstr "75%"
 
-#: src/pages/Stake/index.tsx
-msgid "90 Days"
-msgstr "90 Days"
+#: 
+#~ msgid "90 Days"
+#~ msgstr "90 Days"
 
 #: 
 #~ msgid "90 Days(8x) = {0}%"
@@ -185,9 +185,9 @@ msgstr "A minimum threshold of 0.25% of the total UNI supply is required to subm
 msgid "APR"
 msgstr "APR"
 
-#: src/components/Menu/index.tsx
-msgid "About"
-msgstr "About"
+#: 
+#~ msgid "About"
+#~ msgstr "About"
 
 #: src/components/swap/SwapModalHeader.tsx
 msgid "Accept"
@@ -388,6 +388,22 @@ msgstr "Best for stable pairs."
 msgid "Blocked address"
 msgstr "Blocked address"
 
+#: src/pages/Farm/FarmStake.tsx
+msgid "Boost"
+msgstr "Boost"
+
+#: src/pages/Farm/index.tsx
+msgid "Boost APR"
+msgstr "Boost APR"
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "Boost Factor"
+msgstr "Boost Factor"
+
+#: src/components/farm/FarmBoostDialog.tsx
+msgid "Boost My LP Staking"
+msgstr "Boost My LP Staking"
+
 #: src/components/PositionCard/index.tsx
 msgid "By adding liquidity you'll earn 0.25% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
 msgstr "By adding liquidity you'll earn 0.25% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
@@ -408,6 +424,7 @@ msgstr "By connecting a wallet, you agree to Starswap Labs’ <0>Terms of Servic
 #: src/components/Stake/TokenHarvestDialog.tsx
 #: src/components/Stake/TokenStakeDialog.tsx
 #: src/components/Stake/TokenUnstakeDialog.tsx
+#: src/components/farm/FarmBoostDialog.tsx
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/components/farm/FarmStakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
@@ -545,6 +562,7 @@ msgstr "Common bases"
 #: src/components/Stake/TokenHarvestDialog.tsx
 #: src/components/Stake/TokenStakeDialog.tsx
 #: src/components/Stake/TokenUnstakeDialog.tsx
+#: src/components/farm/FarmBoostDialog.tsx
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/components/farm/FarmStakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
@@ -669,8 +687,18 @@ msgstr "Current price"
 msgid "Current {0} Price:"
 msgstr "Current {0} Price:"
 
-#~ msgid "Days"
-#~ msgstr "Days"
+#: src/pages/Farm/index.tsx
+#: src/pages/Stake/index.tsx
+msgid "Daily Reward"
+msgstr "Daily Reward"
+
+#: src/pages/Stake/index.tsx
+#: src/pages/Stake/index.tsx
+#: src/pages/Stake/index.tsx
+#: src/pages/Stake/index.tsx
+#: src/pages/Stake/index.tsx
+msgid "Days"
+msgstr " Days"
 
 #: src/components/vote/DelegateModal.tsx
 msgid "Delegate Votes"
@@ -869,6 +897,10 @@ msgstr "Explore popular pools on Starswap Analytics."
 msgid "Farm"
 msgstr "Farm"
 
+#: src/pages/Farm/FarmStake.tsx
+msgid "Farm Total Liquidity"
+msgstr "Farm Total Liquidity"
+
 #: src/components/PositionPreview/index.tsx
 msgid "Fee Tier"
 msgstr "Fee Tier"
@@ -880,6 +912,10 @@ msgstr "For"
 #: src/pages/MigrateV2/index.tsx
 msgid "For each pool shown below, click migrate to remove your liquidity from Uniswap V2 and deposit it into Uniswap V3."
 msgstr "For each pool shown below, click migrate to remove your liquidity from Starswap and deposit it into Starswap."
+
+#: src/pages/Farm/index.tsx
+msgid "For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block."
+msgstr "For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block."
 
 #: src/components/swap/SwapModalHeader.tsx
 #: src/pages/Swap/index.tsx
@@ -897,8 +933,6 @@ msgstr "Get support on Discord"
 #: src/pages/Farm/FarmStake.tsx
 msgid "Harvest"
 msgstr "Harvest"
-msgid "Boost"
-msgstr "Boost"
 
 #: src/components/farm/FarmHarvestDialog.tsx
 msgid "Harvest STAR"
@@ -1024,6 +1058,10 @@ msgstr "Invalid recipient"
 #: src/components/farm/FarmStakeDialog.tsx
 msgid "LP Token Balance"
 msgstr "LP Token Balance"
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "LP Token Staking Status"
+msgstr "LP Token Staking Status"
 
 #: src/pages/Pool/index.tsx
 msgid "Learn"
@@ -1287,6 +1325,10 @@ msgstr "Owner"
 msgid "Participating pools"
 msgstr "Participating pools"
 
+#: src/pages/Farm/FarmStake.tsx
+msgid "Percentage"
+msgstr "Percentage"
+
 #: 
 #~ msgid "Please connect to the appropriate Ethereum network."
 #~ msgstr "Please connect to the appropriate Ethereum network."
@@ -1495,14 +1537,11 @@ msgstr "Return"
 #: src/pages/Stake/index.tsx
 msgid "Reward Token"
 msgstr "Reward Token"
-msgid "Daily Reward"
-msgstr "Daily Reward"
 
 #: src/components/swap/AdvancedSwapDetails.tsx
 msgid "Route"
 msgstr "Route"
 
-#: src/pages/Farm/FarmStake.tsx
 #: src/pages/Stake/TokenStake.tsx
 msgid "STAR"
 msgstr "STAR"
@@ -1511,8 +1550,6 @@ msgstr "STAR"
 #: src/pages/Stake/TokenStake.tsx
 msgid "STAR Balance"
 msgstr "STAR Balance"
-msgid "veSTAR Reward"
-msgstr "veSTAR Reward"
 
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/pages/Farm/FarmStake.tsx
@@ -1522,24 +1559,6 @@ msgstr "STAR Earned"
 #: src/pages/Stake/index.tsx
 msgid "STAR Stake APR Formula"
 msgstr "Pool APR = (Pool's Release per second  * Pool's Stepwise Multiplier * 365 days * 24 hours * 3600 seconds) / Pool TVL"
-msgid "The estimated annualized percentage yield of rewards."
-msgstr "The estimated annualized percentage yield of rewards."
-msgid "Days"
-msgstr " Days"
-
-#: src/pages/farm/index.tsx
-msgid "The estimated annualized percentage yield of rewards"
-msgstr "The estimated annualized percentage yield of rewards = (Pool's Release per second  * Pool's Multiplier * 365 days * 24 hours * 3600 seconds) / Pool TVL"
-msgid "The boosted estimated annualized percentage yield of rewards"
-msgstr "The boosted estimated annualized percentage yield of rewards = [1, 2.5] * (Pool's Release per second  * Pool's Multiplier * 365 days * 24 hours * 3600 seconds) / Pool TVL"
-msgid "Daily Reward"
-msgstr "Daily Reward"
-msgid "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."
-msgstr "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."
-msgid "For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block."
-msgstr "For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block."
-msgid "This amount is already included in all APR calculations for the farm."
-msgstr "This amount is already included in all APR calculations for the farm."
 
 #: src/components/SearchModal/CurrencySearch.tsx
 msgid "Search name or paste address"
@@ -1639,24 +1658,6 @@ msgstr "Stake"
 #: src/components/farm/FarmStakeDialog.tsx
 msgid "Stake LP Token"
 msgstr "Stake LP Token"
-msgid "LP Token Staking Status"
-msgstr "LP Token Staking Status"
-msgid "Staked Liquidity"
-msgstr "Staked Liquidity"
-msgid "Farm Total Liquidity"
-msgstr "Farm Total Liquidity"
-msgid "Percentage"
-msgstr "Percentage"
-msgid "Staked Amount In USD"
-msgstr "Staked Amount In USD"
-msgid "Token X"
-msgstr "Token X"
-msgid "Token Y"
-msgstr "Token Y"
-msgid "Token X Amount"
-msgstr "Token X Amount"
-msgid "Token Y Amount"
-msgstr "Token Y Amount"
 
 #: src/components/Stake/TokenStakeDialog.tsx
 msgid "Stake Token"
@@ -1666,9 +1667,17 @@ msgstr "Stake Token"
 msgid "Stake to Earn"
 msgstr "Stake to Earn"
 
+#: src/pages/Farm/FarmStake.tsx
+msgid "Staked Amount In USD"
+msgstr "Staked Amount In USD"
+
 #: src/components/farm/FarmUnstakeDialog.tsx
 msgid "Staked LP Token"
 msgstr "Staked LP Token"
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "Staked Liquidity"
+msgstr "Staked Liquidity"
 
 #: src/components/SwitchLocaleLink/index.tsx
 msgid "Starswap available in: <0>{0}</0>"
@@ -1743,16 +1752,22 @@ msgstr "TBD Earned"
 #: src/pages/Stake/index.tsx
 msgid "TVL in USDT"
 msgstr "TVL in USDT"
-msgid "Boost APR"
-msgstr "Boost APR"
+
+#: src/components/Menu/index.tsx
+msgid "Telegram"
+msgstr "Telegram"
 
 #: src/components/Popups/ClaimPopup.tsx
 msgid "Thanks for being part of the Uniswap community <0/>"
 msgstr "Thanks for being part of the Starswap community <0/>"
 
+#: 
+#~ msgid "The Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.<0/><1/>For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.<2/><3/>This amount is already included in all APR calculations for the farm."
+#~ msgstr "The Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.<0/><1/>For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.<2/><3/>This amount is already included in all APR calculations for the farm."
+
 #: src/pages/Farm/index.tsx
-msgid "The Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.<0/><1/>For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.<2/><3/>This amount is already included in all APR calculations for the farm."
-msgstr "The Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.<0/><1/>For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.<2/><3/>This amount is already included in all APR calculations for the farm."
+msgid "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."
+msgstr "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."
 
 #: 
 #~ msgid "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.<0/><1/>For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.<2/><3/>This amount is already included in all APR calculations for the farm."
@@ -1763,6 +1778,13 @@ msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually m
 msgstr "The Starswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 
 #: src/pages/Farm/index.tsx
+msgid "The boosted estimated annualized percentage yield of rewards"
+msgstr "The boosted estimated annualized percentage yield of rewards = [1, 2.5] * (Pool's Release per second  * Pool's Multiplier * 365 days * 24 hours * 3600 seconds) / Pool TVL"
+
+#: src/pages/Farm/index.tsx
+msgid "The estimated annualized percentage yield of rewards"
+msgstr "The estimated annualized percentage yield of rewards = (Pool's Release per second  * Pool's Multiplier * 365 days * 24 hours * 3600 seconds) / Pool TVL"
+
 #: src/pages/Stake/index.tsx
 msgid "The estimated annualized percentage yield of rewards."
 msgstr "The estimated annualized percentage yield of rewards."
@@ -1802,6 +1824,10 @@ msgstr "The transaction could not be sent because the deadline has passed. Pleas
 #: src/components/SearchModal/CommonBases.tsx
 msgid "These tokens are commonly paired with other tokens."
 msgstr "These tokens are commonly paired with other tokens."
+
+#: src/pages/Farm/index.tsx
+msgid "This amount is already included in all APR calculations for the farm."
+msgstr "This amount is already included in all APR calculations for the farm."
 
 #: src/components/swap/SwapNetworkAlert.tsx
 msgid "This is an alpha release of Uniswap on the Arbitrum network. You must bridge L1 assets to the network to swap them."
@@ -1854,6 +1880,22 @@ msgstr "Token Address"
 #: src/pages/Farm/index.tsx
 msgid "Token Pair"
 msgstr "Token Pair"
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "Token X"
+msgstr "Token X"
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "Token X Amount"
+msgstr "Token X Amount"
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "Token Y"
+msgstr "Token Y"
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "Token Y Amount"
+msgstr "Token Y Amount"
 
 #: src/components/SearchModal/Manage.tsx
 msgid "Tokens"
@@ -2062,6 +2104,10 @@ msgstr "V3"
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
 msgid "V3 {0} Price:"
 msgstr "V3 {0} Price:"
+
+#: src/components/farm/FarmBoostDialog.tsx
+msgid "VeStar:"
+msgstr "VeStar:"
 
 #: src/components/Header/UniBalanceContent.tsx
 msgid "View UNI Analytics"
@@ -2362,6 +2408,17 @@ msgstr "https:// or ipfs:// or ENS name"
 msgid "minutes"
 msgstr "minutes"
 
+#~ msgid "veSTAR Balance"
+#~ msgstr "veSTAR Balance"
+
+#: src/components/Stake/TokenStakeDialog.tsx
+msgid "veSTAR Reward"
+msgstr "veSTAR Reward"
+
+#: src/pages/Stake/TokenStake.tsx
+msgid "veStar Balance"
+msgstr "veStar Balance"
+
 #: src/components/SearchModal/ImportRow.tsx
 msgid "via {0}"
 msgstr "via {0}"
@@ -2369,6 +2426,10 @@ msgstr "via {0}"
 #: src/components/SearchModal/ImportToken.tsx
 msgid "via {0} token list"
 msgstr "via {0} token list"
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "x"
+msgstr "x"
 
 #: src/components/SearchModal/ImportToken.tsx
 msgid "{0, plural, one {Import token} other {Import tokens}}"

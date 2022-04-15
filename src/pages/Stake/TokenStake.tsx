@@ -42,6 +42,17 @@ const Container = styled.div`
     }
   }
 `
+const TitleTotal = styled.div<{ margin?: string; maxWidth?: string }>`
+  position: relative;
+  max-width: ${({ maxWidth }) => maxWidth ?? '480px'};
+  width: 100%;
+  background: linear-gradient(241deg, #FF978E20 0%, #FB548B20 100%);
+  font-size: 20px;
+  border-radius: 24px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-align: center;
+` 
 
 const BalanceText = styled(Text)`
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
@@ -110,6 +121,13 @@ export default function FarmStake({
   )
 
   let myStakeList = [];
+
+  const { data: veStarAmount, error: errorVeStar } = useSWR(
+    `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmount?accountAddress=${address}`,
+    fetcher
+  );
+  const veStarScalingFactor = 1000000000;
+
   let { data, error } = useSWR(
     // "http://a1277180fcb764735801852ac3de308f-21096515.ap-northeast-1.elb.amazonaws.com:80/v1/starswap/farmingTvlInUsd",
     `https://swap-api.starswap.xyz/${network}/v1/syrupStakes?accountAddress=${address}&tokenId=${token}`,
@@ -148,6 +166,9 @@ export default function FarmStake({
   return (
     <>
       <Container style={{ paddingTop: '50px' }}>
+        <TitleTotal>
+          <Trans>veStar Balance</Trans>: {veStarAmount / veStarScalingFactor}
+        </TitleTotal>
         <AutoRow justify="center">
           <FarmCard>
             <AutoColumn justify="center">
