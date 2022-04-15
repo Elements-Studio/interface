@@ -202,7 +202,7 @@ export default function FarmStake({
                             </ButtonFarm>
                           </RowBetween>
                           {
-                            (!isEnoughVeStar) ? (
+                            (!isWait && !isEnoughVeStar) ? (
                               <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
                                 <Trans>The veSTAR balance is not enough.</Trans>
                               </TYPE.body>
