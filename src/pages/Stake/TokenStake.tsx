@@ -99,7 +99,7 @@ export default function FarmStake({
   const veStarScalingFactor = 1000000000;
 
   let { data } = useSWR(
-    `https://swap-api.starswap.xyz/${network}/v1/syrupStakes?accountAddress=${address}&tokenId=${token}`,
+    `https://swap-api.starswap.xyz/${network}/v1/getAccountSyrupStakes?accountAddress=${address}&tokenId=${token}`,
     fetcher
   );
   myStakeList = data ? data : []
@@ -160,7 +160,10 @@ export default function FarmStake({
           </FarmCard>
         </AutoRow>
         <MyStakeListTitle />
-        { (myStakeList && myStakeList.length > 0) ? myStakeList.map((item:any)=> (
+        { (myStakeList && myStakeList.length > 0) ? myStakeList.map((item:any)=>{
+          const isWait = item.endTime > (Date.now() / 1000)
+          const isEnoughVeStar = veStarAmount >= item.veStarAmount 
+          return (
             <AutoRow justify="center" key={item.id}>
               <FarmCard>
                 <AutoColumn justify="center">
@@ -188,22 +191,32 @@ export default function FarmStake({
                           </TYPE.black>
                         </ButtonBorder>
                       ) : (
-                        <RowBetween style={{ marginTop: '16px' }}>
-                          <ButtonFarm id={item.id} onClick={() => { handleUnstakeId(item.id); console.log('click', item.id); setUnstakeDialogOpen(true);  }} disabled={item.endTime > (Date.now() / 1000)}>
-                            <TYPE.main color={'#fff'}>
-                              { (item.endTime > (Date.now() / 1000)) ? 
-                                <Trans>Wait</Trans> : <Trans>Unstake</Trans>
-                              }
-                            </TYPE.main>
-                          </ButtonFarm>
-                        </RowBetween>
+                        <>
+                          <RowBetween style={{ marginTop: '16px' }}>
+                            <ButtonFarm id={item.id} onClick={() => { handleUnstakeId(item.id); setUnstakeDialogOpen(true);  }} disabled={isWait || !isEnoughVeStar}>
+                              <TYPE.main color={'#fff'}>
+                                { (isWait) ? 
+                                  <Trans>Wait</Trans> : <Trans>Unstake</Trans>
+                                }
+                              </TYPE.main>
+                            </ButtonFarm>
+                          </RowBetween>
+                          {
+                            (!isEnoughVeStar) ? (
+                              <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
+                                <Trans>The veSTAR balance is not enough.</Trans>
+                              </TYPE.body>
+                            ): null
+                          }
+                          
+                        </>
                       )
                     )}
                 </AutoColumn>
               </FarmCard>
             </AutoRow>
           )
-        ) : (
+        }) : (
           <AutoRow justify="center">
             <h3><Trans>No Staking</Trans></h3>
           </AutoRow>

@@ -1761,6 +1761,10 @@ msgstr "您注入的代币比率将决定此流动池的初始兑换率。"
 msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
 msgstr "由于期限已过，因此无法发送交易。请检查您的交易截止期限设置。"
 
+#: src/pages/Stake/TokenStake.tsx
+msgid "The veSTAR balance is not enough."
+msgstr "veSTAR余额不够"
+
 #: src/components/SearchModal/CommonBases.tsx
 msgid "These tokens are commonly paired with other tokens."
 msgstr "这些代币通常与其他代币配对。"

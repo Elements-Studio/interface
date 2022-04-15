@@ -1821,6 +1821,10 @@ msgstr "The ratio of tokens you add will set the price of this pool."
 msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
 msgstr "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
 
+#: src/pages/Stake/TokenStake.tsx
+msgid "The veSTAR balance is not enough."
+msgstr "The veSTAR balance is not enough."
+
 #: src/components/SearchModal/CommonBases.tsx
 msgid "These tokens are commonly paired with other tokens."
 msgstr "These tokens are commonly paired with other tokens."
