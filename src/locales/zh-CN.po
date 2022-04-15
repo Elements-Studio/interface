@@ -2129,6 +2129,14 @@ msgstr "每周奖励"
 msgid "Welcome to team Unicorn :)"
 msgstr "欢迎来到 Unicorn （独角兽）团队 :)"
 
+#: src/components/Stake/TokenStakeDialog.tsx
+msgid "When you Stake, you will get {veStarAmount} veSTAR immediately."
+msgstr "Stake时会立即获得 {veStarAmount}个 veSTAR.  "
+
+#: src/components/Stake/TokenStakeDialog.tsx
+msgid "When you Unstake, you need to have at least {veStarAmount} veSTAR in your balance to unstake."
+msgstr "Unstake时需要余额里有不少于 {veStarAmount}个 veSTAR才能unstake."
+
 #: src/components/earn/ClaimRewardModal.tsx
 msgid "When you claim without withdrawing your liquidity remains in the mining pool."
 msgstr "当您领取奖励但没赎回流动资金时，流动资金仍然留在矿池内。"
@@ -2347,9 +2355,9 @@ msgstr "分钟"
 #~ msgid "veSTAR Balance"
 #~ msgstr "veSTAR 余额"
 
-#: src/components/Stake/TokenStakeDialog.tsx
-msgid "veSTAR Reward"
-msgstr "veSTAR 奖励"
+#: 
+#~ msgid "veSTAR Reward"
+#~ msgstr "veSTAR 奖励"
 
 #: src/pages/Stake/TokenStake.tsx
 msgid "veStar Balance"

@@ -38,6 +38,15 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
 `
+const ConainerDisabled = styled.div`
+width: 100%;
+button:disabled {
+  background: #EDEEF2!important;
+  div {
+    color: #565A69!important;
+  }
+}
+`
 
 const RadioContainer = styled.div`
   border-radius: 20px;
@@ -123,6 +132,7 @@ export default function FarmStakeDialog({
   const poolList = pool ?  pool.filter((item:any)=>item.description==='STAR') : [];
 
   const onCancle = () =>{
+    setLoading(false);
     setStakeNumber(0);
     setDuration(604800);
     onDismiss();
@@ -182,6 +192,8 @@ export default function FarmStakeDialog({
     }
     return false;
   }
+
+  const veStarAmount = (stakeNumber && duration) ? (stakeNumber * (duration / 86400) / 365).toFixed(4) : 0
  
   return (
     <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={ theme.bgCard }>
@@ -230,14 +242,14 @@ export default function FarmStakeDialog({
             </RadioGroup>
           </FormControl>
         </RadioContainer>
-        <RadioContainer>
-          <FormControl component="fieldset">
-            <FormLabel component="legend"><Trans>veSTAR Reward</Trans></FormLabel>
-            <TYPE.black fontWeight={500} fontSize={24} style={{ marginTop: '10px', lineHeight: '20px', marginBottom: '12px'}}>
-              { (stakeNumber && duration) ? (stakeNumber * (duration / 86400) / 365).toFixed(4) : 0}
-            </TYPE.black>
-          </FormControl>
-        </RadioContainer>
+        {
+          (veStarAmount > 0) && (
+            <>
+              <AutoRow><Trans>When you Stake, you will get {veStarAmount} veSTAR immediately.</Trans></AutoRow>
+              <AutoRow><Trans>When you Unstake, you need to have at least {veStarAmount} veSTAR in your balance to unstake.</Trans></AutoRow>
+            </>
+          )
+        }
         {loading && (
           <CircularProgress
             size={64}
@@ -247,24 +259,25 @@ export default function FarmStakeDialog({
             }}
           />
         )}
-        <RowBetween style={{ marginTop: '24px' }}>
-          <ButtonBorder marginRight={22} onClick={onCancle} >
-            <TYPE.black fontSize={20}>
-              <Trans>Cancel</Trans>
-            </TYPE.black>
-          </ButtonBorder>
-          <ButtonFarm onClick={() => {
-            onClickStakeConfirm();
-            setLoading(true);
-            alert(`You will receive ${(stakeNumber * (duration / 86400) / 365).toFixed(4)} veSTAR when redeemed \n 赎回时您将会获得${(stakeNumber * (duration / 86400) / 365).toFixed(4)}个 veSTAR`);
-            setTimeout(onDismiss, 30000);
-            setTimeout("window.location.reload()", 60000);
-          }}>
-            <TYPE.main color={'#fff'}>
-              <Trans>Confirm</Trans>
-            </TYPE.main>
-          </ButtonFarm>
-        </RowBetween>
+        <ConainerDisabled>
+          <RowBetween style={{ marginTop: '24px' }}>
+            <ButtonBorder marginRight={22} onClick={onCancle} >
+              <TYPE.black fontSize={20}>
+                <Trans>Cancel</Trans>
+              </TYPE.black>
+            </ButtonBorder>
+            <ButtonFarm disabled={!(veStarAmount>0)} onClick={() => {
+              onClickStakeConfirm();
+              setLoading(true);
+              setTimeout(onDismiss, 30000);
+              setTimeout("window.location.reload()", 60000);
+            }}>
+              <TYPE.main color={'#fff'}>
+                <Trans>Confirm</Trans>
+              </TYPE.main>
+            </ButtonFarm>
+          </RowBetween>
+        </ConainerDisabled>
       </ColumnCenter>
     </Modal>
   )

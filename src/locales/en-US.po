@@ -2193,6 +2193,14 @@ msgstr "Weekly Rewards"
 msgid "Welcome to team Unicorn :)"
 msgstr "Welcome to team Unicorn :)"
 
+#: src/components/Stake/TokenStakeDialog.tsx
+msgid "When you Stake, you will get {veStarAmount} veSTAR immediately."
+msgstr "When you Stake, you will get {veStarAmount} veSTAR immediately."
+
+#: src/components/Stake/TokenStakeDialog.tsx
+msgid "When you Unstake, you need to have at least {veStarAmount} veSTAR in your balance to unstake."
+msgstr "When you Unstake, you need to have at least {veStarAmount} veSTAR in your balance to unstake."
+
 #: src/components/earn/ClaimRewardModal.tsx
 msgid "When you claim without withdrawing your liquidity remains in the mining pool."
 msgstr "When you claim without withdrawing your liquidity remains in the mining pool."
@@ -2411,9 +2419,9 @@ msgstr "minutes"
 #~ msgid "veSTAR Balance"
 #~ msgstr "veSTAR Balance"
 
-#: src/components/Stake/TokenStakeDialog.tsx
-msgid "veSTAR Reward"
-msgstr "veSTAR Reward"
+#: 
+#~ msgid "veSTAR Reward"
+#~ msgstr "veSTAR Reward"
 
 #: src/pages/Stake/TokenStake.tsx
 msgid "veStar Balance"
