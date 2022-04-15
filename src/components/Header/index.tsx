@@ -356,8 +356,8 @@ export default function Header() {
         <StyledNavLink id={`stake-nav-link`} to={'/stake'}>
           <Trans>Stake</Trans>
         </StyledNavLink>
-        <StyledExternalLink id={`starswap-docs`} href={'https://docs.starswap.xyz/'}>
-          <Trans>Docs</Trans>
+        <StyledExternalLink id={`starswap-info`} href={'https://info.starswap.xyz/'}>
+          <Trans>Charts</Trans>
           <sup>↗</sup>
         </StyledExternalLink>
         {/*
