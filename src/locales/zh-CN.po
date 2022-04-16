@@ -366,8 +366,8 @@ msgid "Boost My LP Staking"
 msgstr ""
 
 #: src/components/PositionCard/index.tsx
-msgid "By adding liquidity you'll earn 0.25% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
-msgstr "通过注入流动资金，您将按您在流动池中所占份额赚取对应交易量的0.25%手续费。手续费将实时累计，添加到流动池中，您可以通过赎回您的流动资金将手续费也赎回。"
+msgid "By adding liquidity you'll earn {feePercent}% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
+msgstr "通过注入流动资金，您将按您在流动池中所占份额赚取对应交易量的{feePercent}%手续费。手续费将实时累计，添加到流动池中，您可以通过赎回您的流动资金将手续费也赎回。"
 
 #: src/components/SearchModal/ImportList.tsx
 msgid "By adding this list you are implicitly trusting that the data is correct. Anyone can create a list, including creating fake versions of existing lists and lists that claim to represent projects that do not have one."
@@ -2383,11 +2383,14 @@ msgstr ""
 msgid "{0, plural, one {Import token} other {Import tokens}}"
 msgstr "{0, plural, one {导入代币} other {导入代币}}"
 
-#: src/components/PositionCard/index.tsx
 #: src/pages/Vote/VotePage.tsx
 #: src/pages/Vote/VotePage.tsx
 msgid "{0} %"
 msgstr "{0} %"
+
+#: src/components/PositionCard/index.tsx
+msgid "{0} %3"
+msgstr ""
 
 #: src/components/PositionListItem/index.tsx
 #: src/components/PositionListItem/index.tsx

@@ -48,18 +48,29 @@ const StyledPositionCard = styled(LightCard)<{ bgColor: any }>`
 `
 
 interface PositionCardProps {
+  liquidityPools?: any
   pair: Pair
   showUnwrapped?: boolean
   border?: string
   stakedBalance?: CurrencyAmount<Token> // optional balance to indicate that liquidity is deposited in mining pool
 }
 
-export function MinimalPositionCard({ pair, showUnwrapped = false, border }: PositionCardProps) {
+export function MinimalPositionCard({ liquidityPools, pair, showUnwrapped = false, border }: PositionCardProps) {
   const { account } = useActiveWeb3React()
 
   const currency0 = showUnwrapped ? pair.token0 : unwrappedToken(pair.token0)
   const currency1 = showUnwrapped ? pair.token1 : unwrappedToken(pair.token1)
-
+  
+  // calculate feePercent
+  const liquidityPoolMatch = liquidityPools.filter((lp: any) => 
+    lp.liquidityPoolId.liquidityTokenId.tokenXId === pair.token0.symbol && lp.liquidityPoolId.liquidityTokenId.tokenYId === pair.token1.symbol ||
+    lp.liquidityPoolId.liquidityTokenId.tokenXId === pair.token1.symbol && lp.liquidityPoolId.liquidityTokenId.tokenYId === pair.token0.symbol
+  )
+  const {poundageRate:poundageRateOrigin,swapFeeOperationRateV2: swapFeeOperationRateV2Origin} = liquidityPoolMatch[0]
+  const poundageRate = poundageRateOrigin.denominator === 0 ? {numerator: 3, denominator: 1000} :poundageRateOrigin
+  const swapFeeOperationRateV2 = swapFeeOperationRateV2Origin.denominator === 0 ? {numerator: 5, denominator: 6} : swapFeeOperationRateV2Origin
+  const fee = poundageRate.numerator / poundageRate.denominator * swapFeeOperationRateV2.numerator / swapFeeOperationRateV2.denominator
+  const feePercent =  fee * 100
   const [showMore, setShowMore] = useState(false)
 
   const userPoolBalance = useTokenBalance(account ?? undefined, pair.liquidityToken)
@@ -83,7 +94,8 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
           pair.getLiquidityValue(pair.token1, totalPoolTokens, userPoolBalance, false),
         ]
       : [undefined, undefined]
-
+  console.log({token0Deposited, token1Deposited})
+   
   return (
     <>
       {userPoolBalance && JSBI.greaterThan(userPoolBalance.quotient, JSBI.BigInt(0)) ? (
@@ -156,7 +168,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
               ⭐️
             </span>{' '}
             <Trans>
-              By adding liquidity you&apos;ll earn 0.25% of all trades on this pair proportional to your share of the
+              By adding liquidity you'll earn {feePercent}% of all trades on this pair proportional to your share of the
               pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity.
             </Trans>{' '}
           </TYPE.subHeader>
@@ -298,7 +310,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
               <Text fontSize={16} fontWeight={500}>
                 {poolTokenPercentage ? (
                   <Trans>
-                    {poolTokenPercentage.toFixed(2) === '0.00' ? '<0.01' : poolTokenPercentage.toFixed(2)} %
+                    {poolTokenPercentage.toFixed(2) === '0.00' ? '<0.01' : poolTokenPercentage.toFixed(2)} %3
                   </Trans>
                 ) : (
                   '-'

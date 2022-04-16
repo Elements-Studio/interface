@@ -80,6 +80,17 @@ export function useBatchGetReserves(pairs: ([string, string] | undefined)[]) {
   )
 }
 
+export function useGetLiquidityPools() {
+  const { chainId } = useActiveWeb3React()
+  const network = getCurrentNetwork(chainId)
+  const url = `https://swap-api.starcoin.org/${ network }/v1/liquidityPools`
+  const maps = useSWR(
+    url,
+    (url: any) => axios.get(url).then(res => res.data)
+  )
+  return maps
+}
+
 /**
  * 根据x计算y (无手续费)
  */

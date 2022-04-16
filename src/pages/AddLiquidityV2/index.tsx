@@ -45,6 +45,7 @@ import UnsupportedCurrencyFooter from 'components/swap/UnsupportedCurrencyFooter
 import { SwitchLocaleLink } from 'components/SwitchLocaleLink'
 import { t, Trans } from '@lingui/macro'
 import { useAddLiquidity } from 'hooks/useTokenSwapScript'
+import { useGetLiquidityPools } from 'hooks/useTokenSwapRouter'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 
@@ -328,6 +329,7 @@ export default function AddLiquidity({
 
   const addIsUnsupported = useIsSwapUnsupported(currencies?.CURRENCY_A, currencies?.CURRENCY_B)
 
+  const { data: liquidityPools} = useGetLiquidityPools()
   return (
     <>
       <AppBody>
@@ -506,9 +508,9 @@ export default function AddLiquidity({
       <SwitchLocaleLink />
 
       {!addIsUnsupported ? (
-        pair && !noLiquidity && pairState !== PairState.INVALID ? (
+        liquidityPools && pair && !noLiquidity && pairState !== PairState.INVALID ? (
           <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem' }}>
-            <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
+            <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} liquidityPools={liquidityPools} />
           </AutoColumn>
         ) : null
       ) : (
