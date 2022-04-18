@@ -9,7 +9,7 @@ import {
   BLOCKED_PRICE_IMPACT_NON_EXPERT,
 } from '../constants/misc'
 
-const THIRTY_BIPS_FEE = new Percent(JSBI.BigInt(30), JSBI.BigInt(10000))
+const THIRTY_BIPS_FEE = new Percent(JSBI.BigInt(25), JSBI.BigInt(10000))
 const ONE_HUNDRED_PERCENT = new Percent(JSBI.BigInt(10000), JSBI.BigInt(10000))
 const INPUT_FRACTION_AFTER_FEE = ONE_HUNDRED_PERCENT.subtract(THIRTY_BIPS_FEE)
 
@@ -20,7 +20,7 @@ export function computeRealizedLPFeePercent(
   let percent: Percent
   if (trade instanceof V2Trade) {
     // for each hop in our trade, take away the x*y=k price impact from 0.25% fees
-    // e.g. for 3 tokens/2 hops: 1 - ((1 - .03) * (1-.03))
+    // e.g. for 3 tokens/2 hops: 1 - ((1 - .25) * (1-.25))
     percent = ONE_HUNDRED_PERCENT.subtract(
       trade.route.pairs.reduce<Percent>(
         (currentFee: Percent): Percent => currentFee.multiply(INPUT_FRACTION_AFTER_FEE),
