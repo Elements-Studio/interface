@@ -67,8 +67,8 @@ export function MinimalPositionCard({ liquidityPools, pair, showUnwrapped = fals
     lp.liquidityPoolId.liquidityTokenId.tokenXId === pair.token1.symbol && lp.liquidityPoolId.liquidityTokenId.tokenYId === pair.token0.symbol
   )
   const {poundageRate:poundageRateOrigin,swapFeeOperationRateV2: swapFeeOperationRateV2Origin} = liquidityPoolMatch[0]
-  const poundageRate = poundageRateOrigin.denominator === 0 ? {numerator: 3, denominator: 1000} :poundageRateOrigin
-  const swapFeeOperationRateV2 = swapFeeOperationRateV2Origin.denominator === 0 ? {numerator: 5, denominator: 6} : swapFeeOperationRateV2Origin
+  const poundageRate = !poundageRateOrigin || poundageRateOrigin.denominator === 0 ? {numerator: 3, denominator: 1000} :poundageRateOrigin
+  const swapFeeOperationRateV2 = !swapFeeOperationRateV2Origin || swapFeeOperationRateV2Origin.denominator === 0 ? {numerator: 5, denominator: 6} : swapFeeOperationRateV2Origin
   const fee = poundageRate.numerator / poundageRate.denominator * swapFeeOperationRateV2.numerator / swapFeeOperationRateV2.denominator
   const feePercent =  fee * 100
   const [showMore, setShowMore] = useState(false)

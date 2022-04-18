@@ -91,10 +91,11 @@ export default function FarmStake({
     provider.getBalance(address, STAR_address)
   )
 
+  const isBoost = useIsBoost()
   let myStakeList = [];
 
   let { data } = useSWR(
-    `https://swap-api.starswap.xyz/${network}/v1/getAccountSyrupStakes?accountAddress=${address}&tokenId=${token}`,
+    `https://swap-api.starswap.xyz/${network}/v1/${isBoost ? 'getAccountSyrupStakes' : 'syrupStakes'}?accountAddress=${address}&tokenId=${token}`,
     fetcher
   );
   myStakeList = data ? data : []
@@ -110,7 +111,7 @@ export default function FarmStake({
   //   fetcher
   // );
   const [ veStarAmount, setVeStarAmount ] = useState(0)
-  const isBoost = useIsBoost()
+  
   useEffect(
     () => {
       if (isBoost) {
