@@ -48,8 +48,9 @@ export default function FarmTitle() {
     // if (error) return "An error has occurred.";
     // if (!data) return "Loading...";
     if (error) return null;
-    const tvlUSD = data?.toFixed(2) || 0;
-
+    if (!data) return null;
+    const tvlUSD = Number(data).toFixed(2);
+    
     return (
       <>
         <Container>
@@ -58,7 +59,7 @@ export default function FarmTitle() {
           </Trans>
         </Container>
         <TitleTotal>
-          <Trans>Total Value Locked in USDT</Trans>: {Number(tvlUSD)}
+          <Trans>Total value of the funds in this farm’s liquidity pool: {tvlUSD} USDT</Trans>
         </TitleTotal>
       </>
     )

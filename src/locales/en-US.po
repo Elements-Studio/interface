@@ -440,9 +440,9 @@ msgstr "Change"
 msgid "Change your network to go back to L1"
 msgstr "Change your network to go back to L1"
 
-#: 
-#~ msgid "Charts"
-#~ msgstr "Charts"
+#: src/components/Header/index.tsx
+msgid "Charts"
+msgstr "Charts"
 
 #: src/pages/Pool/CTACards.tsx
 msgid "Check out our v3 LP walkthrough and migration guides."
@@ -779,7 +779,6 @@ msgstr "Discord"
 msgid "Dismiss"
 msgstr "Dismiss"
 
-#: src/components/Header/index.tsx
 #: src/components/Menu/index.tsx
 msgid "Docs"
 msgstr "Docs"
@@ -1922,7 +1921,6 @@ msgid "Total Supply"
 msgstr "Total Supply"
 
 #: src/components/Stake/StakeTitle.tsx
-#: src/components/farm/FarmTitle.tsx
 msgid "Total Value Locked in USDT"
 msgstr "Total Value Locked in USDT"
 
@@ -1937,6 +1935,10 @@ msgstr "Total deposited"
 #: src/pages/Earn/Manage.tsx
 msgid "Total deposits"
 msgstr "Total deposits"
+
+#: src/components/farm/FarmTitle.tsx
+msgid "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USDT"
+msgstr "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USDT"
 
 #: src/components/Settings/index.tsx
 msgid "Transaction Settings"

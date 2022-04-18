@@ -397,9 +397,9 @@ msgstr "更改"
 msgid "Change your network to go back to L1"
 msgstr "更改您的网络以返回 L1"
 
-#: 
-#~ msgid "Charts"
-#~ msgstr "图表"
+#: src/components/Header/index.tsx
+msgid "Charts"
+msgstr "图表"
 
 #: src/pages/Pool/CTACards.tsx
 msgid "Check out our v3 LP walkthrough and migration guides."
@@ -736,7 +736,6 @@ msgstr "Discord"
 msgid "Dismiss"
 msgstr "关闭"
 
-#: src/components/Header/index.tsx
 #: src/components/Menu/index.tsx
 msgid "Docs"
 msgstr "文档"
@@ -1862,7 +1861,6 @@ msgid "Total Supply"
 msgstr "总供应量"
 
 #: src/components/Stake/StakeTitle.tsx
-#: src/components/farm/FarmTitle.tsx
 msgid "Total Value Locked in USDT"
 msgstr "锁仓总额(USDT)"
 
@@ -1873,6 +1871,10 @@ msgstr "存入总额"
 #: src/pages/Earn/Manage.tsx
 msgid "Total deposits"
 msgstr "存入总额"
+
+#: src/components/farm/FarmTitle.tsx
+msgid "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USDT"
+msgstr "该农场流动资金池中锁仓总额：{tvlUSD} USDT"
 
 #: src/components/Settings/index.tsx
 msgid "Transaction Settings"
