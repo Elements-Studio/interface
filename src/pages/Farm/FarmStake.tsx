@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro'
-import { useCallback, useContext, useState } from 'react'
+import { useCallback, useContext, useState, useEffect } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
@@ -32,8 +32,8 @@ import { useUserLiquidity } from 'hooks/useTokenSwapRouter'
 import useSWR from 'swr'
 import axios from 'axios'
 import { useIsDarkMode } from '../../state/user/hooks'
+import { useIsBoost } from '../../state/user/hooks'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
-
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
@@ -119,29 +119,42 @@ export default function FarmStake({
 
   const network = getCurrentNetwork(chainId)
 
-  const { data: veStarAmount, error: errorVeStar } = useSWR(
-    `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmount?accountAddress=${address}`,
-    fetcher
-  );
+  // const { data: veStarAmount, error: errorVeStar } = useSWR(
+  //   `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmount?accountAddress=${address}`,
+  //   fetcher
+  // );
 
-  const { data: boostFactorOrigin, error: errorBF } = useSWR(
-    `https://swap-api.starswap.xyz/${network}/v1/getAccountFarmBoostFactor?tokenXId=${tokenX}&tokenYId=${tokenY}&accountAddress=${address}`,
-    fetcher
-  );
+  // const { data: boostFactorOrigin, error: errorBF } = useSWR(
+  //   `https://swap-api.starswap.xyz/${network}/v1/getAccountFarmBoostFactor?tokenXId=${tokenX}&tokenYId=${tokenY}&accountAddress=${address}`,
+  //   fetcher
+  // );
+
+  const isBoost = useIsBoost()
+  const [ veStarAmount, setVeStarAmount ] = useState(0)
+  const [ boostFactorOrigin, setBoostFactorOrigin ] = useState(0)
+  useEffect(
+    () => {
+      if (isBoost) {
+        const url1 = `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmount?accountAddress=${address}`
+        axios.get(url1).then(res => res.data).then(data => setVeStarAmount(data))
+        const url2 = `https://swap-api.starswap.xyz/${network}/v1/getAccountFarmBoostFactor?tokenXId=${tokenX}&tokenYId=${tokenY}&accountAddress=${address}`
+        axios.get(url2).then(res => res.data).then(data => setBoostFactorOrigin(data))
+        return
+      }
+    },
+    [isBoost]
+  )
 
   const { data: lpStakingData, error: errorLP } = useSWR(
     `https://swap-api.starswap.xyz/${network}/v1/getAccountFarmStakeInfo?tokenXId=${tokenX}&tokenYId=${tokenY}&accountAddress=${address}`,
     fetcher
   );
 
-  // console.log({lpStakingData})
-
-  // const lpTokenScalingFactor = 1000000000000000000;
   const lpTokenScalingFactor = 1000000000;
   const tbdScalingFactor = 1000000000;
   const starScalingFactor = 1000000000;
   const stcScalingFactor = 1000000000;
-
+  
   // boostFactor stored in Move is mulitpied by 100, 1.05 => 105
   const boostFactor = boostFactorOrigin? boostFactorOrigin/ 100 : 0;
   const tbdGain:any = useLookupTBDGain(address, x, y)?.data || 0;
@@ -157,9 +170,6 @@ export default function FarmStake({
       hasStake = true;
     }
   }
-
-
-  const provider = useStarcoinProvider()
 
   const [ stakeDialogOpen, setStakeDialogOpen ] = useState(false)
   const [ harvestDialogOpen, setHarvestDialogOpen ] = useState(false)
@@ -259,36 +269,40 @@ export default function FarmStake({
             </AutoColumn>
           </FarmCard>
         </AutoRow>
-        <AutoRow justify="center" style={{alignItems: 'start'}}>
-          <FarmCard>
-            <AutoColumn justify="center">
-              <RowFixed>
-                <StyledEthereumLogo src={BoostFlame} size={'60px'} style={{width: '45px'}} />
-              </RowFixed>
-              <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>
-                <Trans>Boost Factor</Trans>
-              </TYPE.body>
-              <TYPE.body color={'#FE7F8D'} fontSize={16} style={{ marginTop: '16px' }}>
-                {
-                  hasAccount ? (
-                    <BalanceText style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                      {boostFactor}<Trans>x</Trans>
-                    </BalanceText>
-                  ) : null
-                }
-              </TYPE.body>
-              <ButtonFarm style={{ marginTop: '16px' }}
-                disabled={!hasAccount || !(tbdGain > 0)}
-                onClick={() => { setBoostDialogOpen(true) }} 
-              >
-                <TYPE.main color={'#FE7F8D'}>
-                  <BalanceText color={'#fff'} style={{ flexShrink: 0}} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                    <Trans>Boost</Trans>
-                  </BalanceText>
-                </TYPE.main>
-              </ButtonFarm>
-            </AutoColumn>
-          </FarmCard>
+        <AutoRow justify="center">
+          {
+            (isBoost) ? (
+              <FarmCard>
+                <AutoColumn justify="center">
+                  <RowFixed>
+                    <StyledEthereumLogo src={BoostFlame} size={'60px'} style={{width: '45px'}} />
+                  </RowFixed>
+                  <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>
+                    <Trans>Boost Factor</Trans>
+                  </TYPE.body>
+                  <TYPE.body color={'#FE7F8D'} fontSize={16} style={{ marginTop: '16px' }}>
+                    {
+                      hasAccount ? (
+                        <BalanceText style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                          {boostFactor}<Trans>x</Trans>
+                        </BalanceText>
+                      ) : null
+                    }
+                  </TYPE.body>
+                  <ButtonFarm style={{ marginTop: '16px' }}
+                    disabled={!hasAccount || !(tbdGain > 0)}
+                    onClick={() => { setBoostDialogOpen(true) }} 
+                  >
+                    <TYPE.main color={'#FE7F8D'}>
+                      <BalanceText color={'#fff'} style={{ flexShrink: 0}} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                        <Trans>Boost</Trans>
+                      </BalanceText>
+                    </TYPE.main>
+                  </ButtonFarm>
+                </AutoColumn>
+              </FarmCard>
+            ): null
+          }
           <FarmCard>
             <AutoColumn justify="center">
               {/*

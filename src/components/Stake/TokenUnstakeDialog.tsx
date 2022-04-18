@@ -112,7 +112,6 @@ export default function FarmUnstakeDialog({
               </TYPE.black>
             </ButtonBorder>
             <ButtonFarm id='sss' disabled={loading} onClick={() => {
-              console.log({loading})
               onClickUnstakeConfirm();
               setLoading(true);
               setTimeout(onDismiss, 30000);

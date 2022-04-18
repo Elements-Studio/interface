@@ -10,6 +10,7 @@ import { V2_FACTORY_ADDRESSES } from '../../constants/addresses'
 import { BASES_TO_TRACK_LIQUIDITY_FOR, PINNED_PAIRS } from '../../constants/routing'
 import { useAllTokens } from '../../hooks/Tokens'
 import { useActiveWeb3React } from '../../hooks/web3'
+import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import { AppState } from '../index'
 import {
   addSerializedPair,
@@ -352,4 +353,27 @@ export function useArbitrumAlphaAlert(): [boolean, (arbitrumAlphaAcknowledged: b
   }
 
   return [arbitrumAlphaAcknowledged, setArbitrumAlphaAcknowledged]
+}
+
+export function useIsBoost(): boolean {
+  let isBoost = false;
+  const { chainId } = useActiveWeb3React()
+  const network = getCurrentNetwork(chainId)
+  switch (network) {
+    // case 'halley':
+    //   isBoost = false;
+    //   break;
+    case 'proxima':
+      isBoost = true;
+      break;
+    case 'barnard':
+      isBoost = process.env.REACT_APP_STARSWAP_BOOST === 'true';
+      break;
+    // case 'main':
+    //   isBoost = false;
+    //   break;
+    default:
+      isBoost = false;
+  }
+  return isBoost
 }

@@ -94,7 +94,6 @@ export function MinimalPositionCard({ liquidityPools, pair, showUnwrapped = fals
           pair.getLiquidityValue(pair.token1, totalPoolTokens, userPoolBalance, false),
         ]
       : [undefined, undefined]
-  console.log({token0Deposited, token1Deposited})
    
   return (
     <>

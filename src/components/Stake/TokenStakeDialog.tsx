@@ -11,6 +11,7 @@ import Column, { AutoColumn, ColumnCenter, ColumnRight } from '../Column'
 import Row, { RowBetween, AutoRow } from '../Row'
 import Modal from '../Modal'
 import { STAR } from '../../constants/tokens'
+import { useIsBoost } from '../../state/user/hooks'
 import { ButtonFarm, ButtonBorder, ButtonText } from 'components/Button'
 import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
@@ -125,6 +126,8 @@ export default function FarmStakeDialog({
     fetcher
   );
 
+  const isBoost = useIsBoost()
+
   // if (error) return "An error has occurred.";
   // if (!data) return "Loading...";
   if (error) return null;
@@ -193,8 +196,8 @@ export default function FarmStakeDialog({
     return false;
   }
 
-  const veStarAmount = (stakeNumber && duration) ? (stakeNumber * (duration / 86400) / 365).toFixed(4) : 0
- 
+  const veStarAmount = (isBoost && stakeNumber && duration) ? (stakeNumber * (duration / 86400) / 365).toFixed(4) : 0
+  
   return (
     <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={ theme.bgCard }>
       <ColumnCenter style={{ padding: '27px 32px'}}>
@@ -266,7 +269,7 @@ export default function FarmStakeDialog({
                 <Trans>Cancel</Trans>
               </TYPE.black>
             </ButtonBorder>
-            <ButtonFarm disabled={!(veStarAmount>0)} onClick={() => {
+            <ButtonFarm disabled={!(isBoost ? veStarAmount > 0 : stakeNumber > 0)} onClick={() => {
               onClickStakeConfirm();
               setLoading(true);
               setTimeout(onDismiss, 30000);

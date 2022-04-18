@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro'
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
@@ -14,6 +14,7 @@ import TokenStakeDialog from '../../components/Stake/TokenStakeDialog'
 import TokenUnstakeDialog from '../../components/Stake/TokenUnstakeDialog'
 import StarswapBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
+import { useIsBoost } from '../../state/user/hooks'
 import { STAR } from '../../constants/tokens'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import { useUserStarStaked } from 'hooks/useTokenSwapFarmScript'
@@ -92,12 +93,6 @@ export default function FarmStake({
 
   let myStakeList = [];
 
-  const { data: veStarAmount } = useSWR(
-    `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmount?accountAddress=${address}`,
-    fetcher
-  );
-  const veStarScalingFactor = 1000000000;
-
   let { data } = useSWR(
     `https://swap-api.starswap.xyz/${network}/v1/getAccountSyrupStakes?accountAddress=${address}&tokenId=${token}`,
     fetcher
@@ -110,6 +105,24 @@ export default function FarmStake({
   const [ unstakeDialogOpen, setUnstakeDialogOpen ] = useState(false)
   const [ unstakeId, setUnstakeId ] = useState('')
 
+  // const { data: veStarAmount } = useSWR(
+  //   `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmount?accountAddress=${address}`,
+  //   fetcher
+  // );
+  const [ veStarAmount, setVeStarAmount ] = useState(0)
+  const isBoost = useIsBoost()
+  useEffect(
+    () => {
+      if (isBoost) {
+        const url = `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmount?accountAddress=${address}`
+        axios.get(url).then(res => res.data).then(data => setVeStarAmount(data))
+        return
+      }
+    },
+    [isBoost]
+  )
+  const veStarScalingFactor = 1000000000;
+
   const handleDismissStake = useCallback(() => {
     setStakeDialogOpen(false)
   }, [setStakeDialogOpen])
@@ -121,13 +134,16 @@ export default function FarmStake({
   function handleUnstakeId(id:any) {
     setUnstakeId(id);
   };
-
   return (
     <>
       <Container style={{ paddingTop: '50px' }}>
-        <TitleTotal>
-          <Trans>veStar Balance</Trans>: {veStarAmount / veStarScalingFactor}
-        </TitleTotal>
+        {
+          (isBoost) ? (
+            <TitleTotal>
+              <Trans>veStar Balance</Trans>: {veStarAmount / veStarScalingFactor}
+            </TitleTotal>
+          ) : null
+        }
         <AutoRow justify="center">
           <FarmCard>
             <AutoColumn justify="center">
@@ -160,9 +176,9 @@ export default function FarmStake({
           </FarmCard>
         </AutoRow>
         <MyStakeListTitle />
-        { (myStakeList && myStakeList.length > 0) ? myStakeList.map((item:any)=>{
+        { (myStakeList && myStakeList.length > 0) ? myStakeList.map((item:any)=> {
           const isWait = item.endTime > (Date.now() / 1000)
-          const isEnoughVeStar = veStarAmount >= item.veStarAmount 
+          const isEnoughVeStar = isBoost ? veStarAmount >= item.veStarAmount : true
           return (
             <AutoRow justify="center" key={item.id}>
               <FarmCard>
