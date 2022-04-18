@@ -1844,7 +1844,6 @@ msgid "Total Supply"
 msgstr "总供应量"
 
 #: src/components/Stake/StakeTitle.tsx
-#: src/components/farm/FarmTitle.tsx
 msgid "Total Value Locked in USDT"
 msgstr "锁仓总额(USDT)"
 
@@ -1855,6 +1854,10 @@ msgstr "存入总额"
 #: src/pages/Earn/Manage.tsx
 msgid "Total deposits"
 msgstr "存入总额"
+
+#: src/components/farm/FarmTitle.tsx
+msgid "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USDT"
+msgstr "该农场流动资金池中锁仓总额: {tvlUSD} USDT"
 
 #: src/components/Settings/index.tsx
 msgid "Transaction Settings"

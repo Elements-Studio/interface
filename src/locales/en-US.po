@@ -1904,7 +1904,6 @@ msgid "Total Supply"
 msgstr "Total Supply"
 
 #: src/components/Stake/StakeTitle.tsx
-#: src/components/farm/FarmTitle.tsx
 msgid "Total Value Locked in USDT"
 msgstr "Total Value Locked in USDT"
 
@@ -1919,6 +1918,10 @@ msgstr "Total deposited"
 #: src/pages/Earn/Manage.tsx
 msgid "Total deposits"
 msgstr "Total deposits"
+
+#: src/components/farm/FarmTitle.tsx
+msgid "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USDT"
+msgstr "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USDT"
 
 #: src/components/Settings/index.tsx
 msgid "Transaction Settings"
