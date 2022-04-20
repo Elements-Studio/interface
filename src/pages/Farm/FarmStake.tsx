@@ -203,7 +203,7 @@ export default function FarmStake({
       {
               network === 'main' ? (
                 <TYPE.body fontSize={12} style={{ marginTop: '12px', textAlign: 'center'}}>
-                  <Trans>Users who test and give feedback on the Boost feature will have 7 days priority using it on the Main network.
+                  <Trans>Users who test the Boost feature on the Barnard network and give feedback, will have 7 days priority using it on the Main network.
                   </Trans>
                   <br/>
                   <Trans>The Boost feature will be launched on the Main network soon, please stay tuned.
@@ -314,7 +314,7 @@ export default function FarmStake({
                   {
                     isBoost && network === 'barnard' ? (
                       <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
-                        <Trans>Users who test and give feedback on the Boost feature will have 7 days priority using it on the Main network.</Trans>
+                        <Trans>Users who test the Boost feature and give feedback will have 7 days priority using it on the Main network.</Trans>
                       </TYPE.body>
                     ) : null
                   }
