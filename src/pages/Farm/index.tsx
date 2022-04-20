@@ -186,7 +186,7 @@ export default function Farm({ history }: RouteComponentProps) {
   return (
     <>
       <FarmTitle />
-      <AutoRow justify="center" style={{ paddingTop: '50px', maxWidth: '1200px' }}>
+      <AutoRow justify="center" style={{ paddingTop: '1rem', maxWidth: '1200px' }}>
         {list ? list.map((item:any,index:any) => (
             <FarmCard key={index}>
               <AutoColumn justify="center">

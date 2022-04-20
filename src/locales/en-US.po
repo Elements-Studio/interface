@@ -1760,6 +1760,10 @@ msgstr "Telegram"
 msgid "Thanks for being part of the Uniswap community <0/>"
 msgstr "Thanks for being part of the Starswap community <0/>"
 
+#: src/pages/Farm/FarmStake.tsx
+msgid "The Boost feature will be launched on the Main network soon, please stay tuned."
+msgstr "The Boost feature will be launched on the Main network soon, please stay tuned."
+
 #: 
 #~ msgid "The Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.<0/><1/>For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.<2/><3/>This amount is already included in all APR calculations for the farm."
 #~ msgstr "The Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.<0/><1/>For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.<2/><3/>This amount is already included in all APR calculations for the farm."
@@ -2097,6 +2101,11 @@ msgstr "Update list"
 #: src/components/claim/ClaimModal.tsx
 msgid "User"
 msgstr "User"
+
+#: src/pages/Farm/FarmStake.tsx
+#: src/pages/Farm/FarmStake.tsx
+msgid "Users who test and give feedback on the Boost feature will have 7 days priority using it on the Main network."
+msgstr "Users who test and give feedback on the Boost feature will have 7 days priority using it on the Main network."
 
 #: src/pages/Pool/index.tsx
 msgid "V2 liquidity"

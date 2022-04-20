@@ -137,7 +137,7 @@ export default function FarmStake({
   };
   return (
     <>
-      <Container style={{ paddingTop: '50px' }}>
+      <Container style={{ paddingTop: '1rem' }}>
         {
           (isBoost) ? (
             <TitleTotal>

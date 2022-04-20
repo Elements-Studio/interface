@@ -199,7 +199,19 @@ export default function FarmStake({
 
   return (
     <>
-      <Container style={{ paddingTop: '50px' }}>
+      <Container style={{ paddingTop: '1rem' }}>
+      {
+              network === 'main' ? (
+                <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
+                  <Trans>Users who test and give feedback on the Boost feature will have 7 days priority using it on the Main network.
+                  </Trans>
+                  <br/>
+                  <Trans>The Boost feature will be launched on the Main network soon, please stay tuned.
+                  </Trans>
+                </TYPE.body>
+                
+              ) : null
+            }
         <AutoRow justify="center">
           <FarmCard>
             <AutoColumn justify="center">
@@ -299,6 +311,13 @@ export default function FarmStake({
                       </BalanceText>
                     </TYPE.main>
                   </ButtonFarm>
+                  {
+                    isBoost && network === 'barnard' ? (
+                      <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
+                        <Trans>Users who test and give feedback on the Boost feature will have 7 days priority using it on the Main network.</Trans>
+                      </TYPE.body>
+                    ) : null
+                  }
                 </AutoColumn>
               </FarmCard>
             ): null
