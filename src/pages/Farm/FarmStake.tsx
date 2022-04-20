@@ -202,7 +202,7 @@ export default function FarmStake({
       <Container style={{ paddingTop: '1rem' }}>
       {
               network === 'main' ? (
-                <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
+                <TYPE.body fontSize={12} style={{ marginTop: '12px', textAlign: 'center'}}>
                   <Trans>Users who test and give feedback on the Boost feature will have 7 days priority using it on the Main network.
                   </Trans>
                   <br/>
