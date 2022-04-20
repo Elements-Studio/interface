@@ -18,13 +18,13 @@ import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
 
 const Container = styled.div`
-  border-radius: 20px;
-  border: 1px solid ${({ theme }) => theme.inputBorder};
   width: 100%;
-  height: 88px;
-  margin-top: 16px;
-  display: flex;
-  justify-content: space-between;
+  button:disabled {
+    background: #EDEEF2!important;
+    div {
+      color: #565A69!important;
+    }
+  }
 `
 
 const Input = styled.input`
@@ -134,22 +134,26 @@ export default function FarmUnstakeDialog({
             <Trans>VeStar:</Trans>：{veStarAmount / lpTokenScalingFactor}
           </TYPE.black>
         </RowBetween>
-        <RowBetween style={{ marginTop: '24px' }}>
-          <ButtonBorder marginRight={22} onClick={onDismiss} >
-            <TYPE.black fontSize={20}>
-              <Trans>Cancel</Trans>
-            </TYPE.black>
-          </ButtonBorder>
-          <ButtonFarm onClick={() => {
-            onClickUnstakeConfirm();
-            setTimeout(onDismiss, 2500);
-            setTimeout("window.location.reload()", 10000);
-          }}>
-            <TYPE.main color={'#fff'}>
-              <Trans>Confirm</Trans>
-            </TYPE.main>
-          </ButtonFarm>
-        </RowBetween>
+        <Container>
+          <RowBetween style={{ marginTop: '24px' }}>
+            <ButtonBorder marginRight={22} onClick={onDismiss} >
+              <TYPE.black fontSize={20}>
+                <Trans>Cancel</Trans>
+              </TYPE.black>
+            </ButtonBorder>
+            <ButtonFarm 
+              disabled={veStarAmount === 0} 
+              onClick={() => {
+                onClickUnstakeConfirm();
+                setTimeout(onDismiss, 2500);
+                setTimeout("window.location.reload()", 10000);
+              }}>
+              <TYPE.main color={'#fff'}>
+                <Trans>Confirm</Trans>
+              </TYPE.main>
+            </ButtonFarm>
+          </RowBetween>
+        </Container>
       </ColumnCenter>
     </Modal>
   )
