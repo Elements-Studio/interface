@@ -196,7 +196,7 @@ export default function FarmStakeDialog({
     return false;
   }
 
-  const veStarAmount = (isBoost && stakeNumber && duration) ? (stakeNumber * (duration / 86400) / 365).toFixed(4) : 0
+  const veStarAmount = (isBoost && stakeNumber && duration) ? (stakeNumber * (duration / 86400) / ( 365 * 2 )).toFixed(4) : 0
   
   return (
     <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={ theme.bgCard }>
