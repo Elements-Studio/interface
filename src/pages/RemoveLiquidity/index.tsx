@@ -44,6 +44,7 @@ import { useUserSlippageToleranceWithDefault } from '../../state/user/hooks'
 import { BigNumber } from '@ethersproject/bignumber'
 import { t, Trans } from '@lingui/macro'
 import { useRemoveLiquidity } from 'hooks/useTokenSwapScript'
+import { useGetLiquidityPools } from 'hooks/useTokenSwapRouter'
 
 const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(5, 100)
 
@@ -438,7 +439,7 @@ export default function RemoveLiquidity({
     Number.parseInt(parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0)),
     liquidityPercentChangeCallback
   )
-
+  const { data: liquidityPools} = useGetLiquidityPools()
   return (
     <>
       <AppBody>
@@ -671,7 +672,7 @@ export default function RemoveLiquidity({
 
       {pair ? (
         <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem' }}>
-          <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
+          <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} liquidityPools={liquidityPools} />
         </AutoColumn>
       ) : null}
     </>
