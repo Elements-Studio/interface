@@ -21,7 +21,7 @@ import FAIBlueLogo from '../../assets/images/fai_token_logo_blue.png'
 import STCBlueLogo from '../../assets/images/stc_logo_blue.png'
 import StarswapBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
 import PortisIcon from '../../assets/images/portisIcon.png'
-import { useIsDarkMode } from '../../state/user/hooks'
+import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import axios from 'axios';
@@ -73,7 +73,7 @@ export default function Farm({ history }: RouteComponentProps) {
     `https://swap-api.starswap.xyz/${network}/v1/lpTokenFarms`,
     fetcher
   );
-
+  const isBoost = useIsBoost()
   
   // if (error) return "An error has occurred.";
   // if (!data) return "Loading...";
@@ -273,21 +273,25 @@ export default function Farm({ history }: RouteComponentProps) {
                   />
                 </RowFixed>
               </FixedHeightRow>
-              <FixedHeightRow>
-                <Text fontSize={16} fontWeight={500}>
-                  <Trans>Boost APR</Trans>
-                </Text>
-                <RowFixed>
-                  <Text fontSize={16} fontWeight={500}>
-                    {(item.estimatedApy).toFixed(2)}% ~ {(item.estimatedApy * 2.5).toFixed(2)}%
-                  </Text>
-                  <QuestionHelper
-                    text={
-                      <Trans>The boosted estimated annualized percentage yield of rewards</Trans>
-                    }
-                  />
-                </RowFixed>
-              </FixedHeightRow>
+              {
+                isBoost ? (
+                  <FixedHeightRow>
+                    <Text fontSize={16} fontWeight={500}>
+                      <Trans>Boost APR</Trans>
+                    </Text>
+                    <RowFixed>
+                      <Text fontSize={16} fontWeight={500}>
+                        {(item.estimatedApy).toFixed(2)}% ~ {(item.estimatedApy * 2.5).toFixed(2)}%
+                      </Text>
+                      <QuestionHelper
+                        text={
+                          <Trans>The boosted estimated annualized percentage yield of rewards</Trans>
+                        }
+                      />
+                    </RowFixed>
+                  </FixedHeightRow>
+                ) : null
+              }
               <FixedHeightRow marginBottom={16}>
                 <Text fontSize={16} fontWeight={500}>
                   <Trans>Multiplier</Trans>
