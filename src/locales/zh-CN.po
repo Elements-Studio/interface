@@ -2060,7 +2060,7 @@ msgid "V3 {0} Price:"
 msgstr "V3 {0} 兑换率："
 
 #: src/components/farm/FarmBoostDialog.tsx
-msgid "VeStar:"
+msgid "VeStar"
 msgstr ""
 
 #: src/components/Header/UniBalanceContent.tsx

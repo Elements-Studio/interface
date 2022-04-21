@@ -2124,8 +2124,8 @@ msgid "V3 {0} Price:"
 msgstr "V3 {0} Price:"
 
 #: src/components/farm/FarmBoostDialog.tsx
-msgid "VeStar:"
-msgstr "VeStar:"
+msgid "VeStar"
+msgstr "VeStar"
 
 #: src/components/Header/UniBalanceContent.tsx
 msgid "View UNI Analytics"

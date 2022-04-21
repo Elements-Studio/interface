@@ -131,7 +131,7 @@ export default function FarmUnstakeDialog({
         </AutoRow>
         <RowBetween style={{ marginTop: '8px' }}>
           <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
-            <Trans>VeStar:</Trans>：{veStarAmount / lpTokenScalingFactor}
+            <Trans>VeStar</Trans>: {veStarAmount / lpTokenScalingFactor}
           </TYPE.black>
         </RowBetween>
         <Container>
