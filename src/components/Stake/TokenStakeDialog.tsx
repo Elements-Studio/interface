@@ -234,9 +234,13 @@ export default function FarmStakeDialog({
               <FormControlLabel value="10" control={<Radio />} label="10 Seconds" />
               <FormControlLabel value="86400" control={<Radio />} label="1 Day" />
               <FormControlLabel value="31536000" disabled control={<Radio />} label="(365 Days)" />
-              */}
               <FormControlLabel value="100" control={<Radio />} label="100 Seconds" />
-              <FormControlLabel value="3600" control={<Radio />} label="1 hour" />
+              */}
+              {
+                isBoost ? (
+                  <FormControlLabel value="3600" control={<Radio />} label="1 hour" />
+                ) : null
+              }
               <FormControlLabel value="604800" control={<Radio />} label={`7 Days (2x)  ${poolList !== [] ? (poolList[0].estimatedApy*2).toFixed(4) : ''}%`}/>
               <FormControlLabel value="1209600" control={<Radio />} label={`14 Days (3x)  ${poolList !== [] ? (poolList[0].estimatedApy*3).toFixed(4) : ''}%`}/>
               <FormControlLabel value="2592000" control={<Radio />} label={`30 Days (4x)  ${poolList !== [] ? (poolList[0].estimatedApy*4).toFixed(4) : ''}%`}/>
