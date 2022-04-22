@@ -20,10 +20,48 @@ export function computeRealizedLPFeePercent(
   let percent: Percent
   if (trade instanceof V2Trade) {
     // for each hop in our trade, take away the x*y=k price impact from 0.25% fees
-    // e.g. for 3 tokens/2 hops: 1 - ((1 - .25) * (1-.25))
+    // e.g. for 3 tokens/2 hops: 1 - ((1 - .025) * (1-.025))
     percent = ONE_HUNDRED_PERCENT.subtract(
       trade.route.pairs.reduce<Percent>(
         (currentFee: Percent): Percent => currentFee.multiply(INPUT_FRACTION_AFTER_FEE),
+        ONE_HUNDRED_PERCENT
+      )
+    )
+  } else {
+    percent = ONE_HUNDRED_PERCENT.subtract(
+      trade.route.pools.reduce<Percent>(
+        (currentFee: Percent, pool): Percent =>
+          currentFee.multiply(ONE_HUNDRED_PERCENT.subtract(new Fraction(pool.fee, 1_000_000))),
+        ONE_HUNDRED_PERCENT
+      )
+    )
+  }
+
+  return new Percent(percent.numerator, percent.denominator)
+}
+
+export function computeRealizedLPFeePercentDynamic(
+  trade: V2Trade<Currency, Currency, TradeType> | V3Trade<Currency, Currency, TradeType>,
+  liquidityPools: any
+): Percent {
+  let percent: Percent
+  if (trade instanceof V2Trade) {
+    percent = ONE_HUNDRED_PERCENT.subtract(
+      trade.route.pairs.reduce<Percent>(
+        (currentFee: Percent, pair): Percent => {
+          // calculate feePercent dynamatically, instead of fixed .025%
+          const liquidityPoolMatch = liquidityPools.filter((lp: any) =>
+            lp.liquidityPoolId.liquidityTokenId.tokenXId === pair.token0.symbol && lp.liquidityPoolId.liquidityTokenId.tokenYId === pair.token1.symbol ||
+            lp.liquidityPoolId.liquidityTokenId.tokenXId === pair.token1.symbol && lp.liquidityPoolId.liquidityTokenId.tokenYId === pair.token0.symbol
+          )
+          const { poundageRate: poundageRateOrigin, swapFeeOperationRateV2: swapFeeOperationRateV2Origin } = liquidityPoolMatch[0]
+          const poundageRate = !poundageRateOrigin || poundageRateOrigin.denominator === 0 ? { numerator: 3, denominator: 1000 } : poundageRateOrigin
+          const swapFeeOperationRateV2 = !swapFeeOperationRateV2Origin || swapFeeOperationRateV2Origin.denominator === 0 ? { numerator: 5, denominator: 6 } : swapFeeOperationRateV2Origin
+          const fee = (poundageRate.numerator / poundageRate.denominator) * (1 - swapFeeOperationRateV2.numerator / swapFeeOperationRateV2.denominator)
+          const feePercent = new Percent(JSBI.BigInt(fee * 10000), JSBI.BigInt(10000))
+          const inputFractionAfterFee = ONE_HUNDRED_PERCENT.subtract(feePercent)
+          return currentFee.multiply(inputFractionAfterFee)
+        },
         ONE_HUNDRED_PERCENT
       )
     )

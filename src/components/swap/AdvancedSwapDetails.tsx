@@ -5,11 +5,12 @@ import { Trade as V3Trade } from '@uniswap/v3-sdk'
 import { useContext, useMemo } from 'react'
 import { ThemeContext } from 'styled-components'
 import { TYPE } from '../../theme'
-import { computeRealizedLPFeePercent } from '../../utils/prices'
+import { computeRealizedLPFeePercentDynamic } from '../../utils/prices'
 import { AutoColumn } from '../Column'
 import { RowBetween, RowFixed } from '../Row'
 import FormattedPriceImpact from './FormattedPriceImpact'
 import SwapRoute from './SwapRoute'
+import { useGetLiquidityPools } from 'hooks/useTokenSwapRouter'
 
 export interface AdvancedSwapDetailsProps {
   trade?: V2Trade<Currency, Currency, TradeType> | V3Trade<Currency, Currency, TradeType>
@@ -19,14 +20,15 @@ export interface AdvancedSwapDetailsProps {
 export function AdvancedSwapDetails({ trade, allowedSlippage }: AdvancedSwapDetailsProps) {
   const theme = useContext(ThemeContext)
 
+  const liquidityPools = useGetLiquidityPools()
+  
   const { realizedLPFee, priceImpact } = useMemo(() => {
-    if (!trade) return { realizedLPFee: undefined, priceImpact: undefined }
-
-    const realizedLpFeePercent = computeRealizedLPFeePercent(trade)
+    if (!trade || !liquidityPools) return { realizedLPFee: undefined, priceImpact: undefined }
+    const realizedLpFeePercent = computeRealizedLPFeePercentDynamic(trade, liquidityPools)
     const realizedLPFee = trade.inputAmount.multiply(realizedLpFeePercent)
     const priceImpact = trade.priceImpact.subtract(realizedLpFeePercent)
     return { priceImpact, realizedLPFee }
-  }, [trade])
+  }, [trade,liquidityPools])
 
   return !trade ? null : (
     <AutoColumn gap="8px">
