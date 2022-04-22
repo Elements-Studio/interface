@@ -439,7 +439,9 @@ export default function RemoveLiquidity({
     Number.parseInt(parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0)),
     liquidityPercentChangeCallback
   )
-  const { data: liquidityPools} = useGetLiquidityPools()
+
+  const liquidityPools = useGetLiquidityPools()
+
   return (
     <>
       <AppBody>

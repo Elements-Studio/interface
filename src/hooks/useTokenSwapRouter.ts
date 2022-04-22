@@ -1,9 +1,11 @@
 import useSWR from 'swr'
 import axios from 'axios'
+import { useEffect } from 'react'
 import { FACTORY_ADDRESS as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
 import { useActiveWeb3React } from './web3'
 import { useStarcoinProvider } from './useStarcoinProvider'
 import getCurrentNetwork from '../utils/getCurrentNetwork'
+import { useLiquidityPools } from '../state/user/hooks'
 
 const PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapRouter::`
 
@@ -83,12 +85,17 @@ export function useBatchGetReserves(pairs: ([string, string] | undefined)[]) {
 export function useGetLiquidityPools() {
   const { chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
-  const url = `https://swap-api.starcoin.org/${ network }/v1/liquidityPools`
-  const maps = useSWR(
-    url,
-    (url: any) => axios.get(url).then(res => res.data)
+  const [liquidityPools, setLiquidityPools] = useLiquidityPools()
+  useEffect(
+    () => {
+      if (!liquidityPools[network]) {
+        const url = `https://swap-api.starcoin.org/${ network }/v1/liquidityPools`
+        axios.get(url).then((res: any) => res.data).then((data: any) => setLiquidityPools({ ...liquidityPools, [network]: data }))
+      }
+    },
+    [network, liquidityPools]
   )
-  return maps
+  return liquidityPools[network]
 }
 
 /**

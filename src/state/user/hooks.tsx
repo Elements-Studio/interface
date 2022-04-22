@@ -27,6 +27,7 @@ import {
   updateUserLocale,
   updateUserSingleHopOnly,
   updateUserSlippageTolerance,
+  updateLiquidityPools,
 } from './actions'
 
 function serializeToken(token: Token): SerializedToken {
@@ -376,4 +377,14 @@ export function useIsBoost(): boolean {
       isBoost = false;
   }
   return isBoost
+}
+
+export function useLiquidityPools(): [any, (liquidityPools: any) => void] {
+  const dispatch = useAppDispatch()
+  const liquidityPools = useAppSelector((state) => state.user.liquidityPools)
+  const setLiquidityPools = (liquidityPools: any) => {
+    dispatch(updateLiquidityPools({ liquidityPools }))
+  }
+
+  return [liquidityPools, setLiquidityPools]
 }
