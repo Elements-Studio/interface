@@ -56,7 +56,7 @@ export function computeRealizedLPFeePercentDynamic(
           )
           const { poundageRate: poundageRateOrigin, swapFeeOperationRateV2: swapFeeOperationRateV2Origin } = liquidityPoolMatch[0]
           const poundageRate = !poundageRateOrigin || poundageRateOrigin.denominator === 0 ? { numerator: 3, denominator: 1000 } : poundageRateOrigin
-          const swapFeeOperationRateV2 = !swapFeeOperationRateV2Origin || swapFeeOperationRateV2Origin.denominator === 0 ? { numerator: 5, denominator: 6 } : swapFeeOperationRateV2Origin
+          const swapFeeOperationRateV2 = !swapFeeOperationRateV2Origin || swapFeeOperationRateV2Origin.denominator === 0 ? { numerator: 1, denominator: 6 } : swapFeeOperationRateV2Origin
           const fee = (poundageRate.numerator / poundageRate.denominator) * (1 - swapFeeOperationRateV2.numerator / swapFeeOperationRateV2.denominator)
           const feePercent = new Percent(JSBI.BigInt(fee * 10000), JSBI.BigInt(10000))
           const inputFractionAfterFee = ONE_HUNDRED_PERCENT.subtract(feePercent)
