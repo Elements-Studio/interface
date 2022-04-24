@@ -1031,6 +1031,10 @@ msgstr "学习"
 msgid "Learn more"
 msgstr "了解更多"
 
+#: src/pages/Farm/FarmStake.tsx
+msgid "Learn more about boost"
+msgstr "挖矿加速说明"
+
 #: src/components/claim/ClaimModal.tsx
 #: src/pages/Pool/PositionPage.tsx
 msgid "Liquidity"

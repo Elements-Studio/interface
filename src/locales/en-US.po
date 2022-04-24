@@ -1070,6 +1070,10 @@ msgstr "Learn"
 msgid "Learn more"
 msgstr "Learn more"
 
+#: src/pages/Farm/FarmStake.tsx
+msgid "Learn more about boost"
+msgstr "Learn more about boost"
+
 #: src/components/claim/ClaimModal.tsx
 #: src/pages/Pool/PositionPage.tsx
 msgid "Liquidity"

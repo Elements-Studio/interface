@@ -5,7 +5,7 @@ import { Link, RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
 import { STC, STAR, FAI, XUSDT } from '../../constants/tokens'
 import Row, { AutoRow, RowFixed, RowBetween } from '../../components/Row'
-import { TYPE } from '../../theme'
+import { TYPE, ExternalLink } from '../../theme'
 import { ButtonFarm, ButtonBorder } from '../../components/Button'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
 import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
@@ -34,6 +34,8 @@ import axios from 'axios'
 import { useIsDarkMode } from '../../state/user/hooks'
 import { useIsBoost } from '../../state/user/hooks'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
+import { useActiveLocale } from 'hooks/useActiveLocale'
+
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
@@ -84,6 +86,7 @@ const StyledGetLink = styled.a`
     text-decoration: underline;
   }
 `
+
 export default function FarmStake({
   match: {
     params: { tokenX, tokenY },
@@ -118,16 +121,6 @@ export default function FarmStake({
   }
 
   const network = getCurrentNetwork(chainId)
-
-  // const { data: veStarAmount, error: errorVeStar } = useSWR(
-  //   `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmount?accountAddress=${address}`,
-  //   fetcher
-  // );
-
-  // const { data: boostFactorOrigin, error: errorBF } = useSWR(
-  //   `https://swap-api.starswap.xyz/${network}/v1/getAccountFarmBoostFactor?tokenXId=${tokenX}&tokenYId=${tokenY}&accountAddress=${address}`,
-  //   fetcher
-  // );
 
   const isBoost = useIsBoost()
   const [ veStarAmount, setVeStarAmount ] = useState(0)
@@ -197,6 +190,7 @@ export default function FarmStake({
     setBoostDialogOpen(false)
   }, [setBoostDialogOpen])
 
+  const local = useActiveLocale()
   return (
     <>
       <Container style={{ paddingTop: '1rem' }}>
@@ -313,9 +307,17 @@ export default function FarmStake({
                   </ButtonFarm>
                   {
                     isBoost && network === 'barnard' ? (
-                      <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
-                        <Trans>Users who test the Boost feature and give feedback will have 7 days priority using it on the Main network.</Trans>
-                      </TYPE.body>
+                      <>
+                        <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
+                          <Trans>Users who test the Boost feature and give feedback will have 7 days priority using it on the Main network.</Trans>
+                          &nbsp;
+                          <ExternalLink href={local === 'en-US' ? 'https://docs.starswap.xyz/v/en/guidelines/vestar-and-boosting' : 'https://docs.starswap.xyz/shi-yong-zhi-nan/ti-su-wa-kuang'}>
+                            <Trans>Learn more about boost</Trans>
+                          </ExternalLink>
+                        </TYPE.body>
+                        
+                      </>
+                      
                     ) : null
                   }
                 </AutoColumn>
