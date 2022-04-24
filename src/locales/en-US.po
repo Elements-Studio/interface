@@ -404,6 +404,10 @@ msgstr "Boost Factor"
 msgid "Boost My LP Staking"
 msgstr "Boost My LP Staking"
 
+#: src/components/Banner/index.tsx
+msgid "Boost is about to be online"
+msgstr "Boost is about to be online"
+
 #: src/components/PositionCard/index.tsx
 msgid "By adding liquidity you'll earn {feePercent}% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
 msgstr "By adding liquidity you'll earn {feePercent}% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
@@ -952,6 +956,10 @@ msgstr "Hide"
 #: src/pages/Swap/index.tsx
 msgid "High Price Impact"
 msgstr "High Price Impact"
+
+#: src/components/Banner/index.tsx
+msgid "How to qualify in the veSTAR boost whitelist?"
+msgstr "How to qualify in the veSTAR boost whitelist?"
 
 #: src/components/SearchModal/ImportList.tsx
 msgid "I understand"

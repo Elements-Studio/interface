@@ -7,6 +7,7 @@ import { Text } from 'rebass'
 import QuestionHelper from '../../components/QuestionHelper'
 import Row, { AutoRow, RowFixed, RowBetween } from '../../components/Row'
 import { TYPE,IconWrapper } from '../../theme'
+import Banner from '../../components/Banner'
 import { ButtonFarm } from '../../components/Button'
 import { AutoColumn } from '../../components/Column'
 import StakeTitle from '../../components/Stake/StakeTitle'
@@ -183,6 +184,7 @@ export default function Farm({ history }: RouteComponentProps) {
   }
   return (
     <>
+      <Banner />
       <StakeTitle />
       <AutoRow justify="center" style={{ paddingTop: '30px', maxWidth: '1200px' }}>
         {list ? list.map((item:any,index:any) => (

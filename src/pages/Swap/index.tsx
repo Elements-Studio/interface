@@ -13,6 +13,7 @@ import ReactGA from 'react-ga'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
 import styled, { ThemeContext } from 'styled-components'
+import Banner from '../../components/Banner'
 import AddressInputPanel from '../../components/AddressInputPanel'
 import { ButtonConfirmed, ButtonError, ButtonGray, ButtonLight, ButtonPrimary } from '../../components/Button'
 import { GreyCard } from '../../components/Card'
@@ -380,14 +381,7 @@ export default function Swap({ history }: RouteComponentProps) {
 
   return (
     <>
-      {/*
-      <TokenWarningModal
-        isOpen={importTokensNotInDefault.length > 0 && !dismissTokenWarning}
-        tokens={importTokensNotInDefault}
-        onConfirm={handleConfirmTokenWarning}
-        onDismiss={handleDismissTokenWarning}
-      />
-      */}
+      <Banner />
       <SwapNetworkAlert />
       <AppBody>
         <SwapHeader allowedSlippage={allowedSlippage} />

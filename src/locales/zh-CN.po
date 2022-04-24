@@ -365,6 +365,10 @@ msgstr ""
 msgid "Boost My LP Staking"
 msgstr ""
 
+#: src/components/Banner/index.tsx
+msgid "Boost is about to be online"
+msgstr "Boost功能即将上线"
+
 #: src/components/PositionCard/index.tsx
 msgid "By adding liquidity you'll earn {feePercent}% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
 msgstr "通过注入流动资金，您将按您在流动池中所占份额赚取对应交易量的{feePercent}%手续费。手续费将实时累计，添加到流动池中，您可以通过赎回您的流动资金将手续费也赎回。"
@@ -913,6 +917,10 @@ msgstr "隐藏"
 #: src/pages/Swap/index.tsx
 msgid "High Price Impact"
 msgstr "对兑换率有高度影响"
+
+#: src/components/Banner/index.tsx
+msgid "How to qualify in the veSTAR boost whitelist?"
+msgstr "如何获得加速白名单资格?"
 
 #: src/components/SearchModal/ImportList.tsx
 msgid "I understand"
