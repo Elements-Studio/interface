@@ -18,7 +18,8 @@ import {
   updateHideClosedPositions,
   updateUserLocale,
   updateArbitrumAlphaAcknowledged,
-  updateLiquidityPools
+  updateLiquidityPools,
+  updateBoostSignature,
 } from './actions'
 import { SupportedLocale } from 'constants/locales'
 
@@ -65,6 +66,9 @@ export interface UserState {
   timestamp: number
   URLWarningVisible: boolean,
   liquidityPools: any,
+  boostSignature: {
+    [address: string]: string
+  }
 }
 
 function pairKey(token0Address: string, token1Address: string) {
@@ -86,7 +90,8 @@ export const initialState: UserState = {
   pairs: {},
   timestamp: currentTimestamp(),
   URLWarningVisible: true,
-  liquidityPools: {}
+  liquidityPools: {},
+  boostSignature: {},
 }
 
 export default createReducer(initialState, (builder) =>
@@ -124,6 +129,7 @@ export default createReducer(initialState, (builder) =>
 
       state.lastUpdateVersionTimestamp = currentTimestamp()
       state.liquidityPools = {}
+      state.boostSignature = {}
     })
     .addCase(updateUserDarkMode, (state, action) => {
       state.userDarkMode = action.payload.userDarkMode
@@ -198,5 +204,8 @@ export default createReducer(initialState, (builder) =>
     })
     .addCase(updateLiquidityPools, (state, action) => {
       state.liquidityPools = action.payload.liquidityPools
+    })
+    .addCase(updateBoostSignature, (state, action) => {
+      state.boostSignature = action.payload.boostSignature
     })
 )

@@ -13,9 +13,12 @@ import Modal from '../Modal'
 import { ButtonFarm, ButtonBorder, ButtonText } from 'components/Button'
 import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
+import { useBoostSignature } from '../../state/user/hooks'
+import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import BigNumber from 'bignumber.js'
 import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
+import { addHexPrefix } from '@starcoin/stc-util'
 
 const Container = styled.div`
   width: 100%;
@@ -82,30 +85,25 @@ export default function FarmUnstakeDialog({
 
   const starcoinProvider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
-
+  const network = getCurrentNetwork(chainId)
+  const [boostSignature, _] = useBoostSignature()
   const theme = useContext(ThemeContext)
   
-  async function onClickUnstakeConfirm() {
+  async function onClickConfirm() {
     try {
-      const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapFarmScript::boost`;
-      const strTypeArgs = [tokenX, tokenY];
-      const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
+      const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapFarmScript::wl_boost`;
+      const tyArgs = [tokenX, tokenY];
 
-      const boostAmount = new BigNumber(veStarAmount);
-      const boostAmountSCSHex = (function () {
-        const se = new bcs.BcsSerializer();
-        se.serializeU128(new BigNumber(boostAmount).toNumber());
-        return hexlify(se.getBytes());
-      })();
-      const args = [
-        arrayify(boostAmountSCSHex)
-      ];
+      const nodeUrl = `https://${network}-seed.starcoin.org`
 
-      const scriptFunction = utils.tx.encodeScriptFunction(
-        functionId,
-        structTypeTags,
-        args,
-      );
+      const boostAmount = new BigNumber(veStarAmount).toNumber();
+
+      const address = account ?  account.toLowerCase() : ''
+      const signature = boostSignature[address] || ''
+
+      const args = [boostAmount, signature]
+      const scriptFunction = await utils.tx.encodeScriptFunctionByResolve(functionId, tyArgs, args, nodeUrl)
+
       const payloadInHex = (function () {
         const se = new bcs.BcsSerializer();
         scriptFunction.serialize(se);
@@ -144,7 +142,7 @@ export default function FarmUnstakeDialog({
             <ButtonFarm 
               disabled={veStarAmount === 0} 
               onClick={() => {
-                onClickUnstakeConfirm();
+                onClickConfirm();
                 setTimeout(onDismiss, 2500);
                 setTimeout("window.location.reload()", 10000);
               }}>

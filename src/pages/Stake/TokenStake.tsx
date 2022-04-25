@@ -14,7 +14,7 @@ import TokenStakeDialog from '../../components/Stake/TokenStakeDialog'
 import TokenUnstakeDialog from '../../components/Stake/TokenUnstakeDialog'
 import StarswapBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
-import { useIsBoost } from '../../state/user/hooks'
+import { useIsBoost, useBoostSignature } from '../../state/user/hooks'
 import { STAR } from '../../constants/tokens'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import { useUserStarStaked } from 'hooks/useTokenSwapFarmScript'
@@ -106,19 +106,17 @@ export default function FarmStake({
   const [ unstakeDialogOpen, setUnstakeDialogOpen ] = useState(false)
   const [ unstakeId, setUnstakeId ] = useState('')
 
-  // const { data: veStarAmount } = useSWR(
-  //   `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmount?accountAddress=${address}`,
-  //   fetcher
-  // );
   const [ veStarAmount, setVeStarAmount ] = useState(0)
-  
+  const [boostSignature, setBoostSignature] = useBoostSignature()
   useEffect(
     () => {
-      if (isBoost) {
-        const url = `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmount?accountAddress=${address}`
-        axios.get(url).then(res => res.data).then(data => setVeStarAmount(data))
-        return
-      }
+      const url = `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmountAndBoostSignature?accountAddress=${address}`
+      axios.get(url).then(res => res.data).then(data => {
+        if (isBoost) {
+          setVeStarAmount(data.veStarAmount)
+          setBoostSignature({...boostSignature, [address]: data.signature || ''})
+        }
+      })
     },
     [isBoost]
   )
@@ -158,7 +156,7 @@ export default function FarmStake({
                 {
                   hasAccount ? (
                     <BalanceText style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                      {starBalance ? (Number(starBalance) / starScalingFactor) : 0} <Trans>STAR</Trans>
+                      {starBalance ? (Number(starBalance) / starScalingFactor) : 0}
                     </BalanceText>
                   ) : null
                 }

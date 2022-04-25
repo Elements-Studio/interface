@@ -28,6 +28,7 @@ import {
   updateUserSingleHopOnly,
   updateUserSlippageTolerance,
   updateLiquidityPools,
+  updateBoostSignature,
 } from './actions'
 
 function serializeToken(token: Token): SerializedToken {
@@ -379,6 +380,17 @@ export function useIsBoost(): boolean {
   return isBoost
 }
 
+
+export function useIsWhiteList(): boolean {
+  console.log('useIsWhiteList')
+  const [boostSignature, _] = useBoostSignature()
+  const { account } = useActiveWeb3React()
+  const address = account ?  account.toLowerCase() : ''
+  const isWhiteList = !!boostSignature[address] 
+  console.log({boostSignature, address, isWhiteList})
+  return isWhiteList
+}
+
 export function useLiquidityPools(): [any, (liquidityPools: any) => void] {
   const dispatch = useAppDispatch()
   const liquidityPools = useAppSelector((state) => state.user.liquidityPools)
@@ -387,4 +399,14 @@ export function useLiquidityPools(): [any, (liquidityPools: any) => void] {
   }
 
   return [liquidityPools, setLiquidityPools]
+}
+
+export function useBoostSignature(): [{ [address: string]: string }, (boostSignature: { [address: string]: string }) => void] {
+  const dispatch = useAppDispatch()
+  const boostSignature = useAppSelector((state) => state.user.boostSignature)
+  const setBoostSignature = (boostSignature: { [address: string]: string }) => {
+    dispatch(updateBoostSignature({ boostSignature }))
+  }
+
+  return [boostSignature, setBoostSignature]
 }

@@ -31,8 +31,7 @@ import { useLookupTBDGain, useUserStaked } from 'hooks/useTokenSwapFarmScript'
 import { useUserLiquidity } from 'hooks/useTokenSwapRouter'
 import useSWR from 'swr'
 import axios from 'axios'
-import { useIsDarkMode } from '../../state/user/hooks'
-import { useIsBoost } from '../../state/user/hooks'
+import { useIsDarkMode, useIsBoost, useBoostSignature } from '../../state/user/hooks'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import { useActiveLocale } from 'hooks/useActiveLocale'
 
@@ -125,14 +124,21 @@ export default function FarmStake({
   const isBoost = useIsBoost()
   const [ veStarAmount, setVeStarAmount ] = useState(0)
   const [ boostFactorOrigin, setBoostFactorOrigin ] = useState(0)
+  const [boostSignature, setBoostSignature] = useBoostSignature()
   useEffect(
     () => {
+      const url1 = `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmountAndBoostSignature?accountAddress=${address}`
+      axios.get(url1).then(res => res.data).then(data => {
+        if (isBoost) {
+          setVeStarAmount(data.veStarAmount)
+          setBoostSignature({...boostSignature, [address]: data.signature || ''})
+        }
+      })
       if (isBoost) {
-        const url1 = `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmount?accountAddress=${address}`
-        axios.get(url1).then(res => res.data).then(data => setVeStarAmount(data))
         const url2 = `https://swap-api.starswap.xyz/${network}/v1/getAccountFarmBoostFactor?tokenXId=${tokenX}&tokenYId=${tokenY}&accountAddress=${address}`
-        axios.get(url2).then(res => res.data).then(data => setBoostFactorOrigin(data))
-        return
+        axios.get(url2).then(res => res.data).then(data => {
+          setBoostFactorOrigin(data)
+        })
       }
     },
     [isBoost]
@@ -306,7 +312,7 @@ export default function FarmStake({
                     </TYPE.main>
                   </ButtonFarm>
                   {
-                    isBoost && network === 'barnard' ? (
+                    ['barnard', 'proxima'].includes(network)  ? (
                       <>
                         <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
                           <Trans>Users who test the Boost feature and give feedback will have 7 days priority using it on the Main network.</Trans>
@@ -315,9 +321,7 @@ export default function FarmStake({
                             <Trans>Learn more about boost</Trans>
                           </ExternalLink>
                         </TYPE.body>
-                        
                       </>
-                      
                     ) : null
                   }
                 </AutoColumn>

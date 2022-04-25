@@ -34,3 +34,4 @@ export const removeSerializedPair =
   createAction<{ chainId: number; tokenAAddress: string; tokenBAddress: string }>('user/removeSerializedPair')
 export const toggleURLWarning = createAction<void>('app/toggleURLWarning')
 export const updateLiquidityPools = createAction<{ liquidityPools: any }>('user/updateLiquidityPools')
+export const updateBoostSignature = createAction<{ boostSignature: { [address: string]: string } }>('user/updateBoostSignature')
