@@ -31,7 +31,7 @@ import { useLookupTBDGain, useUserStaked } from 'hooks/useTokenSwapFarmScript'
 import { useUserLiquidity } from 'hooks/useTokenSwapRouter'
 import useSWR from 'swr'
 import axios from 'axios'
-import { useIsDarkMode, useIsBoost, useBoostSignature } from '../../state/user/hooks'
+import { useIsDarkMode, useIsBoost, useIsWhiteList, useBoostSignature } from '../../state/user/hooks'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import { useActiveLocale } from 'hooks/useActiveLocale'
 
@@ -122,6 +122,7 @@ export default function FarmStake({
   const network = getCurrentNetwork(chainId)
 
   const isBoost = useIsBoost()
+  const isWhiteList = useIsWhiteList()
   const [ veStarAmount, setVeStarAmount ] = useState(0)
   const [ boostFactorOrigin, setBoostFactorOrigin ] = useState(0)
   const [boostSignature, setBoostSignature] = useBoostSignature()
@@ -301,16 +302,21 @@ export default function FarmStake({
                       ) : null
                     }
                   </TYPE.body>
-                  <ButtonFarm style={{ marginTop: '16px' }}
-                    disabled={!hasAccount || !(tbdGain > 0)}
-                    onClick={() => { setBoostDialogOpen(true) }} 
-                  >
-                    <TYPE.main color={'#FE7F8D'}>
-                      <BalanceText color={'#fff'} style={{ flexShrink: 0}} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                        <Trans>Boost</Trans>
-                      </BalanceText>
-                    </TYPE.main>
-                  </ButtonFarm>
+                  {
+                    isWhiteList ? (
+                      <ButtonFarm style={{ marginTop: '16px' }}
+                        disabled={!hasAccount || !(tbdGain > 0)}
+                        onClick={() => { setBoostDialogOpen(true) }} 
+                      >
+                        <TYPE.main color={'#FE7F8D'}>
+                          <BalanceText color={'#fff'} style={{ flexShrink: 0}} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                            <Trans>Boost</Trans>
+                          </BalanceText>
+                        </TYPE.main>
+                      </ButtonFarm>
+                    ) : null
+                  }
+                  
                   {
                     ['barnard', 'proxima'].includes(network)  ? (
                       <>
