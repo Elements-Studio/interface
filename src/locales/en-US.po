@@ -470,7 +470,6 @@ msgid "Claim UNI Token"
 msgstr "Claim UNI Token"
 
 #: src/components/earn/ClaimRewardModal.tsx
-#: src/components/earn/ClaimRewardModal.tsx
 msgid "Claim accumulated UNI rewards"
 msgstr "Claim accumulated UNI rewards"
 
@@ -1553,9 +1552,9 @@ msgstr "Reward Token"
 msgid "Route"
 msgstr "Route"
 
-#: src/pages/Stake/TokenStake.tsx
-msgid "STAR"
-msgstr "STAR"
+#: 
+#~ msgid "STAR"
+#~ msgstr "STAR"
 
 #: src/components/Stake/TokenStakeDialog.tsx
 #: src/pages/Stake/TokenStake.tsx
@@ -2252,7 +2251,6 @@ msgstr "Withdraw"
 msgid "Withdraw & Claim"
 msgstr "Withdraw & Claim"
 
-#: src/components/earn/UnstakingModal.tsx
 #: src/components/earn/UnstakingModal.tsx
 msgid "Withdraw deposited liquidity"
 msgstr "Withdraw deposited liquidity"

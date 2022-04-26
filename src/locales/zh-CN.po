@@ -427,7 +427,6 @@ msgid "Claim UNI Token"
 msgstr "领取 UNI 代币"
 
 #: src/components/earn/ClaimRewardModal.tsx
-#: src/components/earn/ClaimRewardModal.tsx
 msgid "Claim accumulated UNI rewards"
 msgstr "领取累积的 UNI 代币奖励"
 
@@ -1509,9 +1508,9 @@ msgstr "奖励代币"
 msgid "Route"
 msgstr "途径"
 
-#: src/pages/Stake/TokenStake.tsx
-msgid "STAR"
-msgstr ""
+#: 
+#~ msgid "STAR"
+#~ msgstr ""
 
 #: src/components/Stake/TokenStakeDialog.tsx
 #: src/pages/Stake/TokenStake.tsx
@@ -2188,7 +2187,6 @@ msgstr "赎回"
 msgid "Withdraw & Claim"
 msgstr "赎回和领取"
 
-#: src/components/earn/UnstakingModal.tsx
 #: src/components/earn/UnstakingModal.tsx
 msgid "Withdraw deposited liquidity"
 msgstr "赎回注入的流动资金"
