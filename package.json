@@ -20,7 +20,7 @@
     "@react-hook/window-scroll": "^1.3.0",
     "@reduxjs/toolkit": "^1.6.0",
     "@rtk-query/graphql-request-base-query": "^1.0.3",
-    "@starcoin/starcoin": "^1.5.3",
+    "@starcoin/starcoin": "^2.1.0",
     "@starcoin/starswap-sdk-core": "^0.3.0",
     "@starcoin/starswap-v2-sdk": "^0.2.4",
     "@starcoin/starswap-web3-core": "^0.2.1",

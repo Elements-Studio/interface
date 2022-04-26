@@ -91,6 +91,9 @@ export default function FarmUnstakeDialog({
   
   async function onClickConfirm() {
     try {
+      const address = account ?  account.toLowerCase() : ''
+      const signature = boostSignature[address] || ''
+
       const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapFarmScript::wl_boost`;
       const tyArgs = [tokenX, tokenY];
 
@@ -98,10 +101,8 @@ export default function FarmUnstakeDialog({
 
       const boostAmount = new BigNumber(veStarAmount).toNumber();
 
-      const address = account ?  account.toLowerCase() : ''
-      const signature = boostSignature[address] || ''
-
-      const args = [boostAmount, signature]
+      const args = [boostAmount, signature];
+      
       const scriptFunction = await utils.tx.encodeScriptFunctionByResolve(functionId, tyArgs, args, nodeUrl)
 
       const payloadInHex = (function () {

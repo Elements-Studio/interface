@@ -3372,6 +3372,11 @@
   resolved "https://registry.npmjs.org/@multiformats/base-x/-/base-x-4.0.1.tgz"
   integrity sha512-eMk0b9ReBbV23xXU693TAIrLyeO5iTgBZGSJfpqriG8UkYvr/hC9u9pyMlAakDNHWmbhMZCDs6KQO0jzKD8OTw==
 
+"@noble/ed25519@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@noble/ed25519/-/ed25519-1.6.0.tgz#b55f7c9e532b478bf1d7c4f609e1f3a37850b583"
+  integrity sha512-UKju89WV37IUALIMfKhKW3psO8AqmrE/GvH6QbPKjzolQ98zM7WmGUeY+xdIgSf5tqPFf75ZCYMgym6E9Jsw3Q==
+
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
   resolved "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.4.tgz"
@@ -3659,10 +3664,10 @@
     bech32 "1.1.4"
     ws "7.2.3"
 
-"@starcoin/starcoin@^1.5.3":
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/@starcoin/starcoin/-/starcoin-1.5.3.tgz#b75c763f1ec68b149da674852eb73b4717dd7ea1"
-  integrity sha512-rO7deVE7ccz3VgwUp/Gbkiv4IKrgmgYZaNWNsmFga/BjtL1cOxjZiJ60b8eMOdqqrta+Qtyoz12CleDJU2+H3w==
+"@starcoin/starcoin@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@starcoin/starcoin/-/starcoin-2.1.0.tgz#4727fd60044133ee3c4f97954b86e115948ac1ba"
+  integrity sha512-sPmNetZvIYmGvso71MFeihka2qLHcZJjLwq5x3xFN4bqfHzdpNsKG7QIrnchbzcuiqkoi509Os/kMxs61+zYHw==
   dependencies:
     "@ethersproject/basex" "^5.0.4"
     "@ethersproject/bignumber" "^5.0"
@@ -3673,9 +3678,10 @@
     "@ethersproject/properties" "^5.0.4"
     "@ethersproject/sha2" "^5.0.4"
     "@ethersproject/web" "^5.0.9"
-    "@starcoin/stc-ed25519" "^0.1.0"
+    "@noble/ed25519" "^1.6.0"
     bech32 "^2.0.0"
     ethereumjs-util "5.1.0"
+    fs "^0.0.1-security"
     is-alphabetical "^1.0.4"
     is-alphanumerical "^1.0.4"
     is-decimal "^1.0.4"
@@ -3684,6 +3690,7 @@
     is-word-character "^1.0.4"
     js-sha3 "^0.8.0"
     jssha "^3.2.0"
+    lodash "^4.17.21"
     read-bigint "^0.1.6"
     ws "7.2.3"
 
@@ -10353,6 +10360,11 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   integrity sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
+
+fs@^0.0.1-security:
+  version "0.0.1-security"
+  resolved "https://registry.yarnpkg.com/fs/-/fs-0.0.1-security.tgz#8a7bd37186b6dddf3813f23858b57ecaaf5e41d4"
+  integrity sha1-invTcYa23d84E/I4WLV+yq9eQdQ=
 
 fsevents@^1.2.7:
   version "1.2.13"
