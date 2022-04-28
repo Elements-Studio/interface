@@ -1719,9 +1719,9 @@ msgstr ""
 msgid "Thanks for being part of the Uniswap community <0/>"
 msgstr "感谢您加入 Uniswap 社区 <0/>"
 
-#: src/pages/Farm/FarmStake.tsx
-msgid "The Boost feature will be launched on the Main network soon, please stay tuned."
-msgstr "Boost功能即将上线主网，敬请期待。"
+#: 
+#~ msgid "The Boost feature will be launched on the Main network soon, please stay tuned."
+#~ msgstr "Boost功能即将上线主网，敬请期待。"
 
 #: src/pages/Farm/index.tsx
 msgid "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."
@@ -2049,13 +2049,13 @@ msgstr "更新代币列表"
 msgid "User"
 msgstr "用户"
 
-#: src/pages/Farm/FarmStake.tsx
-msgid "Users who test the Boost feature and give feedback will have 7 days priority using it on the Main network."
-msgstr "测试和反馈Boost功能的用户，将享有Boost功能在主网的7天优先体验权。"
+#: 
+#~ msgid "Users who test the Boost feature and give feedback will have 7 days priority using it on the Main network."
+#~ msgstr "在Barnard网测试和反馈Boost功能的用户，将享有Boost功能在主网的7天优先体验权。"
 
 #: src/pages/Farm/FarmStake.tsx
 msgid "Users who test the Boost feature on the Barnard network and give feedback, will have 7 days priority using it on the Main network."
-msgstr "在Barnard网上测试和反馈Boost功能的用户，将享有Boost功能在主网的7天优先体验权。"
+msgstr "在Barnard网测试和反馈Boost功能的用户，将享有Boost功能在主网的7天优先体验权。"
 
 #: src/pages/Pool/index.tsx
 msgid "V2 liquidity"

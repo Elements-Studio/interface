@@ -201,18 +201,6 @@ export default function FarmStake({
   return (
     <>
       <Container style={{ paddingTop: '1rem' }}>
-      {
-              network === 'main' ? (
-                <TYPE.body fontSize={12} style={{ marginTop: '12px', textAlign: 'center'}}>
-                  <Trans>Users who test the Boost feature on the Barnard network and give feedback, will have 7 days priority using it on the Main network.
-                  </Trans>
-                  <br/>
-                  <Trans>The Boost feature will be launched on the Main network soon, please stay tuned.
-                  </Trans>
-                </TYPE.body>
-                
-              ) : null
-            }
         <AutoRow justify="center">
           <FarmCard>
             <AutoColumn justify="center">
@@ -316,20 +304,13 @@ export default function FarmStake({
                       </ButtonFarm>
                     ) : null
                   }
-                  
-                  {
-                    ['barnard', 'proxima'].includes(network)  ? (
-                      <>
-                        <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
-                          <Trans>Users who test the Boost feature and give feedback will have 7 days priority using it on the Main network.</Trans>
-                          &nbsp;
-                          <ExternalLink href={local === 'en-US' ? 'https://docs.starswap.xyz/v/en/guidelines/vestar-and-boosting' : 'https://docs.starswap.xyz/shi-yong-zhi-nan/ti-su-wa-kuang'}>
-                            <Trans>Learn more about boost</Trans>
-                          </ExternalLink>
-                        </TYPE.body>
-                      </>
-                    ) : null
-                  }
+                  <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
+                    <Trans>Users who test the Boost feature on the Barnard network and give feedback, will have 7 days priority using it on the Main network.</Trans>
+                    &nbsp;
+                    <ExternalLink href={local === 'en-US' ? 'https://docs.starswap.xyz/v/en/guidelines/vestar-and-boosting' : 'https://docs.starswap.xyz/shi-yong-zhi-nan/ti-su-wa-kuang'}>
+                      <Trans>Learn more about boost</Trans>
+                    </ExternalLink>
+                  </TYPE.body>
                 </AutoColumn>
               </FarmCard>
             ): null

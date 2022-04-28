@@ -369,10 +369,10 @@ export function useIsBoost(): boolean {
       isBoost = true;
       break;
     case 'barnard':
-      isBoost = process.env.REACT_APP_STARSWAP_BOOST === 'true';
+      isBoost = true;
       break;
     case 'main':
-      isBoost = process.env.REACT_APP_STARSWAP_BOOST === 'true';
+      isBoost = true;
       break;
     default:
       isBoost = false;
