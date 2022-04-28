@@ -13,7 +13,6 @@ import FarmTitle from '../../components/farm/FarmTitle'
 import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
 import FarmCard from '../../components/farm/FarmCard'
 import CurrencyLogo from '../../components/CurrencyLogo'
-import Banner from '../../components/Banner'
 import { marginTop, maxWidth, paddingTop } from 'styled-system'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import STCLogo from '../../assets/images/stc.png'
@@ -186,7 +185,6 @@ export default function Farm({ history }: RouteComponentProps) {
 
   return (
     <>
-      <Banner/>
       <FarmTitle />
       <AutoRow justify="center" style={{ paddingTop: '1rem', maxWidth: '1200px' }}>
         {list ? list.map((item:any,index:any) => (

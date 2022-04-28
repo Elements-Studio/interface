@@ -11,7 +11,6 @@ import Card from '../../components/Card'
 import { RowBetween, RowFixed } from '../../components/Row'
 import { ButtonPrimary, ButtonSecondary, ButtonOutlined } from '../../components/Button'
 import { ChevronsRight } from 'react-feather'
-import Banner from '../../components/Banner'
 import { AutoColumn } from '../../components/Column'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { useV2Pairs } from '../../hooks/useV2Pairs'
@@ -135,7 +134,6 @@ export default function Pool() {
   return (
     <>
       <PageWrapper>
-        <Banner />
         <SwapPoolTabs active={'pool'} />
         {/*
         <VoteCard>
