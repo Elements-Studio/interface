@@ -25,6 +25,7 @@ import Swap from './Swap'
 import Farm from './Farm'
 import FarmStake from './Farm/FarmStake'
 import Stake from './Stake'
+import Simulator from './Stake/Simulator'
 import TokenStake from './Stake/TokenStake'
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 import Vote from './Vote'
@@ -115,6 +116,12 @@ export default function App() {
               <Route exact strict path="/farm/:tokenX/:tokenY" component={FarmStake} />
 
               <Route exact strict path="/stake" component={Stake} />
+              <Route
+                exact
+                strict
+                path="/stake/simulator"
+                component={Simulator}
+              />
               <Route exact strict path="/stake/:token" component={TokenStake} />
 
               <Route exact strict path="/add/v2/:currencyIdA?/:currencyIdB?" component={RedirectDuplicateTokenIdsV2} />
