@@ -2117,9 +2117,13 @@ msgstr "User"
 #~ msgid "Users who test the Boost feature and give feedback will have 7 days priority using it on the Main network."
 #~ msgstr "Users who test the Boost feature and give feedback will have 7 days priority using it on the Main network."
 
+#: 
+#~ msgid "Users who test the Boost feature on the Barnard network and give feedback, will have 7 days priority using it on the Main network."
+#~ msgstr "Users who test the Boost feature on the Barnard network and give feedback, will have 7 days priority using it on the Main network."
+
 #: src/pages/Farm/FarmStake.tsx
-msgid "Users who test the Boost feature on the Barnard network and give feedback, will have 7 days priority using it on the Main network."
-msgstr "Users who test the Boost feature on the Barnard network and give feedback, will have 7 days priority using it on the Main network."
+msgid "Users who test the boost feature on the Barnard network and give feedback, have 7 days priority using it on the Main network."
+msgstr "Users who test the boost feature on the Barnard network and give feedback, have 7 days priority using it on the Main network."
 
 #: src/pages/Pool/index.tsx
 msgid "V2 liquidity"

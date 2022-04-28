@@ -2053,9 +2053,13 @@ msgstr "用户"
 #~ msgid "Users who test the Boost feature and give feedback will have 7 days priority using it on the Main network."
 #~ msgstr "在Barnard网测试和反馈Boost功能的用户，将享有Boost功能在主网的7天优先体验权。"
 
+#: 
+#~ msgid "Users who test the Boost feature on the Barnard network and give feedback, will have 7 days priority using it on the Main network."
+#~ msgstr "在Barnard网测试和反馈Boost功能的用户，将享有Boost功能在主网的7天优先体验权。"
+
 #: src/pages/Farm/FarmStake.tsx
-msgid "Users who test the Boost feature on the Barnard network and give feedback, will have 7 days priority using it on the Main network."
-msgstr "在Barnard网测试和反馈Boost功能的用户，将享有Boost功能在主网的7天优先体验权。"
+msgid "Users who test the boost feature on the Barnard network and give feedback, have 7 days priority using it on the Main network."
+msgstr "在Barnard网测试和反馈Boost功能的用户，享有Boost功能在主网的7天优先体验权。"
 
 #: src/pages/Pool/index.tsx
 msgid "V2 liquidity"
