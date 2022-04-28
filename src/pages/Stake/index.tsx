@@ -181,108 +181,98 @@ export default function Farm({ history }: RouteComponentProps) {
     </>
     )
   }
+
   return (
     <>
       <StakeTitle />
       <AutoRow justify="center" style={{ paddingTop: '30px', maxWidth: '1200px' }}>
-        {list ? list.map((item:any,index:any) => (
-            <FarmCard key={index}>
-              <AutoColumn justify="center">
-                <RowFixed>
-                  <StyledEthereumLogo src={StarswapBlueLogo} size={'48px'} />
-                  {/*
+        {list
+          ? list.map((item: any, index: any) => (
+              <FarmCard key={index}>
+                <AutoColumn justify="center">
+                  <RowFixed>
+                    <StyledEthereumLogo src={StarswapBlueLogo} size={'48px'} />
+                    {/*
                   <StyledEthereumLogo src={EthereumLogo} style={{ marginRight: '1.25rem' }} size={'48px'} />
                   */}
-                </RowFixed>
-                <Text fontSize={16} marginTop={23}>
-                  {item.syrupPoolId.tokenId}
-                </Text>
-              </AutoColumn>
-              <FarmRow style={{ marginTop: '30px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Token Address</Trans>
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14}>
-                    {item.syrupPoolId.poolAddress.substring(0,16)+'...'} 
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow>
-              <FarmRow style={{ marginTop: '10px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>TVL in USDT</Trans>
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14}>
-                    {item.tvlInUsd.toFixed(2) || 0}
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow>
-              <FarmRow style={{ marginTop: '10px', marginBottom: '10px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Total Stake Amount</Trans>
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14}>
-                    {Number(item.totalStakeAmount / starScalingFactor).toFixed(2) || 0}
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow>
-              <FarmRow style={{ marginTop: '10px', marginBottom: '10px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Reward Token</Trans>
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14}>
-                    {item.rewardTokenId}
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow>
-              <FarmRow style={{ marginTop: '10px', marginBottom: '10px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Daily Reward</Trans>
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14}>
-                    {Number(item.dailyReward / starScalingFactor) || 0}
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow>
-              <FarmRow style={{ marginTop: '10px', marginBottom: '10px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Pool Created</Trans>
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14}>
-                    {(new Date(item.createdAt)+'').slice(4,24)}
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow>
-              <FarmRow style={{ marginTop: '10px', marginBottom: '20px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Pool Updated</Trans>
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14}>
-                    {(new Date(item.updatedAt)+'').slice(4,24)}
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow>
-              {/* <FarmRow style={{ marginTop: '10px', background: '#2FD8B2', marginBottom: '30px' }}>
+                  </RowFixed>
+                  <Text fontSize={16} marginTop={23}>
+                    {item.syrupPoolId.tokenId}
+                  </Text>
+                </AutoColumn>
+                <FarmRow style={{ marginTop: '30px' }}>
+                  <RowFixed>
+                    <TYPE.black fontWeight={400} fontSize={14}>
+                      <Trans>Token Address</Trans>
+                    </TYPE.black>
+                  </RowFixed>
+                  <RowFixed>
+                    <TYPE.black fontSize={14}>{item.syrupPoolId.poolAddress.substring(0, 16) + '...'}</TYPE.black>
+                  </RowFixed>
+                </FarmRow>
+                <FarmRow style={{ marginTop: '10px' }}>
+                  <RowFixed>
+                    <TYPE.black fontWeight={400} fontSize={14}>
+                      <Trans>TVL in USDT</Trans>
+                    </TYPE.black>
+                  </RowFixed>
+                  <RowFixed>
+                    <TYPE.black fontSize={14}>{item.tvlInUsd.toFixed(2) || 0}</TYPE.black>
+                  </RowFixed>
+                </FarmRow>
+                <FarmRow style={{ marginTop: '10px', marginBottom: '10px' }}>
+                  <RowFixed>
+                    <TYPE.black fontWeight={400} fontSize={14}>
+                      <Trans>Total Stake Amount</Trans>
+                    </TYPE.black>
+                  </RowFixed>
+                  <RowFixed>
+                    <TYPE.black fontSize={14}>
+                      {Number(item.totalStakeAmount / starScalingFactor).toFixed(2) || 0}
+                    </TYPE.black>
+                  </RowFixed>
+                </FarmRow>
+                <FarmRow style={{ marginTop: '10px', marginBottom: '10px' }}>
+                  <RowFixed>
+                    <TYPE.black fontWeight={400} fontSize={14}>
+                      <Trans>Reward Token</Trans>
+                    </TYPE.black>
+                  </RowFixed>
+                  <RowFixed>
+                    <TYPE.black fontSize={14}>{item.rewardTokenId}</TYPE.black>
+                  </RowFixed>
+                </FarmRow>
+                <FarmRow style={{ marginTop: '10px', marginBottom: '10px' }}>
+                  <RowFixed>
+                    <TYPE.black fontWeight={400} fontSize={14}>
+                      <Trans>Daily Reward</Trans>
+                    </TYPE.black>
+                  </RowFixed>
+                  <RowFixed>
+                    <TYPE.black fontSize={14}>{Number(item.dailyReward / starScalingFactor) || 0}</TYPE.black>
+                  </RowFixed>
+                </FarmRow>
+                <FarmRow style={{ marginTop: '10px', marginBottom: '10px' }}>
+                  <RowFixed>
+                    <TYPE.black fontWeight={400} fontSize={14}>
+                      <Trans>Pool Created</Trans>
+                    </TYPE.black>
+                  </RowFixed>
+                  <RowFixed>
+                    <TYPE.black fontSize={14}>{(new Date(item.createdAt) + '').slice(4, 24)}</TYPE.black>
+                  </RowFixed>
+                </FarmRow>
+                <FarmRow style={{ marginTop: '10px', marginBottom: '20px' }}>
+                  <RowFixed>
+                    <TYPE.black fontWeight={400} fontSize={14}>
+                      <Trans>Pool Updated</Trans>
+                    </TYPE.black>
+                  </RowFixed>
+                  <RowFixed>
+                    <TYPE.black fontSize={14}>{(new Date(item.updatedAt) + '').slice(4, 24)}</TYPE.black>
+                  </RowFixed>
+                </FarmRow>
+                {/* <FarmRow style={{ marginTop: '10px', background: '#2FD8B2', marginBottom: '30px' }}>
                 <RowFixed>
                   <TYPE.black fontWeight={400} fontSize={14}>
                     <Trans>Estimated annualized rate of return:</Trans>       
@@ -294,20 +284,18 @@ export default function Farm({ history }: RouteComponentProps) {
                   </TYPE.black>
                 </RowFixed>
               </FarmRow> */}
-              <FixedHeightRow marginBottom={16}>
-                <Text fontSize={16} fontWeight={500}>
-                  <Trans>&nbsp;&nbsp;&nbsp;&nbsp;APR</Trans>
-                </Text>
-                <RowFixed>
+                <FixedHeightRow marginBottom={16}>
                   <Text fontSize={16} fontWeight={500}>
-                    {(item.estimatedApy* 2).toFixed(2)}% ~ {(item.estimatedApy*8).toFixed(2)}%
+                    <Trans>&nbsp;&nbsp;&nbsp;&nbsp;APR</Trans>
                   </Text>
-                  <QuestionHelper
-                    text={tips(item.estimatedApy)}
-                  />
-                </RowFixed>
-              </FixedHeightRow>
-              {/* <FixedHeightRow>
+                  <RowFixed>
+                    <Text fontSize={16} fontWeight={500}>
+                      {(item.estimatedApy * 2).toFixed(2)}% ~ {(item.estimatedApy * 8).toFixed(2)}%
+                    </Text>
+                    <QuestionHelper text={tips(item.estimatedApy)} />
+                  </RowFixed>
+                </FixedHeightRow>
+                {/* <FixedHeightRow>
                 <Text fontSize={16} fontWeight={500}>
                   <Trans>Stepwise Multiplier</Trans>
                 </Text>
@@ -324,20 +312,27 @@ export default function Farm({ history }: RouteComponentProps) {
                   />
                 </RowFixed>
               </FixedHeightRow> */}
-              <ButtonFarm as={Link}
-                to={(window.starcoin && account) ? `/stake/STAR` : '/stake'}
-                onClick={() => {
-                  if (!(window.starcoin && account)) {
-                    alert('Please Connect StarMask Wallet First! \n请先链接StarMask钱包');
-                  }
-                }}
-              >
-                <TYPE.main color={'#fff'}>
-                  <Trans>Stake</Trans>
-                </TYPE.main>
-              </ButtonFarm>
-            </FarmCard>
-        )) : null}
+                <ButtonFarm
+                  as={Link}
+                  to={window.starcoin && account ? `/stake/STAR` : '/stake'}
+                  onClick={() => {
+                    if (!(window.starcoin && account)) {
+                      alert('Please Connect StarMask Wallet First! \n请先链接StarMask钱包')
+                    }
+                  }}
+                >
+                  <TYPE.main color={'#fff'}>
+                    <Trans>Stake</Trans>
+                  </TYPE.main>
+                </ButtonFarm>
+                <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
+                  <Link to={`/stake/simulator`}>
+                    <Trans>Enter Simulator</Trans>
+                  </Link>
+                </TYPE.body>
+              </FarmCard>
+            ))
+          : null}
       </AutoRow>
       <SwitchLocaleLink />
     </>
