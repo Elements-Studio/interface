@@ -1,5 +1,7 @@
 import { Trans } from '@lingui/macro'
 import { useState, useEffect } from 'react'
+import JSBI from 'jsbi'
+import { Percent } from '@uniswap/sdk-core'
 import styled from 'styled-components'
 import { RouteComponentProps, Link } from 'react-router-dom'
 import { Text } from 'rebass'
@@ -86,6 +88,8 @@ const StyledArrowLeft = styled(ArrowLeft)`
   color: ${({ theme }) => theme.text1};
 `
 
+const scalingFactor = 1000000000
+
 export default function Simulator({ history }: RouteComponentProps) {
   const { account, chainId } = useActiveWeb3React()
   const vestarCount = useGetVestarCount()
@@ -109,19 +113,12 @@ export default function Simulator({ history }: RouteComponentProps) {
 
   useEffect(() => {
     // userInputStarToVeStar
-    const _userVeStarCount = (Number(lockedValue) * (duration / 86400)) / (365 * 2) + ''
-    setShareVeStar(_userVeStarCount)
+    const _userVeStarCount = Number(((Number(lockedValue) * scalingFactor * (duration / 86400)) / (365 * 2)).toFixed(0))
+    setShareVeStar(_userVeStarCount+'')
     // share of  veSTAR
     if (vestarCount) {
-      const TotalLockedFarmAmoun = (data?.length && data[1].totalStakeAmount) || 0
-      const _tmp = Number(_userVeStarCount) / (Number(_userVeStarCount) + vestarCount)
-      const veStarPercentage = new BigNumber(_tmp) + ''
+      const veStarPercentage = new Percent(JSBI.BigInt(_userVeStarCount), JSBI.BigInt(_userVeStarCount + vestarCount)).toFixed(9)
       setShareOfVeStar(veStarPercentage)
-
-      // // boost factor
-      // const _boostFactor =
-      //   Number(_userVeStarCount) / vestarCount / (((2 / 3) * Number(lockedValue)) / TotalLockedFarmAmoun) + 1
-      // setBoostFactor(_boostFactor + '')
     }
   }, [lockedValue, duration, vestarCount, data])
 
@@ -225,7 +222,7 @@ export default function Simulator({ history }: RouteComponentProps) {
             </Text>
             <RowFixed>
               <Text fontSize={16} fontWeight={500}>
-                {vestarCount / 1000000000}
+                {vestarCount / scalingFactor}
               </Text>
             </RowFixed>
           </FixedHeightRow>
@@ -235,7 +232,7 @@ export default function Simulator({ history }: RouteComponentProps) {
             </Text>
             <RowFixed>
               <Text fontSize={16} fontWeight={500}>
-                {Number(shareVeStar).toFixed(9)}
+                {Number(shareVeStar) / scalingFactor}
               </Text>
               <QuestionHelper text={<Trans>your share of veSTAR</Trans>} />
             </RowFixed>
@@ -246,7 +243,7 @@ export default function Simulator({ history }: RouteComponentProps) {
             </Text>
             <RowFixed>
               <Text fontSize={16} fontWeight={500}>
-                {Number(veStarPercentage)?.toFixed(15)} %
+                {(Number(veStarPercentage) * 100).toFixed(4)} %
               </Text>
             </RowFixed>
           </FixedHeightRow>
@@ -299,28 +296,6 @@ export default function Simulator({ history }: RouteComponentProps) {
                     <Text fontSize={16} fontWeight={500}>
                       {Number(Number(stakedLpArr[index] || 0) / item.tvlInUsd).toFixed(5)} %
                     </Text>
-                  </RowFixed>
-                </FixedHeightRow>
-                <FixedHeightRow>
-                  <Text fontSize={16} fontWeight={500}>
-                    <Trans>APR</Trans>
-                  </Text>
-                  <RowFixed>
-                    <Text fontSize={16} fontWeight={500}>
-                      {item.estimatedApy.toFixed(2)}%
-                    </Text>
-                    <QuestionHelper text={<Trans>The estimated annualized percentage yield of rewards</Trans>} />
-                  </RowFixed>
-                </FixedHeightRow>
-                <FixedHeightRow>
-                  <Text fontSize={16} fontWeight={500}>
-                    <Trans>Multiplier</Trans>
-                  </Text>
-                  <RowFixed>
-                    <Text fontSize={16} fontWeight={500}>
-                      {item.rewardMultiplier || 0}x
-                    </Text>
-                    <QuestionHelper text={farmAPRTips()} />
                   </RowFixed>
                 </FixedHeightRow>
                 <FixedHeightRow>
