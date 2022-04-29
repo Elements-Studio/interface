@@ -814,8 +814,8 @@ msgid "End"
 msgstr "End"
 
 #: src/pages/Stake/index.tsx
-msgid "Enter Simulator"
-msgstr "Enter Simulator"
+msgid "Boost Simulator"
+msgstr "Boost Simulator"
 
 #: src/state/burn/v3/hooks.ts
 msgid "Enter a percent"
@@ -1683,8 +1683,8 @@ msgid "Stake LP Token"
 msgstr "Stake LP Token"
 
 #: src/pages/Stake/Simulator.tsx
-msgid "Stake Simulator"
-msgstr "Stake Simulator"
+msgid "Boost Simulator"
+msgstr "Boost Simulator"
 
 #: src/components/Stake/TokenStakeDialog.tsx
 msgid "Stake Token"

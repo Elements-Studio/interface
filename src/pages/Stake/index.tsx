@@ -327,7 +327,7 @@ export default function Farm({ history }: RouteComponentProps) {
                 </ButtonFarm>
                 <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
                   <Link to={`/stake/simulator`}>
-                    <Trans>Enter Simulator</Trans>
+                    <Trans>Boost Simulator</Trans>
                   </Link>
                 </TYPE.body>
               </FarmCard>
