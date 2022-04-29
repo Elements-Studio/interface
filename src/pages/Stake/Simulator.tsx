@@ -243,7 +243,6 @@ export default function Simulator({ history }: RouteComponentProps) {
               <Text fontSize={16} fontWeight={500}>
                 {Number(veStarAmount) / scalingFactor}
               </Text>
-              <QuestionHelper text={<Trans>your share of veSTAR</Trans>} />
             </RowFixed>
           </FixedHeightRow>
           <FixedHeightRow>
@@ -254,7 +253,7 @@ export default function Simulator({ history }: RouteComponentProps) {
               <Text fontSize={16} fontWeight={500}>
                 {Number(shareVeStar) / scalingFactor}
               </Text>
-              <QuestionHelper text={<Trans>your share of veSTAR</Trans>} />
+              <QuestionHelper text={<Trans>Your veSTAR Estimated Tips</Trans>} />
             </RowFixed>
           </FixedHeightRow>
           <FixedHeightRow>
@@ -265,6 +264,7 @@ export default function Simulator({ history }: RouteComponentProps) {
               <Text fontSize={16} fontWeight={500}>
                 {(Number(veStarPercentage))} %
               </Text>
+              <QuestionHelper text={<Trans>Percentage Tips</Trans>} />
             </RowFixed>
           </FixedHeightRow>
         </FarmCard>
@@ -326,6 +326,7 @@ export default function Simulator({ history }: RouteComponentProps) {
                     <Text fontSize={16} fontWeight={500}>
                       {getBoostFactor(index)}X
                     </Text>
+                    <QuestionHelper text={<Trans>Boost Factor Tips</Trans>} />
                   </RowFixed>
                 </FixedHeightRow>
                 <FixedHeightRow>
