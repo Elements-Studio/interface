@@ -130,7 +130,6 @@ export default function Simulator({ history }: RouteComponentProps) {
     // userInputStarToVeStar
     const _userVeStarCount = Number(((Number(lockedValue) * scalingFactor * (duration / 86400)) / (365 * 2)).toFixed(0))
     setShareVeStar(_userVeStarCount + '')
-    console.log(_userVeStarCount,veStarAmount, vestarCount, _userVeStarCount + veStarAmount, _userVeStarCount + veStarAmount + vestarCount)
     // share of  veSTAR
     if (vestarCount) {
       const veStarPercentage = new Percent(JSBI.BigInt(_userVeStarCount + veStarAmount), JSBI.BigInt(_userVeStarCount + veStarAmount + vestarCount)).toFixed(9)
@@ -264,7 +263,7 @@ export default function Simulator({ history }: RouteComponentProps) {
             </Text>
             <RowFixed>
               <Text fontSize={16} fontWeight={500}>
-                {(Number(veStarPercentage)).toFixed(4)} %
+                {(Number(veStarPercentage))} %
               </Text>
             </RowFixed>
           </FixedHeightRow>
@@ -273,7 +272,7 @@ export default function Simulator({ history }: RouteComponentProps) {
       <AutoRow justify="center" style={{ paddingTop: '1rem', maxWidth: '1200px' }}>
         {list
           ? list.map((item: any, index: any) => (
-              <FarmCard key={index}>
+              <FarmCard key={index} style={{ width: '400px', maxWidth: '400px' }}>
                 <AutoColumn justify="center">
                   <RowFixed>
                     <StyledEthereumLogo src={STCBlueLogo} size={'48px'} style={{ marginRight: '1.25rem' }} />
@@ -315,7 +314,7 @@ export default function Simulator({ history }: RouteComponentProps) {
                   </Text>
                   <RowFixed>
                     <Text fontSize={16} fontWeight={500}>
-                      {Number(Number(stakedLpArr[index] || 0) / item.tvlInUsd).toFixed(5)} %
+                      {Number(Number(stakedLpArr[index]) * scalingFactor / data[index].totalStakeAmount).toFixed(9)} %
                     </Text>
                   </RowFixed>
                 </FixedHeightRow>
