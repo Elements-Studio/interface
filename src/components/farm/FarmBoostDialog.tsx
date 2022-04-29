@@ -92,7 +92,7 @@ export default function FarmUnstakeDialog({
   async function onClickConfirm() {
     try {
       const address = account ?  account.toLowerCase() : ''
-      const signature = boostSignature[address] || ''
+      const signature = network === 'proxima' ? '' : (boostSignature[address] || '')
 
       const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapFarmScript::wl_boost`;
       const tyArgs = [tokenX, tokenY];

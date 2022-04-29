@@ -291,7 +291,7 @@ export default function FarmStake({
                     }
                   </TYPE.body>
                   {
-                    isWhiteList ? (
+                    (network === 'proxima' ||  isWhiteList) ? (
                       <ButtonFarm style={{ marginTop: '16px' }}
                         disabled={!hasAccount || !(tbdGain > 0)}
                         onClick={() => { setBoostDialogOpen(true) }} 
