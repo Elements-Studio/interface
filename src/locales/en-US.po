@@ -182,6 +182,7 @@ msgstr "A minimum threshold of 0.25% of the total UNI supply is required to subm
 
 #: src/pages/Farm/index.tsx
 #: src/pages/Stake/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "APR"
 msgstr "APR"
 
@@ -393,6 +394,7 @@ msgid "Boost"
 msgstr "Boost"
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "Boost APR"
 msgstr "Boost APR"
 
@@ -703,42 +705,6 @@ msgstr "Daily Reward"
 msgid "Days"
 msgstr "Days"
 
-#: src/pages/Stake/index.tsx
-msgid "Enter Simulator"
-msgstr "Enter Simulator"
-
-#: src/pages/Stake/index.tsx
-msgid "Enter Simulator"
-msgstr "Enter Simulator"
-
-#: src/pages/Stake/index.tsx
-msgid "Stake Simulator"
-msgstr "Stake Simulator"
-
-#: src/pages/Stake/index.tsx
-msgid "Your Locked"
-msgstr "Your Locked"
-
-#: src/pages/Stake/index.tsx
-msgid "Total veSTAR"
-msgstr "Total veSTAR"
-
-#: src/pages/Stake/index.tsx
-msgid "Lock Until"
-msgstr "Lock Until"
-
-#: src/pages/Stake/index.tsx
-msgid "you share of veSTAR"
-msgstr "you share of veSTAR"
-
-#: src/pages/Stake/index.tsx
-msgid "You staked lp amount"
-msgstr "You staked lp amount"
-
-#: src/pages/Stake/index.tsx
-msgid "Your share of staking"
-msgstr "Your share of staking"
-
 #: src/components/vote/DelegateModal.tsx
 msgid "Delegate Votes"
 msgstr "Delegate Votes"
@@ -827,6 +793,7 @@ msgid "Don’t see one of your v2 positions? <0>Import it.</0>"
 msgstr "Don’t see one of your v2 positions? <0>Import it.</0>"
 
 #: src/components/Stake/TokenStakeDialog.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "Duration"
 msgstr "Duration"
 
@@ -845,6 +812,10 @@ msgstr "Earned UNI tokens represent voting shares in Starswap governance."
 #: src/pages/Stake/TokenStake.tsx
 msgid "End"
 msgstr "End"
+
+#: src/pages/Stake/index.tsx
+msgid "Enter Simulator"
+msgstr "Enter Simulator"
 
 #: src/state/burn/v3/hooks.ts
 msgid "Enter a percent"
@@ -952,6 +923,7 @@ msgid "For each pool shown below, click migrate to remove your liquidity from Un
 msgstr "For each pool shown below, click migrate to remove your liquidity from Starswap and deposit it into Starswap."
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block."
 msgstr "For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block."
 
@@ -1153,6 +1125,10 @@ msgstr "Loaded"
 msgid "Loading"
 msgstr "Loading"
 
+#: src/pages/Stake/Simulator.tsx
+msgid "Lock Until"
+msgstr "Lock Until"
+
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/components/farm/FarmStakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
@@ -1261,6 +1237,7 @@ msgid "More"
 msgstr "More"
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "Multiplier"
 msgstr "Multiplier"
 
@@ -1588,9 +1565,9 @@ msgstr "Reward Token"
 msgid "Route"
 msgstr "Route"
 
-#: 
-#~ msgid "STAR"
-#~ msgstr "STAR"
+#: src/pages/Stake/Simulator.tsx
+msgid "STAR"
+msgstr "STAR"
 
 #: src/components/Stake/TokenStakeDialog.tsx
 #: src/pages/Stake/TokenStake.tsx
@@ -1705,6 +1682,10 @@ msgstr "Stake"
 msgid "Stake LP Token"
 msgstr "Stake LP Token"
 
+#: src/pages/Stake/Simulator.tsx
+msgid "Stake Simulator"
+msgstr "Stake Simulator"
+
 #: src/components/Stake/TokenStakeDialog.tsx
 msgid "Stake Token"
 msgstr "Stake Token"
@@ -1816,6 +1797,7 @@ msgstr "Thanks for being part of the Starswap community <0/>"
 #~ msgstr "The Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.<0/><1/>For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.<2/><3/>This amount is already included in all APR calculations for the farm."
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."
 msgstr "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."
 
@@ -1828,10 +1810,12 @@ msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually m
 msgstr "The Starswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "The boosted estimated annualized percentage yield of rewards"
 msgstr "The boosted estimated annualized percentage yield of rewards = [1, 2.5] * (Pool's Release per second  * Pool's Multiplier * 365 days * 24 hours * 3600 seconds) / Pool TVL"
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "The estimated annualized percentage yield of rewards"
 msgstr "The estimated annualized percentage yield of rewards = (Pool's Release per second  * Pool's Multiplier * 365 days * 24 hours * 3600 seconds) / Pool TVL"
 
@@ -1880,6 +1864,7 @@ msgid "These tokens are commonly paired with other tokens."
 msgstr "These tokens are commonly paired with other tokens."
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "This amount is already included in all APR calculations for the farm."
 msgstr "This amount is already included in all APR calculations for the farm."
 
@@ -1990,6 +1975,10 @@ msgstr "Total deposits"
 #: src/components/farm/FarmTitle.tsx
 msgid "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USDT"
 msgstr "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USDT"
+
+#: src/pages/Stake/Simulator.tsx
+msgid "Total veSTAR"
+msgstr "Total veSTAR"
 
 #: src/components/Settings/index.tsx
 msgid "Transaction Settings"
@@ -2360,6 +2349,10 @@ msgstr "You must have {formattedProposalThreshold} votes to submit a proposal"
 msgid "You should only deposit liquidity into Uniswap V3 at a price you believe is correct. <0/>If the price seems incorrect, you can either make a swap to move the price or wait for someone else to do so."
 msgstr "You should only deposit liquidity into Starswap at a price you believe is correct. <0/>If the price seems incorrect, you can either make a swap to move the price or wait for someone else to do so."
 
+#: src/pages/Stake/Simulator.tsx
+msgid "You staked lp amount"
+msgstr "You staked lp amount"
+
 #: src/pages/RemoveLiquidity/V3.tsx
 msgid "You will also collect fees earned from this position."
 msgstr "You will also collect fees earned from this position."
@@ -2368,6 +2361,10 @@ msgstr "You will also collect fees earned from this position."
 #: src/pages/RemoveLiquidity/index.tsx
 msgid "You will receive"
 msgstr "You will receive"
+
+#: src/pages/Stake/Simulator.tsx
+msgid "Your Locked"
+msgstr "Your Locked"
 
 #: src/components/Header/UniBalanceContent.tsx
 msgid "Your UNI Breakdown"
@@ -2430,6 +2427,10 @@ msgstr "Your positions"
 #: src/components/earn/PoolCard.tsx
 msgid "Your rate"
 msgstr "Your rate"
+
+#: src/pages/Stake/Simulator.tsx
+msgid "Your share of staking"
+msgstr "Your share of staking"
 
 #: src/components/PositionCard/index.tsx
 #: src/components/PositionCard/V2.tsx
@@ -2506,6 +2507,10 @@ msgstr "via {0} token list"
 #: src/pages/Farm/FarmStake.tsx
 msgid "x"
 msgstr "x"
+
+#: src/pages/Stake/Simulator.tsx
+msgid "your share of veSTAR"
+msgstr "your share of veSTAR"
 
 #: src/components/SearchModal/ImportToken.tsx
 msgid "{0, plural, one {Import token} other {Import tokens}}"
