@@ -1819,6 +1819,14 @@ msgstr "The boosted estimated annualized percentage yield of rewards = [1, 2.5] 
 msgid "The estimated annualized percentage yield of rewards"
 msgstr "The estimated annualized percentage yield of rewards = (Pool's Release per second  * Pool's Multiplier * 365 days * 24 hours * 3600 seconds) / Pool TVL"
 
+#: src/pages/Stake/Simulator.tsx
+msgid "your share of veSTAR"
+msgstr "your share of veSTAR = Your Locked Star *  Duration days / (365 * 2)"
+
+#: src/pages/Stake/Simulator.tsx
+msgid "Your veSTAR"
+msgstr "Your veSTAR"
+
 #: src/pages/Stake/index.tsx
 msgid "The estimated annualized percentage yield of rewards."
 msgstr "The estimated annualized percentage yield of rewards."

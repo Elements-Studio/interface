@@ -15,9 +15,14 @@ export const CardWrapper = styled.div<{ margin?: string; maxWidth?: string }>`
   padding: 40px 30px;
 `
 
+interface FarmProps {
+  children: React.ReactNode;
+  [key: string]: any;
+}
+
 /**
  * The styled container element that wraps the content of most pages and the tabs.
  */
-export default function FarmCard({ children, ...rest }: { children: React.ReactNode }) {
+export default function FarmCard({ children, ...rest }: FarmProps) {
   return <CardWrapper {...rest}>{children}</CardWrapper>
 }

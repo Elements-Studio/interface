@@ -1763,6 +1763,10 @@ msgstr "预计年化收益率APR = (池子每秒释放量 * 池子倍率 * 365�
 msgid "The estimated annualized percentage yield of rewards."
 msgstr "奖励的预计年化收益率"
 
+#: src/pages/Stake/Simulator.tsx
+msgid "your share of veSTAR"
+msgstr "用户锁仓STAR数量 * 用户锁仓STAR时间 / (365 * 2)"
+
 #: src/hooks/useSwapCallback.ts
 msgid "The input token cannot be transferred. There may be an issue with the input token."
 msgstr "输入代币无法进行转账。输入代币可能有些问题。"
@@ -2445,8 +2449,8 @@ msgid "x"
 msgstr ""
 
 #: src/pages/Stake/Simulator.tsx
-msgid "your share of veSTAR"
-msgstr "获得veSTAR 金额"
+msgid "Your veSTAR"
+msgstr "获得veSTAR 数量"
 
 #: src/components/SearchModal/ImportToken.tsx
 msgid "{0, plural, one {Import token} other {Import tokens}}"
