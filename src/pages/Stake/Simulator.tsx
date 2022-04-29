@@ -91,7 +91,11 @@ const StyledArrowLeft = styled(ArrowLeft)`
 const scalingFactor = 1000000000
 
 export default function Simulator({ history }: RouteComponentProps) {
+  let address = ''
   const { account, chainId } = useActiveWeb3React()
+  if (account) {
+    address = account.toLowerCase();
+  }
   const vestarCount = useGetVestarCount()
   const network = getCurrentNetwork(chainId)
 
@@ -111,26 +115,31 @@ export default function Simulator({ history }: RouteComponentProps) {
   const [shareVeStar, setShareVeStar] = useState('');
   const [boostFactor, setBoostFactor] = useState('')
 
+  const [ veStarAmount, setVeStarAmount ] = useState(0)
+
+  useEffect(
+    () => {
+      const url = `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmountAndBoostSignature?accountAddress=${address}`
+      axios.get(url).then(res => res.data).then(data => {
+        setVeStarAmount(data.veStarAmount)
+      })
+    },
+    [address]
+  )
   useEffect(() => {
     // userInputStarToVeStar
     const _userVeStarCount = Number(((Number(lockedValue) * scalingFactor * (duration / 86400)) / (365 * 2)).toFixed(0))
-    setShareVeStar(_userVeStarCount+'')
+    setShareVeStar(_userVeStarCount + '')
     // share of  veSTAR
     if (vestarCount) {
-      const veStarPercentage = new Percent(JSBI.BigInt(_userVeStarCount), JSBI.BigInt(_userVeStarCount + vestarCount)).toFixed(9)
+      const veStarPercentage = new Percent(JSBI.BigInt(_userVeStarCount + veStarAmount), JSBI.BigInt(_userVeStarCount + veStarAmount + vestarCount)).toFixed(9)
       setShareOfVeStar(veStarPercentage)
     }
-  }, [lockedValue, duration, vestarCount, data])
+  }, [veStarAmount, lockedValue, duration, vestarCount, data])
 
   const getBoostFactor = (index: any) => {
-    const BoostFactor = Number(Number(new BigNumber(veStarPercentage)) / Number(new BigNumber((2/3) * Number(stakedLpArr[index]) / data[1].totalStakeAmount))) + 1;
-    // const BoostFactor =
-    //   Number(new BigNumber(Number(shareVeStar) /
-    //     vestarCount /
-    //     ((2 / 3) * Number(new BigNumber(Number(stakedLpArr[index]) / data[1].totalStakeAmount))))) +
-    //   1
-
-      return isNaN(BoostFactor) ? 0 : Infinity === BoostFactor ? 0 : Math.min(2.5, BoostFactor).toFixed(2)
+    const BoostFactor = (Number(veStarPercentage) / Number(new BigNumber((2/3) * Number(stakedLpArr[index]) * scalingFactor / data[index].totalStakeAmount))) + 1
+    return isNaN(BoostFactor) ? 1.0 : Infinity === BoostFactor ? 1.0 : Math.min(2.5, BoostFactor).toFixed(2)
   }
 
   const handleDurationChange = (event: any) => {
@@ -228,7 +237,18 @@ export default function Simulator({ history }: RouteComponentProps) {
           </FixedHeightRow>
           <FixedHeightRow>
             <Text fontSize={16} fontWeight={500}>
-              <Trans>Your veSTAR</Trans>
+              <Trans>Your veSTAR Balance</Trans>
+            </Text>
+            <RowFixed>
+              <Text fontSize={16} fontWeight={500}>
+                {Number(veStarAmount) / scalingFactor}
+              </Text>
+              <QuestionHelper text={<Trans>your share of veSTAR</Trans>} />
+            </RowFixed>
+          </FixedHeightRow>
+          <FixedHeightRow>
+            <Text fontSize={16} fontWeight={500}>
+              <Trans>Your veSTAR Estimated</Trans>
             </Text>
             <RowFixed>
               <Text fontSize={16} fontWeight={500}>
