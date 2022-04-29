@@ -771,8 +771,8 @@ msgid "End"
 msgstr "终止"
 
 #: src/pages/Stake/index.tsx
-msgid "Enter Simulator"
-msgstr "进入模拟器"
+msgid "Boost Simulator"
+msgstr "Boost模拟器"
 
 #: src/state/burn/v3/hooks.ts
 msgid "Enter a percent"
@@ -1640,7 +1640,7 @@ msgstr "质押 LP Token"
 
 #: src/pages/Stake/Simulator.tsx
 msgid "Stake Simulator"
-msgstr "质押模拟器"
+msgstr "Boost模拟器"
 
 #: src/components/Stake/TokenStakeDialog.tsx
 msgid "Stake Token"

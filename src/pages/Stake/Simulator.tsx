@@ -180,7 +180,7 @@ export default function Simulator({ history }: RouteComponentProps) {
         <Link to="/stake" style={{ transform: 'translateX(-40px)' }}>
           <StyledArrowLeft />
         </Link>
-        <Trans>Stake Simulator</Trans>
+        <Trans>Boost Simulator</Trans>
       </Container>
       <AutoRow justify="center" style={{ paddingTop: '1rem', maxWidth: '1200px' }}>
         <FarmCard style={{ width: '450px', maxWidth: '450px' }}>
