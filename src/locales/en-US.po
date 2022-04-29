@@ -2520,9 +2520,18 @@ msgid "x"
 msgstr "x"
 
 #: src/pages/Stake/Simulator.tsx
+msgid "Your veSTAR Estimated Tips"
+msgstr "Your veSTAR Estimated = Your Locked STAR * Duration / (365 * 2)"
+
 #: src/pages/Stake/Simulator.tsx
-msgid "your share of veSTAR"
-msgstr "your share of veSTAR"
+msgid "Boost Factor Tips"
+msgstr "Boost Factor = ( Your veSTAR Balance + Your veSTAR Estimated / Total veSTAR ) / ( ( 2 / 3) * You staked lp amount / lp amount ) + 1"
+
+
+#: src/pages/Stake/Simulator.tsx
+msgid "Percentage Tips"
+msgstr "Percentage = Your veSTAR Estimated / (Your veSTAR Estimated + Total veSTAR)"
+
 
 #: src/components/SearchModal/ImportToken.tsx
 msgid "{0, plural, one {Import token} other {Import tokens}}"

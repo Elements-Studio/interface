@@ -2456,9 +2456,17 @@ msgid "x"
 msgstr ""
 
 #: src/pages/Stake/Simulator.tsx
+msgid "Your veSTAR Estimated Tips"
+msgstr "预估获得veStar = 用户锁仓STAR数量 * 用户锁仓STAR时间 / (365 * 2)"
+
 #: src/pages/Stake/Simulator.tsx
-msgid "your share of veSTAR"
-msgstr "用户锁仓STAR数量 * 用户锁仓STAR时间 / (365 * 2)"
+msgid "Boost Factor Tips"
+msgstr "Boost Factor = ( 用户veSTAR余额 + 预估获得veStar / veSTAR 总数 ) / ( ( 2 / 3) * lp质押金额 / lp质押总数 ) + 1"
+
+
+#: src/pages/Stake/Simulator.tsx
+msgid "Percentage Tips"
+msgstr "所占百分比 = 预估获得veStar / （预估获得veStar + veSTAR 总数)"
 
 #: src/components/SearchModal/ImportToken.tsx
 msgid "{0, plural, one {Import token} other {Import tokens}}"
