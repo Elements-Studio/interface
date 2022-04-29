@@ -126,11 +126,14 @@ export default function Simulator({ history }: RouteComponentProps) {
   }, [lockedValue, duration, vestarCount, data])
 
   const getBoostFactor = (index: any) => {
-    const BoostFactor = Number(
-      Number(shareVeStar) / vestarCount / (((2 / 3) * Number(stakedLpArr[index])) / data[1].totalStakeAmount) + 1
-    );
+    const BoostFactor = Number(Number(new BigNumber(veStarPercentage)) / Number(new BigNumber((2/3) * Number(stakedLpArr[index]) / data[1].totalStakeAmount))) + 1;
+    // const BoostFactor =
+    //   Number(new BigNumber(Number(shareVeStar) /
+    //     vestarCount /
+    //     ((2 / 3) * Number(new BigNumber(Number(stakedLpArr[index]) / data[1].totalStakeAmount))))) +
+    //   1
 
-    return isNaN(BoostFactor) ? 0 : Infinity === BoostFactor ? 0 : Math.min(2.5, BoostFactor).toFixed(2)
+      return isNaN(BoostFactor) ? 0 : Infinity === BoostFactor ? 0 : Math.min(2.5, BoostFactor).toFixed(2)
   }
 
   const handleDurationChange = (event: any) => {
@@ -167,14 +170,14 @@ export default function Simulator({ history }: RouteComponentProps) {
 
   return (
     <>
-      <Container style={{display: 'flex'}}>
-        <Link to="/stake" style={{transform: 'translateX(-40px)'}}>
-        <StyledArrowLeft />
-      </Link>
+      <Container style={{ display: 'flex' }}>
+        <Link to="/stake" style={{ transform: 'translateX(-40px)' }}>
+          <StyledArrowLeft />
+        </Link>
         <Trans>Stake Simulator</Trans>
       </Container>
       <AutoRow justify="center" style={{ paddingTop: '1rem', maxWidth: '1200px' }}>
-        <FarmCard>
+        <FarmCard style={{ width: '450px', maxWidth: '450px' }}>
           <FixedHeightRow marginBottom={10}>
             <Text fontSize={16} fontWeight={500}>
               <Trans>Your Locked</Trans>
@@ -222,18 +225,19 @@ export default function Simulator({ history }: RouteComponentProps) {
             </Text>
             <RowFixed>
               <Text fontSize={16} fontWeight={500}>
-                {vestarCount}
+                {vestarCount / 1000000000}
               </Text>
             </RowFixed>
           </FixedHeightRow>
           <FixedHeightRow>
             <Text fontSize={16} fontWeight={500}>
-              <Trans>your share of veSTAR</Trans>
+              <Trans>Your veSTAR</Trans>
             </Text>
             <RowFixed>
               <Text fontSize={16} fontWeight={500}>
-                {Number(shareVeStar).toFixed(3)}
+                {Number(shareVeStar).toFixed(9)}
               </Text>
+              <QuestionHelper text={<Trans>your share of veSTAR</Trans>} />
             </RowFixed>
           </FixedHeightRow>
           <FixedHeightRow>
