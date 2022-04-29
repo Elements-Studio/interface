@@ -11,9 +11,9 @@ import { AutoColumn } from '../../components/Column'
 import { Input as NumericalInput } from '../../components/NumericalInput'
 import FarmTitle from '../../components/farm/FarmTitle'
 import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
+import { ArrowLeft } from 'react-feather'
 import FarmCard from '../../components/farm/FarmCard'
 import CurrencyLogo from '../../components/CurrencyLogo'
-import Banner from '../../components/Banner'
 import { marginTop, maxWidth, paddingTop } from 'styled-system'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import STCLogo from '../../assets/images/stc.png'
@@ -33,6 +33,7 @@ import RadioGroup from '@mui/material/RadioGroup'
 import axios from 'axios'
 import useSWR from 'swr'
 import useGetVestarCount from '../../hooks/useGetVestarCount';
+import BigNumber from 'bignumber.js'
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 30px;
@@ -81,39 +82,70 @@ const TitleTotal = styled.div<{ margin?: string; maxWidth?: string }>`
   text-align: center;
 `
 
+const StyledArrowLeft = styled(ArrowLeft)`
+  color: ${({ theme }) => theme.text1};
+`
+
 export default function Simulator({ history }: RouteComponentProps) {
   const { account, chainId } = useActiveWeb3React()
+  const vestarCount = useGetVestarCount()
   const network = getCurrentNetwork(chainId)
 
   const darkMode = useIsDarkMode()
 
   const { data, error } = useSWR(`https://swap-api.starswap.xyz/${network}/v1/lpTokenFarms`, fetcher)
   // const isBoost = useIsBoost()
-  const [lockedValue, setLockedValue] = useState('');
-  const [stakedLpArr, setStateLpArr] = useState<string[]>([]);
-  const [rend, setRend] = useState(false)
+  const [stakedLpArr, setStateLpArr] = useState<string[]>(['1', '1'])
   const [duration, setDuration] = useState<any>(604800)
-  const [parseTime, setParseTime] = useState('');
-  const vestarCount = useGetVestarCount();
-  const [parseTVestar, setParseTVestar] = useState('');
-   const handleDurationChange = (event: any) => {
-     setDuration(event.target.value)
-   }
+  const [parseTime, setParseTime] = useState('')
 
-   useEffect(() => {
-    setParseTime((new Date(new Date().getTime() + duration * 1000) + '').slice(4, 24));
-   }, [duration]);
+  // TotalVeSTARAmount
 
-   useEffect(() => {
-    const _vestarCount = ((Number(lockedValue) * (duration / 86400)) / (365 * 2)).toFixed(4) + '';
-    setParseTVestar(_vestarCount)
-   }, [duration, lockedValue])
+  // user input star
+  const [lockedValue, setLockedValue] = useState('')
+  const [veStarPercentage, setShareOfVeStar] = useState('')
+  const [shareVeStar, setShareVeStar] = useState('');
+  const [boostFactor, setBoostFactor] = useState('')
+
+  useEffect(() => {
+    // userInputStarToVeStar
+    const _userVeStarCount = (Number(lockedValue) * (duration / 86400)) / (365 * 2) + ''
+    setShareVeStar(_userVeStarCount)
+    // share of  veSTAR
+    if (vestarCount) {
+      const TotalLockedFarmAmoun = (data?.length && data[1].totalStakeAmount) || 0
+      const _tmp = Number(_userVeStarCount) / (Number(_userVeStarCount) + vestarCount)
+      const veStarPercentage = new BigNumber(_tmp) + ''
+      setShareOfVeStar(veStarPercentage)
+
+      // // boost factor
+      // const _boostFactor =
+      //   Number(_userVeStarCount) / vestarCount / (((2 / 3) * Number(lockedValue)) / TotalLockedFarmAmoun) + 1
+      // setBoostFactor(_boostFactor + '')
+    }
+  }, [lockedValue, duration, vestarCount, data])
+
+  const getBoostFactor = (index: any) => {
+    const BoostFactor = Number(
+      Number(shareVeStar) / vestarCount / (((2 / 3) * Number(stakedLpArr[index])) / data[1].totalStakeAmount) + 1
+    );
+
+    return isNaN(BoostFactor) ? 0 : Infinity === BoostFactor ? 0 : Math.min(2.5, BoostFactor).toFixed(2)
+  }
+
+  const handleDurationChange = (event: any) => {
+    setDuration(event.target.value)
+  }
+
+  useEffect(() => {
+    setParseTime((new Date(new Date().getTime() + duration * 1000) + '').slice(4, 21))
+  }, [duration])
+
 
 
   if (error) return null
   if (!data) return null
   const list = data
-  
 
   const farmAPRTips = () => {
     return (
@@ -135,8 +167,10 @@ export default function Simulator({ history }: RouteComponentProps) {
 
   return (
     <>
-      <Banner />
-      <Container>
+      <Container style={{display: 'flex'}}>
+        <Link to="/stake" style={{transform: 'translateX(-40px)'}}>
+        <StyledArrowLeft />
+      </Link>
         <Trans>Stake Simulator</Trans>
       </Container>
       <AutoRow justify="center" style={{ paddingTop: '1rem', maxWidth: '1200px' }}>
@@ -188,17 +222,27 @@ export default function Simulator({ history }: RouteComponentProps) {
             </Text>
             <RowFixed>
               <Text fontSize={16} fontWeight={500}>
-                {parseTVestar}
+                {vestarCount}
               </Text>
             </RowFixed>
           </FixedHeightRow>
           <FixedHeightRow>
             <Text fontSize={16} fontWeight={500}>
-              <Trans>you share of veSTAR</Trans>
+              <Trans>your share of veSTAR</Trans>
             </Text>
             <RowFixed>
               <Text fontSize={16} fontWeight={500}>
-                {(Number(lockedValue) / vestarCount).toFixed(14)} %
+                {Number(shareVeStar).toFixed(3)}
+              </Text>
+            </RowFixed>
+          </FixedHeightRow>
+          <FixedHeightRow>
+            <Text fontSize={16} fontWeight={500}>
+              <Trans>Percentage</Trans>
+            </Text>
+            <RowFixed>
+              <Text fontSize={16} fontWeight={500}>
+                {Number(veStarPercentage)?.toFixed(15)} %
               </Text>
             </RowFixed>
           </FixedHeightRow>
@@ -239,7 +283,6 @@ export default function Simulator({ history }: RouteComponentProps) {
                         let _tmp = stakedLpArr
                         _tmp[index] = val
                         setStateLpArr([..._tmp])
-                        setRend(!rend)
                       }}
                     />
                   </RowFixed>
@@ -267,19 +310,6 @@ export default function Simulator({ history }: RouteComponentProps) {
                 </FixedHeightRow>
                 <FixedHeightRow>
                   <Text fontSize={16} fontWeight={500}>
-                    <Trans>Boost APR</Trans>
-                  </Text>
-                  <RowFixed>
-                    <Text fontSize={16} fontWeight={500}>
-                      {item.estimatedApy.toFixed(2)}% ~ {(item.estimatedApy * 2.5).toFixed(2)}%
-                    </Text>
-                    <QuestionHelper
-                      text={<Trans>The boosted estimated annualized percentage yield of rewards</Trans>}
-                    />
-                  </RowFixed>
-                </FixedHeightRow>
-                <FixedHeightRow>
-                  <Text fontSize={16} fontWeight={500}>
                     <Trans>Multiplier</Trans>
                   </Text>
                   <RowFixed>
@@ -287,6 +317,29 @@ export default function Simulator({ history }: RouteComponentProps) {
                       {item.rewardMultiplier || 0}x
                     </Text>
                     <QuestionHelper text={farmAPRTips()} />
+                  </RowFixed>
+                </FixedHeightRow>
+                <FixedHeightRow>
+                  <Text fontSize={16} fontWeight={500}>
+                    <Trans>Boost Factor</Trans>
+                  </Text>
+                  <RowFixed>
+                    <Text fontSize={16} fontWeight={500}>
+                      {getBoostFactor(index)}X
+                    </Text>
+                  </RowFixed>
+                </FixedHeightRow>
+                <FixedHeightRow>
+                  <Text fontSize={16} fontWeight={500}>
+                    <Trans>Boost APR</Trans>
+                  </Text>
+                  <RowFixed>
+                    <Text fontSize={16} fontWeight={500}>
+                      {((getBoostFactor(index) as number) * item.estimatedApy).toFixed(2)}%
+                    </Text>
+                    <QuestionHelper
+                      text={<Trans>The boosted estimated annualized percentage yield of rewards</Trans>}
+                    />
                   </RowFixed>
                 </FixedHeightRow>
               </FarmCard>

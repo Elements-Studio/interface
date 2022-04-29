@@ -147,6 +147,7 @@ msgstr "提交提案所需的最低门槛为 UNI 总供应量的 0.25%"
 
 #: src/pages/Farm/index.tsx
 #: src/pages/Stake/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "APR"
 msgstr "年化收益率"
 
@@ -354,6 +355,7 @@ msgid "Boost"
 msgstr "增强收益"
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "Boost APR"
 msgstr "强化版收益率"
 
@@ -660,38 +662,6 @@ msgstr "单日奖励"
 msgid "Days"
 msgstr "天"
 
-#: src/pages/Stake/index.tsx
-msgid "Enter Simulator"
-msgstr "进入模拟器"
-
-#: src/pages/Stake/index.tsx
-msgid "Stake Simulator"
-msgstr "质押模拟器"
-
-#: src/pages/Stake/index.tsx
-msgid "Your Locked"
-msgstr "质押金额"
-
-#: src/pages/Stake/index.tsx
-msgid "Total veSTAR"
-msgstr "veSTAR 总数"
-
-#: src/pages/Stake/index.tsx
-msgid "Lock Until"
-msgstr "终止时间"
-
-#: src/pages/Stake/index.tsx
-msgid "you share of veSTAR"
-msgstr "所占百分比"
-
-#: src/pages/Stake/index.tsx
-msgid "You staked lp amount"
-msgstr "质押金额"
-
-#: src/pages/Stake/index.tsx
-msgid "Your share of staking"
-msgstr "所占百分比"
-
 #: src/components/vote/DelegateModal.tsx
 msgid "Delegate Votes"
 msgstr "委托投票"
@@ -780,6 +750,7 @@ msgid "Don’t see one of your v2 positions? <0>Import it.</0>"
 msgstr "看不到您的一些 v2 流动资金吗？<0>将它手动导入。</0>"
 
 #: src/components/Stake/TokenStakeDialog.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "Duration"
 msgstr "期限"
 
@@ -798,6 +769,10 @@ msgstr "已赚取的 UNI 代币代表了 Uniswap 治理中的投票份额。"
 #: src/pages/Stake/TokenStake.tsx
 msgid "End"
 msgstr "终止"
+
+#: src/pages/Stake/index.tsx
+msgid "Enter Simulator"
+msgstr "进入模拟器"
 
 #: src/state/burn/v3/hooks.ts
 msgid "Enter a percent"
@@ -909,6 +884,7 @@ msgid "For each pool shown below, click migrate to remove your liquidity from Un
 msgstr "对于下面显示的每个流动池，单击“迁移”以从 Starswap 赎回您的流动资金，并将其注入到 Starswap。"
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block."
 msgstr "比如，1倍率的农场每个区块获得1 STAR，40倍率的农场每个区块获得40 STAR。"
 
@@ -1110,6 +1086,10 @@ msgstr "已加载"
 msgid "Loading"
 msgstr "正在加载"
 
+#: src/pages/Stake/Simulator.tsx
+msgid "Lock Until"
+msgstr "结束时间"
+
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/components/farm/FarmStakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
@@ -1218,6 +1198,7 @@ msgid "More"
 msgstr "更多"
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "Multiplier"
 msgstr "倍率"
 
@@ -1540,9 +1521,9 @@ msgstr "奖励代币"
 msgid "Route"
 msgstr "途径"
 
-#: 
-#~ msgid "STAR"
-#~ msgstr ""
+#: src/pages/Stake/Simulator.tsx
+msgid "STAR"
+msgstr ""
 
 #: src/components/Stake/TokenStakeDialog.tsx
 #: src/pages/Stake/TokenStake.tsx
@@ -1657,6 +1638,10 @@ msgstr "质押"
 msgid "Stake LP Token"
 msgstr "质押 LP Token"
 
+#: src/pages/Stake/Simulator.tsx
+msgid "Stake Simulator"
+msgstr "质押模拟器"
+
 #: src/components/Stake/TokenStakeDialog.tsx
 msgid "Stake Token"
 msgstr ""
@@ -1756,6 +1741,7 @@ msgstr "感谢您加入 Uniswap 社区 <0/>"
 #~ msgstr "Boost功能即将上线主网，敬请期待。"
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."
 msgstr "阶梯倍率代表每个农场从每个区块产生的所有STAR中所占的比例。"
 
@@ -1764,10 +1750,12 @@ msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually m
 msgstr "兑换交易不满足 Uniswap 不变量 X × Y = K 的要求。这通常意味着您要兑换的代币之一在代币转账过程中带有一些自定义代币合约特性。"
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "The boosted estimated annualized percentage yield of rewards"
 msgstr "强化版预计年化收益率APR = [1, 2.5] * (池子每秒释放量 * 池子倍率 * 365天 * 24小时 * 3600秒) / 池子TVL"
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "The estimated annualized percentage yield of rewards"
 msgstr "预计年化收益率APR = (池子每秒释放量 * 池子倍率 * 365天 * 24小时 * 3600秒) / 池子TVL"
 
@@ -1816,6 +1804,7 @@ msgid "These tokens are commonly paired with other tokens."
 msgstr "这些代币通常与其他代币配对。"
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "This amount is already included in all APR calculations for the farm."
 msgstr "农场中所有APR的计算中已经包含该数量。"
 
@@ -1922,6 +1911,10 @@ msgstr "存入总额"
 #: src/components/farm/FarmTitle.tsx
 msgid "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USDT"
 msgstr "该农场流动资金池中锁仓总额：{tvlUSD} USDT"
+
+#: src/pages/Stake/Simulator.tsx
+msgid "Total veSTAR"
+msgstr "veSTAR 总数"
 
 #: src/components/Settings/index.tsx
 msgid "Transaction Settings"
@@ -2292,6 +2285,10 @@ msgstr "您必须有 {formattedProposalThreshold} 票才能提交提案"
 msgid "You should only deposit liquidity into Uniswap V3 at a price you believe is correct. <0/>If the price seems incorrect, you can either make a swap to move the price or wait for someone else to do so."
 msgstr "请确保以您认为是正确的兑换率来将流动资金注入到 Starswap。 <0/>如果兑换率看起来不正确，您可以进行兑换交易以移动兑换率，或者等待别人进行此操作。"
 
+#: src/pages/Stake/Simulator.tsx
+msgid "You staked lp amount"
+msgstr "质押金额"
+
 #: src/pages/RemoveLiquidity/V3.tsx
 msgid "You will also collect fees earned from this position."
 msgstr "您还将从此仓位中领取已赚取的手续费。"
@@ -2300,6 +2297,10 @@ msgstr "您还将从此仓位中领取已赚取的手续费。"
 #: src/pages/RemoveLiquidity/index.tsx
 msgid "You will receive"
 msgstr "您将收到"
+
+#: src/pages/Stake/Simulator.tsx
+msgid "Your Locked"
+msgstr "质押金额"
 
 #: src/components/Header/UniBalanceContent.tsx
 msgid "Your UNI Breakdown"
@@ -2362,6 +2363,10 @@ msgstr "您的仓位"
 #: src/components/earn/PoolCard.tsx
 msgid "Your rate"
 msgstr "您的费率"
+
+#: src/pages/Stake/Simulator.tsx
+msgid "Your share of staking"
+msgstr "所占百分比"
 
 #: src/components/PositionCard/index.tsx
 #: src/components/PositionCard/V2.tsx
@@ -2438,6 +2443,10 @@ msgstr "从 {0} 代币列表"
 #: src/pages/Farm/FarmStake.tsx
 msgid "x"
 msgstr ""
+
+#: src/pages/Stake/Simulator.tsx
+msgid "your share of veSTAR"
+msgstr "获得veSTAR 金额"
 
 #: src/components/SearchModal/ImportToken.tsx
 msgid "{0, plural, one {Import token} other {Import tokens}}"
