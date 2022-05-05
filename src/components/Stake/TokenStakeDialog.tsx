@@ -95,7 +95,7 @@ const Input = styled.input`
   }
 `
 
-interface FarmStakeDialogProps {
+interface TokenStakeDialogProps {
   token: any,
   stakeTokenBalance: number,
   stakeTokenScalingFactor: number,
@@ -103,13 +103,13 @@ interface FarmStakeDialogProps {
   onDismiss: () => void
 }
 
-export default function FarmStakeDialog({
+export default function TokenStakeDialog({
   token,
   stakeTokenBalance,
   stakeTokenScalingFactor,
   onDismiss,
   isOpen,
-}: FarmStakeDialogProps) {
+}: TokenStakeDialogProps) {
 
   const starcoinProvider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()

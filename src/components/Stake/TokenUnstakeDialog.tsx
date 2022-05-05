@@ -28,7 +28,7 @@ const Container = styled.div`
     }
   }
 `
-interface FarmUnstakeDialogProps {
+interface TokenUnstakeDialogProps {
   token: any,
   unstakeId: any,
   stakeTokenScalingFactor: number,
@@ -36,13 +36,13 @@ interface FarmUnstakeDialogProps {
   onDismiss: () => void
 }
 
-export default function FarmUnstakeDialog({
+export default function TokenUnstakeDialog({
   token,
   unstakeId,
   stakeTokenScalingFactor,
   onDismiss,
   isOpen,
-}: FarmUnstakeDialogProps) {
+}: TokenUnstakeDialogProps) {
   const starcoinProvider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
 
