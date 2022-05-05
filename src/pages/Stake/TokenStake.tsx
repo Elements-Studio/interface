@@ -14,7 +14,7 @@ import TokenStakeDialog from '../../components/Stake/TokenStakeDialog'
 import TokenUnstakeDialog from '../../components/Stake/TokenUnstakeDialog'
 import StarswapBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
-import { useIsBoost, useBoostSignature } from '../../state/user/hooks'
+import { useIsBoost } from '../../state/user/hooks'
 import { STAR } from '../../constants/tokens'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import { useUserStarStaked } from 'hooks/useTokenSwapFarmScript'
@@ -107,14 +107,12 @@ export default function FarmStake({
   const [ unstakeId, setUnstakeId ] = useState('')
 
   const [ veStarAmount, setVeStarAmount ] = useState(0)
-  const [boostSignature, setBoostSignature] = useBoostSignature()
   useEffect(
     () => {
       const url = `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmountAndBoostSignature?accountAddress=${address}`
       axios.get(url).then(res => res.data).then(data => {
         if (isBoost) {
           setVeStarAmount(data.veStarAmount)
-          setBoostSignature({...boostSignature, [address]: data.signature || ''})
         }
       })
     },
