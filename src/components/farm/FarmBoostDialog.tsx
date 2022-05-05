@@ -13,7 +13,6 @@ import Modal from '../Modal'
 import { ButtonFarm, ButtonBorder, ButtonText } from 'components/Button'
 import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
-import { useBoostSignature } from '../../state/user/hooks'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import BigNumber from 'bignumber.js'
 import { arrayify, hexlify } from '@ethersproject/bytes'
@@ -86,13 +85,12 @@ export default function FarmUnstakeDialog({
   const starcoinProvider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
-  const [boostSignature, _] = useBoostSignature()
   const theme = useContext(ThemeContext)
   
   async function onClickConfirm() {
     try {
       const address = account ?  account.toLowerCase() : ''
-      const signature = network === 'proxima' ? '' : (boostSignature[address] || '')
+      const signature = ''
 
       const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapFarmScript::wl_boost`;
       const tyArgs = [tokenX, tokenY];

@@ -382,12 +382,10 @@ export function useIsBoost(): boolean {
 
 
 export function useIsWhiteList(): boolean {
-  console.log('useIsWhiteList')
   const [boostSignature, _] = useBoostSignature()
   const { account } = useActiveWeb3React()
   const address = account ?  account.toLowerCase() : ''
   const isWhiteList = !!boostSignature[address] 
-  console.log({boostSignature, address, isWhiteList})
   return isWhiteList
 }
 

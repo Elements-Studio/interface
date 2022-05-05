@@ -31,7 +31,7 @@ import { useLookupTBDGain, useUserStaked } from 'hooks/useTokenSwapFarmScript'
 import { useUserLiquidity } from 'hooks/useTokenSwapRouter'
 import useSWR from 'swr'
 import axios from 'axios'
-import { useIsDarkMode, useIsBoost, useIsWhiteList, useBoostSignature } from '../../state/user/hooks'
+import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import { useActiveLocale } from 'hooks/useActiveLocale'
 
@@ -122,17 +122,14 @@ export default function FarmStake({
   const network = getCurrentNetwork(chainId)
 
   const isBoost = useIsBoost()
-  const isWhiteList = useIsWhiteList()
   const [ veStarAmount, setVeStarAmount ] = useState(0)
   const [ boostFactorOrigin, setBoostFactorOrigin ] = useState(0)
-  const [boostSignature, setBoostSignature] = useBoostSignature()
   useEffect(
     () => {
       const url1 = `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmountAndBoostSignature?accountAddress=${address}`
       axios.get(url1).then(res => res.data).then(data => {
         if (isBoost) {
           setVeStarAmount(data.veStarAmount)
-          setBoostSignature({...boostSignature, [address]: data.signature || ''})
         }
       })
       if (isBoost) {
@@ -290,23 +287,17 @@ export default function FarmStake({
                       ) : null
                     }
                   </TYPE.body>
-                  {
-                    (network === 'proxima' ||  isWhiteList) ? (
-                      <ButtonFarm style={{ marginTop: '16px' }}
-                        disabled={!hasAccount || !(tbdGain > 0)}
-                        onClick={() => { setBoostDialogOpen(true) }} 
-                      >
-                        <TYPE.main color={'#FE7F8D'}>
-                          <BalanceText color={'#fff'} style={{ flexShrink: 0}} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                            <Trans>Boost</Trans>
-                          </BalanceText>
-                        </TYPE.main>
-                      </ButtonFarm>
-                    ) : null
-                  }
+                    <ButtonFarm style={{ marginTop: '16px' }}
+                      disabled={!hasAccount || !(tbdGain > 0)}
+                      onClick={() => { setBoostDialogOpen(true) }} 
+                    >
+                      <TYPE.main color={'#FE7F8D'}>
+                        <BalanceText color={'#fff'} style={{ flexShrink: 0}} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                          <Trans>Boost</Trans>
+                        </BalanceText>
+                      </TYPE.main>
+                    </ButtonFarm>
                   <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
-                    <Trans>Users who test the boost feature on the Barnard network and give feedback, have 7 days priority using it on the Main network.</Trans>
-                    &nbsp;
                     <ExternalLink href={local === 'en-US' ? 'https://docs.starswap.xyz/v/en/guidelines/vestar-and-boosting' : 'https://docs.starswap.xyz/shi-yong-zhi-nan/ti-su-wa-kuang'}>
                       <Trans>Learn more about boost</Trans>
                     </ExternalLink>
