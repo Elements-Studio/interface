@@ -402,9 +402,18 @@ msgstr "Boost APR"
 msgid "Boost Factor"
 msgstr "Boost Factor"
 
+#: src/pages/Stake/Simulator.tsx
+msgid "Boost Factor Tips"
+msgstr "Boost Factor = ( Your veSTAR Balance + Your veSTAR Estimated / Total veSTAR ) / ( ( 2 / 3) * You staked lp amount / lp amount ) + 1"
+
 #: src/components/farm/FarmBoostDialog.tsx
 msgid "Boost My LP Staking"
 msgstr "Boost My LP Staking"
+
+#: src/pages/Stake/Simulator.tsx
+#: src/pages/Stake/index.tsx
+msgid "Boost Simulator"
+msgstr "Boost Simulator"
 
 #: src/components/Banner/index.tsx
 msgid "Boost is about to be online"
@@ -478,6 +487,10 @@ msgstr "Claim accumulated UNI rewards"
 #: src/pages/Pool/PositionPage.tsx
 msgid "Claim fees"
 msgstr "Claim fees"
+
+#: src/pages/Stake/TokenStake.tsx
+msgid "Claim veSTAR"
+msgstr "Claim veSTAR"
 
 #: src/components/Popups/ClaimPopup.tsx
 msgid "Claim your UNI tokens"
@@ -812,10 +825,6 @@ msgstr "Earned UNI tokens represent voting shares in Starswap governance."
 #: src/pages/Stake/TokenStake.tsx
 msgid "End"
 msgstr "End"
-
-#: src/pages/Stake/index.tsx
-msgid "Boost Simulator"
-msgstr "Boost Simulator"
 
 #: src/state/burn/v3/hooks.ts
 msgid "Enter a percent"
@@ -1352,6 +1361,10 @@ msgstr "Participating pools"
 msgid "Percentage"
 msgstr "Percentage"
 
+#: src/pages/Stake/Simulator.tsx
+msgid "Percentage Tips"
+msgstr "Percentage = Your veSTAR Estimated / (Your veSTAR Estimated + Total veSTAR)"
+
 #: 
 #~ msgid "Please connect to the appropriate Ethereum network."
 #~ msgstr "Please connect to the appropriate Ethereum network."
@@ -1681,10 +1694,6 @@ msgstr "Stake"
 #: src/components/farm/FarmStakeDialog.tsx
 msgid "Stake LP Token"
 msgstr "Stake LP Token"
-
-#: src/pages/Stake/Simulator.tsx
-msgid "Boost Simulator"
-msgstr "Boost Simulator"
 
 #: src/components/Stake/TokenStakeDialog.tsx
 msgid "Stake Token"
@@ -2472,6 +2481,10 @@ msgstr "Your veSTAR Balance"
 msgid "Your veSTAR Estimated"
 msgstr "Your veSTAR Estimated"
 
+#: src/pages/Stake/Simulator.tsx
+msgid "Your veSTAR Estimated Tips"
+msgstr "Your veSTAR Estimated = Your Locked STAR * Duration / (365 * 2)"
+
 #: src/components/Settings/index.tsx
 msgid "confirm"
 msgstr "confirm"
@@ -2514,20 +2527,6 @@ msgstr "via {0} token list"
 #: src/pages/Farm/FarmStake.tsx
 msgid "x"
 msgstr "x"
-
-#: src/pages/Stake/Simulator.tsx
-msgid "Your veSTAR Estimated Tips"
-msgstr "Your veSTAR Estimated = Your Locked STAR * Duration / (365 * 2)"
-
-#: src/pages/Stake/Simulator.tsx
-msgid "Boost Factor Tips"
-msgstr "Boost Factor = ( Your veSTAR Balance + Your veSTAR Estimated / Total veSTAR ) / ( ( 2 / 3) * You staked lp amount / lp amount ) + 1"
-
-
-#: src/pages/Stake/Simulator.tsx
-msgid "Percentage Tips"
-msgstr "Percentage = Your veSTAR Estimated / (Your veSTAR Estimated + Total veSTAR)"
-
 
 #: src/components/SearchModal/ImportToken.tsx
 msgid "{0, plural, one {Import token} other {Import tokens}}"

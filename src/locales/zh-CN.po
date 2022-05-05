@@ -363,9 +363,18 @@ msgstr "强化版收益率"
 msgid "Boost Factor"
 msgstr ""
 
+#: src/pages/Stake/Simulator.tsx
+msgid "Boost Factor Tips"
+msgstr "Boost Factor = ( 用户veSTAR余额 + 预估获得veStar / veSTAR 总数 ) / ( ( 2 / 3) * lp质押金额 / lp质押总数 ) + 1"
+
 #: src/components/farm/FarmBoostDialog.tsx
 msgid "Boost My LP Staking"
 msgstr ""
+
+#: src/pages/Stake/Simulator.tsx
+#: src/pages/Stake/index.tsx
+msgid "Boost Simulator"
+msgstr "Boost模拟器"
 
 #: src/components/Banner/index.tsx
 msgid "Boost is about to be online"
@@ -435,6 +444,10 @@ msgstr "领取累积的 UNI 代币奖励"
 #: src/pages/Pool/PositionPage.tsx
 msgid "Claim fees"
 msgstr "领取已累积的手续费"
+
+#: src/pages/Stake/TokenStake.tsx
+msgid "Claim veSTAR"
+msgstr "领取 veSTAR"
 
 #: src/components/Popups/ClaimPopup.tsx
 msgid "Claim your UNI tokens"
@@ -769,10 +782,6 @@ msgstr "已赚取的 UNI 代币代表了 Uniswap 治理中的投票份额。"
 #: src/pages/Stake/TokenStake.tsx
 msgid "End"
 msgstr "终止"
-
-#: src/pages/Stake/index.tsx
-msgid "Boost Simulator"
-msgstr "Boost模拟器"
 
 #: src/state/burn/v3/hooks.ts
 msgid "Enter a percent"
@@ -1308,6 +1317,10 @@ msgstr "参与的流动池"
 msgid "Percentage"
 msgstr "所占百分比"
 
+#: src/pages/Stake/Simulator.tsx
+msgid "Percentage Tips"
+msgstr "所占百分比 = 预估获得veStar / （预估获得veStar + veSTAR 总数)"
+
 #: 
 #~ msgid "Please connect to the appropriate Ethereum network."
 #~ msgstr "请连接到适当的以太坊网络。"
@@ -1638,9 +1651,9 @@ msgstr "质押"
 msgid "Stake LP Token"
 msgstr "质押 LP Token"
 
-#: src/pages/Stake/Simulator.tsx
-msgid "Stake Simulator"
-msgstr "Boost模拟器"
+#: 
+#~ msgid "Stake Simulator"
+#~ msgstr "Boost模拟器"
 
 #: src/components/Stake/TokenStakeDialog.tsx
 msgid "Stake Token"
@@ -2408,6 +2421,10 @@ msgstr "你的veSTAR余额"
 msgid "Your veSTAR Estimated"
 msgstr "预估获得veSTAR"
 
+#: src/pages/Stake/Simulator.tsx
+msgid "Your veSTAR Estimated Tips"
+msgstr "预估获得veStar = 用户锁仓STAR数量 * 用户锁仓STAR时间 / (365 * 2)"
+
 #: src/components/Settings/index.tsx
 msgid "confirm"
 msgstr "确认"
@@ -2450,19 +2467,6 @@ msgstr "从 {0} 代币列表"
 #: src/pages/Farm/FarmStake.tsx
 msgid "x"
 msgstr ""
-
-#: src/pages/Stake/Simulator.tsx
-msgid "Your veSTAR Estimated Tips"
-msgstr "预估获得veStar = 用户锁仓STAR数量 * 用户锁仓STAR时间 / (365 * 2)"
-
-#: src/pages/Stake/Simulator.tsx
-msgid "Boost Factor Tips"
-msgstr "Boost Factor = ( 用户veSTAR余额 + 预估获得veStar / veSTAR 总数 ) / ( ( 2 / 3) * lp质押金额 / lp质押总数 ) + 1"
-
-
-#: src/pages/Stake/Simulator.tsx
-msgid "Percentage Tips"
-msgstr "所占百分比 = 预估获得veStar / （预估获得veStar + veSTAR 总数)"
 
 #: src/components/SearchModal/ImportToken.tsx
 msgid "{0, plural, one {Import token} other {Import tokens}}"

@@ -12,6 +12,7 @@ import FarmCard from '../../components/farm/FarmCard'
 import MyStakeListTitle from '../../components/Stake/MyStakeListTitle'
 import TokenStakeDialog from '../../components/Stake/TokenStakeDialog'
 import TokenUnstakeDialog from '../../components/Stake/TokenUnstakeDialog'
+import TokenClaimVeStarDialog from '../../components/Stake/TokenClaimVeStarDialog'
 import StarswapBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { useIsBoost } from '../../state/user/hooks'
@@ -103,6 +104,8 @@ export default function FarmStake({
   // if (!data) return "Loading...";
 
   const [ stakeDialogOpen, setStakeDialogOpen ] = useState(false)
+  const [ ClaimVeStarDialogOpen, setClaimVeStarDialogOpen ] = useState(false)
+  const [ claimVeStarId, setClaimVeStarId ] = useState('')
   const [ unstakeDialogOpen, setUnstakeDialogOpen ] = useState(false)
   const [ unstakeId, setUnstakeId ] = useState('')
 
@@ -124,12 +127,20 @@ export default function FarmStake({
     setStakeDialogOpen(false)
   }, [setStakeDialogOpen])
 
+  const handleDismissClaimVeStar = useCallback(() => {
+    setClaimVeStarDialogOpen(false)
+  }, [setClaimVeStarDialogOpen])
+
   const handleDismissUnstake = useCallback(() => {
     setUnstakeDialogOpen(false)
   }, [setUnstakeDialogOpen])
 
   function handleUnstakeId(id:any) {
     setUnstakeId(id);
+  };
+
+  function handleClaimVeStarId(id:any) {
+    setClaimVeStarId(id);
   };
   return (
     <>
@@ -176,6 +187,7 @@ export default function FarmStake({
         { (myStakeList && myStakeList.length > 0) ? myStakeList.map((item:any)=> {
           const isWait = item.endTime > (Date.now() / 1000)
           const isEnoughVeStar = isBoost ? veStarAmount >= item.veStarAmount : true
+          const isVeStarStaked = !!item.veStarAmount
           return (
             <AutoRow justify="center" key={item.id}>
               <FarmCard>
@@ -190,41 +202,52 @@ export default function FarmStake({
                   <TYPE.body fontSize={16} style={{ marginTop: '16px' }}><Trans>End</Trans>: {(new Date(item.endTime*1000)+'').slice(4,24)}</TYPE.body>
                   <TYPE.body fontSize={16} style={{ marginTop: '16px' }}><Trans>Stepwise Multiplier</Trans>: {item.stepwiseMultiplier}</TYPE.body>
                   <TYPE.body fontSize={16} style={{ color: 'red', marginTop: '16px' }}><Trans>Expected Gain</Trans>: {Number(item.expectedGain / starScalingFactor) || 0 }</TYPE.body>
-                    {!hasAccount ? (
+                  {!hasAccount ? (
+                    <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
+                      <TYPE.black fontSize="20px" color={'#FE7F8D'}>
+                        <Trans>Connect Wallet</Trans>
+                      </TYPE.black>
+                    </ButtonBorder>
+                  ) : (
+                    !isAuthorization ? (
                       <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
                         <TYPE.black fontSize="20px" color={'#FE7F8D'}>
-                          <Trans>Connect Wallet</Trans>
+                          <Trans>Authorization</Trans>
                         </TYPE.black>
                       </ButtonBorder>
                     ) : (
-                      !isAuthorization ? (
-                        <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
-                          <TYPE.black fontSize="20px" color={'#FE7F8D'}>
-                            <Trans>Authorization</Trans>
-                          </TYPE.black>
-                        </ButtonBorder>
-                      ) : (
-                        <>
-                          <RowBetween style={{ marginTop: '16px' }}>
-                            <ButtonFarm id={item.id} onClick={() => { handleUnstakeId(item.id); setUnstakeDialogOpen(true);  }} disabled={isWait || !isEnoughVeStar}>
-                              <TYPE.main color={'#fff'}>
-                                { (isWait) ? 
-                                  <Trans>Wait</Trans> : <Trans>Unstake</Trans>
-                                }
-                              </TYPE.main>
-                            </ButtonFarm>
-                          </RowBetween>
-                          {
-                            (!isWait && !isEnoughVeStar) ? (
-                              <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
-                                <Trans>The veSTAR balance is not enough.</Trans>
-                              </TYPE.body>
-                            ): null
-                          }
-                          
-                        </>
-                      )
-                    )}
+                      <>
+                        <RowBetween style={{ marginTop: '16px' }}>
+                          <ButtonFarm id={item.id} onClick={() => { handleUnstakeId(item.id); setUnstakeDialogOpen(true);  }} disabled={isWait || !isEnoughVeStar}>
+                            <TYPE.main color={'#fff'}>
+                              { (isWait) ? 
+                                <Trans>Wait</Trans> : <Trans>Unstake</Trans>
+                              }
+                            </TYPE.main>
+                          </ButtonFarm>
+                        </RowBetween>
+                        {
+                          (!isWait && !isEnoughVeStar) ? (
+                            <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
+                              <Trans>The veSTAR balance is not enough.</Trans>
+                            </TYPE.body>
+                          ): null
+                        }
+                        
+                      </>
+                    )
+                  )}
+                  {
+                    !isVeStarStaked ? (
+                      <RowBetween style={{ marginTop: '16px' }}>
+                        <ButtonFarm id={item.id} onClick={() => { handleClaimVeStarId(item.id); setClaimVeStarDialogOpen(true);  }}>
+                          <TYPE.main color={'#fff'}>
+                            <Trans>Claim veSTAR</Trans>
+                          </TYPE.main>
+                        </ButtonFarm>
+                      </RowBetween>
+                    ) : null
+                  }
                 </AutoColumn>
               </FarmCard>
             </AutoRow>
@@ -245,11 +268,14 @@ export default function FarmStake({
         onDismiss={handleDismissStake}
       />
       <TokenUnstakeDialog
-        unstakeId={unstakeId}
-        stakeTokenScalingFactor={starScalingFactor}
-        token={token}
+        id={unstakeId}
         isOpen={unstakeDialogOpen}
         onDismiss={handleDismissUnstake}
+      />
+      <TokenClaimVeStarDialog
+        id={claimVeStarId}
+        isOpen={ClaimVeStarDialogOpen}
+        onDismiss={handleDismissClaimVeStar}
       />
     </>
   )
