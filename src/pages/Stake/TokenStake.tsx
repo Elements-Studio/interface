@@ -108,6 +108,7 @@ export default function FarmStake({
   const [ claimVeStarId, setClaimVeStarId ] = useState('')
   const [ unstakeDialogOpen, setUnstakeDialogOpen ] = useState(false)
   const [ unstakeId, setUnstakeId ] = useState('')
+  const [ veStarReward, setVeStarReward ] = useState(0)
 
   const [ veStarAmount, setVeStarAmount ] = useState(0)
   useEffect(
@@ -141,6 +142,10 @@ export default function FarmStake({
 
   function handleClaimVeStarId(id:any) {
     setClaimVeStarId(id);
+  };
+
+  function handleVeStarReward(value:any) {
+    setVeStarReward(value);
   };
   return (
     <>
@@ -189,7 +194,7 @@ export default function FarmStake({
           const isEnoughVeStar = isBoost ? veStarAmount >= item.veStarAmount : true
           const isVeStarStaked = !!item.veStarAmount
           const userLockedSTARDay = (item.endTime - item.startTime) / (3600 * 24)
-          const veSTARReward = (parseInt(item.amount) / starScalingFactor) * userLockedSTARDay / (365 * 2)
+          const veStarReward = (parseInt(item.amount) / starScalingFactor) * userLockedSTARDay / (365 * 2)
           return (
             <AutoRow justify="center" key={item.id}>
               <FarmCard>
@@ -242,9 +247,9 @@ export default function FarmStake({
                   {
                     !isVeStarStaked ? (
                       <RowBetween style={{ marginTop: '16px' }}>
-                        <ButtonFarm id={item.id} onClick={() => { handleClaimVeStarId(item.id); setClaimVeStarDialogOpen(true);  }}>
+                        <ButtonFarm id={item.id} onClick={() => { handleClaimVeStarId(item.id); handleVeStarReward(veStarReward); setClaimVeStarDialogOpen(true);  }}>
                           <TYPE.main color={'#fff'}>
-                            <Trans>Claim {veSTARReward.toFixed(9)} rewared veSTAR</Trans>
+                            <Trans>Claim veSTAR</Trans>
                           </TYPE.main>
                         </ButtonFarm>
                       </RowBetween>
@@ -276,6 +281,7 @@ export default function FarmStake({
       />
       <TokenClaimVeStarDialog
         id={claimVeStarId}
+        veStarReward={veStarReward}
         isOpen={ClaimVeStarDialogOpen}
         onDismiss={handleDismissClaimVeStar}
       />

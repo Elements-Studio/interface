@@ -436,6 +436,7 @@ msgstr "By connecting a wallet, you agree to Starswap Labs’ <0>Terms of Servic
 #~ msgstr "By connecting a wallet, you agree to Starswap Labs’ <0>Terms of Service</0> and acknowledge that you have read and understand the <1>Starswap protocol disclaimer</1>."
 
 #: src/components/Stake/GetAllStakeDialog.tsx
+#: src/components/Stake/TokenClaimVeStarDialog.tsx
 #: src/components/Stake/TokenHarvestDialog.tsx
 #: src/components/Stake/TokenStakeDialog.tsx
 #: src/components/Stake/TokenUnstakeDialog.tsx
@@ -488,13 +489,17 @@ msgstr "Claim accumulated UNI rewards"
 msgid "Claim fees"
 msgstr "Claim fees"
 
-#: src/pages/Stake/TokenStake.tsx
+#: src/components/Stake/TokenClaimVeStarDialog.tsx
 msgid "Claim veSTAR"
 msgstr "Claim veSTAR"
 
 #: src/components/Popups/ClaimPopup.tsx
 msgid "Claim your UNI tokens"
 msgstr "Claim your UNI tokens"
+
+#: src/pages/Stake/TokenStake.tsx
+msgid "Claim rewared {0} veSTAR"
+msgstr "Claim rewared {0} veSTAR"
 
 #: src/components/claim/AddressClaimModal.tsx
 msgid "Claimed"
@@ -577,6 +582,7 @@ msgid "Common bases"
 msgstr "Common bases"
 
 #: src/components/Stake/GetAllStakeDialog.tsx
+#: src/components/Stake/TokenClaimVeStarDialog.tsx
 #: src/components/Stake/TokenHarvestDialog.tsx
 #: src/components/Stake/TokenStakeDialog.tsx
 #: src/components/Stake/TokenUnstakeDialog.tsx

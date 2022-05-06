@@ -25,12 +25,14 @@ const Container = styled.div`
 `
 interface TokenClaimVeStarDialogProps {
   id: any,
+  veStarReward: number,
   isOpen: boolean
   onDismiss: () => void
 }
 
 export default function TokenClaimVeStarDialog({
   id,
+  veStarReward,
   onDismiss,
   isOpen,
 }: TokenClaimVeStarDialogProps) {
@@ -80,7 +82,7 @@ export default function TokenClaimVeStarDialog({
       <ColumnCenter style={{ padding: '27px 32px'}}>
         <AutoRow>
           <TYPE.black fontWeight={500} fontSize={20}>
-            <Trans>Claim veSTAR</Trans>
+            <Trans>Claim rewared {veStarReward.toFixed(9)} veSTAR</Trans>
           </TYPE.black>
         </AutoRow>
         {loading && (

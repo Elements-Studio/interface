@@ -393,6 +393,7 @@ msgid "By connecting a wallet, you agree to Starswap Labs’ <0>Terms of Service
 msgstr "通过连接钱包，您同意接受 Starswap 实验室的<0>服务条款</0>，并确认您已阅读和理解<1>Starswap协议免责声明</1>。"
 
 #: src/components/Stake/GetAllStakeDialog.tsx
+#: src/components/Stake/TokenClaimVeStarDialog.tsx
 #: src/components/Stake/TokenHarvestDialog.tsx
 #: src/components/Stake/TokenStakeDialog.tsx
 #: src/components/Stake/TokenUnstakeDialog.tsx
@@ -445,13 +446,17 @@ msgstr "领取累积的 UNI 代币奖励"
 msgid "Claim fees"
 msgstr "领取已累积的手续费"
 
-#: src/pages/Stake/TokenStake.tsx
+#: src/components/Stake/TokenClaimVeStarDialog.tsx
 msgid "Claim veSTAR"
 msgstr "领取 veSTAR"
 
 #: src/components/Popups/ClaimPopup.tsx
 msgid "Claim your UNI tokens"
 msgstr "领取您的 UNI 代币"
+
+#: src/pages/Stake/TokenStake.tsx
+msgid "Claim rewared {0} veSTAR"
+msgstr "领取获得的 {0} veSTAR"
 
 #: src/components/claim/AddressClaimModal.tsx
 msgid "Claimed"
@@ -534,6 +539,7 @@ msgid "Common bases"
 msgstr "共同基础"
 
 #: src/components/Stake/GetAllStakeDialog.tsx
+#: src/components/Stake/TokenClaimVeStarDialog.tsx
 #: src/components/Stake/TokenHarvestDialog.tsx
 #: src/components/Stake/TokenStakeDialog.tsx
 #: src/components/Stake/TokenUnstakeDialog.tsx

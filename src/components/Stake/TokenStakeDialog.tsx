@@ -230,11 +230,6 @@ export default function TokenStakeDialog({
           <FormControl component="fieldset">
             <FormLabel component="legend"><Trans>Duration</Trans></FormLabel>
             <RadioGroup aria-label="duration" name="duration" value={duration} onChange={handleDurationChange}>
-              {/*
-              <FormControlLabel value="10" control={<Radio />} label="10 Seconds" />
-              <FormControlLabel value="86400" control={<Radio />} label="1 Day" />
-              <FormControlLabel value="31536000" disabled control={<Radio />} label="(365 Days)" />
-              */}
               {
                 isTest ? (
                   <>
