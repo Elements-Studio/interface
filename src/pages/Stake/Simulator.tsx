@@ -174,6 +174,8 @@ export default function Simulator({ history }: RouteComponentProps) {
     )
   }
 
+  const isTest = process.env.REACT_APP_STARSWAP_IN_TEST === 'true';
+
   return (
     <>
       <Container style={{ display: 'flex' }}>
@@ -207,6 +209,14 @@ export default function Simulator({ history }: RouteComponentProps) {
                 <Trans>Duration</Trans>
               </FormLabel>
               <RadioGroup aria-label="duration" name="duration" value={duration} onChange={handleDurationChange}>
+                {
+                  isTest ? (
+                    <>
+                      <FormControlLabel value="100" control={<Radio />} label="100 Seconds" />
+                      <FormControlLabel value="3600" control={<Radio />} label="1 hour" />
+                    </>
+                  ) : null
+                }
                 <FormControlLabel value="604800" control={<Radio />} label={`7 Days (2x)`} />
                 <FormControlLabel value="1209600" control={<Radio />} label={`14 Days (3x)`} />
                 <FormControlLabel value="2592000" control={<Radio />} label={`30 Days (4x)`} />

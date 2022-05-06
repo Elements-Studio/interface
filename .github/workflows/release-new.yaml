@@ -23,6 +23,7 @@ jobs:
         run: yarn build
         env:
           REACT_APP_STARSWAP_BOOST: ${{ secrets.BOOST }}
+          REACT_APP_STARSWAP_IN_TEST: ${{ secrets.IN_TEST }}
           REACT_APP_INFURA_KEY: '538f147a2d66487d86f0a2fcc2afdcb5'
           CI: false
 

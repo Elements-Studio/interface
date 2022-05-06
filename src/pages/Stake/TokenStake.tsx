@@ -188,8 +188,8 @@ export default function FarmStake({
           const isWait = item.endTime > (Date.now() / 1000)
           const isEnoughVeStar = isBoost ? veStarAmount >= item.veStarAmount : true
           const isVeStarStaked = !!item.veStarAmount
-          const UserLockedSTARDay = (item.endTime - item.startTime) / (3600 * 24)
-          const veSTARReward = (parseInt(item.amount) / starScalingFactor) * UserLockedSTARDay / (365 * 2)
+          const userLockedSTARDay = (item.endTime - item.startTime) / (3600 * 24)
+          const veSTARReward = (parseInt(item.amount) / starScalingFactor) * userLockedSTARDay / (365 * 2)
           return (
             <AutoRow justify="center" key={item.id}>
               <FarmCard>
