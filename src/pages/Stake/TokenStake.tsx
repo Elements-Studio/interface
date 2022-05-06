@@ -188,6 +188,8 @@ export default function FarmStake({
           const isWait = item.endTime > (Date.now() / 1000)
           const isEnoughVeStar = isBoost ? veStarAmount >= item.veStarAmount : true
           const isVeStarStaked = !!item.veStarAmount
+          const UserLockedSTARDay = (item.endTime - item.startTime) / (3600 * 24)
+          const veSTARReward = (parseInt(item.amount) / starScalingFactor) * UserLockedSTARDay / (365 * 2)
           return (
             <AutoRow justify="center" key={item.id}>
               <FarmCard>
@@ -242,7 +244,7 @@ export default function FarmStake({
                       <RowBetween style={{ marginTop: '16px' }}>
                         <ButtonFarm id={item.id} onClick={() => { handleClaimVeStarId(item.id); setClaimVeStarDialogOpen(true);  }}>
                           <TYPE.main color={'#fff'}>
-                            <Trans>Claim veSTAR</Trans>
+                            <Trans>Claim {veSTARReward.toFixed(9)} rewared veSTAR</Trans>
                           </TYPE.main>
                         </ButtonFarm>
                       </RowBetween>
