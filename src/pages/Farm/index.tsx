@@ -86,8 +86,8 @@ export default function Farm({ history }: RouteComponentProps) {
             <FarmCard key={index}>
               <AutoColumn justify="center">
                 <RowFixed>
-                  <CurrencyLogo currency={currency0} size={'48px'} style={{borderRadius: '8px;'}} />
-                  <CurrencyLogo currency={currency1} size={'48px'} style={{borderRadius: '8px;'}} />
+                  <CurrencyLogo currency={currency0} size={'48px'} style={{borderRadius: '8px'}} />
+                  <CurrencyLogo currency={currency1} size={'48px'} style={{borderRadius: '8px'}} />
                 </RowFixed>
                 <Text fontSize={16} marginTop={23}>
                   {token0.symbol}/{token1.symbol}
@@ -141,18 +141,6 @@ export default function Farm({ history }: RouteComponentProps) {
                   </TYPE.black>
                 </RowFixed>
               </FarmRow>
-              {/* <FarmRow style={{ marginTop: '10px', background: '#2FD8B2', marginBottom: '30px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Estimated annualized rate of return:</Trans>       
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14} style={{wordBreak: 'break-all'}}>
-                    {item.estimatedApy}
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow> */}
               <FixedHeightRow>
                 <Text fontSize={16} fontWeight={500}>
                   <Trans>APR</Trans>
@@ -201,7 +189,7 @@ export default function Farm({ history }: RouteComponentProps) {
                 </RowFixed>
               </FixedHeightRow>
               <ButtonFarm as={Link}
-                to={(window.starcoin && account)? `/farm/${item.liquidityTokenFarmId.liquidityTokenId.tokenXId}/${item.liquidityTokenFarmId.liquidityTokenId.tokenYId}` : `/farm`}
+                to={(window.starcoin && account)? `/farm/${token0.symbol}/${token1.symbol}` : `/farm`}
                 onClick={() => {
                   if (!(window.starcoin && account)) {
                     alert('Please Connect StarMask Wallet First! \n请先链接StarMask钱包');

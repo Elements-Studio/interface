@@ -75,7 +75,7 @@ export default function CurrencyLogo({
     if (darkMode) {
       return <StyledEthereumLogo src={STCBlueLogo} size={size} style={style} {...rest} />
     }
-    return <StyledEthereumLogo src={STCLogo} size={size} style={style} {...rest} />
+    return <StyledEthereumLogo src={STCBlueLogo} size={size} style={style} {...rest} />
   } else if (currency?.symbol === 'STAR'){
     if (darkMode) {
       return <StyledEthereumLogo src={STARBlueLogo} size={size} style={style} {...rest} />
