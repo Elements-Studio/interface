@@ -170,7 +170,6 @@ const BalanceText = styled(Text)`
     display: none;
   `};
 `
-
 const Title = styled.a`
   display: flex;
   align-items: center;
@@ -196,6 +195,11 @@ const UniIcon = styled.div`
   };
   display: flex;
   align-items: center;
+`
+const TitleText = styled(Text)`
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    display: none;
+  `};
 `
 
 const activeClassName = 'ACTIVE'
@@ -325,9 +329,9 @@ export default function Header() {
           <UniIcon>
             <img height={'25px'} src={darkMode ? LogoDark : Logo} alt="logo" />
           </UniIcon>
-          <BalanceText style={{ fontFamily: 'Qualy' }}>
+          <TitleText style={{ fontFamily: 'Qualy' }}>
             STARSWAP
-          </BalanceText>
+          </TitleText>
         </Title>
       </HeaderRow>
       <HeaderLinks>
