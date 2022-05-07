@@ -11,10 +11,8 @@ import { useUserHasSubmittedClaim } from 'state/transactions/hooks'
 import { useDarkModeManager } from 'state/user/hooks'
 import { useSTCBalances } from 'state/wallet/hooks'
 import styled from 'styled-components/macro'
-// import Logo from '../../assets/svg/logo.svg'
-// import LogoDark from '../../assets/svg/logo_white.svg'
-import Logo from '../../assets/svg/starswap_title_logo.svg'
-import LogoDark from '../../assets/svg/starswap_title_logo.svg'
+import Logo from '../../assets/svg/starswap_logo.svg'
+import LogoDark from '../../assets/svg/starswap_logo_blue.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { ExternalLink, TYPE } from '../../theme'
 import ClaimModal from '../claim/ClaimModal'
@@ -231,6 +229,12 @@ const StyledNavLink = styled(NavLink).attrs({
   }
 `
 
+const StyledNavLinkOptional = styled(StyledNavLink)`
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    display: none;
+  `};
+`
+
 const StyledExternalLink = styled(ExternalLink).attrs({
   activeClassName,
 })<{ isActive?: boolean }>`
@@ -319,20 +323,18 @@ export default function Header() {
       <HeaderRow>
         <Title href=".">
           <UniIcon>
-            <img height={'60px'} src={darkMode ? LogoDark : Logo} alt="logo" />
+            <img height={'25px'} src={darkMode ? LogoDark : Logo} alt="logo" />
           </UniIcon>
-          {/*
-          <Text style={{ fontFamily: 'Qualy' }}>
+          <BalanceText style={{ fontFamily: 'Qualy' }}>
             STARSWAP
-          </Text>
-          */}
+          </BalanceText>
         </Title>
       </HeaderRow>
       <HeaderLinks>
         {process.env.NODE_ENV === 'development' ? (
-          <StyledNavLink id={`register-nav-link`} to={'/register'}>
+          <StyledNavLinkOptional id={`register-nav-link`} to={'/register'}>
             <Trans>Register</Trans>
-          </StyledNavLink>
+          </StyledNavLinkOptional>
         ) : null}
         <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
           <Trans>Swap</Trans>
@@ -363,7 +365,7 @@ export default function Header() {
         {/*
         <StyledNavLink id={`stake-nav-link`} to={'/vote'}>
           <Trans>Vote</Trans>
-        </StyledNavLink>
+        </StyledNavLiStyledExternalLinknk>
         <StyledExternalLink id={`stake-nav-link`} href={'https://poll.starcoin.org'}>
           <Trans>Vote</Trans>
           <sup>↗</sup>
