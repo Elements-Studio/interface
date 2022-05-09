@@ -187,7 +187,7 @@ export default function Farm({ history }: RouteComponentProps) {
     <>
       <FarmTitle />
       <AutoRow justify="center" style={{ paddingTop: '1rem', maxWidth: '1200px' }}>
-        {list ? list.map((item:any,index:any) => (
+        {list ? list.filter((item:any) => item.description !== 'STC / WEN').map((item:any,index:any) => (
             <FarmCard key={index}>
               <AutoColumn justify="center">
                 <RowFixed>
