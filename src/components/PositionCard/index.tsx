@@ -322,19 +322,17 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
               <RowBetween marginTop="10px">
                 <ButtonPrimary
                   padding="8px"
-                  borderRadius="8px"
+                  style={{borderRadius:"8px"}}
                   as={Link}
                   to={`/add/v2/${currencyId(currency0)}/${currencyId(currency1)}`}
-                  // width="32%"
                   width="49%"
                 >
                   <Trans>Add</Trans>
                 </ButtonPrimary>
                 <ButtonPrimary
                   padding="8px"
-                  borderRadius="8px"
+                  style={{borderRadius:"8px"}}
                   as={Link}
-                  // width="32%"
                   width="49%"
                   to={`/remove/v2/${currencyId(currency0)}/${currencyId(currency1)}`}
                 >

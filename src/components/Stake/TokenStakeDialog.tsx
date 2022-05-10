@@ -95,7 +95,7 @@ const Input = styled.input`
   }
 `
 
-interface FarmStakeDialogProps {
+interface TokenStakeDialogProps {
   token: any,
   stakeTokenBalance: number,
   stakeTokenScalingFactor: number,
@@ -103,13 +103,13 @@ interface FarmStakeDialogProps {
   onDismiss: () => void
 }
 
-export default function FarmStakeDialog({
+export default function TokenStakeDialog({
   token,
   stakeTokenBalance,
   stakeTokenScalingFactor,
   onDismiss,
   isOpen,
-}: FarmStakeDialogProps) {
+}: TokenStakeDialogProps) {
 
   const starcoinProvider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
@@ -197,7 +197,7 @@ export default function FarmStakeDialog({
   }
 
   const veStarAmount = (isBoost && stakeNumber && duration) ? (stakeNumber * (duration / 86400) / ( 365 * 2 )).toFixed(4) : 0
-  
+  const isTest = process.env.REACT_APP_STARSWAP_IN_TEST === 'true';
   return (
     <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={ theme.bgCard }>
       <ColumnCenter style={{ padding: '27px 32px'}}>
@@ -230,13 +230,14 @@ export default function FarmStakeDialog({
           <FormControl component="fieldset">
             <FormLabel component="legend"><Trans>Duration</Trans></FormLabel>
             <RadioGroup aria-label="duration" name="duration" value={duration} onChange={handleDurationChange}>
-              {/*
-              <FormControlLabel value="10" control={<Radio />} label="10 Seconds" />
-              <FormControlLabel value="86400" control={<Radio />} label="1 Day" />
-              <FormControlLabel value="31536000" disabled control={<Radio />} label="(365 Days)" />
-              <FormControlLabel value="100" control={<Radio />} label="100 Seconds" />
-              <FormControlLabel value="3600" control={<Radio />} label="1 hour" />
-              */}
+              {
+                isTest ? (
+                  <>
+                    <FormControlLabel value="100" control={<Radio />} label="100 Seconds" />
+                    <FormControlLabel value="3600" control={<Radio />} label="1 hour" />
+                  </>
+                ) : null
+              }
               <FormControlLabel value="604800" control={<Radio />} label={`7 Days (2x)  ${poolList !== [] ? (poolList[0].estimatedApy*2).toFixed(4) : ''}%`}/>
               <FormControlLabel value="1209600" control={<Radio />} label={`14 Days (3x)  ${poolList !== [] ? (poolList[0].estimatedApy*3).toFixed(4) : ''}%`}/>
               <FormControlLabel value="2592000" control={<Radio />} label={`30 Days (4x)  ${poolList !== [] ? (poolList[0].estimatedApy*4).toFixed(4) : ''}%`}/>

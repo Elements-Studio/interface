@@ -1,26 +1,18 @@
 import { Trans } from '@lingui/macro'
-import { useCallback, useContext, useState } from 'react'
-import { ChevronDown, ChevronUp } from 'react-feather'
-import styled, { ThemeContext } from 'styled-components'
+import styled from 'styled-components'
 import { RouteComponentProps, Link } from 'react-router-dom'
 import { Text } from 'rebass'
 import QuestionHelper from '../../components/QuestionHelper'
-import Row, { AutoRow, RowFixed, RowBetween } from '../../components/Row'
-import { TYPE,IconWrapper } from '../../theme'
+import { AutoRow, RowFixed, RowBetween } from '../../components/Row'
+import { TYPE } from '../../theme'
 import { ButtonFarm } from '../../components/Button'
 import { AutoColumn } from '../../components/Column'
 import FarmTitle from '../../components/farm/FarmTitle'
 import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
 import FarmCard from '../../components/farm/FarmCard'
 import CurrencyLogo from '../../components/CurrencyLogo'
-import { marginTop, maxWidth, paddingTop } from 'styled-system'
-import EthereumLogo from '../../assets/images/ethereum-logo.png'
-import STCLogo from '../../assets/images/stc.png'
-import FAILogo from '../../assets/images/fai_token_logo.png'
-import FAIBlueLogo from '../../assets/images/fai_token_logo_blue.png'
-import STCBlueLogo from '../../assets/images/stc_logo_blue.png'
-import StarswapBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
-import PortisIcon from '../../assets/images/portisIcon.png'
+import { COMMON_BASES } from '../../constants/routing'
+import { unwrappedToken } from '../../utils/unwrappedToken'
 import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
@@ -32,20 +24,6 @@ export const FixedHeightRow = styled(RowBetween)`
 `
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
-
-/*
-const fetcher = (
-  url:any,
-  {
-    method: 'POST', 
-    mode: 'no-cors',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: {"key" : "some text"}
-  }
-  ) => fetch(url).then((res) => res.json());
-*/
 
 const StyledEthereumLogo = styled.img<{ size: string }>`
   width: ${({ size }) => size};
@@ -69,110 +47,20 @@ export default function Farm({ history }: RouteComponentProps) {
   const lpTokenScalingFactor = 1000000000;
   const starScalingFactor = 1000000000;
 
-  const { data, error } = useSWR(
+  const isBoost = useIsBoost()
+
+  const { data: list, error } = useSWR(
     `https://swap-api.starswap.xyz/${network}/v1/lpTokenFarms`,
     fetcher
   );
-  const isBoost = useIsBoost()
-  
-  // if (error) return "An error has occurred.";
-  // if (!data) return "Loading...";
+
   if (error) return null;
-  if (!data) return null;
-  const list = data;
+  if (!list) return null;
 
-  // const darkMode = useIsDarkMode();
-
-  /*
-  const list = [
-    {
-      liquidityTokenFarmId: { 
-        farmAddress: "1", 
-        liquidityTokenId: { tokenXId: "Bot", tokenYId: "Ddd", liquidityTokenAddress: "0x07fa08a855753f0ff7292fdcbe871216" }
-      },
-      description: "Bot<->Ddd Pool", 
-      sequenceNumber: 11, 
-      totalStakeAmount: null, 
-      deactived: false, 
-      createdBy: "admin", 
-      updatedBy: "admin", 
-      createdAt: 1630661107485, 
-      updatedAt: 1630661107485 
-    },
-    {
-      liquidityTokenFarmId: { 
-        farmAddress: "2", 
-        liquidityTokenId: { tokenXId: "Bot", tokenYId: "Ddd", liquidityTokenAddress: "0x07fa08a855753f0ff7292fdcbe871216" }
-      },
-      description: "Bot<->Ddd Pool", 
-      sequenceNumber: 11, 
-      totalStakeAmount: null, 
-      deactived: false, 
-      createdBy: "admin", 
-      updatedBy: "admin", 
-      createdAt: 1630661107485, 
-      updatedAt: 1630661107485 
-    },
-    {
-      liquidityTokenFarmId: { 
-        farmAddress: "0x07fa08a855753f0ff7292fdcbe871216", 
-        liquidityTokenId: { tokenXId: "Bot", tokenYId: "Ddd", liquidityTokenAddress: "0x07fa08a855753f0ff7292fdcbe871216" }
-      },
-      description: "Bot<->Ddd Pool", 
-      sequenceNumber: 11, 
-      totalStakeAmount: null, 
-      deactived: false, 
-      createdBy: "admin", 
-      updatedBy: "admin", 
-      createdAt: 1630661107485, 
-      updatedAt: 1630661107485 
-    },
-    {
-      liquidityTokenFarmId: { 
-        farmAddress: "3", 
-        liquidityTokenId: { tokenXId: "Bot", tokenYId: "Ddd", liquidityTokenAddress: "0x07fa08a855753f0ff7292fdcbe871216" }
-      },
-      description: "Bot<->Ddd Pool", 
-      sequenceNumber: 11, 
-      totalStakeAmount: null, 
-      deactived: false, 
-      createdBy: "admin", 
-      updatedBy: "admin", 
-      createdAt: 1630661107485, 
-      updatedAt: 1630661107485 
-    },
-    {
-      liquidityTokenFarmId: { 
-        farmAddress: "0x07fa08a855753f0ff7292fdcbe871216", 
-        liquidityTokenId: { tokenXId: "Bot", tokenYId: "Ddd", liquidityTokenAddress: "0x07fa08a855753f0ff7292fdcbe871216" }
-      },
-      description: "Bot<->Ddd Pool", 
-      sequenceNumber: 11, 
-      totalStakeAmount: null, 
-      deactived: false, 
-      createdBy: "admin", 
-      updatedBy: "admin", 
-      createdAt: 1630661107485, 
-      updatedAt: 1630661107485 
-    },
-    {
-      liquidityTokenFarmId: { 
-        farmAddress: "0x07fa08a855753f0ff7292fdcbe871216", 
-        liquidityTokenId: { tokenXId: "Bot", tokenYId: "Ddd", liquidityTokenAddress: "0x07fa08a855753f0ff7292fdcbe871216" }
-      },
-      description: "Bot<->Ddd Pool", 
-      sequenceNumber: 11, 
-      totalStakeAmount: null, 
-      deactived: false, 
-      createdBy: "admin", 
-      updatedBy: "admin", 
-      createdAt: 1630661107485, 
-      updatedAt: 1630661107485 
-    },
-  ]
-  */
-
-  const farmAPRTips = () =>{
+  
+  const bases = typeof chainId !== 'undefined' ? COMMON_BASES[chainId] ?? [] : []
+  
+  const MultiplierTips = () =>{
     return (
     <>
     <Trans>The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.</Trans><br/><br/>
@@ -187,15 +75,22 @@ export default function Farm({ history }: RouteComponentProps) {
     <>
       <FarmTitle />
       <AutoRow justify="center" style={{ paddingTop: '1rem', maxWidth: '1200px' }}>
-        {list ? list.filter((item:any) => item.description !== 'STC / WEN').map((item:any,index:any) => (
+        {list ? list.map((item:any,index:any) => {
+          const tokenX = bases.filter(token => token.symbol === item.liquidityTokenFarmId.liquidityTokenId.tokenXId)
+          const tokenY = bases.filter(token => token.symbol === item.liquidityTokenFarmId.liquidityTokenId.tokenYId)
+          const token0 = tokenX[0]
+          const token1 = tokenY[0]
+          const currency0 = unwrappedToken(token0)
+          const currency1 = unwrappedToken(token1)
+          return (
             <FarmCard key={index}>
               <AutoColumn justify="center">
                 <RowFixed>
-                  <StyledEthereumLogo src={STCBlueLogo} size={'48px'} />
-                  <StyledEthereumLogo src={item.liquidityTokenFarmId.liquidityTokenId.tokenXId === 'STAR' ? StarswapBlueLogo : (darkMode ? FAIBlueLogo : FAILogo) } style={{ marginRight: '1.25rem' }} size={'48px'} />
+                  <CurrencyLogo currency={currency0} size={'48px'} style={{borderRadius: '8px'}} />
+                  <CurrencyLogo currency={currency1} size={'48px'} style={{borderRadius: '8px'}} />
                 </RowFixed>
                 <Text fontSize={16} marginTop={23}>
-                  {item.liquidityTokenFarmId.liquidityTokenId.tokenYId}/{item.liquidityTokenFarmId.liquidityTokenId.tokenXId}
+                  {token0.symbol}/{token1.symbol}
                 </Text>
               </AutoColumn>
               <FarmRow style={{ marginTop: '30px' }}>
@@ -206,7 +101,7 @@ export default function Farm({ history }: RouteComponentProps) {
                 </RowFixed>
                 <RowFixed>
                   <TYPE.black fontSize={14}>
-                    {item.liquidityTokenFarmId.liquidityTokenId.tokenXId} - {item.liquidityTokenFarmId.liquidityTokenId.tokenYId} 
+                    {token0.symbol} - {token1.symbol} 
                   </TYPE.black>
                 </RowFixed>
               </FarmRow>
@@ -246,18 +141,6 @@ export default function Farm({ history }: RouteComponentProps) {
                   </TYPE.black>
                 </RowFixed>
               </FarmRow>
-              {/* <FarmRow style={{ marginTop: '10px', background: '#2FD8B2', marginBottom: '30px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Estimated annualized rate of return:</Trans>       
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14} style={{wordBreak: 'break-all'}}>
-                    {item.estimatedApy}
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow> */}
               <FixedHeightRow>
                 <Text fontSize={16} fontWeight={500}>
                   <Trans>APR</Trans>
@@ -301,12 +184,12 @@ export default function Farm({ history }: RouteComponentProps) {
                     { item.rewardMultiplier || 0 }x
                   </Text>
                   <QuestionHelper
-                    text={farmAPRTips()}
+                    text={MultiplierTips()}
                   />
                 </RowFixed>
               </FixedHeightRow>
               <ButtonFarm as={Link}
-                to={(window.starcoin && account)? `/farm/${item.liquidityTokenFarmId.liquidityTokenId.tokenXId}/${item.liquidityTokenFarmId.liquidityTokenId.tokenYId}` : `/farm`}
+                to={(window.starcoin && account)? `/farm/${token0.symbol}/${token1.symbol}` : `/farm`}
                 onClick={() => {
                   if (!(window.starcoin && account)) {
                     alert('Please Connect StarMask Wallet First! \n请先链接StarMask钱包');
@@ -317,7 +200,8 @@ export default function Farm({ history }: RouteComponentProps) {
                 </TYPE.main>
               </ButtonFarm>
             </FarmCard>
-        )) : null}
+          )
+        }) : null}
       </AutoRow>
       <SwitchLocaleLink />
     </>

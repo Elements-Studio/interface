@@ -22,7 +22,7 @@ import STCLogo from '../../assets/images/stc.png'
 import FAILogo from '../../assets/images/fai_token_logo.png'
 import FAIBlueLogo from '../../assets/images/fai_token_logo_blue.png'
 import STCBlueLogo from '../../assets/images/stc_logo_blue.png'
-import StarswapBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
+import StarswapBlueLogo from '../../assets/svg/starswap_logo.svg'
 import PortisIcon from '../../assets/images/portisIcon.png'
 import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
@@ -174,6 +174,8 @@ export default function Simulator({ history }: RouteComponentProps) {
     )
   }
 
+  const isTest = process.env.REACT_APP_STARSWAP_IN_TEST === 'true';
+
   return (
     <>
       <Container style={{ display: 'flex' }}>
@@ -207,6 +209,14 @@ export default function Simulator({ history }: RouteComponentProps) {
                 <Trans>Duration</Trans>
               </FormLabel>
               <RadioGroup aria-label="duration" name="duration" value={duration} onChange={handleDurationChange}>
+                {
+                  isTest ? (
+                    <>
+                      <FormControlLabel value="100" control={<Radio />} label="100 Seconds" />
+                      <FormControlLabel value="3600" control={<Radio />} label="1 hour" />
+                    </>
+                  ) : null
+                }
                 <FormControlLabel value="604800" control={<Radio />} label={`7 Days (2x)`} />
                 <FormControlLabel value="1209600" control={<Radio />} label={`14 Days (3x)`} />
                 <FormControlLabel value="2592000" control={<Radio />} label={`30 Days (4x)`} />

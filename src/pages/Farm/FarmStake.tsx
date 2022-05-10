@@ -1,10 +1,12 @@
 import { Trans } from '@lingui/macro'
-import { useCallback, useContext, useState, useEffect } from 'react'
-import styled, { ThemeContext } from 'styled-components'
+import { useCallback, useState, useEffect } from 'react'
+import { ExtendedStar } from '../../constants/tokens'
+import { Token, NativeCurrency } from '@uniswap/sdk-core'
+import styled from 'styled-components'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
 import { STC, STAR, FAI, XUSDT } from '../../constants/tokens'
-import Row, { AutoRow, RowFixed, RowBetween } from '../../components/Row'
+import { AutoRow, RowFixed, RowBetween } from '../../components/Row'
 import { TYPE, ExternalLink } from '../../theme'
 import { ButtonFarm, ButtonBorder } from '../../components/Button'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
@@ -14,19 +16,15 @@ import FarmStakeDialog from '../../components/farm/FarmStakeDialog'
 import FarmHarvestDialog from '../../components/farm/FarmHarvestDialog'
 import FarmUnstakeDialog from '../../components/farm/FarmUnstakeDialog'
 import FarmBoostDialog from '../../components/farm/FarmBoostDialog'
-import GetAllStakeDialog from '../../components/farm/GetAllStakeDialog'
-import EthereumLogo from '../../assets/images/ethereum-logo.png'
-import STCLogo from '../../assets/images/stc.png'
+import CurrencyLogo from '../../components/CurrencyLogo'
 import STCBlueLogo from '../../assets/images/stc_logo_blue.png'
-import StarswapBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
+import StarswapBlueLogo from '../../assets/svg/starswap_logo.svg'
 import BoostFlame from '../../assets/svg/boost_flame.png'
 import FAILogo from '../../assets/images/fai_token_logo.png'
 import FAIBlueLogo from '../../assets/images/fai_token_logo_blue.png'
-import PortisIcon from '../../assets/images/portisIcon.png'
-import ArbitrumLogo from '../../assets/svg/arbitrum_logo.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
-import { useSTCBalances, useTokenBalance } from 'state/wallet/hooks'
-import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
+import { COMMON_BASES } from '../../constants/routing'
+import { unwrappedToken } from '../../utils/unwrappedToken'
 import { useLookupTBDGain, useUserStaked } from 'hooks/useTokenSwapFarmScript'
 import { useUserLiquidity } from 'hooks/useTokenSwapRouter'
 import useSWR from 'swr'
@@ -99,31 +97,28 @@ export default function FarmStake({
 
   const { account, chainId } = useActiveWeb3React()
 
-  const darkMode = useIsDarkMode();
-
   if (account) {
     hasAccount = true;
     address = account.toLowerCase();
   }
-  // const userSTCBalance = useSTCBalances(address ? [address] : [])?.[address ?? '']
 
-  const x = STC[(chainId ? chainId : 1)].address;
-  let y;
-  if (tokenY === 'STAR' || tokenX === 'STAR') {
-    y = STAR[(chainId ? chainId : 1)].address;
-  }
-  if (tokenY === 'FAI' || tokenX === 'FAI') {
-    y = FAI[(chainId ? chainId : 1)].address;
-  }
-  if (tokenY === 'XUSDT' || tokenX === 'XUSDT') {
-    y = XUSDT[(chainId ? chainId : 1)].address;
-  }
+  const bases = typeof chainId !== 'undefined' ? COMMON_BASES[chainId] ?? [] : []
+  const _tokenX = bases.filter(token => token.symbol === tokenX)
+  const _tokenY = bases.filter(token => token.symbol === tokenY)
+  const token0 = _tokenX[0]
+  const token1 = _tokenY[0]
+  const currency0 = unwrappedToken(token0)
+  const currency1 = unwrappedToken(token1)
+  
+  const addressX = (token0 as Token).address ? (token0 as Token).address : (token0.symbol=== 'STC' ? STC[(chainId ? chainId : 1)].address : '')
+  const addressY = (token1 as Token).address ? (token1 as Token).address : (token1.symbol=== 'STC' ? STC[(chainId ? chainId : 1)].address : '')
 
   const network = getCurrentNetwork(chainId)
 
   const isBoost = useIsBoost()
   const [ veStarAmount, setVeStarAmount ] = useState(0)
   const [ boostFactorOrigin, setBoostFactorOrigin ] = useState(0)
+  
   useEffect(
     () => {
       const url1 = `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmountAndBoostSignature?accountAddress=${address}`
@@ -154,10 +149,9 @@ export default function FarmStake({
   
   // boostFactor stored in Move is mulitpied by 100, 1.05 => 105
   const boostFactor = boostFactorOrigin? boostFactorOrigin/ 100 : 0;
-  const tbdGain:any = useLookupTBDGain(address, x, y)?.data || 0;
-  const userLiquidity:any = useUserLiquidity(address, x, y)?.data || 0;
-  // const userStaked:any = useUserStaked(address, x, y)?.data || 0;
-  const { data, error } = useUserStaked(address, x, y);
+  const tbdGain:any = useLookupTBDGain(address, addressX, addressY)?.data || 0;
+  const userLiquidity:any = useUserLiquidity(address, addressX, addressY)?.data || 0;
+  const { data, error } = useUserStaked(address, addressX, addressY);
   let userStaked: any = 0;
   if (error) {
     console.log(error)
@@ -170,7 +164,6 @@ export default function FarmStake({
 
   const [ stakeDialogOpen, setStakeDialogOpen ] = useState(false)
   const [ harvestDialogOpen, setHarvestDialogOpen ] = useState(false)
-  const [ allStakeDialogOpen, setAllStakeDialogOpen ] = useState(false)
   const [ unstakeDialogOpen, setUnstakeDialogOpen ] = useState(false)
   const [ boostDialogOpen, setBoostDialogOpen ] = useState(false)
 
@@ -181,10 +174,6 @@ export default function FarmStake({
   const handleDismissHarvest = useCallback(() => {
     setHarvestDialogOpen(false)
   }, [setHarvestDialogOpen])
-
-  const handleDismissAllStake = useCallback(() => {
-    setAllStakeDialogOpen(false)
-  }, [setAllStakeDialogOpen])
 
   const handleDismissUnstake = useCallback(() => {
     setUnstakeDialogOpen(false)
@@ -231,10 +220,10 @@ export default function FarmStake({
           <FarmCard>
             <AutoColumn justify="center">
               <RowFixed>
-                <StyledEthereumLogo src={STCBlueLogo} style={{ marginRight: '1.25rem' }} size={'48px'} />
-                <StyledEthereumLogo src={tokenX === 'STAR' ? StarswapBlueLogo : (darkMode ? FAIBlueLogo : FAILogo) } size={'48px'} />
+                <CurrencyLogo currency={currency0} size={'48px'} style={{marginRight: '1.25rem', borderRadius: '8px'}} />
+                <CurrencyLogo currency={currency1} size={'48px'} style={{borderRadius: '8px;'}} />
               </RowFixed>
-              <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{tokenY}/{tokenX}</TYPE.body>
+              <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{tokenX}/{tokenY}</TYPE.body>
               <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>{userStaked / lpTokenScalingFactor}</TYPE.body>
                 {!hasAccount ? (
                   <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
@@ -431,41 +420,35 @@ export default function FarmStake({
       <FarmHarvestDialog
         tbdEarned={tbdGain}
         tbdScalingFactor={tbdScalingFactor}
-        tokenX={x}
-        tokenY={y}
+        tokenX={addressX}
+        tokenY={addressY}
         isOpen={harvestDialogOpen}
         onDismiss={handleDismissHarvest}
       />
       <FarmStakeDialog
         lpTokenBalance={userLiquidity}
         lpTokenScalingFactor={lpTokenScalingFactor}
-        tokenX={x}
-        tokenY={y}
+        tokenX={addressX}
+        tokenY={addressY}
         isOpen={stakeDialogOpen}
         onDismiss={handleDismissStake}
       />
       <FarmUnstakeDialog
         userStaked={userStaked}
         lpTokenScalingFactor={lpTokenScalingFactor}
-        tokenX={x}
-        tokenY={y}
+        tokenX={addressX}
+        tokenY={addressY}
         isOpen={unstakeDialogOpen}
         onDismiss={handleDismissUnstake}
       />
       <FarmBoostDialog
         veStarAmount={veStarAmount}
         lpTokenScalingFactor={lpTokenScalingFactor}
-        tokenX={x}
-        tokenY={y}
+        tokenX={addressX}
+        tokenY={addressY}
         isOpen={boostDialogOpen}
         onDismiss={handleDismissBoost}
       />
-      {/*
-      <GetAllStakeDialog
-        isOpen={allStakeDialogOpen}
-        onDismiss={handleDismissAllStake}
-      />
-      */}
     </>
   )
 }

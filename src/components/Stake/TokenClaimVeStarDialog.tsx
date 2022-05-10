@@ -23,17 +23,19 @@ const Container = styled.div`
     }
   }
 `
-interface TokenUnstakeDialogProps {
+interface TokenClaimVeStarDialogProps {
   id: any,
+  veStarReward: number,
   isOpen: boolean
   onDismiss: () => void
 }
 
-export default function TokenUnstakeDialog({
+export default function TokenClaimVeStarDialog({
   id,
+  veStarReward,
   onDismiss,
   isOpen,
-}: TokenUnstakeDialogProps) {
+}: TokenClaimVeStarDialogProps) {
   const starcoinProvider = useStarcoinProvider();
   const { chainId } = useActiveWeb3React()
 
@@ -43,17 +45,17 @@ export default function TokenUnstakeDialog({
   
   async function onClickConfirm() {
     try {
-      const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapSyrupScript::unstake`;
+      const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapSyrupScript::take_vestar_by_stake_id`;
       const strTypeArgs = [STAR[(chainId ? chainId : 1)].address];
       const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
 
-      const unstakeIdSCSHex = (function () {
+      const claimStakeIdSCSHex = (function () {
         const se = new bcs.BcsSerializer();
         se.serializeU64(parseInt(id));
         return hexlify(se.getBytes());
       })();
       const args = [
-        arrayify(unstakeIdSCSHex)
+        arrayify(claimStakeIdSCSHex)
       ];
 
       const scriptFunction = utils.tx.encodeScriptFunction(
@@ -80,7 +82,7 @@ export default function TokenUnstakeDialog({
       <ColumnCenter style={{ padding: '27px 32px'}}>
         <AutoRow>
           <TYPE.black fontWeight={500} fontSize={20}>
-            <Trans>Unstake STAR</Trans>
+            <Trans>Claim rewared {veStarReward.toFixed(9)} veSTAR</Trans>
           </TYPE.black>
         </AutoRow>
         {loading && (

@@ -2,10 +2,10 @@ import { Currency } from '@uniswap/sdk-core'
 import React, { useMemo } from 'react'
 import styled from 'styled-components/macro'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
-import STCLogo from '../../assets/images/stc.png'
+import STCLogo from '../../assets/svg/stc.svg'
 import STCBlueLogo from '../../assets/images/stc_logo_blue.png'
 import STARLogo from '../../assets/images/starswap_logo_star_round.jpg'
-import STARBlueLogo from '../../assets/svg/starswap_product_logo_blue.svg'
+import STARBlueLogo from '../../assets/svg/starswap_logo.svg'
 import FAILogo from '../../assets/images/fai_token_logo.png'
 import FAIBlueLogo from '../../assets/images/fai_token_logo_blue.png'
 import WENLogo from '../../assets/svg/starswap_wen.svg'
@@ -75,7 +75,7 @@ export default function CurrencyLogo({
     if (darkMode) {
       return <StyledEthereumLogo src={STCBlueLogo} size={size} style={style} {...rest} />
     }
-    return <StyledEthereumLogo src={STCLogo} size={size} style={style} {...rest} />
+    return <StyledEthereumLogo src={STCBlueLogo} size={size} style={style} {...rest} />
   } else if (currency?.symbol === 'STAR'){
     if (darkMode) {
       return <StyledEthereumLogo src={STARBlueLogo} size={size} style={style} {...rest} />
