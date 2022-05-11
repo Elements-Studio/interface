@@ -192,7 +192,6 @@ export default function FarmStake({
         { (myStakeList && myStakeList.length > 0) ? myStakeList.map((item:any)=> {
           const isWait = item.endTime > (Date.now() / 1000)
           const isEnoughVeStar = isBoost ? veStarAmount >= item.veStarAmount : true
-          const isReClaim = process.env.REACT_APP_STARSWAP_RECLAIM === 'true';
           const isVeStarStaked = !!item.veStarAmount
           const userLockedSTARDay = (item.endTime - item.startTime) / (3600 * 24)
           const veStarReward = (parseInt(item.amount) / starScalingFactor) * userLockedSTARDay / (365 * 2)
@@ -246,7 +245,7 @@ export default function FarmStake({
                     )
                   )}
                   {
-                    (isReClaim && !isVeStarStaked) ? (
+                    !isVeStarStaked ? (
                       <RowBetween style={{ marginTop: '16px' }}>
                         <ButtonFarm id={item.id} onClick={() => { handleClaimVeStarId(item.id); handleVeStarReward(veStarReward); setClaimVeStarDialogOpen(true);  }}>
                           <TYPE.main color={'#fff'}>
