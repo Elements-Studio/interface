@@ -324,7 +324,7 @@ export default function Simulator({ history }: RouteComponentProps) {
                   </Text>
                   <RowFixed>
                     <Text fontSize={16} fontWeight={500}>
-                      {Number(Number(stakedLpArr[index]) * scalingFactor / data[index].totalStakeAmount).toFixed(9)} %
+                      {new Percent(JSBI.BigInt(Number(stakedLpArr[index]) * scalingFactor), JSBI.BigInt(data[index].totalStakeAmount)).toFixed(9)}
                     </Text>
                   </RowFixed>
                 </FixedHeightRow>
@@ -345,7 +345,7 @@ export default function Simulator({ history }: RouteComponentProps) {
                   </Text>
                   <RowFixed>
                     <Text fontSize={16} fontWeight={500}>
-                      {((getBoostFactor(index) as number) * item.estimatedApy).toFixed(2)}%
+                      {((getBoostFactor(index) as number) * item.estimatedApy).toFixed(2)} %
                     </Text>
                     <QuestionHelper
                       text={<Trans>The boosted estimated annualized percentage yield of rewards</Trans>}
