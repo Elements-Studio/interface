@@ -36,6 +36,8 @@ import axios from 'axios'
 import useSWR from 'swr'
 import useGetVestarCount from '../../hooks/useGetVestarCount';
 import BigNumber from 'bignumber.js'
+import { COMMON_BASES } from '../../constants/routing'
+import { unwrappedToken } from '../../utils/unwrappedToken'
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 30px;
@@ -103,7 +105,7 @@ export default function Simulator({ history }: RouteComponentProps) {
 
   const { data, error } = useSWR(`https://swap-api.starswap.xyz/${network}/v1/lpTokenFarms`, fetcher)
   // const isBoost = useIsBoost()
-  const [stakedLpArr, setStateLpArr] = useState<string[]>(['1', '1'])
+  const [stakedLpArr, setStateLpArr] = useState<string[]>(['1', '1', '1'])
   const [duration, setDuration] = useState<any>(604800)
   const [parseTime, setParseTime] = useState('')
 
@@ -175,6 +177,7 @@ export default function Simulator({ history }: RouteComponentProps) {
   }
 
   const isTest = process.env.REACT_APP_STARSWAP_IN_TEST === 'true';
+  const bases = typeof chainId !== 'undefined' ? COMMON_BASES[chainId] ?? [] : []
 
   return (
     <>
@@ -281,25 +284,22 @@ export default function Simulator({ history }: RouteComponentProps) {
       </AutoRow>
       <AutoRow justify="center" style={{ paddingTop: '1rem', maxWidth: '1200px' }}>
         {list
-          ? list.map((item: any, index: any) => (
+          ? list.map((item: any, index: any) => {
+            const tokenX = bases.filter(token => token.symbol === item.liquidityTokenFarmId.liquidityTokenId.tokenXId)
+            const tokenY = bases.filter(token => token.symbol === item.liquidityTokenFarmId.liquidityTokenId.tokenYId)
+            const token0 = tokenX[0]
+            const token1 = tokenY[0]
+            const currency0 = unwrappedToken(token0)
+            const currency1 = unwrappedToken(token1)
+            return (
               <FarmCard key={index} style={{ width: '400px', maxWidth: '400px' }}>
                 <AutoColumn justify="center">
                   <RowFixed>
-                    <StyledEthereumLogo src={STCBlueLogo} size={'48px'} style={{ marginRight: '1.25rem' }} />
-                    <StyledEthereumLogo
-                      src={
-                        item.liquidityTokenFarmId.liquidityTokenId.tokenXId === 'STAR'
-                          ? StarswapBlueLogo
-                          : darkMode
-                          ? FAIBlueLogo
-                          : FAILogo
-                      }
-                      size={'48px'}
-                    />
+                    <CurrencyLogo currency={currency0} size={'48px'} style={{marginRight: '1.25rem', borderRadius: '8px'}} />
+                    <CurrencyLogo currency={currency1} size={'48px'} style={{borderRadius: '8px;'}} />
                   </RowFixed>
                   <Text fontSize={16} marginTop={23}>
-                    {item.liquidityTokenFarmId.liquidityTokenId.tokenYId}/
-                    {item.liquidityTokenFarmId.liquidityTokenId.tokenXId}
+                  {token0.symbol}/{token1.symbol}
                   </Text>
                 </AutoColumn>
                 <FixedHeightRow marginTop={30} marginBottom={10}>
@@ -353,7 +353,7 @@ export default function Simulator({ history }: RouteComponentProps) {
                   </RowFixed>
                 </FixedHeightRow>
               </FarmCard>
-            ))
+            )})
           : null}
       </AutoRow>
       <SwitchLocaleLink />
