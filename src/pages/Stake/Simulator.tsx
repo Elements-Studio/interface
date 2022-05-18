@@ -304,7 +304,7 @@ export default function Simulator({ history }: RouteComponentProps) {
                 <AutoColumn justify="center">
                   <RowFixed>
                     <CurrencyLogo currency={currency0} size={'48px'} style={{marginRight: '1.25rem', borderRadius: '8px'}} />
-                    <CurrencyLogo currency={currency1} size={'48px'} style={{borderRadius: '8px;'}} />
+                    <CurrencyLogo currency={currency1} size={'48px'} style={{borderRadius: '8px'}} />
                   </RowFixed>
                   <Text fontSize={16} marginTop={23}>
                   {token0.symbol}/{token1.symbol}

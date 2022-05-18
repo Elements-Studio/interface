@@ -221,7 +221,7 @@ export default function FarmStake({
             <AutoColumn justify="center">
               <RowFixed>
                 <CurrencyLogo currency={currency0} size={'48px'} style={{marginRight: '1.25rem', borderRadius: '8px'}} />
-                <CurrencyLogo currency={currency1} size={'48px'} style={{borderRadius: '8px;'}} />
+                <CurrencyLogo currency={currency1} size={'48px'} style={{borderRadius: '8px'}} />
               </RowFixed>
               <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{tokenX}/{tokenY}</TYPE.body>
               <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>{userStaked / lpTokenScalingFactor}</TYPE.body>
