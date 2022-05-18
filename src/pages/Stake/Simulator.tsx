@@ -154,7 +154,8 @@ export default function Simulator({ history }: RouteComponentProps) {
   }, [veStarAmount, lockedValue, duration, vestarCount, list])
 
   const getBoostFactor = (index: any) => {
-    const BoostFactor = (Number(veStarPercentage) / Number(new BigNumber((2/3) * Number(stakedLpArr[index]) * scalingFactor / list[index].totalStakeAmount))) + 1
+    const yourShareOfStaking= new Percent(JSBI.BigInt(Number(stakedLpArr[index]) * scalingFactor), JSBI.BigInt(list[index].totalStakeAmount)).toFixed(9)
+    const BoostFactor = (Number(veStarPercentage) / Number(new BigNumber((2/3) * Number(yourShareOfStaking)))) + 1
     return isNaN(BoostFactor) ? 1.0 : Infinity === BoostFactor ? 1.0 : Math.min(2.5, BoostFactor).toFixed(2)
   }
 
