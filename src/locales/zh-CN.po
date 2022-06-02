@@ -364,8 +364,8 @@ msgid "Boost Factor"
 msgstr ""
 
 #: src/pages/Farm/FarmStake.tsx
-msgid "Predict Boost Factor"
-msgstr "预测Boost Factor"
+msgid "Predict the updated Boost Factor value"
+msgstr "预测更新后Boost系数"
 
 #: src/pages/Stake/Simulator.tsx
 msgid "Boost Factor Tips"

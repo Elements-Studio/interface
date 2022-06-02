@@ -64,6 +64,11 @@ const Input = styled.input`
   }
 `
 
+const PredictBoostFactorSpan = styled.span`
+  color: #fd748d;
+  font-size: 16px;
+`
+
 interface FarmUnstakeDialogProps {
   tokenX: any,
   tokenY: any,
@@ -189,7 +194,7 @@ export default function FarmUnstakeDialog({
         </Container>
         <RowBetween style={{ marginTop: '8px' }}>
           <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
-            <Trans>Predict Boost Factor</Trans>：{predictBoostFactor / 100}X
+            <Trans>Predict the updated Boost Factor value</Trans>：<PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
           </TYPE.black>
         </RowBetween>
         <RowBetween style={{ marginTop: '24px' }}>

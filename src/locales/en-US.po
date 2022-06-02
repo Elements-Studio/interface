@@ -403,8 +403,8 @@ msgid "Boost Factor"
 msgstr "Boost Factor"
 
 #: src/pages/Farm/FarmStake.tsx
-msgid "Predict Boost Factor"
-msgstr "Predict Boost Factor"
+msgid "Predict the updated Boost Factor value"
+msgstr "Predict the updated Boost Factor value"
 
 #: src/pages/Stake/Simulator.tsx
 msgid "Boost Factor Tips"
