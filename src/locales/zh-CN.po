@@ -363,6 +363,10 @@ msgstr "强化版收益率"
 msgid "Boost Factor"
 msgstr ""
 
+#: src/pages/Farm/FarmStake.tsx
+msgid "Predict Boost Factor"
+msgstr "预测Boost Factor"
+
 #: src/pages/Stake/Simulator.tsx
 msgid "Boost Factor Tips"
 msgstr "Boost Factor = ( 用户veSTAR余额 + 预估获得veStar / veSTAR 总数 ) / ( ( 2 / 3) * lp质押金额 / lp质押总数 ) + 1"

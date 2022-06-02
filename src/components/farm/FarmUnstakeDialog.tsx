@@ -16,6 +16,8 @@ import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import BigNumber from 'bignumber.js'
 import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
+import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
+import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 
 const Container = styled.div`
   border-radius: 20px;
@@ -68,7 +70,8 @@ interface FarmUnstakeDialogProps {
   userStaked: number,
   lpTokenScalingFactor: number,
   isOpen: boolean
-  onDismiss: () => void
+  onDismiss: () => void,
+  lpStakingData: any
 }
 
 export default function FarmUnstakeDialog({
@@ -78,18 +81,35 @@ export default function FarmUnstakeDialog({
   lpTokenScalingFactor,
   onDismiss,
   isOpen,
+  lpStakingData
 }: FarmUnstakeDialogProps) {
 
   const starcoinProvider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
+  let address = ''
+  if (account) {
+    address = account.toLowerCase()
+  }
 
   const theme = useContext(ThemeContext)
   
   const [unstakeNumber, setUnstakeNumber] = useState<any>('')
+  const [predictBoostFactor, setPredictBoostFactor] = useState<number>(100)
 
   function parseUnstakeNumber(value: string) {
     setUnstakeNumber(value)
   }
+
+  // const lockedAmount = useGetLockedAmount(tokenX, tokenY, address)
+  const boostFactor = useComputeBoostFactor(
+    0,
+    new BigNumber(Number(lpStakingData?.stakedLiquidity) - Number(unstakeNumber) * lpTokenScalingFactor),
+    lpStakingData?.farmTotalLiquidity
+  )
+
+  useEffect(() => {
+    setPredictBoostFactor(boostFactor)
+  }, [boostFactor])
 
   async function onClickUnstakeConfirm() {
     try {
@@ -129,8 +149,8 @@ export default function FarmUnstakeDialog({
   }
  
   return (
-    <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={ theme.bgCard }>
-      <ColumnCenter style={{ padding: '27px 32px'}}>
+    <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={theme.bgCard}>
+      <ColumnCenter style={{ padding: '27px 32px' }}>
         <AutoRow>
           <TYPE.black fontWeight={500} fontSize={20}>
             <Trans>Unstake LP Token</Trans>
@@ -146,27 +166,45 @@ export default function FarmUnstakeDialog({
             placeholder={'0.0'}
             value={unstakeNumber}
             onChange={(e) => parseUnstakeNumber(e.target.value)}
-            style={{ height: '28px', background: 'transparent', textAlign: 'left', marginTop: '28px', marginLeft: '18px' }}
+            style={{
+              height: '28px',
+              background: 'transparent',
+              textAlign: 'left',
+              marginTop: '28px',
+              marginLeft: '18px',
+            }}
           />
           <ColumnRight style={{ marginRight: '25px', textAlign: 'right' }}>
-            <ButtonText style={{ marginTop: '28px', lineHeight: '28px' }} onClick={() => { setUnstakeNumber((userStaked / lpTokenScalingFactor).toString()) }}>
+            <ButtonText
+              style={{ marginTop: '28px', lineHeight: '28px' }}
+              onClick={() => {
+                setUnstakeNumber((userStaked / lpTokenScalingFactor).toString())
+              }}
+            >
               <TYPE.black fontWeight={500} fontSize={20} color={'#FD748D'} style={{ lineHeight: '28px' }}>
                 <Trans>MAX</Trans>
               </TYPE.black>
             </ButtonText>
           </ColumnRight>
         </Container>
+        <RowBetween style={{ marginTop: '8px' }}>
+          <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
+            <Trans>Predict Boost Factor</Trans>：{predictBoostFactor / 100}X
+          </TYPE.black>
+        </RowBetween>
         <RowBetween style={{ marginTop: '24px' }}>
-          <ButtonBorder marginRight={22} onClick={onDismiss} >
+          <ButtonBorder marginRight={22} onClick={onDismiss}>
             <TYPE.black fontSize={20}>
               <Trans>Cancel</Trans>
             </TYPE.black>
           </ButtonBorder>
-          <ButtonFarm onClick={() => {
-            onClickUnstakeConfirm();
-            setTimeout(onDismiss, 2500);
-            setTimeout("window.location.reload()", 10000);
-          }}>
+          <ButtonFarm
+            onClick={() => {
+              onClickUnstakeConfirm()
+              setTimeout(onDismiss, 2500)
+              setTimeout('window.location.reload()', 10000)
+            }}
+          >
             <TYPE.main color={'#fff'}>
               <Trans>Confirm</Trans>
             </TYPE.main>

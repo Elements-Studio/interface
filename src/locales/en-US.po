@@ -402,6 +402,10 @@ msgstr "Boost APR"
 msgid "Boost Factor"
 msgstr "Boost Factor"
 
+#: src/pages/Farm/FarmStake.tsx
+msgid "Predict Boost Factor"
+msgstr "Predict Boost Factor"
+
 #: src/pages/Stake/Simulator.tsx
 msgid "Boost Factor Tips"
 msgstr "Boost Factor = ( Your veSTAR Balance + Your veSTAR Estimated / Total veSTAR ) / ( ( 2 / 3) * You staked lp amount / lp amount ) + 1"

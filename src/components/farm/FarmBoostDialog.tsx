@@ -18,6 +18,11 @@ import BigNumber from 'bignumber.js'
 import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
 import { addHexPrefix } from '@starcoin/stc-util'
+import CircularProgress from '@mui/material/CircularProgress'
+import axios from 'axios'
+import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
+import useGetLockedAmount from '../../hooks/useGetLockedAmount'
+
 
 const Container = styled.div`
   width: 100%;
@@ -27,6 +32,15 @@ const Container = styled.div`
       color: #565A69!important;
     }
   }
+`
+const InputContainer = styled.div`
+  border-radius: 20px;
+  border: 1px solid ${({ theme }) => theme.inputBorder};
+  width: 100%;
+  height: 88px;
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
 `
 
 const Input = styled.input`
@@ -65,12 +79,13 @@ const Input = styled.input`
 `
 
 interface FarmUnstakeDialogProps {
-  tokenX: any,
-  tokenY: any,
-  veStarAmount: number,
-  lpTokenScalingFactor: number,
+  tokenX: any
+  tokenY: any
+  veStarAmount: number
+  lpTokenScalingFactor: number
   isOpen: boolean
   onDismiss: () => void
+  lpStakingData: any
 }
 
 export default function FarmUnstakeDialog({
@@ -80,47 +95,76 @@ export default function FarmUnstakeDialog({
   lpTokenScalingFactor,
   onDismiss,
   isOpen,
+  lpStakingData,
 }: FarmUnstakeDialogProps) {
-
-  const starcoinProvider = useStarcoinProvider();
+  const starcoinProvider = useStarcoinProvider()
   const { account, chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
   const theme = useContext(ThemeContext)
-  
+  const [starAmount, setStarAmount] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  let address = ''
+  if (account) {
+    address = account.toLowerCase()
+  }
+
+  const [predictBoostFactor, setPredictBoostFactor] = useState<number>(100)
+
   async function onClickConfirm() {
     try {
-      const address = account ?  account.toLowerCase() : ''
+      const address = account ? account.toLowerCase() : ''
       const signature = ''
 
-      const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapFarmScript::wl_boost`;
-      const tyArgs = [tokenX, tokenY];
+      const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapFarmScript::wl_boost`
+      const tyArgs = [tokenX, tokenY]
 
       const nodeUrl = `https://${network}-seed.starcoin.org`
+      const boostAmount = new BigNumber(Number(starAmount) * lpTokenScalingFactor).toNumber()
+      const args = [boostAmount, signature]
 
-      const boostAmount = new BigNumber(veStarAmount).toNumber();
-
-      const args = [boostAmount, signature];
-      
       const scriptFunction = await utils.tx.encodeScriptFunctionByResolve(functionId, tyArgs, args, nodeUrl)
 
       const payloadInHex = (function () {
-        const se = new bcs.BcsSerializer();
-        scriptFunction.serialize(se);
-        return hexlify(se.getBytes());
-      })();
+        const se = new bcs.BcsSerializer()
+        scriptFunction.serialize(se)
+        return hexlify(se.getBytes())
+      })()
 
-      await starcoinProvider.getSigner().sendUncheckedTransaction({
+      const response = await starcoinProvider.getSigner().sendUncheckedTransaction({
         data: payloadInHex,
-      });
+      })
+      setLoading(true)
+      setInterval(async () => {
+        const txnInfo = await starcoinProvider.getTransactionInfo(response)
+        console.log({ txnInfo })
+        if (txnInfo.status === 'Executed') {
+          setLoading(false)
+          onDismiss()
+          clearInterval()
+          window.location.reload()
+        }
+      }, 3000)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-    return false;
+    return false
   }
- 
+
+  const lockedAmount = useGetLockedAmount(tokenX, tokenY, address)
+  const boostFactor = useComputeBoostFactor(
+    new BigNumber(Number(lockedAmount) + Number(starAmount) * lpTokenScalingFactor),
+    lpStakingData?.stakedLiquidity,
+    lpStakingData?.farmTotalLiquidity
+  )
+
+  useEffect(() => {
+    setPredictBoostFactor(boostFactor)
+  }, [boostFactor])
+
   return (
-    <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={ theme.bgCard }>
-      <ColumnCenter style={{ padding: '27px 32px'}}>
+    <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={theme.bgCard}>
+      <ColumnCenter style={{ padding: '27px 32px' }}>
         <AutoRow>
           <TYPE.black fontWeight={500} fontSize={20}>
             <Trans>Boost My LP Staking</Trans>
@@ -131,20 +175,59 @@ export default function FarmUnstakeDialog({
             <Trans>VeStar</Trans>: {veStarAmount / lpTokenScalingFactor}
           </TYPE.black>
         </RowBetween>
+        <InputContainer>
+          <Input
+            placeholder={'0.0'}
+            value={starAmount}
+            onChange={(e) => setStarAmount(e.target.value)}
+            style={{
+              height: '28px',
+              background: 'transparent',
+              textAlign: 'left',
+              marginTop: '28px',
+              marginLeft: '18px',
+            }}
+          />
+          <ColumnRight style={{ marginRight: '25px', textAlign: 'right' }}>
+            <ButtonText
+              style={{ marginTop: '28px', lineHeight: '28px' }}
+              onClick={() => {
+                setStarAmount((veStarAmount / lpTokenScalingFactor).toString())
+              }}
+            >
+              <TYPE.black fontWeight={500} fontSize={20} color={'#FD748D'} style={{ lineHeight: '28px' }}>
+                <Trans>MAX</Trans>
+              </TYPE.black>
+            </ButtonText>
+          </ColumnRight>
+        </InputContainer>
+        <RowBetween style={{ marginTop: '8px' }}>
+          <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
+            <Trans>Predict Boost Factor</Trans>：{predictBoostFactor / 100}X
+          </TYPE.black>
+        </RowBetween>
+        {loading && (
+          <CircularProgress
+            size={64}
+            sx={{
+              marginTop: '10px',
+              zIndex: 1,
+            }}
+          />
+        )}
         <Container>
           <RowBetween style={{ marginTop: '24px' }}>
-            <ButtonBorder marginRight={22} onClick={onDismiss} >
+            <ButtonBorder marginRight={22} onClick={onDismiss}>
               <TYPE.black fontSize={20}>
                 <Trans>Cancel</Trans>
               </TYPE.black>
             </ButtonBorder>
-            <ButtonFarm 
-              disabled={veStarAmount === 0} 
+            <ButtonFarm
+              disabled={Number(starAmount) === 0}
               onClick={() => {
-                onClickConfirm();
-                setTimeout(onDismiss, 2500);
-                setTimeout("window.location.reload()", 10000);
-              }}>
+                onClickConfirm()
+              }}
+            >
               <TYPE.main color={'#fff'}>
                 <Trans>Confirm</Trans>
               </TYPE.main>

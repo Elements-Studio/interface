@@ -197,20 +197,21 @@ export default function FarmStake({
                 <Trans>STAR Earned</Trans>
               </TYPE.body>
               <TYPE.body color={'#FE7F8D'} fontSize={16} style={{ marginTop: '16px' }}>
-                {
-                  hasAccount ? (
-                    <BalanceText style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                      {tbdGain / tbdScalingFactor}
-                    </BalanceText>
-                  ) : null
-                }
+                {hasAccount ? (
+                  <BalanceText style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                    {tbdGain / tbdScalingFactor}
+                  </BalanceText>
+                ) : null}
               </TYPE.body>
-              <ButtonFarm style={{ marginTop: '16px' }}
+              <ButtonFarm
+                style={{ marginTop: '16px' }}
                 disabled={!hasAccount || !(tbdGain > 0)}
-                onClick={() => { setHarvestDialogOpen(true) }} 
+                onClick={() => {
+                  setHarvestDialogOpen(true)
+                }}
               >
                 <TYPE.main color={'#FE7F8D'}>
-                  <BalanceText color={'#fff'} style={{ flexShrink: 0}} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                  <BalanceText color={'#fff'} style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
                     <Trans>Harvest</Trans>
                   </BalanceText>
                 </TYPE.main>
@@ -220,81 +221,104 @@ export default function FarmStake({
           <FarmCard>
             <AutoColumn justify="center">
               <RowFixed>
-                <CurrencyLogo currency={currency0} size={'48px'} style={{marginRight: '1.25rem', borderRadius: '8px'}} />
-                <CurrencyLogo currency={currency1} size={'48px'} style={{borderRadius: '8px;'}} />
+                <CurrencyLogo
+                  currency={currency0}
+                  size={'48px'}
+                  style={{ marginRight: '1.25rem', borderRadius: '8px' }}
+                />
+                <CurrencyLogo currency={currency1} size={'48px'} style={{ borderRadius: '8px;' }} />
               </RowFixed>
-              <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{tokenX}/{tokenY}</TYPE.body>
-              <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>{userStaked / lpTokenScalingFactor}</TYPE.body>
-                {!hasAccount ? (
-                  <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
-                    <TYPE.black fontSize="20px" color={'#FE7F8D'}>
-                      <Trans>Connect Wallet</Trans>
+              <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>
+                {tokenX}/{tokenY}
+              </TYPE.body>
+              <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>
+                {userStaked / lpTokenScalingFactor}
+              </TYPE.body>
+              {!hasAccount ? (
+                <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
+                  <TYPE.black fontSize="20px" color={'#FE7F8D'}>
+                    <Trans>Connect Wallet</Trans>
+                  </TYPE.black>
+                </ButtonBorder>
+              ) : !isAuthorization ? (
+                <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
+                  <TYPE.black fontSize="20px" color={'#FE7F8D'}>
+                    <Trans>Authorization</Trans>
+                  </TYPE.black>
+                </ButtonBorder>
+              ) : (
+                <RowBetween style={{ marginTop: '16px' }}>
+                  <ButtonFarm
+                    onClick={() => {
+                      setStakeDialogOpen(true)
+                    }}
+                    disabled={!(userLiquidity > 0)}
+                  >
+                    <TYPE.main color={'#fff'}>
+                      <Trans>Stake</Trans>
+                    </TYPE.main>
+                  </ButtonFarm>
+                  <ButtonBorder
+                    onClick={() => {
+                      setUnstakeDialogOpen(true)
+                    }}
+                    disabled={!hasStake}
+                    marginLeft={16}
+                  >
+                    <TYPE.black fontSize={20}>
+                      <Trans>Unstake</Trans>
                     </TYPE.black>
                   </ButtonBorder>
-                ) : (
-                  !isAuthorization ? (
-                    <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
-                      <TYPE.black fontSize="20px" color={'#FE7F8D'}>
-                        <Trans>Authorization</Trans>
-                      </TYPE.black>
-                    </ButtonBorder>
-                  ) : (
-                    <RowBetween style={{ marginTop: '16px' }}>
-                      <ButtonFarm onClick={() => { setStakeDialogOpen(true) }} disabled={!(userLiquidity > 0)}>
-                        <TYPE.main color={'#fff'}>
-                          <Trans>Stake</Trans>
-                        </TYPE.main>
-                      </ButtonFarm>
-                      <ButtonBorder onClick={() => { setUnstakeDialogOpen(true) }} disabled={!hasStake} marginLeft={16}>
-                        <TYPE.black fontSize={20}>
-                          <Trans>Unstake</Trans>
-                        </TYPE.black>
-                      </ButtonBorder>
-                    </RowBetween>
-                  )
-                )}
+                </RowBetween>
+              )}
             </AutoColumn>
           </FarmCard>
         </AutoRow>
         <AutoRow justify="center">
-          {
-            (isBoost) ? (
-              <FarmCard>
-                <AutoColumn justify="center">
-                  <RowFixed>
-                    <StyledEthereumLogo src={BoostFlame} size={'60px'} style={{width: '45px'}} />
-                  </RowFixed>
-                  <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>
-                    <Trans>Boost Factor</Trans>
-                  </TYPE.body>
-                  <TYPE.body color={'#FE7F8D'} fontSize={16} style={{ marginTop: '16px' }}>
-                    {
-                      hasAccount ? (
-                        <BalanceText style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                          {boostFactor}<Trans>x</Trans>
-                        </BalanceText>
-                      ) : null
+          {isBoost ? (
+            <FarmCard>
+              <AutoColumn justify="center">
+                <RowFixed>
+                  <StyledEthereumLogo src={BoostFlame} size={'60px'} style={{ width: '45px' }} />
+                </RowFixed>
+                <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>
+                  <Trans>Boost Factor</Trans>
+                </TYPE.body>
+                <TYPE.body color={'#FE7F8D'} fontSize={16} style={{ marginTop: '16px' }}>
+                  {hasAccount ? (
+                    <BalanceText style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                      {boostFactor}
+                      <Trans>x</Trans>
+                    </BalanceText>
+                  ) : null}
+                </TYPE.body>
+                <ButtonFarm
+                  style={{ marginTop: '16px' }}
+                  disabled={!hasAccount || !(tbdGain > 0)}
+                  onClick={() => {
+                    setBoostDialogOpen(true)
+                  }}
+                >
+                  <TYPE.main color={'#FE7F8D'}>
+                    <BalanceText color={'#fff'} style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                      <Trans>Boost</Trans>
+                    </BalanceText>
+                  </TYPE.main>
+                </ButtonFarm>
+                <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
+                  <ExternalLink
+                    href={
+                      local === 'en-US'
+                        ? 'https://docs.starswap.xyz/v/en/guidelines/vestar-and-boosting'
+                        : 'https://docs.starswap.xyz/shi-yong-zhi-nan/ti-su-wa-kuang'
                     }
-                  </TYPE.body>
-                    <ButtonFarm style={{ marginTop: '16px' }}
-                      disabled={!hasAccount || !(tbdGain > 0)}
-                      onClick={() => { setBoostDialogOpen(true) }} 
-                    >
-                      <TYPE.main color={'#FE7F8D'}>
-                        <BalanceText color={'#fff'} style={{ flexShrink: 0}} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                          <Trans>Boost</Trans>
-                        </BalanceText>
-                      </TYPE.main>
-                    </ButtonFarm>
-                  <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
-                    <ExternalLink href={local === 'en-US' ? 'https://docs.starswap.xyz/v/en/guidelines/vestar-and-boosting' : 'https://docs.starswap.xyz/shi-yong-zhi-nan/ti-su-wa-kuang'}>
-                      <Trans>Learn more about boost</Trans>
-                    </ExternalLink>
-                  </TYPE.body>
-                </AutoColumn>
-              </FarmCard>
-            ): null
-          }
+                  >
+                    <Trans>Learn more about boost</Trans>
+                  </ExternalLink>
+                </TYPE.body>
+              </AutoColumn>
+            </FarmCard>
+          ) : null}
           <FarmCard>
             <AutoColumn justify="center">
               {/*
@@ -305,106 +329,98 @@ export default function FarmStake({
               <TYPE.body fontSize={24} style={{ marginTop: '0px' }}>
                 <Trans>LP Token Staking Status</Trans>
               </TYPE.body>
-              { lpStakingData ? (
-              <>
-              <FarmRow style={{ marginTop: '20px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Staked Liquidity</Trans>
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14}>
-                    {Number(lpStakingData.stakedLiquidity / lpTokenScalingFactor)}
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow>
-              <FarmRow style={{ marginTop: '10px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Farm Total Liquidity</Trans>
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14}>
-                    {Number(lpStakingData.farmTotalLiquidity / lpTokenScalingFactor)}
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow>
-              <FarmRow style={{ marginTop: '10px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Percentage</Trans>
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14}>
-                    {Number(lpStakingData.sharePercentage)}
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow>
-              <FarmRow style={{ marginTop: '10px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Staked Amount In USD</Trans>
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14}>
-                    {Number(lpStakingData.stakedAmountInUsd)}
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow>
-              <FarmRow style={{ marginTop: '10px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Token X</Trans>
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14}>
-                    {lpStakingData.tokenXAmount.tokenId}
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow>
-              <FarmRow style={{ marginTop: '10px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Token X Amount</Trans>
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14}>
-                    {Number(lpStakingData.tokenXAmount.amount / starScalingFactor)}
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow>
-              <FarmRow style={{ marginTop: '10px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Token Y</Trans>
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14}>
-                    {lpStakingData.tokenYAmount.tokenId}
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow>
-              <FarmRow style={{ marginTop: '10px' }}>
-                <RowFixed>
-                  <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>Token Y Amount</Trans>
-                  </TYPE.black>
-                </RowFixed>
-                <RowFixed>
-                  <TYPE.black fontSize={14}>
-                    {Number(lpStakingData.tokenYAmount.amount / stcScalingFactor)}
-                  </TYPE.black>
-                </RowFixed>
-              </FarmRow>
-              </>
-              ) : null }
+              {lpStakingData ? (
+                <>
+                  <FarmRow style={{ marginTop: '20px' }}>
+                    <RowFixed>
+                      <TYPE.black fontWeight={400} fontSize={14}>
+                        <Trans>Staked Liquidity</Trans>
+                      </TYPE.black>
+                    </RowFixed>
+                    <RowFixed>
+                      <TYPE.black fontSize={14}>
+                        {Number(lpStakingData.stakedLiquidity / lpTokenScalingFactor)}
+                      </TYPE.black>
+                    </RowFixed>
+                  </FarmRow>
+                  <FarmRow style={{ marginTop: '10px' }}>
+                    <RowFixed>
+                      <TYPE.black fontWeight={400} fontSize={14}>
+                        <Trans>Farm Total Liquidity</Trans>
+                      </TYPE.black>
+                    </RowFixed>
+                    <RowFixed>
+                      <TYPE.black fontSize={14}>
+                        {Number(lpStakingData.farmTotalLiquidity / lpTokenScalingFactor)}
+                      </TYPE.black>
+                    </RowFixed>
+                  </FarmRow>
+                  <FarmRow style={{ marginTop: '10px' }}>
+                    <RowFixed>
+                      <TYPE.black fontWeight={400} fontSize={14}>
+                        <Trans>Percentage</Trans>
+                      </TYPE.black>
+                    </RowFixed>
+                    <RowFixed>
+                      <TYPE.black fontSize={14}>{Number(lpStakingData.sharePercentage)}</TYPE.black>
+                    </RowFixed>
+                  </FarmRow>
+                  <FarmRow style={{ marginTop: '10px' }}>
+                    <RowFixed>
+                      <TYPE.black fontWeight={400} fontSize={14}>
+                        <Trans>Staked Amount In USD</Trans>
+                      </TYPE.black>
+                    </RowFixed>
+                    <RowFixed>
+                      <TYPE.black fontSize={14}>{Number(lpStakingData.stakedAmountInUsd)}</TYPE.black>
+                    </RowFixed>
+                  </FarmRow>
+                  <FarmRow style={{ marginTop: '10px' }}>
+                    <RowFixed>
+                      <TYPE.black fontWeight={400} fontSize={14}>
+                        <Trans>Token X</Trans>
+                      </TYPE.black>
+                    </RowFixed>
+                    <RowFixed>
+                      <TYPE.black fontSize={14}>{lpStakingData.tokenXAmount.tokenId}</TYPE.black>
+                    </RowFixed>
+                  </FarmRow>
+                  <FarmRow style={{ marginTop: '10px' }}>
+                    <RowFixed>
+                      <TYPE.black fontWeight={400} fontSize={14}>
+                        <Trans>Token X Amount</Trans>
+                      </TYPE.black>
+                    </RowFixed>
+                    <RowFixed>
+                      <TYPE.black fontSize={14}>
+                        {Number(lpStakingData.tokenXAmount.amount / starScalingFactor)}
+                      </TYPE.black>
+                    </RowFixed>
+                  </FarmRow>
+                  <FarmRow style={{ marginTop: '10px' }}>
+                    <RowFixed>
+                      <TYPE.black fontWeight={400} fontSize={14}>
+                        <Trans>Token Y</Trans>
+                      </TYPE.black>
+                    </RowFixed>
+                    <RowFixed>
+                      <TYPE.black fontSize={14}>{lpStakingData.tokenYAmount.tokenId}</TYPE.black>
+                    </RowFixed>
+                  </FarmRow>
+                  <FarmRow style={{ marginTop: '10px' }}>
+                    <RowFixed>
+                      <TYPE.black fontWeight={400} fontSize={14}>
+                        <Trans>Token Y Amount</Trans>
+                      </TYPE.black>
+                    </RowFixed>
+                    <RowFixed>
+                      <TYPE.black fontSize={14}>
+                        {Number(lpStakingData.tokenYAmount.amount / stcScalingFactor)}
+                      </TYPE.black>
+                    </RowFixed>
+                  </FarmRow>
+                </>
+              ) : null}
             </AutoColumn>
           </FarmCard>
         </AutoRow>
@@ -424,6 +440,7 @@ export default function FarmStake({
         tokenY={addressY}
         isOpen={harvestDialogOpen}
         onDismiss={handleDismissHarvest}
+        lpStakingData={lpStakingData}
       />
       <FarmStakeDialog
         lpTokenBalance={userLiquidity}
@@ -432,6 +449,7 @@ export default function FarmStake({
         tokenY={addressY}
         isOpen={stakeDialogOpen}
         onDismiss={handleDismissStake}
+        lpStakingData={lpStakingData}
       />
       <FarmUnstakeDialog
         userStaked={userStaked}
@@ -440,6 +458,7 @@ export default function FarmStake({
         tokenY={addressY}
         isOpen={unstakeDialogOpen}
         onDismiss={handleDismissUnstake}
+        lpStakingData={lpStakingData}
       />
       <FarmBoostDialog
         veStarAmount={veStarAmount}
@@ -448,6 +467,7 @@ export default function FarmStake({
         tokenY={addressY}
         isOpen={boostDialogOpen}
         onDismiss={handleDismissBoost}
+        lpStakingData={lpStakingData}
       />
     </>
   )
