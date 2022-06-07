@@ -18,6 +18,7 @@ import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
 import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
 import useGetLockedAmount from '../../hooks/useGetLockedAmount'
+import getCurrentNetwork from '../../utils/getCurrentNetwork'
 
 const Container = styled.div`
   border-radius: 20px;
@@ -91,6 +92,9 @@ export default function FarmUnstakeDialog({
 
   const starcoinProvider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
+  const network = getCurrentNetwork(chainId)
+  const isMain = network === 'main'
+
   let address = ''
   if (account) {
     address = account.toLowerCase()
@@ -192,11 +196,11 @@ export default function FarmUnstakeDialog({
             </ButtonText>
           </ColumnRight>
         </Container>
-        <RowBetween style={{ marginTop: '8px' }}>
+        {!isMain && <RowBetween style={{ marginTop: '8px' }}>
           <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
             <Trans>Predict the updated Boost Factor value</Trans>：<PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
           </TYPE.black>
-        </RowBetween>
+        </RowBetween>}
         <RowBetween style={{ marginTop: '24px' }}>
           <ButtonBorder marginRight={22} onClick={onDismiss}>
             <TYPE.black fontSize={20}>
