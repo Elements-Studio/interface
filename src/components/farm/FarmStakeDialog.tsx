@@ -17,6 +17,9 @@ import BigNumber from 'bignumber.js';
 import { arrayify, hexlify } from '@ethersproject/bytes';
 import { utils, bcs } from '@starcoin/starcoin';
 import CircularProgress from '@mui/material/CircularProgress'
+import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
+import useGetLockedAmount from '../../hooks/useGetLockedAmount'
+import getCurrentNetwork from '../../utils/getCurrentNetwork'
 
 const Container = styled.div`
   border-radius: 20px;
@@ -63,13 +66,19 @@ const Input = styled.input`
   }
 `
 
+const PredictBoostFactorSpan = styled.span`
+  color: #fd748d;
+  font-size: 16px;
+`
+
 interface FarmStakeDialogProps {
   tokenX: any,
   tokenY: any,
   lpTokenBalance: number,
   lpTokenScalingFactor: number,
   isOpen: boolean
-  onDismiss: () => void
+  onDismiss: () => void,
+  lpStakingData: any
 }
 
 export default function FarmStakeDialog({
@@ -79,19 +88,39 @@ export default function FarmStakeDialog({
   lpTokenScalingFactor,
   onDismiss,
   isOpen,
+  lpStakingData
 }: FarmStakeDialogProps) {
 
   const starcoinProvider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
+  const network = getCurrentNetwork(chainId)
+  const isMain = network === 'main'
+
+  let address = '';
+  if (account) {
+    address = account.toLowerCase()
+  }
 
   const theme = useContext(ThemeContext)
   
   const [stakeNumber, setStakeNumber] = useState<any>('')
   const [loading, setLoading] = useState(false);
+  const [predictBoostFactor, setPredictBoostFactor] = useState<number>(100)
 
   function parseStakeNumber(value: string) {
     setStakeNumber(value)
   }
+
+  const lockedAmount = useGetLockedAmount(tokenX, tokenY, address);
+  const boostFactor = useComputeBoostFactor(
+    lockedAmount,
+    new BigNumber(Number(lpStakingData?.stakedLiquidity) + Number(stakeNumber) * lpTokenScalingFactor),
+    lpStakingData?.farmTotalLiquidity
+  )
+  
+  useEffect(() => {
+    setPredictBoostFactor(boostFactor)
+  }, [boostFactor])
 
   async function onClickStakeConfirm() {
     try {
@@ -143,8 +172,8 @@ export default function FarmStakeDialog({
   }
  
   return (
-    <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={ theme.bgCard }>
-      <ColumnCenter style={{ padding: '27px 32px'}}>
+    <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={theme.bgCard}>
+      <ColumnCenter style={{ padding: '27px 32px' }}>
         <AutoRow>
           <TYPE.black fontWeight={500} fontSize={20}>
             <Trans>Stake LP Token</Trans>
@@ -160,16 +189,32 @@ export default function FarmStakeDialog({
             placeholder={'0.0'}
             value={stakeNumber}
             onChange={(e) => parseStakeNumber(e.target.value)}
-            style={{ height: '28px', width: '100%', background: 'transparent', textAlign: 'left', marginTop: '28px', marginLeft: '18px' }}
+            style={{
+              height: '28px',
+              background: 'transparent',
+              textAlign: 'left',
+              marginTop: '28px',
+              marginLeft: '18px',
+            }}
           />
-          <ColumnRight style={{ marginRight: '24px', textAlign: 'right' }}>
-            <ButtonText style={{ marginTop: '28px', lineHeight: '28px' }} onClick={() => { setStakeNumber((lpTokenBalance / lpTokenScalingFactor).toString()) }}>
+          <ColumnRight style={{ marginRight: '25px', textAlign: 'right' }}>
+            <ButtonText
+              style={{ marginTop: '28px', lineHeight: '28px' }}
+              onClick={() => {
+                setStakeNumber((lpTokenBalance / lpTokenScalingFactor).toString())
+              }}
+            >
               <TYPE.black fontWeight={500} fontSize={20} color={'#FD748D'} style={{ lineHeight: '28px' }}>
                 <Trans>MAX</Trans>
               </TYPE.black>
             </ButtonText>
           </ColumnRight>
         </Container>
+        {!isMain && <RowBetween style={{ marginTop: '8px' }}>
+          <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
+            <Trans>Predict the updated Boost Factor value</Trans>：<PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
+          </TYPE.black>
+        </RowBetween>}
         {loading && (
           <CircularProgress
             size={64}
@@ -180,16 +225,18 @@ export default function FarmStakeDialog({
           />
         )}
         <RowBetween style={{ marginTop: '24px' }}>
-          <ButtonBorder marginRight={22} onClick={onDismiss} >
+          <ButtonBorder marginRight={22} onClick={onDismiss}>
             <TYPE.black fontSize={20}>
               <Trans>Cancel</Trans>
             </TYPE.black>
           </ButtonBorder>
-          <ButtonFarm onClick={() => {
-            onClickStakeConfirm();
-            // setTimeout(onDismiss, 2500);
-            // setTimeout("window.location.reload()", 10000);
-          }}>
+          <ButtonFarm
+            onClick={() => {
+              onClickStakeConfirm()
+              // setTimeout(onDismiss, 2500);
+              // setTimeout("window.location.reload()", 10000);
+            }}
+          >
             <TYPE.main color={'#fff'}>
               <Trans>Confirm</Trans>
             </TYPE.main>

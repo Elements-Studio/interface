@@ -16,6 +16,9 @@ import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import BigNumber from 'bignumber.js'
 import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
+import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
+import useGetLockedAmount from '../../hooks/useGetLockedAmount'
+import getCurrentNetwork from '../../utils/getCurrentNetwork'
 
 const Container = styled.div`
   border-radius: 20px;
@@ -62,13 +65,19 @@ const Input = styled.input`
   }
 `
 
+const PredictBoostFactorSpan = styled.span`
+  color: #fd748d;
+  font-size: 16px;
+`
+
 interface FarmHarvestDialogProps {
   tokenX: any,
   tokenY: any,
   tbdEarned: number,
   tbdScalingFactor: number,
   isOpen: boolean,
-  onDismiss: () => void
+  onDismiss: () => void,
+  lpStakingData: any
 }
 
 export default function FarmHarvestDialog({
@@ -78,19 +87,39 @@ export default function FarmHarvestDialog({
   tbdScalingFactor,
   onDismiss,
   isOpen,
+  lpStakingData
 }: FarmHarvestDialogProps) {
 
   const starcoinProvider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
+  const network = getCurrentNetwork(chainId)
+  const isMain = network === 'main'
+
+  let address = '';
+  if (account) {
+    address = account.toLowerCase()
+  }
 
   const theme = useContext(ThemeContext)
   
   const [harvestNumber, setHarvestNumber] = useState<any>('')
 
+  const [predictBoostFactor, setPredictBoostFactor] = useState<number>(100)
+
   function parseHarvestNumber(value: string) {
     setHarvestNumber(value)
   }
 
+  const lockedAmount = useGetLockedAmount(tokenX, tokenY, address);
+  const boostFactor = useComputeBoostFactor(
+    lockedAmount,
+    lpStakingData?.stakedLiquidity,
+    lpStakingData?.farmTotalLiquidity
+  )
+  
+  useEffect(() => {
+    setPredictBoostFactor(boostFactor)
+  }, [boostFactor])
   async function onClickHarvestConfirm() {
     try {
       const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapFarmScript::harvest`;
@@ -129,8 +158,8 @@ export default function FarmHarvestDialog({
   }
  
   return (
-    <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={ theme.bgCard }>
-      <ColumnCenter style={{ padding: '27px 32px'}}>
+    <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={theme.bgCard}>
+      <ColumnCenter style={{ padding: '27px 32px' }}>
         <AutoRow>
           <TYPE.black fontWeight={500} fontSize={20}>
             <Trans>Harvest STAR</Trans>
@@ -146,27 +175,45 @@ export default function FarmHarvestDialog({
             placeholder={'0.0'}
             value={harvestNumber}
             onChange={(e) => parseHarvestNumber(e.target.value)}
-            style={{ height: '28px', background: 'transparent', textAlign: 'left', marginTop: '28px', marginLeft: '18px' }}
+            style={{
+              height: '28px',
+              background: 'transparent',
+              textAlign: 'left',
+              marginTop: '28px',
+              marginLeft: '18px',
+            }}
           />
           <ColumnRight style={{ marginRight: '25px', textAlign: 'right' }}>
-            <ButtonText style={{ marginTop: '28px', lineHeight: '28px' }} onClick={() => { setHarvestNumber((tbdEarned / tbdScalingFactor).toString()) }}>
+            <ButtonText
+              style={{ marginTop: '28px', lineHeight: '28px' }}
+              onClick={() => {
+                setHarvestNumber((tbdEarned / tbdScalingFactor).toString())
+              }}
+            >
               <TYPE.black fontWeight={500} fontSize={20} color={'#FD748D'} style={{ lineHeight: '28px' }}>
                 <Trans>MAX</Trans>
               </TYPE.black>
             </ButtonText>
           </ColumnRight>
         </Container>
+        {!isMain && <RowBetween style={{ marginTop: '8px' }}>
+          <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
+            <Trans>Predict the updated Boost Factor value</Trans>：<PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
+          </TYPE.black>
+        </RowBetween>}
         <RowBetween style={{ marginTop: '24px' }}>
-          <ButtonBorder marginRight={22} onClick={onDismiss} >
+          <ButtonBorder marginRight={22} onClick={onDismiss}>
             <TYPE.black fontSize={20}>
               <Trans>Cancel</Trans>
             </TYPE.black>
           </ButtonBorder>
-          <ButtonFarm onClick={() => {
-            onClickHarvestConfirm();
-            setTimeout(onDismiss, 2500);
-            setTimeout("window.location.reload()", 10000);
-          }}>
+          <ButtonFarm
+            onClick={() => {
+              onClickHarvestConfirm()
+              setTimeout(onDismiss, 2500)
+              setTimeout('window.location.reload()', 10000)
+            }}
+          >
             <TYPE.main color={'#fff'}>
               <Trans>Confirm</Trans>
             </TYPE.main>
