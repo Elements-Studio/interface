@@ -207,11 +207,13 @@ export default function FarmUnstakeDialog({
             </ButtonText>
           </ColumnRight>
         </InputContainer>}
-        {!isMain && <RowBetween style={{ marginTop: '8px' }}>
-          <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
-            <Trans>Predict the updated Boost Factor value</Trans>：<PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
-          </TYPE.black>
-        </RowBetween>}
+        {
+          !isMain && <RowBetween style={{ marginTop: '8px' }}>
+            <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
+              <Trans>Predict the updated Boost Factor value</Trans>：<PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
+            </TYPE.black>
+          </RowBetween>
+        }
         {loading && !isMain && (
           <CircularProgress
             size={64}
