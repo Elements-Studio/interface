@@ -126,7 +126,7 @@ export default function FarmUnstakeDialog({
       const tyArgs = [tokenX, tokenY]
 
       const nodeUrl = `https://${network}-seed.starcoin.org`
-      const boostAmount = new BigNumber(Number(starAmount) * lpTokenScalingFactor).toNumber()
+      const boostAmount = new BigNumber( Number(starAmount) > 0 ? Number(starAmount) * lpTokenScalingFactor : veStarAmount).toNumber()
       const args = [boostAmount, signature]
 
       const scriptFunction = await utils.tx.encodeScriptFunctionByResolve(functionId, tyArgs, args, nodeUrl)
