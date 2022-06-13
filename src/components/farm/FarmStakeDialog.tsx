@@ -94,7 +94,6 @@ export default function FarmStakeDialog({
   const starcoinProvider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
-  const isMain = network === 'main'
 
   let address = '';
   if (account) {
@@ -210,11 +209,11 @@ export default function FarmStakeDialog({
             </ButtonText>
           </ColumnRight>
         </Container>
-        {!isMain && <RowBetween style={{ marginTop: '8px' }}>
+        <RowBetween style={{ marginTop: '8px' }}>
           <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
             <Trans>Predict the updated Boost Factor value</Trans>：<PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
           </TYPE.black>
-        </RowBetween>}
+        </RowBetween>
         {loading && (
           <CircularProgress
             size={64}

@@ -93,7 +93,6 @@ export default function FarmUnstakeDialog({
   const starcoinProvider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
-  const isMain = network === 'main'
 
   let address = ''
   if (account) {
@@ -196,11 +195,11 @@ export default function FarmUnstakeDialog({
             </ButtonText>
           </ColumnRight>
         </Container>
-        {!isMain && <RowBetween style={{ marginTop: '8px' }}>
+        <RowBetween style={{ marginTop: '8px' }}>
           <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
             <Trans>Predict the updated Boost Factor value</Trans>：<PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
           </TYPE.black>
-        </RowBetween>}
+        </RowBetween>
         <RowBetween style={{ marginTop: '24px' }}>
           <ButtonBorder marginRight={22} onClick={onDismiss}>
             <TYPE.black fontSize={20}>

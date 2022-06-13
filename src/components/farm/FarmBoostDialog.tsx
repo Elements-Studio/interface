@@ -108,7 +108,6 @@ export default function FarmUnstakeDialog({
   const theme = useContext(ThemeContext)
   const [starAmount, setStarAmount] = useState('')
   const [loading, setLoading] = useState(false)
-  const isMain = network === 'main';
 
   let address = ''
   if (account) {
@@ -181,7 +180,7 @@ export default function FarmUnstakeDialog({
             <Trans>VeStar</Trans>: {veStarAmount / lpTokenScalingFactor}
           </TYPE.black>
         </RowBetween>
-        {!isMain && <InputContainer>
+        <InputContainer>
           <Input
             placeholder={'0.0'}
             value={starAmount}
@@ -206,15 +205,14 @@ export default function FarmUnstakeDialog({
               </TYPE.black>
             </ButtonText>
           </ColumnRight>
-        </InputContainer>}
-        {
-          !isMain && <RowBetween style={{ marginTop: '8px' }}>
-            <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
-              <Trans>Predict the updated Boost Factor value</Trans>：<PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
-            </TYPE.black>
-          </RowBetween>
-        }
-        {loading && !isMain && (
+        </InputContainer>
+        <RowBetween style={{ marginTop: '8px' }}>
+          <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
+            <Trans>Predict the updated Boost Factor value</Trans>：
+            <PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
+          </TYPE.black>
+        </RowBetween>
+        {loading && (
           <CircularProgress
             size={64}
             sx={{
@@ -231,7 +229,7 @@ export default function FarmUnstakeDialog({
               </TYPE.black>
             </ButtonBorder>
             <ButtonFarm
-              disabled={!isMain ? Number(starAmount) === 0 : Number(veStarAmount) === 0}
+              disabled={Number(starAmount) === 0}
               onClick={() => {
                 onClickConfirm()
               }}
