@@ -75,35 +75,49 @@ export const STAR: { [chainId: number]: Token } = {
 export const XUSDT: { [chainId: number]: Token } = {
   [SupportedChainId.MAINNET]: new Token(
     SupportedChainId.MAINNET,
-    '0xb6d69dd935edf7f2054acf12eb884df8::XUSDT::XUSDT',
-    9,
+    '0xe52552637c5897a2d499fbf08216f73e::XUSDT::XUSDT',
+    6,
     'XUSDT',
     'XUSDT'
   ),
   [SupportedChainId.BARNARD]: new Token(
     SupportedChainId.BARNARD,
-    '0xb6d69dd935edf7f2054acf12eb884df8::XUSDT::XUSDT',
-    9,
+    '0x416b32009fe49fcab1d5f2ba0153838f::XUSDT::XUSDT',
+    6,
     'XUSDT',
     'XUSDT'
   ),
   [SupportedChainId.PROXIMA]: new Token(
     SupportedChainId.PROXIMA,
-    '0xb6d69dd935edf7f2054acf12eb884df8::XUSDT::XUSDT',
-    9,
+    '0x416b32009fe49fcab1d5f2ba0153838f::XUSDT::XUSDT',
+    6,
     'XUSDT',
     'XUSDT'
   ),
 }
-// export const XETH: { [chainId: number]: Token } = {
-//   [SupportedChainId.BARNARD]: new Token(
-//     SupportedChainId.BARNARD,
-//     '0x2d81a0427d64ff61b11ede9085efa5ad::XETH::XETH',
-//     18,
-//     'XETH',
-//     'XETH'
-//   ),
-// }
+export const XETH: { [chainId: number]: Token } = {
+  [SupportedChainId.MAINNET]: new Token(
+    SupportedChainId.MAINNET,
+    '0xe52552637c5897a2d499fbf08216f73e::XETH::XETH',
+    18,
+    'XETH',
+    'XETH'
+  ),
+  [SupportedChainId.BARNARD]: new Token(
+    SupportedChainId.BARNARD,
+    '0x416b32009fe49fcab1d5f2ba0153838f::XETH::XETH',
+    18,
+    'XETH',
+    'XETH'
+  ),
+  [SupportedChainId.PROXIMA]: new Token(
+    SupportedChainId.PROXIMA,
+    '0x416b32009fe49fcab1d5f2ba0153838f::XETH::XETH',
+    18,
+    'XETH',
+    'XETH'
+  ),
+}
 // export const BX_USDT: { [chainId: number]: Token } = {
 //   [SupportedChainId.BARNARD]: new Token(
 //     SupportedChainId.BARNARD,
