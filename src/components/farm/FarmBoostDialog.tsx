@@ -125,7 +125,7 @@ export default function FarmUnstakeDialog({
       const tyArgs = [tokenX, tokenY]
 
       const nodeUrl = `https://${network}-seed.starcoin.org`
-      const boostAmount = new BigNumber( Number(starAmount) > 0 ? Number(starAmount) * lpTokenScalingFactor : veStarAmount).toNumber()
+      const boostAmount = Number(starAmount) > 0 ? new BigNumber(starAmount).times(lpTokenScalingFactor).toNumber() : new BigNumber(veStarAmount).toNumber();
       const args = [boostAmount, signature]
 
       const scriptFunction = await utils.tx.encodeScriptFunctionByResolve(functionId, tyArgs, args, nodeUrl)
@@ -229,7 +229,7 @@ export default function FarmUnstakeDialog({
               </TYPE.black>
             </ButtonBorder>
             <ButtonFarm
-              disabled={Number(starAmount) === 0}
+              disabled={Number(starAmount) <= 0}
               onClick={() => {
                 onClickConfirm()
               }}
