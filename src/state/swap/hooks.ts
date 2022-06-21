@@ -206,6 +206,10 @@ export function useDerivedSwapInfo(toggledVersion: Version): {
   // compare input balance to max input based on version
   const [balanceIn, amountIn] = [currencyBalances[Field.INPUT], v2Trade?.maximumAmountIn(allowedSlippage)]
 
+  if (!balanceIn) {
+    inputError = t`Insufficient ${inputCurrency?.name || ''} balance`
+  }
+
   if (balanceIn && amountIn && balanceIn.lessThan(amountIn)) {
     inputError = t`Insufficient ${ amountIn.currency.symbol } balance`
   }

@@ -278,6 +278,8 @@ export default function CurrencyInputPanel({
                           Balance: {formatCurrencyAmount(selectedCurrencyBalance, 9)} {currency.symbol}
                         </Trans>
                       )
+                    ) : currency && !selectedCurrencyBalance ? (
+                      <Trans>Balance: 0 {currency.name}</Trans>
                     ) : null}
                   </TYPE.body>
                   {showMaxButton && selectedCurrencyBalance ? (
