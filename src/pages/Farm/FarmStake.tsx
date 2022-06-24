@@ -32,6 +32,7 @@ import axios from 'axios'
 import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import { useActiveLocale } from 'hooks/useActiveLocale'
+import BigNumber from 'bignumber.js'
 
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
@@ -142,6 +143,21 @@ export default function FarmStake({
     fetcher
   );
 
+
+
+  let tokenXInfo = useSWR(
+    `https://swap-api.starswap.xyz/${network}/v1/tokens/${lpStakingData?.tokenXAmount?.tokenId || ''}`,
+    fetcher
+  );
+
+  let tokenYInfo = useSWR(
+    `https://swap-api.starswap.xyz/${network}/v1/tokens/${lpStakingData?.tokenYAmount?.tokenId || ''}`,
+    fetcher
+  )
+
+  const tokenXScalingFactor = tokenXInfo?.data?.scalingFactor;
+  const tokenYScalingFactor = tokenYInfo?.data?.scalingFactor;
+  
   const lpTokenScalingFactor = 1000000000;
   const tbdScalingFactor = 1000000000;
   const starScalingFactor = 1000000000;
@@ -393,7 +409,7 @@ export default function FarmStake({
                     </RowFixed>
                     <RowFixed>
                       <TYPE.black fontSize={14}>
-                        {Number(lpStakingData.tokenXAmount.amount / starScalingFactor)}
+                        {tokenXScalingFactor && new BigNumber(lpStakingData.tokenXAmount.amount / tokenXScalingFactor).toString()}
                       </TYPE.black>
                     </RowFixed>
                   </FarmRow>
@@ -415,7 +431,8 @@ export default function FarmStake({
                     </RowFixed>
                     <RowFixed>
                       <TYPE.black fontSize={14}>
-                        {Number(lpStakingData.tokenYAmount.amount / stcScalingFactor)}
+                        {tokenYScalingFactor &&
+                          new BigNumber(lpStakingData.tokenYAmount.amount / tokenYScalingFactor).toString()}
                       </TYPE.black>
                     </RowFixed>
                   </FarmRow>
