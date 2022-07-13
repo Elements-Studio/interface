@@ -330,6 +330,10 @@ msgid "Balance:"
 msgstr "余额："
 
 #: src/components/CurrencyInputPanel/index.tsx
+msgid "Balance: 0 {0}"
+msgstr ""
+
+#: src/components/CurrencyInputPanel/index.tsx
 msgid "Balance: {0} {1}"
 msgstr "余额：{0} {1}"
 
@@ -362,10 +366,6 @@ msgstr "强化版收益率"
 #: src/pages/Stake/Simulator.tsx
 msgid "Boost Factor"
 msgstr ""
-
-#: src/pages/Farm/FarmStake.tsx
-msgid "Predict the updated Boost Factor value"
-msgstr "预测更新后Boost系数"
 
 #: src/pages/Stake/Simulator.tsx
 msgid "Boost Factor Tips"
@@ -451,16 +451,16 @@ msgid "Claim fees"
 msgstr "领取已累积的手续费"
 
 #: src/components/Stake/TokenClaimVeStarDialog.tsx
+msgid "Claim rewared {0} veSTAR"
+msgstr "领取获得的 {0} veSTAR"
+
+#: src/pages/Stake/TokenStake.tsx
 msgid "Claim veSTAR"
 msgstr "领取 veSTAR"
 
 #: src/components/Popups/ClaimPopup.tsx
 msgid "Claim your UNI tokens"
 msgstr "领取您的 UNI 代币"
-
-#: src/pages/Stake/TokenStake.tsx
-msgid "Claim rewared {0} veSTAR"
-msgstr "领取获得的 {0} veSTAR"
 
 #: src/components/claim/AddressClaimModal.tsx
 msgid "Claimed"
@@ -1020,6 +1020,7 @@ msgstr "现有流动量不足以支持此交易。请尝试启用“多节点”
 #: src/state/mint/v3/hooks.ts
 #: src/state/mint/v3/hooks.ts
 #: src/state/swap/hooks.ts
+#: src/state/swap/hooks.ts
 msgid "Insufficient {0} balance"
 msgstr "{0} 余额不足"
 
@@ -1111,6 +1112,7 @@ msgstr "结束时间"
 
 #: src/components/Stake/TokenHarvestDialog.tsx
 #: src/components/Stake/TokenStakeDialog.tsx
+#: src/components/farm/FarmBoostDialog.tsx
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/components/farm/FarmStakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
@@ -1391,6 +1393,13 @@ msgstr "流动池汇集 {0}:"
 #: src/pages/Pool/index.tsx
 msgid "Pools Overview"
 msgstr "流动池概览"
+
+#: src/components/farm/FarmBoostDialog.tsx
+#: src/components/farm/FarmHarvestDialog.tsx
+#: src/components/farm/FarmStakeDialog.tsx
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "Predict the updated Boost Factor value"
+msgstr "预测更新后Boost系数"
 
 #: src/components/swap/SwapModalHeader.tsx
 #: src/pages/RemoveLiquidity/index.tsx

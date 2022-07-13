@@ -74,9 +74,7 @@ export default function Farm({ history }: RouteComponentProps) {
     <>
       <FarmTitle />
       <AutoRow justify="center" style={{ paddingTop: '1rem', maxWidth: '1200px' }}>
-        {list ? list.filter((item:any) => 
-          network === 'main' ? item.description !== 'STC / XUSDT' : true
-        ).map((item:any,index:any) => {
+        {list ? list.map((item:any,index:any) => {
           const tokenX = bases.filter(token => token.symbol === item.liquidityTokenFarmId.liquidityTokenId.tokenXId)
           const tokenY = bases.filter(token => token.symbol === item.liquidityTokenFarmId.liquidityTokenId.tokenYId)
           const token0 = tokenX[0]

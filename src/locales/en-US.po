@@ -365,6 +365,10 @@ msgid "Balance:"
 msgstr "Balance:"
 
 #: src/components/CurrencyInputPanel/index.tsx
+msgid "Balance: 0 {0}"
+msgstr "Balance: 0 {0}"
+
+#: src/components/CurrencyInputPanel/index.tsx
 msgid "Balance: {0} {1}"
 msgstr "Balance: {0} {1}"
 
@@ -401,10 +405,6 @@ msgstr "Boost APR"
 #: src/pages/Stake/Simulator.tsx
 msgid "Boost Factor"
 msgstr "Boost Factor"
-
-#: src/pages/Farm/FarmStake.tsx
-msgid "Predict the updated Boost Factor value"
-msgstr "Predict the updated Boost Factor value"
 
 #: src/pages/Stake/Simulator.tsx
 msgid "Boost Factor Tips"
@@ -494,16 +494,16 @@ msgid "Claim fees"
 msgstr "Claim fees"
 
 #: src/components/Stake/TokenClaimVeStarDialog.tsx
+msgid "Claim rewared {0} veSTAR"
+msgstr "Claim rewared {0} veSTAR"
+
+#: src/pages/Stake/TokenStake.tsx
 msgid "Claim veSTAR"
 msgstr "Claim veSTAR"
 
 #: src/components/Popups/ClaimPopup.tsx
 msgid "Claim your UNI tokens"
 msgstr "Claim your UNI tokens"
-
-#: src/pages/Stake/TokenStake.tsx
-msgid "Claim rewared {0} veSTAR"
-msgstr "Claim rewared {0} veSTAR"
 
 #: src/components/claim/AddressClaimModal.tsx
 msgid "Claimed"
@@ -1059,6 +1059,7 @@ msgstr "Insufficient liquidity for this trade. Try enabling multi-hop trades."
 #: src/state/mint/v3/hooks.ts
 #: src/state/mint/v3/hooks.ts
 #: src/state/swap/hooks.ts
+#: src/state/swap/hooks.ts
 msgid "Insufficient {0} balance"
 msgstr "Insufficient {0} balance"
 
@@ -1150,6 +1151,7 @@ msgstr "Lock Until"
 
 #: src/components/Stake/TokenHarvestDialog.tsx
 #: src/components/Stake/TokenStakeDialog.tsx
+#: src/components/farm/FarmBoostDialog.tsx
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/components/farm/FarmStakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
@@ -1435,6 +1437,13 @@ msgstr "Pooled {0}:"
 #: src/pages/Pool/index.tsx
 msgid "Pools Overview"
 msgstr "Pools Overview"
+
+#: src/components/farm/FarmBoostDialog.tsx
+#: src/components/farm/FarmHarvestDialog.tsx
+#: src/components/farm/FarmStakeDialog.tsx
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "Predict the updated Boost Factor value"
+msgstr "Predict the updated Boost Factor value"
 
 #: src/components/swap/SwapModalHeader.tsx
 #: src/pages/RemoveLiquidity/index.tsx
