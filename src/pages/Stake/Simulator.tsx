@@ -106,7 +106,7 @@ export default function Simulator({ history }: RouteComponentProps) {
   // const { data, error } = useSWR(`https://swap-api.starswap.xyz/${network}/v1/lpTokenFarms`, fetcher)
   // const isBoost = useIsBoost()
   const [list, setList] = useState<any[]>([])
-  const [stakedLpArr, setStateLpArr] = useState<string[]>(['1','1','1', '1', '1', '1'])
+  const [stakedLpArr, setStateLpArr] = useState<string[]>([])
   const [duration, setDuration] = useState<any>(604800)
   const [parseTime, setParseTime] = useState('')
 
@@ -292,77 +292,79 @@ export default function Simulator({ history }: RouteComponentProps) {
         </FarmCard>
       </AutoRow>
       <AutoRow justify="center" style={{ paddingTop: '1rem', maxWidth: '1200px' }}>
-        {list
+        {list && stakedLpArr.length
           ? list.map((item: any, index: any) => {
             const tokenX = bases.filter(token => token.symbol === item.liquidityTokenFarmId.liquidityTokenId.tokenXId)
             const tokenY = bases.filter(token => token.symbol === item.liquidityTokenFarmId.liquidityTokenId.tokenYId)
             const token0 = tokenX[0]
             const token1 = tokenY[0]
-            const currency0 = unwrappedToken(token0)
-            const currency1 = unwrappedToken(token1)
-            return (
-              <FarmCard key={index} style={{ width: '400px', maxWidth: '400px' }}>
-                <AutoColumn justify="center">
-                  <RowFixed>
-                    <CurrencyLogo currency={currency0} size={'48px'} style={{marginRight: '1.25rem', borderRadius: '8px'}} />
-                    <CurrencyLogo currency={currency1} size={'48px'} style={{borderRadius: '8px'}} />
-                  </RowFixed>
-                  <Text fontSize={16} marginTop={23}>
-                  {token0.symbol}/{token1.symbol}
-                  </Text>
-                </AutoColumn>
-                <FixedHeightRow marginTop={30} marginBottom={10}>
-                  <Text fontSize={16} fontWeight={500}>
-                    <Trans>You staked lp amount</Trans>
-                  </Text>
-                  <RowFixed style={{ width: '100px' }}>
-                    <NumericalInput
-                      className="token-amount-input"
-                      value={stakedLpArr[index] || ''}
-                      onUserInput={(val) => {
-                        let _tmp = stakedLpArr
-                        _tmp[index] = val
-                        setStateLpArr([..._tmp])
-                      }}
-                    />
-                  </RowFixed>
-                </FixedHeightRow>
-                <FixedHeightRow>
-                  <Text fontSize={16} fontWeight={500}>
-                    <Trans>Your share of staking</Trans>
-                  </Text>
-                  <RowFixed>
-                    <Text fontSize={16} fontWeight={500}>
-                      {new Percent(JSBI.BigInt(Number(stakedLpArr[index] || '1') * scalingFactor), JSBI.BigInt(list[index].totalStakeAmount)).toFixed(9)}
+            const currency0 = token0 && unwrappedToken(token0);
+            const currency1 = token1 && unwrappedToken(token1);
+            return currency0 && currency1 ? (
+              (
+                <FarmCard key={index} style={{ width: '400px', maxWidth: '400px' }}>
+                  <AutoColumn justify="center">
+                    <RowFixed>
+                      <CurrencyLogo currency={currency0} size={'48px'} style={{marginRight: '1.25rem', borderRadius: '8px'}} />
+                      <CurrencyLogo currency={currency1} size={'48px'} style={{borderRadius: '8px'}} />
+                    </RowFixed>
+                    <Text fontSize={16} marginTop={23}>
+                    {token0.symbol}/{token1.symbol}
                     </Text>
-                  </RowFixed>
-                </FixedHeightRow>
-                <FixedHeightRow>
-                  <Text fontSize={16} fontWeight={500}>
-                    <Trans>Boost Factor</Trans>
-                  </Text>
-                  <RowFixed>
+                  </AutoColumn>
+                  <FixedHeightRow marginTop={30} marginBottom={10}>
                     <Text fontSize={16} fontWeight={500}>
-                      {getBoostFactor(index)}X
+                      <Trans>You staked lp amount</Trans>
                     </Text>
-                    <QuestionHelper text={<Trans>Boost Factor Tips</Trans>} />
-                  </RowFixed>
-                </FixedHeightRow>
-                <FixedHeightRow>
-                  <Text fontSize={16} fontWeight={500}>
-                    <Trans>Boost APR</Trans>
-                  </Text>
-                  <RowFixed>
+                    <RowFixed style={{ width: '100px' }}>
+                      <NumericalInput
+                        className="token-amount-input"
+                        value={stakedLpArr[index] || ''}
+                        onUserInput={(val) => {
+                          let _tmp = stakedLpArr
+                          _tmp[index] = val
+                          setStateLpArr([..._tmp])
+                        }}
+                      />
+                    </RowFixed>
+                  </FixedHeightRow>
+                  <FixedHeightRow>
                     <Text fontSize={16} fontWeight={500}>
-                      {((getBoostFactor(index) as number) * item.estimatedApy).toFixed(2)} %
+                      <Trans>Your share of staking</Trans>
                     </Text>
-                    <QuestionHelper
-                      text={<Trans>The boosted estimated annualized percentage yield of rewards</Trans>}
-                    />
-                  </RowFixed>
-                </FixedHeightRow>
-              </FarmCard>
-            )})
+                    <RowFixed>
+                      <Text fontSize={16} fontWeight={500}>
+                        {new Percent(JSBI.BigInt(Number(stakedLpArr[index] || '1') * scalingFactor), JSBI.BigInt(list[index].totalStakeAmount)).toFixed(9)}
+                      </Text>
+                    </RowFixed>
+                  </FixedHeightRow>
+                  <FixedHeightRow>
+                    <Text fontSize={16} fontWeight={500}>
+                      <Trans>Boost Factor</Trans>
+                    </Text>
+                    <RowFixed>
+                      <Text fontSize={16} fontWeight={500}>
+                        {getBoostFactor(index)}X
+                      </Text>
+                      <QuestionHelper text={<Trans>Boost Factor Tips</Trans>} />
+                    </RowFixed>
+                  </FixedHeightRow>
+                  <FixedHeightRow>
+                    <Text fontSize={16} fontWeight={500}>
+                      <Trans>Boost APR</Trans>
+                    </Text>
+                    <RowFixed>
+                      <Text fontSize={16} fontWeight={500}>
+                        {((getBoostFactor(index) as number) * item.estimatedApy).toFixed(2)} %
+                      </Text>
+                      <QuestionHelper
+                        text={<Trans>The boosted estimated annualized percentage yield of rewards</Trans>}
+                      />
+                    </RowFixed>
+                  </FixedHeightRow>
+                </FarmCard>
+              )
+            ) : null})
           : null}
       </AutoRow>
       <SwitchLocaleLink />
