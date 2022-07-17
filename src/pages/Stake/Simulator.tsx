@@ -154,7 +154,7 @@ export default function Simulator({ history }: RouteComponentProps) {
   }, [veStarAmount, lockedValue, duration, vestarCount, list])
 
   const getBoostFactor = (index: any) => {
-      const yourShareOfStaking= new Percent(JSBI.BigInt(Number(stakedLpArr[index] || '1') * scalingFactor), JSBI.BigInt(list[index].totalStakeAmount)).toFixed(9)
+      const yourShareOfStaking= new Percent(new BigNumber(stakedLpArr[index] || '1').times(scalingFactor).toString(), JSBI.BigInt(list[index].totalStakeAmount)).toFixed(9)
       const BoostFactor = (Number(veStarPercentage) / Number(new BigNumber((2/3) * Number(yourShareOfStaking)))) + 1
       return isNaN(BoostFactor) ? 1.0 : Infinity === BoostFactor ? 1.0 : Math.min(2.5, BoostFactor).toFixed(2)
   }
@@ -334,7 +334,8 @@ export default function Simulator({ history }: RouteComponentProps) {
                     </Text>
                     <RowFixed>
                       <Text fontSize={16} fontWeight={500}>
-                        {new Percent(JSBI.BigInt(Number(stakedLpArr[index] || '1') * scalingFactor), JSBI.BigInt(list[index].totalStakeAmount)).toFixed(9)}
+                        {/* {new BigNumber(new BigNumber(stakedLpArr[index] || '1').times(scalingFactor).div(new BigNumber(list[index].totalStakeAmount))).toFixed(9)} */}
+                        {new Percent(new BigNumber(stakedLpArr[index] || '1').times(scalingFactor).toString(), JSBI.BigInt(list[index].totalStakeAmount)).toFixed(9)}
                       </Text>
                     </RowFixed>
                   </FixedHeightRow>

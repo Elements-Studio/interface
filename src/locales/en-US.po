@@ -414,8 +414,8 @@ msgstr "Boost Factor = ( Your veSTAR Balance + Your veSTAR Estimated / Total veS
 msgid "Boost My LP Staking"
 msgstr "Boost My LP Staking"
 
-#: src/pages/Stake/Simulator.tsx
 #: src/pages/Stake/index.tsx
+#: src/pages/Stake/Simulator.tsx
 msgid "Boost Simulator"
 msgstr "Boost Simulator"
 
@@ -439,16 +439,16 @@ msgstr "By connecting a wallet, you agree to Starswap Labs’ <0>Terms of Servic
 #~ msgid "By connecting a wallet, you agree to Uniswap Labs’ <0>Terms of Service</0> and acknowledge that you have read and understand the <1>Uniswap protocol disclaimer</1>."
 #~ msgstr "By connecting a wallet, you agree to Starswap Labs’ <0>Terms of Service</0> and acknowledge that you have read and understand the <1>Starswap protocol disclaimer</1>."
 
-#: src/components/Stake/GetAllStakeDialog.tsx
-#: src/components/Stake/TokenClaimVeStarDialog.tsx
-#: src/components/Stake/TokenHarvestDialog.tsx
-#: src/components/Stake/TokenStakeDialog.tsx
-#: src/components/Stake/TokenUnstakeDialog.tsx
 #: src/components/farm/FarmBoostDialog.tsx
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/components/farm/FarmStakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
 #: src/components/farm/GetAllStakeDialog.tsx
+#: src/components/Stake/GetAllStakeDialog.tsx
+#: src/components/Stake/TokenClaimVeStarDialog.tsx
+#: src/components/Stake/TokenHarvestDialog.tsx
+#: src/components/Stake/TokenStakeDialog.tsx
+#: src/components/Stake/TokenUnstakeDialog.tsx
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -474,10 +474,10 @@ msgstr "Check out our v3 LP walkthrough and migration guides."
 msgid "Claim"
 msgstr "Claim"
 
-#: src/components/Header/index.tsx
 #: src/components/claim/AddressClaimModal.tsx
 #: src/components/claim/ClaimModal.tsx
 #: src/components/claim/ClaimModal.tsx
+#: src/components/Header/index.tsx
 msgid "Claim UNI"
 msgstr "Claim UNI"
 
@@ -585,16 +585,16 @@ msgstr "Collecting fees will withdraw currently available fees for you."
 msgid "Common bases"
 msgstr "Common bases"
 
-#: src/components/Stake/GetAllStakeDialog.tsx
-#: src/components/Stake/TokenClaimVeStarDialog.tsx
-#: src/components/Stake/TokenHarvestDialog.tsx
-#: src/components/Stake/TokenStakeDialog.tsx
-#: src/components/Stake/TokenUnstakeDialog.tsx
 #: src/components/farm/FarmBoostDialog.tsx
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/components/farm/FarmStakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
 #: src/components/farm/GetAllStakeDialog.tsx
+#: src/components/Stake/GetAllStakeDialog.tsx
+#: src/components/Stake/TokenClaimVeStarDialog.tsx
+#: src/components/Stake/TokenHarvestDialog.tsx
+#: src/components/Stake/TokenStakeDialog.tsx
+#: src/components/Stake/TokenUnstakeDialog.tsx
 #: src/pages/RemoveLiquidity/index.tsx
 msgid "Confirm"
 msgstr "Confirm"
@@ -608,10 +608,10 @@ msgstr "Confirm Supply"
 msgid "Confirm Swap"
 msgstr "Confirm Swap"
 
-#: src/components/ModalViews/index.tsx
-#: src/components/TransactionConfirmationModal/index.tsx
 #: src/components/claim/AddressClaimModal.tsx
 #: src/components/claim/ClaimModal.tsx
+#: src/components/ModalViews/index.tsx
+#: src/components/TransactionConfirmationModal/index.tsx
 #: src/components/vote/VoteModal.tsx
 msgid "Confirm this transaction in your wallet"
 msgstr "Confirm this transaction in your wallet"
@@ -876,8 +876,8 @@ msgstr "Enter valid token address"
 msgid "Error"
 msgstr "Error"
 
-#: src/components/WalletModal/PendingView.tsx
 #: src/components/WalletModal/index.tsx
+#: src/components/WalletModal/PendingView.tsx
 msgid "Error connecting"
 msgstr "Error connecting"
 
@@ -919,9 +919,9 @@ msgstr "Explore popular pools on Starswap Analytics."
 #~ msgid "Extract"
 #~ msgstr "Extract"
 
+#: src/components/farm/FarmHeader.tsx
 #: src/components/Header/index.tsx
 #: src/components/Stake/FarmHeader.tsx
-#: src/components/farm/FarmHeader.tsx
 msgid "Farm"
 msgstr "Farm"
 
@@ -1134,11 +1134,11 @@ msgstr "Lists"
 msgid "Loaded"
 msgstr "Loaded"
 
+#: src/components/PositionCard/index.tsx
 #: src/components/PositionCard/Sushi.tsx
 #: src/components/PositionCard/V2.tsx
-#: src/components/PositionCard/index.tsx
-#: src/pages/MigrateV2/MigrateV2Pair.tsx
 #: src/pages/MigrateV2/index.tsx
+#: src/pages/MigrateV2/MigrateV2Pair.tsx
 #: src/pages/Pool/v2.tsx
 #: src/pages/PoolFinder/index.tsx
 #: src/pages/Swap/index.tsx
@@ -1149,12 +1149,12 @@ msgstr "Loading"
 msgid "Lock Until"
 msgstr "Lock Until"
 
-#: src/components/Stake/TokenHarvestDialog.tsx
-#: src/components/Stake/TokenStakeDialog.tsx
 #: src/components/farm/FarmBoostDialog.tsx
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/components/farm/FarmStakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
+#: src/components/Stake/TokenHarvestDialog.tsx
+#: src/components/Stake/TokenStakeDialog.tsx
 msgid "MAX"
 msgstr "MAX"
 
@@ -1162,12 +1162,12 @@ msgstr "MAX"
 msgid "Make sure the URL is<0>app.uniswap.org</0>"
 msgstr "Make sure the URL is<0>app.uniswap.org</0>"
 
-#: src/components/PositionCard/V2.tsx
-#: src/components/PositionCard/V2.tsx
-#: src/components/PositionCard/index.tsx
-#: src/components/PositionCard/index.tsx
-#: src/components/SearchModal/Manage.tsx
 #: src/components/earn/PoolCard.tsx
+#: src/components/PositionCard/index.tsx
+#: src/components/PositionCard/index.tsx
+#: src/components/PositionCard/V2.tsx
+#: src/components/PositionCard/V2.tsx
+#: src/components/SearchModal/Manage.tsx
 msgid "Manage"
 msgstr "Manage"
 
@@ -1219,8 +1219,8 @@ msgstr "Migrate Liquidity"
 #~ msgid "Migrate Liquidity to V3"
 #~ msgstr "Migrate Liquidity to V3"
 
-#: src/pages/MigrateV2/MigrateV2Pair.tsx
 #: src/pages/MigrateV2/index.tsx
+#: src/pages/MigrateV2/MigrateV2Pair.tsx
 msgid "Migrate V2 Liquidity"
 msgstr "Migrate V2 Liquidity"
 
@@ -1418,15 +1418,15 @@ msgstr "Pool Updated"
 msgid "Pool rate"
 msgstr "Pool rate"
 
-#: src/components/PositionCard/V2.tsx
 #: src/components/PositionCard/index.tsx
+#: src/components/PositionCard/V2.tsx
 msgid "Pool tokens in rewards pool:"
 msgstr "Pool tokens in rewards pool:"
 
-#: src/components/PositionCard/V2.tsx
-#: src/components/PositionCard/V2.tsx
 #: src/components/PositionCard/index.tsx
 #: src/components/PositionCard/index.tsx
+#: src/components/PositionCard/V2.tsx
+#: src/components/PositionCard/V2.tsx
 #: src/pages/RemoveLiquidity/V3.tsx
 #: src/pages/RemoveLiquidity/V3.tsx
 #: src/pages/RemoveLiquidity/V3.tsx
@@ -1541,11 +1541,11 @@ msgstr "Recipient"
 msgid "Register"
 msgstr "Register"
 
-#: src/components/PositionCard/V2.tsx
 #: src/components/PositionCard/index.tsx
-#: src/pages/RemoveLiquidity/V3.tsx
-#: src/pages/RemoveLiquidity/V3.tsx
+#: src/components/PositionCard/V2.tsx
 #: src/pages/RemoveLiquidity/index.tsx
+#: src/pages/RemoveLiquidity/V3.tsx
+#: src/pages/RemoveLiquidity/V3.tsx
 msgid "Remove"
 msgstr "Remove"
 
@@ -1689,8 +1689,8 @@ msgstr "Show Portis"
 msgid "Simple"
 msgstr "Simple"
 
-#: src/components/TransactionSettings/index.tsx
 #: src/components/swap/AdvancedSwapDetails.tsx
+#: src/components/TransactionSettings/index.tsx
 msgid "Slippage tolerance"
 msgstr "Slippage tolerance"
 
@@ -1705,8 +1705,8 @@ msgstr "Something went wrong"
 #: src/components/Header/index.tsx
 #: src/pages/Farm/FarmStake.tsx
 #: src/pages/Farm/index.tsx
-#: src/pages/Stake/TokenStake.tsx
 #: src/pages/Stake/index.tsx
+#: src/pages/Stake/TokenStake.tsx
 msgid "Stake"
 msgstr "Stake"
 
@@ -1899,8 +1899,8 @@ msgstr "This amount is already included in all APR calculations for the farm."
 msgid "This is an alpha release of Uniswap on the Arbitrum network. You must bridge L1 assets to the network to swap them."
 msgstr "This is an alpha release of Starswap on the Arbitrum network. You must bridge L1 assets to the network to swap them."
 
-#: src/components/Stake/GetAllStakeDialog.tsx
 #: src/components/farm/GetAllStakeDialog.tsx
+#: src/components/Stake/GetAllStakeDialog.tsx
 msgid "This operation extracts all pledged liquidity quotas and rewards. Do you continue to perform the operation?"
 msgstr "This operation extracts all pledged liquidity quotas and rewards. Do you continue to perform the operation?"
 
@@ -2011,10 +2011,10 @@ msgstr "Total veSTAR"
 msgid "Transaction Settings"
 msgstr "Transaction Settings"
 
-#: src/components/TransactionConfirmationModal/index.tsx
 #: src/components/earn/ClaimRewardModal.tsx
 #: src/components/earn/StakingModal.tsx
 #: src/components/earn/UnstakingModal.tsx
+#: src/components/TransactionConfirmationModal/index.tsx
 #: src/components/vote/DelegateModal.tsx
 #: src/components/vote/VoteModal.tsx
 msgid "Transaction Submitted"
@@ -2113,8 +2113,8 @@ msgstr "Unknown Source"
 msgid "Unknown error{0}. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
 msgstr "Unknown error{0}. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Starswap."
 
-#: src/pages/Vote/VotePage.tsx
 #: src/pages/Vote/index.tsx
+#: src/pages/Vote/VotePage.tsx
 msgid "Unlock Votes"
 msgstr "Unlock Votes"
 
@@ -2217,9 +2217,9 @@ msgstr "View on Explorer"
 msgid "View on Stcscan"
 msgstr "View on Stcscan"
 
-#: src/components/ModalViews/index.tsx
 #: src/components/claim/AddressClaimModal.tsx
 #: src/components/claim/ClaimModal.tsx
+#: src/components/ModalViews/index.tsx
 #: src/components/vote/VoteModal.tsx
 msgid "View transaction on Explorer"
 msgstr "View transaction on Explorer"
@@ -2413,9 +2413,9 @@ msgstr "Your liquidity deposits"
 msgid "Your liquidity will only earn fees when the market price of the pair is within your range. <0>Need help picking a range?</0>"
 msgstr "Your liquidity will only earn fees when the market price of the pair is within your range. <0>Need help picking a range?</0>"
 
+#: src/components/PositionCard/index.tsx
+#: src/components/PositionCard/index.tsx
 #: src/components/PositionCard/V2.tsx
-#: src/components/PositionCard/index.tsx
-#: src/components/PositionCard/index.tsx
 msgid "Your pool share:"
 msgstr "Your pool share:"
 
@@ -2455,8 +2455,8 @@ msgstr "Your rate"
 msgid "Your share of staking"
 msgstr "Your share of staking"
 
-#: src/components/PositionCard/V2.tsx
 #: src/components/PositionCard/index.tsx
+#: src/components/PositionCard/V2.tsx
 msgid "Your total pool tokens:"
 msgstr "Your total pool tokens:"
 
