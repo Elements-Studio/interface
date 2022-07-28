@@ -110,6 +110,7 @@ export type Burn_Filter = {
   transaction_ends_with_nocase?: Maybe<Scalars['String']>;
   transaction_not_ends_with?: Maybe<Scalars['String']>;
   transaction_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  transaction_?: Maybe<Transaction_Filter>;
   pool?: Maybe<Scalars['String']>;
   pool_not?: Maybe<Scalars['String']>;
   pool_gt?: Maybe<Scalars['String']>;
@@ -130,6 +131,7 @@ export type Burn_Filter = {
   pool_ends_with_nocase?: Maybe<Scalars['String']>;
   pool_not_ends_with?: Maybe<Scalars['String']>;
   pool_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  pool_?: Maybe<Pool_Filter>;
   token0?: Maybe<Scalars['String']>;
   token0_not?: Maybe<Scalars['String']>;
   token0_gt?: Maybe<Scalars['String']>;
@@ -150,6 +152,7 @@ export type Burn_Filter = {
   token0_ends_with_nocase?: Maybe<Scalars['String']>;
   token0_not_ends_with?: Maybe<Scalars['String']>;
   token0_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  token0_?: Maybe<Token_Filter>;
   token1?: Maybe<Scalars['String']>;
   token1_not?: Maybe<Scalars['String']>;
   token1_gt?: Maybe<Scalars['String']>;
@@ -170,6 +173,7 @@ export type Burn_Filter = {
   token1_ends_with_nocase?: Maybe<Scalars['String']>;
   token1_not_ends_with?: Maybe<Scalars['String']>;
   token1_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  token1_?: Maybe<Token_Filter>;
   timestamp?: Maybe<Scalars['BigInt']>;
   timestamp_not?: Maybe<Scalars['BigInt']>;
   timestamp_gt?: Maybe<Scalars['BigInt']>;
@@ -313,6 +317,7 @@ export type Collect_Filter = {
   transaction_ends_with_nocase?: Maybe<Scalars['String']>;
   transaction_not_ends_with?: Maybe<Scalars['String']>;
   transaction_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  transaction_?: Maybe<Transaction_Filter>;
   timestamp?: Maybe<Scalars['BigInt']>;
   timestamp_not?: Maybe<Scalars['BigInt']>;
   timestamp_gt?: Maybe<Scalars['BigInt']>;
@@ -341,6 +346,7 @@ export type Collect_Filter = {
   pool_ends_with_nocase?: Maybe<Scalars['String']>;
   pool_not_ends_with?: Maybe<Scalars['String']>;
   pool_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  pool_?: Maybe<Pool_Filter>;
   owner?: Maybe<Scalars['Bytes']>;
   owner_not?: Maybe<Scalars['Bytes']>;
   owner_in?: Maybe<Array<Scalars['Bytes']>>;
@@ -600,6 +606,7 @@ export type Flash_Filter = {
   transaction_ends_with_nocase?: Maybe<Scalars['String']>;
   transaction_not_ends_with?: Maybe<Scalars['String']>;
   transaction_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  transaction_?: Maybe<Transaction_Filter>;
   timestamp?: Maybe<Scalars['BigInt']>;
   timestamp_not?: Maybe<Scalars['BigInt']>;
   timestamp_gt?: Maybe<Scalars['BigInt']>;
@@ -628,6 +635,7 @@ export type Flash_Filter = {
   pool_ends_with_nocase?: Maybe<Scalars['String']>;
   pool_not_ends_with?: Maybe<Scalars['String']>;
   pool_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  pool_?: Maybe<Pool_Filter>;
   sender?: Maybe<Scalars['Bytes']>;
   sender_not?: Maybe<Scalars['Bytes']>;
   sender_in?: Maybe<Array<Scalars['Bytes']>>;
@@ -756,6 +764,7 @@ export type Mint_Filter = {
   transaction_ends_with_nocase?: Maybe<Scalars['String']>;
   transaction_not_ends_with?: Maybe<Scalars['String']>;
   transaction_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  transaction_?: Maybe<Transaction_Filter>;
   timestamp?: Maybe<Scalars['BigInt']>;
   timestamp_not?: Maybe<Scalars['BigInt']>;
   timestamp_gt?: Maybe<Scalars['BigInt']>;
@@ -784,6 +793,7 @@ export type Mint_Filter = {
   pool_ends_with_nocase?: Maybe<Scalars['String']>;
   pool_not_ends_with?: Maybe<Scalars['String']>;
   pool_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  pool_?: Maybe<Pool_Filter>;
   token0?: Maybe<Scalars['String']>;
   token0_not?: Maybe<Scalars['String']>;
   token0_gt?: Maybe<Scalars['String']>;
@@ -804,6 +814,7 @@ export type Mint_Filter = {
   token0_ends_with_nocase?: Maybe<Scalars['String']>;
   token0_not_ends_with?: Maybe<Scalars['String']>;
   token0_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  token0_?: Maybe<Token_Filter>;
   token1?: Maybe<Scalars['String']>;
   token1_not?: Maybe<Scalars['String']>;
   token1_gt?: Maybe<Scalars['String']>;
@@ -824,6 +835,7 @@ export type Mint_Filter = {
   token1_ends_with_nocase?: Maybe<Scalars['String']>;
   token1_not_ends_with?: Maybe<Scalars['String']>;
   token1_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  token1_?: Maybe<Token_Filter>;
   owner?: Maybe<Scalars['Bytes']>;
   owner_not?: Maybe<Scalars['Bytes']>;
   owner_in?: Maybe<Array<Scalars['Bytes']>>;
@@ -1091,6 +1103,7 @@ export type PoolDayData_Filter = {
   pool_ends_with_nocase?: Maybe<Scalars['String']>;
   pool_not_ends_with?: Maybe<Scalars['String']>;
   pool_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  pool_?: Maybe<Pool_Filter>;
   liquidity?: Maybe<Scalars['BigInt']>;
   liquidity_not?: Maybe<Scalars['BigInt']>;
   liquidity_gt?: Maybe<Scalars['BigInt']>;
@@ -1315,6 +1328,7 @@ export type PoolHourData_Filter = {
   pool_ends_with_nocase?: Maybe<Scalars['String']>;
   pool_not_ends_with?: Maybe<Scalars['String']>;
   pool_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  pool_?: Maybe<Pool_Filter>;
   liquidity?: Maybe<Scalars['BigInt']>;
   liquidity_not?: Maybe<Scalars['BigInt']>;
   liquidity_gt?: Maybe<Scalars['BigInt']>;
@@ -1523,6 +1537,7 @@ export type Pool_Filter = {
   token0_ends_with_nocase?: Maybe<Scalars['String']>;
   token0_not_ends_with?: Maybe<Scalars['String']>;
   token0_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  token0_?: Maybe<Token_Filter>;
   token1?: Maybe<Scalars['String']>;
   token1_not?: Maybe<Scalars['String']>;
   token1_gt?: Maybe<Scalars['String']>;
@@ -1543,6 +1558,7 @@ export type Pool_Filter = {
   token1_ends_with_nocase?: Maybe<Scalars['String']>;
   token1_not_ends_with?: Maybe<Scalars['String']>;
   token1_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  token1_?: Maybe<Token_Filter>;
   feeTier?: Maybe<Scalars['BigInt']>;
   feeTier_not?: Maybe<Scalars['BigInt']>;
   feeTier_gt?: Maybe<Scalars['BigInt']>;
@@ -1735,6 +1751,13 @@ export type Pool_Filter = {
   liquidityProviderCount_lte?: Maybe<Scalars['BigInt']>;
   liquidityProviderCount_in?: Maybe<Array<Scalars['BigInt']>>;
   liquidityProviderCount_not_in?: Maybe<Array<Scalars['BigInt']>>;
+  poolHourData_?: Maybe<PoolHourData_Filter>;
+  poolDayData_?: Maybe<PoolDayData_Filter>;
+  mints_?: Maybe<Mint_Filter>;
+  burns_?: Maybe<Burn_Filter>;
+  swaps_?: Maybe<Swap_Filter>;
+  collects_?: Maybe<Collect_Filter>;
+  ticks_?: Maybe<Tick_Filter>;
   /** Filter for the block changed event. */
   _change_block?: Maybe<BlockChangedFilter>;
 };
@@ -1854,6 +1877,7 @@ export type PositionSnapshot_Filter = {
   pool_ends_with_nocase?: Maybe<Scalars['String']>;
   pool_not_ends_with?: Maybe<Scalars['String']>;
   pool_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  pool_?: Maybe<Pool_Filter>;
   position?: Maybe<Scalars['String']>;
   position_not?: Maybe<Scalars['String']>;
   position_gt?: Maybe<Scalars['String']>;
@@ -1874,6 +1898,7 @@ export type PositionSnapshot_Filter = {
   position_ends_with_nocase?: Maybe<Scalars['String']>;
   position_not_ends_with?: Maybe<Scalars['String']>;
   position_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  position_?: Maybe<Position_Filter>;
   blockNumber?: Maybe<Scalars['BigInt']>;
   blockNumber_not?: Maybe<Scalars['BigInt']>;
   blockNumber_gt?: Maybe<Scalars['BigInt']>;
@@ -1966,6 +1991,7 @@ export type PositionSnapshot_Filter = {
   transaction_ends_with_nocase?: Maybe<Scalars['String']>;
   transaction_not_ends_with?: Maybe<Scalars['String']>;
   transaction_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  transaction_?: Maybe<Transaction_Filter>;
   feeGrowthInside0LastX128?: Maybe<Scalars['BigInt']>;
   feeGrowthInside0LastX128_not?: Maybe<Scalars['BigInt']>;
   feeGrowthInside0LastX128_gt?: Maybe<Scalars['BigInt']>;
@@ -2040,6 +2066,7 @@ export type Position_Filter = {
   pool_ends_with_nocase?: Maybe<Scalars['String']>;
   pool_not_ends_with?: Maybe<Scalars['String']>;
   pool_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  pool_?: Maybe<Pool_Filter>;
   token0?: Maybe<Scalars['String']>;
   token0_not?: Maybe<Scalars['String']>;
   token0_gt?: Maybe<Scalars['String']>;
@@ -2060,6 +2087,7 @@ export type Position_Filter = {
   token0_ends_with_nocase?: Maybe<Scalars['String']>;
   token0_not_ends_with?: Maybe<Scalars['String']>;
   token0_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  token0_?: Maybe<Token_Filter>;
   token1?: Maybe<Scalars['String']>;
   token1_not?: Maybe<Scalars['String']>;
   token1_gt?: Maybe<Scalars['String']>;
@@ -2080,6 +2108,7 @@ export type Position_Filter = {
   token1_ends_with_nocase?: Maybe<Scalars['String']>;
   token1_not_ends_with?: Maybe<Scalars['String']>;
   token1_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  token1_?: Maybe<Token_Filter>;
   tickLower?: Maybe<Scalars['String']>;
   tickLower_not?: Maybe<Scalars['String']>;
   tickLower_gt?: Maybe<Scalars['String']>;
@@ -2100,6 +2129,7 @@ export type Position_Filter = {
   tickLower_ends_with_nocase?: Maybe<Scalars['String']>;
   tickLower_not_ends_with?: Maybe<Scalars['String']>;
   tickLower_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  tickLower_?: Maybe<Tick_Filter>;
   tickUpper?: Maybe<Scalars['String']>;
   tickUpper_not?: Maybe<Scalars['String']>;
   tickUpper_gt?: Maybe<Scalars['String']>;
@@ -2120,6 +2150,7 @@ export type Position_Filter = {
   tickUpper_ends_with_nocase?: Maybe<Scalars['String']>;
   tickUpper_not_ends_with?: Maybe<Scalars['String']>;
   tickUpper_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  tickUpper_?: Maybe<Tick_Filter>;
   liquidity?: Maybe<Scalars['BigInt']>;
   liquidity_not?: Maybe<Scalars['BigInt']>;
   liquidity_gt?: Maybe<Scalars['BigInt']>;
@@ -2196,6 +2227,7 @@ export type Position_Filter = {
   transaction_ends_with_nocase?: Maybe<Scalars['String']>;
   transaction_not_ends_with?: Maybe<Scalars['String']>;
   transaction_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  transaction_?: Maybe<Transaction_Filter>;
   feeGrowthInside0LastX128?: Maybe<Scalars['BigInt']>;
   feeGrowthInside0LastX128_not?: Maybe<Scalars['BigInt']>;
   feeGrowthInside0LastX128_gt?: Maybe<Scalars['BigInt']>;
@@ -3106,6 +3138,7 @@ export type Swap_Filter = {
   transaction_ends_with_nocase?: Maybe<Scalars['String']>;
   transaction_not_ends_with?: Maybe<Scalars['String']>;
   transaction_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  transaction_?: Maybe<Transaction_Filter>;
   timestamp?: Maybe<Scalars['BigInt']>;
   timestamp_not?: Maybe<Scalars['BigInt']>;
   timestamp_gt?: Maybe<Scalars['BigInt']>;
@@ -3134,6 +3167,7 @@ export type Swap_Filter = {
   pool_ends_with_nocase?: Maybe<Scalars['String']>;
   pool_not_ends_with?: Maybe<Scalars['String']>;
   pool_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  pool_?: Maybe<Pool_Filter>;
   token0?: Maybe<Scalars['String']>;
   token0_not?: Maybe<Scalars['String']>;
   token0_gt?: Maybe<Scalars['String']>;
@@ -3154,6 +3188,7 @@ export type Swap_Filter = {
   token0_ends_with_nocase?: Maybe<Scalars['String']>;
   token0_not_ends_with?: Maybe<Scalars['String']>;
   token0_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  token0_?: Maybe<Token_Filter>;
   token1?: Maybe<Scalars['String']>;
   token1_not?: Maybe<Scalars['String']>;
   token1_gt?: Maybe<Scalars['String']>;
@@ -3174,6 +3209,7 @@ export type Swap_Filter = {
   token1_ends_with_nocase?: Maybe<Scalars['String']>;
   token1_not_ends_with?: Maybe<Scalars['String']>;
   token1_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  token1_?: Maybe<Token_Filter>;
   sender?: Maybe<Scalars['Bytes']>;
   sender_not?: Maybe<Scalars['Bytes']>;
   sender_in?: Maybe<Array<Scalars['Bytes']>>;
@@ -3340,6 +3376,7 @@ export type TickDayData_Filter = {
   pool_ends_with_nocase?: Maybe<Scalars['String']>;
   pool_not_ends_with?: Maybe<Scalars['String']>;
   pool_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  pool_?: Maybe<Pool_Filter>;
   tick?: Maybe<Scalars['String']>;
   tick_not?: Maybe<Scalars['String']>;
   tick_gt?: Maybe<Scalars['String']>;
@@ -3360,6 +3397,7 @@ export type TickDayData_Filter = {
   tick_ends_with_nocase?: Maybe<Scalars['String']>;
   tick_not_ends_with?: Maybe<Scalars['String']>;
   tick_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  tick_?: Maybe<Tick_Filter>;
   liquidityGross?: Maybe<Scalars['BigInt']>;
   liquidityGross_not?: Maybe<Scalars['BigInt']>;
   liquidityGross_gt?: Maybe<Scalars['BigInt']>;
@@ -3494,6 +3532,7 @@ export type TickHourData_Filter = {
   pool_ends_with_nocase?: Maybe<Scalars['String']>;
   pool_not_ends_with?: Maybe<Scalars['String']>;
   pool_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  pool_?: Maybe<Pool_Filter>;
   tick?: Maybe<Scalars['String']>;
   tick_not?: Maybe<Scalars['String']>;
   tick_gt?: Maybe<Scalars['String']>;
@@ -3514,6 +3553,7 @@ export type TickHourData_Filter = {
   tick_ends_with_nocase?: Maybe<Scalars['String']>;
   tick_not_ends_with?: Maybe<Scalars['String']>;
   tick_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  tick_?: Maybe<Tick_Filter>;
   liquidityGross?: Maybe<Scalars['BigInt']>;
   liquidityGross_not?: Maybe<Scalars['BigInt']>;
   liquidityGross_gt?: Maybe<Scalars['BigInt']>;
@@ -3636,6 +3676,7 @@ export type Tick_Filter = {
   pool_ends_with_nocase?: Maybe<Scalars['String']>;
   pool_not_ends_with?: Maybe<Scalars['String']>;
   pool_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  pool_?: Maybe<Pool_Filter>;
   liquidityGross?: Maybe<Scalars['BigInt']>;
   liquidityGross_not?: Maybe<Scalars['BigInt']>;
   liquidityGross_gt?: Maybe<Scalars['BigInt']>;
@@ -3894,6 +3935,7 @@ export type TokenDayData_Filter = {
   token_ends_with_nocase?: Maybe<Scalars['String']>;
   token_not_ends_with?: Maybe<Scalars['String']>;
   token_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  token_?: Maybe<Token_Filter>;
   volume?: Maybe<Scalars['BigDecimal']>;
   volume_not?: Maybe<Scalars['BigDecimal']>;
   volume_gt?: Maybe<Scalars['BigDecimal']>;
@@ -4058,6 +4100,7 @@ export type TokenHourData_Filter = {
   token_ends_with_nocase?: Maybe<Scalars['String']>;
   token_not_ends_with?: Maybe<Scalars['String']>;
   token_not_ends_with_nocase?: Maybe<Scalars['String']>;
+  token_?: Maybe<Token_Filter>;
   volume?: Maybe<Scalars['BigDecimal']>;
   volume_not?: Maybe<Scalars['BigDecimal']>;
   volume_gt?: Maybe<Scalars['BigDecimal']>;
@@ -4318,6 +4361,8 @@ export type Token_Filter = {
   whitelistPools_contains_nocase?: Maybe<Array<Scalars['String']>>;
   whitelistPools_not_contains?: Maybe<Array<Scalars['String']>>;
   whitelistPools_not_contains_nocase?: Maybe<Array<Scalars['String']>>;
+  whitelistPools_?: Maybe<Pool_Filter>;
+  tokenDayData_?: Maybe<TokenDayData_Filter>;
   /** Filter for the block changed event. */
   _change_block?: Maybe<BlockChangedFilter>;
 };
@@ -4442,6 +4487,11 @@ export type Transaction_Filter = {
   gasPrice_lte?: Maybe<Scalars['BigInt']>;
   gasPrice_in?: Maybe<Array<Scalars['BigInt']>>;
   gasPrice_not_in?: Maybe<Array<Scalars['BigInt']>>;
+  mints_?: Maybe<Mint_Filter>;
+  burns_?: Maybe<Burn_Filter>;
+  swaps_?: Maybe<Swap_Filter>;
+  flashed_?: Maybe<Flash_Filter>;
+  collects_?: Maybe<Collect_Filter>;
   /** Filter for the block changed event. */
   _change_block?: Maybe<BlockChangedFilter>;
 };

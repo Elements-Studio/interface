@@ -70,7 +70,6 @@ export default function Farm({ history }: RouteComponentProps) {
     </>
     )
   }
-
   return (
     <>
       <FarmTitle />

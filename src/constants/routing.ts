@@ -104,7 +104,7 @@ export const CUSTOM_BASES: { [chainId: number]: { [tokenAddress: string]: Token[
  */
 export const COMMON_BASES: ChainCurrencyList = {
   // [1]: [ExtendedStar.onChain(1), DAI, USDC, USDT, WBTC, WETH9_EXTENDED[1]],
-  [SupportedChainId.MAINNET]: [ExtendedStar.onChain(SupportedChainId.MAINNET), STAR[SupportedChainId.MAINNET], FAI[SupportedChainId.MAINNET], WEN[SupportedChainId.MAINNET]],
+  [SupportedChainId.MAINNET]: [ExtendedStar.onChain(SupportedChainId.MAINNET), STAR[SupportedChainId.MAINNET], FAI[SupportedChainId.MAINNET], WEN[SupportedChainId.MAINNET], XUSDT[SupportedChainId.MAINNET]],
   [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD), STAR[SupportedChainId.BARNARD], FAI[SupportedChainId.BARNARD], WEN[SupportedChainId.BARNARD], SHARE[SupportedChainId.BARNARD], XUSDT[SupportedChainId.BARNARD], XETH[SupportedChainId.BARNARD]],
   [SupportedChainId.PROXIMA]: [ExtendedStar.onChain(SupportedChainId.PROXIMA), STAR[SupportedChainId.PROXIMA], FAI[SupportedChainId.PROXIMA], WEN[SupportedChainId.PROXIMA], SHARE[SupportedChainId.PROXIMA], XUSDT[SupportedChainId.PROXIMA], XETH[SupportedChainId.PROXIMA]],
   [3]: [ExtendedStar.onChain(3), WETH9_EXTENDED[3]],
