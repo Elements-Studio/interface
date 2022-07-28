@@ -464,6 +464,10 @@ msgstr "Change your network to go back to L1"
 msgid "Charts"
 msgstr "Charts"
 
+#: src/components/Header/index.tsx
+msgid "Bridge"
+msgstr "Bridge"
+
 #: src/pages/Pool/CTACards.tsx
 msgid "Check out our v3 LP walkthrough and migration guides."
 msgstr "Check out our v3 LP walkthrough and migration guides."
@@ -632,6 +636,10 @@ msgstr "Confirm this transaction in your wallet"
 #: src/state/swap/hooks.ts
 msgid "Connect Wallet"
 msgstr "Connect Wallet"
+
+#: src/pages/Swap/index.tsx
+msgid "Total value of the funds in this liquidity pool:"
+msgstr "Total value of the funds in this liquidity pool:"
 
 #: src/components/earn/UnstakingModal.tsx
 #: src/pages/Pool/index.tsx
@@ -898,8 +906,8 @@ msgid "Expanded results from inactive Token Lists"
 msgstr "Expanded results from inactive Token Lists"
 
 #: src/pages/Stake/TokenStake.tsx
-msgid "Expected Gain"
-msgstr "Expected Gain"
+msgid "Pending Gain"
+msgstr "Pending Gain"
 
 #: src/components/Settings/index.tsx
 msgid "Expert mode turns off the confirm transaction prompt and allows high slippage trades that often result in bad rates and lost funds."
@@ -1962,6 +1970,10 @@ msgstr "Token Y"
 #: src/pages/Farm/FarmStake.tsx
 msgid "Token Y Amount"
 msgstr "Token Y Amount"
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "Boost veSTAR amount"
+msgstr "Boost veSTAR amount"
 
 #: src/components/SearchModal/Manage.tsx
 msgid "Tokens"

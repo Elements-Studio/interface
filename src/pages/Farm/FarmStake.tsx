@@ -33,6 +33,7 @@ import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import { useActiveLocale } from 'hooks/useActiveLocale'
 import BigNumber from 'bignumber.js'
+import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
@@ -97,6 +98,8 @@ export default function FarmStake({
   let hasStake = false
 
   const { account, chainId } = useActiveWeb3React()
+
+
 
   if (account) {
     hasAccount = true;
@@ -200,6 +203,8 @@ export default function FarmStake({
   }, [setBoostDialogOpen])
 
   const local = useActiveLocale()
+  const lockedAmount = useGetLockedAmount(tokenX, tokenY, address);
+  
   return (
     <>
       <Container style={{ paddingTop: '1rem' }}>
@@ -433,6 +438,18 @@ export default function FarmStake({
                       <TYPE.black fontSize={14}>
                         {tokenYScalingFactor &&
                           new BigNumber(lpStakingData.tokenYAmount.amount / tokenYScalingFactor).toString()}
+                      </TYPE.black>
+                    </RowFixed>
+                  </FarmRow>
+                  <FarmRow style={{ marginTop: '10px' }}>
+                    <RowFixed>
+                      <TYPE.black fontWeight={400} fontSize={14}>
+                        <Trans>Boost veSTAR amount</Trans>
+                      </TYPE.black>
+                    </RowFixed>
+                    <RowFixed>
+                      <TYPE.black fontSize={14}>
+                        {lockedAmount}
                       </TYPE.black>
                     </RowFixed>
                   </FarmRow>

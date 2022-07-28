@@ -208,7 +208,7 @@ export default function FarmStake({
                   <TYPE.body fontSize={16} style={{ marginTop: '16px' }}><Trans>Start</Trans>: {(new Date(item.startTime*1000)+'').slice(4,24)}</TYPE.body>
                   <TYPE.body fontSize={16} style={{ marginTop: '16px' }}><Trans>End</Trans>: {(new Date(item.endTime*1000)+'').slice(4,24)}</TYPE.body>
                   <TYPE.body fontSize={16} style={{ marginTop: '16px' }}><Trans>Stepwise Multiplier</Trans>: {item.stepwiseMultiplier}</TYPE.body>
-                  <TYPE.body fontSize={16} style={{ color: 'red', marginTop: '16px' }}><Trans>Expected Gain</Trans>: {Number(item.expectedGain / starScalingFactor) || 0 }</TYPE.body>
+                  <TYPE.body fontSize={16} style={{ color: 'red', marginTop: '16px' }}><Trans>Pending Gain</Trans>: {Number(item.expectedGain / starScalingFactor) || 0 }</TYPE.body>
                   {!hasAccount ? (
                     <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
                       <TYPE.black fontSize="20px" color={'#FE7F8D'}>
