@@ -400,8 +400,8 @@ export default function Swap({ history }: RouteComponentProps) {
   const [poolTvl, setPoolTvl] = useState<null | string>();
 
   useEffect(() => {
-    const tokenXName = trade?.inputAmount?.currency?.symbol;
-    const tokenYName = trade?.outputAmount?.currency?.symbol;
+    const tokenXName = currencies?.INPUT?.name || '';
+    const tokenYName = currencies?.OUTPUT?.name || '';
 
     liquidityPools && liquidityPools.forEach((pool: Record<any, any>) => {
       const poolTokenXName = `${tokenXName} / ${tokenYName}`;
@@ -412,7 +412,7 @@ export default function Swap({ history }: RouteComponentProps) {
         setPoolTvl(allTvl.toString());
       }
     })
-  }, [trade])
+  }, [currencies])
 
   return (
     <>
@@ -563,8 +563,8 @@ export default function Swap({ history }: RouteComponentProps) {
             )}
 
             {
-              <Row style={{ justifyContent: !trade ? 'center' : 'right' }}>
-              {trade ? (
+              <Row style={{ justifyContent: 'right' }} mt={-10}>
+              {currencies.INPUT && currencies.OUTPUT ? (
               <RowFixed>
                 <StyledTvlContainer title={`Total value of the funds in this liquidity pool: ${poolTvl} USDT`}>
                   <div style={{ alignItems: 'center', display: 'flex', width: 'fit-content' }}>

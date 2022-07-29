@@ -211,7 +211,7 @@ export default function WalletModal({
           return null
         }
 
-        if (!window.web3 && !window.starcoin && isMobile) {
+        if (window.starcoin) {
           return (
             <Option
               onClick={() => {
