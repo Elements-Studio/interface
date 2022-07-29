@@ -226,8 +226,19 @@ export default function WalletModal({
               icon={option.iconURL}
             />
           )
+        } else {
+          return (
+            <Option
+              id={`connect-${key}`}
+              key={key}
+              color={'#E8831D'}
+              header={<Trans>Install StarMask</Trans>}
+              subheader={null}
+              link={'https://github.com/starcoinorg/starmask-extension'}
+              icon={StarmaskIcon}
+            />
+          )
         }
-        return null
       }
 
       // overwrite injected when needed
