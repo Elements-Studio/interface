@@ -210,8 +210,7 @@ export default function WalletModal({
         if (option.connector === portis) {
           return null
         }
-
-        if (!window.web3 && !window.starcoin && isMobile) {
+        if (window.starcoin) {
           return (
             <Option
               onClick={() => {
