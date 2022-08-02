@@ -1750,6 +1750,10 @@ msgstr "Starswap available in: <0>{0}</0>"
 msgid "Start"
 msgstr "Start"
 
+#: src/pages/Stake/TokenStake.tsx
+msgid "Mint veSTAR amount"
+msgstr "Mint veSTAR amount"
+
 #: src/pages/Earn/Manage.tsx
 msgid "Step 1. Get UNI-V2 Liquidity tokens"
 msgstr "Step 1. Get UNI-V2 Liquidity tokens"

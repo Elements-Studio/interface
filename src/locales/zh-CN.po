@@ -1714,6 +1714,10 @@ msgstr "Starswap 可选语言: <0>{0}</0>"
 msgid "Start"
 msgstr "起始"
 
+#: src/pages/Stake/TokenStake.tsx
+msgid "Mint veSTAR amount"
+msgstr "铸造vsSTAR数量"
+
 #: src/pages/Earn/Manage.tsx
 msgid "Step 1. Get UNI-V2 Liquidity tokens"
 msgstr "第 1 步：获取 UNI-V2 流动池代币"

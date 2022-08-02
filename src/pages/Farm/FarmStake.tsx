@@ -32,11 +32,13 @@ import axios from 'axios'
 import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import { useActiveLocale } from 'hooks/useActiveLocale'
-import BigNumber from 'bignumber.js'
-import useGetLockedAmount from '../../hooks/useGetLockedAmount'
+import BigNumber from 'bignumber.js';
+import useGetLockedAmountV2 from '../../hooks/useGetLockedAmountV2'
 
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
+const lpTokenScalingFactor = 1000000000;
+
 
 const Container = styled.div`
   width: auto;
@@ -203,7 +205,7 @@ export default function FarmStake({
   }, [setBoostDialogOpen])
 
   const local = useActiveLocale()
-  const lockedAmount = useGetLockedAmount(tokenX, tokenY, address);
+  const lockedAmount = useGetLockedAmountV2(addressX, addressY, address);
   
   return (
     <>
@@ -449,7 +451,7 @@ export default function FarmStake({
                     </RowFixed>
                     <RowFixed>
                       <TYPE.black fontSize={14}>
-                        {lockedAmount}
+                        {lockedAmount / lpTokenScalingFactor}
                       </TYPE.black>
                     </RowFixed>
                   </FarmRow>
