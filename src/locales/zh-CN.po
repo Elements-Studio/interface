@@ -556,6 +556,22 @@ msgstr "共同基础"
 msgid "Confirm"
 msgstr "确认"
 
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "Confirm"
+msgstr "确认"
+
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "Insufficient amount"
+msgstr "余额不足"
+
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "Enter number"
+msgstr "输入数额"
+
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "Invalid type"
+msgstr "输入错误"
+
 #: src/pages/AddLiquidityV2/ConfirmAddModalBottom.tsx
 msgid "Confirm Supply"
 msgstr "确认供应"

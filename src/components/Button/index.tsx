@@ -320,6 +320,13 @@ export const ButtonFarm = styled(Base)`
   background: linear-gradient(241deg, #FF978E 0%, #FB548B 100%);
   font-size: 20px;
   font-weight: 500;
+
+  &:disabled {
+    opacity: 50%;
+    cursor: auto;
+    box-shadow: none;
+    background-color: ${({ theme }) => theme.red1};
+  }
 `
 
 export const ButtonBorder = styled(Base)`
