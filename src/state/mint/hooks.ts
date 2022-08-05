@@ -200,6 +200,14 @@ export function useDerivedMintInfo(
     error = t`Insufficient ${currencies[Field.CURRENCY_B]?.symbol} balance`
   }
 
+  if (!currencyBalances.CURRENCY_B) {
+    error = t`Insufficient ${currencyB?.name || ''} balance`
+  }
+
+  if (!currencyBalances.CURRENCY_A) {
+    error = t`Insufficient ${currencyA?.name || ''} balance`
+  }
+
   return {
     dependentField,
     currencies,

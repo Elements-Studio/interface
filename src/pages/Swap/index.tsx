@@ -406,7 +406,6 @@ export default function Swap({ history }: RouteComponentProps) {
     liquidityPools && liquidityPools.forEach((pool: Record<any, any>) => {
       const poolTokenXName = `${tokenXName} / ${tokenYName}`;
       const poolTokenYName = `${tokenYName} / ${tokenXName}`;
-      console.log(poolTokenXName, poolTokenYName)
       if (pool.description === poolTokenXName || pool.description === poolTokenYName) {
         const allTvl = new BigNumber(pool.tokenXReserveInUsd).plus(pool.tokenYReserveInUsd);
         setPoolTvl(allTvl.toString());
