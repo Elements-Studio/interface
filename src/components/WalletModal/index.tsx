@@ -210,10 +210,6 @@ export default function WalletModal({
         if (option.connector === portis) {
           return null
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> 2c318e568443aac1404a4a58744969e365983b31
         if (window.starcoin) {
           return (
             <Option
