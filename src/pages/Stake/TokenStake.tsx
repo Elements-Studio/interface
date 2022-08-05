@@ -9,10 +9,12 @@ import { ButtonFarm, ButtonBorder } from '../../components/Button'
 import { AutoColumn } from '../../components/Column'
 import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
 import FarmCard from '../../components/farm/FarmCard'
+import FarmCardPerson from '../../components/Stake/FarmCardPerson'
 import MyStakeListTitle from '../../components/Stake/MyStakeListTitle'
 import TokenStakeDialog from '../../components/Stake/TokenStakeDialog'
 import TokenUnstakeDialog from '../../components/Stake/TokenUnstakeDialog'
 import TokenClaimVeStarDialog from '../../components/Stake/TokenClaimVeStarDialog'
+
 import StarswapBlueLogo from '../../assets/svg/starswap_logo.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { useIsBoost } from '../../state/user/hooks'
@@ -147,6 +149,7 @@ export default function FarmStake({
   function handleVeStarReward(value:any) {
     setVeStarReward(value);
   };
+
   return (
     <>
       <Container style={{ paddingTop: '1rem' }}>
@@ -196,20 +199,23 @@ export default function FarmStake({
           const userLockedSTARDay = (item.endTime - item.startTime) / (3600 * 24)
           const veStarReward = (parseInt(item.amount) / starScalingFactor) * userLockedSTARDay / (365 * 2)
           return (
-            <AutoRow justify="center" key={item.id}>
-              <FarmCard>
-                <AutoColumn justify="center">
-                  <RowFixed>
-                    <StyledEthereumLogo src={StarswapBlueLogo} style={{ marginRight: '1.25rem' }} size={'48px'} />
-                  </RowFixed>
-                  <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>{token}</TYPE.body>
-                  <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>ID: {item.id}</TYPE.body>
-                  <TYPE.body fontSize={24} style={{ marginTop: '16px' }}>{(parseInt(item.amount) / starScalingFactor).toString()}</TYPE.body>
-                  <TYPE.body fontSize={16} style={{ marginTop: '16px' }}><Trans>Start</Trans>: {(new Date(item.startTime*1000)+'').slice(4,24)}</TYPE.body>
-                  <TYPE.body fontSize={16} style={{ marginTop: '16px' }}><Trans>End</Trans>: {(new Date(item.endTime*1000)+'').slice(4,24)}</TYPE.body>
-                  <TYPE.body fontSize={16} style={{ marginTop: '16px' }}><Trans>Stepwise Multiplier</Trans>: {item.stepwiseMultiplier}</TYPE.body>
-                  <TYPE.body fontSize={16} style={{ color: 'red', marginTop: '16px' }}><Trans>Expected Gain</Trans>: {Number(item.expectedGain / starScalingFactor) || 0 }</TYPE.body>
-                  {!hasAccount ? (
+            <FarmCardPerson
+              key={item.id}
+              rest={{
+                address,
+                StarswapBlueLogo,
+                token,
+                tokenTypeTag: item.tokenTypeTag,
+                id: item.id,
+                amount: item.amount,
+                starScalingFactor,
+                startTime: item.startTime,
+                endTime: item.endTime,
+                stepwiseMultiplier: item.stepwiseMultiplier,
+                expectedGain: item.expectedGain
+              }}
+            >
+              {!hasAccount ? (
                     <ButtonBorder style={{ marginTop: '16px' }} color={'#FE7F8D'}>
                       <TYPE.black fontSize="20px" color={'#FE7F8D'}>
                         <Trans>Connect Wallet</Trans>
@@ -255,9 +261,7 @@ export default function FarmStake({
                       </RowBetween>
                     ) : null
                   }
-                </AutoColumn>
-              </FarmCard>
-            </AutoRow>
+            </FarmCardPerson>
           )
         }) : (
           <AutoRow justify="center">

@@ -57,6 +57,9 @@ import { isTradeBetter } from '../../utils/isTradeBetter'
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
 import { warningSeverity } from '../../utils/prices'
 import AppBody from '../AppBody'
+import { useGetLiquidityPools } from 'hooks/useTokenSwapRouter'
+import BigNumber from 'bignumber.js'
+
 
 const StyledInfo = styled(Info)`
   opacity: 0.4;
@@ -66,6 +69,19 @@ const StyledInfo = styled(Info)`
   :hover {
     opacity: 0.8;
   }
+`
+
+const StyledTvlContainer = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  font-size: 0.875rem;
+  font-weight: 400;
+  background-color: transparent;
+  border: none;
+  height: 24px;
+  cursor: pointer;
 `
 
 export default function Swap({ history }: RouteComponentProps) {
@@ -104,6 +120,9 @@ export default function Swap({ history }: RouteComponentProps) {
 
   // get version from the url
   const toggledVersion = useToggledVersion()
+
+  const liquidityPools = useGetLiquidityPools()
+
 
   // swap state
   const { independentField, typedValue, recipient } = useSwapState()
@@ -378,6 +397,23 @@ export default function Swap({ history }: RouteComponentProps) {
 
   const priceImpactTooHigh = priceImpactSeverity > 3 && !isExpertMode
 
+  const [poolTvl, setPoolTvl] = useState<null | string>();
+
+  useEffect(() => {
+    const tokenXName = currencies?.INPUT?.name || '';
+    const tokenYName = currencies?.OUTPUT?.name || '';
+
+    liquidityPools && liquidityPools.forEach((pool: Record<any, any>) => {
+      const poolTokenXName = `${tokenXName} / ${tokenYName}`;
+      const poolTokenYName = `${tokenYName} / ${tokenXName}`;
+      console.log(poolTokenXName, poolTokenYName)
+      if (pool.description === poolTokenXName || pool.description === poolTokenYName) {
+        const allTvl = new BigNumber(pool.tokenXReserveInUsd).plus(pool.tokenYReserveInUsd);
+        setPoolTvl(allTvl.toString());
+      }
+    })
+  }, [currencies])
+
   return (
     <>
       <SwapNetworkAlert />
@@ -526,6 +562,22 @@ export default function Swap({ history }: RouteComponentProps) {
               </Row>
             )}
 
+            {
+              <Row style={{ justifyContent: 'right' }} mt={-10}>
+              {currencies.INPUT && currencies.OUTPUT ? (
+              <RowFixed>
+                <StyledTvlContainer title={`Total value of the funds in this liquidity pool: ${poolTvl} USDT`}>
+                  <div style={{ alignItems: 'center', display: 'flex', width: 'fit-content' }}>
+                    <Text fontWeight={500} fontSize={12} color={theme.text1}>
+                      <Trans>Total value of the funds in this liquidity pool: </Trans>
+                      <span style={{fontSize: '14px'}}> {poolTvl} USDT</span>
+                    </Text>
+                  </div>
+                </StyledTvlContainer>
+              </RowFixed>
+            ) : null}
+          </Row>
+            }
             <BottomGrouping>
               {swapIsUnsupported ? (
                 <ButtonPrimary disabled={true}>

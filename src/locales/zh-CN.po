@@ -871,8 +871,20 @@ msgid "Expanded results from inactive Token Lists"
 msgstr "从待用代币列表中扩展出的结果"
 
 #: src/pages/Stake/TokenStake.tsx
-msgid "Expected Gain"
-msgstr "预期收益"
+msgid "Pending Gain"
+msgstr "待收取收益"
+
+#: src/components/Header/index.tsx
+msgid "Bridge"
+msgstr "跨链桥"
+
+#: src/pages/Swap/index.tsx
+msgid "Total value of the funds in this liquidity pool:"
+msgstr "该流动池中资金总额："
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "Boost veSTAR amount"
+msgstr "加速的vsSTAR数量"
 
 #: src/components/Settings/index.tsx
 msgid "Expert mode turns off the confirm transaction prompt and allows high slippage trades that often result in bad rates and lost funds."
@@ -1717,6 +1729,10 @@ msgstr "Starswap 可选语言: <0>{0}</0>"
 #: src/pages/Stake/TokenStake.tsx
 msgid "Start"
 msgstr "起始"
+
+#: src/pages/Stake/TokenStake.tsx
+msgid "Mint veSTAR amount"
+msgstr "铸造vsSTAR数量"
 
 #: src/pages/Earn/Manage.tsx
 msgid "Step 1. Get UNI-V2 Liquidity tokens"
