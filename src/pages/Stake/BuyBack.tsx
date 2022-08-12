@@ -5,12 +5,15 @@ import { Percent } from '@uniswap/sdk-core'
 import styled from 'styled-components'
 import { RouteComponentProps, Link } from 'react-router-dom'
 import { Text } from 'rebass'
-import { providers } from '@starcoin/starcoin';
+import { arrayify, hexlify } from '@ethersproject/bytes';
+import { bcs, utils, providers } from '@starcoin/starcoin';
+import CircularProgress from '@mui/material/CircularProgress'
+import { FACTORY_ADDRESS as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
 import QuestionHelper from '../../components/QuestionHelper'
 import Row, { AutoRow, RowFixed, RowBetween } from '../../components/Row'
 import { TYPE, IconWrapper } from '../../theme'
 import { ButtonFarm } from '../../components/Button'
-import { AutoColumn } from '../../components/Column'
+import { AutoColumn, ColumnCenter } from '../../components/Column'
 import { Input as NumericalInput } from '../../components/NumericalInput'
 import FarmTitle from '../../components/farm/FarmTitle'
 import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
@@ -27,6 +30,7 @@ import StarswapBlueLogo from '../../assets/svg/starswap_logo.svg'
 import PortisIcon from '../../assets/images/portisIcon.png'
 import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
+import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
@@ -95,13 +99,47 @@ const StyledArrowLeft = styled(ArrowLeft)`
 
 const scalingFactor = 1000000000
 
+
 export default function BuyBack({ history }: RouteComponentProps) {
   let address = ''
   const { account, chainId } = useActiveWeb3React()
   if (account) {
     address = account.toLowerCase();
   }
+  const [loading, setLoading] = useState(false);
+
   const info = useGetBuyBackInfo()
+
+  const starcoinProvider = useStarcoinProvider();
+
+  async function onClickConfirm() {
+    try {
+      const functionId = `${V2_FACTORY_ADDRESS}::BuyBackSTAR::buy_back`;
+      const typeArgs: any[] = [];
+      const args: any[] = [];
+
+      const scriptFunction = utils.tx.encodeScriptFunction(
+        functionId,
+        typeArgs,
+        args,
+      );
+
+      const payloadInHex = (function () {
+        const se = new bcs.BcsSerializer();
+        scriptFunction.serialize(se);
+        return hexlify(se.getBytes());
+      })();
+
+      await starcoinProvider.getSigner().sendUncheckedTransaction({
+        data: payloadInHex,
+      });
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+    return false;
+  }
 
   return (
     <>
@@ -161,7 +199,7 @@ export default function BuyBack({ history }: RouteComponentProps) {
               </TYPE.black>
             </RowFixed>
           </FarmRow>
-          <FarmRow>
+          <FarmRow style={{marginBottom: '10px'}}>
             <RowFixed>
               <TYPE.black fontWeight={400} fontSize={14}>
                 <Trans>Release STC Amount Per Time</Trans>
@@ -199,7 +237,7 @@ export default function BuyBack({ history }: RouteComponentProps) {
             </Text>
             <RowFixed>
               <Text fontSize={16} fontWeight={500}>
-              {info[7]}
+              {info[7] / scalingFactor}
               </Text>
             </RowFixed>
           </FixedHeightRow>
@@ -209,11 +247,26 @@ export default function BuyBack({ history }: RouteComponentProps) {
             </Text>
             <RowFixed>
               <Text fontSize={16} fontWeight={500}>
-              {info[7]}
+              {info[8] / scalingFactor}
               </Text>
             </RowFixed>
           </FixedHeightRow>
-          <ButtonFarm
+          {loading && (
+            <ColumnCenter style={{ padding: '27px 32px' }}>
+              <CircularProgress
+                size={64}
+                sx={{
+                  marginTop: '10px',
+                  zIndex: 1,
+                }}
+              />
+            </ColumnCenter>
+          )}
+          <ButtonFarm disabled={loading} onClick={() => {
+              onClickConfirm();
+              setLoading(true);
+            }}>
+          {/* <ButtonFarm
             as={Link}
             to={window.starcoin && account ? `/stake/STAR` : '/stake'}
             onClick={() => {
@@ -221,7 +274,7 @@ export default function BuyBack({ history }: RouteComponentProps) {
                 alert('Please Connect StarMask Wallet First! \n请先链接StarMask钱包')
               }
             }}
-          >
+          > */}
             <TYPE.main color={'#fff'}>
               <Trans>Buy Back</Trans>
             </TYPE.main>
