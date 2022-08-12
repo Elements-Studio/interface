@@ -26,6 +26,7 @@ import Farm from './Farm'
 import FarmStake from './Farm/FarmStake'
 import Stake from './Stake'
 import Simulator from './Stake/Simulator'
+import BuyBack from './Stake/BuyBack'
 import TokenStake from './Stake/TokenStake'
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 import Vote from './Vote'
@@ -121,6 +122,12 @@ export default function App() {
                 strict
                 path="/stake/simulator"
                 component={Simulator}
+              />
+              <Route
+                exact
+                strict
+                path="/stake/buyBack"
+                component={BuyBack}
               />
               <Route exact strict path="/stake/:token" component={TokenStake} />
 

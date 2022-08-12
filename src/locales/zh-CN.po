@@ -337,6 +337,10 @@ msgstr ""
 msgid "Balance: {0} {1}"
 msgstr "余额：{0} {1}"
 
+#: src/pages/Stake/BuyBack.tsx
+msgid "Begin Time"
+msgstr ""
+
 #: src/components/FeeSelector/index.tsx
 msgid "Best for exotic pairs."
 msgstr "较适合低交易量的币对。"
@@ -375,14 +379,27 @@ msgstr "Boost Factor = ( 用户veSTAR余额 + 预估获得veStar / veSTAR 总数
 msgid "Boost My LP Staking"
 msgstr ""
 
-#: src/pages/Stake/index.tsx
 #: src/pages/Stake/Simulator.tsx
+#: src/pages/Stake/index.tsx
 msgid "Boost Simulator"
 msgstr "Boost模拟器"
 
 #: src/components/Banner/index.tsx
 msgid "Boost is about to be online"
 msgstr "Boost功能即将上线"
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "Boost veSTAR amount"
+msgstr "加速的vsSTAR数量"
+
+#: src/components/Header/index.tsx
+msgid "Bridge"
+msgstr "跨链桥"
+
+#: src/pages/Stake/BuyBack.tsx
+#: src/pages/Stake/index.tsx
+msgid "Buy Back"
+msgstr ""
 
 #: src/components/PositionCard/index.tsx
 msgid "By adding liquidity you'll earn {feePercent}% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
@@ -396,16 +413,16 @@ msgstr "添加此代币列表代表您信任其数据是正确的。任何人都
 msgid "By connecting a wallet, you agree to Starswap Labs’ <0>Terms of Service</0> and acknowledge that you have read and understand the <1>Starswap protocol disclaimer</1>."
 msgstr "通过连接钱包，您同意接受 Starswap 实验室的<0>服务条款</0>，并确认您已阅读和理解<1>Starswap协议免责声明</1>。"
 
-#: src/components/farm/FarmBoostDialog.tsx
-#: src/components/farm/FarmHarvestDialog.tsx
-#: src/components/farm/FarmStakeDialog.tsx
-#: src/components/farm/FarmUnstakeDialog.tsx
-#: src/components/farm/GetAllStakeDialog.tsx
 #: src/components/Stake/GetAllStakeDialog.tsx
 #: src/components/Stake/TokenClaimVeStarDialog.tsx
 #: src/components/Stake/TokenHarvestDialog.tsx
 #: src/components/Stake/TokenStakeDialog.tsx
 #: src/components/Stake/TokenUnstakeDialog.tsx
+#: src/components/farm/FarmBoostDialog.tsx
+#: src/components/farm/FarmHarvestDialog.tsx
+#: src/components/farm/FarmStakeDialog.tsx
+#: src/components/farm/FarmUnstakeDialog.tsx
+#: src/components/farm/GetAllStakeDialog.tsx
 msgid "Cancel"
 msgstr "取消"
 
@@ -431,10 +448,10 @@ msgstr "查看我们的 v3 流动池介绍和迁移指南。"
 msgid "Claim"
 msgstr "领取"
 
+#: src/components/Header/index.tsx
 #: src/components/claim/AddressClaimModal.tsx
 #: src/components/claim/ClaimModal.tsx
 #: src/components/claim/ClaimModal.tsx
-#: src/components/Header/index.tsx
 msgid "Claim UNI"
 msgstr "领取UNI代币"
 
@@ -542,16 +559,16 @@ msgstr "收取手续费的操作将为您提取您当前已累积的手续费。
 msgid "Common bases"
 msgstr "共同基础"
 
-#: src/components/farm/FarmBoostDialog.tsx
-#: src/components/farm/FarmHarvestDialog.tsx
-#: src/components/farm/FarmStakeDialog.tsx
-#: src/components/farm/FarmUnstakeDialog.tsx
-#: src/components/farm/GetAllStakeDialog.tsx
 #: src/components/Stake/GetAllStakeDialog.tsx
 #: src/components/Stake/TokenClaimVeStarDialog.tsx
 #: src/components/Stake/TokenHarvestDialog.tsx
 #: src/components/Stake/TokenStakeDialog.tsx
 #: src/components/Stake/TokenUnstakeDialog.tsx
+#: src/components/farm/FarmBoostDialog.tsx
+#: src/components/farm/FarmHarvestDialog.tsx
+#: src/components/farm/FarmStakeDialog.tsx
+#: src/components/farm/FarmUnstakeDialog.tsx
+#: src/components/farm/GetAllStakeDialog.tsx
 #: src/pages/RemoveLiquidity/index.tsx
 msgid "Confirm"
 msgstr "确认"
@@ -565,10 +582,10 @@ msgstr "确认供应"
 msgid "Confirm Swap"
 msgstr "确认兑换"
 
-#: src/components/claim/AddressClaimModal.tsx
-#: src/components/claim/ClaimModal.tsx
 #: src/components/ModalViews/index.tsx
 #: src/components/TransactionConfirmationModal/index.tsx
+#: src/components/claim/AddressClaimModal.tsx
+#: src/components/claim/ClaimModal.tsx
 #: src/components/vote/VoteModal.tsx
 msgid "Confirm this transaction in your wallet"
 msgstr "在您的钱包中确认这笔交易"
@@ -789,7 +806,7 @@ msgstr "质押 LP Token 以赚取 STAR"
 msgid "Earned UNI tokens represent voting shares in Uniswap governance."
 msgstr "已赚取的 UNI 代币代表了 Uniswap 治理中的投票份额。"
 
-#: src/pages/Stake/TokenStake.tsx
+#: src/components/Stake/FarmCardPerson.tsx
 msgid "End"
 msgstr "终止"
 
@@ -833,8 +850,8 @@ msgstr "输入有效的代币合约地址"
 msgid "Error"
 msgstr "错误"
 
-#: src/components/WalletModal/index.tsx
 #: src/components/WalletModal/PendingView.tsx
+#: src/components/WalletModal/index.tsx
 msgid "Error connecting"
 msgstr "连接错误"
 
@@ -854,22 +871,6 @@ msgstr "导入列表出错"
 msgid "Expanded results from inactive Token Lists"
 msgstr "从待用代币列表中扩展出的结果"
 
-#: src/pages/Stake/TokenStake.tsx
-msgid "Pending Gain"
-msgstr "待收取收益"
-
-#: src/components/Header/index.tsx
-msgid "Bridge"
-msgstr "跨链桥"
-
-#: src/pages/Swap/index.tsx
-msgid "Total value of the funds in this liquidity pool:"
-msgstr "该流动池中资金总额："
-
-#: src/pages/Farm/FarmStake.tsx
-msgid "Boost veSTAR amount"
-msgstr "加速的vsSTAR数量"
-
 #: src/components/Settings/index.tsx
 msgid "Expert mode turns off the confirm transaction prompt and allows high slippage trades that often result in bad rates and lost funds."
 msgstr "“专家模式”将解除确认交易的提示，并允许兑换率高滑点的交易，从而可能导致较不利的兑换率和资金损失。"
@@ -888,9 +889,9 @@ msgstr "在 Uniswap 数据分析中探索较受欢迎的流动池。"
 #~ msgid "Extract"
 #~ msgstr "提取"
 
-#: src/components/farm/FarmHeader.tsx
 #: src/components/Header/index.tsx
 #: src/components/Stake/FarmHeader.tsx
+#: src/components/farm/FarmHeader.tsx
 msgid "Farm"
 msgstr "农场"
 
@@ -915,6 +916,7 @@ msgid "For each pool shown below, click migrate to remove your liquidity from Un
 msgstr "对于下面显示的每个流动池，单击“迁移”以从 Starswap 赎回您的流动资金，并将其注入到 Starswap。"
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/BuyBack.tsx
 #: src/pages/Stake/Simulator.tsx
 msgid "For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block."
 msgstr "比如，1倍率的农场每个区块获得1 STAR，40倍率的农场每个区块获得40 STAR。"
@@ -1040,6 +1042,10 @@ msgstr "{0} 余额不足"
 msgid "Interface Settings"
 msgstr "界面设置"
 
+#: src/pages/Stake/BuyBack.tsx
+msgid "Interval Duration"
+msgstr ""
+
 #: src/state/mint/hooks.ts
 #: src/state/mint/v3/hooks.ts
 msgid "Invalid pair"
@@ -1069,6 +1075,10 @@ msgstr "LP Token 余额"
 #: src/pages/Farm/FarmStake.tsx
 msgid "LP Token Staking Status"
 msgstr "流动性代币质押状态"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Latest boughtback time"
+msgstr ""
 
 #: src/pages/Pool/index.tsx
 msgid "Learn"
@@ -1107,11 +1117,11 @@ msgstr "列表"
 msgid "Loaded"
 msgstr "已加载"
 
-#: src/components/PositionCard/index.tsx
 #: src/components/PositionCard/Sushi.tsx
 #: src/components/PositionCard/V2.tsx
-#: src/pages/MigrateV2/index.tsx
+#: src/components/PositionCard/index.tsx
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
+#: src/pages/MigrateV2/index.tsx
 #: src/pages/Pool/v2.tsx
 #: src/pages/PoolFinder/index.tsx
 #: src/pages/Swap/index.tsx
@@ -1122,12 +1132,12 @@ msgstr "正在加载"
 msgid "Lock Until"
 msgstr "结束时间"
 
+#: src/components/Stake/TokenHarvestDialog.tsx
+#: src/components/Stake/TokenStakeDialog.tsx
 #: src/components/farm/FarmBoostDialog.tsx
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/components/farm/FarmStakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
-#: src/components/Stake/TokenHarvestDialog.tsx
-#: src/components/Stake/TokenStakeDialog.tsx
 msgid "MAX"
 msgstr "最大"
 
@@ -1135,12 +1145,12 @@ msgstr "最大"
 msgid "Make sure the URL is<0>app.uniswap.org</0>"
 msgstr "请确认网页链接为<0>app.uniswap.org</0>"
 
-#: src/components/earn/PoolCard.tsx
-#: src/components/PositionCard/index.tsx
-#: src/components/PositionCard/index.tsx
 #: src/components/PositionCard/V2.tsx
 #: src/components/PositionCard/V2.tsx
+#: src/components/PositionCard/index.tsx
+#: src/components/PositionCard/index.tsx
 #: src/components/SearchModal/Manage.tsx
+#: src/components/earn/PoolCard.tsx
 msgid "Manage"
 msgstr "管理"
 
@@ -1192,8 +1202,8 @@ msgstr "迁移流动资金"
 #~ msgid "Migrate Liquidity to V3"
 #~ msgstr "将流动资金迁移到V3"
 
-#: src/pages/MigrateV2/index.tsx
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
+#: src/pages/MigrateV2/index.tsx
 msgid "Migrate V2 Liquidity"
 msgstr "迁移V2 流动资金"
 
@@ -1226,6 +1236,10 @@ msgstr "最小值："
 msgid "Minimum received"
 msgstr "收到的最低数额"
 
+#: src/components/Stake/FarmCardPerson.tsx
+msgid "Mint veSTAR amount"
+msgstr "铸造vsSTAR数量"
+
 #: src/pages/Pool/index.tsx
 msgid "More"
 msgstr "更多"
@@ -1241,6 +1255,14 @@ msgstr "我的质押"
 #: src/pages/Pool/index.tsx
 msgid "New Position"
 msgstr "新仓位"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Next Release STC Amount"
+msgstr ""
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Next Release Time"
+msgstr ""
 
 #: src/pages/Stake/TokenStake.tsx
 msgid "No Staking"
@@ -1336,6 +1358,10 @@ msgstr "拥有者"
 msgid "Participating pools"
 msgstr "参与的流动池"
 
+#: src/components/Stake/FarmCardPerson.tsx
+msgid "Pending Gain"
+msgstr "待收取收益"
+
 #: src/pages/Farm/FarmStake.tsx
 #: src/pages/Stake/Simulator.tsx
 msgid "Percentage"
@@ -1386,15 +1412,15 @@ msgstr "质押池更新时间"
 msgid "Pool rate"
 msgstr "流动池费率"
 
-#: src/components/PositionCard/index.tsx
 #: src/components/PositionCard/V2.tsx
+#: src/components/PositionCard/index.tsx
 msgid "Pool tokens in rewards pool:"
 msgstr "奖励池中的流动池代币："
 
-#: src/components/PositionCard/index.tsx
-#: src/components/PositionCard/index.tsx
 #: src/components/PositionCard/V2.tsx
 #: src/components/PositionCard/V2.tsx
+#: src/components/PositionCard/index.tsx
+#: src/components/PositionCard/index.tsx
 #: src/pages/RemoveLiquidity/V3.tsx
 #: src/pages/RemoveLiquidity/V3.tsx
 #: src/pages/RemoveLiquidity/V3.tsx
@@ -1509,11 +1535,19 @@ msgstr "接受者"
 msgid "Register"
 msgstr ""
 
-#: src/components/PositionCard/index.tsx
+#: src/pages/Stake/BuyBack.tsx
+msgid "Release STC Amount Per Time"
+msgstr ""
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Remaining STC Amount"
+msgstr ""
+
 #: src/components/PositionCard/V2.tsx
+#: src/components/PositionCard/index.tsx
+#: src/pages/RemoveLiquidity/V3.tsx
+#: src/pages/RemoveLiquidity/V3.tsx
 #: src/pages/RemoveLiquidity/index.tsx
-#: src/pages/RemoveLiquidity/V3.tsx
-#: src/pages/RemoveLiquidity/V3.tsx
 msgid "Remove"
 msgstr "去除"
 
@@ -1574,14 +1608,27 @@ msgstr ""
 msgid "STAR Balance"
 msgstr "STAR 余额"
 
+#: src/pages/Stake/BuyBack.tsx
+msgid "STAR Buy Back"
+msgstr ""
+
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/pages/Farm/FarmStake.tsx
 msgid "STAR Earned"
 msgstr ""
 
+#: src/pages/Stake/BuyBack.tsx
+msgid "STAR For Next Buy Back"
+msgstr ""
+
 #: src/pages/Stake/index.tsx
 msgid "STAR Stake APR Formula"
 msgstr "池子APR = (池子每秒释放量 * 池子阶梯倍率  * 365天 * 24小时 * 3600秒) / 池子TVL"
+
+#: 
+#: 
+#~ msgid "STC Buy Back STAR"
+#~ msgstr "STC 回购 STAR"
 
 #: src/components/SearchModal/CurrencySearch.tsx
 msgid "Search name or paste address"
@@ -1657,8 +1704,8 @@ msgstr "显示 Portis"
 msgid "Simple"
 msgstr "简单型"
 
-#: src/components/swap/AdvancedSwapDetails.tsx
 #: src/components/TransactionSettings/index.tsx
+#: src/components/swap/AdvancedSwapDetails.tsx
 msgid "Slippage tolerance"
 msgstr "滑点容差"
 
@@ -1673,8 +1720,8 @@ msgstr "出问题了"
 #: src/components/Header/index.tsx
 #: src/pages/Farm/FarmStake.tsx
 #: src/pages/Farm/index.tsx
-#: src/pages/Stake/index.tsx
 #: src/pages/Stake/TokenStake.tsx
+#: src/pages/Stake/index.tsx
 msgid "Stake"
 msgstr "质押"
 
@@ -1710,19 +1757,15 @@ msgstr "已质押流动性"
 msgid "Starswap available in: <0>{0}</0>"
 msgstr "Starswap 可选语言: <0>{0}</0>"
 
-#: src/pages/Stake/TokenStake.tsx
+#: src/components/Stake/FarmCardPerson.tsx
 msgid "Start"
 msgstr "起始"
-
-#: src/pages/Stake/TokenStake.tsx
-msgid "Mint veSTAR amount"
-msgstr "铸造vsSTAR数量"
 
 #: src/pages/Earn/Manage.tsx
 msgid "Step 1. Get UNI-V2 Liquidity tokens"
 msgstr "第 1 步：获取 UNI-V2 流动池代币"
 
-#: src/pages/Stake/TokenStake.tsx
+#: src/components/Stake/FarmCardPerson.tsx
 msgid "Stepwise Multiplier"
 msgstr "阶梯倍率"
 
@@ -1789,6 +1832,7 @@ msgstr "感谢您加入 Uniswap 社区 <0/>"
 #~ msgstr "Boost功能即将上线主网，敬请期待。"
 
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/BuyBack.tsx
 #: src/pages/Stake/Simulator.tsx
 msgid "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."
 msgstr "阶梯倍率代表每个农场从每个区块产生的所有STAR中所占的比例。"
@@ -1850,7 +1894,52 @@ msgstr "veSTAR余额不够"
 msgid "These tokens are commonly paired with other tokens."
 msgstr "这些代币通常与其他代币配对。"
 
+#: src/pages/Stake/BuyBack.tsx
+msgid "STAR Buy Back"
+msgstr "STAR回购"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Total STC Amount"
+msgstr "总额STC"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Remaining STC Amount"
+msgstr "剩余STC"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Begin Time"
+msgstr "起始时间"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Interval Duration"
+msgstr "间隔时间"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Release STC Amount Per Time"
+msgstr "每次释放STC"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Latest boughtback time"
+msgstr "最后回购时间"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Next Release Time"
+msgstr "本轮释放时间"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Next Release STC Amount"
+msgstr "本轮释放STC额度"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "STAR For Next Buy Back"
+msgstr "本轮购买所需STAR"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Buy Back"
+msgstr "回购"
+
 #: src/pages/Farm/index.tsx
+#: src/pages/Stake/BuyBack.tsx
 #: src/pages/Stake/Simulator.tsx
 msgid "This amount is already included in all APR calculations for the farm."
 msgstr "农场中所有APR的计算中已经包含该数量。"
@@ -1859,8 +1948,8 @@ msgstr "农场中所有APR的计算中已经包含该数量。"
 msgid "This is an alpha release of Uniswap on the Arbitrum network. You must bridge L1 assets to the network to swap them."
 msgstr "这是 Arbitrum 网络上 Uniswap 的 alpha 版本。您需要先将 L1 资产桥接到 Arbitrum 网络才能使用。"
 
-#: src/components/farm/GetAllStakeDialog.tsx
 #: src/components/Stake/GetAllStakeDialog.tsx
+#: src/components/farm/GetAllStakeDialog.tsx
 msgid "This operation extracts all pledged liquidity quotas and rewards. Do you continue to perform the operation?"
 msgstr "该操作提取所有的质押的流动性额度和奖励，是否继续执⾏操作？"
 
@@ -1959,6 +2048,10 @@ msgstr "存入总额"
 msgid "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USDT"
 msgstr "该农场流动资金池中锁仓总额：{tvlUSD} USDT"
 
+#: src/pages/Swap/index.tsx
+msgid "Total value of the funds in this liquidity pool:"
+msgstr "该流动池中资金总额："
+
 #: src/pages/Stake/Simulator.tsx
 msgid "Total veSTAR"
 msgstr "veSTAR 总数"
@@ -1967,10 +2060,10 @@ msgstr "veSTAR 总数"
 msgid "Transaction Settings"
 msgstr "交易设置"
 
+#: src/components/TransactionConfirmationModal/index.tsx
 #: src/components/earn/ClaimRewardModal.tsx
 #: src/components/earn/StakingModal.tsx
 #: src/components/earn/UnstakingModal.tsx
-#: src/components/TransactionConfirmationModal/index.tsx
 #: src/components/vote/DelegateModal.tsx
 #: src/components/vote/VoteModal.tsx
 msgid "Transaction Submitted"
@@ -2069,8 +2162,8 @@ msgstr "未知来源"
 msgid "Unknown error{0}. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
 msgstr "未知错误{0}。尝试增加您的滑点容差。注：转账时额外抽取费用（fee-on-transfer）的代币和弹性供应（rebase）代币都与 Starswap 不兼容。"
 
-#: src/pages/Vote/index.tsx
 #: src/pages/Vote/VotePage.tsx
+#: src/pages/Vote/index.tsx
 msgid "Unlock Votes"
 msgstr "解锁投票"
 
@@ -2173,9 +2266,9 @@ msgstr "在浏览器上查看"
 msgid "View on Stcscan"
 msgstr "在 Stcscan 上查看"
 
+#: src/components/ModalViews/index.tsx
 #: src/components/claim/AddressClaimModal.tsx
 #: src/components/claim/ClaimModal.tsx
-#: src/components/ModalViews/index.tsx
 #: src/components/vote/VoteModal.tsx
 msgid "View transaction on Explorer"
 msgstr "在浏览器上查看交易"
@@ -2369,9 +2462,9 @@ msgstr "您注入的流动资金"
 msgid "Your liquidity will only earn fees when the market price of the pair is within your range. <0>Need help picking a range?</0>"
 msgstr "只有当代币的市场兑换率在您设置的范围内时，您的流动资金才会赚取手续费。 <0>需要帮助选择范围设置吗？</0>"
 
-#: src/components/PositionCard/index.tsx
-#: src/components/PositionCard/index.tsx
 #: src/components/PositionCard/V2.tsx
+#: src/components/PositionCard/index.tsx
+#: src/components/PositionCard/index.tsx
 msgid "Your pool share:"
 msgstr "您的流动池份额："
 
@@ -2411,8 +2504,8 @@ msgstr "您的费率"
 msgid "Your share of staking"
 msgstr "所占百分比"
 
-#: src/components/PositionCard/index.tsx
 #: src/components/PositionCard/V2.tsx
+#: src/components/PositionCard/index.tsx
 msgid "Your total pool tokens:"
 msgstr "您的流动池代币总额："
 
