@@ -339,7 +339,7 @@ msgstr "余额：{0} {1}"
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "Begin Time"
-msgstr ""
+msgstr "起始时间"
 
 #: src/components/FeeSelector/index.tsx
 msgid "Best for exotic pairs."
@@ -399,7 +399,7 @@ msgstr "跨链桥"
 #: src/pages/Stake/BuyBack.tsx
 #: src/pages/Stake/index.tsx
 msgid "Buy Back"
-msgstr ""
+msgstr "回购"
 
 #: src/components/PositionCard/index.tsx
 msgid "By adding liquidity you'll earn {feePercent}% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
@@ -932,7 +932,6 @@ msgid "For each pool shown below, click migrate to remove your liquidity from Un
 msgstr "对于下面显示的每个流动池，单击“迁移”以从 Starswap 赎回您的流动资金，并将其注入到 Starswap。"
 
 #: src/pages/Farm/index.tsx
-#: src/pages/Stake/BuyBack.tsx
 #: src/pages/Stake/Simulator.tsx
 msgid "For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block."
 msgstr "比如，1倍率的农场每个区块获得1 STAR，40倍率的农场每个区块获得40 STAR。"
@@ -1060,7 +1059,11 @@ msgstr "界面设置"
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "Interval Duration"
-msgstr ""
+msgstr "间隔时间"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Interval time less than 5 min"
+msgstr "间隔时间不足5分钟"
 
 #: src/state/mint/hooks.ts
 #: src/state/mint/v3/hooks.ts
@@ -1094,7 +1097,7 @@ msgstr "流动性代币质押状态"
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "Latest boughtback time"
-msgstr ""
+msgstr "最后回购时间"
 
 #: src/pages/Pool/index.tsx
 msgid "Learn"
@@ -1274,11 +1277,11 @@ msgstr "新仓位"
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "Next Release STC Amount"
-msgstr ""
+msgstr "本轮释放STC额度"
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "Next Release Time"
-msgstr ""
+msgstr "本轮释放时间"
 
 #: src/pages/Stake/TokenStake.tsx
 msgid "No Staking"
@@ -1553,11 +1556,15 @@ msgstr ""
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "Release STC Amount Per Time"
-msgstr ""
+msgstr "每次释放STC"
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "Remaining STC Amount"
-msgstr ""
+msgstr "剩余STC"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Remaining STC amount is zero"
+msgstr "剩余STC为零"
 
 #: src/components/PositionCard/V2.tsx
 #: src/components/PositionCard/index.tsx
@@ -1626,7 +1633,7 @@ msgstr "STAR 余额"
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "STAR Buy Back"
-msgstr ""
+msgstr "STAR回购"
 
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/pages/Farm/FarmStake.tsx
@@ -1635,7 +1642,7 @@ msgstr ""
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "STAR For Next Buy Back"
-msgstr ""
+msgstr "本轮购买所需STAR"
 
 #: src/pages/Stake/index.tsx
 msgid "STAR Stake APR Formula"
@@ -1848,7 +1855,6 @@ msgstr "感谢您加入 Uniswap 社区 <0/>"
 #~ msgstr "Boost功能即将上线主网，敬请期待。"
 
 #: src/pages/Farm/index.tsx
-#: src/pages/Stake/BuyBack.tsx
 #: src/pages/Stake/Simulator.tsx
 msgid "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."
 msgstr "阶梯倍率代表每个农场从每个区块产生的所有STAR中所占的比例。"
@@ -1910,52 +1916,7 @@ msgstr "veSTAR余额不够"
 msgid "These tokens are commonly paired with other tokens."
 msgstr "这些代币通常与其他代币配对。"
 
-#: src/pages/Stake/BuyBack.tsx
-msgid "STAR Buy Back"
-msgstr "STAR回购"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Total STC Amount"
-msgstr "总额STC"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Remaining STC Amount"
-msgstr "剩余STC"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Begin Time"
-msgstr "起始时间"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Interval Duration"
-msgstr "间隔时间"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Release STC Amount Per Time"
-msgstr "每次释放STC"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Latest boughtback time"
-msgstr "最后回购时间"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Next Release Time"
-msgstr "本轮释放时间"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Next Release STC Amount"
-msgstr "本轮释放STC额度"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "STAR For Next Buy Back"
-msgstr "本轮购买所需STAR"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Buy Back"
-msgstr "回购"
-
 #: src/pages/Farm/index.tsx
-#: src/pages/Stake/BuyBack.tsx
 #: src/pages/Stake/Simulator.tsx
 msgid "This amount is already included in all APR calculations for the farm."
 msgstr "农场中所有APR的计算中已经包含该数量。"
@@ -2039,6 +2000,10 @@ msgstr "待用代币列表中的代币。在下面导入特定代币或单击“
 #: src/pages/Pool/CTACards.tsx
 msgid "Top pools"
 msgstr "较活跃的流动池"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Total STC Amount"
+msgstr "总额STC"
 
 #: src/pages/Stake/index.tsx
 msgid "Total Stake Amount"
