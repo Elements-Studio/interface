@@ -955,7 +955,6 @@ msgid "For each pool shown below, click migrate to remove your liquidity from Un
 msgstr "For each pool shown below, click migrate to remove your liquidity from Starswap and deposit it into Starswap."
 
 #: src/pages/Farm/index.tsx
-#: src/pages/Stake/BuyBack.tsx
 #: src/pages/Stake/Simulator.tsx
 msgid "For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block."
 msgstr "For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block."
@@ -1084,6 +1083,10 @@ msgstr "Interface Settings"
 #: src/pages/Stake/BuyBack.tsx
 msgid "Interval Duration"
 msgstr "Interval Duration"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Interval time less than 5 min"
+msgstr "Interval time less than 5 min"
 
 #: src/state/mint/hooks.ts
 #: src/state/mint/v3/hooks.ts
@@ -1587,6 +1590,10 @@ msgstr "Release STC Amount Per Time"
 msgid "Remaining STC Amount"
 msgstr "Remaining STC Amount"
 
+#: src/pages/Stake/BuyBack.tsx
+msgid "Remaining STC amount is zero"
+msgstr "Remaining STC amount is zero"
+
 #: src/components/PositionCard/V2.tsx
 #: src/components/PositionCard/index.tsx
 #: src/pages/RemoveLiquidity/V3.tsx
@@ -1664,11 +1671,6 @@ msgstr "STAR Earned"
 #: src/pages/Stake/BuyBack.tsx
 msgid "STAR For Next Buy Back"
 msgstr "STAR For Next Buy Back"
-
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Buy Back"
-msgstr "Buy Back"
 
 #: src/pages/Stake/index.tsx
 msgid "STAR Stake APR Formula"
@@ -1889,7 +1891,6 @@ msgstr "Thanks for being part of the Starswap community <0/>"
 #~ msgstr "The Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.<0/><1/>For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.<2/><3/>This amount is already included in all APR calculations for the farm."
 
 #: src/pages/Farm/index.tsx
-#: src/pages/Stake/BuyBack.tsx
 #: src/pages/Stake/Simulator.tsx
 msgid "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."
 msgstr "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block."
@@ -1956,7 +1957,6 @@ msgid "These tokens are commonly paired with other tokens."
 msgstr "These tokens are commonly paired with other tokens."
 
 #: src/pages/Farm/index.tsx
-#: src/pages/Stake/BuyBack.tsx
 #: src/pages/Stake/Simulator.tsx
 msgid "This amount is already included in all APR calculations for the farm."
 msgstr "This amount is already included in all APR calculations for the farm."

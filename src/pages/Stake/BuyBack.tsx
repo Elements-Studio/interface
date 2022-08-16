@@ -1,7 +1,5 @@
 import { Trans } from '@lingui/macro'
 import { useState, useEffect } from 'react'
-import JSBI from 'jsbi'
-import { Percent } from '@uniswap/sdk-core'
 import styled from 'styled-components'
 import { RouteComponentProps, Link } from 'react-router-dom'
 import { Text } from 'rebass'
@@ -9,65 +7,21 @@ import { arrayify, hexlify } from '@ethersproject/bytes';
 import { bcs, utils, providers } from '@starcoin/starcoin';
 import CircularProgress from '@mui/material/CircularProgress'
 import { FACTORY_ADDRESS as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
-import QuestionHelper from '../../components/QuestionHelper'
-import Row, { AutoRow, RowFixed, RowBetween } from '../../components/Row'
+import { AutoRow, RowFixed, RowBetween } from '../../components/Row'
 import { TYPE, IconWrapper } from '../../theme'
-import { ButtonFarm } from '../../components/Button'
+import { ButtonError } from '../../components/Button'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
-import { Input as NumericalInput } from '../../components/NumericalInput'
-import FarmTitle from '../../components/farm/FarmTitle'
 import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
 import { ArrowLeft } from 'react-feather'
 import FarmCard from '../../components/farm/FarmCard'
-import CurrencyLogo from '../../components/CurrencyLogo'
-import { marginTop, maxWidth, paddingTop } from 'styled-system'
-import EthereumLogo from '../../assets/images/ethereum-logo.png'
-import STCLogo from '../../assets/images/stc.png'
-import FAILogo from '../../assets/images/fai_token_logo.png'
-import FAIBlueLogo from '../../assets/images/fai_token_logo_blue.png'
-import STCBlueLogo from '../../assets/svg/stc.svg'
-import StarswapBlueLogo from '../../assets/svg/starswap_logo.svg'
-import PortisIcon from '../../assets/images/portisIcon.png'
-import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
-import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import getCurrentNetwork from '../../utils/getCurrentNetwork'
-import FormLabel from '@mui/material/FormLabel'
-import Radio from '@mui/material/Radio'
-import RadioGroup from '@mui/material/RadioGroup'
-import axios from 'axios'
-import useSWR from 'swr'
-import useGetVestarCount from '../../hooks/useGetVestarCount';
 import useGetBuyBackInfo from '../../hooks/useGetBuyBackInfo';
-import BigNumber from 'bignumber.js'
-import { COMMON_BASES } from '../../constants/routing'
-import { unwrappedToken } from '../../utils/unwrappedToken'
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 30px;
 `
 
-const fetcher = (url: any) => axios.get(url).then((res) => res.data)
-
-const RadioContainer = styled.div`
-  border-radius: 20px;
-  border: 1px solid ${({ theme }) => theme.inputBorder};
-  width: 100%;
-  margin-top: 16px;
-  margin-bottom: 16px;
-  padding-top: 12px;
-  padding-left: 16px;
-  display: flex;
-  justify-content: space-between;
-`
-
-const StyledEthereumLogo = styled.img<{ size: string }>`
-  width: ${({ size }) => size};
-  height: ${({ size }) => size};
-  border-radius: 4px;
-`
 const FarmRow = styled(RowBetween)`
   background: ${({ theme }) => theme.bg7};
   line-height: 20px;
@@ -80,25 +34,16 @@ const Container = styled(TYPE.topTitle)`
   margin-top: 1rem !important;
   text-align: center;
 `
-const TitleTotal = styled.div<{ margin?: string; maxWidth?: string }>`
-  position: relative;
-  max-width: ${({ maxWidth }) => maxWidth ?? '480px'};
-  width: 100%;
-  background: linear-gradient(241deg, #FF978E20 0%, #FB548B20 100%);
-  font-size: 20px;
-  border-radius: 24px;
-  margin-top: 2rem;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  text-align: center;
-`
 
 const StyledArrowLeft = styled(ArrowLeft)`
   color: ${({ theme }) => theme.text1};
 `
 
-const scalingFactor = 1000000000
+const ButtonBuyBack = styled(ButtonError)`
+  background: linear-gradient(241deg, #FF978E 0%, #FB548B 100%);
+`
 
+const scalingFactor = 1000000000
 
 export default function BuyBack({ history }: RouteComponentProps) {
   let address = ''
@@ -141,6 +86,15 @@ export default function BuyBack({ history }: RouteComponentProps) {
     return false;
   }
 
+  let error: any | undefined
+  if (info[0] === 0) {
+    error = <Trans>Remaining STC amount is zero</Trans>
+  }
+  const sinceLatest = (new Date().getTime() - info[4]*1000)/1000/60
+  if (sinceLatest < 5.0) {
+    error = error ?? <Trans>Interval time less than 5 min</Trans>
+  }
+  
   return (
     <>
       <Container style={{ display: 'flex' }}>
@@ -262,23 +216,12 @@ export default function BuyBack({ history }: RouteComponentProps) {
               />
             </ColumnCenter>
           )}
-          <ButtonFarm disabled={loading} onClick={() => {
+          <ButtonBuyBack disabled={!!error} error={!!error} onClick={() => {
               onClickConfirm();
               setLoading(true);
             }}>
-          {/* <ButtonFarm
-            as={Link}
-            to={window.starcoin && account ? `/stake/STAR` : '/stake'}
-            onClick={() => {
-              if (!(window.starcoin && account)) {
-                alert('Please Connect StarMask Wallet First! \n请先链接StarMask钱包')
-              }
-            }}
-          > */}
-            <TYPE.main color={'#fff'}>
-              <Trans>Buy Back</Trans>
-            </TYPE.main>
-          </ButtonFarm>
+            {error ?? <Trans>Buy Back</Trans>}
+          </ButtonBuyBack>
         </FarmCard>
       </AutoRow>
       <SwitchLocaleLink />
