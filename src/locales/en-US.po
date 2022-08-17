@@ -377,8 +377,8 @@ msgstr "Balance: {0} {1}"
 #~ msgstr "Base APR"
 
 #: src/pages/Stake/BuyBack.tsx
-msgid "Begin Time"
-msgstr "Begin Time"
+msgid "Start Time"
+msgstr "Start Time"
 
 #: src/components/FeeSelector/index.tsx
 msgid "Best for exotic pairs."
@@ -435,10 +435,13 @@ msgstr "Boost veSTAR amount"
 msgid "Bridge"
 msgstr "Bridge"
 
-#: src/pages/Stake/BuyBack.tsx
 #: src/pages/Stake/index.tsx
 msgid "Buy Back"
 msgstr "Buy Back"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Trigger buyback"
+msgstr "Trigger buyback"
 
 #: src/components/PositionCard/index.tsx
 msgid "By adding liquidity you'll earn {feePercent}% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
@@ -1081,8 +1084,8 @@ msgid "Interface Settings"
 msgstr "Interface Settings"
 
 #: src/pages/Stake/BuyBack.tsx
-msgid "Interval Duration"
-msgstr "Interval Duration"
+msgid "Release interval time"
+msgstr "Release interval time"
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "Interval time less than 5 min"
@@ -1119,8 +1122,8 @@ msgid "LP Token Staking Status"
 msgstr "LP Token Staking Status"
 
 #: src/pages/Stake/BuyBack.tsx
-msgid "Latest boughtback time"
-msgstr "Latest boughtback time"
+msgid "Last buyback time"
+msgstr "Last buyback time"
 
 #: src/pages/Pool/index.tsx
 msgid "Learn"
@@ -1303,8 +1306,8 @@ msgid "Next Release STC Amount"
 msgstr "Next Release STC Amount"
 
 #: src/pages/Stake/BuyBack.tsx
-msgid "Next Release Time"
-msgstr "Next Release Time"
+msgid "As of next release time"
+msgstr "As of next release time"
 
 #: src/pages/Stake/TokenStake.tsx
 msgid "No Staking"
@@ -1583,8 +1586,8 @@ msgid "Register"
 msgstr "Register"
 
 #: src/pages/Stake/BuyBack.tsx
-msgid "Release STC Amount Per Time"
-msgstr "Release STC Amount Per Time"
+msgid "STC Amount per release"
+msgstr "STC Amount per release"
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "Remaining STC Amount"

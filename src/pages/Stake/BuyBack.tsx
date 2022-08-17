@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, ReactNode } from 'react'
 import styled from 'styled-components'
 import { RouteComponentProps, Link } from 'react-router-dom'
 import { Text } from 'rebass'
@@ -7,9 +7,11 @@ import { arrayify, hexlify } from '@ethersproject/bytes';
 import { bcs, utils, providers } from '@starcoin/starcoin';
 import CircularProgress from '@mui/material/CircularProgress'
 import { FACTORY_ADDRESS as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
+import TransactionConfirmationModal, { ConfirmationModalContent } from '../../components/TransactionConfirmationModal'
 import { AutoRow, RowFixed, RowBetween } from '../../components/Row'
 import { TYPE, IconWrapper } from '../../theme'
 import { ButtonError } from '../../components/Button'
+import ConfirmSwapModal from '../../components/swap/ConfirmSwapModal'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
 import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
 import { ArrowLeft } from 'react-feather'
@@ -51,7 +53,9 @@ export default function BuyBack({ history }: RouteComponentProps) {
   if (account) {
     address = account.toLowerCase();
   }
-  const [loading, setLoading] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [attemptingTxn, setAttemptingTxn] = useState(false)
+  const [txnHash, setTxnHash] = useState<string | undefined>()
 
   const info = useGetBuyBackInfo()
 
@@ -59,6 +63,8 @@ export default function BuyBack({ history }: RouteComponentProps) {
 
   async function onClickConfirm() {
     try {
+      setAttemptingTxn(true);
+
       const functionId = `${V2_FACTORY_ADDRESS}::BuyBackSTAR::buy_back`;
       const typeArgs: any[] = [];
       const args: any[] = [];
@@ -75,18 +81,20 @@ export default function BuyBack({ history }: RouteComponentProps) {
         return hexlify(se.getBytes());
       })();
 
-      await starcoinProvider.getSigner().sendUncheckedTransaction({
+      const txnHash = await starcoinProvider.getSigner().sendUncheckedTransaction({
         data: payloadInHex,
       });
-      setLoading(false);
+      setTxnHash(txnHash);
+      setAttemptingTxn(false)
     } catch (error) {
       console.error(error);
-      setLoading(false);
+      
+      setAttemptingTxn(false)
     }
     return false;
   }
 
-  let error: any | undefined
+  let error: ReactNode | undefined
   if (info[0] === 0) {
     error = <Trans>Remaining STC amount is zero</Trans>
   }
@@ -95,9 +103,51 @@ export default function BuyBack({ history }: RouteComponentProps) {
     error = error ?? <Trans>Interval time less than 5 min</Trans>
   }
   
+  const handleDismissConfirmation = useCallback(() => {
+    setShowConfirm(false)
+    setTxnHash('')
+  }, [txnHash])
+
+  const pendingText = <Trans>Trigger buyback</Trans>
+
+  function modalHeader() {
+    return (
+      <div style={{margin: '30px auto', textAlign: 'center'}}>
+        <RowFixed>
+          <Trans>Trigger buyback</Trans>
+        </RowFixed>
+      </div>
+    )
+  }
+
+  function modalBottom() {
+    return (
+      <ButtonBuyBack onClick={onClickConfirm}>
+        <Text fontWeight={500} fontSize={20}>
+          <Trans>Confirm</Trans>
+        </Text>
+      </ButtonBuyBack>
+    )
+  }
+
   return (
     <>
       <Container style={{ display: 'flex' }}>
+        <TransactionConfirmationModal
+          isOpen={showConfirm}
+          onDismiss={handleDismissConfirmation}
+          attemptingTxn={attemptingTxn}
+          hash={txnHash ?? ''}
+          content={() => (
+            <ConfirmationModalContent
+              title={<Trans>STAR Buy Back</Trans>}
+              onDismiss={handleDismissConfirmation}
+              topContent={modalHeader}
+              bottomContent={modalBottom}
+            />
+          )}
+          pendingText={pendingText}
+        />
         <Link to="/stake" style={{ transform: 'translateX(-40px)' }}>
           <StyledArrowLeft />
         </Link>
@@ -132,7 +182,7 @@ export default function BuyBack({ history }: RouteComponentProps) {
           <FarmRow>
             <RowFixed>
               <TYPE.black fontWeight={400} fontSize={14}>
-                <Trans>Begin Time</Trans>
+                <Trans>Start Time</Trans>
               </TYPE.black>
             </RowFixed>
             <RowFixed>
@@ -144,7 +194,7 @@ export default function BuyBack({ history }: RouteComponentProps) {
           <FarmRow>
             <RowFixed>
               <TYPE.black fontWeight={400} fontSize={14}>
-                <Trans>Interval Duration</Trans>
+                <Trans>Release interval time</Trans>
               </TYPE.black>
             </RowFixed>
             <RowFixed>
@@ -156,7 +206,7 @@ export default function BuyBack({ history }: RouteComponentProps) {
           <FarmRow style={{marginBottom: '10px'}}>
             <RowFixed>
               <TYPE.black fontWeight={400} fontSize={14}>
-                <Trans>Release STC Amount Per Time</Trans>
+                <Trans>STC Amount per release</Trans>
               </TYPE.black>
             </RowFixed>
             <RowFixed>
@@ -167,7 +217,7 @@ export default function BuyBack({ history }: RouteComponentProps) {
           </FarmRow>
           <FixedHeightRow>
             <Text fontSize={16} fontWeight={500}>
-              <Trans>Latest boughtback time</Trans>
+              <Trans>Last buyback time</Trans>
             </Text>
             <RowFixed>
               <Text fontSize={16} fontWeight={500}>
@@ -177,7 +227,7 @@ export default function BuyBack({ history }: RouteComponentProps) {
           </FixedHeightRow>
           <FixedHeightRow>
             <Text fontSize={16} fontWeight={500}>
-              <Trans>Next Release Time</Trans>
+              <Trans>As of next release time</Trans>
             </Text>
             <RowFixed>
               <Text fontSize={16} fontWeight={500}>
@@ -187,7 +237,7 @@ export default function BuyBack({ history }: RouteComponentProps) {
           </FixedHeightRow>
           <FixedHeightRow>
             <Text fontSize={16} fontWeight={500}>
-              <Trans>Next Release STC Amount</Trans>
+              <Trans>Available STC amount</Trans>
             </Text>
             <RowFixed>
               <Text fontSize={16} fontWeight={500}>
@@ -197,30 +247,18 @@ export default function BuyBack({ history }: RouteComponentProps) {
           </FixedHeightRow>
           <FixedHeightRow marginBottom={16}>
             <Text fontSize={16} fontWeight={500}>
-              <Trans>STAR For Next Buy Back</Trans>
+              <Trans>Estimated buyback STAR amount</Trans>
             </Text>
             <RowFixed>
               <Text fontSize={16} fontWeight={500}>
-              {info[8] / scalingFactor}
+              {(info[8] / scalingFactor).toFixed(5)}
               </Text>
             </RowFixed>
           </FixedHeightRow>
-          {loading && (
-            <ColumnCenter style={{ padding: '27px 32px' }}>
-              <CircularProgress
-                size={64}
-                sx={{
-                  marginTop: '10px',
-                  zIndex: 1,
-                }}
-              />
-            </ColumnCenter>
-          )}
           <ButtonBuyBack disabled={!!error} error={!!error} onClick={() => {
-              onClickConfirm();
-              setLoading(true);
+              setShowConfirm(true);
             }}>
-            {error ?? <Trans>Buy Back</Trans>}
+            {error ?? <Trans>Trigger buyback</Trans>}
           </ButtonBuyBack>
         </FarmCard>
       </AutoRow>
