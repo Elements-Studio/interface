@@ -53,6 +53,7 @@ export default function BuyBack({ history }: RouteComponentProps) {
   if (account) {
     address = account.toLowerCase();
   }
+  console.log({address})
   const [showConfirm, setShowConfirm] = useState(false)
   const [attemptingTxn, setAttemptingTxn] = useState(false)
   const [txnPending, setTxnPending] = useState(false)
@@ -97,6 +98,10 @@ export default function BuyBack({ history }: RouteComponentProps) {
   }
 
   let error: ReactNode | undefined
+  if (address === '') {
+    error = <Trans>Not connected to a wallet</Trans>
+  }
+
   if (info[0] === 0) {
     error = <Trans>Remaining STC amount is zero</Trans>
   }

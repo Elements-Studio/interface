@@ -409,6 +409,10 @@ msgid "Transaction is pending"
 msgstr "交易处理中"
 
 #: src/pages/Stake/BuyBack.tsx
+msgid "Not connected to a wallet"
+msgstr "没有连接钱包"
+
+#: src/pages/Stake/BuyBack.tsx
 msgid "Trigger buyback is successed"
 msgstr "触发回购成功"
 
