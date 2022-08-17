@@ -55,6 +55,7 @@ export default function BuyBack({ history }: RouteComponentProps) {
   }
   const [showConfirm, setShowConfirm] = useState(false)
   const [attemptingTxn, setAttemptingTxn] = useState(false)
+  const [txnPending, setTxnPending] = useState(false)
   const [txnHash, setTxnHash] = useState<string | undefined>()
 
   const info = useGetBuyBackInfo()
@@ -85,6 +86,7 @@ export default function BuyBack({ history }: RouteComponentProps) {
         data: payloadInHex,
       });
       setTxnHash(txnHash);
+      setTxnPending(true)
       setAttemptingTxn(false)
     } catch (error) {
       console.error(error);
@@ -98,13 +100,51 @@ export default function BuyBack({ history }: RouteComponentProps) {
   if (info[0] === 0) {
     error = <Trans>Remaining STC amount is zero</Trans>
   }
+
   const sinceLatest = (new Date().getTime() - info[4]*1000)/1000/60
   if (sinceLatest < 5.0) {
     error = error ?? <Trans>Interval time less than 5 min</Trans>
   }
+
+  if (txnPending) {
+    error = error ?? <Trans>Transaction is pending</Trans>
+  }
+
+  if (txnHash === '' && !txnPending) {
+    error = error ?? <Trans>Trigger buyback is successed</Trans>
+  }
+
+  const checkTxnStatus = useCallback(async (txnHash) => {
+      let starcoinProvider: any
+      try {
+        if (window.starcoin) {
+          starcoinProvider = new providers.Web3Provider(window.starcoin, 'any')
+        }
+      } catch (error) {
+        console.error(error)
+      }
+
+      const contractMethod = "chain.get_transaction_info";
+      let timing = setInterval(async function() {
+        await new Promise((resolve, reject) => {
+          return starcoinProvider
+            ?.send(contractMethod, [txnHash])
+            .then((result: number[]) => {
+              if (result) {
+                clearInterval(timing);
+                setTxnPending(false);
+              }
+            })
+        });
+      }, 3000);
+  }, [])  
   
   const handleDismissConfirmation = useCallback(() => {
     setShowConfirm(false)
+    // if there was a tx hash
+    if (txnHash) {
+      checkTxnStatus(txnHash)
+    }
     setTxnHash('')
   }, [txnHash])
 
