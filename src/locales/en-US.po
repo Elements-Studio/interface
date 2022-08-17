@@ -443,6 +443,14 @@ msgstr "Buy Back"
 msgid "Trigger buyback"
 msgstr "Trigger buyback"
 
+#: src/pages/Stake/BuyBack.tsx
+msgid "Transaction is pending"
+msgstr "Transaction is pending"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Trigger buyback is successed"
+msgstr "Trigger buyback is successed"
+
 #: src/components/PositionCard/index.tsx
 msgid "By adding liquidity you'll earn {feePercent}% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
 msgstr "By adding liquidity you'll earn {feePercent}% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."

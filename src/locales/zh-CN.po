@@ -404,6 +404,14 @@ msgstr "回购"
 msgid "Trigger buyback"
 msgstr "触发回购"
 
+#: src/pages/Stake/BuyBack.tsx
+msgid "Transaction is pending"
+msgstr "交易处理中"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Trigger buyback is successed"
+msgstr "触发回购成功"
+
 #: src/components/PositionCard/index.tsx
 msgid "By adding liquidity you'll earn {feePercent}% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
 msgstr "通过注入流动资金，您将按您在流动池中所占份额赚取对应交易量的{feePercent}%手续费。手续费将实时累计，添加到流动池中，您可以通过赎回您的流动资金将手续费也赎回。"
