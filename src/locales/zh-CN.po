@@ -338,7 +338,7 @@ msgid "Balance: {0} {1}"
 msgstr "余额：{0} {1}"
 
 #: src/pages/Stake/BuyBack.tsx
-msgid "Begin Time"
+msgid "Start Time"
 msgstr "起始时间"
 
 #: src/components/FeeSelector/index.tsx
@@ -396,10 +396,13 @@ msgstr "加速的vsSTAR数量"
 msgid "Bridge"
 msgstr "跨链桥"
 
-#: src/pages/Stake/BuyBack.tsx
 #: src/pages/Stake/index.tsx
 msgid "Buy Back"
 msgstr "回购"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Trigger buyback"
+msgstr "触发回购"
 
 #: src/components/PositionCard/index.tsx
 msgid "By adding liquidity you'll earn {feePercent}% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
@@ -1042,7 +1045,7 @@ msgid "Interface Settings"
 msgstr "界面设置"
 
 #: src/pages/Stake/BuyBack.tsx
-msgid "Interval Duration"
+msgid "Release interval time"
 msgstr "间隔时间"
 
 #: src/pages/Stake/BuyBack.tsx
@@ -1080,7 +1083,7 @@ msgid "LP Token Staking Status"
 msgstr "流动性代币质押状态"
 
 #: src/pages/Stake/BuyBack.tsx
-msgid "Latest boughtback time"
+msgid "Last buyback time"
 msgstr "最后回购时间"
 
 #: src/pages/Pool/index.tsx
@@ -1260,12 +1263,12 @@ msgid "New Position"
 msgstr "新仓位"
 
 #: src/pages/Stake/BuyBack.tsx
-msgid "Next Release STC Amount"
-msgstr "本轮释放STC额度"
+msgid "Available STC amount"
+msgstr "可用于回购的STC"
 
 #: src/pages/Stake/BuyBack.tsx
-msgid "Next Release Time"
-msgstr "本轮释放时间"
+msgid "As of next release time"
+msgstr "截至下次释放时间"
 
 #: src/pages/Stake/TokenStake.tsx
 msgid "No Staking"
@@ -1539,7 +1542,7 @@ msgid "Register"
 msgstr ""
 
 #: src/pages/Stake/BuyBack.tsx
-msgid "Release STC Amount Per Time"
+msgid "STC Amount per release"
 msgstr "每次释放STC"
 
 #: src/pages/Stake/BuyBack.tsx
@@ -1625,8 +1628,8 @@ msgid "STAR Earned"
 msgstr ""
 
 #: src/pages/Stake/BuyBack.tsx
-msgid "STAR For Next Buy Back"
-msgstr "本轮购买所需STAR"
+msgid "Estimated buyback STAR amount"
+msgstr "预计回购的STAR"
 
 #: src/pages/Stake/index.tsx
 msgid "STAR Stake APR Formula"
@@ -1987,7 +1990,7 @@ msgstr "较活跃的流动池"
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "Total STC Amount"
-msgstr "总额STC"
+msgstr "STC总额"
 
 #: src/pages/Stake/index.tsx
 msgid "Total Stake Amount"
