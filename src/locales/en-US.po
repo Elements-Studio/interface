@@ -448,6 +448,10 @@ msgid "Transaction is pending"
 msgstr "Transaction is pending"
 
 #: src/pages/Stake/BuyBack.tsx
+msgid "Not connected to a wallet"
+msgstr "Not connected to a wallet"
+
+#: src/pages/Stake/BuyBack.tsx
 msgid "Trigger buyback is successed"
 msgstr "Trigger buyback is successed"
 
