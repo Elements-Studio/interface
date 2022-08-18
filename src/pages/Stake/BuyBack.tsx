@@ -117,6 +117,7 @@ export default function BuyBack({ history }: RouteComponentProps) {
 
   if (txnHash === '' && !txnPending) {
     error = error ?? <Trans>Trigger buyback is successed</Trans>
+    setTimeout('window.location.reload()', 2000)
   }
 
   const checkTxnStatus = useCallback(async (txnHash) => {
