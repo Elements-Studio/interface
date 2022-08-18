@@ -149,8 +149,8 @@ export default function BuyBack({ history }: RouteComponentProps) {
     // if there was a tx hash
     if (txnHash) {
       checkTxnStatus(txnHash)
+      setTxnHash('')
     }
-    setTxnHash('')
   }, [txnHash])
 
   const pendingText = <Trans>Trigger buyback</Trans>
