@@ -172,9 +172,9 @@ export default function FarmStake({
               <TYPE.body color={'#FE7F8D'} fontSize={16} style={{ marginTop: '16px' }}>
                 {
                   hasAccount ? (
-                    <BalanceText style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                    <Text style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
                       {starBalance ? (Number(starBalance) / starScalingFactor) : 0}
-                    </BalanceText>
+                    </Text>
                   ) : null
                 }
               </TYPE.body>
@@ -183,9 +183,9 @@ export default function FarmStake({
                 onClick={() => { setStakeDialogOpen(true) }} 
               >
                 <TYPE.main color={'#FE7F8D'}>
-                  <BalanceText color={'#fff'} style={{ flexShrink: 0}} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                  <Text color={'#fff'} style={{ flexShrink: 0}} pl="0.75rem" pr="0.5rem" fontWeight={500}>
                     <Trans>Stake</Trans>
-                  </BalanceText>
+                  </Text>
                 </TYPE.main>
               </ButtonFarm>
             </AutoColumn>

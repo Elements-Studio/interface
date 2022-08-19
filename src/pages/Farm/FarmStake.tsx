@@ -221,9 +221,9 @@ export default function FarmStake({
               </TYPE.body>
               <TYPE.body color={'#FE7F8D'} fontSize={16} style={{ marginTop: '16px' }}>
                 {hasAccount ? (
-                  <BalanceText style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                  <Text style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
                     {tbdGain / tbdScalingFactor}
-                  </BalanceText>
+                  </Text>
                 ) : null}
               </TYPE.body>
               <ButtonFarm
@@ -234,9 +234,9 @@ export default function FarmStake({
                 }}
               >
                 <TYPE.main color={'#FE7F8D'}>
-                  <BalanceText color={'#fff'} style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                  <Text color={'#fff'} style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
                     <Trans>Harvest</Trans>
-                  </BalanceText>
+                  </Text>
                 </TYPE.main>
               </ButtonFarm>
             </AutoColumn>
@@ -309,10 +309,10 @@ export default function FarmStake({
                 </TYPE.body>
                 <TYPE.body color={'#FE7F8D'} fontSize={16} style={{ marginTop: '16px' }}>
                   {hasAccount ? (
-                    <BalanceText style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                    <Text style={{ flexShrink: 0, fontSize: '1.5em' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
                       {boostFactor}
                       <Trans>x</Trans>
-                    </BalanceText>
+                    </Text>
                   ) : null}
                 </TYPE.body>
                 <ButtonFarm
@@ -323,9 +323,9 @@ export default function FarmStake({
                   }}
                 >
                   <TYPE.main color={'#FE7F8D'}>
-                    <BalanceText color={'#fff'} style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                    <Text color={'#fff'} style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
                       <Trans>Boost</Trans>
-                    </BalanceText>
+                    </Text>
                   </TYPE.main>
                 </ButtonFarm>
                 <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
