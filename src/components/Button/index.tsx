@@ -323,6 +323,8 @@ export const ButtonFarm = styled(Base)`
   &:disabled {
     opacity: 50%;
     cursor: auto;
+    box-shadow: none;
+    background-color: ${({ theme }) => theme.red1};
   }
 `
 
