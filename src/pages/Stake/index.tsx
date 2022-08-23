@@ -325,9 +325,14 @@ export default function Farm({ history }: RouteComponentProps) {
                     <Trans>Stake</Trans>
                   </TYPE.main>
                 </ButtonFarm>
-                <TYPE.body fontSize={12} style={{ marginTop: '12px' }}>
+                <TYPE.body fontSize={12} style={{ marginTop: '12px', display: 'inline-flex' }}>
                   <Link to={`/stake/simulator`}>
                     <Trans>Boost Simulator</Trans>
+                  </Link>
+                </TYPE.body>
+                <TYPE.body fontSize={12} style={{ margin: '12px 0 0 24px', display: 'inline-flex' }}>
+                  <Link to={`/stake/buyBack`}>
+                    <Trans>Buy Back</Trans>
                   </Link>
                 </TYPE.body>
               </FarmCard>
