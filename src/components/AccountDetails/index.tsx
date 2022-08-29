@@ -10,7 +10,8 @@ import Copy from './Copy'
 import Transaction from './Transaction'
 
 import { ReactComponent as Close } from '../../assets/images/x.svg'
-import { injected, walletconnect, walletlink, fortmatic, portis } from '../../connectors'
+import { injected, openblock, walletconnect, walletlink, fortmatic, portis } from '../../connectors'
+import OpenBlockIcon from '../../assets/images/openblock.png'
 import CoinbaseWalletIcon from '../../assets/images/coinbaseWalletIcon.svg'
 import WalletConnectIcon from '../../assets/images/walletConnectIcon.svg'
 import FortmaticIcon from '../../assets/images/fortmaticIcon.png'
@@ -229,8 +230,9 @@ export default function AccountDetails({
   const dispatch = useAppDispatch()
 
   function formatConnectorName() {
-    const { starcoin } = window
+    const { starcoin, obstarcoin } = window
     const isStarMask = !!(starcoin && starcoin.isStarMask)
+    const isOpenBlock = !!(obstarcoin && obstarcoin.isStarMask)
     const name = Object.keys(SUPPORTED_WALLETS)
       .filter(
         (k) =>
@@ -249,6 +251,12 @@ export default function AccountDetails({
       return (
         <IconWrapper size={16}>
           <Identicon />
+        </IconWrapper>
+      )
+    } else if (connector === openblock) {
+      return (
+        <IconWrapper size={16}>
+          <img src={OpenBlockIcon} alt={'OpenBlock logo'} />
         </IconWrapper>
       )
     } else if (connector === walletconnect) {
@@ -307,7 +315,7 @@ export default function AccountDetails({
               <AccountGroupingRow>
                 {formatConnectorName()}
                 <div>
-                  {connector !== injected && connector !== walletlink && (
+                  {connector !== injected && connector !== openblock && connector !== walletlink && (
                     <WalletAction
                       style={{ fontSize: '.825rem', fontWeight: 400, marginRight: '8px' }}
                       onClick={() => {

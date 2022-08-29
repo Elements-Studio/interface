@@ -13,6 +13,12 @@ interface Window {
     removeListener?: (...args: any[]) => void
     autoRefreshOnNetworkChange?: boolean
   }
+  obstarcoin?: {
+    isStarMask?: true
+    on?: (...args: any[]) => void
+    removeListener?: (...args: any[]) => void
+    autoRefreshOnNetworkChange?: boolean
+  }
   web3?: Record<string, unknown>
 }
 

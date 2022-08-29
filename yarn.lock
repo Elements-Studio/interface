@@ -3728,10 +3728,19 @@
     tiny-invariant "^1.0.6"
     tiny-warning "^1.0.3"
 
-"@starcoin/starswap-web3-injected-connector@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@starcoin/starswap-web3-injected-connector/-/starswap-web3-injected-connector-0.1.0.tgz#501f35f9e9962e1b8b9d22a6cafc0a8284e100ce"
-  integrity sha512-rg1QiiFRj0U1NjBdA+shU4iGDRJ3TaxiY4K6uk5jMXAsFxRTj2RxPJAjJqdc8KyBvMvq/4OVqmz/bLJzbDE/Vw==
+"@starcoin/starswap-web3-injected-connector@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@starcoin/starswap-web3-injected-connector/-/starswap-web3-injected-connector-0.2.0.tgz#3d21436524dcfb2a2a60ece5e68eecd0ada1f2dc"
+  integrity sha512-kNTI+utCMKgX2u+iHlC5YJGDVHK/Jk/q0iGYFFtakkp+3RulPSKitc7cfxb4bKXylv2pyoU/FgX+5Vk2RjEyHg==
+  dependencies:
+    "@web3-react/abstract-connector" "^6.0.7"
+    "@web3-react/types" "^6.0.7"
+    tiny-warning "^1.0.3"
+
+"@starcoin/starswap-web3-openblock-connector@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@starcoin/starswap-web3-openblock-connector/-/starswap-web3-openblock-connector-0.1.1.tgz#81c7b7e92071cf649c8ce9a1c739e8e7d8912ade"
+  integrity sha512-9v+9H9Kd2HvEAB+CUOpUhYHFreVBLsWpJv0xDKvJkk83R1Pb5zqKptNiwaSgApqdzyz/xir6WPSOq1XFETZDxg==
   dependencies:
     "@web3-react/abstract-connector" "^6.0.7"
     "@web3-react/types" "^6.0.7"
