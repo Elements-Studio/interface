@@ -2597,6 +2597,22 @@ msgstr "Your veSTAR Estimated = Your Locked STAR * Duration / (365 * 2)"
 msgid "confirm"
 msgstr "confirm"
 
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "Confirm"
+msgstr "Confirm"
+
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "Insufficient amount"
+msgstr "Insufficient amount"
+
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "Enter number"
+msgstr "Enter number"
+
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "Invalid type"
+msgstr "Invalid type"
+
 #: src/components/claim/AddressClaimModal.tsx
 msgid "for {0}"
 msgstr "for {0}"

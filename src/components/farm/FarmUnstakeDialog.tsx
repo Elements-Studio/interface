@@ -155,9 +155,59 @@ export default function FarmUnstakeDialog({
     }
     return false;
   }
+
+  const checkUnstakeNumber = useCallback(() => {
+    if (unstakeNumber === '') {
+      return {
+        isPass: false,
+        message: <Trans>Enter number</Trans>
+      }
+    }
+    const number = new BigNumber(unstakeNumber)
+
+    if (number.isNaN()) {
+      return {
+        isPass: false,
+        message: <Trans>Invalid type</Trans>
+      }
+    }
+    if (number.isZero()) {
+      return {
+        isPass: false,
+        message: <Trans>Enter number</Trans>
+      }
+    }
+    if (number.isNegative()) {
+      return {
+        isPass: false,
+        message: <Trans>Invalid type</Trans>
+      }
+    }
+
+    return {
+      isPass: true,
+      message: <Trans>Confirm</Trans>
+    }
+  }, [unstakeNumber, userStaked, lpTokenScalingFactor])
+
+  const getButtonText = useCallback(() => {
+    const checkRet = checkUnstakeNumber();
+
+    if (!checkRet.isPass) {
+      return checkRet.message;
+    }
+
+    return unstakeNumber === ''
+                  ? <Trans>Enter number</Trans>
+                  : (userStaked / lpTokenScalingFactor) < unstakeNumber
+                  ? <Trans>Insufficient amount</Trans>
+                  : <Trans>Confirm</Trans>
+  }, [unstakeNumber, userStaked, lpTokenScalingFactor]);
  
+
+  
   return (
-    <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={theme.bgCard}>
+    <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={theme.bgCard} maxWidth={550}>
       <ColumnCenter style={{ padding: '27px 32px' }}>
         <AutoRow>
           <TYPE.black fontWeight={500} fontSize={20}>
@@ -207,6 +257,7 @@ export default function FarmUnstakeDialog({
             </TYPE.black>
           </ButtonBorder>
           <ButtonFarm
+            disabled={((userStaked / lpTokenScalingFactor) < unstakeNumber) || unstakeNumber === '' || checkUnstakeNumber().isPass === false}
             onClick={() => {
               onClickUnstakeConfirm()
               setTimeout(onDismiss, 2500)
@@ -214,7 +265,7 @@ export default function FarmUnstakeDialog({
             }}
           >
             <TYPE.main color={'#fff'}>
-              <Trans>Confirm</Trans>
+              <Trans>{getButtonText()}</Trans>
             </TYPE.main>
           </ButtonFarm>
         </RowBetween>

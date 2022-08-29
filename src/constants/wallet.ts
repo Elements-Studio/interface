@@ -3,10 +3,11 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 // import COINBASE_ICON_URL from '../assets/images/coinbaseWalletIcon.svg'
 // import FORTMATIC_ICON_URL from '../assets/images/fortmaticIcon.png'
 import STARMASK_ICON_URL from '../assets/images/starmask.png'
-import OPENBLOCK_ICON_URL from '../assets/images/openblockgs.png'
+import ONEKEY_ICON_URL from '../assets/images/onekey.png'
+import OPENBLOCK_ICON_URL from '../assets/images/openblock.png'
 // import PORTIS_ICON_URL from '../assets/images/portisIcon.png'
 // import WALLETCONNECT_ICON_URL from '../assets/images/walletConnectIcon.svg'
-import { fortmatic, injected, openblock, portis, walletconnect, walletlink } from '../connectors'
+import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
 
 export interface WalletInfo {
   connector?: AbstractConnector
@@ -46,14 +47,14 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
   //   href: null,
   //   color: '#E8831D',
   // },
-  OPENBLOCK: {
-    connector: openblock,
-    name: 'OpenBlock',
-    iconURL: OPENBLOCK_ICON_URL,
-    description: 'Easy-to-use browser extension.',
-    href: null,
-    color: '#E8831D',
-  },
+  // OPENBLOCK: {
+  //   connector: injected,
+  //   name: 'OpenBlock',
+  //   iconURL: OPENBLOCK_ICON_URL,
+  //   description: 'Easy-to-use browser extension.',
+  //   href: null,
+  //   color: '#E8831D',
+  // },
   // WALLET_CONNECT: {
   //   connector: walletconnect,
   //   name: 'WalletConnect',
