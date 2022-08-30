@@ -3716,10 +3716,10 @@
     tiny-invariant "^1.1.0"
     tiny-warning "^1.0.3"
 
-"@starcoin/starswap-web3-core@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/@starcoin/starswap-web3-core/-/starswap-web3-core-0.2.1.tgz#080127699790b7d9581994552202e33d57b621f0"
-  integrity sha512-s7rSC1ycOiO5JKPIZ5xXgvlNSTWduull+hidO107eeE+lM6/4JQjxJHaACNyZbolDWHCFuYYboadh3u0JUlfrQ==
+"@starcoin/starswap-web3-core@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@starcoin/starswap-web3-core/-/starswap-web3-core-0.3.0.tgz#aa7c18a6b082ed7029091d136267e642283b54a6"
+  integrity sha512-ctKFtyW1xeooBeb0y/K37Np0EyfDLl/sHYKrPJ86gIeZhSpTd2FdRG74oQ29Qa8KlAPas/nluYQA3UPDif0VkQ==
   dependencies:
     "@ethersproject/keccak256" "^5.0.0-beta.130"
     "@starcoin/stc-util" "^0.4.1"

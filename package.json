@@ -23,7 +23,7 @@
     "@starcoin/starcoin": "^2.1.0",
     "@starcoin/starswap-sdk-core": "^0.3.0",
     "@starcoin/starswap-v2-sdk": "^0.2.4",
-    "@starcoin/starswap-web3-core": "^0.2.1",
+    "@starcoin/starswap-web3-core": "^0.3.0",
     "@starcoin/starswap-web3-injected-connector": "^0.2.0",
     "@starcoin/starswap-web3-openblock-connector": "^0.1.1",
     "@starcoin/stc-util": "^0.4.1",
@@ -128,7 +128,7 @@
     "compile-contract-types": "exit 0",
     "compile-external-abi-types": "typechain --target ethers-v5 --out-dir src/abis/types './src/abis/**/*.json'",
     "compile-v3-contract-types": "typechain --target ethers-v5 --out-dir src/types/v3 './node_modules/@uniswap/?(v3-core|v3-periphery)/artifacts/contracts/**/*.json'",
-    "build": "yarn compile-contract-types && yarn graphql:generate && yarn i18n:extract && yarn i18n:compile && react-scripts build",
+    "build": "yarn compile-contract-types && yarn i18n:extract && yarn i18n:compile && react-scripts build",
     "i18n:extract": "yarn lingui extract --locale en-US && yarn lingui extract --locale zh-CN",
     "i18n:compile": "lingui compile",
     "integration-test": "start-server-and-test 'serve build -l 3000' http://localhost:3000 'cypress run --record'",
@@ -136,7 +136,7 @@
     "postinstall": "yarn compile-contract-types",
     "start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
-    "prestart": "yarn graphql:generate && touch src/locales/en-US.po"
+    "prestart": "touch src/locales/en-US.po"
   },
   "eslintConfig": {
     "extends": "react-app",
