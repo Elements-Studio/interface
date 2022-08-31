@@ -3639,10 +3639,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@starcoin/providers@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@starcoin/providers/-/providers-0.1.2.tgz#f9ef69ffaef774c2d3a58f514cfe1af6c17b91e4"
-  integrity sha512-cqIJzssoSRFl2bInvg/iKK/v852ZWoMTuP+5iuxTsTOeYp6Ei8wBke8jMozikFt6rnOonDzEfCipCaVsyTUJRQ==
+"@starcoin/providers@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@starcoin/providers/-/providers-0.1.4.tgz#92afd07e259344186d10353dd5c51cd4f5f55116"
+  integrity sha512-aeDOacKUnwT05aQSVHFBnZ06owvTXFWZXRjPdNKN7v7Iun6TOW4CQgv4M+EpqDqtOMnDvBlE4DjkSLxs2In4PQ==
   dependencies:
     "@ethersproject/abstract-provider" "^5.2.0"
     "@ethersproject/abstract-signer" "^5.2.0"
