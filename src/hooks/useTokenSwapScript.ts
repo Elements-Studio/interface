@@ -42,6 +42,7 @@ export function useRegisterSwapPair(signer?: string) {
  * 通过指定换入的代币额度来置换代币
  */
 export function useSwapExactTokenForToken(signer?: string) {
+  console.log('useSwapExactTokenForToken1')
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
   return useCallback(
@@ -60,6 +61,8 @@ export function useSwapExactTokenForToken(signer?: string) {
 
       const args = [arrayify(serializeU128(amount_x_in)), arrayify(serializeU128(amount_y_out_min))]
       const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
+      console.log('scriptFunction1', { scriptFunction })
+      console.log(serializeScriptFunction(scriptFunction))
       const transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
         data: serializeScriptFunction(scriptFunction),
         expiredSecs,
@@ -74,6 +77,7 @@ export function useSwapExactTokenForToken(signer?: string) {
  * 通过指定换出的代币额度来置换代币
  */
 export function useSwapTokenForExactToken(signer?: string) {
+  console.log('useSwapTokenForExactToken2')
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
   return useCallback(
@@ -91,6 +95,8 @@ export function useSwapTokenForExactToken(signer?: string) {
       }
       const args = [arrayify(serializeU128(amount_x_in_max)), arrayify(serializeU128(amount_y_out))]
       const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
+      console.log('scriptFunction2', { scriptFunction })
+      console.log(serializeScriptFunction(scriptFunction))
       const transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
         data: serializeScriptFunction(scriptFunction),
         expiredSecs,
