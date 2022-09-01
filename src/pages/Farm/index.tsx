@@ -5,7 +5,7 @@ import { Text } from 'rebass'
 import QuestionHelper from '../../components/QuestionHelper'
 import { AutoRow, RowFixed, RowBetween } from '../../components/Row'
 import { TYPE } from '../../theme'
-import { ButtonFarm } from '../../components/Button'
+import { ButtonFarm, ButtonLight } from '../../components/Button'
 import { AutoColumn } from '../../components/Column'
 import FarmTitle from '../../components/farm/FarmTitle'
 import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
@@ -14,6 +14,7 @@ import CurrencyLogo from '../../components/CurrencyLogo'
 import { COMMON_BASES } from '../../constants/routing'
 import { unwrappedToken } from '../../utils/unwrappedToken'
 import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
+import { useWalletModalToggle } from '../../state/application/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import axios from 'axios';
@@ -41,7 +42,8 @@ const FarmRow = styled(RowBetween)`
 export default function Farm({ history }: RouteComponentProps) {
   const { account, chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
-
+  // toggle wallet when disconnected
+  const toggleWalletModal = useWalletModalToggle()
   const darkMode = useIsDarkMode();
 
   const lpTokenScalingFactor = 1000000000;
@@ -187,17 +189,21 @@ export default function Farm({ history }: RouteComponentProps) {
                   />
                 </RowFixed>
               </FixedHeightRow>
-              <ButtonFarm as={Link}
-                to={(window.starcoin && account)? `/farm/${token0.symbol}/${token1.symbol}` : `/farm`}
-                onClick={() => {
-                  if (!(window.starcoin && account)) {
-                    alert('Please Connect StarMask Wallet First! \n请先链接StarMask钱包');
-                  }
-              }}>
-                <TYPE.main color={'#fff'}>
-                  <Trans>Stake</Trans>
-                </TYPE.main>
-              </ButtonFarm>
+              {
+                !account ? (
+                  <ButtonLight onClick={toggleWalletModal}>
+                    <Trans>Connect Wallet</Trans>
+                  </ButtonLight>
+                ): (
+                  <ButtonFarm as={Link}
+                    to={account ? `/farm/${token0.symbol}/${token1.symbol}` : `/farm`}
+                   >
+                    <TYPE.main color={'#fff'}>
+                      <Trans>Stake</Trans>
+                    </TYPE.main>
+                  </ButtonFarm>
+                )
+              }
             </FarmCard>
           )
         }) : null}
