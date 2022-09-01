@@ -6,15 +6,17 @@ import { useActiveWeb3React } from './web3'
 
 export function useStarcoinProvider(): providers.Web3Provider | providers.JsonRpcProvider {
   const { chainId } = useActiveWeb3React()
-  const provider = window.starcoin ? window.starcoin : window.obstarcoin
+  let provider: any
+  if (window.starcoin && window.starcoin.chainId) {
+    provider = window.starcoin
+  } else if (window.obstarcoin && window.obstarcoin.chainId) {
+    provider = window.obstarcoin
+  }
   return useMemo(() => {
     try {
-      const provider = window.starcoin ? window.starcoin : window.obstarcoin
-      console.log('11 useStarcoinProvider', 'window.starcoin=', window.starcoin, 'window.obstarcoin=', window.obstarcoin, { provider })
       // We must specify the network as 'any' for starcoin to allow network changes
       return new providers.Web3Provider(provider!, 'any')
     } catch {
-      console.error('providers.Web3Provider is not ok, use providers.JsonRpcProvider')
       return new providers.JsonRpcProvider(NETWORK_URLS[chainId as SupportedChainId])
     }
   }, [chainId, provider])
