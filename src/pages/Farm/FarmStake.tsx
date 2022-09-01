@@ -249,7 +249,7 @@ export default function FarmStake({
                   size={'48px'}
                   style={{ marginRight: '1.25rem', borderRadius: '8px' }}
                 />
-                <CurrencyLogo currency={currency1} size={'48px'} style={{ borderRadius: '8px;' }} />
+                <CurrencyLogo currency={currency1} size={'48px'} style={{ borderRadius: '8px' }} />
               </RowFixed>
               <TYPE.body fontSize={24} style={{ marginTop: '24px' }}>
                 {tokenX}/{tokenY}
