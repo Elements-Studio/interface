@@ -80,7 +80,7 @@ function TopLevelModals() {
 export default function App() {
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = `https://obstatic.243096.com/download/dapp/sdk/index.js?t=${ new Date().toLocaleString().replaceAll(' ','') }`;
+    script.src = `https://obstatic.243096.com/download/dapp/sdk/index.js?t=083101`;
     script.async = true;
     document.body.appendChild(script);
     return () => {
