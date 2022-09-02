@@ -1,21 +1,13 @@
 import { useEffect, useState, useCallback } from 'react'
-import { providers } from '@starcoin/starcoin'
+import { useStarcoinProvider } from './useStarcoinProvider';
 
 export default function useGetLockedAmount(tokenX: string, tokenY: string, accountAddress: string): number {
   let _tokenX = tokenX;
   let _tokenY = tokenY;
   const [ret, setRet] = useState<number>(0)
+  const starcoinProvider = useStarcoinProvider()
+
   const contractSend = useCallback(async () => {
-    let starcoinProvider: any
-
-    try {
-      if (window.starcoin) {
-        starcoinProvider = new providers.Web3Provider(window.starcoin, 'any')
-      }
-    } catch (error) {
-      console.error(error)
-    }
-
     if (_tokenY.indexOf('STC') === -1) {
       const _temp = tokenY
       _tokenY = _tokenX
@@ -40,7 +32,7 @@ export default function useGetLockedAmount(tokenX: string, tokenY: string, accou
           setRet(result[0] || 0)
         })
     })
-  }, [tokenX, tokenY, accountAddress]);
+  }, [tokenX, tokenY, accountAddress, starcoinProvider]);
 
   useEffect(() => {
     contractSend()

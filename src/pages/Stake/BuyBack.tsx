@@ -53,7 +53,6 @@ export default function BuyBack({ history }: RouteComponentProps) {
   if (account) {
     address = account.toLowerCase();
   }
-  console.log({address})
   const [showConfirm, setShowConfirm] = useState(false)
   const [attemptingTxn, setAttemptingTxn] = useState(false)
   const [txnPending, setTxnPending] = useState(false)
@@ -121,15 +120,6 @@ export default function BuyBack({ history }: RouteComponentProps) {
   }
 
   const checkTxnStatus = useCallback(async (txnHash) => {
-      let starcoinProvider: any
-      try {
-        if (window.starcoin) {
-          starcoinProvider = new providers.Web3Provider(window.starcoin, 'any')
-        }
-      } catch (error) {
-        console.error(error)
-      }
-
       const contractMethod = "chain.get_transaction_info";
       let timing = setInterval(async function() {
         await new Promise((resolve, reject) => {
@@ -143,7 +133,7 @@ export default function BuyBack({ history }: RouteComponentProps) {
             })
         });
       }, 3000);
-  }, [])  
+  }, [starcoinProvider])  
   
   const handleDismissConfirmation = useCallback(() => {
     setShowConfirm(false)

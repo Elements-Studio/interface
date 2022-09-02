@@ -7,7 +7,6 @@ import { PortisConnector } from '@web3-react/portis-connector'
 import { SupportedChainId } from '../constants/chains'
 import getLibrary from '../utils/getLibrary'
 
-import { useActiveWeb3React } from '../hooks/web3'
 import { FortmaticConnector } from './Fortmatic'
 import { NetworkConnector } from './NetworkConnector'
 import UNISWAP_LOGO_URL from '../assets/svg/logo.svg'
@@ -56,13 +55,10 @@ export function getNetworkLibrary(): Web3Provider {
 }
 
 export function getStarcoin(connector: any): any {
-  console.log('getStarcoin', { connector })
   if (connector instanceof InjectedConnector) {
-    console.log('instanceof InjectedConnector')
     return window.starcoin
   }
   if (connector instanceof OpenBlockConnector) {
-    console.log('instanceof OpenBlockConnector')
     return window.obstarcoin
   }
   return undefined

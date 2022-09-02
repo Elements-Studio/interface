@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback } from 'react'
-import { providers } from '@starcoin/starcoin'
 import BigNumber from 'bignumber.js';
-
+import { useStarcoinProvider } from './useStarcoinProvider';
 
 export default function useComputeBoostFactor(
   lockedAmount: BigNumber | number,
@@ -9,22 +8,13 @@ export default function useComputeBoostFactor(
   totalFarmAmount: BigNumber | number
 ): number {
   const [ret, setRet] = useState<number>(100)
+  const starcoinProvider = useStarcoinProvider()
   const contractSend = useCallback(async () => {
-    let starcoinProvider: any
-
-    try {
-      if (window.starcoin) {
-        starcoinProvider = new providers.Web3Provider(window.starcoin, 'any')
-      }
-    } catch (error) {
-      console.error(error)
-    }
-
     if (lockedAmount && lockedFarmAmount && totalFarmAmount) {
       const contractMethod = 'contract.call_v2'
       const functionId = '0x8c109349c6bd91411d6bc962e080c4a3::Boost::compute_boost_factor'
       const tyArgs: any[] = []
-      const args: any[] = [`${lockedAmount}u128`, `${lockedFarmAmount}u128`, `${totalFarmAmount}u128`]
+      const args: any[] = [`${ lockedAmount }u128`, `${ lockedFarmAmount }u128`, `${ totalFarmAmount }u128`]
 
       await new Promise((resolve, reject) => {
         return starcoinProvider
@@ -40,7 +30,7 @@ export default function useComputeBoostFactor(
           })
       })
     }
-  }, [lockedAmount, lockedFarmAmount, totalFarmAmount])
+  }, [lockedAmount, lockedFarmAmount, totalFarmAmount, starcoinProvider])
 
   useEffect(() => {
     contractSend()

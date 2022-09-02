@@ -8,7 +8,7 @@ import ReactGA from 'react-ga'
 import styled from 'styled-components/macro'
 import StarmaskIcon from '../../assets/images/starmask.png'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
-import { fortmatic, injected, portis } from '../../connectors'
+import { fortmatic, injected } from '../../connectors'
 import { OVERLAY_READY } from '../../connectors/Fortmatic'
 import { SUPPORTED_WALLETS } from '../../constants/wallet'
 import usePrevious from '../../hooks/usePrevious'
@@ -201,16 +201,24 @@ export default function WalletModal({
 
   // get wallets user can switch too, depending on device/browser
   function getOptions() {
-    const isStarMask = window.starcoin && window.starcoin.isStarMask
+    const isStarMask = window.starcoin?.isStarMask || window.obstarcoin?.isStarMask 
     return Object.keys(SUPPORTED_WALLETS).map((key) => {
       const option = SUPPORTED_WALLETS[key]
       // check for mobile options
       if (isMobile) {
-        //disable portis on mobile for now
-        if (option.connector === portis) {
-          return null
-        }
-        if (window.starcoin) {
+        if (option.connector === injected && !window.starcoin) {
+          return (
+            <Option
+              id={`connect-${key}`}
+              key={key}
+              color={'#E8831D'}
+              header={<Trans>Install StarMask</Trans>}
+              subheader={null}
+              link={'https://github.com/starcoinorg/starmask-extension'}
+              icon={StarmaskIcon}
+            />
+          )
+        } else {
           return (
             <Option
               onClick={() => {
@@ -226,21 +234,8 @@ export default function WalletModal({
               icon={option.iconURL}
             />
           )
-        } else {
-          return (
-            <Option
-              id={`connect-${key}`}
-              key={key}
-              color={'#E8831D'}
-              header={<Trans>Install StarMask</Trans>}
-              subheader={null}
-              link={'https://github.com/starcoinorg/starmask-extension'}
-              icon={StarmaskIcon}
-            />
-          )
         }
       }
-
       // overwrite injected when needed
       if (option.connector === injected) {
         // don't show injected if there's no injected provider

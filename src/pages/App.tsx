@@ -37,6 +37,8 @@ import { PositionPage } from './Pool/PositionPage'
 import AddLiquidity from './AddLiquidity'
 import ApeModeQueryParamReader from 'hooks/useApeModeQueryParamReader'
 import CreateProposal from './CreateProposal'
+import { useActiveWeb3React } from '../hooks/web3'
+import { getStarcoin } from '../connectors'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -78,6 +80,14 @@ function TopLevelModals() {
 }
 
 export default function App() {
+  const { connector } = useActiveWeb3React()
+  const starcoin = getStarcoin(connector)
+  useEffect(() => {
+    if (!!starcoin) {
+      starcoin.autoRefreshOnNetworkChange = false
+    }
+  }, [starcoin]);
+
   useEffect(() => {
     const script = document.createElement('script');
     // script.src = `https://obstatic.243096.com/download/dapp/sdk/index.js?t=083101`;

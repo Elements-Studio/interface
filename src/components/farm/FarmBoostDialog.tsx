@@ -142,7 +142,6 @@ export default function FarmUnstakeDialog({
       setLoading(true)
       setInterval(async () => {
         const txnInfo = await starcoinProvider.getTransactionInfo(response)
-        console.log({ txnInfo })
         if (txnInfo.status === 'Executed') {
           setLoading(false)
           onDismiss()

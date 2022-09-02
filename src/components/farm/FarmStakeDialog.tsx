@@ -152,11 +152,9 @@ export default function FarmStakeDialog({
       const response = await starcoinProvider.getSigner().sendUncheckedTransaction({
         data: payloadInHex,
       });
-      console.log({ response });
       setLoading(true);
       setInterval(async () => {
         const txnInfo = await starcoinProvider.getTransactionInfo(response);
-        console.log({txnInfo})
         if (txnInfo.status === 'Executed') {
           setLoading(false);
           onDismiss();

@@ -3,7 +3,7 @@ import { useWeb3React as useWeb3ReactCore } from '@starcoin/starswap-web3-core'
 import { Web3ReactContextInterface } from '@starcoin/starswap-web3-core/dist/types'
 import { useEffect, useState } from 'react'
 import { isMobile } from 'react-device-detect'
-import { injected } from '../connectors'
+import { injected, getStarcoin } from '../connectors'
 import { NetworkContextName } from '../constants/misc'
 
 export function useActiveWeb3React(): Web3ReactContextInterface<Web3Provider> {
@@ -13,6 +13,8 @@ export function useActiveWeb3React(): Web3ReactContextInterface<Web3Provider> {
 }
 
 export function useEagerConnect() {
+  const { connector } = useActiveWeb3React()
+  const starcoin = getStarcoin(connector)
   const { activate, active } = useWeb3ReactCore() // specifically using useWeb3ReactCore because of what this hook does
   const [tried, setTried] = useState(false)
 
@@ -23,7 +25,7 @@ export function useEagerConnect() {
           setTried(true)
         })
       } else {
-        if (isMobile && window.starcoin) {
+        if (isMobile && starcoin) {
           activate(injected, undefined, true).catch(() => {
             setTried(true)
           })
@@ -32,7 +34,7 @@ export function useEagerConnect() {
         }
       }
     })
-  }, [activate]) // intentionally only running on mount (make sure it's only mounted once :))
+  }, [activate, starcoin]) // intentionally only running on mount (make sure it's only mounted once :))
 
   // if the connection worked, wait until we get confirmation of that to flip the flag
   useEffect(() => {
