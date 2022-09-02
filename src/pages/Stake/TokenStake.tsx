@@ -115,14 +115,16 @@ export default function FarmStake({
   const [ veStarAmount, setVeStarAmount ] = useState(0)
   useEffect(
     () => {
-      const url = `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmountAndBoostSignature?accountAddress=${address}`
-      axios.get(url).then(res => res.data).then(data => {
-        if (isBoost) {
-          setVeStarAmount(data.veStarAmount)
-        }
-      })
+      if (address) {
+        const url = `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmountAndBoostSignature?accountAddress=${address}`
+        axios.get(url).then(res => res.data).then(data => {
+          if (isBoost) {
+            setVeStarAmount(data.veStarAmount)
+          }
+        })
+      }
     },
-    [isBoost]
+    [isBoost, address]
   )
   const veStarScalingFactor = 1000000000;
 

@@ -135,10 +135,12 @@ export default function Simulator({ history }: RouteComponentProps) {
 
   useEffect(
     () => {
-      const url = `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmountAndBoostSignature?accountAddress=${address}`
-      axios.get(url).then(res => res.data).then(data => {
-        setVeStarAmount(data.veStarAmount)
-      })
+      if (address) {
+        const url = `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmountAndBoostSignature?accountAddress=${address}`
+        axios.get(url).then(res => res.data).then(data => {
+          setVeStarAmount(data.veStarAmount)
+        })
+      }
     },
     [address]
   )

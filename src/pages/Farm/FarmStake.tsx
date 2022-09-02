@@ -127,20 +127,22 @@ export default function FarmStake({
   
   useEffect(
     () => {
-      const url1 = `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmountAndBoostSignature?accountAddress=${address}`
-      axios.get(url1).then(res => res.data).then(data => {
-        if (isBoost) {
-          setVeStarAmount(data.veStarAmount)
-        }
-      })
-      if (isBoost) {
-        const url2 = `https://swap-api.starswap.xyz/${network}/v1/getAccountFarmBoostFactor?tokenXId=${tokenX}&tokenYId=${tokenY}&accountAddress=${address}`
-        axios.get(url2).then(res => res.data).then(data => {
-          setBoostFactorOrigin(data)
+      if (address) {
+        const url1 = `https://swap-api.starswap.xyz/${network}/v1/getAccountVeStarAmountAndBoostSignature?accountAddress=${address}`
+        axios.get(url1).then(res => res.data).then(data => {
+          if (isBoost) {
+            setVeStarAmount(data.veStarAmount)
+          }
         })
+        if (isBoost) {
+          const url2 = `https://swap-api.starswap.xyz/${network}/v1/getAccountFarmBoostFactor?tokenXId=${tokenX}&tokenYId=${tokenY}&accountAddress=${address}`
+          axios.get(url2).then(res => res.data).then(data => {
+            setBoostFactorOrigin(data)
+          })
+        }
       }
     },
-    [isBoost]
+    [isBoost, address]
   )
 
   const { data: lpStakingData, error: errorLP } = useSWR(
