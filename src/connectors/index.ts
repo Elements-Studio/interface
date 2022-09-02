@@ -1,4 +1,4 @@
-import { Web3Provider } from '@starcoin/providers'
+import { Web3Provider, ExternalProvider } from '@starcoin/providers'
 import { InjectedConnector } from '@starcoin/starswap-web3-injected-connector'
 import { OpenBlockConnector } from '@starcoin/starswap-web3-openblock-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
@@ -7,6 +7,7 @@ import { PortisConnector } from '@web3-react/portis-connector'
 import { SupportedChainId } from '../constants/chains'
 import getLibrary from '../utils/getLibrary'
 
+import { useActiveWeb3React } from '../hooks/web3'
 import { FortmaticConnector } from './Fortmatic'
 import { NetworkConnector } from './NetworkConnector'
 import UNISWAP_LOGO_URL from '../assets/svg/logo.svg'
@@ -52,6 +53,19 @@ export const network = new NetworkConnector({
 let networkLibrary: Web3Provider | undefined
 export function getNetworkLibrary(): Web3Provider {
   return (networkLibrary = networkLibrary ?? getLibrary(network.provider))
+}
+
+export function getStarcoin(connector: any): any {
+  console.log('getStarcoin', { connector })
+  if (connector instanceof InjectedConnector) {
+    console.log('instanceof InjectedConnector')
+    return window.starcoin
+  }
+  if (connector instanceof OpenBlockConnector) {
+    console.log('instanceof OpenBlockConnector')
+    return window.obstarcoin
+  }
+  return undefined
 }
 
 export const injected = new InjectedConnector({
