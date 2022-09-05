@@ -20,6 +20,7 @@ interface Window {
     removeListener?: (...args: any[]) => void
     autoRefreshOnNetworkChange?: boolean
     chainId?: any
+    isLogin?: boolean
   }
   web3?: Record<string, unknown>
 }
