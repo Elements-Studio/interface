@@ -21,6 +21,7 @@ interface Window {
     autoRefreshOnNetworkChange?: boolean
     chainId?: any
     isLogin?: boolean
+    sdkLoaded?: boolean
   }
   web3?: Record<string, unknown>
 }
