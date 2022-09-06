@@ -8,10 +8,11 @@ import ReactGA from 'react-ga'
 import styled from 'styled-components/macro'
 import StarmaskIcon from '../../assets/images/starmask.png'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
-import { fortmatic, injected } from '../../connectors'
+import { fortmatic, injected, openblock } from '../../connectors'
 import { OVERLAY_READY } from '../../connectors/Fortmatic'
 import { SUPPORTED_WALLETS } from '../../constants/wallet'
 import usePrevious from '../../hooks/usePrevious'
+import useInterval from '../../hooks/useInterval'
 import { ApplicationModal } from '../../state/application/actions'
 import { useModalOpen, useWalletModalToggle } from '../../state/application/hooks'
 import { ExternalLink, TYPE } from '../../theme'
@@ -129,6 +130,7 @@ export default function WalletModal({
   const [pendingWallet, setPendingWallet] = useState<AbstractConnector | undefined>()
 
   const [pendingError, setPendingError] = useState<boolean>()
+  const [loadingOpenBlock, setLoadingOpenBlock] = useState<boolean>(true)
 
   const walletModalOpen = useModalOpen(ApplicationModal.WALLET)
   const toggleWalletModal = useWalletModalToggle()
@@ -149,6 +151,17 @@ export default function WalletModal({
       setWalletView(WALLET_VIEWS.ACCOUNT)
     }
   }, [walletModalOpen])
+
+  const delay = 1000
+  useInterval(
+    () => {
+      // wait until wasm is loaded within iframe
+      if (window.obstarcoin && window.obstarcoin?.sdkLoaded) {
+        setLoadingOpenBlock(false)
+      }
+    },
+    !(window.obstarcoin && window.obstarcoin?.sdkLoaded) ? delay : null,
+  )
 
   // close modal when a connection is successful
   const activePrevious = usePrevious(active)
@@ -204,6 +217,11 @@ export default function WalletModal({
     const isStarMask = window.starcoin?.isStarMask || window.obstarcoin?.isStarMask 
     return Object.keys(SUPPORTED_WALLETS).map((key) => {
       const option = SUPPORTED_WALLETS[key]
+      
+      let loading = false
+      if (option.connector === openblock ){
+        loading = loadingOpenBlock
+      }
       // check for mobile options
       if (isMobile) {
         if (option.connector === injected && !window.starcoin) {
@@ -229,6 +247,7 @@ export default function WalletModal({
               active={option.connector && option.connector === connector}
               color={option.color}
               link={option.href}
+              loading={loading}
               header={option.name}
               subheader={null}
               icon={option.iconURL}
@@ -281,6 +300,7 @@ export default function WalletModal({
             active={option.connector === connector}
             color={option.color}
             link={option.href}
+            loading={loading}
             header={option.name}
             subheader={null} //use option.descriptio to bring back multi-line
             icon={option.iconURL}

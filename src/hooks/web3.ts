@@ -142,7 +142,7 @@ export function useOpenBlockConnect() {
   useInterval(
     () => {
       // wait until wasm is loaded within iframe
-      if (window.obstarcoin && window.obstarcoin?.sdkLoaded && !obstarcoinReady) {
+      if (window.obstarcoin && window.obstarcoin?.sdkLoaded) {
         setObstarcoinReady(true)
       }
     },

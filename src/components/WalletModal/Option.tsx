@@ -97,10 +97,12 @@ export default function Option({
   subheader = null,
   icon,
   active = false,
+  loading = false,
   id,
 }: {
   link?: string | null
   clickable?: boolean
+  loading?: boolean
   size?: number | null
   onClick?: null | (() => void)
   color: string
@@ -111,7 +113,7 @@ export default function Option({
   id: string
 }) {
   const content = (
-    <OptionCardClickable id={id} onClick={onClick} clickable={clickable && !active} active={active}>
+    <OptionCardClickable id={id} onClick={onClick} clickable={clickable && !active && !loading} active={active} disabled={loading}>
       <OptionCardLeft>
         <HeaderText color={color}>
           {active ? (
@@ -123,6 +125,9 @@ export default function Option({
           ) : (
             ''
           )}
+          {
+            loading ? 'Loading ': ''
+          }
           {header}
         </HeaderText>
         {subheader && <SubHeader>{subheader}</SubHeader>}
