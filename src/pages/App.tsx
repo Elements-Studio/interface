@@ -81,7 +81,6 @@ export default function App() {
   useEffect(() => {
     const script = document.createElement('script');
     script.src = `https://obstatic.243096.com/download/dapp/sdk/index.js?t=22090600`;
-    // script.src = `/index.js?t=083100`;
     script.async = true;
     document.body.appendChild(script);
     return () => {
