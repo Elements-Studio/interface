@@ -290,7 +290,7 @@ export default function Farm({ history }: RouteComponentProps) {
               </FarmRow> */}
                 <FixedHeightRow marginBottom={16}>
                   <Text fontSize={16} fontWeight={500}>
-                    <Trans>&nbsp;&nbsp;&nbsp;&nbsp;APR</Trans>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<Trans>APR</Trans>
                   </Text>
                   <RowFixed>
                     <Text fontSize={16} fontWeight={500}>
