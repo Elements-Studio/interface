@@ -38,8 +38,8 @@ export default function Web3ReactManager({ children }: { children: JSX.Element }
 
    // try to eagerly connect to OpenBlock, if it is not connected to StarMask above
    // but we should not block the page while OpenBlock sdk download wasm within iframe
-   const triedOpenBlock = useOpenBlockConnect()
-   useOpenBlockListener(!triedOpenBlock)
+  //  const triedOpenBlock = useOpenBlockConnect()
+  //  useOpenBlockListener(!triedOpenBlock)
 
   // handle delayed loader state
   const [showLoader, setShowLoader] = useState(false)
