@@ -131,7 +131,6 @@ export default function WalletModal({
   const [pendingWallet, setPendingWallet] = useState<AbstractConnector | undefined>()
 
   const [pendingError, setPendingError] = useState<boolean>()
-  const [loadingOpenBlock, setLoadingOpenBlock] = useState<boolean>(!(window.obstarcoin && window.obstarcoin?.sdkLoaded))
   const [wallet, setWallet] = useLocalStorage("wallet", "");
 
   const walletModalOpen = useModalOpen(ApplicationModal.WALLET)
@@ -153,17 +152,6 @@ export default function WalletModal({
       setWalletView(WALLET_VIEWS.ACCOUNT)
     }
   }, [walletModalOpen])
-
-  const delay = 1000
-  useInterval(
-    () => {
-      // wait until wasm is loaded within iframe
-      if (window.obstarcoin && window.obstarcoin?.sdkLoaded) {
-        setLoadingOpenBlock(false)
-      }
-    },
-    !(window.obstarcoin && window.obstarcoin?.sdkLoaded) ? delay : null,
-  )
 
   // close modal when a connection is successful
   const activePrevious = usePrevious(active)
@@ -224,7 +212,7 @@ export default function WalletModal({
       
       let loading = false
       if (option.connector === openblock ){
-        loading = loadingOpenBlock
+        loading = !window.obstarcoin?.sdkLoaded
       }
       // check for mobile options
       if (isMobile) {
