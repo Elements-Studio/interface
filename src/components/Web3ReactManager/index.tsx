@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react'
 import { useWeb3React } from '@starcoin/starswap-web3-core'
 import styled from 'styled-components/macro'
 import { Trans } from '@lingui/macro'
-
+import useLocalStorage from '../../hooks/useLocalStorage'
 import { network } from '../../connectors'
-import { useEagerConnect, useInactiveListener, useOpenBlockConnect, useOpenBlockListener } from '../../hooks/web3'
+import { useEagerConnect, useInactiveListener, useOpenBlockListener } from '../../hooks/web3'
 import { NetworkContextName } from '../../constants/misc'
 import Loader from '../Loader'
+import { bool } from '@starcoin/starcoin/dist/src/lib/runtime/serde'
 
 const MessageWrapper = styled.div`
   display: flex;
@@ -22,10 +23,11 @@ const Message = styled.h2`
 export default function Web3ReactManager({ children }: { children: JSX.Element }) {
   const { active } = useWeb3React()
   const { active: networkActive, error: networkError, activate: activateNetwork } = useWeb3React(NetworkContextName)
+  const [wallet, setWallet] = useLocalStorage("wallet", "");
 
   // try to eagerly connect to an injected provider, if it exists and has granted access already
-  const triedEager = useEagerConnect()
-  console.log({triedEager})
+  const  triedEager = useEagerConnect()
+
   // after eagerly trying injected, if the network connect ever isn't active or in an error state, activate itd
   useEffect(() => {
     if (triedEager && !networkActive && !networkError && !active) {
@@ -35,11 +37,9 @@ export default function Web3ReactManager({ children }: { children: JSX.Element }
 
   // when there's no account connected, react to logins (broadly speaking) on the injected provider, if it exists
   useInactiveListener(!triedEager)
-
-   // try to eagerly connect to OpenBlock, if it is not connected to StarMask above
-   // but we should not block the page while OpenBlock sdk download wasm within iframe
-  //  const triedOpenBlock = useOpenBlockConnect()
-  //  useOpenBlockListener(!triedOpenBlock)
+  
+  // try to eagerly connect to OpenBlock if previous connected wallet is OpenBlock
+  useOpenBlockListener(!triedEager)
 
   // handle delayed loader state
   const [showLoader, setShowLoader] = useState(false)

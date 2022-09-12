@@ -7,6 +7,7 @@ import { isMobile } from 'react-device-detect'
 import { injected, openblock } from '../connectors'
 import { NetworkContextName } from '../constants/misc'
 import useInterval from './useInterval'
+import useLocalStorage from './useLocalStorage'
 
 export function useActiveWeb3React(): Web3ReactContextInterface<Web3Provider> {
   const context = useWeb3ReactCore<Web3Provider>()
@@ -15,29 +16,45 @@ export function useActiveWeb3React(): Web3ReactContextInterface<Web3Provider> {
 }
 
 export function useEagerConnect() {
-  console.log('useEagerConnect')
   const { activate, active } = useWeb3ReactCore() // specifically using useWeb3ReactCore because of what this hook does
   const [tried, setTried] = useState(false)
-
+  const [wallet, setWallet] = useLocalStorage("wallet", "");
+  const [obstarcoinReady, setObstarcoinReady] = useState<boolean>(false)
+  const delay = 1000
+  useInterval(
+    () => {
+      // wait until wasm is loaded within iframe
+      if (window.obstarcoin && window.obstarcoin?.sdkLoaded) {
+        setObstarcoinReady(true)
+      }
+    },
+    !obstarcoinReady ? delay : null,
+  )
   useEffect(() => {
-    console.log('useEffect')
-    injected.isAuthorized().then((isAuthorized) => {
-      console.log('starcoin isAuthorized', isAuthorized)
-      if (isAuthorized) {
-        activate(injected, undefined, true).catch(() => {
-          setTried(true)
-        })
-      } else {
-        if (isMobile && window.starcoin) {
+    if (wallet === 'StarMask') {
+      injected.isAuthorized().then((isAuthorized) => {
+        if (isAuthorized) {
           activate(injected, undefined, true).catch(() => {
             setTried(true)
           })
         } else {
-          setTried(true)
+          if (isMobile && window.starcoin) {
+            activate(injected, undefined, true).catch(() => {
+              setTried(true)
+            })
+          } else {
+            setTried(true)
+          }
         }
+      })
+    } else if (wallet === 'OpenBlock') {
+      if (obstarcoinReady) {
+        setTried(true)
       }
-    })
-  }, [activate]) // intentionally only running on mount (make sure it's only mounted once :))
+    } else {
+      setTried(true)
+    }
+  }, [activate, obstarcoinReady]) // intentionally only running on mount (make sure it's only mounted once :))
 
   // if the connection worked, wait until we get confirmation of that to flip the flag
   useEffect(() => {
@@ -55,13 +72,12 @@ export function useEagerConnect() {
  */
 export function useInactiveListener(suppress = false) {
   const { active, error, activate } = useWeb3ReactCore() // specifically using useWeb3React because of what this hook does
+  const [wallet, setWallet] = useLocalStorage("wallet", "");
 
   useEffect(() => {
     const { starcoin } = window
-
-    if (starcoin && starcoin.on && !active && !error && !suppress) {
+    if (wallet === 'StarMask' && starcoin && starcoin.on && !active && !error && !suppress) {
       const handleChainChanged = () => {
-        console.log('handleChainChanged 111')
         // eat errors
         activate(injected, undefined, true).catch((error) => {
           console.error('Failed to activate after chain changed', error)
@@ -69,8 +85,6 @@ export function useInactiveListener(suppress = false) {
       }
 
       const handleAccountsChanged = (accounts: string[]) => {
-        console.log('handleAccountsChanged 222')
-
         if (accounts.length > 0) {
           // eat errors
           activate(injected, undefined, true).catch((error) => {
@@ -96,30 +110,32 @@ export function useInactiveListener(suppress = false) {
 export function useOpenBlockListener(suppress = false) {
   const { active, error, activate } = useWeb3ReactCore() // specifically using useWeb3React because of what this hook does
   const { obstarcoin } = window
+  const obstarcoinReady = obstarcoin && obstarcoin.sdkLoaded
+  const [wallet, setWallet] = useLocalStorage("wallet", "");
 
   useEffect(() => {
-    if (obstarcoin && obstarcoin.on && !active && !error && !suppress) {
-      const handleChainChanged = () => {
-        // eat errors
+    const handleChainChanged = () => {
+      // eat errors
+      if (window.obstarcoin && window.obstarcoin?.sdkLoaded) {
         activate(openblock, undefined, true).catch((error) => {
           console.error('Failed to activate after chain changed', error)
         })
       }
 
-      const handleAccountsChanged = (accounts: string[]) => {
-        if (accounts.length > 0) {
-          // eat errors
-          activate(openblock, undefined, true).catch((error) => {
-            console.error('Failed to activate after accounts changed', error)
-          })
-        }
-      }
+    }
 
+    const handleAccountsChanged = (accounts: string[]) => {
+      if (accounts.length > 0 && window.obstarcoin && window.obstarcoin?.sdkLoaded) {
+        // eat errors
+        activate(openblock, undefined, true).catch((error) => {
+          console.error('Failed to activate after accounts changed', error)
+        })
+      }
+    }
+
+    if (obstarcoin && obstarcoin.on && !active && !error && !suppress) {
       obstarcoin.on('chainChanged', handleChainChanged)
       obstarcoin.on('accountsChanged', handleAccountsChanged)
-
-      // Should be called by OpenBlock sdk, but they has an unkonwn bug, so we call it directly
-      handleChainChanged()
 
       return () => {
         if (obstarcoin.removeListener) {
@@ -128,33 +144,10 @@ export function useOpenBlockListener(suppress = false) {
         }
       }
     }
-    return undefined
-  }, [active, error, suppress, activate, obstarcoin])
-}
-
-
-export function useOpenBlockConnect() {
-  const { activate, active, error } = useWeb3ReactCore() // specifically using useWeb3ReactCore because of what this hook does
-  const [tried, setTried] = useState(false)
-
-  const [obstarcoinReady, setObstarcoinReady] = useState<boolean>(false)
-  const delay = 1000
-  useInterval(
-    () => {
-      // wait until wasm is loaded within iframe
-      if (window.obstarcoin && window.obstarcoin?.sdkLoaded) {
-        setObstarcoinReady(true)
-      }
-    },
-    !obstarcoinReady ? delay : null,
-  )
-
-  // if the connection worked, wait until we get confirmation of that to flip the flag
-  useEffect(() => {
-    if (obstarcoinReady) {
-      setTried(true)
+    if (suppress && wallet === 'OpenBlock' && obstarcoinReady) {
+      // Should be called by OpenBlock sdk, but they has an unkonwn bug, so we call it directly
+      handleChainChanged()
     }
-  }, [activate, active, obstarcoinReady])
-
-  return tried
+    return undefined
+  }, [active, error, suppress, activate, obstarcoin, obstarcoinReady])
 }
