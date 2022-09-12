@@ -13,6 +13,7 @@ import { OVERLAY_READY } from '../../connectors/Fortmatic'
 import { SUPPORTED_WALLETS } from '../../constants/wallet'
 import usePrevious from '../../hooks/usePrevious'
 import useInterval from '../../hooks/useInterval'
+import useLocalStorage from '../../hooks/useLocalStorage'
 import { ApplicationModal } from '../../state/application/actions'
 import { useModalOpen, useWalletModalToggle } from '../../state/application/hooks'
 import { ExternalLink, TYPE } from '../../theme'
@@ -131,6 +132,7 @@ export default function WalletModal({
 
   const [pendingError, setPendingError] = useState<boolean>()
   const [loadingOpenBlock, setLoadingOpenBlock] = useState<boolean>(true)
+  const [wallet, setWallet] = useLocalStorage("wallet", "");
 
   const walletModalOpen = useModalOpen(ApplicationModal.WALLET)
   const toggleWalletModal = useWalletModalToggle()
@@ -195,7 +197,9 @@ export default function WalletModal({
     }
 
     connector &&
-      activate(connector, undefined, true).catch((error) => {
+      activate(connector, undefined, true).then(() =>{
+        setWallet(name)
+      }).catch((error) => {
         if (error instanceof UnsupportedChainIdError) {
           activate(connector) // a little janky...can't use setError because the connector isn't set
         } else {
