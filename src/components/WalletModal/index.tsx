@@ -131,7 +131,7 @@ export default function WalletModal({
   const [pendingWallet, setPendingWallet] = useState<AbstractConnector | undefined>()
 
   const [pendingError, setPendingError] = useState<boolean>()
-  const [loadingOpenBlock, setLoadingOpenBlock] = useState<boolean>(true)
+  const [loadingOpenBlock, setLoadingOpenBlock] = useState<boolean>(!(window.obstarcoin && window.obstarcoin?.sdkLoaded))
   const [wallet, setWallet] = useLocalStorage("wallet", "");
 
   const walletModalOpen = useModalOpen(ApplicationModal.WALLET)
