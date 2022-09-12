@@ -54,8 +54,11 @@ export default function Web3ReactManager({ children }: { children: JSX.Element }
   }, [])
 
   // on page load, do nothing until we've tried to connect to the injected connector
-  if (!(triedEager)) {
-    return null
+  if (!triedEager) {
+    // we should not block the page before OpenBlock sdkLoaded is true
+    if (wallet !== 'OpenBlock'){
+      return null
+    }
   }
 
   // if the account context isn't active, and there's an error on the network context, it's an irrecoverable error
