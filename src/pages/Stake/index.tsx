@@ -81,7 +81,9 @@ export default function Farm({ history }: RouteComponentProps) {
   // if (error) return "An error has occurred.";
   // if (!data) return "Loading...";
   if (error) return null;
-  if (!pool) return null;
+  if (error2) return null;
+  if (!pool || !data) return null;
+  
   const list = pool.filter((item:any)=>item.description==='STAR');
   console.log({network,list,data})
 
