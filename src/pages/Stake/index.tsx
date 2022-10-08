@@ -73,114 +73,93 @@ export default function Farm({ history }: RouteComponentProps) {
     fetcher
   );
   
+  const { data, error: error2 } = useSWR(
+    `https://swap-api.starswap.xyz/${network}/v1/syrupMultiplierPools?tokenId=STAR&estimateApr=true`,
+    fetcher
+  );
+
   // if (error) return "An error has occurred.";
   // if (!data) return "Loading...";
   if (error) return null;
   if (!pool) return null;
   const list = pool.filter((item:any)=>item.description==='STAR');
+  console.log({network,list,data})
 
   // const darkMode = useIsDarkMode();
 
   /*
-  const list = [
+  const data = [
     {
-      liquidityTokenFarmId: { 
-        farmAddress: "1", 
-        liquidityTokenId: { tokenXId: "Bot", tokenYId: "Ddd", liquidityTokenAddress: "0x07fa08a855753f0ff7292fdcbe871216" }
-      },
-      description: "Bot<->Ddd Pool", 
-      sequenceNumber: 11, 
-      totalStakeAmount: null, 
-      deactived: false, 
-      createdBy: "admin", 
-      updatedBy: "admin", 
-      createdAt: 1630661107485, 
-      updatedAt: 1630661107485 
+      "pledgeTimeSeconds": 100,
+      "multiplier": 1,
+      "assetAmount": 0,
+      "assetWeight": 0,
+      "poolRatio": 0,
+      "estimatedApr": 0
     },
     {
-      liquidityTokenFarmId: { 
-        farmAddress: "2", 
-        liquidityTokenId: { tokenXId: "Bot", tokenYId: "Ddd", liquidityTokenAddress: "0x07fa08a855753f0ff7292fdcbe871216" }
-      },
-      description: "Bot<->Ddd Pool", 
-      sequenceNumber: 11, 
-      totalStakeAmount: null, 
-      deactived: false, 
-      createdBy: "admin", 
-      updatedBy: "admin", 
-      createdAt: 1630661107485, 
-      updatedAt: 1630661107485 
+      "pledgeTimeSeconds": 3600,
+      "multiplier": 1,
+      "assetAmount": 0,
+      "assetWeight": 0,
+      "poolRatio": 0,
+      "estimatedApr": 0
     },
     {
-      liquidityTokenFarmId: { 
-        farmAddress: "0x07fa08a855753f0ff7292fdcbe871216", 
-        liquidityTokenId: { tokenXId: "Bot", tokenYId: "Ddd", liquidityTokenAddress: "0x07fa08a855753f0ff7292fdcbe871216" }
-      },
-      description: "Bot<->Ddd Pool", 
-      sequenceNumber: 11, 
-      totalStakeAmount: null, 
-      deactived: false, 
-      createdBy: "admin", 
-      updatedBy: "admin", 
-      createdAt: 1630661107485, 
-      updatedAt: 1630661107485 
+      "pledgeTimeSeconds": 604800,
+      "multiplier": 1,
+      "assetAmount": 144798212259248,
+      "assetWeight": 144798212259248,
+      "poolRatio": 0.008305096,
+      "estimatedApr": 4.1602162
     },
     {
-      liquidityTokenFarmId: { 
-        farmAddress: "3", 
-        liquidityTokenId: { tokenXId: "Bot", tokenYId: "Ddd", liquidityTokenAddress: "0x07fa08a855753f0ff7292fdcbe871216" }
-      },
-      description: "Bot<->Ddd Pool", 
-      sequenceNumber: 11, 
-      totalStakeAmount: null, 
-      deactived: false, 
-      createdBy: "admin", 
-      updatedBy: "admin", 
-      createdAt: 1630661107485, 
-      updatedAt: 1630661107485 
+      "pledgeTimeSeconds": 1209600,
+      "multiplier": 2,
+      "assetAmount": 16467204830351,
+      "assetWeight": 32934409660702,
+      "poolRatio": 0.001888997,
+      "estimatedApr": 8.320431
     },
     {
-      liquidityTokenFarmId: { 
-        farmAddress: "0x07fa08a855753f0ff7292fdcbe871216", 
-        liquidityTokenId: { tokenXId: "Bot", tokenYId: "Ddd", liquidityTokenAddress: "0x07fa08a855753f0ff7292fdcbe871216" }
-      },
-      description: "Bot<->Ddd Pool", 
-      sequenceNumber: 11, 
-      totalStakeAmount: null, 
-      deactived: false, 
-      createdBy: "admin", 
-      updatedBy: "admin", 
-      createdAt: 1630661107485, 
-      updatedAt: 1630661107485 
+      "pledgeTimeSeconds": 2592000,
+      "multiplier": 6,
+      "assetAmount": 14025708880698,
+      "assetWeight": 84154253284188,
+      "poolRatio": 0.00482678,
+      "estimatedApr": 24.9612958
     },
     {
-      liquidityTokenFarmId: { 
-        farmAddress: "0x07fa08a855753f0ff7292fdcbe871216", 
-        liquidityTokenId: { tokenXId: "Bot", tokenYId: "Ddd", liquidityTokenAddress: "0x07fa08a855753f0ff7292fdcbe871216" }
-      },
-      description: "Bot<->Ddd Pool", 
-      sequenceNumber: 11, 
-      totalStakeAmount: null, 
-      deactived: false, 
-      createdBy: "admin", 
-      updatedBy: "admin", 
-      createdAt: 1630661107485, 
-      updatedAt: 1630661107485 
+      "pledgeTimeSeconds": 5184000,
+      "multiplier": 9,
+      "assetAmount": 32471861200349,
+      "assetWeight": 292246750803141,
+      "poolRatio": 0.016762206,
+      "estimatedApr": 37.4419479
     },
+    {
+      "pledgeTimeSeconds": 7776000,
+      "multiplier": 12,
+      "assetAmount": 1406727415929985,
+      "assetWeight": 16880728991159820,
+      "poolRatio": 0.96821692,
+      "estimatedApr": 49.9225958
+    }
   ]
   */
-  const tips = (base: any) =>{
+  const tips = (data: any) =>{
+    const list = data.filter((item:any)=>item.estimatedApr > 0).map((item: any) => {
+      return (
+        <>
+        {item.pledgeTimeSeconds/3600/24}<Trans>Days</Trans>({item.multiplier}x) = { item.estimatedApr.toFixed(4) }%<br/>
+        </>
+      )
+    })
+      
     return (
     <>
     <Trans>The estimated annualized percentage yield of rewards.</Trans><br/><br/>
-    7<Trans>Days</Trans>(2x) = { base ? (base * 2).toFixed(4) : '0'}%<br/>
-    14<Trans>Days</Trans>(3x) = { base ? (base * 3).toFixed(4) : '0'}%<br/>
-    30<Trans>Days</Trans>(4x) = { base ? (base * 4).toFixed(4) : '0'}%<br/>
-    60<Trans>Days</Trans>(6x) = { base ? (base * 6).toFixed(4) : '0'}%<br/>
-    90<Trans>Days</Trans>(8x) = { base ? (base * 8).toFixed(4) : '0'}%
-    <br/>
-    <br/>
-    <Trans>STAR Stake APR Formula</Trans>
+    {list}
     <br/>
     </>
     )
@@ -294,9 +273,9 @@ export default function Farm({ history }: RouteComponentProps) {
                   </Text>
                   <RowFixed>
                     <Text fontSize={16} fontWeight={500}>
-                      {(item.estimatedApy * 2).toFixed(2)}% ~ {(item.estimatedApy * 8).toFixed(2)}%
+                      {(data.filter((item:any)=>item.pledgeTimeSeconds === 604800)[0].estimatedApr).toFixed(2)}% ~ {(data.filter((item:any)=>item.pledgeTimeSeconds === 7776000)[0].estimatedApr).toFixed(2)}%
                     </Text>
-                    <QuestionHelper text={tips(item.estimatedApy)} />
+                    <QuestionHelper text={tips(data)} />
                   </RowFixed>
                 </FixedHeightRow>
                 {/* <FixedHeightRow>
