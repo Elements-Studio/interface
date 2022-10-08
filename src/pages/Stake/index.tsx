@@ -190,7 +190,8 @@ export default function Farm({ history }: RouteComponentProps) {
                     </TYPE.black>
                   </RowFixed>
                   <RowFixed>
-                    <TYPE.black fontSize={14}>{item.syrupPoolId.poolAddress.substring(0, 16) + '...'}</TYPE.black>
+                    <TYPE.black fontSize={14}>{ item.syrupPoolId.poolAddress.substring(0,7) + '...' + item.syrupPoolId.poolAddress.substring(item.syrupPoolId.poolAddress.length-5) }</TYPE.black>
+                    <QuestionHelper text={item.syrupPoolId.poolAddress} />
                   </RowFixed>
                 </FarmRow>
                 <FarmRow style={{ marginTop: '10px' }}>
