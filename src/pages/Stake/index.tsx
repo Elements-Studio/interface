@@ -85,7 +85,6 @@ export default function Farm({ history }: RouteComponentProps) {
   if (!pool || !data) return null;
   
   const list = pool.filter((item:any)=>item.description==='STAR');
-  console.log({network,list,data})
 
   // const darkMode = useIsDarkMode();
 

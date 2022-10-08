@@ -126,12 +126,19 @@ export default function TokenStakeDialog({
     fetcher
   );
 
+  const { data, error: error2 } = useSWR(
+    `https://swap-api.starswap.xyz/${network}/v1/syrupMultiplierPools?tokenId=STAR&estimateApr=true`,
+    fetcher
+  );
+
   const isBoost = useIsBoost()
 
   // if (error) return "An error has occurred.";
   // if (!data) return "Loading...";
   if (error) return null;
-  if (!pool) return null;
+  if (error2) return null;
+  if (!pool || !data) return null;
+
   const poolList = pool ?  pool.filter((item:any)=>item.description==='STAR') : [];
 
   const onCancle = () =>{
@@ -238,11 +245,15 @@ export default function TokenStakeDialog({
                   </>
                 ) : null
               }
-              <FormControlLabel value="604800" control={<Radio />} label={`7 Days (2x)  ${poolList !== [] ? (poolList[0].estimatedApy*2).toFixed(4) : ''}%`}/>
-              <FormControlLabel value="1209600" control={<Radio />} label={`14 Days (3x)  ${poolList !== [] ? (poolList[0].estimatedApy*3).toFixed(4) : ''}%`}/>
-              <FormControlLabel value="2592000" control={<Radio />} label={`30 Days (4x)  ${poolList !== [] ? (poolList[0].estimatedApy*4).toFixed(4) : ''}%`}/>
-              <FormControlLabel value="5184000" control={<Radio />} label={`60 Days (6x)  ${poolList !== [] ? (poolList[0].estimatedApy*6).toFixed(4) : ''}%`}/>
-              <FormControlLabel value="7776000" control={<Radio />} label={`90 Days (8x)  ${poolList !== [] ? (poolList[0].estimatedApy*8).toFixed(4) : ''}%`}/>
+              {
+                data.filter((item:any)=>item.estimatedApr > 0).map((item: any) => {
+                  return (
+                    <>
+                    <FormControlLabel value={item.pledgeTimeSeconds} control={<Radio />} label={`${item.pledgeTimeSeconds/3600/24} Days (${item.multiplier}x)  ${ item.estimatedApr.toFixed(4) }%`}/>
+                    </>
+                  )
+                })
+              }
             </RadioGroup>
           </FormControl>
         </RadioContainer>
