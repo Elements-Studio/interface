@@ -1,7 +1,7 @@
 import { WETH9 } from '@uniswap/sdk-core'
 import { Token, Star } from '@starcoin/starswap-sdk-core'
 import { UNI_ADDRESS } from './addresses'
-import { SupportedChainId } from './chains'
+import { SupportedChainId, NetworkType, SupportedChainId_STARCOIN, SupportedChainId_APTOS } from './chains'
 
 export const STC: { [chainId: number]: Token } = {
   [SupportedChainId.MAINNET]: new Token(
@@ -72,6 +72,49 @@ export const STAR: { [chainId: number]: Token } = {
     'Star'
   ),
 }
+
+export const STAR2: { [networkType: string]: { [chainId: number]: Token } } = {
+  [NetworkType.STARCOIN]: {
+    [SupportedChainId_STARCOIN.MAINNET]: new Token(
+      SupportedChainId_STARCOIN.MAINNET,
+      '0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR',
+      9,
+      'STAR',
+      'Star'
+    ),
+    [SupportedChainId_STARCOIN.BARNARD]: new Token(
+      SupportedChainId_STARCOIN.BARNARD,
+      '0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR',
+      9,
+      'STAR',
+      'Star'
+    ),
+    [SupportedChainId_STARCOIN.PROXIMA]: new Token(
+      SupportedChainId_STARCOIN.PROXIMA,
+      '0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR',
+      9,
+      'STAR',
+      'Star'
+    ),
+  },
+  [NetworkType.APTOS]: {
+    [SupportedChainId_APTOS.MAIN]: new Token(
+      SupportedChainId_APTOS.MAIN,
+      '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::STAR::STAR',
+      9,
+      'STAR',
+      'Star'
+    ),
+    [SupportedChainId_APTOS.TEST]: new Token(
+      SupportedChainId_APTOS.TEST,
+      '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::STAR::STAR',
+      9,
+      'STAR',
+      'Star'
+    ),
+  }
+}
+
 export const XUSDT: { [chainId: number]: Token } = {
   [SupportedChainId.MAINNET]: new Token(
     SupportedChainId.MAINNET,
