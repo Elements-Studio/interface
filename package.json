@@ -128,13 +128,13 @@
     "compile-contract-types": "exit 0",
     "compile-external-abi-types": "typechain --target ethers-v5 --out-dir src/abis/types './src/abis/**/*.json'",
     "compile-v3-contract-types": "typechain --target ethers-v5 --out-dir src/types/v3 './node_modules/@uniswap/?(v3-core|v3-periphery)/artifacts/contracts/**/*.json'",
-    "build": "yarn compile-contract-types && yarn i18n:extract && yarn i18n:compile && react-scripts build",
+    "build": "yarn compile-contract-types && yarn i18n:extract && yarn i18n:compile && craco build",
     "i18n:extract": "yarn lingui extract --locale en-US && yarn lingui extract --locale zh-CN",
     "i18n:compile": "lingui compile",
     "integration-test": "start-server-and-test 'serve build -l 3000' http://localhost:3000 'cypress run --record'",
     "graphql:generate": "graphql-codegen --config codegen.yml",
     "postinstall": "yarn compile-contract-types",
-    "start": "react-scripts start",
+    "start": "craco start",
     "test": "react-scripts test --env=jsdom",
     "prestart": "touch src/locales/en-US.po"
   },
@@ -162,12 +162,18 @@
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "@craco/craco": "^6.4.5",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/material": "^5.3.1",
     "@starcoin/providers": "^0.1.4",
+    "@vanilla-extract/babel-plugin": "^1.2.0",
+    "@vanilla-extract/css": "^1.9.1",
+    "@vanilla-extract/sprinkles": "^1.5.0",
+    "@vanilla-extract/webpack-plugin": "^2.2.0",
     "axios": "^0.21.4",
     "bignumber.js": "^9.0.1",
+    "mini-css-extract-plugin": "^2.6.1",
     "swr": "1.2.0"
   }
 }
