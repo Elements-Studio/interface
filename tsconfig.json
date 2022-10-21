@@ -26,5 +26,5 @@
     "baseUrl": "src"
   },
   "exclude": ["node_modules", "cypress"],
-  "include": ["./src/**/*.ts", "./src/**/*.tsx", "src/components/Confetti/index.js"]
+  "include": ["./src/**/*.ts", "./src/**/*.tsx", "src/components/Confetti/index.js", "src/nft/css/sprinkles.css", "src/nft/css/common.css", "src/nft/css/reset.css"]
 }

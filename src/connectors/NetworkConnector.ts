@@ -1,4 +1,3 @@
-import { ConnectorUpdate } from '@web3-react/types'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import invariant from 'tiny-invariant'
 
@@ -159,7 +158,7 @@ export class NetworkConnector extends AbstractConnector {
     return this.providers[this.currentChainId]
   }
 
-  public async activate(): Promise<ConnectorUpdate> {
+  public async activate(): Promise<any> {
     return { provider: this.providers[this.currentChainId], chainId: this.currentChainId, account: null }
   }
 

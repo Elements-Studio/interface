@@ -1,4 +1,4 @@
-import { WETH9 } from '@uniswap/sdk-core'
+import { WETH9, NativeCurrency } from '@uniswap/sdk-core'
 import { Token, Star } from '@starcoin/starswap-sdk-core'
 import { UNI_ADDRESS } from './addresses'
 import { SupportedChainId } from './chains'
@@ -334,4 +334,13 @@ export class ExtendedStar extends Star {
   public static onChain(chainId: number): ExtendedStar {
     return this._cachedStar[chainId] ?? (this._cachedStar[chainId] = new ExtendedStar(chainId))
   }
+}
+
+const cachedNativeCurrency: { [chainId: number]: NativeCurrency | Token } = {}
+
+export function nativeOnChain(chainId: number): NativeCurrency | Token {
+  if (cachedNativeCurrency[chainId]) return cachedNativeCurrency[chainId]
+  let nativeCurrency: NativeCurrency | Token
+  nativeCurrency = ExtendedStar.onChain(chainId)
+  return (cachedNativeCurrency[chainId] = nativeCurrency)
 }

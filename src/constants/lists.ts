@@ -17,6 +17,10 @@ const BA_LIST = 'https://raw.githubusercontent.com/The-Blockchain-Association/se
 
 export const UNSUPPORTED_LIST_URLS: string[] = [BA_LIST]
 
+export const OPTIMISM_LIST = 'https://static.optimism.io/optimism.tokenlist.json'
+export const ARBITRUM_LIST = 'https://bridge.arbitrum.io/token-list-42161.json'
+export const CELO_LIST = 'https://celo-org.github.io/celo-token-list/celo.tokenlist.json'
+
 // lower index == higher priority for token import
 export const DEFAULT_LIST_OF_LISTS: string[] = [
   // COMPOUND_LIST,
