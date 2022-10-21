@@ -4,7 +4,7 @@ import styled from 'styled-components/macro'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import STCLogo from '../../assets/svg/stc.svg'
 import STCBlueLogo from '../../assets/svg/stc.svg'
-import STARLogo from '../../assets/images/starswap_logo_star_round.jpg'
+import STARLogo from '../../assets/images/starswap_logo_star_round.png'
 import STARBlueLogo from '../../assets/svg/starswap_logo.svg'
 import FAILogo from '../../assets/images/fai_token_logo.png'
 import FAIBlueLogo from '../../assets/images/fai_token_logo_blue.png'
@@ -80,7 +80,7 @@ export default function CurrencyLogo({
     return <StyledEthereumLogo src={STCBlueLogo} size={size} style={style} {...rest} />
   } else if (currency?.symbol === 'STAR'){
     if (darkMode) {
-      return <StyledEthereumLogo src={STARBlueLogo} size={size} style={style} {...rest} />
+      return <StyledEthereumLogo src={STARLogo} size={size} style={style} {...rest} />
     }
     return <StyledEthereumLogo src={STARLogo} size={size} style={style} {...rest} />
   } else if (currency?.symbol === 'FAI'){
