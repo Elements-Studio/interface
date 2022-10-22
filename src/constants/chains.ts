@@ -9,6 +9,9 @@ export enum SupportedChainId {
   KOVAN = 42,
   ARBITRUM_ONE = 42161,
   ARBITRUM_RINKEBY = 421611,
+  APTOS_MAIN = 1,
+  APTOS_TEST = 2,
+  APTOS_DEV = 34,
 }
 
 export const NETWORK_LABELS: { [chainId in SupportedChainId | number]: string } = {
@@ -22,4 +25,7 @@ export const NETWORK_LABELS: { [chainId in SupportedChainId | number]: string } 
   [SupportedChainId.KOVAN]: 'Kovan',
   [SupportedChainId.ARBITRUM_ONE]: 'Arbitrum',
   [SupportedChainId.ARBITRUM_RINKEBY]: 'Arbitrum Testnet',
+  [SupportedChainId.APTOS_MAIN]: 'aptos-mainnet',
+  [SupportedChainId.APTOS_DEV]: 'aptos-devnet',
+  [SupportedChainId.APTOS_TEST]: 'aptos-testnet',
 }

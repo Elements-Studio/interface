@@ -29,6 +29,9 @@ export const NETWORK_URLS: {
   [SupportedChainId.KOVAN]: `https://kovan.infura.io/v3/${ INFURA_KEY }`,
   [SupportedChainId.ARBITRUM_ONE]: `https://arb1.arbitrum.io/rpc`,
   [SupportedChainId.ARBITRUM_RINKEBY]: `https://rinkeby.arbitrum.io/rpc`,
+  [SupportedChainId.APTOS_MAIN]: `https://main-seed.starcoin.org`,
+  [SupportedChainId.APTOS_DEV]: `https://swap-api.starswap.xyz/aptos-devnet/v1`,
+  [SupportedChainId.APTOS_TEST]: `https://swap-api.starswap.xyz/aptos-testnet/v1`,
 }
 
 const SUPPORTED_CHAIN_IDS: SupportedChainId[] = [
@@ -42,6 +45,9 @@ const SUPPORTED_CHAIN_IDS: SupportedChainId[] = [
   SupportedChainId.ROPSTEN,
   SupportedChainId.ARBITRUM_ONE,
   SupportedChainId.ARBITRUM_RINKEBY,
+  SupportedChainId.APTOS_MAIN,
+  SupportedChainId.APTOS_DEV,
+  SupportedChainId.APTOS_TEST,
 ]
 
 export const network = new NetworkConnector({

@@ -1,5 +1,5 @@
 import { WETH9 } from '@uniswap/sdk-core'
-import { Token, Star } from '@starcoin/starswap-sdk-core'
+import { Token, Star, Apt } from '@starcoin/starswap-sdk-core'
 import { UNI_ADDRESS } from './addresses'
 import { SupportedChainId } from './chains'
 
@@ -71,6 +71,27 @@ export const STAR: { [chainId: number]: Token } = {
     'STAR',
     'Star'
   ),
+  [SupportedChainId.APTOS_MAIN]: new Token(
+    SupportedChainId.APTOS_MAIN,
+    '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
+  [SupportedChainId.APTOS_TEST]: new Token(
+    SupportedChainId.APTOS_TEST,
+    '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
+  [SupportedChainId.APTOS_DEV]: new Token(
+    SupportedChainId.APTOS_DEV,
+    '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
 }
 export const XUSDT: { [chainId: number]: Token } = {
   [SupportedChainId.MAINNET]: new Token(
@@ -93,6 +114,50 @@ export const XUSDT: { [chainId: number]: Token } = {
     6,
     'XUSDT',
     'XUSDT'
+  ),
+  [SupportedChainId.APTOS_MAIN]: new Token(
+    SupportedChainId.APTOS_MAIN,
+    '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::XUSDT::XUSDT',
+    6,
+    'XUSDT',
+    'XUSDT'
+  ),
+  [SupportedChainId.APTOS_TEST]: new Token(
+    SupportedChainId.APTOS_TEST,
+    '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::XUSDT::XUSDT',
+    6,
+    'XUSDT',
+    'XUSDT'
+  ),
+  [SupportedChainId.APTOS_DEV]: new Token(
+    SupportedChainId.APTOS_DEV,
+    '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::XUSDT::XUSDT',
+    6,
+    'XUSDT',
+    'XUSDT'
+  ),
+}
+export const APT: { [chainId: number]: Token } = {
+  [SupportedChainId.APTOS_MAIN]: new Token(
+    SupportedChainId.APTOS_MAIN,
+    '0x1::aptos_coin::AptosCoin',
+    8,
+    'APT',
+    'APT'
+  ),
+  [SupportedChainId.APTOS_TEST]: new Token(
+    SupportedChainId.APTOS_TEST,
+    '0x1::aptos_coin::AptosCoin',
+    8,
+    'APT',
+    'APT'
+  ),
+  [SupportedChainId.APTOS_DEV]: new Token(
+    SupportedChainId.APTOS_DEV,
+    '0x1::aptos_coin::AptosCoin',
+    8,
+    'APT',
+    'APT'
   ),
 }
 export const XETH: { [chainId: number]: Token } = {
@@ -324,14 +389,17 @@ export const WETH9_EXTENDED: { [chainId: number]: Token } = {
 // }
 
 export class ExtendedStar extends Star {
-  // public get wrapped(): Token {
-  //   if (this.chainId in WETH9_EXTENDED) return WETH9_EXTENDED[this.chainId]
-  //   throw new Error('Unsupported chain ID')
-  // }
-
   private static _cachedStar: { [chainId: number]: ExtendedStar } = {}
 
   public static onChain(chainId: number): ExtendedStar {
     return this._cachedStar[chainId] ?? (this._cachedStar[chainId] = new ExtendedStar(chainId))
+  }
+}
+
+export class ExtendedApt extends Apt {
+  private static _cachedApt: { [chainId: number]: ExtendedApt } = {}
+
+  public static onChain(chainId: number): ExtendedApt {
+    return this._cachedApt[chainId] ?? (this._cachedApt[chainId] = new ExtendedApt(chainId))
   }
 }

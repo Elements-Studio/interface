@@ -12,6 +12,7 @@ import {
   AMPL,
   DAI,
   ExtendedStar,
+  ExtendedApt,
   FEI,
   FRAX,
   FXS,
@@ -26,6 +27,7 @@ import {
   WBTC,
   ETH2X_FLI,
   WETH9_EXTENDED,
+  APT,
 } from './tokens'
 
 type ChainTokenList = {
@@ -71,6 +73,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [SupportedChainId.MAINNET]: [STC[SupportedChainId.MAINNET]],
   [SupportedChainId.BARNARD]: [STC[SupportedChainId.BARNARD]],
   [SupportedChainId.PROXIMA]: [STC[SupportedChainId.PROXIMA]],
+  [SupportedChainId.APTOS_TEST]: [APT[SupportedChainId.APTOS_TEST]],
 }
 export const ADDITIONAL_BASES: { [chainId: number]: { [tokenAddress: string]: Token[] } } = {
   // [1]: {
@@ -115,6 +118,9 @@ export const COMMON_BASES: ChainCurrencyList = {
     ExtendedStar.onChain(SupportedChainId.ARBITRUM_ONE),
     WETH9_EXTENDED[SupportedChainId.ARBITRUM_ONE],
   ],
+  [SupportedChainId.APTOS_MAIN]: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN), STAR[SupportedChainId.APTOS_MAIN], XUSDT[SupportedChainId.APTOS_MAIN]],
+  [SupportedChainId.APTOS_TEST]: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST), STAR[SupportedChainId.APTOS_TEST], XUSDT[SupportedChainId.APTOS_TEST]],
+  [SupportedChainId.APTOS_DEV]: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV), STAR[SupportedChainId.APTOS_DEV], XUSDT[SupportedChainId.APTOS_DEV]],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
