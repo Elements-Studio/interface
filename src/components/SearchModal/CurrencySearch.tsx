@@ -4,7 +4,7 @@ import ReactGA from 'react-ga'
 import { t, Trans } from '@lingui/macro'
 import { FixedSizeList } from 'react-window'
 import { Text } from 'rebass'
-import { ExtendedStar } from '../../constants/tokens'
+import { ExtendedStar,ExtendedApt } from '../../constants/tokens'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { useAllTokens, useToken, useIsUserAddedToken, useSearchInactiveTokenLists } from '../../hooks/Tokens'
 import { CloseIcon, TYPE, ButtonText, IconWrapper } from '../../theme'
@@ -110,15 +110,15 @@ export function CurrencySearch({
 
   const filteredSortedTokens = useSortedTokensByQuery(sortedTokens, debouncedQuery)
 
-  const star = useMemo(() => chainId && ExtendedStar.onChain(chainId), [chainId])
+  const apt = useMemo(() => chainId && ExtendedApt.onChain(chainId), [chainId])
 
   const filteredSortedTokensWithSTC: Currency[] = useMemo(() => {
     const s = debouncedQuery.toLowerCase().trim()
-    if (s === '' || s === 's' || s === 'st' || s === 'stc') {
-      return star ? [star, ...filteredSortedTokens] : filteredSortedTokens
+    if (s === '' || s === 'a' || s === 'ap' || s === 'apt') {
+      return apt ? [apt, ...filteredSortedTokens] : filteredSortedTokens
     }
     return filteredSortedTokens
-  }, [debouncedQuery, star, filteredSortedTokens])
+  }, [debouncedQuery, apt, filteredSortedTokens])
 
   const handleCurrencySelect = useCallback(
     (currency: Currency) => {
@@ -146,8 +146,8 @@ export function CurrencySearch({
     (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.key === 'Enter') {
         const s = debouncedQuery.toLowerCase().trim()
-        if (s === 'stc' && star) {
-          handleCurrencySelect(star)
+        if (s === 'apt' && apt) {
+          handleCurrencySelect(apt)
         } else if (filteredSortedTokensWithSTC.length > 0) {
           if (filteredSortedTokensWithSTC.length > 0) {
             if (
@@ -160,7 +160,7 @@ export function CurrencySearch({
         }
       }
     },
-    [debouncedQuery, star, filteredSortedTokensWithSTC, handleCurrencySelect]
+    [debouncedQuery, apt, filteredSortedTokensWithSTC, handleCurrencySelect]
   )
 
   // menu ui
