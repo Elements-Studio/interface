@@ -38,7 +38,7 @@ export function useSwapActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency.isToken ? currency.address : currency.isNative ? 'STC' : '',
+          currencyId: currency.isToken ? currency.address : currency.isNative ? (currency.symbol || '') : '',
         })
       )
     },
@@ -135,7 +135,6 @@ export function useDerivedSwapInfo(toggledVersion: Version): {
     [Field.OUTPUT]: { currencyId: outputCurrencyId },
     recipient,
   } = useSwapState()
-
   const inputCurrency = useCurrency(inputCurrencyId)
   const outputCurrency = useCurrency(outputCurrencyId)
   const recipientLookup = useENS(recipient ?? undefined)
@@ -207,7 +206,7 @@ export function useDerivedSwapInfo(toggledVersion: Version): {
   const [balanceIn, amountIn] = [currencyBalances[Field.INPUT], v2Trade?.maximumAmountIn(allowedSlippage)]
 
   if (!balanceIn) {
-    inputError = t`Insufficient ${inputCurrency?.name || ''} balance`
+    inputError = t`Insufficient ${ inputCurrency?.name || '' } balance`
   }
 
   if (balanceIn && amountIn && balanceIn.lessThan(amountIn)) {
@@ -232,6 +231,7 @@ function parseCurrencyFromURLParameter(urlParam: any): string {
     const valid = isAddress(urlParam)
     if (valid) return valid
     if (urlParam.toUpperCase() === 'STC') return 'STC'
+    if (urlParam.toUpperCase() === 'APT') return 'APT'
   }
   return ''
 }
@@ -259,8 +259,8 @@ export function queryParametersToSwapState(parsedQs: ParsedQs): SwapState {
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
   if (inputCurrency === '' && outputCurrency === '') {
-    // default to STC input
-    inputCurrency = 'STC'
+    // default to APT input
+    inputCurrency = 'APT'
   } else if (inputCurrency === outputCurrency) {
     // clear output if identical
     outputCurrency = ''

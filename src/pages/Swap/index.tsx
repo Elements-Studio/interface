@@ -222,15 +222,25 @@ export default function Swap({ history }: RouteComponentProps) {
   let inputPrecision;
   let outputPrecision;
   if (inputCurrency?.isNative === true) {
-    inputTag = '0x00000000000000000000000000000001::STC::STC';
-    inputPrecision = 9;
+    if (inputCurrency?.symbol === 'STC') {
+      inputTag = '0x00000000000000000000000000000001::STC::STC';
+      inputPrecision = 9;
+    } else if (inputCurrency?.symbol === 'APT') {
+      inputTag = '0x1::aptos_coin::AptosCoin';
+      inputPrecision = 8;
+    }
   } else {
     inputTag = trade ? JSON.parse(JSON.stringify(inputCurrency))._checksummedAddress: '';
     inputPrecision = trade ? JSON.parse(JSON.stringify(inputCurrency)).tokenInfo.decimals : 0;
   }
   if (outputCurrency?.isNative === true) {
-    outputTag = '0x00000000000000000000000000000001::STC::STC';
-    outputPrecision = 9;
+    if (inputCurrency?.symbol === 'STC') {
+      outputTag = '0x00000000000000000000000000000001::STC::STC';
+      outputPrecision = 9;
+    } else if (inputCurrency?.symbol === 'APT') {
+      outputTag = '0x1::aptos_coin::AptosCoin';
+      outputPrecision = 8;
+    }
   } else {
     outputTag = trade ? JSON.parse(JSON.stringify(outputCurrency))._checksummedAddress: '';
     outputPrecision = trade ? JSON.parse(JSON.stringify(outputCurrency)).tokenInfo.decimals : 0;

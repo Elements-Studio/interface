@@ -3,7 +3,7 @@ import { Currency, Token } from '@uniswap/sdk-core'
 import { arrayify } from 'ethers/lib/utils'
 import { useMemo } from 'react'
 import { createTokenFilterFunction } from '../components/SearchModal/filtering'
-import { ExtendedStar, WETH9_EXTENDED } from '../constants/tokens'
+import { ExtendedStar, ExtendedApt, WETH9_EXTENDED } from '../constants/tokens'
 import { useAllLists, useCombinedActiveList, useInactiveListUrls } from '../state/lists/hooks'
 import { WrappedTokenInfo } from '../state/lists/wrappedTokenInfo'
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
@@ -118,8 +118,8 @@ function parseStringOrBytes32(str: string | undefined, bytes32: string | undefin
     ? str
     : // need to check for proper bytes string and valid terminator
     bytes32 && BYTES32_REGEX.test(bytes32) && arrayify(bytes32)[31] === 0
-    ? parseBytes32String(bytes32)
-    : defaultValue
+      ? parseBytes32String(bytes32)
+      : defaultValue
 }
 
 // undefined if invalid or does not exist
@@ -177,10 +177,10 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
 
 export function useCurrency(currencyId: string | undefined): Currency | null | undefined {
   const { chainId } = useActiveWeb3React()
-  const isSTC = currencyId?.toUpperCase() === 'STC'
-  const token = useToken(isSTC ? undefined : currencyId)
-  const extendedStar = useMemo(() => (chainId ? ExtendedStar.onChain(chainId) : undefined), [chainId])
+  const isNativeCurrency = ['APT', 'STC'].includes(currencyId?.toUpperCase() || '')
+  const token = useToken(isNativeCurrency ? undefined : currencyId)
+  const extended = useMemo(() => (chainId ? (currencyId?.toUpperCase() === 'STC' ? ExtendedStar.onChain(chainId) : ExtendedApt.onChain(chainId)) : undefined), [chainId])
   const weth = chainId ? WETH9_EXTENDED[chainId] : undefined
   if (weth?.address?.toLowerCase() === currencyId?.toLowerCase()) return weth
-  return isSTC ? extendedStar : token
+  return isNativeCurrency ? extended : token
 }
