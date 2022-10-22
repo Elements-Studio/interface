@@ -22,7 +22,7 @@ export function useRegisterActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency.isToken ? currency.address : currency.isNative ? 'STC' : '',
+          currencyId: currency.isToken ? currency.address : currency.isNative ? (currency.symbol || '') : '',
         })
       )
     },
