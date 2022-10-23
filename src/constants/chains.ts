@@ -54,7 +54,7 @@ export const NETWORK_LABELS: { [chainId in SupportedChainId | number]: string } 
   [SupportedChainId.KOVAN]: 'Kovan',
   [SupportedChainId.ARBITRUM_ONE]: 'Arbitrum',
   [SupportedChainId.ARBITRUM_RINKEBY]: 'Arbitrum Testnet',
-  [SupportedChainId.APTOS_MAIN]: 'aptos-mainnet',
-  [SupportedChainId.APTOS_DEV]: 'aptos-devnet',
-  [SupportedChainId.APTOS_TEST]: 'aptos-testnet',
+  [SupportedChainId.APTOS_MAIN]: 'mainnet',
+  [SupportedChainId.APTOS_DEV]: 'devnet',
+  [SupportedChainId.APTOS_TEST]: 'testnet',
 }
