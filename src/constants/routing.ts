@@ -1,6 +1,6 @@
 // a list of tokens by chain
 import { Currency, Token } from '@uniswap/sdk-core'
-import { SupportedChainId } from './chains'
+import { SupportedChainId, NetworkType, SupportedChainId2, SupportedChainId_STARCOIN, SupportedChainId_APTOS } from './chains'
 import {
   STC,
   STAR,
@@ -26,6 +26,7 @@ import {
   WBTC,
   ETH2X_FLI,
   WETH9_EXTENDED,
+  STAR2
 } from './tokens'
 
 type ChainTokenList = {
@@ -116,6 +117,11 @@ export const COMMON_BASES: ChainCurrencyList = {
     WETH9_EXTENDED[SupportedChainId.ARBITRUM_ONE],
   ],
 }
+
+const networkType1 = NetworkType.STARCOIN
+console.log('STAR2-starcoin-mainnet', networkType1, SupportedChainId2[networkType1].MAINNET, STAR2[networkType1][SupportedChainId_STARCOIN.MAINNET])
+const networkType2 = NetworkType.APTOS
+console.log('STAR2-aptos-main', networkType2, SupportedChainId2[networkType2].MAIN, STAR2[networkType2][SupportedChainId_APTOS.MAIN])
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
