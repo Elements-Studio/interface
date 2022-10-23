@@ -14,6 +14,7 @@ import burn from './burn/reducer'
 import burnV3 from './burn/v3/reducer'
 import multicall from './multicall/reducer'
 import { api } from './data/slice'
+import networktype from './networktype/reducers'
 
 const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists']
 
@@ -30,6 +31,7 @@ const store = configureStore({
     burnV3,
     multicall,
     lists,
+    networktype,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>

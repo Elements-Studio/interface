@@ -1,9 +1,8 @@
-import { useWeb3React } from '@starcoin/starswap-web3-core'
-import { getChainInfo } from 'constants/chainInfo'
+import { getNetworkInfo } from 'constants/chainInfo'
 import { SupportedChainId } from 'constants/chains'
 import { useOnClickOutsideIgnore } from 'hooks/useOnClickOutsideIgnore'
-import useSelectChain from 'hooks/useSelectChain'
-import useSyncChainQuery from 'hooks/useSyncChainQuery'
+// import useSelectChain from 'hooks/useSelectChain'
+// import useSyncChainQuery from 'hooks/useSyncChainQuery'
 import { Box } from 'nft/components/Box'
 import { Portal } from 'nft/components/common/Portal'
 import { Column, Row } from 'nft/components/Flex'
@@ -14,17 +13,15 @@ import { isMobile } from 'react-device-detect'
 import { useCallback, useRef, useState } from 'react'
 import { ChevronDown, ChevronUp } from 'react-feather'
 import { useTheme } from 'styled-components/macro'
+import {useGetType} from 'state/networktype/hooks'
 
 import * as styles from './ChainSelector.css'
 import ChainSelectorRow from './ChainSelectorRow'
 import { NavDropdown } from './NavDropdown'
 
 const NETWORK_SELECTOR_CHAINS = [
-  SupportedChainId.MAINNET,
-  SupportedChainId.POLYGON,
-  SupportedChainId.OPTIMISM,
-  SupportedChainId.ARBITRUM_ONE,
-  SupportedChainId.CELO,
+  'STARCOIN',
+  'APTOS'
 ]
 
 interface ChainSelectorProps {
@@ -32,7 +29,6 @@ interface ChainSelectorProps {
 }
 
 export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
-  const { chainId } = useWeb3React()
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const theme = useTheme()
@@ -41,24 +37,26 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
   const modalRef = useRef<HTMLDivElement>(null)
   useOnClickOutsideIgnore(ref, () => setIsOpen(false), [modalRef])
 
-  const info = chainId ? getChainInfo(chainId) : undefined
+  const networkType = useGetType();
+  const info = networkType ? getNetworkInfo(networkType) : undefined
 
-  const selectChain = useSelectChain()
-  useSyncChainQuery()
+  // const selectChain = useSelectChain()
+  // useSyncChainQuery()
 
-  const [pendingChainId, setPendingChainId] = useState<SupportedChainId | undefined>(undefined)
+  const [pendingChainId, setPendingChainId] = useState<string | undefined>(undefined)
 
   const onSelectChain = useCallback(
-    async (targetChainId: SupportedChainId) => {
+    async (targetChainId: string) => {
       setPendingChainId(targetChainId)
-      await selectChain(targetChainId)
+      // await selectChain(targetChainId)
       setPendingChainId(undefined)
       setIsOpen(false)
     },
-    [selectChain, setIsOpen]
+    // [selectChain, setIsOpen]
+    [setIsOpen]
   )
 
-  if (!chainId) {
+  if (!networkType) {
     return null
   }
 
@@ -67,7 +65,7 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
   const dropdown = (
     <NavDropdown top="56" left={leftAlign ? '0' : 'auto'} right={leftAlign ? 'auto' : '0'} ref={modalRef}>
       <Column paddingX="8">
-        {NETWORK_SELECTOR_CHAINS.map((chainId: SupportedChainId) => (
+        {NETWORK_SELECTOR_CHAINS.map((chainId: string) => (
           <ChainSelectorRow
             onSelectChain={onSelectChain}
             targetChain={chainId}

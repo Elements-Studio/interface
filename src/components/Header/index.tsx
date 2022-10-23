@@ -24,6 +24,7 @@ import { Dots } from '../swap/styleds'
 import Web3Status from '../Web3Status'
 import NetworkCard from './NetworkCard'
 import UniBalanceContent from './UniBalanceContent'
+import { ChainSelector } from 'components/NavBar/ChainSelector'
 
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
   display: grid;
@@ -393,6 +394,7 @@ export default function Header() {
       </HeaderLinks>
       <HeaderControls>
         <HeaderElement>
+          <ChainSelector />
           <HideSmall>
             <NetworkCard />
           </HideSmall>

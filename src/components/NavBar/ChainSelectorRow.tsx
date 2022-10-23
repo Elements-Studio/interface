@@ -1,9 +1,8 @@
-import { useWeb3React } from '@starcoin/starswap-web3-core'
 import Loader from 'components/Loader'
-import { getChainInfo } from 'constants/chainInfo'
-import { SupportedChainId } from 'constants/chains'
+import { getNetworkInfo } from 'constants/chainInfo'
 import { CheckMarkIcon } from 'nft/components/icons'
 import styled, { useTheme } from 'styled-components/macro'
+import {useGetType} from 'state/networktype/hooks'
 
 const LOGO_SIZE = 20
 
@@ -65,13 +64,13 @@ export default function ChainSelectorRow({
   onSelectChain,
   isPending,
 }: {
-  targetChain: SupportedChainId
-  onSelectChain: (targetChain: number) => void
+  targetChain: string
+  onSelectChain: (targetChain: string) => void
   isPending: boolean
 }) {
-  const { chainId } = useWeb3React()
-  const active = chainId === targetChain
-  const { label, logoUrl } = getChainInfo(targetChain)
+  const networkType = useGetType()
+  const active = networkType === targetChain
+  const { label, logoUrl } = getNetworkInfo(targetChain)
 
   const theme = useTheme()
 
