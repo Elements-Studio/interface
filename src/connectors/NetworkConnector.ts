@@ -1,6 +1,7 @@
 import { ConnectorUpdate } from '@web3-react/types'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import invariant from 'tiny-invariant'
+import { NETWORK_LABELS } from '../constants/chains'
 
 interface NetworkConnectorArguments {
   urls: { [chainId: number]: string }
@@ -50,11 +51,8 @@ export class MiniRpcProvider implements AsyncSendable {
     this.batchWaitTimeMs = batchWaitTimeMs ?? 50
   }
 
-  public readonly clearBatch = async () => {
-    console.debug('Clearing batch', this.batch)
-    const batch = this.batch
-    this.batch = []
-    this.batchTimeoutId = null
+  private readonly handleBatchStarcoin = async (batch: BatchItem[]) => {
+    console.log('handleBatchStarcoin', this.url, { batch })
     let response: Response
     try {
       response = await fetch(this.url, {
@@ -68,7 +66,7 @@ export class MiniRpcProvider implements AsyncSendable {
     }
 
     if (!response.ok) {
-      batch.forEach(({ reject }) => reject(new RequestError(`${response.status}: ${response.statusText}`, -32000)))
+      batch.forEach(({ reject }) => reject(new RequestError(`${ response.status }: ${ response.statusText }`, -32000)))
       return
     }
 
@@ -94,8 +92,75 @@ export class MiniRpcProvider implements AsyncSendable {
       } else if ('result' in result && resolve) {
         resolve(result.result)
       } else {
-        reject(new RequestError(`Received unexpected JSON-RPC response to ${method} request.`, -32000, result))
+        reject(new RequestError(`Received unexpected JSON-RPC response to ${ method } request.`, -32000, result))
       }
+    }
+  }
+
+  private readonly handleBatchAptos = async (batch: BatchItem[]) => {
+    console.log('handleBatchAptos', this.url, { batch })
+
+    batch.forEach(async ({ request, resolve, reject }) => {
+      console.log({ request })
+      let response: Response
+      let fetchMethod = 'GET'
+      let fetchUrl = this.url  // default for chain.id, chain.info
+      const { method, params } = request
+      if (method === 'state.list_resource' || method === 'getAccountResources') {
+        fetchUrl = `${ fetchUrl }accounts/${ (params as unknown[])[0] }/resources`
+      }
+      if (method === 'getAccount') {
+        fetchUrl = `${ fetchUrl }accounts/${ (params as unknown[])[0] }`
+      }
+      if (method === 'getAccountResource') {
+        fetchUrl = `${ fetchUrl }accounts/${ (params as unknown[])[0] }/resource/${ encodeURI((params as unknown[])[1] as string) }`
+      }
+      if (method === 'chain.get_transaction_info') {
+        fetchUrl = `${ fetchUrl }transactions/by_hash/${ (params as unknown[])[0] }`
+      }
+      try {
+        response = await fetch(fetchUrl, {
+          method: fetchMethod,
+          headers: { 'content-type': 'application/json', accept: 'application/json' },
+        })
+      } catch (error) {
+        reject(new Error('Failed to send batch call'))
+        return
+      }
+      console.log({ response })
+      let data
+      try {
+        data = await response.json()
+      } catch (error) {
+        reject(new Error('Failed to parse JSON response'))
+        return
+      }
+      console.log({ data })
+      let result
+      switch (method) {
+        case 'chain.id':
+          result = { id: data.chain_id, name: NETWORK_LABELS[data.chain_id] }
+          break;
+        case 'chain.info':
+          result = { head: { number: Number(data.block_height) } }
+          break;
+        default:
+          result = data
+      }
+      console.log({ result })
+      resolve(result)
+    })
+  }
+
+  public readonly clearBatch = async () => {
+    console.debug('Clearing batch')
+    const batch = this.batch
+    this.batch = []
+    this.batchTimeoutId = null
+    if (/aptoslabs\.com/.test(this.url)) {
+      await this.handleBatchAptos(batch)
+    } else {
+      await this.handleBatchStarcoin(batch)
     }
   }
 
@@ -121,7 +186,7 @@ export class MiniRpcProvider implements AsyncSendable {
       return this.request(method.method, method.params)
     }
     if (method === 'eth_chainId') {
-      return `0x${this.chainId.toString(16)}`
+      return `0x${ this.chainId.toString(16) }`
     }
     const promise = new Promise((resolve, reject) => {
       this.batch.push({
