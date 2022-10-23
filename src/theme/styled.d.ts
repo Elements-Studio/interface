@@ -57,6 +57,36 @@ export interface Colors {
   error: Color
   success: Color
   warning: Color
+
+  textPrimary: Color
+  textSecondary: Color
+
+  backgroundOutline: Color
+
+  accentActive: Color
+
+  breakpoint: {
+    sm: number
+    md: number
+    lg: number
+    xl: number
+    xxl: number
+    xxxl: number
+  }
+
+  transition: {
+    duration: {
+      slow: string
+      medium: string
+      fast: string
+    }
+    timing: {
+      ease: string
+      in: string
+      out: string
+      inOut: string
+    }
+  }
 }
 
 export interface Grids {

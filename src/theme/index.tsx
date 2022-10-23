@@ -35,6 +35,29 @@ const mediaWidthTemplates: { [width in keyof typeof MEDIA_WIDTHS]: typeof css } 
 const white = '#FFFFFF'
 const black = '#000000'
 
+const BREAKPOINTS = {
+  sm: 640,
+  md: 768,
+  lg: 1024,
+  xl: 1280,
+  xxl: 1536,
+  xxxl: 1920,
+}
+
+const transitions = {
+  duration: {
+    slow: '500ms',
+    medium: '250ms',
+    fast: '125ms',
+  },
+  timing: {
+    ease: 'ease',
+    in: 'ease-in',
+    out: 'ease-out',
+    inOut: 'ease-in-out',
+  },
+}
+
 export function colors(darkMode: boolean): Colors {
   return {
     // base
@@ -100,6 +123,17 @@ export function colors(darkMode: boolean): Colors {
     // dont wanna forget these blue yet
     blue4: darkMode ? '#153d6f70' : '#C4D9F8',
     // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
+
+    textPrimary: darkMode ? '#FFFFFF' : '#0E111A',
+    textSecondary: darkMode ? '#99A1BD' : '#5E6887',
+
+    backgroundOutline: darkMode ? 'rgba(153,161,189,0.24)' : 'rgba(94,104,135,0.24)',
+
+    breakpoint: BREAKPOINTS,
+
+    transition: transitions,
+
+    accentActive: '#4C82FB'
   }
 }
 
