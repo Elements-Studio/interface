@@ -1,4 +1,4 @@
-import { Currency, Token, CurrencyAmount, Star } from '@starcoin/starswap-sdk-core'
+import { Currency, Token, CurrencyAmount, Star, Apt } from '@starcoin/starswap-sdk-core'
 import JSBI from 'jsbi'
 import { useMemo } from 'react'
 import { UNI } from '../../constants/tokens'
@@ -6,6 +6,7 @@ import { useActiveWeb3React } from '../../hooks/web3'
 import { useAllTokens } from '../../hooks/Tokens'
 // import { useMulticall2Contract } from '../../hooks/useContract'
 import { isAddress } from '../../utils'
+import getNetworkType from '../../utils/getNetworkType'
 import { useUserUnclaimedAmount } from '../claim/hooks'
 // import { useMultipleContractSingleData, useSingleContractMultipleData } from '../multicall/hooks'
 import { useTotalUniEarned } from '../stake/hooks'
@@ -28,9 +29,9 @@ export function useSTCBalances(uncheckedAddresses?: (string | undefined)[]): {
     () =>
       uncheckedAddresses
         ? uncheckedAddresses
-            .map(isAddress)
-            .filter((a): a is string => a !== false)
-            .sort()
+          .map(isAddress)
+          .filter((a): a is string => a !== false)
+          .sort()
         : [],
     [uncheckedAddresses]
   )
@@ -40,17 +41,38 @@ export function useSTCBalances(uncheckedAddresses?: (string | undefined)[]): {
   //   'getEthBalance',
   //   addresses.map((address) => [address])
   // )
+
+  const networkType = getNetworkType()
   const provider = useStarcoinProvider()
+
   const { data: results } = useSWR(addresses.length ? [provider, 'getBalance', ...addresses] : null, () =>
-    Promise.all(addresses.map((address) => provider!.getBalance(address)))
+    Promise.all(addresses.map((address) => {
+      if (networkType === 'APTOS') {
+        return new Promise(async (resolve, reject) => {
+          try {
+            const response = await provider!.send('getAccountResource', [address, '0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>'])
+            resolve(response.data.coin.value)
+          } catch (error) {
+            reject(error)
+          }
+        })
+      } else {
+        return provider!.getBalance(address)
+      }
+    }))
   )
 
   return useMemo(
     () =>
       addresses.reduce<{ [address: string]: CurrencyAmount<Currency> }>((memo, address, i) => {
         const value = results?.[i]
-        if (value && chainId)
-          memo[address] = CurrencyAmount.fromRawAmount(Star.onChain(chainId), JSBI.BigInt(value.toString()))
+        if (value && chainId) {
+          if (networkType === 'APTOS') {
+            memo[address] = CurrencyAmount.fromRawAmount(Apt.onChain(chainId), JSBI.BigInt((value as number).toString()))
+          } else {
+            memo[address] = CurrencyAmount.fromRawAmount(Star.onChain(chainId), JSBI.BigInt((value as number).toString()))
+          }
+        }
         return memo
       }, {}),
     [addresses, chainId, results]
@@ -92,13 +114,13 @@ export function useTokenBalancesWithLoadingIndicator(
       () =>
         address && validatedTokens.length > 0
           ? validatedTokens.reduce<{ [tokenAddress: string]: CurrencyAmount<Token> | undefined }>((memo, token, i) => {
-              const value = balances?.[i]
-              const amount = value ? JSBI.BigInt(value.toString()) : undefined
-              if (amount) {
-                memo[token.address] = CurrencyAmount.fromRawAmount(token, amount)
-              }
-              return memo
-            }, {})
+            const value = balances?.[i]
+            const amount = value ? JSBI.BigInt(value.toString()) : undefined
+            if (amount) {
+              memo[token.address] = CurrencyAmount.fromRawAmount(token, amount)
+            }
+            return memo
+          }, {})
           : {},
       [address, validatedTokens, balances]
     ),

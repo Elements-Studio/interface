@@ -7,6 +7,12 @@ export const STCSCAN_SUFFIXES: { [chainId: number]: string } = {
   [SupportedChainId.HALLEY]: 'halley',
 }
 
+export const APTOS_SUFFIXES: { [chainId: number]: string } = {
+  [SupportedChainId.APTOS_MAIN]: 'mainnet',
+  [SupportedChainId.APTOS_TEST]: 'testnet',
+  [SupportedChainId.APTOS_DEV]: 'devnet',
+}
+
 export enum ExplorerDataType {
   TRANSACTION = 'transaction',
   // TOKEN = 'token',

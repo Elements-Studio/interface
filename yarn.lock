@@ -3949,10 +3949,10 @@
     bech32 "1.1.4"
     ws "7.2.3"
 
-"@starcoin/starcoin@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@starcoin/starcoin/-/starcoin-2.1.0.tgz#4727fd60044133ee3c4f97954b86e115948ac1ba"
-  integrity sha512-sPmNetZvIYmGvso71MFeihka2qLHcZJjLwq5x3xFN4bqfHzdpNsKG7QIrnchbzcuiqkoi509Os/kMxs61+zYHw==
+"@starcoin/starcoin@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@starcoin/starcoin/-/starcoin-2.3.1.tgz#f927bdbd19861b57c2e2a62191f7b5ffbec6434b"
+  integrity sha512-eKZwAbKmVpn9UEqpKPSkwhT3ULn1maeoHINi0Mh0zhV3rNgMJ9xseoHs5kdiM6+Jf0VBBRaSuO11sl0HxPQfGw==
   dependencies:
     "@ethersproject/basex" "^5.0.4"
     "@ethersproject/bignumber" "^5.0"
@@ -3976,7 +3976,6 @@
     js-sha3 "^0.8.0"
     jssha "^3.2.0"
     lodash "^4.17.21"
-    read-bigint "^0.1.6"
     ws "7.2.3"
 
 "@starcoin/starswap-sdk-core@^0.4.1":
@@ -4040,6 +4039,21 @@
   version "0.4.1"
   resolved "https://registry.npmjs.org/@starcoin/stc-util/-/stc-util-0.4.1.tgz#3ad13dc5dfca76a9f71544261e544a440650c4a7"
   integrity sha512-KaNVfmiBH+y6AGgbV0iqEkLbfXjMBw27xYAoS+JC9fEthUvo3ff5vzVBLJEjWiXuOxaJ4V0DkCBbQ4q7jEoPuQ==
+  dependencies:
+    "@starcoin/stc-ed25519" "^0.1.0"
+    bn.js "^4.11.0"
+    create-hash "^1.1.2"
+    ethjs-util "0.1.6"
+    js-sha3 "^0.8.0"
+    keccak "^1.0.2"
+    rlp "^2.0.0"
+    safe-buffer "^5.1.1"
+    secp256k1 "^3.0.1"
+
+"@starcoin/stc-util@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@starcoin/stc-util/-/stc-util-0.6.0.tgz#96d721fab2156ceccb9e7427fa2f37cce73076f7"
+  integrity sha512-G7nrEPijZHF5MEgaC5x5A+28u5Xm3oOAHZfJyzplC6A9vrlGWmqi14z0IEio4k4K50XgyQ+i7s1ClSorgtgrrg==
   dependencies:
     "@starcoin/stc-ed25519" "^0.1.0"
     bn.js "^4.11.0"
@@ -16638,11 +16652,6 @@ react@^17.0.1:
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
-
-read-bigint@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/read-bigint/-/read-bigint-0.1.6.tgz#451fdb5ef5a9bb425fba1f92511038e2a54e5f26"
-  integrity sha512-WHfCMBWes972LRSGYb1/mTW6yy83DQ28Lj94TfVM1HIhFf2I7Di09bUoc8+pPsx4JXgEge2r0d9y+7lj6x3j4g==
 
 read-pkg-up@^3.0.0:
   version "3.0.0"
