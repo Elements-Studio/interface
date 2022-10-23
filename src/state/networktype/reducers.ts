@@ -12,6 +12,6 @@ const initialState: NetWorkTypeState = {
 export default createReducer(initialState, (builder) => 
     builder
         .addCase(setType, (state, action) => {
-            state.type = action.type;
+            state.type = action.payload.key;
         })
 )

@@ -1,7 +1,7 @@
 import { getNetworkInfo } from 'constants/chainInfo'
 import { SupportedChainId } from 'constants/chains'
 import { useOnClickOutsideIgnore } from 'hooks/useOnClickOutsideIgnore'
-// import useSelectChain from 'hooks/useSelectChain'
+import useSelectNetWork from 'hooks/useSelectNetWork'
 // import useSyncChainQuery from 'hooks/useSyncChainQuery'
 import { Box } from 'nft/components/Box'
 import { Portal } from 'nft/components/common/Portal'
@@ -40,7 +40,7 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
   const networkType = useGetType();
   const info = networkType ? getNetworkInfo(networkType) : undefined
 
-  // const selectChain = useSelectChain()
+  const selectChain = useSelectNetWork()
   // useSyncChainQuery()
 
   const [pendingChainId, setPendingChainId] = useState<string | undefined>(undefined)
@@ -48,12 +48,12 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
   const onSelectChain = useCallback(
     async (targetChainId: string) => {
       setPendingChainId(targetChainId)
-      // await selectChain(targetChainId)
+      await selectChain(targetChainId)
       setPendingChainId(undefined)
       setIsOpen(false)
     },
     // [selectChain, setIsOpen]
-    [setIsOpen]
+    [selectChain]
   )
 
   if (!networkType) {
