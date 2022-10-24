@@ -23,7 +23,7 @@
     "@starcoin/starcoin": "^2.3.1",
     "@starcoin/starswap-sdk-core": "^0.4.1",
     "@starcoin/starswap-v2-sdk": "^0.4.0",
-    "@starcoin/starswap-web3-core": "^0.3.0",
+    "@starcoin/starswap-web3-core": "^0.3.1",
     "@starcoin/starswap-web3-injected-connector": "^0.2.0",
     "@starcoin/starswap-web3-openblock-connector": "^0.1.1",
     "@starcoin/stc-util": "^0.6.0",
