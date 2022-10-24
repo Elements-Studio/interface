@@ -101,21 +101,39 @@ export function useTokenBalancesWithLoadingIndicator(
   //   undefined,
   //   100_000
   // )
+  const networkType = getNetworkType()
   const provider = useStarcoinProvider()
   const { data: balances, isValidating } = useSWR(
     address && validatedTokens.length
       ? [provider, 'getBalance', address, ...validatedTokens.map((token) => token.address)]
       : null,
-    () => Promise.all(validatedTokens.map((token) => provider.getBalance(address!.toLowerCase(), token.address)))
+    () => Promise.all(validatedTokens.map((token) => {
+      if (networkType === 'APTOS') {
+        return new Promise(async (resolve, reject) => {
+          try {
+            const response = await provider!.send('getAccountResource', [address, `0x1::coin::CoinStore<${ token.address }>`])
+            resolve(response.data.coin.value)
+          } catch (error: any) {
+            console.error(error)
+            const errInfo = error.message && JSON.parse(error.message)
+            if (errInfo && errInfo.error_code === 'resource_not_found') {
+              resolve(0)
+            }
+            reject(error)
+          }
+        })
+      } else {
+        return provider.getBalance(address!.toLowerCase(), token.address)
+      }
+    }))
   )
-
   return [
     useMemo(
       () =>
         address && validatedTokens.length > 0
           ? validatedTokens.reduce<{ [tokenAddress: string]: CurrencyAmount<Token> | undefined }>((memo, token, i) => {
             const value = balances?.[i]
-            const amount = value ? JSBI.BigInt(value.toString()) : undefined
+            const amount = value ? JSBI.BigInt((value as number).toString()) : undefined
             if (amount) {
               memo[token.address] = CurrencyAmount.fromRawAmount(token, amount)
             }
