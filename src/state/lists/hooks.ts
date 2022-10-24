@@ -53,6 +53,9 @@ function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddress
     [SupportedChainId.PROXIMA]: { ...map1[SupportedChainId.PROXIMA], ...map2[SupportedChainId.PROXIMA] },
     [SupportedChainId.BARNARD]: { ...map1[SupportedChainId.BARNARD], ...map2[SupportedChainId.BARNARD] },
     [SupportedChainId.HALLEY]: { ...map1[SupportedChainId.HALLEY], ...map2[SupportedChainId.HALLEY] },
+    [SupportedChainId.APTOS_MAIN]: { ...map1[SupportedChainId.APTOS_MAIN], ...map2[SupportedChainId.APTOS_MAIN] },
+    [SupportedChainId.APTOS_TEST]: { ...map1[SupportedChainId.APTOS_TEST], ...map2[SupportedChainId.APTOS_TEST] },
+    [SupportedChainId.APTOS_DEV]: { ...map1[SupportedChainId.APTOS_DEV], ...map2[SupportedChainId.APTOS_DEV] },
   }
 }
 
