@@ -9,6 +9,10 @@ const MAINNET_AND_TESTNETS = [
   SupportedChainId.RINKEBY,
   SupportedChainId.GOERLI,
   SupportedChainId.KOVAN,
+  SupportedChainId.APTOS_MAIN,
+  SupportedChainId.APTOS_TEST,
+  SupportedChainId.APTOS_DEV,
+
 ]
 
 export function constructSameAddressMap<T extends string>(

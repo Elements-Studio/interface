@@ -73,7 +73,9 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [SupportedChainId.MAINNET]: [STC[SupportedChainId.MAINNET]],
   [SupportedChainId.BARNARD]: [STC[SupportedChainId.BARNARD]],
   [SupportedChainId.PROXIMA]: [STC[SupportedChainId.PROXIMA]],
+  [SupportedChainId.APTOS_MAIN]: [APT[SupportedChainId.APTOS_MAIN]],
   [SupportedChainId.APTOS_TEST]: [APT[SupportedChainId.APTOS_TEST]],
+  [SupportedChainId.APTOS_DEV]: [APT[SupportedChainId.APTOS_DEV]],
 }
 export const ADDITIONAL_BASES: { [chainId: number]: { [tokenAddress: string]: Token[] } } = {
   // [1]: {
@@ -130,6 +132,9 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   [SupportedChainId.MAINNET]: [ExtendedStar.onChain(SupportedChainId.MAINNET).wrapped],
   [SupportedChainId.BARNARD]: [ExtendedStar.onChain(SupportedChainId.BARNARD).wrapped],
   [SupportedChainId.PROXIMA]: [ExtendedStar.onChain(SupportedChainId.PROXIMA).wrapped],
+  [SupportedChainId.APTOS_MAIN]: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN).wrapped],
+  [SupportedChainId.APTOS_TEST]: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST).wrapped],
+  [SupportedChainId.APTOS_DEV]: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV).wrapped],
 }
 export const PINNED_PAIRS: { readonly [chainId: number]: [Token, Token][] } = {
   // [1]: [
