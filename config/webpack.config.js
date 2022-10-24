@@ -389,6 +389,14 @@ module.exports = function (webpackEnv) {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
             },
+            // fix: Can't import the named export 'bytesToHex' from non EcmaScript module (only default export is available) 
+            // https://github.com/aptos-labs/aptos-core/issues/4601
+            // because aptos sdk format is mjs, not umd as starcoin sdk
+            {
+              test: /\.mjs$/,
+              include: /node_modules/,
+              type: "javascript/auto",
+            },
             // Process application JS with Babel.
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
             {
