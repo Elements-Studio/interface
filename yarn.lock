@@ -4000,10 +4000,10 @@
     tiny-invariant "^1.1.0"
     tiny-warning "^1.0.3"
 
-"@starcoin/starswap-web3-core@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@starcoin/starswap-web3-core/-/starswap-web3-core-0.3.0.tgz#aa7c18a6b082ed7029091d136267e642283b54a6"
-  integrity sha512-ctKFtyW1xeooBeb0y/K37Np0EyfDLl/sHYKrPJ86gIeZhSpTd2FdRG74oQ29Qa8KlAPas/nluYQA3UPDif0VkQ==
+"@starcoin/starswap-web3-core@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@starcoin/starswap-web3-core/-/starswap-web3-core-0.3.1.tgz#5ac290dcb7f876a54f2c12f39e83f10fdc5591e2"
+  integrity sha512-KpoYFFsFSbDWhtGy+zMKp+Os+Q8fJZddJ19gymELpA81/wweFMLKdMUFijJaI1UJvdS8RoFd3w6X/ubJQ2k9qA==
   dependencies:
     "@ethersproject/keccak256" "^5.0.0-beta.130"
     "@starcoin/stc-util" "^0.4.1"
