@@ -5,9 +5,18 @@ import { FACTORY_ADDRESS as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk
 import { useCallback } from 'react'
 import { useStarcoinProvider } from './useStarcoinProvider'
 import { TransactionPayloadVariantScriptFunction } from '@starcoin/starcoin/dist/src/lib/runtime/starcoin_types'
+import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import { useTransactionExpirationSecs } from './useTransactionDeadline'
+import BigNumber from 'bignumber.js'
+import getNetworkType from '../utils/getNetworkType'
 
-const PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapScripts::`
+const networkType = getNetworkType()
+
+console.log({ networkType })
+
+const ADDRESS = networkType === 'APTOS' ? '0x0c3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716' : V2_FACTORY_ADDRESS
+const MODULE = 'TokenSwapScripts'
+const PREFIX = `${ ADDRESS }::${ MODULE }::`
 
 function serializeU128(value: string | number): string {
   const se = new bcs.BcsSerializer()
@@ -46,24 +55,59 @@ export function useSwapExactTokenForToken(signer?: string) {
   const expiredSecs = useTransactionExpirationSecs()
   return useCallback(
     async (x: string, y: string, midPath: Token[], amount_x_in: number | string, amount_y_out_min: number | string) => {
-      let functionId
-      let tyArgs
-      if (midPath.length === 1) {
-        // X -> R -> Y
-        functionId = `${ PREFIX }swap_exact_token_for_token_router2`
-        tyArgs = utils.tx.encodeStructTypeTags([x, midPath[0].address, y])
-      } else {
-        // X -> Y
-        functionId = `${ PREFIX }swap_exact_token_for_token`
-        tyArgs = utils.tx.encodeStructTypeTags([x, y])
-      }
+      console.log('useSwapExactTokenForToken', { networkType, x, y, midPath, amount_x_in, amount_y_out_min })
+      let transactionHash: string
+      if (networkType === 'APTOS') {
+        let func
+        let tyArgs
 
-      const args = [arrayify(serializeU128(amount_x_in)), arrayify(serializeU128(amount_y_out_min))]
-      const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
-      const transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
-        data: serializeScriptFunction(scriptFunction),
-        expiredSecs,
-      })
+        if (midPath.length === 1) {
+          // X -> R -> Y
+          func = 'swap_exact_token_for_token_router2'
+          tyArgs = [
+            new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(x)),
+            new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(midPath[0].address)),
+            new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(y))
+          ]
+        } else {
+          // X -> Y
+          func = 'swap_exact_token_for_token'
+          tyArgs = [
+            new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(x)),
+            new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(y))
+          ]
+        }
+        const args = [BCS.bcsSerializeUint64(new BigNumber(amount_x_in).toNumber()), BCS.bcsSerializeUint64(new BigNumber(amount_y_out_min).toNumber())]
+        const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
+          TxnBuilderTypes.EntryFunction.natural(
+            `${ ADDRESS }::${ MODULE }`,
+            func,
+            tyArgs,
+            args,
+          ),
+        );
+        transactionHash = hexlify(BCS.bcsToBytes(entryFunctionPayload))
+        console.log({ transactionHash })
+      } else {
+        let func
+        let tyArgs
+        if (midPath.length === 1) {
+          // X -> R -> Y
+          func = 'swap_exact_token_for_token_router2'
+          tyArgs = utils.tx.encodeStructTypeTags([x, midPath[0].address, y])
+        } else {
+          // X -> Y
+          func = 'swap_exact_token_for_token'
+          tyArgs = utils.tx.encodeStructTypeTags([x, y])
+        }
+        const functionId = `${ ADDRESS }::${ MODULE }::${ func }`
+        const args = [arrayify(serializeU128(amount_x_in)), arrayify(serializeU128(amount_y_out_min))]
+        const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
+        transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
+          data: serializeScriptFunction(scriptFunction),
+          expiredSecs,
+        })
+      }
       return transactionHash
     },
     [provider, signer, expiredSecs]
@@ -74,27 +118,34 @@ export function useSwapExactTokenForToken(signer?: string) {
  * 通过指定换出的代币额度来置换代币
  */
 export function useSwapTokenForExactToken(signer?: string) {
+  console.log('useSwapTokenForExactToken')
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
   return useCallback(
     async (x: string, y: string, midPath: Token[], amount_x_in_max: number | string, amount_y_out: number | string) => {
-      let functionId
-      let tyArgs
-      if (midPath.length === 1) {
-        // X <- R <- Y
-        functionId = `${ PREFIX }swap_token_for_exact_token_router2`
-        tyArgs = utils.tx.encodeStructTypeTags([x, midPath[0].address, y])
+      console.log('useSwapTokenForExactToken', { networkType, x, y, midPath, amount_x_in_max, amount_y_out })
+      let transactionHash: string
+      if (networkType === 'APTOS') {
+        transactionHash = ''
       } else {
-        // X <- Y
-        functionId = `${ PREFIX }swap_token_for_exact_token`
-        tyArgs = utils.tx.encodeStructTypeTags([x, y])
+        let functionId
+        let tyArgs
+        if (midPath.length === 1) {
+          // X <- R <- Y
+          functionId = `${ PREFIX }swap_token_for_exact_token_router2`
+          tyArgs = utils.tx.encodeStructTypeTags([x, midPath[0].address, y])
+        } else {
+          // X <- Y
+          functionId = `${ PREFIX }swap_token_for_exact_token`
+          tyArgs = utils.tx.encodeStructTypeTags([x, y])
+        }
+        const args = [arrayify(serializeU128(amount_x_in_max)), arrayify(serializeU128(amount_y_out))]
+        const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
+        transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
+          data: serializeScriptFunction(scriptFunction),
+          expiredSecs,
+        })
       }
-      const args = [arrayify(serializeU128(amount_x_in_max)), arrayify(serializeU128(amount_y_out))]
-      const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
-      const transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
-        data: serializeScriptFunction(scriptFunction),
-        expiredSecs,
-      })
       return transactionHash
     },
     [provider, signer, expiredSecs]
