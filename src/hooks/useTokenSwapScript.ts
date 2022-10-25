@@ -1,7 +1,7 @@
 import { bcs, utils } from '@starcoin/starcoin'
 import { arrayify, hexlify } from '@ethersproject/bytes'
 import { Token } from '@starcoin/starswap-sdk-core'
-import { FACTORY_ADDRESS as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
+import { useV2FactoryAddress } from './useV2FactoryAddress'
 import { useCallback } from 'react'
 import { useStarcoinProvider } from './useStarcoinProvider'
 import { TransactionPayloadVariantScriptFunction } from '@starcoin/starcoin/dist/src/lib/runtime/starcoin_types'
@@ -12,9 +12,7 @@ import getNetworkType from '../utils/getNetworkType'
 
 const networkType = getNetworkType()
 
-const ADDRESS = networkType === 'APTOS' ? '0x0c3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716' : V2_FACTORY_ADDRESS
 const MODULE = 'TokenSwapScripts'
-const PREFIX = `${ ADDRESS }::${ MODULE }::`
 
 function serializeU128(value: string | number): string {
   const se = new bcs.BcsSerializer()
@@ -32,7 +30,8 @@ export function useRegisterSwapPair(signer?: string) {
   const provider = useStarcoinProvider()
   return useCallback(
     async (x: string, y: string) => {
-      const functionId = `${ PREFIX }register_swap_pair`
+      const ADDRESS = useV2FactoryAddress()
+      const functionId = `${ ADDRESS }::${ MODULE }::register_swap_pair`
       const tyArgs = utils.tx.encodeStructTypeTags([x, y])
       const args: Uint8Array[] = []
       const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
@@ -53,6 +52,7 @@ export function useSwapExactTokenForToken(signer?: string) {
   const expiredSecs = useTransactionExpirationSecs()
   return useCallback(
     async (x: string, y: string, midPath: Token[], amount_x_in: number | string, amount_y_out_min: number | string) => {
+      const ADDRESS = useV2FactoryAddress()
       let payloadHex: string
       if (networkType === 'APTOS') {
         let func
@@ -119,8 +119,8 @@ export function useSwapTokenForExactToken(signer?: string) {
   const expiredSecs = useTransactionExpirationSecs()
   return useCallback(
     async (x: string, y: string, midPath: Token[], amount_x_in_max: number | string, amount_y_out: number | string) => {
+      const ADDRESS = useV2FactoryAddress()
       let payloadHex: string
-
       if (networkType === 'APTOS') {
         let func
         let tyArgs
@@ -156,11 +156,11 @@ export function useSwapTokenForExactToken(signer?: string) {
         let tyArgs
         if (midPath.length === 1) {
           // X <- R <- Y
-          functionId = `${ PREFIX }swap_token_for_exact_token_router2`
+          functionId = `${ ADDRESS }::${ MODULE }::swap_token_for_exact_token_router2`
           tyArgs = utils.tx.encodeStructTypeTags([x, midPath[0].address, y])
         } else {
           // X <- Y
-          functionId = `${ PREFIX }swap_token_for_exact_token`
+          functionId = `${ ADDRESS }::${ MODULE }::swap_token_for_exact_token`
           tyArgs = utils.tx.encodeStructTypeTags([x, y])
         }
         const args = [arrayify(serializeU128(amount_x_in_max)), arrayify(serializeU128(amount_y_out))]
@@ -193,17 +193,55 @@ export function useAddLiquidity(signer?: string) {
       amount_x_min: number | string,
       amount_y_min: number | string
     ) => {
-      const functionId = `${ PREFIX }add_liquidity`
-      const tyArgs = utils.tx.encodeStructTypeTags([x, y])
-      const args = [
-        arrayify(serializeU128(amount_x_desired)),
-        arrayify(serializeU128(amount_y_desired)),
-        arrayify(serializeU128(amount_x_min)),
-        arrayify(serializeU128(amount_y_min)),
-      ]
-      const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
+      console.log('useAddLiquidity', {
+        x,
+        y,
+        amount_x_desired,
+        amount_y_desired,
+        amount_x_min,
+        amount_y_min
+      })
+      const ADDRESS = useV2FactoryAddress()
+
+      let payloadHex: string
+
+      if (networkType === 'APTOS') {
+        const func = 'add_liquidity'
+        const tyArgs = [
+          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(x)),
+          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(y))
+        ]
+
+        const args = [
+          BCS.bcsSerializeU128(new BigNumber(amount_x_desired).toNumber()),
+          BCS.bcsSerializeU128(new BigNumber(amount_y_desired).toNumber()),
+          BCS.bcsSerializeU128(new BigNumber(amount_x_min).toNumber()),
+          BCS.bcsSerializeU128(new BigNumber(amount_y_min).toNumber()),
+        ]
+        const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
+          TxnBuilderTypes.EntryFunction.natural(
+            `${ ADDRESS }::${ MODULE }`,
+            func,
+            tyArgs,
+            args,
+          ),
+        );
+        payloadHex = hexlify(BCS.bcsToBytes(entryFunctionPayload))
+      } else {
+        const functionId = `${ ADDRESS }::${ MODULE }::add_liquidity`
+        const tyArgs = utils.tx.encodeStructTypeTags([x, y])
+        const args = [
+          arrayify(serializeU128(amount_x_desired)),
+          arrayify(serializeU128(amount_y_desired)),
+          arrayify(serializeU128(amount_x_min)),
+          arrayify(serializeU128(amount_y_min)),
+        ]
+        const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
+        payloadHex = serializeScriptFunction(scriptFunction)
+      }
+
       const transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
-        data: serializeScriptFunction(scriptFunction),
+        data: payloadHex,
         expiredSecs,
       })
       return transactionHash
@@ -226,7 +264,7 @@ export function useRemoveLiquidity(signer?: string) {
       amount_x_min: number | string,
       amount_y_min: number | string
     ) => {
-      const functionId = `${ PREFIX }remove_liquidity`
+      const functionId = `${ ADDRESS }::${ MODULE }::remove_liquidity`
       const tyArgs = utils.tx.encodeStructTypeTags([x, y])
       const args = [
         arrayify(serializeU128(liquidity)),

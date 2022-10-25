@@ -6,7 +6,7 @@ import { Text } from 'rebass'
 import { arrayify, hexlify } from '@ethersproject/bytes';
 import { bcs, utils, providers } from '@starcoin/starcoin';
 import CircularProgress from '@mui/material/CircularProgress'
-import { FACTORY_ADDRESS as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
+import { FACTORY_ADDRESS_STARCOIN as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
 import TransactionConfirmationModal, { ConfirmationModalContent } from '../../components/TransactionConfirmationModal'
 import { AutoRow, RowFixed, RowBetween } from '../../components/Row'
 import { TYPE, IconWrapper } from '../../theme'
