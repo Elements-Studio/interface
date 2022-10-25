@@ -4,6 +4,7 @@ import { useMemo } from 'react'
 import { Interface } from '@ethersproject/abi'
 import { V2_FACTORY_ADDRESSES } from '../constants/addresses'
 import { useMultipleContractSingleData } from '../state/multicall/hooks'
+import getNetworkType from '../utils/getNetworkType'
 import { Currency, CurrencyAmount } from '@uniswap/sdk-core'
 import { useBatchGetReserves } from './useTokenSwapRouter'
 
@@ -48,7 +49,7 @@ export function useV2Pairs(currencies: [Currency | undefined, Currency | undefin
   const pairAddressesUnique = _unique(pairAddresses)
   // const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const { data: results, isValidating } = useBatchGetReserves(pairAddresses)
-
+  const networkType = getNetworkType()
   return useMemo(() => {
     return (
       results?.map((result: any, i: number) => {
@@ -68,13 +69,14 @@ export function useV2Pairs(currencies: [Currency | undefined, Currency | undefin
           PairState.EXISTS,
           new Pair(
             CurrencyAmount.fromRawAmount(token0, reserve0.toString()),
-            CurrencyAmount.fromRawAmount(token1, reserve1.toString())
+            CurrencyAmount.fromRawAmount(token1, reserve1.toString()),
+            networkType
           ),
         ]
       }) || [[PairState.NOT_EXISTS, null]]
     )
     // }, [results, tokens])
-  }, [results, tokens, isValidating])
+  }, [results, tokens, isValidating, networkType])
 }
 
 export function useV2Pair(tokenA?: Currency, tokenB?: Currency): [PairState, Pair | null] {
