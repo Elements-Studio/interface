@@ -10,8 +10,6 @@ import BigNumber from 'bignumber.js'
 import getNetworkType from '../utils/getNetworkType'
 import getV2FactoryAddress from '../utils/getV2FactoryAddress'
 
-const networkType = getNetworkType()
-
 const MODULE = 'TokenSwapScripts'
 
 function serializeU128(value: string | number): string {
@@ -51,6 +49,8 @@ export function useSwapExactTokenForToken(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
   const ADDRESS = getV2FactoryAddress()
+  const networkType = getNetworkType()
+
   return useCallback(
     async (x: string, y: string, midPath: Token[], amount_x_in: number | string, amount_y_out_min: number | string) => {
       let payloadHex: string
@@ -118,6 +118,8 @@ export function useSwapTokenForExactToken(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
   const ADDRESS = getV2FactoryAddress()
+  const networkType = getNetworkType()
+
   return useCallback(
     async (x: string, y: string, midPath: Token[], amount_x_in_max: number | string, amount_y_out: number | string) => {
       let payloadHex: string
@@ -185,6 +187,8 @@ export function useAddLiquidity(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
   const ADDRESS = getV2FactoryAddress()
+  const networkType = getNetworkType()
+
   return useCallback(
     async (
       x: string,
@@ -194,14 +198,6 @@ export function useAddLiquidity(signer?: string) {
       amount_x_min: number | string,
       amount_y_min: number | string
     ) => {
-      console.log('useAddLiquidity', {
-        x,
-        y,
-        amount_x_desired,
-        amount_y_desired,
-        amount_x_min,
-        amount_y_min
-      })
       let payloadHex: string
       if (networkType === 'APTOS') {
         const func = 'add_liquidity'
@@ -254,6 +250,8 @@ export function useRemoveLiquidity(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
   const ADDRESS = getV2FactoryAddress()
+  const networkType = getNetworkType()
+
   return useCallback(
     async (
       x: string,
@@ -262,16 +260,41 @@ export function useRemoveLiquidity(signer?: string) {
       amount_x_min: number | string,
       amount_y_min: number | string
     ) => {
-      const functionId = `${ ADDRESS }::${ MODULE }::remove_liquidity`
-      const tyArgs = utils.tx.encodeStructTypeTags([x, y])
-      const args = [
-        arrayify(serializeU128(liquidity)),
-        arrayify(serializeU128(amount_x_min)),
-        arrayify(serializeU128(amount_y_min)),
-      ]
-      const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
+      let payloadHex: string
+      if (networkType === 'APTOS') {
+        const func = 'remove_liquidity'
+        const tyArgs = [
+          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(x)),
+          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(y))
+        ]
+        const args = [
+          BCS.bcsSerializeU128(new BigNumber(liquidity).toNumber()),
+          BCS.bcsSerializeU128(new BigNumber(amount_x_min).toNumber()),
+          BCS.bcsSerializeU128(new BigNumber(amount_y_min).toNumber()),
+        ]
+        const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
+          TxnBuilderTypes.EntryFunction.natural(
+            `${ ADDRESS }::${ MODULE }`,
+            func,
+            tyArgs,
+            args,
+          ),
+        );
+        payloadHex = hexlify(BCS.bcsToBytes(entryFunctionPayload))
+      } else {
+        const functionId = `${ ADDRESS }::${ MODULE }::remove_liquidity`
+        const tyArgs = utils.tx.encodeStructTypeTags([x, y])
+        const args = [
+          arrayify(serializeU128(liquidity)),
+          arrayify(serializeU128(amount_x_min)),
+          arrayify(serializeU128(amount_y_min)),
+        ]
+        const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
+        payloadHex = serializeScriptFunction(scriptFunction)
+      }
+
       const transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
-        data: serializeScriptFunction(scriptFunction),
+        data: payloadHex,
         expiredSecs,
       })
       return transactionHash
