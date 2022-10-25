@@ -416,6 +416,9 @@ export const WETH9_EXTENDED: { [chainId: number]: Token } = {
     'WETH',
     'Wrapped Ether'
   ),
+  [SupportedChainId.APTOS_MAIN]: Apt.onChain(SupportedChainId.APTOS_MAIN).wrapped,
+  [SupportedChainId.APTOS_TEST]: Apt.onChain(SupportedChainId.APTOS_TEST).wrapped,
+  [SupportedChainId.APTOS_DEV]: Apt.onChain(SupportedChainId.APTOS_DEV).wrapped,
 }
 
 // export class ExtendedEther extends Ether {
