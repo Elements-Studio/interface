@@ -12,8 +12,6 @@ import getNetworkType from '../utils/getNetworkType'
 
 const networkType = getNetworkType()
 
-console.log({ networkType })
-
 const ADDRESS = networkType === 'APTOS' ? '0x0c3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716' : V2_FACTORY_ADDRESS
 const MODULE = 'TokenSwapScripts'
 const PREFIX = `${ ADDRESS }::${ MODULE }::`
@@ -117,15 +115,42 @@ export function useSwapExactTokenForToken(signer?: string) {
  * 通过指定换出的代币额度来置换代币
  */
 export function useSwapTokenForExactToken(signer?: string) {
-  console.log('useSwapTokenForExactToken')
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
   return useCallback(
     async (x: string, y: string, midPath: Token[], amount_x_in_max: number | string, amount_y_out: number | string) => {
-      console.log('useSwapTokenForExactToken', { networkType, x, y, midPath, amount_x_in_max, amount_y_out })
-      let transactionHash: string
+      let payloadHex: string
+
       if (networkType === 'APTOS') {
-        transactionHash = ''
+        let func
+        let tyArgs
+        if (midPath.length === 1) {
+          // X <- R <- Y
+          func = 'swap_token_for_exact_token_router2'
+          tyArgs = [
+            new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(x)),
+            new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(midPath[0].address)),
+            new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(y))
+          ]
+        } else {
+          // X <- Y
+          func = 'swap_token_for_exact_token'
+          tyArgs = [
+            new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(x)),
+            new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(y))
+          ]
+        }
+
+        const args = [BCS.bcsSerializeU128(new BigNumber(amount_x_in_max).toNumber()), BCS.bcsSerializeU128(new BigNumber(amount_y_out).toNumber())]
+        const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
+          TxnBuilderTypes.EntryFunction.natural(
+            `${ ADDRESS }::${ MODULE }`,
+            func,
+            tyArgs,
+            args,
+          ),
+        );
+        payloadHex = hexlify(BCS.bcsToBytes(entryFunctionPayload))
       } else {
         let functionId
         let tyArgs
@@ -140,11 +165,13 @@ export function useSwapTokenForExactToken(signer?: string) {
         }
         const args = [arrayify(serializeU128(amount_x_in_max)), arrayify(serializeU128(amount_y_out))]
         const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
-        transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
-          data: serializeScriptFunction(scriptFunction),
-          expiredSecs,
-        })
+        payloadHex = serializeScriptFunction(scriptFunction)
+
       }
+      const transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
+        data: payloadHex,
+        expiredSecs,
+      })
       return transactionHash
     },
     [provider, signer, expiredSecs]
