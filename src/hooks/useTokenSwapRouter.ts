@@ -1,10 +1,12 @@
 import useSWR from 'swr'
 import axios from 'axios'
 import { useEffect } from 'react'
+import { Token, CurrencyAmount, Currency } from '@uniswap/sdk-core'
 import { FACTORY_ADDRESS_STARCOIN as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
 import { useActiveWeb3React } from './web3'
 import { useStarcoinProvider } from './useStarcoinProvider'
 import getCurrentNetwork from '../utils/getCurrentNetwork'
+import getNetworkType from '../utils/getNetworkType'
 import { useLiquidityPools } from '../state/user/hooks'
 
 const PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapRouter::`
@@ -30,14 +32,25 @@ export function useUserLiquidity(signer?: string, x?: string, y?: string) {
  */
 export function useTotalLiquidity(x?: string, y?: string) {
   const provider = useStarcoinProvider()
+  const networkType = getNetworkType()
+  const { chainId } = useActiveWeb3React()
+  const network = getCurrentNetwork(chainId)
+
   return useSWR(
     x && y ? [provider, 'total_liquidity', x, y] : null,
-    async () =>
-      (await provider.call({
-        function_id: `${ PREFIX }total_liquidity`,
-        type_args: [x!, y!],
-        args: [],
-      })) as [number]
+    async () => {
+      if (networkType === 'APTOS') {
+        // const url = `https://swap-api.starcoin.org/${ network }/v1/liquidityPools/${ x?.symbol }:${ y?.symbol }`
+        const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/getTotalLiquidity?tokenX=${ x }&tokenY=${ y }`
+        return axios.get(url).then(res => [res?.data])
+      } else {
+        return (await provider.call({
+          function_id: `${ PREFIX }total_liquidity`,
+          type_args: [x!, y!],
+          args: [],
+        })) as [number]
+      }
+    }
   )
 }
 
