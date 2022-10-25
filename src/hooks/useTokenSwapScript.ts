@@ -1,7 +1,6 @@
 import { bcs, utils } from '@starcoin/starcoin'
 import { arrayify, hexlify } from '@ethersproject/bytes'
 import { Token } from '@starcoin/starswap-sdk-core'
-import { useV2FactoryAddress } from './useV2FactoryAddress'
 import { useCallback } from 'react'
 import { useStarcoinProvider } from './useStarcoinProvider'
 import { TransactionPayloadVariantScriptFunction } from '@starcoin/starcoin/dist/src/lib/runtime/starcoin_types'
@@ -9,6 +8,7 @@ import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import { useTransactionExpirationSecs } from './useTransactionDeadline'
 import BigNumber from 'bignumber.js'
 import getNetworkType from '../utils/getNetworkType'
+import getV2FactoryAddress from '../utils/getV2FactoryAddress'
 
 const networkType = getNetworkType()
 
@@ -28,9 +28,9 @@ function serializeScriptFunction(scriptFunction: TransactionPayloadVariantScript
 
 export function useRegisterSwapPair(signer?: string) {
   const provider = useStarcoinProvider()
+  const ADDRESS = getV2FactoryAddress()
   return useCallback(
     async (x: string, y: string) => {
-      const ADDRESS = useV2FactoryAddress()
       const functionId = `${ ADDRESS }::${ MODULE }::register_swap_pair`
       const tyArgs = utils.tx.encodeStructTypeTags([x, y])
       const args: Uint8Array[] = []
@@ -50,9 +50,9 @@ export function useRegisterSwapPair(signer?: string) {
 export function useSwapExactTokenForToken(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
+  const ADDRESS = getV2FactoryAddress()
   return useCallback(
     async (x: string, y: string, midPath: Token[], amount_x_in: number | string, amount_y_out_min: number | string) => {
-      const ADDRESS = useV2FactoryAddress()
       let payloadHex: string
       if (networkType === 'APTOS') {
         let func
@@ -117,9 +117,9 @@ export function useSwapExactTokenForToken(signer?: string) {
 export function useSwapTokenForExactToken(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
+  const ADDRESS = getV2FactoryAddress()
   return useCallback(
     async (x: string, y: string, midPath: Token[], amount_x_in_max: number | string, amount_y_out: number | string) => {
-      const ADDRESS = useV2FactoryAddress()
       let payloadHex: string
       if (networkType === 'APTOS') {
         let func
@@ -184,6 +184,7 @@ export function useSwapTokenForExactToken(signer?: string) {
 export function useAddLiquidity(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
+  const ADDRESS = getV2FactoryAddress()
   return useCallback(
     async (
       x: string,
@@ -201,17 +202,13 @@ export function useAddLiquidity(signer?: string) {
         amount_x_min,
         amount_y_min
       })
-      const ADDRESS = useV2FactoryAddress()
-
       let payloadHex: string
-
       if (networkType === 'APTOS') {
         const func = 'add_liquidity'
         const tyArgs = [
           new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(x)),
           new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(y))
         ]
-
         const args = [
           BCS.bcsSerializeU128(new BigNumber(amount_x_desired).toNumber()),
           BCS.bcsSerializeU128(new BigNumber(amount_y_desired).toNumber()),
@@ -256,6 +253,7 @@ export function useAddLiquidity(signer?: string) {
 export function useRemoveLiquidity(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
+  const ADDRESS = getV2FactoryAddress()
   return useCallback(
     async (
       x: string,
