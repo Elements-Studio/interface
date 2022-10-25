@@ -55,12 +55,10 @@ export function useSwapExactTokenForToken(signer?: string) {
   const expiredSecs = useTransactionExpirationSecs()
   return useCallback(
     async (x: string, y: string, midPath: Token[], amount_x_in: number | string, amount_y_out_min: number | string) => {
-      console.log('useSwapExactTokenForToken', { networkType, x, y, midPath, amount_x_in, amount_y_out_min })
-      let transactionHash: string
+      let payloadHex: string
       if (networkType === 'APTOS') {
         let func
         let tyArgs
-
         if (midPath.length === 1) {
           // X -> R -> Y
           func = 'swap_exact_token_for_token_router2'
@@ -77,7 +75,8 @@ export function useSwapExactTokenForToken(signer?: string) {
             new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(y))
           ]
         }
-        const args = [BCS.bcsSerializeUint64(new BigNumber(amount_x_in).toNumber()), BCS.bcsSerializeUint64(new BigNumber(amount_y_out_min).toNumber())]
+
+        const args = [BCS.bcsSerializeU128(new BigNumber(amount_x_in).toNumber()), BCS.bcsSerializeU128(new BigNumber(amount_y_out_min).toNumber())]
         const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
           TxnBuilderTypes.EntryFunction.natural(
             `${ ADDRESS }::${ MODULE }`,
@@ -86,8 +85,7 @@ export function useSwapExactTokenForToken(signer?: string) {
             args,
           ),
         );
-        transactionHash = hexlify(BCS.bcsToBytes(entryFunctionPayload))
-        console.log({ transactionHash })
+        payloadHex = hexlify(BCS.bcsToBytes(entryFunctionPayload))
       } else {
         let func
         let tyArgs
@@ -103,11 +101,12 @@ export function useSwapExactTokenForToken(signer?: string) {
         const functionId = `${ ADDRESS }::${ MODULE }::${ func }`
         const args = [arrayify(serializeU128(amount_x_in)), arrayify(serializeU128(amount_y_out_min))]
         const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
-        transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
-          data: serializeScriptFunction(scriptFunction),
-          expiredSecs,
-        })
+        payloadHex = serializeScriptFunction(scriptFunction)
       }
+      const transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
+        data: payloadHex,
+        expiredSecs,
+      })
       return transactionHash
     },
     [provider, signer, expiredSecs]
