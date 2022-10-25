@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import { FACTORY_ADDRESS as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
+import { FACTORY_ADDRESS_STARCOIN as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
 import { useStarcoinProvider } from './useStarcoinProvider'
 
 const PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapFarmScript::`

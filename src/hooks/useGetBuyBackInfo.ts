@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { FACTORY_ADDRESS as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
+import { FACTORY_ADDRESS_STARCOIN as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
 import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from './useStarcoinProvider';
 import getCurrentNetwork from '../utils/getCurrentNetwork'
