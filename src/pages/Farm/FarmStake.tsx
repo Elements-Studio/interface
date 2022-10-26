@@ -5,7 +5,7 @@ import { Token, NativeCurrency } from '@uniswap/sdk-core'
 import styled from 'styled-components'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
-import { STC, STAR, FAI, XUSDT } from '../../constants/tokens'
+import { STC, APT, STAR, FAI, XUSDT } from '../../constants/tokens'
 import { AutoRow, RowFixed, RowBetween } from '../../components/Row'
 import { TYPE, ExternalLink } from '../../theme'
 import { ButtonFarm, ButtonBorder } from '../../components/Button'
@@ -102,7 +102,6 @@ export default function FarmStake({
   const { account, chainId } = useActiveWeb3React()
 
 
-
   if (account) {
     hasAccount = true;
     address = account.toLowerCase();
@@ -116,8 +115,21 @@ export default function FarmStake({
   const currency0 = unwrappedToken(token0)
   const currency1 = unwrappedToken(token1)
   
-  const addressX = (token0 as Token).address ? (token0 as Token).address : (token0.symbol=== 'STC' ? STC[(chainId ? chainId : 1)].address : '')
-  const addressY = (token1 as Token).address ? (token1 as Token).address : (token1.symbol=== 'STC' ? STC[(chainId ? chainId : 1)].address : '')
+  const getAddress = (token: Token): string => {
+    if (token.address) {
+      return token.address
+    }
+    if (token.symbol === 'STC') {
+       return STC[(chainId ? chainId : 1)].address
+    }
+    if (token.symbol === 'APT') {
+      return APT[(chainId ? chainId : 1)].address
+   }
+    return ''
+  }
+
+  const addressX = getAddress(token0 as Token)
+  const addressY = getAddress(token1 as Token)
 
   const network = getCurrentNetwork(chainId)
 
