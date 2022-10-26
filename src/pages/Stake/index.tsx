@@ -1,4 +1,6 @@
 import { Trans } from '@lingui/macro'
+import axios from 'axios';
+import useSWR from "swr";
 import { useCallback, useContext, useState } from 'react'
 import { ChevronDown, ChevronUp } from 'react-feather'
 import styled, { ThemeContext } from 'styled-components'
@@ -23,8 +25,7 @@ import { useIsDarkMode } from '../../state/user/hooks'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
-import axios from 'axios';
-import useSWR from "swr";
+import getNetworkType from '../../utils/getNetworkType'
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 30px;
@@ -86,6 +87,7 @@ export default function Farm({ history }: RouteComponentProps) {
   
   const list = pool.filter((item:any)=>item.description==='STAR');
 
+  const networkType = getNetworkType()
   // const darkMode = useIsDarkMode();
 
   /*
@@ -317,11 +319,15 @@ export default function Farm({ history }: RouteComponentProps) {
                     <Trans>Boost Simulator</Trans>
                   </Link>
                 </TYPE.body>
-                <TYPE.body fontSize={12} style={{ margin: '12px 0 0 24px', display: 'inline-flex' }}>
-                  <Link to={`/stake/buyBack`}>
-                    <Trans>Buy Back</Trans>
-                  </Link>
-                </TYPE.body>
+                {
+                  networkType === 'STARCOIN' && (
+                    <TYPE.body fontSize={12} style={{ margin: '12px 0 0 24px', display: 'inline-flex' }}>
+                      <Link to={`/stake/buyBack`}>
+                        <Trans>Buy Back</Trans>
+                      </Link>
+                    </TYPE.body>
+                  )
+                }
               </FarmCard>
             ))
           : null}
