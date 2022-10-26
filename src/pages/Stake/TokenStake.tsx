@@ -61,7 +61,7 @@ const StyledEthereumLogo = styled.img<{ size: string }>`
   border-radius: 4px;
 `
 
-export default function FarmStake({
+export default function TokenStake({
   match: {
     params: { token },
   },
