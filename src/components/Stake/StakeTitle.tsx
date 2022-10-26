@@ -27,7 +27,7 @@ const TitleTotal = styled.div<{ margin?: string; maxWidth?: string }>`
   text-align: center;
 `
 
-export default function FarmTitle() {
+export default function StakeTitle() {
     const { chainId } = useActiveWeb3React()
     const network = getCurrentNetwork(chainId)
 

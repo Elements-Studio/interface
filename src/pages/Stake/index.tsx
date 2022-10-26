@@ -60,7 +60,7 @@ const FarmRow = styled(RowBetween)`
 `
 
 
-export default function Farm({ history }: RouteComponentProps) {
+export default function Stake({ history }: RouteComponentProps) {
   const { account, chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
 
