@@ -24,7 +24,7 @@ export function useUserLiquidity(address?: string, x?: string, y?: string) {
     address && x && y ? [provider, 'liquidity', address, x, y] : null,
     async () => {
       if (networkType === 'APTOS') {
-        const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/getLiquidity?tokenX=${ x }&tokenY=${ y }&accountAddress=${ address }`
+        const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/getLiquidityBalance?tokenX=${ x }&tokenY=${ y }&accountAddress=${ address }`
         return axios.get(url).then(res => [res?.data])
       } else {
         return (await provider.callV2({

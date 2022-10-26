@@ -56,7 +56,6 @@ export function useLookupTBDGain(address?: string, x?: string, y?: string) {
     async () => {
       if (networkType === 'APTOS') {
         const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/lookupFarmGain?tokenX=${ x }&tokenY=${ y }&accountAddress=${ address }`
-        console.log({ url })
         return axios.get(url).then(res => [res?.data])
       } else {
         return (await provider.callV2({
@@ -83,7 +82,6 @@ export function useUserStaked(address?: string, x?: string, y?: string) {
     async () => {
       if (networkType === 'APTOS') {
         const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/getFarmStakedLiquidity?tokenX=${ x }&tokenY=${ y }&accountAddress=${ address }`
-        console.log({ url })
         return axios.get(url).then(res => [res?.data])
       } else {
         return (await provider.callV2({
@@ -110,7 +108,6 @@ export function useUserStarStaked(address?: string, token?: string) {
     async () => {
       if (networkType === 'APTOS') {
         const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/getSyrupPoolStakeList?token=${ token }&accountAddress=${ address }`
-        console.log({ url })
         return axios.get(url).then(res => [res?.data])
       } else {
         return (await provider.callV2({
