@@ -16,9 +16,13 @@ import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import BigNumber from 'bignumber.js'
 import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
+import CircularProgress from '@mui/material/CircularProgress'
+import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
 import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
+import getNetworkType from '../../utils/getNetworkType'
+import getV2FactoryAddress from '../../utils/getV2FactoryAddress'
 
 const Container = styled.div`
   border-radius: 20px;
@@ -90,7 +94,7 @@ export default function FarmHarvestDialog({
   lpStakingData
 }: FarmHarvestDialogProps) {
 
-  const starcoinProvider = useStarcoinProvider();
+  const provider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
 
@@ -102,7 +106,7 @@ export default function FarmHarvestDialog({
   const theme = useContext(ThemeContext)
   
   const [harvestNumber, setHarvestNumber] = useState<any>('')
-
+  const [loading, setLoading] = useState(false);
   const [predictBoostFactor, setPredictBoostFactor] = useState<number>(100)
 
   function parseHarvestNumber(value: string) {
@@ -121,35 +125,70 @@ export default function FarmHarvestDialog({
   }, [boostFactor])
   async function onClickHarvestConfirm() {
     try {
-      const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapFarmScript::harvest`;
-      const strTypeArgs = [tokenX, tokenY];
-      const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
+      const ADDRESS = getV2FactoryAddress()
+      const networkType = getNetworkType()
+      const MODULE = 'TokenSwapFarmScript'
+      const FUNC = 'harvest'
+      let payloadHex: string
+      if (networkType === 'APTOS') {
+        const tyArgs = [
+          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(tokenX)),
+          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(tokenY)),
+        ]
+        const harvestAmount = new BigNumber(harvestNumber).times('1000000000'); // harvestAmount * 1e9
 
-      const harvestAmount = new BigNumber(harvestNumber).times('1000000000'); // harvestAmount * 1e9
+        const args = [BCS.bcsSerializeU128(new BigNumber(harvestAmount).toNumber())]
+        const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
+          TxnBuilderTypes.EntryFunction.natural(
+            `${ ADDRESS }::${MODULE}`,
+            FUNC,
+            tyArgs,
+            args,
+          ),
+        );
+        payloadHex = hexlify(BCS.bcsToBytes(entryFunctionPayload))
+      }else{
+        const functionId = `${ADDRESS}::${MODULE}::${FUNC}`;
+        const strTypeArgs = [tokenX, tokenY];
+        const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
+  
+        const harvestAmount = new BigNumber(harvestNumber).times('1000000000'); // harvestAmount * 1e9
+  
+        const harvestAmountSCSHex = (function () {
+          const se = new bcs.BcsSerializer();
+          se.serializeU128(new BigNumber(harvestAmount).toNumber());
+          return hexlify(se.getBytes());
+        })();
+        const args = [
+          arrayify(harvestAmountSCSHex)
+        ];
+  
+        const scriptFunction = utils.tx.encodeScriptFunction(
+          functionId,
+          structTypeTags,
+          args,
+        );
+        payloadHex = (function () {
+          const se = new bcs.BcsSerializer();
+          scriptFunction.serialize(se);
+          return hexlify(se.getBytes());
+        })();
+      }
+      const transactionHash = await provider.getSigner().sendUncheckedTransaction({
+        data: payloadHex,
+      })
 
-      const harvestAmountSCSHex = (function () {
-        const se = new bcs.BcsSerializer();
-        se.serializeU128(new BigNumber(harvestAmount).toNumber());
-        return hexlify(se.getBytes());
-      })();
-      const args = [
-        arrayify(harvestAmountSCSHex)
-      ];
-
-      const scriptFunction = utils.tx.encodeScriptFunction(
-        functionId,
-        structTypeTags,
-        args,
-      );
-      const payloadInHex = (function () {
-        const se = new bcs.BcsSerializer();
-        scriptFunction.serialize(se);
-        return hexlify(se.getBytes());
-      })();
-
-      await starcoinProvider.getSigner().sendUncheckedTransaction({
-        data: payloadInHex,
-      });
+      setLoading(true);
+      let id: NodeJS.Timeout
+      id = setInterval(async () => {
+        const txnInfo = await provider!.send('chain.get_transaction_info', [transactionHash])
+        if (networkType === 'STARCOIN' && txnInfo.status === 'Executed' || networkType === 'APTOS' && txnInfo?.success) {
+          setLoading(false);
+          onDismiss();
+          clearInterval(id);
+          window.location.reload();
+        }
+      }, 3000);
     } catch (error) {
       console.error(error);
     }
@@ -200,6 +239,15 @@ export default function FarmHarvestDialog({
             <Trans>Predict the updated Boost Factor value</Trans>：<PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
           </TYPE.black>
         </RowBetween>
+        {loading && (
+          <CircularProgress
+            size={64}
+            sx={{
+              marginTop: '10px',
+              zIndex: 1,
+            }}
+          />
+        )}
         <RowBetween style={{ marginTop: '24px' }}>
           <ButtonBorder marginRight={22} onClick={onDismiss}>
             <TYPE.black fontSize={20}>
@@ -209,8 +257,6 @@ export default function FarmHarvestDialog({
           <ButtonFarm
             onClick={() => {
               onClickHarvestConfirm()
-              setTimeout(onDismiss, 2500)
-              setTimeout('window.location.reload()', 10000)
             }}
           >
             <TYPE.main color={'#fff'}>
