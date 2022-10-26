@@ -1,6 +1,11 @@
 import useSWR from 'swr'
+import axios from 'axios'
 import { FACTORY_ADDRESS_STARCOIN as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
+import { useActiveWeb3React } from './web3'
+import getCurrentNetwork from '../utils/getCurrentNetwork'
 import { useStarcoinProvider } from './useStarcoinProvider'
+import getNetworkType from '../utils/getNetworkType'
+import getV2FactoryAddress from '../utils/getV2FactoryAddress'
 
 const PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapFarmScript::`
 const SYRUP_PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapSyrupScript::`
@@ -42,14 +47,25 @@ export function useTotalLiquidity(x?: string, y?: string) {
  */
 export function useLookupTBDGain(address?: string, x?: string, y?: string) {
   const provider = useStarcoinProvider()
+  const networkType = getNetworkType()
+  const { chainId } = useActiveWeb3React()
+  const network = getCurrentNetwork(chainId)
+
   return useSWR(
     x && y ? [provider, 'lookup_gain', address, x, y] : null,
-    async () =>
-      (await provider.callV2({
-        function_id: `${ PREFIX }lookup_gain`,
-        type_args: [x!, y!],
-        args: [address!],
-      })) as [number]
+    async () => {
+      if (networkType === 'APTOS') {
+        const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/lookupFarmGain?tokenX=${ x }&tokenY=${ y }&accountAddress=${ address }`
+        console.log({ url })
+        return axios.get(url).then(res => [res?.data])
+      } else {
+        return (await provider.callV2({
+          function_id: `${ PREFIX }lookup_gain`,
+          type_args: [x!, y!],
+          args: [address!],
+        })) as [number]
+      }
+    }
   )
 }
 
@@ -58,14 +74,25 @@ export function useLookupTBDGain(address?: string, x?: string, y?: string) {
  */
 export function useUserStaked(address?: string, x?: string, y?: string) {
   const provider = useStarcoinProvider()
+  const networkType = getNetworkType()
+  const { chainId } = useActiveWeb3React()
+  const network = getCurrentNetwork(chainId)
+
   return useSWR(
     x && y ? [provider, 'query_stake', address, x, y] : null,
-    async () =>
-      (await provider.callV2({
-        function_id: `${ PREFIX }query_stake`,
-        type_args: [x!, y!],
-        args: [address!],
-      })) as [number]
+    async () => {
+      if (networkType === 'APTOS') {
+        const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/getFarmStakedLiquidity?tokenX=${ x }&tokenY=${ y }&accountAddress=${ address }`
+        console.log({ url })
+        return axios.get(url).then(res => [res?.data])
+      } else {
+        return (await provider.callV2({
+          function_id: `${ PREFIX }query_stake`,
+          type_args: [x!, y!],
+          args: [address!],
+        })) as [number]
+      }
+    }
   )
 }
 
@@ -74,14 +101,25 @@ export function useUserStaked(address?: string, x?: string, y?: string) {
  */
 export function useUserStarStaked(address?: string, token?: string) {
   const provider = useStarcoinProvider()
+  const networkType = getNetworkType()
+  const { chainId } = useActiveWeb3React()
+  const network = getCurrentNetwork(chainId)
+
   return useSWR(
     token ? [provider, 'query_stake_list', address, token] : null,
-    async () =>
-      (await provider.callV2({
-        function_id: `${ SYRUP_PREFIX }query_stake_list`,
-        type_args: [token!],
-        args: [address!],
-      })) as [number]
+    async () => {
+      if (networkType === 'APTOS') {
+        const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/getSyrupPoolStakeList?token=${ token }&accountAddress=${ address }`
+        console.log({ url })
+        return axios.get(url).then(res => [res?.data])
+      } else {
+        return (await provider.callV2({
+          function_id: `${ SYRUP_PREFIX }query_stake_list`,
+          type_args: [token!],
+          args: [address!],
+        })) as [number]
+      }
+    }
   )
 }
 
