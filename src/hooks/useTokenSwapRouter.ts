@@ -14,16 +14,26 @@ const PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapRouter::`
 /**
  * 查询当前签名者在某代币对下的流动性
  */
-export function useUserLiquidity(signer?: string, x?: string, y?: string) {
+export function useUserLiquidity(address?: string, x?: string, y?: string) {
   const provider = useStarcoinProvider()
+  const networkType = getNetworkType()
+  const { chainId } = useActiveWeb3React()
+  const network = getCurrentNetwork(chainId)
+
   return useSWR(
-    signer && x && y ? [provider, 'liquidity', signer, x, y] : null,
-    async () =>
-      (await provider.callV2({
-        function_id: `${ PREFIX }liquidity`,
-        type_args: [x!, y!],
-        args: [signer!],
-      })) as [number]
+    address && x && y ? [provider, 'liquidity', address, x, y] : null,
+    async () => {
+      if (networkType === 'APTOS') {
+        const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/getLiquidity?tokenX=${ x }&tokenY=${ y }&accountAddress=${ address }`
+        return axios.get(url).then(res => [res?.data])
+      } else {
+        return (await provider.callV2({
+          function_id: `${ PREFIX }liquidity`,
+          type_args: [x!, y!],
+          args: [address!],
+        })) as [number]
+      }
+    }
   )
 }
 
@@ -40,7 +50,6 @@ export function useTotalLiquidity(x?: string, y?: string) {
     x && y ? [provider, 'total_liquidity', x, y] : null,
     async () => {
       if (networkType === 'APTOS') {
-        // const url = `https://swap-api.starcoin.org/${ network }/v1/liquidityPools/${ x?.symbol }:${ y?.symbol }`
         const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/getTotalLiquidity?tokenX=${ x }&tokenY=${ y }`
         return axios.get(url).then(res => [res?.data])
       } else {
