@@ -101,26 +101,26 @@ export function useUserStarStaked(address?: string, token?: string) {
 //   )
 // }
 
-export function useBatchGetReserves(pairs: ([string, string] | undefined)[]) {
-  const provider = useStarcoinProvider()
-  return useSWR(
-    pairs.length
-      ? [provider, 'batch_get_reserves', ...pairs.map((pair) => (pair ? `${ pair[0] }${ pair[1] }` : ''))]
-      : null,
-    () =>
-      Promise.all(
-        pairs.map(async (pair) =>
-          pair
-            ? ((await provider.call({
-              function_id: `${ PREFIX }get_reserves`,
-              type_args: pair,
-              args: [],
-            })) as [number, number])
-            : []
-        )
-      )
-  )
-}
+// export function useBatchGetReserves(pairs: ([string, string] | undefined)[]) {
+//   const provider = useStarcoinProvider()
+//   return useSWR(
+//     pairs.length
+//       ? [provider, 'batch_get_reserves', ...pairs.map((pair) => (pair ? `${ pair[0] }${ pair[1] }` : ''))]
+//       : null,
+//     () =>
+//       Promise.all(
+//         pairs.map(async (pair) =>
+//           pair
+//             ? ((await provider.call({
+//               function_id: `${ PREFIX }get_reserves`,
+//               type_args: pair,
+//               args: [],
+//             })) as [number, number])
+//             : []
+//         )
+//       )
+//   )
+// }
 
 /**
  * 根据x计算y (无手续费)

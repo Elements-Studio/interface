@@ -70,20 +70,20 @@ export function useTotalLiquidity(x?: string, y?: string) {
 //   )
 // }
 
-async function useGetReserves(provider: any, pair: any) {
-  let result
-  try {
-    result = await provider.call({
-      function_id: `${ PREFIX }get_reserves`,
-      type_args: pair,
-      args: [],
-    })
-  } catch (error) {
-    // will fail if pair is not exists on chain 
-    result = [0, 0]
-  }
-  return result
-}
+// async function useGetReserves(provider: any, pair: any) {
+//   let result
+//   try {
+//     result = await provider.call({
+//       function_id: `${ PREFIX }get_reserves`,
+//       type_args: pair,
+//       args: [],
+//     })
+//   } catch (error) {
+//     // will fail if pair is not exists on chain 
+//     result = [0, 0]
+//   }
+//   return result
+// }
 
 export function useBatchGetReserves(pairs: ([string, string] | undefined)[]) {
   const { chainId } = useActiveWeb3React()
