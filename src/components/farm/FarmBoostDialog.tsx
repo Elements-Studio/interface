@@ -22,7 +22,9 @@ import CircularProgress from '@mui/material/CircularProgress'
 import axios from 'axios'
 import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
 import useGetLockedAmount from '../../hooks/useGetLockedAmount'
-
+import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
+import getNetworkType from '../../utils/getNetworkType'
+import getV2FactoryAddress from '../../utils/getV2FactoryAddress'
 
 const Container = styled.div`
   width: 100%;
@@ -102,7 +104,7 @@ export default function FarmUnstakeDialog({
   isOpen,
   lpStakingData,
 }: FarmUnstakeDialogProps) {
-  const starcoinProvider = useStarcoinProvider()
+  const provider = useStarcoinProvider()
   const { account, chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
   const theme = useContext(ThemeContext)
@@ -120,39 +122,75 @@ export default function FarmUnstakeDialog({
     try {
       const address = account ? account.toLowerCase() : ''
       const signature = ''
+      const ADDRESS = getV2FactoryAddress()
+      const networkType = getNetworkType()
+      const MODULE = 'TokenSwapFarmScript'
+      const FUNC = 'wl_boost'
+      let payloadHex: string
+      if (networkType === 'APTOS') {
+        const tyArgs = [
+          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(tokenX)),
+          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(tokenY)),
+        ]
+        const boostAmount = new BigNumber(starAmount).times('1000000000'); // harvestAmount * 1e9
 
-      const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapFarmScript::wl_boost`
-      const tyArgs = [tokenX, tokenY]
-
-      const nodeUrl = `https://${network}-seed.starcoin.org`
-      const boostAmount = Number(starAmount) > 0 ? new BigNumber(starAmount).times(lpTokenScalingFactor).toNumber() : new BigNumber(veStarAmount).toNumber();
-      const args = [boostAmount, signature]
-
-      const scriptFunction = await utils.tx.encodeScriptFunctionByResolve(functionId, tyArgs, args, nodeUrl)
-
-      const payloadInHex = (function () {
-        const se = new bcs.BcsSerializer()
-        scriptFunction.serialize(se)
-        return hexlify(se.getBytes())
-      })()
-
-      const response = await starcoinProvider.getSigner().sendUncheckedTransaction({
-        data: payloadInHex,
+        const args = [BCS.bcsSerializeU128(new BigNumber(boostAmount).toNumber()), BCS.bcsSerializeStr(signature)]
+        const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
+          TxnBuilderTypes.EntryFunction.natural(
+            `${ ADDRESS }::${MODULE}`,
+            FUNC,
+            tyArgs,
+            args,
+          ),
+        );
+        payloadHex = hexlify(BCS.bcsToBytes(entryFunctionPayload))
+      }else{
+        const functionId = `${ADDRESS}::${MODULE}::${FUNC}`;
+        const strTypeArgs = [tokenX, tokenY];
+        const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
+  
+        const boostAmount = new BigNumber(starAmount).times('1000000000'); // harvestAmount * 1e9
+  
+        const boostAmountSCSHex = (function () {
+          const se = new bcs.BcsSerializer();
+          se.serializeU128(new BigNumber(boostAmount).toNumber());
+          return hexlify(se.getBytes());
+        })();
+        const args = [
+          arrayify(boostAmountSCSHex),
+          arrayify(signature),
+        ];
+  
+        const scriptFunction = utils.tx.encodeScriptFunction(
+          functionId,
+          structTypeTags,
+          args,
+        );
+        payloadHex = (function () {
+          const se = new bcs.BcsSerializer();
+          scriptFunction.serialize(se);
+          return hexlify(se.getBytes());
+        })();
+      }
+      const transactionHash = await provider.getSigner().sendUncheckedTransaction({
+        data: payloadHex,
       })
-      setLoading(true)
-      setInterval(async () => {
-        const txnInfo = await starcoinProvider.getTransactionInfo(response)
-        if (txnInfo.status === 'Executed') {
-          setLoading(false)
-          onDismiss()
-          clearInterval()
-          window.location.reload()
+
+      setLoading(true);
+      let id: NodeJS.Timeout
+      id = setInterval(async () => {
+        const txnInfo = await provider!.send('chain.get_transaction_info', [transactionHash])
+        if (networkType === 'STARCOIN' && txnInfo.status === 'Executed' || networkType === 'APTOS' && txnInfo?.success) {
+          setLoading(false);
+          onDismiss();
+          clearInterval(id);
+          window.location.reload();
         }
-      }, 3000)
+      }, 3000);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-    return false
+    return false;
   }
 
   const lockedAmount = useGetLockedAmount(tokenX, tokenY, address)
