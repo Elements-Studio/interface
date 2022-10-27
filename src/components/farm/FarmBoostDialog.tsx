@@ -193,7 +193,9 @@ export default function FarmUnstakeDialog({
     return false;
   }
 
-  const lockedAmount = useGetLockedAmount(tokenX, tokenY, address)
+  const networkType = getNetworkType()
+
+  const lockedAmount = useGetLockedAmount(tokenX, tokenY, address) 
   const boostFactor = useComputeBoostFactor(
     new BigNumber(Number(lockedAmount) + Number(starAmount) * lpTokenScalingFactor),
     lpStakingData?.stakedLiquidity,
@@ -204,6 +206,7 @@ export default function FarmUnstakeDialog({
     setPredictBoostFactor(boostFactor)
   }, [boostFactor])
 
+  
   return (
     <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={theme.bgCard}>
       <ColumnCenter style={{ padding: '27px 32px' }}>
@@ -243,12 +246,16 @@ export default function FarmUnstakeDialog({
             </ButtonText>
           </ColumnRight>
         </InputContainer>
-        <RowBetween style={{ marginTop: '8px' }}>
-          <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
-            <Trans>Predict the updated Boost Factor value</Trans>：
-            <PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
-          </TYPE.black>
-        </RowBetween>
+        {
+          networkType==='STARCOIN' && (
+            <RowBetween style={{ marginTop: '8px' }}>
+              <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
+                <Trans>Predict the updated Boost Factor value</Trans>：
+                <PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
+              </TYPE.black>
+            </RowBetween>
+          )
+        }
         {loading && (
           <CircularProgress
             size={64}
