@@ -26,7 +26,10 @@ import FormLabel from '@mui/material/FormLabel';
 import CircularProgress from '@mui/material/CircularProgress'
 import useSWR from 'swr'
 import axios from 'axios'
+import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
+import getNetworkType from '../../utils/getNetworkType'
+import getV2FactoryAddress from '../../utils/getV2FactoryAddress'
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
@@ -111,7 +114,7 @@ export default function TokenStakeDialog({
   isOpen,
 }: TokenStakeDialogProps) {
 
-  const starcoinProvider = useStarcoinProvider();
+  const provider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
 
@@ -159,44 +162,81 @@ export default function TokenStakeDialog({
   }
 
   async function onClickStakeConfirm() {
+    const ADDRESS = getV2FactoryAddress()
+    const networkType = getNetworkType()
+    const starAddress = STAR[(chainId ? chainId : 1)].address;
     try {
-      const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapSyrupScript::stake`;
-      const strTypeArgs = [STAR[(chainId ? chainId : 1)].address];
-      const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
+      const MODULE = 'TokenSwapSyrupScript'
+      const FUNC = 'stake'
+      let payloadHex: string
+      if (networkType === 'APTOS') {
+        const tyArgs = [
+          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(starAddress)),
+        ]
+        const stakeAmount = new BigNumber(parseFloat(stakeNumber)).times('1000000000'); // stakeAmount * 1e9
 
-      const stakeAmount = new BigNumber(parseFloat(stakeNumber)).times('1000000000'); // stakeAmount * 1e9
-      // const stakeAmount = 50; // stakeAmount * 1e9
-      const stakeDuration = duration;
+        const args = [BCS.bcsSerializeUint64(new BigNumber(duration).toNumber()), BCS.bcsSerializeU128(new BigNumber(stakeAmount).toNumber())]
+        const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
+          TxnBuilderTypes.EntryFunction.natural(
+            `${ ADDRESS }::${MODULE}`,
+            FUNC,
+            tyArgs,
+            args,
+          ),
+        );
+        payloadHex = hexlify(BCS.bcsToBytes(entryFunctionPayload))
+      } else {
+        const functionId = `${ADDRESS}::${MODULE}::${FUNC}`;
+        const strTypeArgs = [starAddress];
+        const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
 
-      const stakeDurationSCSHex = (function () {
-        const se = new bcs.BcsSerializer();
-        se.serializeU64(new BigNumber(stakeDuration).toNumber());
-        return hexlify(se.getBytes());
-      })();
-      const stakeAmountSCSHex = (function () {
-        const se = new bcs.BcsSerializer();
-        se.serializeU128(new BigNumber(stakeAmount).toNumber());
-        return hexlify(se.getBytes());
-      })();
-      const args = [
-        arrayify(stakeDurationSCSHex),
-        arrayify(stakeAmountSCSHex)
-      ];
+        const stakeAmount = new BigNumber(parseFloat(stakeNumber)).times('1000000000'); // stakeAmount * 1e9
 
-      const scriptFunction = utils.tx.encodeScriptFunction(
-        functionId,
-        structTypeTags,
-        args,
-      );
-      const payloadInHex = (function () {
-        const se = new bcs.BcsSerializer();
-        scriptFunction.serialize(se);
-        return hexlify(se.getBytes());
-      })();
+        const stakeAmountSCSHex = (function () {
+          const se = new bcs.BcsSerializer();
+          se.serializeU128(new BigNumber(stakeAmount).toNumber());
+          return hexlify(se.getBytes());
+        })();
 
-      await starcoinProvider.getSigner().sendUncheckedTransaction({
-        data: payloadInHex,
-      });
+        const stakeDuration = duration;
+
+        const stakeDurationSCSHex = (function () {
+          const se = new bcs.BcsSerializer();
+          se.serializeU64(new BigNumber(stakeDuration).toNumber());
+          return hexlify(se.getBytes());
+        })();
+        
+        const args = [
+          arrayify(stakeDurationSCSHex),
+          arrayify(stakeAmountSCSHex)
+        ];
+
+        const scriptFunction = utils.tx.encodeScriptFunction(
+          functionId,
+          structTypeTags,
+          args,
+        );
+        payloadHex = (function () {
+          const se = new bcs.BcsSerializer();
+          scriptFunction.serialize(se);
+          return hexlify(se.getBytes());
+        })();
+      }
+      const transactionHash = await provider.getSigner().sendUncheckedTransaction({
+        data: payloadHex,
+      })
+
+      setLoading(true);
+      let id: NodeJS.Timeout
+      id = setInterval(async () => {
+        const txnInfo = await provider!.send('chain.get_transaction_info', [transactionHash])
+        if (networkType === 'STARCOIN' && txnInfo.status === 'Executed' || networkType === 'APTOS' && txnInfo?.success) {
+          setLoading(false);
+          onDismiss();
+          clearInterval(id);
+          window.location.reload();
+        }
+      }, 3000);
     } catch (error) {
       console.error(error);
     }
@@ -237,21 +277,35 @@ export default function TokenStakeDialog({
           <FormControl component="fieldset">
             <FormLabel component="legend"><Trans>Duration</Trans></FormLabel>
             <RadioGroup aria-label="duration" name="duration" value={duration} onChange={handleDurationChange}>
-              {
+              {/* {
                 isTest ? (
                   <>
                     <FormControlLabel value="100" control={<Radio />} label="100 Seconds" />
                     <FormControlLabel value="3600" control={<Radio />} label="1 hour" />
                   </>
                 ) : null
-              }
+              } */}
               {
                 data.filter((item:any)=>item.estimatedApr > 0).map((item: any) => {
-                  return (
-                    <>
-                    <FormControlLabel value={item.pledgeTimeSeconds} control={<Radio />} label={`${item.pledgeTimeSeconds/3600/24} Days (${item.multiplier}x)  ${ item.estimatedApr.toFixed(4) }%`}/>
-                    </>
-                  )
+                  if (item.pledgeTimeSeconds === 100) {
+                    return (
+                      <>
+                      <FormControlLabel value={item.pledgeTimeSeconds} control={<Radio />} label={`100 Seconds (${item.multiplier}x)  ${ item.estimatedApr.toFixed(4) }%`}/>
+                      </>
+                    )
+                  }else if(item.pledgeTimeSeconds === 3600) {
+                    return (
+                      <>
+                      <FormControlLabel value={item.pledgeTimeSeconds} control={<Radio />} label={`1 hour (${item.multiplier}x)  ${ item.estimatedApr.toFixed(4) }%`}/>
+                      </>
+                    )
+                  }else{
+                    return (
+                      <>
+                      <FormControlLabel value={item.pledgeTimeSeconds} control={<Radio />} label={`${item.pledgeTimeSeconds/3600/24} Days (${item.multiplier}x)  ${ item.estimatedApr.toFixed(4) }%`}/>
+                      </>
+                    )
+                  }
                 })
               }
             </RadioGroup>
@@ -283,9 +337,6 @@ export default function TokenStakeDialog({
             </ButtonBorder>
             <ButtonFarm disabled={!(isBoost ? veStarAmount > 0 : stakeNumber > 0)} onClick={() => {
               onClickStakeConfirm();
-              setLoading(true);
-              setTimeout(onDismiss, 30000);
-              setTimeout("window.location.reload()", 60000);
             }}>
               <TYPE.main color={'#fff'}>
                 <Trans>Confirm</Trans>
