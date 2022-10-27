@@ -152,7 +152,7 @@ export default function TokenStakeDialog({
 
   }
   const handleDurationChange = (event:any) => {
-    setDuration(event.target.value);
+    setDuration(Number(event.target.value));
     // console.log({duration})
   };
 
@@ -243,7 +243,8 @@ export default function TokenStakeDialog({
     return false;
   }
 
-  const veStarAmount = (isBoost && stakeNumber && duration) ? (stakeNumber * (duration / 86400) / ( 365 * 2 )).toFixed(4) : 0
+  const veStarAmount = (isBoost && stakeNumber && duration) ? (stakeNumber * (duration / 86400) / ( 365 * 2 )) : 0
+  const veStarAmountText = veStarAmount > 0 ? (Number(veStarAmount.toFixed(4)) > 0 ? veStarAmount.toFixed(4) : '< 0.0001') : undefined
   const isTest = process.env.REACT_APP_STARSWAP_IN_TEST === 'true';
   return (
     <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={ theme.bgCard }>
@@ -312,10 +313,10 @@ export default function TokenStakeDialog({
           </FormControl>
         </RadioContainer>
         {
-          (veStarAmount > 0) && (
+          veStarAmountText && (
             <>
-              <AutoRow><Trans>When you Stake, you will get {veStarAmount} veSTAR immediately.</Trans></AutoRow>
-              <AutoRow><Trans>When you Unstake, you need to have at least {veStarAmount} veSTAR in your balance to unstake.</Trans></AutoRow>
+              <AutoRow><Trans>When you Stake, you will get {veStarAmountText} veSTAR immediately.</Trans></AutoRow>
+              <AutoRow><Trans>When you Unstake, you need to have at least {veStarAmountText} veSTAR in your balance to unstake.</Trans></AutoRow>
             </>
           )
         }
