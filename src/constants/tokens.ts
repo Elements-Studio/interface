@@ -73,21 +73,21 @@ export const STAR: { [chainId: number]: Token } = {
   ),
   [SupportedChainId.APTOS_MAIN]: new Token(
     SupportedChainId.APTOS_MAIN,
-    '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::STAR::STAR',
+    '0xf0b07b5181ce76e447632cdff90525c0411fd15eb61df7da4e835cf88dc05f5b::STAR::STAR',
     9,
     'STAR',
     'Star'
   ),
   [SupportedChainId.APTOS_TEST]: new Token(
     SupportedChainId.APTOS_TEST,
-    '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::STAR::STAR',
+    '0xf0b07b5181ce76e447632cdff90525c0411fd15eb61df7da4e835cf88dc05f5b::STAR::STAR',
     9,
     'STAR',
     'Star'
   ),
   [SupportedChainId.APTOS_DEV]: new Token(
     SupportedChainId.APTOS_DEV,
-    '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::STAR::STAR',
+    '0xf0b07b5181ce76e447632cdff90525c0411fd15eb61df7da4e835cf88dc05f5b::STAR::STAR',
     9,
     'STAR',
     'Star'
@@ -160,21 +160,21 @@ export const XUSDT: { [chainId: number]: Token } = {
   ),
   [SupportedChainId.APTOS_MAIN]: new Token(
     SupportedChainId.APTOS_MAIN,
-    '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::XUSDT::XUSDT',
+    '0xf0b07b5181ce76e447632cdff90525c0411fd15eb61df7da4e835cf88dc05f5b::XUSDT::XUSDT',
     6,
     'XUSDT',
     'XUSDT'
   ),
   [SupportedChainId.APTOS_TEST]: new Token(
     SupportedChainId.APTOS_TEST,
-    '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::XUSDT::XUSDT',
+    '0xf0b07b5181ce76e447632cdff90525c0411fd15eb61df7da4e835cf88dc05f5b::XUSDT::XUSDT',
     6,
     'XUSDT',
     'XUSDT'
   ),
   [SupportedChainId.APTOS_DEV]: new Token(
     SupportedChainId.APTOS_DEV,
-    '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::XUSDT::XUSDT',
+    '0xf0b07b5181ce76e447632cdff90525c0411fd15eb61df7da4e835cf88dc05f5b::XUSDT::XUSDT',
     6,
     'XUSDT',
     'XUSDT'
