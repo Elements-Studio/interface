@@ -13,6 +13,10 @@ import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
+import BigNumber from 'bignumber.js';
+import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
+import getNetworkType from '../../utils/getNetworkType'
+import getV2FactoryAddress from '../../utils/getV2FactoryAddress'
 
 const Container = styled.div`
   width: 100%;
@@ -34,7 +38,7 @@ export default function TokenUnstakeDialog({
   onDismiss,
   isOpen,
 }: TokenUnstakeDialogProps) {
-  const starcoinProvider = useStarcoinProvider();
+  const provider = useStarcoinProvider();
   const { chainId } = useActiveWeb3React()
 
   const theme = useContext(ThemeContext)
@@ -42,34 +46,70 @@ export default function TokenUnstakeDialog({
   const [loading, setLoading] = useState(false);
   
   async function onClickConfirm() {
+    const ADDRESS = getV2FactoryAddress()
+    const networkType = getNetworkType()
+    const starAddress = STAR[(chainId ? chainId : 1)].address;
     try {
-      const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapSyrupScript::unstake`;
-      const strTypeArgs = [STAR[(chainId ? chainId : 1)].address];
-      const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
+      const MODULE = 'TokenSwapSyrupScript'
+      const FUNC = 'unstake'
+      let payloadHex: string
+      if (networkType === 'APTOS') {
+        const tyArgs = [
+          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(starAddress)),
+        ]
 
-      const unstakeIdSCSHex = (function () {
-        const se = new bcs.BcsSerializer();
-        se.serializeU64(parseInt(id));
-        return hexlify(se.getBytes());
-      })();
-      const args = [
-        arrayify(unstakeIdSCSHex)
-      ];
+        const args = [BCS.bcsSerializeUint64(new BigNumber(parseInt(id)).toNumber())]
+        
+        const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
+          TxnBuilderTypes.EntryFunction.natural(
+            `${ ADDRESS }::${MODULE}`,
+            FUNC,
+            tyArgs,
+            args,
+          ),
+        );
+        payloadHex = hexlify(BCS.bcsToBytes(entryFunctionPayload))
+      } else {
+        const functionId = `${ADDRESS}::${MODULE}::${FUNC}`;
+        const strTypeArgs = [starAddress];
+        const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
 
-      const scriptFunction = utils.tx.encodeScriptFunction(
-        functionId,
-        structTypeTags,
-        args,
-      );
-      const payloadInHex = (function () {
-        const se = new bcs.BcsSerializer();
-        scriptFunction.serialize(se);
-        return hexlify(se.getBytes());
-      })();
+        const unstakeIdSCSHex = (function () {
+          const se = new bcs.BcsSerializer();
+          se.serializeU64(parseInt(id));
+          return hexlify(se.getBytes());
+        })();
 
-      await starcoinProvider.getSigner().sendUncheckedTransaction({
-        data: payloadInHex,
-      });
+        const args = [
+          arrayify(unstakeIdSCSHex)
+        ];
+
+        const scriptFunction = utils.tx.encodeScriptFunction(
+          functionId,
+          structTypeTags,
+          args,
+        );
+        payloadHex = (function () {
+          const se = new bcs.BcsSerializer();
+          scriptFunction.serialize(se);
+          return hexlify(se.getBytes());
+        })();
+      }
+      const transactionHash = await provider.getSigner().sendUncheckedTransaction({
+        data: payloadHex,
+      })
+
+      setLoading(true);
+      let intervalId: NodeJS.Timeout
+      intervalId = setInterval(async () => {
+        const txnInfo = await provider!.send('chain.get_transaction_info', [transactionHash])
+        if (networkType === 'STARCOIN' && txnInfo.status === 'Executed' || networkType === 'APTOS' && txnInfo?.success) {
+          setLoading(false);
+          onDismiss();
+          clearInterval(intervalId);
+          window.location.reload();
+        }
+      }, 3000);
     } catch (error) {
       console.error(error);
     }
@@ -104,9 +144,6 @@ export default function TokenUnstakeDialog({
             </ButtonBorder>
             <ButtonFarm id='sss' disabled={loading} onClick={() => {
               onClickConfirm();
-              setLoading(true);
-              setTimeout(onDismiss, 30000);
-              setTimeout("window.location.reload()", 60000);
             }}>
               <TYPE.main color={'#fff'}>
                 <Trans>Confirm</Trans>
