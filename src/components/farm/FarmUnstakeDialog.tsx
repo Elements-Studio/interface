@@ -129,7 +129,7 @@ export default function FarmUnstakeDialog({
       const ADDRESS = getV2FactoryAddress()
       const networkType = getNetworkType()
       const MODULE = 'TokenSwapFarmScript'
-      const FUNC = 'harvest'
+      const FUNC = 'unstake'
       let payloadHex: string
       if (networkType === 'APTOS') {
         const tyArgs = [
