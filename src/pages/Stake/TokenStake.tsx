@@ -1,3 +1,5 @@
+import useSWR from 'swr'
+import axios from 'axios';
 import { Trans } from '@lingui/macro'
 import { useCallback, useState, useEffect } from 'react'
 import styled from 'styled-components'
@@ -22,8 +24,8 @@ import { STAR } from '../../constants/tokens'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import { useUserStarStaked } from 'hooks/useTokenSwapFarmScript'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
-import useSWR from 'swr'
-import axios from 'axios';
+import getNetworkType from '../../utils/getNetworkType'
+
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
@@ -152,6 +154,7 @@ export default function TokenStake({
     setVeStarReward(value);
   };
 
+  const networkType = getNetworkType()
   return (
     <>
       <Container style={{ paddingTop: '1rem' }}>
@@ -253,7 +256,8 @@ export default function TokenStake({
                     )
                   )}
                   {
-                    !isVeStarStaked ? (
+                    // only starcoin needs claim veSTAR, aptos does not
+                    networkType==='STARCOIN' && !isVeStarStaked ? (
                       <RowBetween style={{ marginTop: '16px' }}>
                         <ButtonFarm id={item.id} onClick={() => { handleClaimVeStarId(item.id); handleVeStarReward(veStarReward); setClaimVeStarDialogOpen(true);  }}>
                           <TYPE.main color={'#fff'}>
