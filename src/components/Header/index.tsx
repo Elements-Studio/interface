@@ -25,6 +25,7 @@ import Web3Status from '../Web3Status'
 import NetworkCard from './NetworkCard'
 import UniBalanceContent from './UniBalanceContent'
 import { ChainSelector } from 'components/NavBar/ChainSelector'
+import getNetworkType from '../../utils/getNetworkType'
 
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
   display: grid;
@@ -326,6 +327,7 @@ export default function Header() {
 
   const scrollY = useScrollPosition()
 
+  const networkType =  getNetworkType()
   return (
     <HeaderFrame showBackground={scrollY > 45}>
       <ClaimModal />
@@ -417,7 +419,7 @@ export default function Header() {
           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
             {account && userStcBalance ? (
               <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                <Trans>{userStcBalance?.toSignificant(9)} STC</Trans>
+                <Trans>{userStcBalance?.toSignificant(9)} {networkType==='STARCOIN' ? 'STC' : 'APT'}</Trans>
               </BalanceText>
             ) : null}
             <Web3Status />
