@@ -14,7 +14,7 @@ import MyStakeListTitle from '../../components/Stake/MyStakeListTitle'
 import TokenStakeDialog from '../../components/Stake/TokenStakeDialog'
 import TokenUnstakeDialog from '../../components/Stake/TokenUnstakeDialog'
 import TokenClaimVeStarDialog from '../../components/Stake/TokenClaimVeStarDialog'
-
+import { useTokenBalance } from '../../state/wallet/hooks'
 import StarswapBlueLogo from '../../assets/svg/starswap_logo_blue.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { useIsBoost } from '../../state/user/hooks'
@@ -79,21 +79,21 @@ export default function TokenStake({
     hasAccount = true;
     address = account.toLowerCase();
   }
-  const STAR_address = STAR[(chainId ? chainId : 1)].address
+
+  const starToken = STAR[(chainId ? chainId : 1)]
 
   const starScalingFactor = 1000000000;
 
-  const userStarStaked:any = useUserStarStaked(address, STAR_address)?.data || [];
+  const userStarStaked:any = useUserStarStaked(address, starToken.address)?.data || [];
   if (userStarStaked === [] || userStarStaked[0]?.length > 0) {
     hasStake = false;
   }
 
   const provider = useStarcoinProvider()
 
-  const { data: starBalance } = useSWR([address].length ? [provider, 'getBalance', ...address] : null, () =>
-    provider.getBalance(address, STAR_address)
-  )
-
+  const tokenBalance = useTokenBalance(address, starToken)
+  const starBalance = Number(tokenBalance?.quotient?.toString(10))
+ 
   const isBoost = useIsBoost()
   let myStakeList = [];
 
