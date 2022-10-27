@@ -14,7 +14,7 @@ export default function useGetVestarCount(): number {
 
   const contractSend = useCallback(async () => {
     if (networkType === 'APTOS') {
-      const tokenAddress = '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::VESTAR::VESTAR'
+      const tokenAddress = '0xf0b07b5181ce76e447632cdff90525c0411fd15eb61df7da4e835cf88dc05f5b::VESTAR::VESTAR'
       const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/getCoinSupply?token=${ tokenAddress }`
       axios.get(url).then(res => {
         setVestarCount(res?.data || 0)

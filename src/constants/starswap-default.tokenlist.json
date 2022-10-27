@@ -12,7 +12,7 @@
   "tokens": [
     {
       "chainId": 1,
-      "address": "0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::STAR::STAR",
+      "address": "0xf0b07b5181ce76e447632cdff90525c0411fd15eb61df7da4e835cf88dc05f5b::STAR::STAR",
       "name": "STAR",
       "symbol": "STAR",
       "decimals": 9,
@@ -20,7 +20,7 @@
     },
     {
       "chainId": 1,
-      "address": "0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::XUSDT::XUSDT",
+      "address": "0xf0b07b5181ce76e447632cdff90525c0411fd15eb61df7da4e835cf88dc05f5b::XUSDT::XUSDT",
       "name": "XUSDT",
       "symbol": "XUSDT",
       "decimals": 6,
@@ -28,7 +28,7 @@
     },
     {
       "chainId": 2,
-      "address": "0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::STAR::STAR",
+      "address": "0xf0b07b5181ce76e447632cdff90525c0411fd15eb61df7da4e835cf88dc05f5b::STAR::STAR",
       "name": "STAR",
       "symbol": "STAR",
       "decimals": 9,
@@ -36,7 +36,7 @@
     },
     {
       "chainId": 2,
-      "address": "0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::XUSDT::XUSDT",
+      "address": "0xf0b07b5181ce76e447632cdff90525c0411fd15eb61df7da4e835cf88dc05f5b::XUSDT::XUSDT",
       "name": "XUSDT",
       "symbol": "XUSDT",
       "decimals": 6,
@@ -44,7 +44,7 @@
     },
     {
       "chainId": 34,
-      "address": "0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::STAR::STAR",
+      "address": "0xf0b07b5181ce76e447632cdff90525c0411fd15eb61df7da4e835cf88dc05f5b::STAR::STAR",
       "name": "STAR",
       "symbol": "STAR",
       "decimals": 9,
@@ -52,7 +52,7 @@
     },
     {
       "chainId": 34,
-      "address": "0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::XUSDT::XUSDT",
+      "address": "0xf0b07b5181ce76e447632cdff90525c0411fd15eb61df7da4e835cf88dc05f5b::XUSDT::XUSDT",
       "name": "XUSDT",
       "symbol": "XUSDT",
       "decimals": 6,
