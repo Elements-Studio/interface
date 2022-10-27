@@ -375,6 +375,12 @@ export function useIsBoost(): boolean {
     case 'main':
       isBoost = true;
       break;
+    case 'aptos-testnet':
+      isBoost = true;
+      break;
+    case 'aptos-devnet':
+        isBoost = true;
+        break;  
     default:
       isBoost = false;
   }
