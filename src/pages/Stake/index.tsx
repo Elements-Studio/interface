@@ -167,6 +167,20 @@ export default function Stake({ history }: RouteComponentProps) {
     </>
     )
   }
+  let aprMin = 0
+  let aprMax = 0
+  data.map((item:any)=> {
+    if (item.estimatedApr > 0 ) {
+      if( item.estimatedApr > aprMax) {
+        aprMax = item.estimatedApr 
+      }
+      if (aprMin === 0){
+        aprMin = item.estimatedApr 
+      }else if (item.estimatedApr < aprMin){
+        aprMin = item.estimatedApr 
+      }
+    }
+  })
 
   return (
     <>
@@ -277,7 +291,7 @@ export default function Stake({ history }: RouteComponentProps) {
                   </Text>
                   <RowFixed>
                     <Text fontSize={16} fontWeight={500}>
-                      {(data.filter((item:any)=>item.pledgeTimeSeconds === 604800)[0].estimatedApr).toFixed(2)}% ~ {(data.filter((item:any)=>item.pledgeTimeSeconds === 7776000)[0].estimatedApr).toFixed(2)}%
+                      {aprMin.toFixed(2)}% ~ {aprMax.toFixed(2)}%
                     </Text>
                     <QuestionHelper text={tips(data)} />
                   </RowFixed>
