@@ -15,7 +15,7 @@ import TokenStakeDialog from '../../components/Stake/TokenStakeDialog'
 import TokenUnstakeDialog from '../../components/Stake/TokenUnstakeDialog'
 import TokenClaimVeStarDialog from '../../components/Stake/TokenClaimVeStarDialog'
 
-import StarswapBlueLogo from '../../assets/svg/starswap_logo.svg'
+import StarswapBlueLogo from '../../assets/svg/starswap_logo_blue.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { useIsBoost } from '../../state/user/hooks'
 import { STAR } from '../../constants/tokens'
