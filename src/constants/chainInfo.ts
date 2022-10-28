@@ -1,5 +1,5 @@
-import ethereumLogoUrl from 'assets/images/ethereum-logo.png'
-
+import STCBlueLogo from 'assets/svg/stc.svg'
+import APTLogo from 'assets/svg/apt.svg'
 
 const NETWORK_INFO: any = {
     STARCOIN: {
@@ -8,7 +8,7 @@ const NETWORK_INFO: any = {
         explorer: 'https://etherscan.io/',
         infoLink: 'https://info.uniswap.org/#/',
         label: 'STARCOIN',
-        logoUrl: ethereumLogoUrl,
+        logoUrl: STCBlueLogo,
         nativeCurrency: { name: 'StarCoin', symbol: 'STC', decimals: 18 },
         color: '#f00',
     },
@@ -18,10 +18,10 @@ const NETWORK_INFO: any = {
         explorer: 'https://rinkeby.etherscan.io/',
         infoLink: 'https://info.uniswap.org/#/',
         label: 'APTOS',
-        logoUrl: ethereumLogoUrl,
+        logoUrl: APTLogo,
         nativeCurrency: { name: 'Aptos', symbol: 'APT', decimals: 18 },
         color: '#f00',
-      },
+    },
 }
 
 export function getNetworkInfo(networkType: any): any {
