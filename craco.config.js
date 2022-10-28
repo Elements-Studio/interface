@@ -21,6 +21,13 @@ module.exports = {
         (plugin) => plugin instanceof MiniCssExtractPlugin
       )
       if (instanceOfMiniCssExtractPlugin !== undefined) { instanceOfMiniCssExtractPlugin.options.ignoreOrder = true }
+      // fix: Can't import the named export 'bytesToHex' from non EcmaScript module (only default export is available) 
+      // https://github.com/aptos-labs/aptos-core/issues/4601
+      webpackConfig.module.rules.push({
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: "javascript/auto"
+      });
       return webpackConfig
     },
   },
