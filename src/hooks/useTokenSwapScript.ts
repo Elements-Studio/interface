@@ -7,8 +7,8 @@ import { TransactionPayloadVariantScriptFunction } from '@starcoin/starcoin/dist
 import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import { useTransactionExpirationSecs } from './useTransactionDeadline'
 import BigNumber from 'bignumber.js'
-import { useGetType } from 'state/networktype/hooks'
-import getV2FactoryAddress from '../utils/getV2FactoryAddress'
+import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
+
 
 const MODULE = 'TokenSwapScripts'
 
@@ -26,7 +26,7 @@ function serializeScriptFunction(scriptFunction: TransactionPayloadVariantScript
 
 export function useRegisterSwapPair(signer?: string) {
   const provider = useStarcoinProvider()
-  const ADDRESS = getV2FactoryAddress()
+  const ADDRESS = useGetV2FactoryAddress()
   return useCallback(
     async (x: string, y: string) => {
       const functionId = `${ ADDRESS }::${ MODULE }::register_swap_pair`
@@ -48,7 +48,7 @@ export function useRegisterSwapPair(signer?: string) {
 export function useSwapExactTokenForToken(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
-  const ADDRESS = getV2FactoryAddress()
+  const ADDRESS = useGetV2FactoryAddress()
   const networkType = useGetType()
 
   return useCallback(
@@ -117,7 +117,7 @@ export function useSwapExactTokenForToken(signer?: string) {
 export function useSwapTokenForExactToken(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
-  const ADDRESS = getV2FactoryAddress()
+  const ADDRESS = useGetV2FactoryAddress()
   const networkType = useGetType()
 
   return useCallback(
@@ -186,7 +186,7 @@ export function useSwapTokenForExactToken(signer?: string) {
 export function useAddLiquidity(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
-  const ADDRESS = getV2FactoryAddress()
+  const ADDRESS = useGetV2FactoryAddress()
   const networkType = useGetType()
 
   return useCallback(
@@ -249,7 +249,7 @@ export function useAddLiquidity(signer?: string) {
 export function useRemoveLiquidity(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
-  const ADDRESS = getV2FactoryAddress()
+  const ADDRESS = useGetV2FactoryAddress()
   const networkType = useGetType()
 
   return useCallback(

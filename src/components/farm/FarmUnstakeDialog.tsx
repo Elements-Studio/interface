@@ -21,8 +21,7 @@ import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
 import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
-import {useGetType} from 'state/networktype/hooks'
-import getV2FactoryAddress from '../../utils/getV2FactoryAddress'
+import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
 
 const Container = styled.div`
   border-radius: 20px;
@@ -124,10 +123,11 @@ export default function FarmUnstakeDialog({
   useEffect(() => {
     setPredictBoostFactor(boostFactor)
   }, [boostFactor])
+  
+  const ADDRESS = useGetV2FactoryAddress()
 
   async function onClickUnstakeConfirm() {
     try {
-      const ADDRESS = getV2FactoryAddress()
       const MODULE = 'TokenSwapFarmScript'
       const FUNC = 'unstake'
       let payloadHex: string

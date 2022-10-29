@@ -15,8 +15,7 @@ import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
 import BigNumber from 'bignumber.js';
 import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
-import {useGetType} from 'state/networktype/hooks'
-import getV2FactoryAddress from '../../utils/getV2FactoryAddress'
+import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
 
 const Container = styled.div`
   width: 100%;
@@ -46,8 +45,9 @@ export default function TokenUnstakeDialog({
 
   const [loading, setLoading] = useState(false);
   
+  const ADDRESS = useGetV2FactoryAddress()
+
   async function onClickConfirm() {
-    const ADDRESS = getV2FactoryAddress()
     const starAddress = STAR[(chainId ? chainId : 1)].address;
     try {
       const MODULE = 'TokenSwapSyrupScript'

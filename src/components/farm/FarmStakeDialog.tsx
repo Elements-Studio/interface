@@ -21,8 +21,7 @@ import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
 import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
-import {useGetType} from 'state/networktype/hooks'
-import getV2FactoryAddress from '../../utils/getV2FactoryAddress'
+import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
 
 const Container = styled.div`
   border-radius: 20px;
@@ -125,8 +124,9 @@ export default function FarmStakeDialog({
     setPredictBoostFactor(boostFactor)
   }, [boostFactor])
 
+  const ADDRESS = useGetV2FactoryAddress()
+
   async function onClickStakeConfirm() {
-    const ADDRESS = getV2FactoryAddress()
     try {
       const MODULE = 'TokenSwapFarmScript'
       const FUNC = 'stake'

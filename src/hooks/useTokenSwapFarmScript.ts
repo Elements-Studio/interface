@@ -5,7 +5,6 @@ import { useActiveWeb3React } from './web3'
 import getCurrentNetwork from '../utils/getCurrentNetwork'
 import { useStarcoinProvider } from './useStarcoinProvider'
 import { useGetType } from 'state/networktype/hooks'
-import getV2FactoryAddress from '../utils/getV2FactoryAddress'
 
 const PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapFarmScript::`
 const SYRUP_PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapSyrupScript::`

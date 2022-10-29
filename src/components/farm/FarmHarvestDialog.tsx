@@ -21,8 +21,7 @@ import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
 import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
-import {useGetType} from 'state/networktype/hooks'
-import getV2FactoryAddress from '../../utils/getV2FactoryAddress'
+import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
 
 const Container = styled.div`
   border-radius: 20px;
@@ -124,9 +123,11 @@ export default function FarmHarvestDialog({
   useEffect(() => {
     setPredictBoostFactor(boostFactor)
   }, [boostFactor])
+
+  const ADDRESS = useGetV2FactoryAddress()
+
   async function onClickHarvestConfirm() {
     try {
-      const ADDRESS = getV2FactoryAddress()
       const MODULE = 'TokenSwapFarmScript'
       const FUNC = 'harvest'
       let payloadHex: string
