@@ -10,7 +10,7 @@ import { V2_FACTORY_ADDRESSES } from '../../constants/addresses'
 import { BASES_TO_TRACK_LIQUIDITY_FOR, PINNED_PAIRS } from '../../constants/routing'
 import { useAllTokens } from '../../hooks/Tokens'
 import { useActiveWeb3React } from '../../hooks/web3'
-import getCurrentNetwork from '../../utils/getCurrentNetwork'
+import { useGetCurrentNetwork } from 'state/networktype/hooks'
 import getNetworkType from '../../utils/getNetworkType'
 import { AppState } from '../index'
 import {
@@ -361,7 +361,7 @@ export function useArbitrumAlphaAlert(): [boolean, (arbitrumAlphaAcknowledged: b
 export function useIsBoost(): boolean {
   let isBoost = false;
   const { chainId } = useActiveWeb3React()
-  const network = getCurrentNetwork(chainId)
+  const network = useGetCurrentNetwork(chainId)
   switch (network) {
     // case 'halley':
     //   isBoost = false;

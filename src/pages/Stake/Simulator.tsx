@@ -28,7 +28,7 @@ import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import getCurrentNetwork from '../../utils/getCurrentNetwork'
+import { useGetCurrentNetwork } from 'state/networktype/hooks'
 import FormLabel from '@mui/material/FormLabel'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
@@ -99,7 +99,7 @@ export default function Simulator({ history }: RouteComponentProps) {
     address = account.toLowerCase();
   }
   const vestarCount = useGetVestarCount()
-  const network = getCurrentNetwork(chainId)
+  const network = useGetCurrentNetwork(chainId)
 
   const darkMode = useIsDarkMode()
 

@@ -30,7 +30,7 @@ import { useUserLiquidity } from 'hooks/useTokenSwapRouter'
 import useSWR from 'swr'
 import axios from 'axios'
 import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
-import getCurrentNetwork from '../../utils/getCurrentNetwork'
+import { useGetCurrentNetwork } from 'state/networktype/hooks'
 import { useActiveLocale } from 'hooks/useActiveLocale'
 import BigNumber from 'bignumber.js';
 import useGetLockedAmountV2 from '../../hooks/useGetLockedAmountV2'
@@ -131,7 +131,7 @@ export default function FarmStake({
   const addressX = getAddress(token0 as Token)
   const addressY = getAddress(token1 as Token)
 
-  const network = getCurrentNetwork(chainId)
+  const network = useGetCurrentNetwork(chainId)
 
   const isBoost = useIsBoost()
   const [ veStarAmount, setVeStarAmount ] = useState(0)

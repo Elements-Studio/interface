@@ -27,8 +27,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import useSWR from 'swr'
 import axios from 'axios'
 import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
-import getCurrentNetwork from '../../utils/getCurrentNetwork'
-import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
+import { useGetType, useGetV2FactoryAddress, useGetCurrentNetwork } from 'state/networktype/hooks'
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
@@ -115,7 +114,7 @@ export default function TokenStakeDialog({
 
   const provider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
-  const network = getCurrentNetwork(chainId)
+  const network = useGetCurrentNetwork(chainId)
   const networkType = useGetType()
   const theme = useContext(ThemeContext)
   const ADDRESS = useGetV2FactoryAddress()

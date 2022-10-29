@@ -2,8 +2,7 @@ import { useEffect, useState, useCallback } from 'react'
 import axios from 'axios'
 import { useStarcoinProvider } from './useStarcoinProvider';
 import { useActiveWeb3React } from './web3'
-import { useGetType } from 'state/networktype/hooks'
-import getCurrentNetwork from '../utils/getCurrentNetwork'
+import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
 
 export default function useGetLockedAmount(tokenX: string, tokenY: string, accountAddress: string): number {
   let _tokenX = tokenX;
@@ -11,7 +10,7 @@ export default function useGetLockedAmount(tokenX: string, tokenY: string, accou
   const [ret, setRet] = useState<number>(0)
   const starcoinProvider = useStarcoinProvider()
   const { chainId } = useActiveWeb3React()
-  const network = getCurrentNetwork(chainId)
+  const network = useGetCurrentNetwork(chainId)
   const networkType = useGetType()
 
   const contractSend = useCallback(async () => {

@@ -20,7 +20,6 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
 import useGetLockedAmount from '../../hooks/useGetLockedAmount'
-import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
 
 const Container = styled.div`
@@ -95,7 +94,6 @@ export default function FarmUnstakeDialog({
 
   const provider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
-  const network = getCurrentNetwork(chainId)
   const networkType = useGetType()
 
   let address = ''

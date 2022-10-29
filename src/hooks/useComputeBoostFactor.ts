@@ -3,8 +3,7 @@ import BigNumber from 'bignumber.js';
 import axios from 'axios'
 import { useActiveWeb3React } from './web3'
 import { useStarcoinProvider } from './useStarcoinProvider';
-import { useGetType } from 'state/networktype/hooks'
-import getCurrentNetwork from '../utils/getCurrentNetwork'
+import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
 
 export default function useComputeBoostFactor(
   lockedAmount: BigNumber | number,
@@ -14,7 +13,7 @@ export default function useComputeBoostFactor(
   const [ret, setRet] = useState<number>(100)
   const starcoinProvider = useStarcoinProvider()
   const { chainId } = useActiveWeb3React()
-  const network = getCurrentNetwork(chainId)
+  const network = useGetCurrentNetwork(chainId)
   const networkType = useGetType()
 
   const contractSend = useCallback(async () => {

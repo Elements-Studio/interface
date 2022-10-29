@@ -2,11 +2,11 @@ import { useEffect, useState, useCallback } from 'react';
 import { FACTORY_ADDRESS_STARCOIN as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
 import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from './useStarcoinProvider';
-import getCurrentNetwork from '../utils/getCurrentNetwork'
+import { useGetCurrentNetwork } from 'state/networktype/hooks'
 
 export default function useGetBuyBackInfo(): number[] {
   const { chainId } = useActiveWeb3React()
-  const network = getCurrentNetwork(chainId)
+  const network = useGetCurrentNetwork(chainId)
   const [info, setInfo] = useState<number[]>([0, 0, 0, 0, 0, 0, 0, 0]);
   const starcoinProvider = useStarcoinProvider()
   const queryInfo = useCallback(async () => {

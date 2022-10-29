@@ -1,3 +1,5 @@
+import axios from 'axios';
+import useSWR from "swr";
 import { Trans } from '@lingui/macro'
 import styled from 'styled-components'
 import { RouteComponentProps, Link } from 'react-router-dom'
@@ -16,9 +18,7 @@ import { unwrappedToken } from '../../utils/unwrappedToken'
 import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
-import getCurrentNetwork from '../../utils/getCurrentNetwork'
-import axios from 'axios';
-import useSWR from "swr";
+import { useGetCurrentNetwork } from 'state/networktype/hooks'
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 30px;
@@ -41,7 +41,7 @@ const FarmRow = styled(RowBetween)`
 
 export default function Farm({ history }: RouteComponentProps) {
   const { account, chainId } = useActiveWeb3React()
-  const network = getCurrentNetwork(chainId)
+  const network = useGetCurrentNetwork(chainId)
   // toggle wallet when disconnected
   const toggleWalletModal = useWalletModalToggle()
   const darkMode = useIsDarkMode();

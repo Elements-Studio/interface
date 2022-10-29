@@ -5,8 +5,7 @@ import { Token, CurrencyAmount, Currency } from '@uniswap/sdk-core'
 import { FACTORY_ADDRESS_STARCOIN as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
 import { useActiveWeb3React } from './web3'
 import { useStarcoinProvider } from './useStarcoinProvider'
-import getCurrentNetwork from '../utils/getCurrentNetwork'
-import { useGetType } from 'state/networktype/hooks'
+import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
 import { useLiquidityPools } from '../state/user/hooks'
 
 const PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapRouter::`
@@ -18,7 +17,7 @@ export function useUserLiquidity(address?: string, x?: string, y?: string) {
   const provider = useStarcoinProvider()
   const networkType = useGetType()
   const { chainId } = useActiveWeb3React()
-  const network = getCurrentNetwork(chainId)
+  const network = useGetCurrentNetwork(chainId)
 
   return useSWR(
     address && x && y ? [provider, 'liquidity', address, x, y] : null,
@@ -44,7 +43,7 @@ export function useTotalLiquidity(x?: string, y?: string) {
   const provider = useStarcoinProvider()
   const networkType = useGetType()
   const { chainId } = useActiveWeb3React()
-  const network = getCurrentNetwork(chainId)
+  const network = useGetCurrentNetwork(chainId)
 
   return useSWR(
     x && y ? [provider, 'total_liquidity', x, y] : null,
@@ -96,7 +95,7 @@ export function useTotalLiquidity(x?: string, y?: string) {
 
 export function useBatchGetReserves(pairs: ([string, string] | undefined)[]) {
   const { chainId } = useActiveWeb3React()
-  const network = getCurrentNetwork(chainId)
+  const network = useGetCurrentNetwork(chainId)
   const url = `https://swap-api.starcoin.org/${ network }/v1/getTokenPairReservesList`
   return useSWR(
     pairs.length ? JSON.stringify(pairs) : null,  // convert array to string as key for caching
@@ -106,7 +105,7 @@ export function useBatchGetReserves(pairs: ([string, string] | undefined)[]) {
 
 export function useGetLiquidityPools() {
   const { chainId } = useActiveWeb3React()
-  const network = getCurrentNetwork(chainId)
+  const network = useGetCurrentNetwork(chainId)
   const [liquidityPools, setLiquidityPools] = useLiquidityPools()
   useEffect(
     () => {

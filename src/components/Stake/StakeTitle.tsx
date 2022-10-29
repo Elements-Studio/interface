@@ -1,12 +1,12 @@
-import { Trans } from '@lingui/macro'
 import { useMemo } from 'react'
+import axios from 'axios';
+import useSWR from "swr";
+import { Trans } from '@lingui/macro'
 import ReactGA from 'react-ga'
 import { useActiveWeb3React } from 'hooks/web3'
 import styled from 'styled-components/macro'
 import { StyledInternalLink, TYPE } from '../../theme'
-import getCurrentNetwork from '../../utils/getCurrentNetwork'
-import axios from 'axios';
-import useSWR from "swr";
+import { useGetCurrentNetwork } from 'state/networktype/hooks'
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
@@ -29,7 +29,7 @@ const TitleTotal = styled.div<{ margin?: string; maxWidth?: string }>`
 
 export default function StakeTitle() {
     const { chainId } = useActiveWeb3React()
-    const network = getCurrentNetwork(chainId)
+    const network = useGetCurrentNetwork(chainId)
 
     const { data, error } = useSWR(
       // "http://a1277180fcb764735801852ac3de308f-21096515.ap-northeast-1.elb.amazonaws.com:80/v1/starswap/farmingTvlInUsd",

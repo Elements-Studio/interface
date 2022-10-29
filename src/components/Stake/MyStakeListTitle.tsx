@@ -2,9 +2,9 @@ import { Trans } from '@lingui/macro'
 import { useMemo } from 'react'
 import ReactGA from 'react-ga'
 import { useActiveWeb3React } from '../../hooks/web3'
-import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import styled from 'styled-components/macro'
 import { StyledInternalLink, TYPE } from '../../theme'
+import { useGetCurrentNetwork } from 'state/networktype/hooks'
 
 import axios from 'axios';
 import useSWR from "swr";
@@ -31,7 +31,7 @@ const TitleTotal = styled.div<{ margin?: string; maxWidth?: string }>`
 export default function MyStakeListTitle() {
 
     const { chainId } = useActiveWeb3React()
-    const network = getCurrentNetwork(chainId)
+    const network = useGetCurrentNetwork(chainId)
     const { data, error } = useSWR(
       `https://swap-api.starcoin.org/${network}/v1/syrupPoolTvlInUsd`,
       fetcher

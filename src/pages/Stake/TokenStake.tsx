@@ -23,8 +23,7 @@ import { useIsBoost } from '../../state/user/hooks'
 import { STAR } from '../../constants/tokens'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import { useUserStarStaked } from 'hooks/useTokenSwapFarmScript'
-import getCurrentNetwork from '../../utils/getCurrentNetwork'
-import {useGetType} from 'state/networktype/hooks'
+import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
 
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
@@ -75,7 +74,7 @@ export default function TokenStake({
   let hasStake = true
 
   const { account, chainId } = useActiveWeb3React()
-  const network = getCurrentNetwork(chainId)
+  const network = useGetCurrentNetwork(chainId)
 
   if (account) {
     hasAccount = true;
@@ -87,7 +86,7 @@ export default function TokenStake({
   const starScalingFactor = 1000000000;
 
   const userStarStaked:any = useUserStarStaked(address, starToken.address)?.data || [];
-  if (userStarStaked === [] || userStarStaked[0]?.length > 0) {
+  if (!userStarStaked.length|| userStarStaked[0]?.length > 0) {
     hasStake = false;
   }
 

@@ -13,7 +13,6 @@ import Modal from '../Modal'
 import { ButtonFarm, ButtonBorder, ButtonText } from 'components/Button'
 import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
-import getCurrentNetwork from '../../utils/getCurrentNetwork'
 import BigNumber from 'bignumber.js'
 import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
@@ -105,7 +104,6 @@ export default function FarmUnstakeDialog({
 }: FarmUnstakeDialogProps) {
   const provider = useStarcoinProvider()
   const { account, chainId } = useActiveWeb3React()
-  const network = getCurrentNetwork(chainId)
   const networkType = useGetType()
   const theme = useContext(ThemeContext)
   const [starAmount, setStarAmount] = useState('')
