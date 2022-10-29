@@ -18,7 +18,7 @@ export enum SupportedChainId_STARCOIN {
 
 export enum SupportedChainId_APTOS {
   MAIN = 1,
-  TEST = 3,
+  TEST = 2,
   DEV = 34,
 }
 

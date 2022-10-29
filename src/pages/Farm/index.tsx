@@ -18,7 +18,7 @@ import { unwrappedToken } from '../../utils/unwrappedToken'
 import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
-import { useGetCurrentNetwork } from 'state/networktype/hooks'
+import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 30px;
