@@ -14,7 +14,7 @@ import { useCallback, useRef, useState } from 'react'
 import { ChevronDown, ChevronUp } from 'react-feather'
 import { useTheme } from 'styled-components/macro'
 import {useGetType} from 'state/networktype/hooks'
-
+import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import * as styles from './ChainSelector.css'
 import ChainSelectorRow from './ChainSelectorRow'
 import { NavDropdown } from './NavDropdown'
@@ -42,11 +42,12 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
 
   const selectChain = useSelectNetWork()
   // useSyncChainQuery()
-
+  const provider  = useStarcoinProvider()
   const [pendingChainId, setPendingChainId] = useState<string | undefined>(undefined)
 
   const onSelectChain = useCallback(
     async (targetChainId: string) => {
+      console.log('window.starcoin',window.starcoin?.chainId,  window.starcoin?.selectedAddress)
       setPendingChainId(targetChainId)
       await selectChain(targetChainId)
       setPendingChainId(undefined)

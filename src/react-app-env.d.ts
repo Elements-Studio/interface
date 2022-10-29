@@ -12,13 +12,15 @@ interface Window {
     on?: (...args: any[]) => void
     removeListener?: (...args: any[]) => void
     autoRefreshOnNetworkChange?: boolean
-    chainId?: any
+    selectedAddress?: any,
+    chainId?: any,
   }
   obstarcoin?: {
     isStarMask?: true
     on?: (...args: any[]) => void
     removeListener?: (...args: any[]) => void
     autoRefreshOnNetworkChange?: boolean
+    selectedAddress?: any,
     chainId?: any
     isLogin?: boolean
     sdkLoaded?: boolean
