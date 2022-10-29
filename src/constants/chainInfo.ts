@@ -9,7 +9,7 @@ const NETWORK_INFO: any = {
         infoLink: 'https://info.uniswap.org/#/',
         label: 'STARCOIN',
         logoUrl: STCBlueLogo,
-        nativeCurrency: { name: 'StarCoin', symbol: 'STC', decimals: 18 },
+        nativeCurrency: { name: 'StarCoin', symbol: 'STC', decimals: 9 },
         color: '#f00',
     },
     APTOS: {
@@ -19,7 +19,7 @@ const NETWORK_INFO: any = {
         infoLink: 'https://info.uniswap.org/#/',
         label: 'APTOS',
         logoUrl: APTLogo,
-        nativeCurrency: { name: 'Aptos', symbol: 'APT', decimals: 18 },
+        nativeCurrency: { name: 'AptosCoin', symbol: 'APT', decimals: 8 },
         color: '#f00',
     },
 }
