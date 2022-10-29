@@ -6,7 +6,7 @@ import { FACTORY_ADDRESS_STARCOIN as V2_FACTORY_ADDRESS } from '@starcoin/starsw
 import { useActiveWeb3React } from './web3'
 import { useStarcoinProvider } from './useStarcoinProvider'
 import getCurrentNetwork from '../utils/getCurrentNetwork'
-import getNetworkType from '../utils/getNetworkType'
+import { useGetType } from 'state/networktype/hooks'
 import { useLiquidityPools } from '../state/user/hooks'
 
 const PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapRouter::`
@@ -16,7 +16,7 @@ const PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapRouter::`
  */
 export function useUserLiquidity(address?: string, x?: string, y?: string) {
   const provider = useStarcoinProvider()
-  const networkType = getNetworkType()
+  const networkType = useGetType()
   const { chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
 
@@ -42,7 +42,7 @@ export function useUserLiquidity(address?: string, x?: string, y?: string) {
  */
 export function useTotalLiquidity(x?: string, y?: string) {
   const provider = useStarcoinProvider()
-  const networkType = getNetworkType()
+  const networkType = useGetType()
   const { chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
 

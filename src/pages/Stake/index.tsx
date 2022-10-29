@@ -25,7 +25,7 @@ import { useIsDarkMode } from '../../state/user/hooks'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
-import getNetworkType from '../../utils/getNetworkType'
+import {useGetType} from 'state/networktype/hooks'
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 30px;
@@ -63,6 +63,7 @@ const FarmRow = styled(RowBetween)`
 export default function Stake({ history }: RouteComponentProps) {
   const { account, chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
+  const networkType = useGetType()
 
   // toggle wallet when disconnected
   const toggleWalletModal = useWalletModalToggle()
@@ -87,7 +88,6 @@ export default function Stake({ history }: RouteComponentProps) {
   
   const list = pool.filter((item:any)=>item.description==='STAR');
 
-  const networkType = getNetworkType()
   // const darkMode = useIsDarkMode();
 
   /*

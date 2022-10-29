@@ -28,7 +28,7 @@ import useSWR from 'swr'
 import axios from 'axios'
 import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
-import getNetworkType from '../../utils/getNetworkType'
+import {useGetType} from 'state/networktype/hooks'
 import getV2FactoryAddress from '../../utils/getV2FactoryAddress'
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
@@ -117,7 +117,7 @@ export default function TokenStakeDialog({
   const provider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
-
+  const networkType = useGetType()
   const theme = useContext(ThemeContext)
   
   const [stakeNumber, setStakeNumber] = useState<any>('')
@@ -163,7 +163,6 @@ export default function TokenStakeDialog({
 
   async function onClickStakeConfirm() {
     const ADDRESS = getV2FactoryAddress()
-    const networkType = getNetworkType()
     const starAddress = STAR[(chainId ? chainId : 1)].address;
     try {
       const MODULE = 'TokenSwapSyrupScript'

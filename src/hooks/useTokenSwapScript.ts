@@ -7,7 +7,7 @@ import { TransactionPayloadVariantScriptFunction } from '@starcoin/starcoin/dist
 import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import { useTransactionExpirationSecs } from './useTransactionDeadline'
 import BigNumber from 'bignumber.js'
-import getNetworkType from '../utils/getNetworkType'
+import { useGetType } from 'state/networktype/hooks'
 import getV2FactoryAddress from '../utils/getV2FactoryAddress'
 
 const MODULE = 'TokenSwapScripts'
@@ -49,7 +49,7 @@ export function useSwapExactTokenForToken(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
   const ADDRESS = getV2FactoryAddress()
-  const networkType = getNetworkType()
+  const networkType = useGetType()
 
   return useCallback(
     async (x: string, y: string, midPath: Token[], amount_x_in: number | string, amount_y_out_min: number | string) => {
@@ -118,7 +118,7 @@ export function useSwapTokenForExactToken(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
   const ADDRESS = getV2FactoryAddress()
-  const networkType = getNetworkType()
+  const networkType = useGetType()
 
   return useCallback(
     async (x: string, y: string, midPath: Token[], amount_x_in_max: number | string, amount_y_out: number | string) => {
@@ -187,7 +187,7 @@ export function useAddLiquidity(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
   const ADDRESS = getV2FactoryAddress()
-  const networkType = getNetworkType()
+  const networkType = useGetType()
 
   return useCallback(
     async (
@@ -250,7 +250,7 @@ export function useRemoveLiquidity(signer?: string) {
   const provider = useStarcoinProvider()
   const expiredSecs = useTransactionExpirationSecs()
   const ADDRESS = getV2FactoryAddress()
-  const networkType = getNetworkType()
+  const networkType = useGetType()
 
   return useCallback(
     async (

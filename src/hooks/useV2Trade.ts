@@ -2,7 +2,7 @@ import { Currency, CurrencyAmount, TradeType } from '@uniswap/sdk-core'
 import { Pair, Trade } from '@starcoin/starswap-v2-sdk'
 import { useMemo } from 'react'
 import { isTradeBetter } from 'utils/isTradeBetter'
-import getNetworkType from '../utils/getNetworkType'
+import { useGetType } from 'state/networktype/hooks'
 import { BETTER_TRADE_LESS_HOPS_THRESHOLD } from '../constants/misc'
 import { useAllCurrencyCombinations } from './useAllCurrencyCombinations'
 import { PairState, useV2Pairs } from './useV2Pairs'
@@ -40,7 +40,7 @@ export function useV2TradeExactIn(
   { maxHops = MAX_HOPS } = {}
 ): Trade<Currency, Currency, TradeType.EXACT_INPUT> | null {
   const allowedPairs = useAllCommonPairs(currencyAmountIn?.currency, currencyOut)
-  const networkType = getNetworkType()
+  const networkType = useGetType()
 
   return useMemo(() => {
     if (currencyAmountIn && currencyOut && allowedPairs.length > 0) {
@@ -77,7 +77,7 @@ export function useV2TradeExactOut(
   { maxHops = MAX_HOPS } = {}
 ): Trade<Currency, Currency, TradeType.EXACT_OUTPUT> | null {
   const allowedPairs = useAllCommonPairs(currencyIn, currencyAmountOut?.currency)
-  const networkType = getNetworkType()
+  const networkType = useGetType()
 
   return useMemo(() => {
     if (currencyIn && currencyAmountOut && allowedPairs.length > 0) {

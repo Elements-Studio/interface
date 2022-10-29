@@ -21,7 +21,7 @@ import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
 import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
-import getNetworkType from '../../utils/getNetworkType'
+import {useGetType} from 'state/networktype/hooks'
 import getV2FactoryAddress from '../../utils/getV2FactoryAddress'
 
 const Container = styled.div`
@@ -97,6 +97,7 @@ export default function FarmHarvestDialog({
   const provider = useStarcoinProvider();
   const { account, chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
+  const networkType = useGetType()
 
   let address = '';
   if (account) {
@@ -126,7 +127,6 @@ export default function FarmHarvestDialog({
   async function onClickHarvestConfirm() {
     try {
       const ADDRESS = getV2FactoryAddress()
-      const networkType = getNetworkType()
       const MODULE = 'TokenSwapFarmScript'
       const FUNC = 'harvest'
       let payloadHex: string

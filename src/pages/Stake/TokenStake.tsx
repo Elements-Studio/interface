@@ -24,7 +24,7 @@ import { STAR } from '../../constants/tokens'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import { useUserStarStaked } from 'hooks/useTokenSwapFarmScript'
 import getCurrentNetwork from '../../utils/getCurrentNetwork'
-import getNetworkType from '../../utils/getNetworkType'
+import {useGetType} from 'state/networktype/hooks'
 
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
@@ -154,7 +154,7 @@ export default function TokenStake({
     setVeStarReward(value);
   };
 
-  const networkType = getNetworkType()
+  const networkType = useGetType()
   return (
     <>
       <Container style={{ paddingTop: '1rem' }}>

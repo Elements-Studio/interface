@@ -4,7 +4,7 @@ import { FACTORY_ADDRESS_STARCOIN as V2_FACTORY_ADDRESS } from '@starcoin/starsw
 import { useActiveWeb3React } from './web3'
 import getCurrentNetwork from '../utils/getCurrentNetwork'
 import { useStarcoinProvider } from './useStarcoinProvider'
-import getNetworkType from '../utils/getNetworkType'
+import { useGetType } from 'state/networktype/hooks'
 import getV2FactoryAddress from '../utils/getV2FactoryAddress'
 
 const PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapFarmScript::`
@@ -47,7 +47,7 @@ export function useTotalLiquidity(x?: string, y?: string) {
  */
 export function useLookupTBDGain(address?: string, x?: string, y?: string) {
   const provider = useStarcoinProvider()
-  const networkType = getNetworkType()
+  const networkType = useGetType()
   const { chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
 
@@ -73,7 +73,7 @@ export function useLookupTBDGain(address?: string, x?: string, y?: string) {
  */
 export function useUserStaked(address?: string, x?: string, y?: string) {
   const provider = useStarcoinProvider()
-  const networkType = getNetworkType()
+  const networkType = useGetType()
   const { chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
 
@@ -99,7 +99,7 @@ export function useUserStaked(address?: string, x?: string, y?: string) {
  */
 export function useUserStarStaked(address?: string, token?: string) {
   const provider = useStarcoinProvider()
-  const networkType = getNetworkType()
+  const networkType = useGetType()
   const { chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
 

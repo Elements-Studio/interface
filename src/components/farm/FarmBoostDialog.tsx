@@ -23,7 +23,7 @@ import axios from 'axios'
 import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
 import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
-import getNetworkType from '../../utils/getNetworkType'
+import {useGetType} from 'state/networktype/hooks'
 import getV2FactoryAddress from '../../utils/getV2FactoryAddress'
 
 const Container = styled.div`
@@ -107,6 +107,7 @@ export default function FarmUnstakeDialog({
   const provider = useStarcoinProvider()
   const { account, chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
+  const networkType = useGetType()
   const theme = useContext(ThemeContext)
   const [starAmount, setStarAmount] = useState('')
   const [loading, setLoading] = useState(false)
@@ -123,7 +124,6 @@ export default function FarmUnstakeDialog({
       const address = account ? account.toLowerCase() : ''
       const signature = ''
       const ADDRESS = getV2FactoryAddress()
-      const networkType = getNetworkType()
       const MODULE = 'TokenSwapFarmScript'
       const FUNC = 'wl_boost'
       let payloadHex: string
@@ -192,8 +192,6 @@ export default function FarmUnstakeDialog({
     }
     return false;
   }
-
-  const networkType = getNetworkType()
 
   const lockedAmount = useGetLockedAmount(tokenX, tokenY, address) 
   const boostFactor = useComputeBoostFactor(

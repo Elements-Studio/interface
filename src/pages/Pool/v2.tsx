@@ -24,7 +24,7 @@ import { Pair } from '@starcoin/starswap-v2-sdk'
 import { Trans } from '@lingui/macro'
 import { ExtendedStar } from 'constants/tokens'
 import { CurrencyAmount, Token } from '@starcoin/starswap-sdk-core'
-import getNetworkType from '../../utils/getNetworkType'
+import {useGetType} from 'state/networktype/hooks'
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -131,7 +131,7 @@ export default function Pool() {
         .filter((stakingPair) => stakingPair?.liquidityToken.address === v2Pair.liquidityToken.address).length === 0
     )
   })
-  const networkType = getNetworkType()
+  const networkType = useGetType()
   const currency = networkType==='APTOS' ? 'APT' : 'STC'
   return (
     <>

@@ -25,7 +25,7 @@ import Web3Status from '../Web3Status'
 import NetworkCard from './NetworkCard'
 import UniBalanceContent from './UniBalanceContent'
 import { ChainSelector } from 'components/NavBar/ChainSelector'
-import getNetworkType from '../../utils/getNetworkType'
+import {useGetType} from 'state/networktype/hooks'
 
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
   display: grid;
@@ -327,7 +327,7 @@ export default function Header() {
 
   const scrollY = useScrollPosition()
 
-  const networkType =  getNetworkType()
+  const networkType = useGetType()
   return (
     <HeaderFrame showBackground={scrollY > 45}>
       <ClaimModal />

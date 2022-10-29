@@ -6,7 +6,7 @@ import { useActiveWeb3React } from '../../hooks/web3'
 import { useAllTokens } from '../../hooks/Tokens'
 // import { useMulticall2Contract } from '../../hooks/useContract'
 import { isAddress } from '../../utils'
-import getNetworkType from '../../utils/getNetworkType'
+import { useGetType } from 'state/networktype/hooks'
 import { useUserUnclaimedAmount } from '../claim/hooks'
 // import { useMultipleContractSingleData, useSingleContractMultipleData } from '../multicall/hooks'
 import { useTotalUniEarned } from '../stake/hooks'
@@ -42,7 +42,7 @@ export function useSTCBalances(uncheckedAddresses?: (string | undefined)[]): {
   //   addresses.map((address) => [address])
   // )
 
-  const networkType = getNetworkType()
+  const networkType = useGetType()
   const provider = useStarcoinProvider()
 
   const { data: results } = useSWR(addresses.length ? [provider, 'getBalance', ...addresses] : null, () =>
@@ -101,7 +101,7 @@ export function useTokenBalancesWithLoadingIndicator(
   //   undefined,
   //   100_000
   // )
-  const networkType = getNetworkType()
+  const networkType = useGetType()
   const provider = useStarcoinProvider()
   const { data: balances, isValidating } = useSWR(
     address && validatedTokens.length

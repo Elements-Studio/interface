@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js';
 import axios from 'axios'
 import { useActiveWeb3React } from './web3'
 import { useStarcoinProvider } from './useStarcoinProvider';
-import getNetworkType from '../utils/getNetworkType'
+import { useGetType } from 'state/networktype/hooks'
 import getCurrentNetwork from '../utils/getCurrentNetwork'
 
 export default function useComputeBoostFactor(
@@ -15,7 +15,7 @@ export default function useComputeBoostFactor(
   const starcoinProvider = useStarcoinProvider()
   const { chainId } = useActiveWeb3React()
   const network = getCurrentNetwork(chainId)
-  const networkType = getNetworkType()
+  const networkType = useGetType()
 
   const contractSend = useCallback(async () => {
     if (lockedAmount && lockedFarmAmount && totalFarmAmount) {
