@@ -21,6 +21,7 @@ import { PairState, useV2Pairs } from 'hooks/useV2Pairs'
 import { getCreate2Address } from '@ethersproject/address'
 import { pack, keccak256 } from '@ethersproject/solidity'
 import { Trans } from '@lingui/macro'
+import { useGetType } from 'state/networktype/hooks'
 
 function EmptyState({ message }: { message: ReactNode }) {
   return (
@@ -58,6 +59,7 @@ export default function MigrateV2() {
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
 
+  const networkType = useGetType()
   // calculate v2 + sushi pair contract addresses for all token pairs
   const tokenPairsWithLiquidityTokens = useMemo(
     () =>
@@ -65,7 +67,7 @@ export default function MigrateV2() {
         // sushi liquidity token or null
         const sushiLiquidityToken = chainId === 1 ? toSushiLiquidityToken(tokens) : null
         return {
-          v2liquidityToken: v2FactoryAddress ? toV2LiquidityToken(tokens) : undefined,
+          v2liquidityToken: v2FactoryAddress ? toV2LiquidityToken(tokens, networkType) : undefined,
           sushiLiquidityToken,
           tokens,
         }

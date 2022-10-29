@@ -11,7 +11,6 @@ import { BASES_TO_TRACK_LIQUIDITY_FOR, PINNED_PAIRS } from '../../constants/rout
 import { useAllTokens } from '../../hooks/Tokens'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { useGetCurrentNetwork } from 'state/networktype/hooks'
-import getNetworkType from '../../utils/getNetworkType'
 import { AppState } from '../index'
 import {
   addSerializedPair,
@@ -264,11 +263,10 @@ export function useURLWarningToggle(): () => void {
  * @param tokenA one of the two tokens
  * @param tokenB the other token
  */
-export function toV2LiquidityToken([tokenA, tokenB]: [Token, Token]): Token {
+export function toV2LiquidityToken([tokenA, tokenB]: [Token, Token], networkType: string): Token {
   if (tokenA.chainId !== tokenB.chainId) throw new Error('Not matching chain IDs')
   if (tokenA.equals(tokenB)) throw new Error('Tokens cannot be equal')
   // if (!V2_FACTORY_ADDRESSES[tokenA.chainId]) throw new Error('No V2 factory address on this chain')
-  const networkType = getNetworkType()
   return new Token(
     tokenA.chainId,
     // computePairAddress({ factoryAddress: V2_FACTORY_ADDRESSES[tokenA.chainId], tokenA, tokenB }),

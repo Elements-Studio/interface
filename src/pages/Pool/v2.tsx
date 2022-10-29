@@ -24,7 +24,7 @@ import { Pair } from '@starcoin/starswap-v2-sdk'
 import { Trans } from '@lingui/macro'
 import { ExtendedStar } from 'constants/tokens'
 import { CurrencyAmount, Token } from '@starcoin/starswap-sdk-core'
-import {useGetType} from 'state/networktype/hooks'
+import { useGetType } from 'state/networktype/hooks'
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -82,11 +82,12 @@ const EmptyProposals = styled.div`
 export default function Pool() {
   const theme = useContext(ThemeContext)
   const { account, chainId } = useActiveWeb3React()
+  const networkType = useGetType()
 
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
   const tokenPairsWithLiquidityTokens = useMemo(
-    () => trackedTokenPairs.map((tokens) => ({ liquidityToken: toV2LiquidityToken(tokens), tokens })),
+    () => trackedTokenPairs.map((tokens) => ({ liquidityToken: toV2LiquidityToken(tokens, networkType), tokens })),
     [trackedTokenPairs]
   )
   const liquidityTokens = useMemo(
@@ -131,7 +132,6 @@ export default function Pool() {
         .filter((stakingPair) => stakingPair?.liquidityToken.address === v2Pair.liquidityToken.address).length === 0
     )
   })
-  const networkType = useGetType()
   const currency = networkType==='APTOS' ? 'APT' : 'STC'
   return (
     <>
