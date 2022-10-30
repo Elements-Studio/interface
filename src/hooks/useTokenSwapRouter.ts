@@ -109,9 +109,13 @@ export function useGetLiquidityPools() {
   const [liquidityPools, setLiquidityPools] = useLiquidityPools()
   useEffect(
     () => {
-      if (!liquidityPools[network]) {
+      if (network && !liquidityPools[network]) {
         const url = `https://swap-api.starcoin.org/${ network }/v1/liquidityPools`
-        axios.get(url).then((res: any) => res.data).then((data: any) => setLiquidityPools({ ...liquidityPools, [network]: data }))
+        axios.get(url).then((res: any) => res.data)
+          .then((data: any) => setLiquidityPools({ ...liquidityPools, [network]: data }))
+          .catch((error: any) => {
+            console.log(error)
+          })
       }
     },
     [network, liquidityPools]
