@@ -119,15 +119,15 @@ export const STAR2: { [networkType: string]: { [chainId: number]: Token } } = {
     ),
   },
   [NetworkType.APTOS]: {
-    [SupportedChainId_APTOS.MAIN]: new Token(
-      SupportedChainId_APTOS.MAIN,
+    [SupportedChainId_APTOS.APTOS_MAIN]: new Token(
+      SupportedChainId_APTOS.APTOS_MAIN,
       '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::STAR::STAR',
       9,
       'STAR',
       'Star'
     ),
-    [SupportedChainId_APTOS.TEST]: new Token(
-      SupportedChainId_APTOS.TEST,
+    [SupportedChainId_APTOS.APTOS_TEST]: new Token(
+      SupportedChainId_APTOS.APTOS_TEST,
       '0xc3dbe4f07390f05b19ccfc083fc6aa5bc5d75621d131fc49557c8f4bbc11716::STAR::STAR',
       9,
       'STAR',

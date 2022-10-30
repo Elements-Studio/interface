@@ -1,6 +1,7 @@
 // a list of tokens by chain
 import { Currency, Token } from '@uniswap/sdk-core'
-import { SupportedChainId, NetworkType, SupportedChainId2, SupportedChainId_STARCOIN, SupportedChainId_APTOS } from './chains'
+import { SupportedChainId, NetworkType, SupportedChainId2, SupportedChainId_STARCOIN, SupportedChainId_APTOS, STARCOIN_ID_NAME, APTOS_ID_NAME, SupportedChainNameId } from './chains'
+import getChainName from 'utils/getChainName'
 import {
   STC,
   STAR,
@@ -31,12 +32,17 @@ import {
   APT,
 } from './tokens'
 
+
 type ChainTokenList = {
   readonly [chainId: number]: Token[]
 }
 
 type ChainCurrencyList = {
   readonly [chainId: number]: Currency[]
+}
+
+type ChainNameCurrencyList = {
+  readonly [chainName: string]: Currency[]
 }
 
 // List of all mirror's assets addresses.
@@ -108,6 +114,7 @@ export const CUSTOM_BASES: { [chainId: number]: { [tokenAddress: string]: Token[
 /**
  * Shows up in the currency select for swap and add liquidity
  */
+// ATTENTION: COMMON_BASES is deprecated, use COMMON_BASES_NAME instead.
 export const COMMON_BASES: ChainCurrencyList = {
   // [1]: [ExtendedStar.onChain(1), DAI, USDC, USDT, WBTC, WETH9_EXTENDED[1]],
   [SupportedChainId.MAINNET]: [ExtendedStar.onChain(SupportedChainId.MAINNET), STAR[SupportedChainId.MAINNET], FAI[SupportedChainId.MAINNET], WEN[SupportedChainId.MAINNET], XUSDT[SupportedChainId.MAINNET]],
@@ -126,10 +133,36 @@ export const COMMON_BASES: ChainCurrencyList = {
   [SupportedChainId.APTOS_DEV]: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV), STAR[SupportedChainId.APTOS_DEV], XUSDT[SupportedChainId.APTOS_DEV]],
 }
 
-const networkType1 = NetworkType.STARCOIN
+export const COMMON_BASES_NAME: ChainNameCurrencyList = {
+  // ['MAINNET']: [ExtendedStar.onChain(1), DAI, USDC, USDT, WBTC, WETH9_EXTENDED[1]],
+  ['MAINNET']: [ExtendedStar.onChain(SupportedChainId.MAINNET), STAR[SupportedChainId.MAINNET], FAI[SupportedChainId.MAINNET], WEN[SupportedChainId.MAINNET], XUSDT[SupportedChainId.MAINNET]],
+  ['BARNARD']: [ExtendedStar.onChain(SupportedChainId.BARNARD), STAR[SupportedChainId.BARNARD], FAI[SupportedChainId.BARNARD], WEN[SupportedChainId.BARNARD], SHARE[SupportedChainId.BARNARD], XUSDT[SupportedChainId.BARNARD], XETH[SupportedChainId.BARNARD]],
+  ['PROXIMA']: [ExtendedStar.onChain(SupportedChainId.PROXIMA), STAR[SupportedChainId.PROXIMA], FAI[SupportedChainId.PROXIMA], WEN[SupportedChainId.PROXIMA], SHARE[SupportedChainId.PROXIMA], XUSDT[SupportedChainId.PROXIMA], XETH[SupportedChainId.PROXIMA]],
+  ['ROPSTEN']: [ExtendedStar.onChain(3), WETH9_EXTENDED[3]],
+  ['RINKEBY']: [ExtendedStar.onChain(4), WETH9_EXTENDED[4]],
+  ['GOERLI']: [ExtendedStar.onChain(5), WETH9_EXTENDED[5]],
+  ['KOVAN']: [ExtendedStar.onChain(42), WETH9_EXTENDED[42]],
+  ['ARBITRUM_ONE']: [
+    ExtendedStar.onChain(SupportedChainId.ARBITRUM_ONE),
+    WETH9_EXTENDED[SupportedChainId.ARBITRUM_ONE],
+  ],
+  ['APTOS_MAIN']: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN), STAR[SupportedChainId.APTOS_MAIN], XUSDT[SupportedChainId.APTOS_MAIN]],
+  ['APTOS_TEST']: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST), STAR[SupportedChainId.APTOS_TEST], XUSDT[SupportedChainId.APTOS_TEST]],
+  ['APTOS_DEV']: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV), STAR[SupportedChainId.APTOS_DEV], XUSDT[SupportedChainId.APTOS_DEV]],
+}
+const chainId = 2
+const networkType = 'APTOS'
+
+const chainName = getChainName(chainId, networkType)
+const supportedChainId = SupportedChainNameId[chainName]
+console.log({ chainId, networkType, chainName, supportedChainId })
+console.log(COMMON_BASES[chainId])
+console.log(COMMON_BASES_NAME[chainName])
+
+const networkType1 = NetworkType['STARCOIN']
 console.log('STAR2-starcoin-mainnet', networkType1, SupportedChainId2[networkType1].MAINNET, STAR2[networkType1][SupportedChainId_STARCOIN.MAINNET])
-const networkType2 = NetworkType.APTOS
-console.log('STAR2-aptos-main', networkType2, SupportedChainId2[networkType2].MAIN, STAR2[networkType2][SupportedChainId_APTOS.MAIN])
+const networkType2 = NetworkType['APTOS']
+console.log('STAR2-aptos-main', networkType2, SupportedChainId2[networkType2].APTOS_MAIN, STAR2[networkType2][SupportedChainId_APTOS.APTOS_MAIN])
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {

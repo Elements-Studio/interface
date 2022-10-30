@@ -23,18 +23,18 @@ import BoostFlame from '../../assets/svg/boost_flame.png'
 import FAILogo from '../../assets/images/fai_token_logo.png'
 import FAIBlueLogo from '../../assets/images/fai_token_logo_blue.png'
 import { useActiveWeb3React } from '../../hooks/web3'
-import { COMMON_BASES } from '../../constants/routing'
+import { COMMON_BASES_NAME } from '../../constants/routing'
 import { unwrappedToken } from '../../utils/unwrappedToken'
 import { useLookupTBDGain, useUserStaked } from 'hooks/useTokenSwapFarmScript'
 import { useUserLiquidity } from 'hooks/useTokenSwapRouter'
 import useSWR from 'swr'
 import axios from 'axios'
 import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
-import { useGetCurrentNetwork } from 'state/networktype/hooks'
+import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
 import { useActiveLocale } from 'hooks/useActiveLocale'
 import BigNumber from 'bignumber.js';
 import useGetLockedAmountV2 from '../../hooks/useGetLockedAmountV2'
-
+import getChainName from 'utils/getChainName'
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
 const lpTokenScalingFactor = 1000000000;
@@ -107,7 +107,9 @@ export default function FarmStake({
     address = account.toLowerCase();
   }
 
-  const bases = typeof chainId !== 'undefined' ? COMMON_BASES[chainId] ?? [] : []
+  const networkType = useGetType()
+  const chainName = getChainName(chainId, networkType)
+  const bases = typeof chainId !== 'undefined' ? COMMON_BASES_NAME[chainName] ?? [] : []
   const _tokenX = bases.filter(token => token.symbol === tokenX)
   const _tokenY = bases.filter(token => token.symbol === tokenY)
   const token0 = _tokenX[0]

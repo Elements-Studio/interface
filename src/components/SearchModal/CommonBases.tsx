@@ -3,12 +3,14 @@ import { Text } from 'rebass'
 import { Currency } from '@uniswap/sdk-core'
 import styled from 'styled-components/macro'
 
-import { COMMON_BASES } from '../../constants/routing'
+import { COMMON_BASES_NAME } from '../../constants/routing'
 import { currencyId } from '../../utils/currencyId'
 import { AutoColumn } from '../Column'
 import QuestionHelper from '../QuestionHelper'
 import { AutoRow } from '../Row'
 import CurrencyLogo from '../CurrencyLogo'
+import { useGetType } from 'state/networktype/hooks'
+import getChainName from 'utils/getChainName'
 
 const BaseWrapper = styled.div<{ disable?: boolean }>`
   border: 1px solid ${({ theme, disable }) => (disable ? 'transparent' : theme.bg3)};
@@ -36,8 +38,9 @@ export default function CommonBases({
   selectedCurrency?: Currency | null
   onSelect: (currency: Currency) => void
 }) {
-  const bases = typeof chainId !== 'undefined' ? COMMON_BASES[chainId] ?? [] : []
-
+  const networkType = useGetType()
+  const chainName = getChainName(chainId, networkType)
+  const bases = typeof chainId !== 'undefined' ? COMMON_BASES_NAME[chainName] ?? [] : []
   return bases.length > 0 ? (
     <AutoColumn gap="md">
       <AutoRow>

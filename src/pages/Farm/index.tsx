@@ -13,12 +13,13 @@ import FarmTitle from '../../components/farm/FarmTitle'
 import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
 import FarmCard from '../../components/farm/FarmCard'
 import CurrencyLogo from '../../components/CurrencyLogo'
-import { COMMON_BASES } from '../../constants/routing'
+import { COMMON_BASES_NAME } from '../../constants/routing'
 import { unwrappedToken } from '../../utils/unwrappedToken'
 import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
 import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
+import getChainName from 'utils/getChainName'
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 30px;
@@ -42,6 +43,8 @@ const FarmRow = styled(RowBetween)`
 export default function Farm({ history }: RouteComponentProps) {
   const { account, chainId } = useActiveWeb3React()
   const network = useGetCurrentNetwork(chainId)
+  const networkType = useGetType()
+
   // toggle wallet when disconnected
   const toggleWalletModal = useWalletModalToggle()
   const darkMode = useIsDarkMode();
@@ -59,8 +62,8 @@ export default function Farm({ history }: RouteComponentProps) {
   if (error) return null;
   if (!list) return null;
 
-  
-  const bases = typeof chainId !== 'undefined' ? COMMON_BASES[chainId] ?? [] : []
+  const chainName = getChainName(chainId, networkType)
+  const bases = typeof chainId !== 'undefined' ? COMMON_BASES_NAME[chainName] ?? [] : []
   
   const MultiplierTips = () =>{
     return (

@@ -28,7 +28,7 @@ import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { useGetCurrentNetwork } from 'state/networktype/hooks'
+import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
 import FormLabel from '@mui/material/FormLabel'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
@@ -36,8 +36,9 @@ import axios from 'axios'
 import useSWR from 'swr'
 import useGetVestarCount from '../../hooks/useGetVestarCount';
 import BigNumber from 'bignumber.js'
-import { COMMON_BASES } from '../../constants/routing'
+import { COMMON_BASES_NAME } from '../../constants/routing'
 import { unwrappedToken } from '../../utils/unwrappedToken'
+import getChainName from 'utils/getChainName'
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 30px;
@@ -191,7 +192,9 @@ export default function Simulator({ history }: RouteComponentProps) {
   }
 
   const isTest = process.env.REACT_APP_STARSWAP_IN_TEST === 'true';
-  const bases = typeof chainId !== 'undefined' ? COMMON_BASES[chainId] ?? [] : []
+  const networkType = useGetType()
+  const chainName = getChainName(chainId, networkType)
+  const bases = typeof chainId !== 'undefined' ? COMMON_BASES_NAME[chainName] ?? [] : []
 
   return (
     <>
