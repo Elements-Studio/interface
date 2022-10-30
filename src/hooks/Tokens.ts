@@ -180,7 +180,9 @@ export function useCurrency(currencyId: string | undefined): Currency | null | u
   const networkType = useGetType()
   const isNativeCurrency = ['APT', 'STC'].includes(currencyId?.toUpperCase() || '')
   const token = useToken(isNativeCurrency ? undefined : currencyId)
-  const extended = useMemo(() => (chainId ? ((currencyId?.toUpperCase() === 'STC' && networkType === 'STARCOIN') ? ExtendedStar.onChain(chainId) : ExtendedApt.onChain(chainId)) : undefined), [chainId, networkType])
+  const extended = useMemo(() => {
+    return (chainId ? ((currencyId?.toUpperCase() === 'STC' && networkType === 'STARCOIN') ? ExtendedStar.onChain(chainId) : ExtendedApt.onChain(chainId)) : undefined)
+  }, [chainId, currencyId, networkType])
   const weth = chainId ? WETH9_EXTENDED[chainId] : undefined
   if (weth?.address?.toLowerCase() === currencyId?.toLowerCase()) return weth
   return isNativeCurrency ? extended : token

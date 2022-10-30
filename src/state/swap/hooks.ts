@@ -21,6 +21,8 @@ import { Field, replaceSwapState, selectCurrency, setRecipient, switchCurrencies
 import { SwapState } from './reducer'
 import { useUserSingleHopOnly } from 'state/user/hooks'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
+import { useGetType } from 'state/networktype/hooks'
+
 
 export function useSwapState(): AppState['swap'] {
   return useAppSelector((state) => state.swap)
@@ -255,12 +257,12 @@ function validatedRecipient(recipient: any): string | null {
   return null
 }
 
-export function queryParametersToSwapState(parsedQs: ParsedQs): SwapState {
+export function queryParametersToSwapState(parsedQs: ParsedQs, networkType: string = 'STARCOIN'): SwapState {
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
   if (inputCurrency === '' && outputCurrency === '') {
     // default to APT input
-    inputCurrency = 'APT'
+    inputCurrency = networkType === 'STARCOIN' ? 'STC' : 'APT'
   } else if (inputCurrency === outputCurrency) {
     // clear output if identical
     outputCurrency = ''
@@ -286,6 +288,7 @@ export function useDefaultsFromURLSearch():
   | { inputCurrencyId: string | undefined; outputCurrencyId: string | undefined }
   | undefined {
   const { chainId } = useActiveWeb3React()
+  const networkType = useGetType()
   const dispatch = useAppDispatch()
   const parsedQs = useParsedQueryString()
   const [result, setResult] =
@@ -293,8 +296,7 @@ export function useDefaultsFromURLSearch():
 
   useEffect(() => {
     if (!chainId) return
-    const parsed = queryParametersToSwapState(parsedQs)
-
+    const parsed = queryParametersToSwapState(parsedQs, networkType)
     dispatch(
       replaceSwapState({
         typedValue: parsed.typedValue,
@@ -307,7 +309,7 @@ export function useDefaultsFromURLSearch():
 
     setResult({ inputCurrencyId: parsed[Field.INPUT].currencyId, outputCurrencyId: parsed[Field.OUTPUT].currencyId })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, chainId])
+  }, [dispatch, chainId, networkType])
 
   return result
 }
