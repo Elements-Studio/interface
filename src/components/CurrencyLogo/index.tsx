@@ -5,7 +5,6 @@ import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import STCLogo from '../../assets/svg/stc.svg'
 import STCBlueLogo from '../../assets/svg/stc.svg'
 import APTLogo from '../../assets/svg/apt.svg'
-import APTDarkLogo from '../../assets/svg/apt_dark.svg'
 import STARLogo from '../../assets/svg/starswap_logo.svg'
 import STARBlueLogo from '../../assets/svg/starswap_logo_blue.svg'
 import FAILogo from '../../assets/images/fai_token_logo.png'
@@ -75,9 +74,6 @@ export default function CurrencyLogo({
   const darkMode = useIsDarkMode();
 
   if (currency?.symbol ==='APT') {
-    if (darkMode) {
-      return <StyledEthereumLogo src={APTDarkLogo} size={size} style={style} {...rest} />
-    }
     return <StyledEthereumLogo src={APTLogo} size={size} style={style} {...rest} />
   } else if (currency?.symbol ==='STC') {
     if (darkMode) {
