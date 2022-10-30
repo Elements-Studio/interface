@@ -10,7 +10,7 @@ import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
 import { useUserAddedTokens } from '../state/user/hooks'
 import { isAddress } from '../utils'
 import { TokenAddressMap, useUnsupportedTokenList } from './../state/lists/hooks'
-
+import { useGetType } from 'state/networktype/hooks'
 import { useActiveWeb3React } from './web3'
 import { useBytes32TokenContract, useTokenContract } from './useContract'
 
@@ -177,9 +177,10 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
 
 export function useCurrency(currencyId: string | undefined): Currency | null | undefined {
   const { chainId } = useActiveWeb3React()
+  const networkType = useGetType()
   const isNativeCurrency = ['APT', 'STC'].includes(currencyId?.toUpperCase() || '')
   const token = useToken(isNativeCurrency ? undefined : currencyId)
-  const extended = useMemo(() => (chainId ? (currencyId?.toUpperCase() === 'STC' ? ExtendedStar.onChain(chainId) : ExtendedApt.onChain(chainId)) : undefined), [chainId])
+  const extended = useMemo(() => (chainId ? ((currencyId?.toUpperCase() === 'STC' && networkType === 'STARCOIN') ? ExtendedStar.onChain(chainId) : ExtendedApt.onChain(chainId)) : undefined), [chainId, networkType])
   const weth = chainId ? WETH9_EXTENDED[chainId] : undefined
   if (weth?.address?.toLowerCase() === currencyId?.toLowerCase()) return weth
   return isNativeCurrency ? extended : token

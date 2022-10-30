@@ -24,6 +24,7 @@ import useTheme from 'hooks/useTheme'
 import ImportRow from './ImportRow'
 import { Edit } from 'react-feather'
 import useDebounce from 'hooks/useDebounce'
+import { useGetType } from 'state/networktype/hooks'
 
 const ContentWrapper = styled(Column)`
   width: 100%;
@@ -109,16 +110,17 @@ export function CurrencySearch({
   }, [filteredTokens, tokenComparator])
 
   const filteredSortedTokens = useSortedTokensByQuery(sortedTokens, debouncedQuery)
-
-  const apt = useMemo(() => chainId && ExtendedApt.onChain(chainId), [chainId])
+  const networkType = useGetType()
+  const coin = useMemo(() => chainId && (networkType === 'STARCOIN' ? ExtendedStar.onChain(chainId) : ExtendedApt.onChain(chainId) ), [chainId,networkType])
 
   const filteredSortedTokensWithSTC: Currency[] = useMemo(() => {
     const s = debouncedQuery.toLowerCase().trim()
-    if (s === '' || s === 'a' || s === 'ap' || s === 'apt') {
-      return apt ? [apt, ...filteredSortedTokens] : filteredSortedTokens
+    if ((networkType === 'STARCOIN' && (s === '' || s === 's' || s === 'st' || s === 'stc')) ||
+     (networkType === 'APTOS' && (s === '' || s === 'a' || s === 'ap' || s === 'apt'))) {
+      return coin ? [coin, ...filteredSortedTokens] : filteredSortedTokens
     }
     return filteredSortedTokens
-  }, [debouncedQuery, apt, filteredSortedTokens])
+  }, [debouncedQuery, coin, filteredSortedTokens])
 
   const handleCurrencySelect = useCallback(
     (currency: Currency) => {
@@ -146,8 +148,8 @@ export function CurrencySearch({
     (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.key === 'Enter') {
         const s = debouncedQuery.toLowerCase().trim()
-        if (s === 'apt' && apt) {
-          handleCurrencySelect(apt)
+        if ((s === 'stc' || s === 'apt') && coin) {
+          handleCurrencySelect(coin)
         } else if (filteredSortedTokensWithSTC.length > 0) {
           if (filteredSortedTokensWithSTC.length > 0) {
             if (
@@ -160,7 +162,7 @@ export function CurrencySearch({
         }
       }
     },
-    [debouncedQuery, apt, filteredSortedTokensWithSTC, handleCurrencySelect]
+    [debouncedQuery, coin, filteredSortedTokensWithSTC, handleCurrencySelect]
   )
 
   // menu ui
