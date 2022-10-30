@@ -1,0 +1,110 @@
+{
+  "name": "Starswap Default List",
+  "timestamp": "2021-01-21T23:57:10.982Z",
+  "version": {
+    "major": 2,
+    "minor": 0,
+    "patch": 0
+  },
+  "tags": {},
+  "logoURI": "ipfs://QmNa8mQkrNKp1WEEeGjFezDmDeodkWRevGFN8JCV7b4Xir",
+  "keywords": ["starswap", "default"],
+  "tokens": [
+    {
+      "chainId": 1,
+      "address": "0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR",
+      "name": "STAR",
+      "symbol": "STAR",
+      "decimals": 9,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    },
+    {
+      "chainId": 1,
+      "address": "0x4ffcc98f43ce74668264a0cf6eebe42b::FAI::FAI",
+      "name": "FAI",
+      "symbol": "FAI",
+      "decimals": 9,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    },
+    {
+      "chainId": 1,
+      "address": "0xbf60b00855c92fe725296a436101c8c6::WEN::WEN",
+      "name": "WEN",
+      "symbol": "WEN",
+      "decimals": 9,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    },
+    {
+      "chainId": 1,
+      "address": "0xe52552637c5897a2d499fbf08216f73e::XUSDT::XUSDT",
+      "name": "XUSDT",
+      "symbol": "XUSDT",
+      "decimals": 6,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    },
+    {
+      "chainId": 251,
+      "address": "0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR",
+      "name": "STAR",
+      "symbol": "STAR",
+      "decimals": 9,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    },
+    {
+      "chainId": 251,
+      "address": "0xfe125d419811297dfab03c61efec0bc9::FAI::FAI",
+      "name": "FAI",
+      "symbol": "FAI",
+      "decimals": 9,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    },
+    {
+      "chainId": 251,
+      "address": "0x88e2677b89841cd4ee7c15535798e1c8::WEN::WEN",
+      "name": "WEN",
+      "symbol": "WEN",
+      "decimals": 9,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    },
+    {
+      "chainId": 251,
+      "address": "0x88e2677b89841cd4ee7c15535798e1c8::SHARE::SHARE",
+      "name": "SHARE",
+      "symbol": "SHARE",
+      "decimals": 9,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    },
+    {
+      "chainId": 251,
+      "address": "0x416b32009fe49fcab1d5f2ba0153838f::XUSDT::XUSDT",
+      "name": "XUSDT",
+      "symbol": "XUSDT",
+      "decimals": 6,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    },
+    {
+      "chainId": 251,
+      "address": "0x416b32009fe49fcab1d5f2ba0153838f::XETH::XETH",
+      "name": "XETH",
+      "symbol": "XETH",
+      "decimals": 18,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    },
+    {
+      "chainId": 252,
+      "address": "0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR",
+      "name": "STAR",
+      "symbol": "STAR",
+      "decimals": 9,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    },
+    {
+      "chainId": 252,
+      "address": "0xfe125d419811297dfab03c61efec0bc9::FAI::FAI",
+      "name": "FAI",
+      "symbol": "FAI",
+      "decimals": 9,
+      "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
+    }
+  ]
+}

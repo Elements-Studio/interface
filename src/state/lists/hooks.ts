@@ -1,4 +1,5 @@
-import DEFAULT_TOKEN_LIST from '../../constants/starswap-default.tokenlist.json'
+import DEFAULT_TOKEN_LIST_STARCOIN from '../../constants/starswap-starcoin-default.tokenlist.json'
+import DEFAULT_TOKEN_LIST_APTOS from '../../constants/starswap-aptos-default.tokenlist.json'
 import { TokenList } from '@uniswap/token-lists'
 import { useMemo } from 'react'
 import { useAppSelector } from 'state/hooks'
@@ -8,6 +9,7 @@ import { AppState } from '../index'
 import { UNSUPPORTED_LIST_URLS } from './../../constants/lists'
 import { WrappedTokenInfo } from './wrappedTokenInfo'
 import { SupportedChainId } from 'constants/chains'
+import { useGetType } from 'state/networktype/hooks'
 
 export type TokenAddressMap = Readonly<{
   [chainId: number]: Readonly<{ [tokenAddress: string]: { token: WrappedTokenInfo; list: TokenList } }>
@@ -23,7 +25,7 @@ export function listToTokenMap(list: TokenList): TokenAddressMap {
   const map = list.tokens.reduce<TokenAddressMap>((tokenMap, tokenInfo) => {
     const token = new WrappedTokenInfo(tokenInfo, list)
     if (tokenMap[token.chainId]?.[token.address] !== undefined) {
-      console.error(new Error(`Duplicate token! ${token.address}`))
+      console.error(new Error(`Duplicate token! ${ token.address }`))
       return tokenMap
     }
     return {
@@ -41,7 +43,6 @@ export function listToTokenMap(list: TokenList): TokenAddressMap {
   return map
 }
 
-const TRANSFORMED_DEFAULT_TOKEN_LIST = listToTokenMap(DEFAULT_TOKEN_LIST)
 
 export function useAllLists(): AppState['lists']['byUrl'] {
   return useAppSelector((state) => state.lists.byUrl)
@@ -98,6 +99,9 @@ export function useInactiveListUrls(): string[] {
 export function useCombinedActiveList(): TokenAddressMap {
   const activeListUrls = useActiveListUrls()
   const activeTokens = useCombinedTokenMapFromUrls(activeListUrls)
+  const networkType = useGetType()
+  const list = networkType === 'STARCOIN' ? DEFAULT_TOKEN_LIST_STARCOIN : DEFAULT_TOKEN_LIST_APTOS
+  const TRANSFORMED_DEFAULT_TOKEN_LIST = listToTokenMap(list)
   return combineMaps(activeTokens, TRANSFORMED_DEFAULT_TOKEN_LIST)
 }
 
