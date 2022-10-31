@@ -73,7 +73,7 @@ export const STAR: { [chainId: number]: Token } = {
   ),
   [SupportedChainId.APTOS_MAIN]: new Token(
     SupportedChainId.APTOS_MAIN,
-    '0xf0b07b5181ce76e447632cdff90525c0411fd15eb61df7da4e835cf88dc05f5b::STAR::STAR',
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
     9,
     'STAR',
     'Star'
@@ -160,10 +160,10 @@ export const XUSDT: { [chainId: number]: Token } = {
   ),
   [SupportedChainId.APTOS_MAIN]: new Token(
     SupportedChainId.APTOS_MAIN,
-    '0xf0b07b5181ce76e447632cdff90525c0411fd15eb61df7da4e835cf88dc05f5b::XUSDT::XUSDT',
+    '0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDT',
     6,
-    'XUSDT',
-    'XUSDT'
+    'USDT',
+    'USDT'
   ),
   [SupportedChainId.APTOS_TEST]: new Token(
     SupportedChainId.APTOS_TEST,
