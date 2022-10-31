@@ -17,15 +17,14 @@ export default function useSelectChain() {
       if (!library?.provider?.request || !chainId) {
         return
       }
-
       try {
-        setType(targetChain);
-
         const targetChainId = targetChain === 'STARCOIN' ? 1 : 2
         await switchToNetwork({ library, chainId: targetChainId, networkType: targetChain })
-          .then((x) => console.log({ x }))
+          .then((resp) => {
+            // resp should be null
+            setType(targetChain);
+          })
           .catch((error) => console.log({ error }))
-
         // await switchChain(connector, targetChain)
       } catch (error) {
         console.error('Failed to switch networks', error)
