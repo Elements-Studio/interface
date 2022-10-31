@@ -6,7 +6,7 @@ export interface NetWorkTypeState {
 }
 
 const initialState: NetWorkTypeState = {
-    type: 'APTOS'
+    type: 'STARCOIN'
 }
 
 export default createReducer(initialState, (builder) =>
