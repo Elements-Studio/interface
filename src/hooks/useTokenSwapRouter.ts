@@ -120,7 +120,7 @@ export function useGetLiquidityPools() {
     },
     [network, liquidityPools]
   )
-  return liquidityPools[network]
+  return network ? liquidityPools[network] : []
 }
 
 /**

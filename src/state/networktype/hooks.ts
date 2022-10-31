@@ -30,7 +30,7 @@ export function useGetCurrentNetwork(chainId: number | undefined) {
     const networkType = useGetType()
     if (networkType === 'APTOS') {
         const name = APTOS_SUFFIXES[chainId ? chainId : 1]
-        return name ?? `aptos-${ name }`
+        return name ? `aptos-${ name }` : undefined
     }
     return STCSCAN_SUFFIXES[chainId ? chainId : 1]
 }
