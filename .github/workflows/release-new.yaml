@@ -2,7 +2,7 @@ name: Build and Deploy
 
 on:
   push:
-    branches: [network_selected_dev_new]
+    branches: [aptos]
 
 jobs:
   deploy:
