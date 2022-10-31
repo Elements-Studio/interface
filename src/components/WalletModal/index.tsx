@@ -315,7 +315,7 @@ export default function WalletModal({
           <ContentWrapper>
             {error instanceof UnsupportedChainIdError ? (
               <h5>
-                <Trans>Please connect to the appropriate Starcoin network.</Trans>
+                <Trans>Please connect to the appropriate Starcoin/Aptos network.</Trans>
               </h5>
             ) : (
               <Trans>Error connecting. Try refreshing the page.</Trans>

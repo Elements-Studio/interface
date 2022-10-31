@@ -1410,8 +1410,8 @@ msgstr "所占百分比 = 预估获得veStar / （预估获得veStar + veSTAR �
 #~ msgstr "请连接到适当的以太坊网络。"
 
 #: src/components/WalletModal/index.tsx
-msgid "Please connect to the appropriate Starcoin network."
-msgstr ""
+msgid "Please connect to the appropriate Starcoin/Aptos network."
+msgstr "请切换到适当的 Starcoin 或 Aptos 网络。"
 
 #: src/components/Settings/index.tsx
 msgid "Please type the word \"{confirmWord}\" to enable expert mode."

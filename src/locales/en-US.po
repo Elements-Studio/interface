@@ -1438,8 +1438,8 @@ msgstr "Percentage = Your veSTAR Estimated / (Your veSTAR Estimated + Total veST
 #~ msgstr "Please connect to the appropriate Ethereum network."
 
 #: src/components/WalletModal/index.tsx
-msgid "Please connect to the appropriate Starcoin network."
-msgstr "Please connect to the appropriate Starcoin network."
+msgid "Please connect to the appropriate Starcoin/Aptos network."
+msgstr "Please connect to the appropriate Starcoin/Aptos network."
 
 #: src/components/Settings/index.tsx
 msgid "Please type the word \"{confirmWord}\" to enable expert mode."
