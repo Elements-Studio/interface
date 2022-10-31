@@ -14,6 +14,7 @@ import { NetworkContextName } from '../../constants/misc'
 import useENSName from '../../hooks/useENSName'
 import { useHasSocks } from '../../hooks/useSocksBalance'
 import { useWalletModalToggle } from '../../state/application/hooks'
+import { useGetType } from 'state/networktype/hooks'
 import { isTransactionRecent, useAllTransactions } from '../../state/transactions/hooks'
 import { TransactionDetails } from '../../state/transactions/reducer'
 import { shortenAddress } from '../../utils'
@@ -164,7 +165,14 @@ function StatusIcon({ connector }: { connector: AbstractConnector }) {
 }
 
 function Web3StatusInner() {
-  const { account, connector, error } = useWeb3React()
+  const { account, connector, error, deactivate } = useWeb3React()
+  const networkType = useGetType()
+  if (networkType === 'STARCOIN' && account && account.length === 66) {
+    deactivate()
+  }
+  if (networkType === 'APTOS' && account && account.length === 34) {
+    deactivate()
+  }
 
   const { ENSName } = useENSName(account ?? undefined)
 

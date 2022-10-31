@@ -8,6 +8,7 @@ import { injected, openblock } from '../connectors'
 import { NetworkContextName } from '../constants/misc'
 import useInterval from './useInterval'
 import useLocalStorage from './useLocalStorage'
+import { useGetType } from 'state/networktype/hooks'
 
 export function useActiveWeb3React(): Web3ReactContextInterface<Web3Provider> {
   const context = useWeb3ReactCore<Web3Provider>()
@@ -105,6 +106,43 @@ export function useInactiveListener(suppress = false) {
     }
     return undefined
   }, [active, error, suppress, activate])
+}
+
+export function useDeactivateRegisterListener(suppress = false) {
+  const { active, error, activate, deactivate } = useWeb3ReactCore() // specifically using useWeb3React because of what this hook does
+  const [registed, setRegisted] = useState(false)
+  const networkType = useGetType()
+  const { starcoin } = window
+  useEffect(() => {
+    if (starcoin && starcoin.on && active && !error && !registed) {
+      const handleChainChanged = () => {
+        // if user switch from Aptos mainnet to Starcoin mainnet, and do not connect Account,
+        // then dapp wont catch this kind of change.
+        // so we have to deactivate while any chain changes to fix it
+        deactivate()
+      }
+
+      const handleAccountsChanged = (accounts: string[]) => {
+        if (accounts.length > 0) {
+          const selectedAddress = accounts[0]
+
+          if (networkType === 'STARCOIN' && selectedAddress.length === 66) {
+            deactivate()
+          }
+          if (networkType === 'APTOS' && selectedAddress && selectedAddress.length === 34) {
+            deactivate()
+          }
+        }
+      }
+
+      starcoin.on('chainChanged', handleChainChanged)
+      starcoin.on('accountsChanged', handleAccountsChanged)
+
+      // only regist once
+      setRegisted(true)
+    }
+    return undefined
+  }, [active, error, activate, starcoin])
 }
 
 export function useOpenBlockListener(suppress = false) {

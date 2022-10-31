@@ -4,7 +4,7 @@ import styled from 'styled-components/macro'
 import { Trans } from '@lingui/macro'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import { network } from '../../connectors'
-import { useEagerConnect, useInactiveListener, useOpenBlockListener } from '../../hooks/web3'
+import { useEagerConnect, useInactiveListener, useOpenBlockListener, useDeactivateRegisterListener } from '../../hooks/web3'
 import { NetworkContextName } from '../../constants/misc'
 import Loader from '../Loader'
 import { bool } from '@starcoin/starcoin/dist/src/lib/runtime/serde'
@@ -37,6 +37,9 @@ export default function Web3ReactManager({ children }: { children: JSX.Element }
 
   // when there's no account connected, react to logins (broadly speaking) on the injected provider, if it exists
   useInactiveListener(!triedEager)
+
+  // deactive while chainChanged and accountsChanged
+  useDeactivateRegisterListener(triedEager)
   
   // try to eagerly connect to OpenBlock if previous connected wallet is OpenBlock
   useOpenBlockListener(!triedEager)

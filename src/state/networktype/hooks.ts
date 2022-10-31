@@ -29,7 +29,8 @@ export function useGetV2FactoryAddress(): string {
 export function useGetCurrentNetwork(chainId: number | undefined) {
     const networkType = useGetType()
     if (networkType === 'APTOS') {
-        return `aptos-${ APTOS_SUFFIXES[chainId ? chainId : 1] }`
+        const name = APTOS_SUFFIXES[chainId ? chainId : 1]
+        return name ?? `aptos-${ name }`
     }
     return STCSCAN_SUFFIXES[chainId ? chainId : 1]
 }
