@@ -95,7 +95,7 @@ export default function CurrencyLogo({
       return <StyledEthereumLogo src={WENLogo} size={size} style={style} {...rest} />
     }
     return <StyledEthereumLogo src={WENLogo} size={size} style={style} {...rest} />
-  } else if (currency?.symbol === 'XUSDT'){
+  } else if (currency?.symbol === 'XUSDT' || currency?.symbol === 'USDT'){
     return <StyledEthereumLogo src={XUSDTLogo} size={size} style={style} {...rest} />
   } else if (currency?.symbol === 'XETH'){
     return <StyledEthereumLogo src={XETHLogo} size={size} style={style} {...rest} />

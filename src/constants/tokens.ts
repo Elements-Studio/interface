@@ -93,6 +93,50 @@ export const STAR: { [chainId: number]: Token } = {
     'Star'
   ),
 }
+export const STAR_NAME: { [chainId: string]: Token } = {
+  ['MAINNET']: new Token(
+    SupportedChainId.MAINNET,
+    '0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
+  ['BARNARD']: new Token(
+    SupportedChainId.BARNARD,
+    '0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
+  ['PROXIMA']: new Token(
+    SupportedChainId.PROXIMA,
+    '0x8c109349c6bd91411d6bc962e080c4a3::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
+  ['APTOS_MAIN']: new Token(
+    SupportedChainId.APTOS_MAIN,
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
+  ['APTOS_TEST']: new Token(
+    SupportedChainId.APTOS_TEST,
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
+  ['APTOS_DEV']: new Token(
+    SupportedChainId.APTOS_DEV,
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
+}
 
 export const XUSDT: { [chainId: number]: Token } = {
   [SupportedChainId.MAINNET]: new Token(
@@ -131,6 +175,50 @@ export const XUSDT: { [chainId: number]: Token } = {
     'XUSDT'
   ),
   [SupportedChainId.APTOS_DEV]: new Token(
+    SupportedChainId.APTOS_DEV,
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::XUSDT::XUSDT',
+    6,
+    'XUSDT',
+    'XUSDT'
+  ),
+}
+export const XUSDT_NAME: { [chainId: string]: Token } = {
+  ['MAINNET']: new Token(
+    SupportedChainId.MAINNET,
+    '0xe52552637c5897a2d499fbf08216f73e::XUSDT::XUSDT',
+    6,
+    'XUSDT',
+    'XUSDT'
+  ),
+  ['BARNARD']: new Token(
+    SupportedChainId.BARNARD,
+    '0x416b32009fe49fcab1d5f2ba0153838f::XUSDT::XUSDT',
+    6,
+    'XUSDT',
+    'XUSDT'
+  ),
+  ['PROXIMA']: new Token(
+    SupportedChainId.PROXIMA,
+    '0x416b32009fe49fcab1d5f2ba0153838f::XUSDT::XUSDT',
+    6,
+    'XUSDT',
+    'XUSDT'
+  ),
+  ['APTOS_MAIN']: new Token(
+    SupportedChainId.APTOS_MAIN,
+    '0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDT',
+    6,
+    'USDT',
+    'USDT'
+  ),
+  ['APTOS_TEST']: new Token(
+    SupportedChainId.APTOS_TEST,
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::XUSDT::XUSDT',
+    6,
+    'XUSDT',
+    'XUSDT'
+  ),
+  ['APTOS_DEV']: new Token(
     SupportedChainId.APTOS_DEV,
     '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::XUSDT::XUSDT',
     6,
