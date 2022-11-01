@@ -28,7 +28,6 @@ import {
   WBTC,
   ETH2X_FLI,
   WETH9_EXTENDED,
-  STAR2,
   APT,
 } from './tokens'
 
@@ -150,19 +149,6 @@ export const COMMON_BASES_NAME: ChainNameCurrencyList = {
   ['APTOS_TEST']: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST), STAR[SupportedChainId.APTOS_TEST], XUSDT[SupportedChainId.APTOS_TEST]],
   ['APTOS_DEV']: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV), STAR[SupportedChainId.APTOS_DEV], XUSDT[SupportedChainId.APTOS_DEV]],
 }
-const chainId = 2
-const networkType = 'APTOS'
-
-const chainName = getChainName(chainId, networkType)
-const supportedChainId = SupportedChainNameId[chainName]
-console.log({ chainId, networkType, chainName, supportedChainId })
-console.log(COMMON_BASES[chainId])
-console.log(COMMON_BASES_NAME[chainName])
-
-const networkType1 = NetworkType['STARCOIN']
-console.log('STAR2-starcoin-mainnet', networkType1, SupportedChainId2[networkType1].MAINNET, STAR2[networkType1][SupportedChainId_STARCOIN.MAINNET])
-const networkType2 = NetworkType['APTOS']
-console.log('STAR2-aptos-main', networkType2, SupportedChainId2[networkType2].APTOS_MAIN, STAR2[networkType2][SupportedChainId_APTOS.APTOS_MAIN])
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {

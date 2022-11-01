@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import axios from 'axios'
+import { FACTORY_ADDRESS_APTOS as V2_FACTORY_ADDRESS_APTOS } from '@starcoin/starswap-v2-sdk'
 import { useStarcoinProvider } from './useStarcoinProvider';
 import { useActiveWeb3React } from './web3'
 import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
@@ -13,7 +14,7 @@ export default function useGetVestarCount(): number {
 
   const contractSend = useCallback(async () => {
     if (networkType === 'APTOS') {
-      const tokenAddress = '0xf0b07b5181ce76e447632cdff90525c0411fd15eb61df7da4e835cf88dc05f5b::VESTAR::VESTAR'
+      const tokenAddress = `${ V2_FACTORY_ADDRESS_APTOS }::VESTAR::VESTAR`
       const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/getCoinSupply?token=${ tokenAddress }`
       axios.get(url).then(res => {
         setVestarCount(res?.data || 0)
