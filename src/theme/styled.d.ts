@@ -110,6 +110,7 @@ declare module 'styled-components' {
       upToSmall: ThemedCssFunction<DefaultTheme>
       upToMedium: ThemedCssFunction<DefaultTheme>
       upToLarge: ThemedCssFunction<DefaultTheme>
+      upToXl: ThemedCssFunction<DefaultTheme>
     }
 
     // css snippets

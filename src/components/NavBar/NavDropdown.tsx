@@ -4,7 +4,7 @@ import { ForwardedRef, forwardRef } from 'react'
 
 import * as styles from './NavDropdown.css'
 
-export const NavDropdown = forwardRef((props: BoxProps, ref: ForwardedRef<HTMLElement>) => {
+export const NavDropdown = forwardRef((props: any, ref: ForwardedRef<HTMLElement>) => {
   return <Box ref={ref} className={isMobile ? styles.mobileNavDropdown : styles.NavDropdown} {...props} />
 })
 

@@ -18,6 +18,8 @@ import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import * as styles from './ChainSelector.css'
 import ChainSelectorRow from './ChainSelectorRow'
 import { NavDropdown } from './NavDropdown'
+import { useWindowSize } from '../../hooks/useWindowSize'
+import { useIsDarkMode } from 'state/user/hooks'
 
 const NETWORK_SELECTOR_CHAINS = [
   'STARCOIN',
@@ -39,6 +41,8 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
 
   const networkType = useGetType();
   const info = networkType ? getNetworkInfo(networkType) : undefined
+  const {width} = useWindowSize();
+  const darkMode = useIsDarkMode();
 
   const selectChain = useSelectNetWork()
   // useSyncChainQuery()
@@ -63,8 +67,21 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
 
   const isSupported = !!info
 
+  const dropDownDefaultProps = {
+    top: '56',
+    left: leftAlign ? '0' : 'auto',
+    right: leftAlign ? 'auto' : '0'
+  };
+
+  const dropDownMobileProps = {
+    bottom: '56',
+    left: '0'
+  };
+
+  const deopDownProps = width ? width <= 960 ? dropDownMobileProps : dropDownDefaultProps : dropDownDefaultProps;
+
   const dropdown = (
-    <NavDropdown top="56" left={leftAlign ? '0' : 'auto'} right={leftAlign ? 'auto' : '0'} ref={modalRef}>
+    <NavDropdown {...deopDownProps} backgroundColor={darkMode ? 'navBgDark' : 'navBg'} ref={modalRef}>
       <Column paddingX="8">
         {NETWORK_SELECTOR_CHAINS.map((chainId: string) => (
           <ChainSelectorRow
@@ -103,7 +120,7 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
         ) : (
           <>
             <img src={info.logoUrl} alt={info.label} className={styles.Image} />
-            <Box as="span" className={subhead} display={{ sm: 'none', xxl: 'flex' }} style={{ lineHeight: '20px' }}>
+            <Box as="span" className={subhead} display={{ medium: 'none', xxl: 'flex' }} style={{ lineHeight: '20px' }}>
               {info.label}
             </Box>
           </>
