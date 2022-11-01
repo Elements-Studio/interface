@@ -90,7 +90,7 @@ const HeaderElement = styled.div`
     margin-left: 8px;
   }
 
-  ${({ theme }) => theme.mediaWidth.upToMedium`
+  ${({ theme }) => theme.mediaWidth.upToLarge`
     flex-direction: row-reverse;
     align-items: center;
   `};

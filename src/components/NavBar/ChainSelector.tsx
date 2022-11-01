@@ -78,7 +78,7 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
     left: '0'
   };
 
-  const deopDownProps = width ? width <= 960 ? dropDownMobileProps : dropDownDefaultProps : dropDownDefaultProps;
+  const deopDownProps = width ? width <= 1280 ? dropDownMobileProps : dropDownDefaultProps : dropDownDefaultProps;
 
   const dropdown = (
     <NavDropdown {...deopDownProps} backgroundColor={darkMode ? 'navBgDark' : 'navBg'} ref={modalRef}>
