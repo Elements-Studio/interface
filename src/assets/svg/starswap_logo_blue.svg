@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<!-- Generator: Adobe Illustrator 26.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:none;}
-	.st1{fill:url(#SVGID_1_);}
+	.st0{fill:#4119FF;}
+	.st1{fill:#171717;}
 	.st2{fill:#FFFFFF;}
+	.st3{display:none;}
+	.st4{display:inline;fill:none;stroke:#000000;stroke-width:0.25;stroke-miterlimit:10;stroke-dasharray:1;}
+	.st5{display:inline;}
+	.st6{fill:none;stroke:#000000;stroke-width:0.25;stroke-miterlimit:10;}
+	.st7{fill:none;stroke:#000000;stroke-width:0.25;stroke-miterlimit:10;stroke-dasharray:1,1;}
+	.st8{fill:none;stroke:#000000;stroke-width:0.25;stroke-miterlimit:10;stroke-dasharray:1;}
+	.st9{fill:none;stroke:#000000;stroke-width:0.25;stroke-miterlimit:10;stroke-dasharray:0.9974,0.9974;}
+	.st10{fill:#32F0C0;}
 </style>
-<title>starcoin_product_logo_concept_3_blue_a</title>
-<rect class="st0" width="500" height="500"/>
-<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="0" y1="252" x2="500" y2="252" gradientTransform="matrix(1 0 0 -1 0 502)">
-	<stop  offset="0" style="stop-color:#265AE3"/>
-	<stop  offset="1" style="stop-color:#082989"/>
-</linearGradient>
-<circle class="st1" cx="250" cy="250" r="250"/>
+<circle class="st0" cx="250" cy="250" r="242.31"/>
 <g>
-	<path class="st2" d="M379.7,156.2c23.2,35.1-37.3,116-135.1,180.7c-63.4,42-127,66.9-170.1,69.6c42.6,5.2,119.2-21.9,196-72.8
-		c101.2-67,164.4-149.7,141.1-184.7c-12.1-18.2-45.1-20-88.3-8.1C350.4,137.9,370.7,142.6,379.7,156.2z"/>
-	<g>
-		<path class="st2" d="M275.1,150.6c56.7-34.4,111.7-54.7,150.4-57.1c-35-4.3-92.9,13.3-155,47.8L275.1,150.6z"/>
-		<path class="st2" d="M188.1,215.8c17.4-16,37.4-32,59.6-47.2l2.6-15.3c-6.4,3.9-12.9,8-19.3,12.3c-26.5,17.5-50.4,36.1-70.8,54.7
-			L188.1,215.8z"/>
-		<path class="st2" d="M121.6,343.1c-15-22.6,4.9-64.2,47-108.3l-15.8-7.8c-52.8,50-79.5,98.5-63.1,123.3
-			c12.1,18.2,45.1,20,88.3,8.1C150.9,361.4,130.6,356.7,121.6,343.1z"/>
-	</g>
-	<path class="st2" d="M226.2,336.2c3.3-2.1,6.6-4.2,9.9-6.4c69.7-46.1,119-101.1,128.5-138.9l-67.2,10.2l-39.6-81.5l-15.2,89.7
-		l-89.9,14.3l82.6,41.1L226.2,336.2z"/>
+	<path class="st2" d="M206.6,333.84c10.79-5.6,21.65-11.8,32.31-18.53c48.11-30.4,85.88-64.55,103.65-91.37h-41.54l-29.36-90.34
+		l-29.36,90.34h-94.99l76.85,55.84L206.6,333.84z"/>
+	<path class="st2" d="M191.32,319.51c-26.58,6.56-51.69,5.24-58.32-5.41c-8.02-12.87,4.38-36.73,30.35-63.74l-12.82-9.31
+		c-36.61,34.06-55.5,65.62-45.49,81.67C114.57,338.03,148.08,335.66,191.32,319.51z"/>
+	<path class="st2" d="M245.35,185.35c0.99-0.62,1.98-1.24,2.97-1.86l4.75-14.65c-10.14,5.28-20.45,11.18-30.77,17.7
+		c-15.72,9.93-30.37,20.27-43.66,30.64h21.67C213.88,206.43,229.01,195.67,245.35,185.35z"/>
+	<path class="st2" d="M381.88,130.68c-18.83-1.19-54.8,5.61-96.57,23.05l2.58,7.94C324.31,143.9,359.06,133.04,381.88,130.68z"/>
+	<path class="st2" d="M394.82,181.66c-9.74-15.16-43.22-12.34-86.23,4.4c26.48-6.93,51.61-5.94,58.4,4.61
+		c14.57,22.68-34.94,81.01-110.59,130.28c-49.78,32.41-104.15,52.83-135.78,56.53c27.9,1.38,93.14-15.27,158.81-58.03
+		C358.83,267.74,410.5,206.05,394.82,181.66z"/>
 </g>
 </svg>
