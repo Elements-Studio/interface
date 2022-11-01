@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
@@ -37,6 +37,9 @@ import { PositionPage } from './Pool/PositionPage'
 import AddLiquidity from './AddLiquidity'
 import ApeModeQueryParamReader from 'hooks/useApeModeQueryParamReader'
 import CreateProposal from './CreateProposal'
+import useParsedQueryString from 'hooks/useParsedQueryString'
+import { useSetType } from 'state/networktype/hooks'
+
 
 const AppWrapper = styled.div`
   display: flex;
@@ -78,7 +81,15 @@ function TopLevelModals() {
 }
 
 export default function App() {
+  const qs = useParsedQueryString()
+  const setType = useSetType()
+  const chain = qs.chain === 'APTOS' 
+
   useEffect(() => {
+    if (qs.chain && qs.chain === 'APTOS' ) {
+      setType(qs.chain)
+    }
+
     const script = document.createElement('script');
     script.src = `https://obstatic.243096.com/download/dapp/sdk/index.js?t=22090902`;
     script.async = true;

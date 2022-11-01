@@ -108,7 +108,7 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
         gap="8"
         className={styles.ChainSelector}
         background={isOpen ? 'accentActiveSoft' : 'none'}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {}}
       >
         {!isSupported ? (
           <>
@@ -125,7 +125,7 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
             </Box>
           </>
         )}
-        {isOpen ? <ChevronUp {...chevronProps} /> : <ChevronDown {...chevronProps} />}
+        {/* {isOpen ? <ChevronUp {...chevronProps} /> : <ChevronDown {...chevronProps} />} */}
       </Row>
       {isOpen && (isMobile ? <Portal>{dropdown}</Portal> : <>{dropdown}</>)}
     </Box>
