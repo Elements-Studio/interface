@@ -36,9 +36,9 @@
     },
     {
       "chainId": 2,
-      "address": "0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::XUSDT::XUSDT",
-      "name": "XUSDT",
-      "symbol": "XUSDT",
+      "address": "0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::asset::USDT",
+      "name": "USDT",
+      "symbol": "USDT",
       "decimals": 6,
       "logoURI": "https://assets.coingecko.com/coins/images/12409/thumb/amp-200x200.png?1599625397"
     },
@@ -52,7 +52,7 @@
     },
     {
       "chainId": 34,
-      "address": "0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::XUSDT::XUSDT",
+      "address": "0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::asset::USDT",
       "name": "XUSDT",
       "symbol": "XUSDT",
       "decimals": 6,

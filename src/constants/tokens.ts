@@ -169,17 +169,17 @@ export const XUSDT: { [chainId: number]: Token } = {
   ),
   [SupportedChainId.APTOS_TEST]: new Token(
     SupportedChainId.APTOS_TEST,
-    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::XUSDT::XUSDT',
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::asset::USDT',
     6,
-    'XUSDT',
-    'XUSDT'
+    'USDT',
+    'USDT'
   ),
   [SupportedChainId.APTOS_DEV]: new Token(
     SupportedChainId.APTOS_DEV,
-    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::XUSDT::XUSDT',
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::asset::USDT',
     6,
-    'XUSDT',
-    'XUSDT'
+    'USDT',
+    'USDT'
   ),
 }
 export const XUSDT_NAME: { [chainId: string]: Token } = {
@@ -213,17 +213,17 @@ export const XUSDT_NAME: { [chainId: string]: Token } = {
   ),
   ['APTOS_TEST']: new Token(
     SupportedChainId.APTOS_TEST,
-    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::XUSDT::XUSDT',
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::asset::USDT',
     6,
-    'XUSDT',
-    'XUSDT'
+    'USDT',
+    'USDT'
   ),
   ['APTOS_DEV']: new Token(
     SupportedChainId.APTOS_DEV,
-    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::XUSDT::XUSDT',
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::asset::USDT',
     6,
-    'XUSDT',
-    'XUSDT'
+    'USDT',
+    'USDT'
   ),
 }
 export const APT: { [chainId: number]: Token } = {
