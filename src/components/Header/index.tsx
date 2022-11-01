@@ -371,10 +371,14 @@ export default function Header() {
         <StyledNavLink id={`stake-nav-link`} to={'/stake'}>
           <Trans>Stake</Trans>
         </StyledNavLink>
-        <StyledExternalLink id={`starswap-info`} href={'https://bridge.poly.network/'}>
-          <Trans>Bridge</Trans>
-          <sup>↗</sup>
-        </StyledExternalLink>
+        {
+          networkType==='STARCOIN' && (
+            <StyledExternalLink id={`starswap-info`} href={'https://bridge.poly.network/'}>
+              <Trans>Bridge</Trans>
+              <sup>↗</sup>
+            </StyledExternalLink>
+          )
+        }
         <StyledExternalLink id={`starswap-info`} href={'https://info.starswap.xyz/'}>
           <Trans>Charts</Trans>
           <sup>↗</sup>
