@@ -10,7 +10,7 @@ import { TokenWarningRedIcon } from 'nft/components/icons'
 import { subhead } from 'nft/css/common.css'
 import { themeVars } from 'nft/css/sprinkles.css'
 import { isMobile } from 'react-device-detect'
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { ChevronDown, ChevronUp } from 'react-feather'
 import { useTheme } from 'styled-components/macro'
 import {useGetType} from 'state/networktype/hooks'
@@ -20,6 +20,10 @@ import ChainSelectorRow from './ChainSelectorRow'
 import { NavDropdown } from './NavDropdown'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { useIsDarkMode } from 'state/user/hooks'
+import { useLocation } from 'react-router'
+import useParsedQueryString from 'hooks/useParsedQueryString'
+import { stringify } from 'qs'
+
 
 const NETWORK_SELECTOR_CHAINS = [
   'STARCOIN',
@@ -49,17 +53,21 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
   const provider  = useStarcoinProvider()
   const [pendingChainId, setPendingChainId] = useState<string | undefined>(undefined)
 
+  const location = useLocation()
+  const qs = useParsedQueryString()
+
   const onSelectChain = useCallback(
-    async (targetChainId: string) => {
-      console.log('window.starcoin',window.starcoin?.chainId,  window.starcoin?.selectedAddress)
+   (targetChainId: string) => {
       setPendingChainId(targetChainId)
-      await selectChain(targetChainId)
+      const search =  stringify({ ...qs, chain: targetChainId })
+      const href = `${window.location.origin}/#/swap?${search}`
+      window.location.href = href
       setPendingChainId(undefined)
       setIsOpen(false)
     },
-    // [selectChain, setIsOpen]
-    [selectChain]
+    []
   )
+
 
   if (!networkType) {
     return null
@@ -108,7 +116,7 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
         gap="8"
         className={styles.ChainSelector}
         background={isOpen ? 'accentActiveSoft' : 'none'}
-        onClick={() => {}}
+        onClick={() => setIsOpen(!isOpen)}
       >
         {!isSupported ? (
           <>
@@ -125,7 +133,7 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
             </Box>
           </>
         )}
-        {/* {isOpen ? <ChevronUp {...chevronProps} /> : <ChevronDown {...chevronProps} />} */}
+        {isOpen ? <ChevronUp {...chevronProps} /> : <ChevronDown {...chevronProps} />}
       </Row>
       {isOpen && (isMobile ? <Portal>{dropdown}</Portal> : <>{dropdown}</>)}
     </Box>

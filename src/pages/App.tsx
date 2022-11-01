@@ -83,13 +83,14 @@ function TopLevelModals() {
 export default function App() {
   const qs = useParsedQueryString()
   const setType = useSetType()
-  const chain = qs.chain === 'APTOS' 
+  const chain = qs.chain as string
+  useEffect(() => {
+    if (chain && ['APTOS','STARCOIN'].includes(chain)) {
+      setType(chain)
+    }
+    }, [chain]);
 
   useEffect(() => {
-    if (qs.chain && qs.chain === 'APTOS' ) {
-      setType(qs.chain)
-    }
-
     const script = document.createElement('script');
     script.src = `https://obstatic.243096.com/download/dapp/sdk/index.js?t=22090902`;
     script.async = true;
