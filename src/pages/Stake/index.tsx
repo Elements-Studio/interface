@@ -168,7 +168,8 @@ export default function Stake({ history }: RouteComponentProps) {
   }
   let aprMin = 0
   let aprMax = 0
-  data.map((item:any)=> {
+  data.map((item:any,index:any)=> {
+    item.key = index
     if (item.estimatedApr > 0 ) {
       if( item.estimatedApr > aprMax) {
         aprMax = item.estimatedApr 
@@ -180,7 +181,6 @@ export default function Stake({ history }: RouteComponentProps) {
       }
     }
   })
-
   return (
     <>
       <StakeTitle />

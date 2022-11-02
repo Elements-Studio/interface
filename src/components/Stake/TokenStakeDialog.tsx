@@ -290,7 +290,7 @@ export default function TokenStakeDialog({
                 data.filter((item:any)=>item.estimatedApr > 0).map((item: any) => {
                   if (item.pledgeTimeSeconds === 100) {
                     return (
-                      <FormControlLabel key={item.pledgeTimeSeconds} control={<Radio />} label={`100 Seconds (${item.multiplier}x)  ${ item.estimatedApr.toFixed(4) }%`}/>
+                      <FormControlLabel key={item.pledgeTimeSeconds}  value={item.pledgeTimeSeconds} control={<Radio />} label={`100 Seconds (${item.multiplier}x)  ${ item.estimatedApr.toFixed(4) }%`}/>
                     )
                   }else if(item.pledgeTimeSeconds === 3600) {
                     return (
