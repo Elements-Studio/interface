@@ -103,7 +103,7 @@ export default function TokenUnstakeDialog({
       let intervalId: NodeJS.Timeout
       intervalId = setInterval(async () => {
         const txnInfo = await provider!.send('chain.get_transaction_info', [transactionHash])
-        if (networkType === 'STARCOIN' && txnInfo.status === 'Executed' || networkType === 'APTOS' && txnInfo?.success) {
+        if (networkType === 'STARCOIN' && txnInfo?.status === 'Executed' || networkType === 'APTOS' && txnInfo?.success) {
           setLoading(false);
           onDismiss();
           clearInterval(intervalId);

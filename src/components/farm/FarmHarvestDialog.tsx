@@ -181,7 +181,7 @@ export default function FarmHarvestDialog({
       let id: NodeJS.Timeout
       id = setInterval(async () => {
         const txnInfo = await provider!.send('chain.get_transaction_info', [transactionHash])
-        if (networkType === 'STARCOIN' && txnInfo.status === 'Executed' || networkType === 'APTOS' && txnInfo?.success) {
+        if (networkType === 'STARCOIN' && txnInfo?.status === 'Executed' || networkType === 'APTOS' && txnInfo?.success) {
           setLoading(false);
           onDismiss();
           clearInterval(id);
