@@ -467,6 +467,14 @@ export const WETH9_EXTENDED: { [chainId: number]: Token } = {
   [SupportedChainId.APTOS_DEV]: Apt.onChain(SupportedChainId.APTOS_DEV).wrapped,
 }
 
+export const WETH9_EXTENDED_NAME: { [chainId: string]: Token } = {
+  ['MAINNET']: Star.onChain(SupportedChainId.MAINNET).wrapped,
+  ['BARNARD']: Star.onChain(SupportedChainId.BARNARD).wrapped,
+  ['PROXIMA']: Star.onChain(SupportedChainId.PROXIMA).wrapped,
+  ['APTOS_MAIN']: Apt.onChain(SupportedChainId.APTOS_MAIN).wrapped,
+  ['APTOS_TEST']: Apt.onChain(SupportedChainId.APTOS_TEST).wrapped,
+  ['APTOS_DEV']: Apt.onChain(SupportedChainId.APTOS_DEV).wrapped,
+}
 // export class ExtendedEther extends Ether {
 //   public get wrapped(): Token {
 //     if (this.chainId in WETH9_EXTENDED) return WETH9_EXTENDED[this.chainId]
