@@ -6,13 +6,17 @@ import styled, { ThemeContext } from 'styled-components'
 import { ColumnCenter } from '../Column'
 import { RowBetween, AutoRow } from '../Row'
 import Modal from '../Modal'
-import { STAR } from '../../constants/tokens'
+import { STAR_NAME } from '../../constants/tokens'
 import { ButtonFarm, ButtonBorder } from 'components/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
+import BigNumber from 'bignumber.js';
+import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
+import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
+import getChainName from 'utils/getChainName'
 
 const Container = styled.div`
   width: 100%;
@@ -36,42 +40,80 @@ export default function TokenClaimVeStarDialog({
   onDismiss,
   isOpen,
 }: TokenClaimVeStarDialogProps) {
-  const starcoinProvider = useStarcoinProvider();
+  const provider = useStarcoinProvider();
   const { chainId } = useActiveWeb3React()
+  const networkType = useGetType()
+  const chainName = getChainName(chainId, networkType)
+  const token = STAR_NAME[chainName]
+  const starAddress = token.address;
 
   const theme = useContext(ThemeContext)
 
   const [loading, setLoading] = useState(false);
-  
+  const ADDRESS = useGetV2FactoryAddress()
+
   async function onClickConfirm() {
-    try {
-      const functionId = `${V2_FACTORY_ADDRESS}::TokenSwapSyrupScript::take_vestar_by_stake_id`;
-      const strTypeArgs = [STAR[(chainId ? chainId : 1)].address];
-      const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
+    try { 
+      const MODULE = 'TokenSwapSyrupScript'
+      const FUNC = 'take_vestar_by_stake_id'
+      let payloadHex: string
+      if (networkType === 'APTOS') {
+        const tyArgs = [
+          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(starAddress)),
+        ]
 
-      const claimStakeIdSCSHex = (function () {
-        const se = new bcs.BcsSerializer();
-        se.serializeU64(parseInt(id));
-        return hexlify(se.getBytes());
-      })();
-      const args = [
-        arrayify(claimStakeIdSCSHex)
-      ];
+        const args = [BCS.bcsSerializeUint64(new BigNumber(parseInt(id)).toNumber())]
+        
+        const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
+          TxnBuilderTypes.EntryFunction.natural(
+            `${ ADDRESS }::${MODULE}`,
+            FUNC,
+            tyArgs,
+            args,
+          ),
+        );
+        payloadHex = hexlify(BCS.bcsToBytes(entryFunctionPayload))
+      } else {
+        const functionId = `${ADDRESS}::${MODULE}::${FUNC}`;
+        const strTypeArgs = [starAddress];
+        const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
 
-      const scriptFunction = utils.tx.encodeScriptFunction(
-        functionId,
-        structTypeTags,
-        args,
-      );
-      const payloadInHex = (function () {
-        const se = new bcs.BcsSerializer();
-        scriptFunction.serialize(se);
-        return hexlify(se.getBytes());
-      })();
+        const claimStakeIdSCSHex = (function () {
+          const se = new bcs.BcsSerializer();
+          se.serializeU64(parseInt(id));
+          return hexlify(se.getBytes());
+        })();
 
-      await starcoinProvider.getSigner().sendUncheckedTransaction({
-        data: payloadInHex,
-      });
+        const args = [
+          arrayify(claimStakeIdSCSHex)
+        ];
+
+        const scriptFunction = utils.tx.encodeScriptFunction(
+          functionId,
+          structTypeTags,
+          args,
+        );
+        payloadHex = (function () {
+          const se = new bcs.BcsSerializer();
+          scriptFunction.serialize(se);
+          return hexlify(se.getBytes());
+        })();
+      }
+      const transactionHash = await provider.getSigner().sendUncheckedTransaction({
+        data: payloadHex,
+      })
+
+      setLoading(true);
+      let intervalId: NodeJS.Timeout
+      intervalId = setInterval(async () => {
+        const txnInfo = await provider!.send('chain.get_transaction_info', [transactionHash])
+        if (networkType === 'STARCOIN' && txnInfo?.status === 'Executed' || networkType === 'APTOS' && txnInfo?.success) {
+          setLoading(false);
+          onDismiss();
+          clearInterval(intervalId);
+          window.location.reload();
+        }
+      }, 3000);
     } catch (error) {
       console.error(error);
     }

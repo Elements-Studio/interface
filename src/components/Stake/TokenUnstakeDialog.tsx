@@ -6,7 +6,7 @@ import styled, { ThemeContext } from 'styled-components'
 import { ColumnCenter } from '../Column'
 import { RowBetween, AutoRow } from '../Row'
 import Modal from '../Modal'
-import { STAR } from '../../constants/tokens'
+import { STAR_NAME } from '../../constants/tokens'
 import { ButtonFarm, ButtonBorder } from 'components/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import { useActiveWeb3React } from 'hooks/web3'
@@ -16,6 +16,7 @@ import { utils, bcs } from '@starcoin/starcoin'
 import BigNumber from 'bignumber.js';
 import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
+import getChainName from 'utils/getChainName'
 
 const Container = styled.div`
   width: 100%;
@@ -40,6 +41,9 @@ export default function TokenUnstakeDialog({
   const provider = useStarcoinProvider();
   const { chainId } = useActiveWeb3React()
   const networkType = useGetType()
+  const chainName = getChainName(chainId, networkType)
+  const token = STAR_NAME[chainName]
+  const starAddress = token.address;
 
   const theme = useContext(ThemeContext)
 
@@ -48,8 +52,7 @@ export default function TokenUnstakeDialog({
   const ADDRESS = useGetV2FactoryAddress()
 
   async function onClickConfirm() {
-    const starAddress = STAR[(chainId ? chainId : 1)].address;
-    try {
+    try { 
       const MODULE = 'TokenSwapSyrupScript'
       const FUNC = 'unstake'
       let payloadHex: string
