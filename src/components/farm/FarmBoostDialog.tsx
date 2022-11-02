@@ -83,7 +83,7 @@ const PredictBoostFactorSpan = styled.span`
   font-size: 16px;
 `
 
-interface FarmUnstakeDialogProps {
+interface FarmBoostDialogProps {
   tokenX: any
   tokenY: any
   veStarAmount: number
@@ -93,7 +93,7 @@ interface FarmUnstakeDialogProps {
   lpStakingData: any
 }
 
-export default function FarmUnstakeDialog({
+export default function FarmBoostDialog({
   tokenX,
   tokenY,
   veStarAmount,
@@ -101,7 +101,7 @@ export default function FarmUnstakeDialog({
   onDismiss,
   isOpen,
   lpStakingData,
-}: FarmUnstakeDialogProps) {
+}: FarmBoostDialogProps) {
   const provider = useStarcoinProvider()
   const { account, chainId } = useActiveWeb3React()
   const networkType = useGetType()
@@ -129,7 +129,7 @@ export default function FarmUnstakeDialog({
           new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(tokenX)),
           new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(tokenY)),
         ]
-        const boostAmount = new BigNumber(starAmount).times('1000000000'); // harvestAmount * 1e9
+        const boostAmount = new BigNumber(starAmount).times('100000000'); // harvestAmount * 1e9
 
         const args = [BCS.bcsSerializeU128(new BigNumber(boostAmount).toNumber()), BCS.bcsSerializeStr(signature)]
         const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
@@ -146,16 +146,21 @@ export default function FarmUnstakeDialog({
         const strTypeArgs = [tokenX, tokenY];
         const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
   
-        const boostAmount = new BigNumber(starAmount).times('1000000000'); // harvestAmount * 1e9
+        const boostAmount = new BigNumber(starAmount).times('1000000000');
   
         const boostAmountSCSHex = (function () {
           const se = new bcs.BcsSerializer();
           se.serializeU128(new BigNumber(boostAmount).toNumber());
           return hexlify(se.getBytes());
         })();
+        const signatureSCSHex = (function () {
+          const se = new bcs.BcsSerializer();
+          se.serializeStr(signature);
+          return hexlify(se.getBytes());
+        })();
         const args = [
           arrayify(boostAmountSCSHex),
-          arrayify(signature),
+          arrayify(signatureSCSHex),
         ];
   
         const scriptFunction = utils.tx.encodeScriptFunction(
@@ -177,7 +182,7 @@ export default function FarmUnstakeDialog({
       let id: NodeJS.Timeout
       id = setInterval(async () => {
         const txnInfo = await provider!.send('chain.get_transaction_info', [transactionHash])
-        if (networkType === 'STARCOIN' && txnInfo.status === 'Executed' || networkType === 'APTOS' && txnInfo?.success) {
+        if (networkType === 'STARCOIN' && txnInfo?.status === 'Executed' || networkType === 'APTOS' && txnInfo?.success) {
           setLoading(false);
           onDismiss();
           clearInterval(id);
