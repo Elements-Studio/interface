@@ -20,10 +20,11 @@ import { useTokenBalance } from '../../state/wallet/hooks'
 import StarswapBlueLogo from '../../assets/svg/starswap_logo_blue.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { useIsBoost } from '../../state/user/hooks'
-import { STAR } from '../../constants/tokens'
+import { STAR_NAME } from '../../constants/tokens'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import { useUserStarStaked } from 'hooks/useTokenSwapFarmScript'
 import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
+import getChainName from 'utils/getChainName'
 
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
@@ -81,9 +82,11 @@ export default function TokenStake({
     address = account.toLowerCase();
   }
 
-  const starToken = STAR[(chainId ? chainId : 1)]
+  const networkType = useGetType()
+  const chainName = getChainName(chainId, networkType)
 
-  const starScalingFactor = 1000000000;
+  const starToken = STAR_NAME[chainName]
+  const starScalingFactor = Math.pow(10, starToken.decimals);
 
   const userStarStaked:any = useUserStarStaked(address, starToken.address)?.data || [];
   if (!userStarStaked.length|| userStarStaked[0]?.length > 0) {
@@ -153,7 +156,6 @@ export default function TokenStake({
     setVeStarReward(value);
   };
 
-  const networkType = useGetType()
   return (
     <>
       <Container style={{ paddingTop: '1rem' }}>

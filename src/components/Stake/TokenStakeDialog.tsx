@@ -10,7 +10,7 @@ import styled, { ThemeContext } from 'styled-components'
 import Column, { AutoColumn, ColumnCenter, ColumnRight } from '../Column'
 import Row, { RowBetween, AutoRow } from '../Row'
 import Modal from '../Modal'
-import { STAR } from '../../constants/tokens'
+import { STAR_NAME } from '../../constants/tokens'
 import { useIsBoost } from '../../state/user/hooks'
 import { ButtonFarm, ButtonBorder, ButtonText } from 'components/Button'
 import { useActiveWeb3React } from 'hooks/web3'
@@ -28,6 +28,7 @@ import useSWR from 'swr'
 import axios from 'axios'
 import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import { useGetType, useGetV2FactoryAddress, useGetCurrentNetwork } from 'state/networktype/hooks'
+import getChainName from 'utils/getChainName'
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
@@ -161,7 +162,9 @@ export default function TokenStakeDialog({
   }
 
   async function onClickStakeConfirm() {
-    const starAddress = STAR[(chainId ? chainId : 1)].address;
+    const chainName = getChainName(chainId, networkType)
+    const token = STAR_NAME[chainName]
+    const starAddress = token.address;
     try {
       const MODULE = 'TokenSwapSyrupScript'
       const FUNC = 'stake'
@@ -170,7 +173,7 @@ export default function TokenStakeDialog({
         const tyArgs = [
           new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(starAddress)),
         ]
-        const stakeAmount = new BigNumber(parseFloat(stakeNumber)).times('1000000000'); // stakeAmount * 1e9
+        const stakeAmount = new BigNumber(parseFloat(stakeNumber)).times(Math.pow(10, token.decimals)); 
 
         const args = [BCS.bcsSerializeUint64(new BigNumber(duration).toNumber()), BCS.bcsSerializeU128(new BigNumber(stakeAmount).toNumber())]
         const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
@@ -187,7 +190,7 @@ export default function TokenStakeDialog({
         const strTypeArgs = [starAddress];
         const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
 
-        const stakeAmount = new BigNumber(parseFloat(stakeNumber)).times('1000000000'); // stakeAmount * 1e9
+        const stakeAmount = new BigNumber(parseFloat(stakeNumber)).times(Math.pow(10, token.decimals)); 
 
         const stakeAmountSCSHex = (function () {
           const se = new bcs.BcsSerializer();
@@ -227,7 +230,7 @@ export default function TokenStakeDialog({
       let id: NodeJS.Timeout
       id = setInterval(async () => {
         const txnInfo = await provider!.send('chain.get_transaction_info', [transactionHash])
-        if (networkType === 'STARCOIN' && txnInfo.status === 'Executed' || networkType === 'APTOS' && txnInfo?.success) {
+        if (networkType === 'STARCOIN' && txnInfo?.status === 'Executed' || networkType === 'APTOS' && txnInfo?.success) {
           setLoading(false);
           onDismiss();
           clearInterval(id);
@@ -278,8 +281,8 @@ export default function TokenStakeDialog({
               {/* {
                 isTest ? (
                   <>
-                    <FormControlLabel value="100" control={<Radio />} label="100 Seconds" />
-                    <FormControlLabel value="3600" control={<Radio />} label="1 hour" />
+                  <FormControlLabel key="100" value="100" control={<Radio />} label="100 Seconds" />
+                  <FormControlLabel key="3600" value="3600" control={<Radio />} label="1 hour" />
                   </>
                 ) : null
               } */}
@@ -287,21 +290,15 @@ export default function TokenStakeDialog({
                 data.filter((item:any)=>item.estimatedApr > 0).map((item: any) => {
                   if (item.pledgeTimeSeconds === 100) {
                     return (
-                      <>
-                      <FormControlLabel value={item.pledgeTimeSeconds} control={<Radio />} label={`100 Seconds (${item.multiplier}x)  ${ item.estimatedApr.toFixed(4) }%`}/>
-                      </>
+                      <FormControlLabel key={item.pledgeTimeSeconds} control={<Radio />} label={`100 Seconds (${item.multiplier}x)  ${ item.estimatedApr.toFixed(4) }%`}/>
                     )
                   }else if(item.pledgeTimeSeconds === 3600) {
                     return (
-                      <>
-                      <FormControlLabel value={item.pledgeTimeSeconds} control={<Radio />} label={`1 hour (${item.multiplier}x)  ${ item.estimatedApr.toFixed(4) }%`}/>
-                      </>
+                      <FormControlLabel key={item.pledgeTimeSeconds} value={item.pledgeTimeSeconds} control={<Radio />} label={`1 hour (${item.multiplier}x)  ${ item.estimatedApr.toFixed(4) }%`}/>
                     )
                   }else{
                     return (
-                      <>
-                      <FormControlLabel value={item.pledgeTimeSeconds} control={<Radio />} label={`${item.pledgeTimeSeconds/3600/24} Days (${item.multiplier}x)  ${ item.estimatedApr.toFixed(4) }%`}/>
-                      </>
+                      <FormControlLabel key={item.pledgeTimeSeconds} value={item.pledgeTimeSeconds} control={<Radio />} label={`${item.pledgeTimeSeconds/3600/24} Days (${item.multiplier}x)  ${ item.estimatedApr.toFixed(4) }%`}/>
                     )
                   }
                 })
