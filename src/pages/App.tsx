@@ -39,6 +39,8 @@ import ApeModeQueryParamReader from 'hooks/useApeModeQueryParamReader'
 import CreateProposal from './CreateProposal'
 import useParsedQueryString from 'hooks/useParsedQueryString'
 import { useSetType } from 'state/networktype/hooks'
+import useLocalStorage from 'hooks/useLocalStorage'
+import useSelectChain from 'hooks/useSelectNetWork'
 
 
 const AppWrapper = styled.div`
@@ -81,14 +83,21 @@ function TopLevelModals() {
 }
 
 export default function App() {
+  const [chain, setChain] = useLocalStorage("chain", "STARCOIN");
+
   const qs = useParsedQueryString()
   const setType = useSetType()
-  const chain = qs.chain as string
+  let targetChain = qs.chain as string
   useEffect(() => {
-    if (chain && ['APTOS','STARCOIN'].includes(chain)) {
-      setType(chain)
+    if (targetChain && ['APTOS','STARCOIN'].includes(targetChain)) {
+      setChain(targetChain)
+      setType(targetChain)
+    }else{
+      targetChain = chain 
+      setChain(targetChain)
+      setType(targetChain)
     }
-    }, [chain]);
+    }, [targetChain]);
 
   useEffect(() => {
     const script = document.createElement('script');

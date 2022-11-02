@@ -23,6 +23,7 @@ import { useIsDarkMode } from 'state/user/hooks'
 import { useLocation } from 'react-router'
 import useParsedQueryString from 'hooks/useParsedQueryString'
 import { stringify } from 'qs'
+import useLocalStorage from 'hooks/useLocalStorage'
 
 
 const NETWORK_SELECTOR_CHAINS = [
@@ -56,12 +57,17 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
   const location = useLocation()
   const qs = useParsedQueryString()
 
+  const [chain, setChain] = useLocalStorage("chain", "STARCOIN");
+  
   const onSelectChain = useCallback(
    (targetChainId: string) => {
       setPendingChainId(targetChainId)
+      if(targetChainId !== chain){
+        setChain(targetChainId)
+      }   
       const search =  stringify({ ...qs, chain: targetChainId })
-      const href = `${window.location.origin}/#/swap?${search}`
-      window.location.href = href
+      const homeUrl = `${window.location.origin}/#/swap?${search}`
+      window.location.href = homeUrl
       setPendingChainId(undefined)
       setIsOpen(false)
     },
