@@ -253,11 +253,16 @@ export default function Stake({ history }: RouteComponentProps) {
                   </RowFixed>
                 </FarmRow>
                 <FarmRow style={{ marginTop: '10px', marginBottom: '10px' }}>
-                  <RowFixed>
-                    <TYPE.black fontWeight={400} fontSize={14}>
-                      <Trans>Pool Created</Trans>
-                    </TYPE.black>
-                  </RowFixed>
+                  { 
+                    networkType === 'STARCOIN' && (
+                      <RowFixed>
+                        <TYPE.black fontWeight={400} fontSize={14}>
+                          <Trans>Pool Created</Trans>
+                        </TYPE.black>
+                      </RowFixed>
+
+                    )
+                  }
                   <RowFixed>
                     <TYPE.black fontSize={14}>{(new Date(item.createdAt) + '').slice(4, 24)}</TYPE.black>
                   </RowFixed>

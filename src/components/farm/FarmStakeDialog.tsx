@@ -134,7 +134,7 @@ export default function FarmStakeDialog({
           new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(tokenX)),
           new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(tokenY)),
         ]
-        const stakeAmount = new BigNumber(stakeNumber).times('1000000000'); // stakeAmount * 1e9
+        const stakeAmount = new BigNumber(stakeNumber).times('1000000000');
 
         const args = [BCS.bcsSerializeU128(new BigNumber(stakeAmount).toNumber())]
         const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(

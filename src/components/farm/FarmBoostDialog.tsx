@@ -129,7 +129,7 @@ export default function FarmBoostDialog({
           new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(tokenX)),
           new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(tokenY)),
         ]
-        const boostAmount = new BigNumber(starAmount).times('100000000'); // harvestAmount * 1e9
+        const boostAmount = new BigNumber(starAmount).times('1000000000'); // harvestAmount * 1e9
 
         const args = [BCS.bcsSerializeU128(new BigNumber(boostAmount).toNumber()), BCS.bcsSerializeStr(signature)]
         const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(

@@ -151,7 +151,7 @@ export default function FarmHarvestDialog({
         const strTypeArgs = [tokenX, tokenY];
         const structTypeTags = utils.tx.encodeStructTypeTags(strTypeArgs);
   
-        const harvestAmount = new BigNumber(harvestNumber).times('1000000000'); // harvestAmount * 1e9
+        const harvestAmount = new BigNumber(harvestNumber).times('1000000000');
   
         const harvestAmountSCSHex = (function () {
           const se = new bcs.BcsSerializer();
