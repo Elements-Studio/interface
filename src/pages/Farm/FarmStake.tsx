@@ -186,8 +186,8 @@ export default function FarmStake({
   
   // boostFactor stored in Move is mulitpied by 100, 1.05 => 105
   const boostFactor = boostFactorOrigin? boostFactorOrigin/ 100 : 0;
-  const tbdGain:any = useLookupTBDGain(address, addressX, addressY)?.data || 0;
-  const userLiquidity:any = useUserLiquidity(address, addressX, addressY)?.data || 0;
+  const tbdGain:any = useLookupTBDGain(address, addressX, addressY)?.data || [0];
+  const userLiquidity:any = useUserLiquidity(address, addressX, addressY)?.data || [0];
   const { data, error } = useUserStaked(address, addressX, addressY);
   let userStaked: any = 0;
   if (error) {
@@ -486,7 +486,7 @@ export default function FarmStake({
       </Container>
       <SwitchLocaleLink />
       <FarmHarvestDialog
-        tbdEarned={tbdGain}
+        tbdEarned={tbdGain[0]}
         tbdScalingFactor={tbdScalingFactor}
         tokenX={addressX}
         tokenY={addressY}
