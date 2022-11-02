@@ -11,8 +11,7 @@ import { useUserHasSubmittedClaim } from 'state/transactions/hooks'
 import { useDarkModeManager } from 'state/user/hooks'
 import { useSTCBalances } from 'state/wallet/hooks'
 import styled from 'styled-components/macro'
-import Logo from '../../assets/svg/starswap_logo.svg'
-import LogoDark from '../../assets/svg/starswap_logo_blue.svg'
+import Logo from '../../assets/svg/starswap_logo_blue.svg'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { ExternalLink, TYPE } from '../../theme'
 import ClaimModal from '../claim/ClaimModal'
@@ -336,7 +335,7 @@ export default function Header() {
       <HeaderRow>
         <Title href=".">
           <UniIcon>
-            <img height={'25px'} src={darkMode ? LogoDark : Logo} alt="logo" />
+            <img height={'25px'} src={Logo} alt="logo" />
           </UniIcon>
           <TitleText style={{ fontFamily: 'Qualy' }}>
             STARSWAP
