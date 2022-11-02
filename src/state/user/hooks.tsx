@@ -7,10 +7,11 @@ import { useCallback, useMemo } from 'react'
 import { shallowEqual } from 'react-redux'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import { V2_FACTORY_ADDRESSES } from '../../constants/addresses'
-import { BASES_TO_TRACK_LIQUIDITY_FOR, PINNED_PAIRS } from '../../constants/routing'
+import { BASES_TO_TRACK_LIQUIDITY_FOR_NAME, PINNED_PAIRS } from '../../constants/routing'
 import { useAllTokens } from '../../hooks/Tokens'
 import { useActiveWeb3React } from '../../hooks/web3'
-import { useGetCurrentNetwork } from 'state/networktype/hooks'
+import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
+import getChainName from 'utils/getChainName'
 import { AppState } from '../index'
 import {
   addSerializedPair,
@@ -285,9 +286,11 @@ export function toV2LiquidityToken([tokenA, tokenB]: [Token, Token], networkType
 export function useTrackedTokenPairs(): [Token, Token][] {
   const { chainId } = useActiveWeb3React()
   const tokens = useAllTokens()
-
   // pinned pairs
   const pinnedPairs = useMemo(() => (chainId ? PINNED_PAIRS[chainId] ?? [] : []), [chainId])
+
+  const networkType = useGetType()
+  const chainName = getChainName(chainId, networkType)
 
   // pairs for every token against every base
   const generatedPairs: [Token, Token][] = useMemo(
@@ -298,7 +301,7 @@ export function useTrackedTokenPairs(): [Token, Token][] {
             // for each token on the current chain,
             return (
               // loop though all bases on the current chain
-              (BASES_TO_TRACK_LIQUIDITY_FOR[chainId] ?? [])
+              (BASES_TO_TRACK_LIQUIDITY_FOR_NAME[chainName] ?? [])
                 // to construct pairs of the given token with each base
                 .map((base) => {
                   if (base.address === token.address) {
@@ -311,7 +314,7 @@ export function useTrackedTokenPairs(): [Token, Token][] {
             )
           })
         : [],
-    [tokens, chainId]
+    [tokens, chainId, networkType]
   )
 
   // pairs saved by users

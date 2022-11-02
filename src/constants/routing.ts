@@ -38,6 +38,10 @@ type ChainTokenList = {
   readonly [chainId: number]: Token[]
 }
 
+type ChainNameTokenList = {
+  readonly [chainName: string]: Token[]
+}
+
 type ChainCurrencyList = {
   readonly [chainId: number]: Currency[]
 }
@@ -163,6 +167,17 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   [SupportedChainId.APTOS_TEST]: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST).wrapped],
   [SupportedChainId.APTOS_DEV]: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV).wrapped],
 }
+
+export const BASES_TO_TRACK_LIQUIDITY_FOR_NAME: ChainNameTokenList = {
+  ['MAINNET']: [ExtendedStar.onChain(SupportedChainId.MAINNET).wrapped],
+  ['BARNARD']: [ExtendedStar.onChain(SupportedChainId.BARNARD).wrapped],
+  ['PROXIMA']: [ExtendedStar.onChain(SupportedChainId.PROXIMA).wrapped],
+  ['APTOS_MAIN']: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN).wrapped],
+  ['APTOS_TEST']: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST).wrapped],
+  ['APTOS_DEV']: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV).wrapped],
+}
+
+
 export const PINNED_PAIRS: { readonly [chainId: number]: [Token, Token][] } = {
   // [1]: [
   //   [
