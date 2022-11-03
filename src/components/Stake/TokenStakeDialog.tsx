@@ -244,7 +244,7 @@ export default function TokenStakeDialog({
   }
 
   const veStarAmount = (isBoost && stakeNumber && duration) ? (stakeNumber * (duration / 86400) / ( 365 * 2 )) : 0
-  const veStarAmountText = veStarAmount > 0 ? (Number(veStarAmount.toFixed(4)) > 0 ? veStarAmount.toFixed(4) : '< 0.0001') : undefined
+  const veStarAmountText = veStarAmount > 0 ? veStarAmount.toFixed(9) : undefined
   const isTest = process.env.REACT_APP_STARSWAP_IN_TEST === 'true';
   return (
     <Modal isOpen={isOpen} onDismiss={onDismiss} dialogBg={ theme.bgCard }>
