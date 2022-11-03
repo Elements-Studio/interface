@@ -14,17 +14,14 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { ChevronDown, ChevronUp } from 'react-feather'
 import { useTheme } from 'styled-components/macro'
 import {useGetType} from 'state/networktype/hooks'
-import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import * as styles from './ChainSelector.css'
 import ChainSelectorRow from './ChainSelectorRow'
 import { NavDropdown } from './NavDropdown'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { useIsDarkMode } from 'state/user/hooks'
-import { useLocation } from 'react-router'
 import useParsedQueryString from 'hooks/useParsedQueryString'
 import { stringify } from 'qs'
 import useLocalStorage from 'hooks/useLocalStorage'
-
 
 const NETWORK_SELECTOR_CHAINS = [
   'STARCOIN',
@@ -51,27 +48,26 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
 
   const selectChain = useSelectNetWork()
   // useSyncChainQuery()
-  const provider  = useStarcoinProvider()
   const [pendingChainId, setPendingChainId] = useState<string | undefined>(undefined)
 
-  const location = useLocation()
   const qs = useParsedQueryString()
 
   const [chain, setChain] = useLocalStorage("chain", "STARCOIN");
   
   const onSelectChain = useCallback(
-   (targetChainId: string) => {
+    async (targetChainId: string) => {
       setPendingChainId(targetChainId)
       if(targetChainId !== chain){
         setChain(targetChainId)
       }   
+      await selectChain(targetChainId)
       const search =  stringify({ ...qs, chain: targetChainId })
       const homeUrl = `${window.location.origin}/#/swap?${search}`
       window.location.href = homeUrl
       setPendingChainId(undefined)
       setIsOpen(false)
     },
-    []
+    [selectChain]
   )
 
 

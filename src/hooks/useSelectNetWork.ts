@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useAppDispatch } from 'state/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
-// import { UnsupportedChainIdError, useWeb3React } from '@starcoin/starswap-web3-core'
+import { useWeb3React } from '@starcoin/starswap-web3-core'
 // import { switchChain } from 'utils/switchChain'
 import { useGetType, useSetType } from 'state/networktype/hooks'
 import { switchToNetwork } from 'utils/switchToNetwork'
@@ -18,11 +18,10 @@ export default function useSelectChain() {
         return
       }
       try {
-        const targetChainId = targetChain === 'STARCOIN' ? 1 : 2
+        const targetChainId = 1
         await switchToNetwork({ library, chainId: targetChainId, networkType: targetChain })
           .then((resp) => {
             // resp should be null
-            setType(targetChain);
           })
           .catch((error) => console.log({ error }))
         // await switchChain(connector, targetChain)
