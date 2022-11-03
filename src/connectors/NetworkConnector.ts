@@ -98,10 +98,7 @@ export class MiniRpcProvider implements AsyncSendable {
   }
 
   private readonly handleBatchAptos = async (batch: BatchItem[]) => {
-    console.log('handleBatchAptos', this.url, { batch })
-
     batch.forEach(async ({ request, resolve, reject }) => {
-      console.log({ request })
       let response: Response
       let fetchMethod = 'GET'
       let fetchUrl = this.url  // default for chain.id, chain.info
@@ -127,7 +124,6 @@ export class MiniRpcProvider implements AsyncSendable {
         reject(new Error('Failed to send batch call'))
         return
       }
-      console.log({ response })
       let data
       try {
         data = await response.json()
@@ -135,7 +131,6 @@ export class MiniRpcProvider implements AsyncSendable {
         reject(new Error('Failed to parse JSON response'))
         return
       }
-      console.log({ data })
       let result
       switch (method) {
         case 'chain.id':
@@ -147,13 +142,11 @@ export class MiniRpcProvider implements AsyncSendable {
         default:
           result = data
       }
-      console.log({ result })
       resolve(result)
     })
   }
 
   public readonly clearBatch = async () => {
-    console.debug('Clearing batch')
     const batch = this.batch
     this.batch = []
     this.batchTimeoutId = null
