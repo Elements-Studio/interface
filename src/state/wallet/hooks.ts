@@ -115,7 +115,16 @@ export function useTokenBalancesWithLoadingIndicator(
             resolve(response.data.coin.value)
           } catch (error: any) {
             console.error(error)
-            const errInfo = error.message && JSON.parse(error.message)
+            const tryParseJSONObject = (jsonString: any) => {
+              try {
+                var o = JSON.parse(jsonString);
+                if (o && typeof o === "object") {
+                  return o;
+                }
+              } catch (e) { }
+              return false;
+            };
+            const errInfo = error.message && tryParseJSONObject(error.message)
             if (errInfo && errInfo.error_code === 'resource_not_found') {
               resolve(0)
             }
