@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { getExplorerLink, ExplorerDataType } from '../../utils/getExplorerLink'
-
+import { useGetType } from 'state/networktype/hooks'
 import Modal from '../Modal'
 import { AutoColumn, ColumnCenter } from '../Column'
 import styled, { ThemeContext } from 'styled-components'
@@ -45,6 +45,7 @@ interface VoteModalProps {
 
 export default function VoteModal({ isOpen, onDismiss, proposalId, support }: VoteModalProps) {
   const { chainId } = useActiveWeb3React()
+  const networkType = useGetType()
   const {
     voteCallback,
   }: {
@@ -151,7 +152,7 @@ export default function VoteModal({ isOpen, onDismiss, proposalId, support }: Vo
             </AutoColumn>
             {chainId && (
               <ExternalLink
-                href={getExplorerLink(chainId, hash, ExplorerDataType.TRANSACTION)}
+                href={getExplorerLink(chainId, hash, ExplorerDataType.TRANSACTION, networkType)}
                 style={{ marginLeft: '4px' }}
               >
                 <TYPE.subHeader>

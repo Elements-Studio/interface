@@ -5,6 +5,7 @@ import useENS from '../../hooks/useENS'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { ExternalLink, TYPE } from '../../theme'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
+import { useGetType } from 'state/networktype/hooks'
 import { AutoColumn } from '../Column'
 import { RowBetween } from '../Row'
 
@@ -84,6 +85,7 @@ export default function AddressInputPanel({
   onChange: (value: string) => void
 }) {
   const { chainId } = useActiveWeb3React()
+  const networkType = useGetType()
   const theme = useContext(ThemeContext)
 
   const { address, loading, name } = useENS(value)
@@ -110,7 +112,7 @@ export default function AddressInputPanel({
               </TYPE.black>
               {address && chainId && (
                 <ExternalLink
-                  href={getExplorerLink(chainId, name ?? address, ExplorerDataType.ADDRESS)}
+                  href={getExplorerLink(chainId, name ?? address, ExplorerDataType.ADDRESS, networkType)}
                   style={{ fontSize: '14px' }}
                 >
                   <Trans>(View on Explorer)</Trans>

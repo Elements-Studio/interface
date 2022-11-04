@@ -5,6 +5,7 @@ import { useActiveWeb3React } from '../../hooks/web3'
 import { TYPE } from '../../theme'
 import { ExternalLink } from '../../theme/components'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
+import { useGetType } from 'state/networktype/hooks'
 import { AutoColumn } from '../Column'
 import { AutoRow } from '../Row'
 import { Trans } from '@lingui/macro'
@@ -23,6 +24,7 @@ export default function TransactionPopup({
   summary?: string
 }) {
   const { chainId } = useActiveWeb3React()
+  const networkType = useGetType()
 
   const theme = useContext(ThemeContext)
 
@@ -34,7 +36,7 @@ export default function TransactionPopup({
       <AutoColumn gap="8px">
         <TYPE.body fontWeight={500}>{summary ?? 'Hash: ' + hash.slice(0, 8) + '...' + hash.slice(58, 65)}</TYPE.body>
         {chainId && (
-          <ExternalLink href={getExplorerLink(chainId, hash, ExplorerDataType.TRANSACTION)}>
+          <ExternalLink href={getExplorerLink(chainId, hash, ExplorerDataType.TRANSACTION, networkType)}>
             <Trans>View on Explorer</Trans>
           </ExternalLink>
         )}

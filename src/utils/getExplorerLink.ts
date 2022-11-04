@@ -26,7 +26,7 @@ export enum ExplorerDataType {
  * @param data the data to return a link for
  * @param type the type of the data
  */
-export function getExplorerLink(chainId: number, data: string, type: ExplorerDataType): string {
+export function getExplorerLink(chainId: number, data: string, type: ExplorerDataType, networkType: string = 'STARCOIN'): string {
   // if (chainId === SupportedChainId.ARBITRUM_ONE) {
   //   switch (type) {
   //     case ExplorerDataType.TRANSACTION:
@@ -53,21 +53,46 @@ export function getExplorerLink(chainId: number, data: string, type: ExplorerDat
   //   }
   // }
 
-  const prefix = `https://stcscan.io/${ STCSCAN_SUFFIXES[chainId] ?? '' }`
+  if (networkType === 'STARCOIN') {
+    const prefix = `https://stcscan.io/${ STCSCAN_SUFFIXES[chainId] ?? '' }`
 
-  switch (type) {
-    case ExplorerDataType.TRANSACTION:
-      return `${ prefix }/transactions/detail/${ data }`
+    switch (type) {
+      case ExplorerDataType.TRANSACTION:
+        return `${ prefix }/transactions/detail/${ data }`
 
-    // case ExplorerDataType.TOKEN:
-    //   return `${prefix}/token/${data}`
+      // case ExplorerDataType.TOKEN:
+      //   return `${prefix}/token/${data}`
 
-    case ExplorerDataType.BLOCK:
-      return `${ prefix }/blocks/detail/${ data }`
+      case ExplorerDataType.BLOCK:
+        return `${ prefix }/blocks/detail/${ data }`
 
-    case ExplorerDataType.ADDRESS:
-      return `${ prefix }/address/${ data }`
-    default:
-      return `${ prefix }`
+      case ExplorerDataType.ADDRESS:
+        return `${ prefix }/address/${ data }`
+      default:
+        return `${ prefix }`
+    }
   }
+
+  if (networkType === 'APTOS') {
+    const prefix = 'https://explorer.aptoslabs.com'
+    const network = APTOS_SUFFIXES[chainId]
+
+    switch (type) {
+      case ExplorerDataType.TRANSACTION:
+        return `${ prefix }/txn/${ data }?network=${ network }`
+
+      // case ExplorerDataType.TOKEN:
+      //   return `${prefix}/token/${data}`
+
+      case ExplorerDataType.BLOCK:
+        return `${ prefix }/block/${ data }?network=${ network }`
+
+      case ExplorerDataType.ADDRESS:
+        return `${ prefix }/account/${ data }?network=${ network }`
+      default:
+        return `${ prefix }`
+    }
+  }
+
+  return ''
 }

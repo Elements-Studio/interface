@@ -1,6 +1,7 @@
 import { useRef, RefObject, useCallback, useState, useMemo } from 'react'
 import Column from 'components/Column'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
+import { useGetType } from 'state/networktype/hooks'
 import { PaddedColumn, Separator, SearchInput } from './styleds'
 import Row, { RowBetween, RowFixed } from 'components/Row'
 import { TYPE, ExternalLinkIcon, TrashIcon, ButtonText, ExternalLink } from 'theme'
@@ -45,6 +46,7 @@ export default function ManageTokens({
   setImportToken: (token: Token) => void
 }) {
   const { chainId } = useActiveWeb3React()
+  const networkType = useGetType()
 
   const [searchQuery, setSearchQuery] = useState<string>('')
   const theme = useTheme()
@@ -80,7 +82,7 @@ export default function ManageTokens({
         <RowBetween key={token.address} width="100%">
           <RowFixed>
             <CurrencyLogo currency={token} size={'20px'} />
-            <ExternalLink href={getExplorerLink(chainId, token.address, ExplorerDataType.ADDRESS)}>
+            <ExternalLink href={getExplorerLink(chainId, token.address, ExplorerDataType.ADDRESS, networkType)}>
               <TYPE.main ml={'10px'} fontWeight={600}>
                 {token.symbol}
               </TYPE.main>
@@ -88,7 +90,7 @@ export default function ManageTokens({
           </RowFixed>
           <RowFixed>
             <TrashIcon onClick={() => removeToken(chainId, token.address)} />
-            <ExternalLinkIcon href={getExplorerLink(chainId, token.address, ExplorerDataType.ADDRESS)} />
+            <ExternalLinkIcon href={getExplorerLink(chainId, token.address, ExplorerDataType.ADDRESS, networkType)} />
           </RowFixed>
         </RowBetween>
       ))

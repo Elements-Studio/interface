@@ -7,6 +7,7 @@ import { AutoColumn } from 'components/Column'
 import Modal from 'components/Modal'
 import { LoadingView, SubmittedView } from 'components/ModalViews'
 import { ExplorerDataType, getExplorerLink } from 'utils/getExplorerLink'
+import { useGetType } from 'state/networktype/hooks'
 import { Link } from 'react-router-dom'
 import { Trans } from '@lingui/macro'
 
@@ -20,6 +21,7 @@ export const ProposalSubmissionModal = ({
   onDismiss: () => void
 }) => {
   const theme = useContext(ThemeContext)
+  const networkType = useGetType()
 
   return (
     <Modal isOpen={isOpen} onDismiss={onDismiss}>
@@ -38,7 +40,7 @@ export const ProposalSubmissionModal = ({
               <Trans>Proposal Submitted</Trans>
             </Text>
             {hash && (
-              <ExternalLink href={getExplorerLink(1, hash, ExplorerDataType.TRANSACTION)}>
+              <ExternalLink href={getExplorerLink(1, hash, ExplorerDataType.TRANSACTION, networkType)}>
                 <Text fontWeight={500} fontSize={14} color={theme.primary1}>
                   <Trans>View on Stcscan</Trans>
                 </Text>

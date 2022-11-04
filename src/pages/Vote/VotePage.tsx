@@ -38,6 +38,7 @@ import { useTokenBalance } from '../../state/wallet/hooks'
 import { ExternalLink, StyledInternalLink, TYPE } from '../../theme'
 import { isAddress } from '../../utils'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
+import { useGetType } from 'state/networktype/hooks'
 import { ProposalStatus } from './styled'
 import { t, Trans } from '@lingui/macro'
 
@@ -125,6 +126,7 @@ export default function VotePage({
   },
 }: RouteComponentProps<{ governorIndex: string; id: string }>) {
   const { chainId, account } = useActiveWeb3React()
+  const networkType = useGetType()
 
   // get data for this specific proposal
   const proposalData: ProposalData | undefined = useProposalData(Number.parseInt(governorIndex), id)
@@ -193,7 +195,7 @@ export default function VotePage({
     if (isAddress(content) && chainId) {
       const commonName = COMMON_CONTRACT_NAMES[chainId]?.[content] ?? content
       return (
-        <ExternalLink href={getExplorerLink(chainId, content, ExplorerDataType.ADDRESS)}>{commonName}</ExternalLink>
+        <ExternalLink href={getExplorerLink(chainId, content, ExplorerDataType.ADDRESS, networkType)}>{commonName}</ExternalLink>
       )
     }
     return <span>{content}</span>
@@ -345,7 +347,7 @@ export default function VotePage({
             <ProposerAddressLink
               href={
                 proposalData?.proposer && chainId
-                  ? getExplorerLink(chainId, proposalData?.proposer, ExplorerDataType.ADDRESS)
+                  ? getExplorerLink(chainId, proposalData?.proposer, ExplorerDataType.ADDRESS, networkType)
                   : ''
               }
             >

@@ -8,6 +8,7 @@ import { RowBetween } from '../Row'
 import { TYPE, ExternalLink, CloseIcon, CustomLightSpinner, UniTokenAnimated } from '../../theme'
 import { ButtonPrimary } from '../Button'
 import { useClaimCallback, useUserUnclaimedAmount, useUserHasAvailableClaim } from '../../state/claim/hooks'
+import { useGetType } from 'state/networktype/hooks'
 import tokenLogo from '../../assets/images/token-logo.png'
 import Circle from '../../assets/images/blue-loader.svg'
 import { Text } from 'rebass'
@@ -46,6 +47,7 @@ const ConfirmedIcon = styled(ColumnCenter)`
 
 export default function AddressClaimModal({ isOpen, onDismiss }: { isOpen: boolean; onDismiss: () => void }) {
   const { chainId } = useActiveWeb3React()
+  const networkType = useGetType()
 
   // state for smart contract input
   const [typed, setTyped] = useState('')
@@ -191,7 +193,7 @@ export default function AddressClaimModal({ isOpen, onDismiss }: { isOpen: boole
               </TYPE.subHeader>
             )}
             {attempting && hash && !claimConfirmed && chainId && hash && (
-              <ExternalLink href={getExplorerLink(chainId, hash, ExplorerDataType.TRANSACTION)} style={{ zIndex: 99 }}>
+              <ExternalLink href={getExplorerLink(chainId, hash, ExplorerDataType.TRANSACTION, networkType)} style={{ zIndex: 99 }}>
                 <Trans>View transaction on Explorer</Trans>
               </ExternalLink>
             )}

@@ -2,6 +2,7 @@ import { Currency } from '@uniswap/sdk-core'
 import { ReactNode, useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import { getExplorerLink, ExplorerDataType } from '../../utils/getExplorerLink'
+import { useGetType } from 'state/networktype/hooks'
 import Modal from '../Modal'
 import { ExternalLink } from '../../theme'
 import { Text } from 'rebass'
@@ -92,6 +93,7 @@ export function TransactionSubmittedContent({
   inline?: boolean // not in modal
 }) {
   const theme = useContext(ThemeContext)
+  const networkType = useGetType()
 
   const { library } = useActiveWeb3React()
 
@@ -114,7 +116,7 @@ export function TransactionSubmittedContent({
             <Trans>Transaction Submitted</Trans>
           </Text>
           {chainId && hash && (
-            <ExternalLink href={getExplorerLink(chainId, hash, ExplorerDataType.TRANSACTION)}>
+            <ExternalLink href={getExplorerLink(chainId, hash, ExplorerDataType.TRANSACTION, networkType)}>
               <Text fontWeight={500} fontSize={14} color={theme.primary1}>
                 <Trans>View on Explorer</Trans>
               </Text>

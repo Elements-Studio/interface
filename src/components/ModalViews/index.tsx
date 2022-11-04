@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
-
+import { useGetType } from 'state/networktype/hooks'
 import { AutoColumn, ColumnCenter } from '../Column'
 import styled, { ThemeContext } from 'styled-components'
 import { RowBetween } from '../Row'
@@ -52,6 +52,7 @@ export function SubmittedView({
 }) {
   const theme = useContext(ThemeContext)
   const { chainId } = useActiveWeb3React()
+  const networkType = useGetType()
 
   return (
     <ConfirmOrLoadingWrapper>
@@ -66,7 +67,7 @@ export function SubmittedView({
         {children}
         {chainId && hash && (
           <ExternalLink
-            href={getExplorerLink(chainId, hash, ExplorerDataType.TRANSACTION)}
+            href={getExplorerLink(chainId, hash, ExplorerDataType.TRANSACTION, networkType)}
             style={{ marginLeft: '4px' }}
           >
             <TYPE.subHeader>

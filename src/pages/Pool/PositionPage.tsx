@@ -9,6 +9,7 @@ import { unwrappedToken } from 'utils/unwrappedToken'
 import { usePositionTokenURI } from '../../hooks/usePositionTokenURI'
 import { calculateGasMargin } from '../../utils/calculateGasMargin'
 import { getExplorerLink, ExplorerDataType } from '../../utils/getExplorerLink'
+import { useGetType } from 'state/networktype/hooks'
 import { LoadingRows } from './styleds'
 import styled from 'styled-components/macro'
 import { AutoColumn } from 'components/Column'
@@ -182,10 +183,11 @@ function CurrentPriceCard({
 
 function LinkedCurrency({ chainId, currency }: { chainId?: number; currency?: Currency }) {
   const address = (currency as Token)?.address
+  const networkType = useGetType()
 
   if (typeof chainId === 'number' && address) {
     return (
-      <ExternalLink href={getExplorerLink(chainId, address, ExplorerDataType.ADDRESS)}>
+      <ExternalLink href={getExplorerLink(chainId, address, ExplorerDataType.ADDRESS, networkType)}>
         <RowFixed>
           <CurrencyLogo currency={currency} size={'20px'} style={{ marginRight: '0.5rem' }} />
           <TYPE.main>{currency?.symbol} ↗</TYPE.main>
@@ -295,6 +297,7 @@ export function PositionPage({
   },
 }: RouteComponentProps<{ tokenId?: string }>) {
   const { chainId, account, library } = useActiveWeb3React()
+  const networkType = useGetType()
   const theme = useTheme()
 
   const parsedTokenId = tokenIdFromUrl ? BigNumber.from(tokenIdFromUrl) : undefined
@@ -579,7 +582,7 @@ export function PositionPage({
                   <NFT image={metadata.result.image} height={400} />
                 </div>
                 {typeof chainId === 'number' && owner && !ownsNFT ? (
-                  <ExternalLink href={getExplorerLink(chainId, owner, ExplorerDataType.ADDRESS)}>
+                  <ExternalLink href={getExplorerLink(chainId, owner, ExplorerDataType.ADDRESS, networkType)}>
                     <Trans>Owner</Trans>
                   </ExternalLink>
                 ) : null}

@@ -21,6 +21,7 @@ import { BackArrow, ExternalLink, TYPE } from '../../theme'
 import { isAddress } from '../../utils'
 import { calculateGasMargin } from '../../utils/calculateGasMargin'
 import { getExplorerLink, ExplorerDataType } from '../../utils/getExplorerLink'
+import { useGetType } from 'state/networktype/hooks'
 import { BodyWrapper } from '../AppBody'
 import { PoolState, usePool } from 'hooks/usePools'
 import { FeeAmount, Pool, Position, priceToClosestTick, TickMath } from '@uniswap/v3-sdk'
@@ -123,6 +124,7 @@ function V2PairMigration({
   token1: Token
 }) {
   const { chainId, account } = useActiveWeb3React()
+  const networkType = useGetType()
   const theme = useTheme()
   const v2FactoryAddress = chainId ? V2_FACTORY_ADDRESSES[chainId] : undefined
 
@@ -247,7 +249,7 @@ function V2PairMigration({
     } else if (gatherPermitSignature) {
       try {
         await gatherPermitSignature()
-      } catch (error) {
+      } catch (error: any) {
         // try to approve if gatherPermitSignature failed for any reason other than the user rejecting it
         if (error?.code !== 4001) {
           await approveManually()
@@ -381,7 +383,7 @@ function V2PairMigration({
           completely trustless thanks to the{' '}
         </Trans>
         {chainId && migrator && (
-          <ExternalLink href={getExplorerLink(chainId, migrator.address, ExplorerDataType.ADDRESS)}>
+          <ExternalLink href={getExplorerLink(chainId, migrator.address, ExplorerDataType.ADDRESS, networkType)}>
             <TYPE.blue display="inline">
               <Trans>Uniswap migration contract↗</Trans>
             </TYPE.blue>

@@ -13,6 +13,7 @@ import { useClaimCallback, useUserClaimData, useUserUnclaimedAmount } from '../.
 import { useUserHasSubmittedClaim } from '../../state/transactions/hooks'
 import { CloseIcon, CustomLightSpinner, ExternalLink, TYPE, UniTokenAnimated } from '../../theme'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
+import { useGetType } from 'state/networktype/hooks'
 import { ButtonPrimary } from '../Button'
 import { AutoColumn, ColumnCenter } from '../Column'
 import Confetti from '../Confetti'
@@ -52,6 +53,7 @@ export default function ClaimModal() {
   const toggleClaimModal = useToggleSelfClaimModal()
 
   const { account, chainId } = useActiveWeb3React()
+  const networkType = useGetType()
 
   // used for UI loading states
   const [attempting, setAttempting] = useState<boolean>(false)
@@ -218,7 +220,7 @@ export default function ClaimModal() {
             )}
             {attempting && claimSubmitted && !claimConfirmed && chainId && claimTxn?.hash && (
               <ExternalLink
-                href={getExplorerLink(chainId, claimTxn?.hash, ExplorerDataType.TRANSACTION)}
+                href={getExplorerLink(chainId, claimTxn?.hash, ExplorerDataType.TRANSACTION, networkType)}
                 style={{ zIndex: 99 }}
               >
                 <Trans>View transaction on Explorer</Trans>

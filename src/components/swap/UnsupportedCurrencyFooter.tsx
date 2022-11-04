@@ -11,6 +11,7 @@ import { useActiveWeb3React } from 'hooks/web3'
 import { Currency, Token } from '@uniswap/sdk-core'
 import { useUnsupportedTokens } from '../../hooks/Tokens'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
+import { useGetType } from 'state/networktype/hooks'
 import { Trans } from '@lingui/macro'
 
 const DetailsFooter = styled.div<{ show: boolean }>`
@@ -46,6 +47,7 @@ export default function UnsupportedCurrencyFooter({
   currencies: (Currency | undefined)[]
 }) {
   const { chainId } = useActiveWeb3React()
+  const networkType = useGetType()
   const [showDetails, setShowDetails] = useState(false)
 
   const tokens =
@@ -80,7 +82,7 @@ export default function UnsupportedCurrencyFooter({
                         <TYPE.body fontWeight={500}>{token.symbol}</TYPE.body>
                       </AutoRow>
                       {chainId && (
-                        <ExternalLink href={getExplorerLink(chainId, token.address, ExplorerDataType.ADDRESS)}>
+                        <ExternalLink href={getExplorerLink(chainId, token.address, ExplorerDataType.ADDRESS, networkType)}>
                           <AddressText>{token.address}</AddressText>
                         </ExternalLink>
                       )}

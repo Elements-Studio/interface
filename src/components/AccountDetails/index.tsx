@@ -3,6 +3,7 @@ import styled, { ThemeContext } from 'styled-components'
 import { SUPPORTED_WALLETS } from '../../constants/wallet'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { clearAllTransactions } from '../../state/transactions/actions'
+import { useGetType } from 'state/networktype/hooks'
 import { shortenAddress } from '../../utils'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
 import { AutoRow } from '../Row'
@@ -226,6 +227,7 @@ export default function AccountDetails({
   openOptions,
 }: AccountDetailsProps) {
   const { chainId, account, connector } = useActiveWeb3React()
+  const networkType = useGetType()
   const theme = useContext(ThemeContext)
   const dispatch = useAppDispatch()
 
@@ -370,7 +372,7 @@ export default function AccountDetails({
                           <AddressLink
                             hasENS={!!ENSName}
                             isENS={true}
-                            href={getExplorerLink(chainId, ENSName, ExplorerDataType.ADDRESS)}
+                            href={getExplorerLink(chainId, ENSName, ExplorerDataType.ADDRESS, networkType)}
                           >
                             <LinkIcon size={16} />
                             <span style={{ marginLeft: '4px' }}>
@@ -396,7 +398,7 @@ export default function AccountDetails({
                           <AddressLink
                             hasENS={!!ENSName}
                             isENS={false}
-                            href={getExplorerLink(chainId, account, ExplorerDataType.ADDRESS)}
+                            href={getExplorerLink(chainId, account, ExplorerDataType.ADDRESS, networkType)}
                           >
                             <LinkIcon size={16} />
                             <span style={{ marginLeft: '4px' }}>

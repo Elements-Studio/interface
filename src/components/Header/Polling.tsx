@@ -5,6 +5,7 @@ import { useActiveWeb3React } from '../../hooks/web3'
 import { useBlockNumber } from '../../state/application/hooks'
 import { ExternalLink, TYPE } from '../../theme'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
+import { useGetType } from 'state/networktype/hooks'
 
 const StyledPolling = styled.div`
   position: fixed;
@@ -66,6 +67,7 @@ const Spinner = styled.div`
 
 export default function Polling() {
   const { chainId } = useActiveWeb3React()
+  const networkType = useGetType()
 
   const blockNumber = useBlockNumber()
 
@@ -92,7 +94,7 @@ export default function Polling() {
 
   return (
     <ExternalLink
-      href={chainId && blockNumber ? getExplorerLink(chainId, blockNumber.toString(), ExplorerDataType.BLOCK) : ''}
+      href={chainId && blockNumber ? getExplorerLink(chainId, blockNumber.toString(), ExplorerDataType.BLOCK, networkType) : ''}
     >
       <StyledPolling onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
         <StyledPollingNumber breathe={isMounting} hovering={isHover}>

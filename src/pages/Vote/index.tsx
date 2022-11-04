@@ -6,6 +6,7 @@ import { ExternalLink, TYPE } from '../../theme'
 import { AutoRow, RowBetween, RowFixed } from '../../components/Row'
 import { Link } from 'react-router-dom'
 import { getExplorerLink, ExplorerDataType } from '../../utils/getExplorerLink'
+import { useGetType } from 'state/networktype/hooks'
 import { ProposalStatus } from './styled'
 import { ButtonPrimary } from '../../components/Button'
 import { Button } from 'rebass/styled-components'
@@ -113,6 +114,7 @@ const EmptyProposals = styled.div`
 
 export default function Vote() {
   const { account, chainId } = useActiveWeb3React()
+  const networkType = useGetType()
 
   // toggle for showing delegation modal
   const showDelegateModal = useModalOpen(ApplicationModal.DELEGATE)
@@ -232,7 +234,7 @@ export default function Vote() {
                   </TYPE.body>
                   <AddressButton>
                     <StyledExternalLink
-                      href={getExplorerLink(1, userDelegatee, ExplorerDataType.ADDRESS)}
+                      href={getExplorerLink(1, userDelegatee, ExplorerDataType.ADDRESS, networkType)}
                       style={{ margin: '0 4px' }}
                     >
                       {userDelegatee === account ? <Trans>Self</Trans> : shortenAddress(userDelegatee)}

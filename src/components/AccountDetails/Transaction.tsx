@@ -4,6 +4,7 @@ import { CheckCircle, Triangle } from 'react-feather'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { ExternalLink } from '../../theme'
 import { useAllTransactions } from '../../state/transactions/hooks'
+import { useGetType } from 'state/networktype/hooks'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
 import { RowFixed } from '../Row'
 import Loader from '../Loader'
@@ -37,6 +38,7 @@ const IconWrapper = styled.div<{ pending: boolean; success?: boolean }>`
 
 export default function Transaction({ hash }: { hash: string }) {
   const { chainId } = useActiveWeb3React()
+  const networkType = useGetType()
   const allTransactions = useAllTransactions()
 
   const tx = allTransactions?.[hash]
@@ -49,7 +51,7 @@ export default function Transaction({ hash }: { hash: string }) {
   return (
     <TransactionWrapper>
       <TransactionState
-        href={getExplorerLink(chainId, hash, ExplorerDataType.TRANSACTION)}
+        href={getExplorerLink(chainId, hash, ExplorerDataType.TRANSACTION, networkType)}
         pending={pending}
         success={success}
       >

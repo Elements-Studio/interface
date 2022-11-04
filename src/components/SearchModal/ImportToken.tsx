@@ -16,6 +16,7 @@ import { useActiveWeb3React } from 'hooks/web3'
 import { ExternalLink } from '../../theme/components'
 import ListLogo from 'components/ListLogo'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
+import { useGetType } from 'state/networktype/hooks'
 import { PaddedColumn } from './styleds'
 import { Plural, Trans } from '@lingui/macro'
 
@@ -51,6 +52,7 @@ export function ImportToken({ tokens, list, onBack, onDismiss, handleCurrencySel
   const theme = useTheme()
 
   const { chainId } = useActiveWeb3React()
+  const networkType = useGetType()
 
   const addToken = useAddUserToken()
 
@@ -96,7 +98,7 @@ export function ImportToken({ tokens, list, onBack, onDismiss, handleCurrencySel
                   </TYPE.darkGray>
                 </AutoColumn>
                 {chainId && (
-                  <ExternalLink href={getExplorerLink(chainId, token.address, ExplorerDataType.ADDRESS)}>
+                  <ExternalLink href={getExplorerLink(chainId, token.address, ExplorerDataType.ADDRESS, networkType)}>
                     <AddressText fontSize={12}>{token.address}</AddressText>
                   </ExternalLink>
                 )}
