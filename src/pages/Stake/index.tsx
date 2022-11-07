@@ -331,11 +331,15 @@ export default function Stake({ history }: RouteComponentProps) {
                     </ButtonFarm>
                   )
                 }
-                <TYPE.body fontSize={12} style={{ marginTop: '12px', display: 'inline-flex' }}>
-                  <Link to={`/stake/simulator`}>
-                    <Trans>Boost Simulator</Trans>
-                  </Link>
-                </TYPE.body>
+                {
+                  networkType === 'STARCOIN' && (
+                    <TYPE.body fontSize={12} style={{ marginTop: '12px', display: 'inline-flex' }}>
+                      <Link to={`/stake/simulator`}>
+                        <Trans>Boost Simulator</Trans>
+                      </Link>
+                    </TYPE.body>
+                  )
+                }
                 {
                   networkType === 'STARCOIN' && (
                     <TYPE.body fontSize={12} style={{ margin: '12px 0 0 24px', display: 'inline-flex' }}>
