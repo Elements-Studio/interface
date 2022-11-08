@@ -1,5 +1,4 @@
 import { getNetworkInfo } from 'constants/chainInfo'
-import { SupportedChainId } from 'constants/chains'
 import { useOnClickOutsideIgnore } from 'hooks/useOnClickOutsideIgnore'
 import useSelectNetWork from 'hooks/useSelectNetWork'
 // import useSyncChainQuery from 'hooks/useSyncChainQuery'
@@ -20,8 +19,8 @@ import { NavDropdown } from './NavDropdown'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { useIsDarkMode } from 'state/user/hooks'
 import useParsedQueryString from 'hooks/useParsedQueryString'
-import { stringify } from 'qs'
 import useLocalStorage from 'hooks/useLocalStorage'
+import getTargetUrl from 'utils/getTargetUrl'
 
 const NETWORK_SELECTOR_CHAINS = [
   'STARCOIN',
@@ -61,9 +60,8 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
         setChain(targetChainId)
       }   
       await selectChain(targetChainId)
-      const search =  stringify({ ...qs, chain: targetChainId })
-      const homeUrl = `${window.location.origin}/#/swap?${search}`
-      window.location.href = homeUrl
+      const targetUrl = getTargetUrl(qs,targetChainId)
+      window.location.href = targetUrl
       setPendingChainId(undefined)
       setIsOpen(false)
     },

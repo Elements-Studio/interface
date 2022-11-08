@@ -37,11 +37,9 @@ import { PositionPage } from './Pool/PositionPage'
 import AddLiquidity from './AddLiquidity'
 import ApeModeQueryParamReader from 'hooks/useApeModeQueryParamReader'
 import CreateProposal from './CreateProposal'
-import useParsedQueryString from 'hooks/useParsedQueryString'
 import { useSetType } from 'state/networktype/hooks'
 import useLocalStorage from 'hooks/useLocalStorage'
-import useSelectChain from 'hooks/useSelectNetWork'
-
+import useGetTargetChain from 'hooks/useGetTargetChain'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -84,10 +82,8 @@ function TopLevelModals() {
 
 export default function App() {
   const [chain, setChain] = useLocalStorage("chain", "STARCOIN");
-
-  const qs = useParsedQueryString()
   const setType = useSetType()
-  let targetChain = qs.chain as string
+  let targetChain = useGetTargetChain()
   useEffect(() => {
     if (targetChain && ['APTOS','STARCOIN'].includes(targetChain)) {
       setChain(targetChain)
