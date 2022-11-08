@@ -337,7 +337,7 @@ export default function Header() {
           <UniIcon>
             <img height={'25px'} src={Logo} alt="logo" />
           </UniIcon>
-          <TitleText style={{ fontFamily: 'Qualy' }}>
+          <TitleText style={{ fontFamily: 'Qualy', marginLeft: '5px' }}>
             STARSWAP
           </TitleText>
         </Title>
