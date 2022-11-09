@@ -378,10 +378,14 @@ export default function Header() {
             </StyledExternalLink>
           )
         }
-        <StyledExternalLink id={`starswap-info`} href={'https://info.starswap.xyz/'}>
-          <Trans>Charts</Trans>
-          <sup>↗</sup>
-        </StyledExternalLink>
+        {
+          networkType==='STARCOIN' && (
+            <StyledExternalLink id={`starswap-info`} href={'https://info.starswap.xyz/'}>
+              <Trans>Charts</Trans>
+              <sup>↗</sup>
+            </StyledExternalLink>
+         )
+        }
         {/*
         <StyledNavLink id={`stake-nav-link`} to={'/vote'}>
           <Trans>Vote</Trans>
