@@ -176,6 +176,7 @@
     "bignumber.js": "^9.0.1",
     "focus-visible": "^5.2.0",
     "mini-css-extract-plugin": "^2.6.1",
+    "starswap-wallet-adapter": "^0.0.7",
     "swr": "1.2.0"
   }
 }
