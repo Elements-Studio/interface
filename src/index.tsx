@@ -23,11 +23,19 @@ import RadialGradientByChainUpdater from './theme/RadialGradientByChainUpdater'
 import getLibrary from './utils/getLibrary'
 import {
   WalletProvider,
-  StarcoinWalletAdapter
+  StarcoinWalletAdapter,
+  MartianWalletAdapter,
+  AptosWalletAdapter,
+  PontemWalletAdapter,
 } from 'starswap-wallet-adapter';
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
-const wallets = [new StarcoinWalletAdapter()];
+const wallets = [
+  new StarcoinWalletAdapter(),
+  new PontemWalletAdapter(),
+  new MartianWalletAdapter(),
+  new AptosWalletAdapter(),
+];
 
 const GOOGLE_ANALYTICS_ID: string | undefined = process.env.REACT_APP_GOOGLE_ANALYTICS_ID
 if (typeof GOOGLE_ANALYTICS_ID === 'string') {
