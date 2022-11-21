@@ -1,12 +1,11 @@
-import { useWallet } from '@manahippo/aptos-wallet-adapter';
+import { useWallet } from 'starswap-wallet-adapter';
 import { useMemo } from 'react';
 import useHippoClient from './useHippoClient';
 import invariant from 'tiny-invariant';
-import { RawCoinInfo } from '@manahippo/coin-list';
 
 export type Balance = number | null;
 
-const useTokenBalane = (token: RawCoinInfo | undefined): [Balance, boolean] => {
+const useTokenBalane = (token: any): [Balance, boolean] => {
   const { getTokenInfoByFullName, getTokenStoreByFullName } = useHippoClient();
   const { connected } = useWallet();
 
