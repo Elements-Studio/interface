@@ -29,7 +29,7 @@ interface BatchItem {
   reject: (error: Error) => void
 }
 
-export class MiniRpcProvider implements AsyncSendable {
+class MiniRpcProvider implements AsyncSendable {
   public readonly isMetaMask: false = false
   public readonly chainId: number
   public readonly url: string
@@ -37,11 +37,14 @@ export class MiniRpcProvider implements AsyncSendable {
   public readonly path: string
   public readonly batchWaitTimeMs: number
 
+  private readonly connector: NetworkConnector
+
   private nextId = 1
   private batchTimeoutId: ReturnType<typeof setTimeout> | null = null
   private batch: BatchItem[] = []
 
-  constructor(chainId: number, url: string, batchWaitTimeMs?: number) {
+  constructor(connector: NetworkConnector, chainId: number, url: string, batchWaitTimeMs?: number) {
+    this.connector = connector
     this.chainId = chainId
     this.url = url
     const parsed = new URL(url)
@@ -51,8 +54,25 @@ export class MiniRpcProvider implements AsyncSendable {
     this.batchWaitTimeMs = batchWaitTimeMs ?? 50
   }
 
-  private readonly handleBatchStarcoin = async (batch: BatchItem[]) => {
-    console.log('handleBatchStarcoin', this.url, { batch })
+  public readonly clearBatch = async () => {
+    console.debug('Clearing batch', this.batch)
+    let batch = this.batch
+
+    batch = batch.filter((b) => {
+      if (b.request.method === 'wallet_switchEthereumChain') {
+        try {
+          this.connector.changeChainId(parseInt((b.request.params as [{ chainId: string }])[0].chainId))
+          b.resolve({ id: b.request.id })
+        } catch (error) {
+          b.reject(error)
+        }
+        return false
+      }
+      return true
+    })
+
+    this.batch = []
+    this.batchTimeoutId = null
     let response: Response
     try {
       response = await fetch(this.url, {
@@ -66,7 +86,7 @@ export class MiniRpcProvider implements AsyncSendable {
     }
 
     if (!response.ok) {
-      batch.forEach(({ reject }) => reject(new RequestError(`${ response.status }: ${ response.statusText }`, -32000)))
+      batch.forEach(({ reject }) => reject(new RequestError(`${response.status}: ${response.statusText}`, -32000)))
       return
     }
 
@@ -92,7 +112,7 @@ export class MiniRpcProvider implements AsyncSendable {
       } else if ('result' in result && resolve) {
         resolve(result.result)
       } else {
-        reject(new RequestError(`Received unexpected JSON-RPC response to ${ method } request.`, -32000, result))
+        reject(new RequestError(`Received unexpected JSON-RPC response to ${method} request.`, -32000, result))
       }
     }
   }
@@ -156,7 +176,6 @@ export class MiniRpcProvider implements AsyncSendable {
       await this.handleBatchStarcoin(batch)
     }
   }
-
   public readonly sendAsync = (
     request: {
       jsonrpc: '2.0'
@@ -179,7 +198,7 @@ export class MiniRpcProvider implements AsyncSendable {
       return this.request(method.method, method.params)
     }
     if (method === 'eth_chainId') {
-      return `0x${ this.chainId.toString(16) }`
+      return `0x${this.chainId.toString(16)}`
     }
     const promise = new Promise((resolve, reject) => {
       this.batch.push({
@@ -206,9 +225,9 @@ export class NetworkConnector extends AbstractConnector {
     invariant(defaultChainId || Object.keys(urls).length === 1, 'defaultChainId is a required argument with >1 url')
     super({ supportedChainIds: Object.keys(urls).map((k): number => Number(k)) })
 
-    this.currentChainId = defaultChainId || Number(Object.keys(urls)[0])
+    this.currentChainId = defaultChainId ?? Number(Object.keys(urls)[0])
     this.providers = Object.keys(urls).reduce<{ [chainId: number]: MiniRpcProvider }>((accumulator, chainId) => {
-      accumulator[Number(chainId)] = new MiniRpcProvider(Number(chainId), urls[Number(chainId)])
+      accumulator[Number(chainId)] = new MiniRpcProvider(this, Number(chainId), urls[Number(chainId)])
       return accumulator
     }, {})
   }
@@ -235,5 +254,22 @@ export class NetworkConnector extends AbstractConnector {
 
   public deactivate() {
     return
+  }
+
+  /**
+   * Meant to be called only by MiniRpcProvider
+   * @param chainId the new chain id
+   */
+  public changeChainId(chainId: number) {
+    if (chainId in this.providers) {
+      this.currentChainId = chainId
+      this.emitUpdate({
+        chainId,
+        account: null,
+        provider: this.providers[chainId],
+      })
+    } else {
+      throw new Error(`Unsupported chain ID: ${chainId}`)
+    }
   }
 }
