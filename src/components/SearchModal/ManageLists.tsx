@@ -241,7 +241,7 @@ export function ManageLists({
     }
   }, [activeCopy, activeListUrls])
 
-  const handleInput = useCallback((e) => {
+  const handleInput = useCallback((e: any) => {
     setListUrlInput(e.target.value)
   }, [])
 

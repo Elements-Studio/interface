@@ -23,15 +23,15 @@ import RadialGradientByChainUpdater from './theme/RadialGradientByChainUpdater'
 import getLibrary from './utils/getLibrary'
 import {
   WalletProvider,
-  StarcoinWalletAdapter,
+  StarMaskWalletAdapter,
   MartianWalletAdapter,
   AptosWalletAdapter,
   PontemWalletAdapter,
-} from 'starswap-wallet-adapter';
+} from '@starcoin/aptos-wallet-adapter';
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
 const wallets = [
-  new StarcoinWalletAdapter(),
+  new StarMaskWalletAdapter(),
   new PontemWalletAdapter(),
   new MartianWalletAdapter(),
   new AptosWalletAdapter(),

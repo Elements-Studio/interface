@@ -111,7 +111,7 @@ export default class ErrorBoundary extends React.Component<unknown, ErrorBoundar
         </FallbackWrapper>
       )
     }
-    return this.props.children
+    return (this.props as any).children
   }
 }
 

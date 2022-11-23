@@ -9,8 +9,8 @@ import {
   AptosWalletAdapter,
   MartianWalletAdapter,
   PontemWalletAdapter,
-  StarcoinWalletAdapter
-} from 'starswap-wallet-adapter';
+  StarMaskWalletAdapter
+} from '@starcoin/aptos-wallet-adapter';
 import { useMemo } from 'react';
 import { openErrorNotification } from 'utils/notifications';
 
@@ -38,7 +38,7 @@ const Providers: React.FC<TProps> = (props: TProps) => {
       new MartianWalletAdapter(),
       new AptosWalletAdapter(),
       new PontemWalletAdapter(),
-      new StarcoinWalletAdapter(),
+      new StarMaskWalletAdapter(),
     ],
     []
   );

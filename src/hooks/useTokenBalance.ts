@@ -1,4 +1,4 @@
-import { useWallet } from 'starswap-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 import { useMemo } from 'react';
 import useHippoClient from './useHippoClient';
 import invariant from 'tiny-invariant';

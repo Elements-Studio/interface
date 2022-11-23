@@ -214,7 +214,7 @@ export default function CurrencyList({
   }, [currencies, otherListTokens])
 
   const Row = useCallback(
-    function TokenRow({ data, index, style }) {
+    function TokenRow({ data, index, style }: any) {
       const row: Currency | BreakLine = data[index]
 
       if (isBreakLine(row)) {
