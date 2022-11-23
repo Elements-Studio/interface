@@ -84,7 +84,7 @@ export const walletconnect = new WalletConnectConnector({
   bridge: WALLETCONNECT_BRIDGE_URL,
   qrcode: true,
   pollingInterval: 15000,
-})
+} as any)
 
 // mainnet only
 export const fortmatic = new FortmaticConnector({

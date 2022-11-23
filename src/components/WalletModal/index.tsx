@@ -24,6 +24,8 @@ import Modal from '../Modal'
 import Option from './Option'
 import PendingView from './PendingView'
 import { LightCard } from '../Card'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+
 
 const CloseIcon = styled.div`
   position: absolute;
@@ -138,6 +140,8 @@ export default function WalletModal({
 
   const previousAccount = usePrevious(account)
 
+  const {wallets, connect} = useWallet();
+
   // close on connection, when logged out before
   useEffect(() => {
     if (account && !previousAccount && walletModalOpen) {
@@ -180,7 +184,7 @@ export default function WalletModal({
     setWalletView(WALLET_VIEWS.PENDING)
 
     // if the connector is walletconnect and the user has already tried to connect, manually reset the connector
-    if (connector instanceof WalletConnectConnector && connector.walletConnectProvider?.wc?.uri) {
+    if (connector instanceof WalletConnectConnector && (connector as any).walletConnectProvider?.wc?.uri) {
       connector.walletConnectProvider = undefined
     }
 
@@ -209,8 +213,8 @@ export default function WalletModal({
   // get wallets user can switch too, depending on device/browser
   function getOptions() {
     const isStarMask = window.starcoin?.isStarMask || window.obstarcoin?.isStarMask 
-    return Object.keys(SUPPORTED_WALLETS).map((key) => {
-      const option = SUPPORTED_WALLETS[key]
+    return wallets.map((item, key) => {
+      const option = item.adapter;
       if (!option.networkType.includes(networkType)) {
         return null
       }

@@ -23,11 +23,42 @@ import RadialGradientByChainUpdater from './theme/RadialGradientByChainUpdater'
 import getLibrary from './utils/getLibrary'
 import {
   WalletProvider,
-  StarcoinWalletAdapter
-} from 'starswap-wallet-adapter';
+  StarMaskWalletAdapter,
+  HippoExtensionWalletAdapter,
+  MartianWalletAdapter,
+  AptosWalletAdapter,
+  FewchaWalletAdapter,
+  PontemWalletAdapter,
+  SpikaWalletAdapter,
+  FletchWalletAdapter,
+  AptosSnapAdapter,
+  NightlyWalletAdapter,
+  BitkeepWalletAdapter,
+  TokenPocketWalletAdapter,
+  BloctoWalletAdapter,
+  WalletAdapterNetwork,
+  Coin98WalletAdapter,
+  FoxWalletAdapter
+} from '@starcoin/aptos-wallet-adapter';
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
-const wallets = [new StarcoinWalletAdapter()];
+const wallets = [
+  new StarMaskWalletAdapter(),
+  new HippoExtensionWalletAdapter(),
+  new MartianWalletAdapter(),
+  new AptosWalletAdapter(),
+  new FewchaWalletAdapter(),
+  new PontemWalletAdapter(),
+  new SpikaWalletAdapter(),
+  new FletchWalletAdapter(),
+  new AptosSnapAdapter(),
+  new NightlyWalletAdapter(),
+  new BitkeepWalletAdapter(),
+  new TokenPocketWalletAdapter(),
+  new BloctoWalletAdapter({ network: WalletAdapterNetwork.Testnet, bloctoAppId:'6d85f56e-5f2e-46cd-b5f2-5cf9695b4d46' }),
+  new Coin98WalletAdapter(),
+  new FoxWalletAdapter()
+];
 
 const GOOGLE_ANALYTICS_ID: string | undefined = process.env.REACT_APP_GOOGLE_ANALYTICS_ID
 if (typeof GOOGLE_ANALYTICS_ID === 'string') {
