@@ -18,7 +18,8 @@ export interface WalletInfo {
   color: string
   primary?: true
   mobile?: true
-  mobileOnly?: true
+  mobileOnly?: true,
+  networkType: string[],
 }
 
 export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
@@ -38,6 +39,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     description: 'Easy-to-use browser extension.',
     href: null,
     color: '#E8831D',
+    networkType: ['STARCOIN', 'APTOS']
   },
   // ONEKEY: {
   //   connector: injected,
@@ -54,6 +56,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     description: 'Easy-to-use browser extension.',
     href: null,
     color: '#E8831D',
+    networkType: ['STARCOIN']
   },
   // WALLET_CONNECT: {
   //   connector: walletconnect,

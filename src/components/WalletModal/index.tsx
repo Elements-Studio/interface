@@ -19,7 +19,7 @@ import { useModalOpen, useWalletModalToggle } from '../../state/application/hook
 import { ExternalLink, TYPE } from '../../theme'
 import AccountDetails from '../AccountDetails'
 import { Trans } from '@lingui/macro'
-
+import { useGetType } from 'state/networktype/hooks'
 import Modal from '../Modal'
 import Option from './Option'
 import PendingView from './PendingView'
@@ -204,12 +204,16 @@ export default function WalletModal({
     })
   }, [toggleWalletModal])
 
+  const networkType = useGetType()
+
   // get wallets user can switch too, depending on device/browser
   function getOptions() {
     const isStarMask = window.starcoin?.isStarMask || window.obstarcoin?.isStarMask 
     return Object.keys(SUPPORTED_WALLETS).map((key) => {
       const option = SUPPORTED_WALLETS[key]
-      
+      if (!option.networkType.includes(networkType)) {
+        return null
+      }
       let loading = false
       if (option.connector === openblock ){
         loading = !window.obstarcoin?.sdkLoaded
