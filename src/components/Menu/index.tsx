@@ -8,6 +8,8 @@ import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import { ApplicationModal } from '../../state/application/actions'
 import { useModalOpen, useToggleModal } from '../../state/application/hooks'
 import { Trans } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
+
 
 import { ExternalLink } from '../../theme'
 import { ButtonPrimary } from '../Button'
@@ -124,7 +126,8 @@ const InternalMenuItem = styled(Link)`
 const CODE_LINK = 'https://github.com/Elements-Studio/'
 
 export default function Menu() {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   const node = useRef<HTMLDivElement>()
   const open = useModalOpen(ApplicationModal.MENU)

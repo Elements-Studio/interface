@@ -40,6 +40,7 @@ import {
   Coin98WalletAdapter,
   FoxWalletAdapter
 } from '@starcoin/aptos-wallet-adapter';
+import { AptosWalletProvider } from 'contexts/AptosWalletProvider';
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
 const wallets = [
@@ -102,10 +103,11 @@ ReactDOM.render(
             <Web3ProviderNetwork getLibrary={getLibrary}>
             <WalletProvider
               wallets={wallets}
-              autoConnect={false} /** allow auto wallet connection or not **/
+              autoConnect={false}
               onError={(error: Error) => {
                 console.log('Handle Error Message', error);
               }}>
+          <AptosWalletProvider>
               <Blocklist>
                 <Updaters />
                 <ThemeProvider>
@@ -113,6 +115,7 @@ ReactDOM.render(
                   <App />
                 </ThemeProvider>
               </Blocklist>
+              </AptosWalletProvider>
             </WalletProvider>
             </Web3ProviderNetwork>
           </Web3ReactProvider>

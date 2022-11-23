@@ -17,6 +17,8 @@ import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
 import { LoadingRows } from './styleds'
 import Toggle from 'components/Toggle'
 import { useUserHideClosedPositions } from 'state/user/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
+
 
 import CTACards from './CTACards'
 import { PositionDetails } from 'types/position'
@@ -107,7 +109,8 @@ const ShowInactiveToggle = styled.div`
 `
 
 export default function Pool() {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
   const toggleWalletModal = useWalletModalToggle()
 
   const theme = useContext(ThemeContext)

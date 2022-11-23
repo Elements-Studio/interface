@@ -31,6 +31,8 @@ import {
   updateLiquidityPools,
   updateBoostSignature,
 } from './actions'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
+
 
 function serializeToken(token: Token): SerializedToken {
   return {
@@ -394,7 +396,8 @@ export function useIsBoost(): boolean {
 
 export function useIsWhiteList(): boolean {
   const [boostSignature, _] = useBoostSignature()
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
   const address = account ?  account.toLowerCase() : ''
   const isWhiteList = !!boostSignature[address] 
   return isWhiteList

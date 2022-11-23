@@ -15,6 +15,7 @@ import { useTotalUniEarned } from '../stake/hooks'
 // import { Erc20Interface } from 'abis/types/Erc20'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import useSWR from 'swr'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 
 /**
  * Returns a map of the given addresses to their eventually consistent ETH balances.
@@ -200,7 +201,8 @@ export function useCurrencyBalance(account?: string, currency?: Currency): Curre
 
 // mimics useAllBalances
 export function useAllTokenBalances(): { [tokenAddress: string]: CurrencyAmount<Token> | undefined } {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
   const allTokens = useAllTokens()
   const allTokensArray = useMemo(() => Object.values(allTokens ?? {}), [allTokens])
   const balances = useTokenBalances(account ?? undefined, allTokensArray)

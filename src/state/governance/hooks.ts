@@ -15,6 +15,8 @@ import { UNI } from '../../constants/tokens'
 import { useMultipleContractMultipleData, useSingleCallResult } from '../multicall/hooks'
 import { useTransactionAdder } from '../transactions/hooks'
 import { t } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
+
 
 interface ProposalDetail {
   target: string
@@ -251,7 +253,8 @@ export function useProposalData(governorIndex: number, id: string): ProposalData
 
 // get the users delegatee if it exists
 export function useUserDelegatee(): string {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
   const uniContract = useUniContract()
   const { result } = useSingleCallResult(uniContract, 'delegates', [account ?? undefined])
   return result?.[0] ?? undefined
@@ -309,7 +312,8 @@ export function useDelegateCallback(): (delegatee: string | undefined) => undefi
 export function useVoteCallback(): {
   voteCallback: (proposalId: string | undefined, support: boolean) => undefined | Promise<string>
 } {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   const govContracts = useGovernanceContracts()
   const latestGovernanceContract = govContracts ? govContracts[0] : null
@@ -338,7 +342,8 @@ export function useVoteCallback(): {
 export function useCreateProposalCallback(): (
   createProposalData: CreateProposalData | undefined
 ) => undefined | Promise<string> {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   const govContracts = useGovernanceContracts()
   const latestGovernanceContract = govContracts ? govContracts[0] : null

@@ -2,6 +2,8 @@ import { Currency } from '@starcoin/starswap-sdk-core'
 import { useMemo } from 'react'
 import { useActiveWeb3React } from './web3'
 import { useRegisterSwapPair } from './useTokenSwapScript'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
+
 
 export enum RegisterCallbackState {
   INVALID,
@@ -17,7 +19,8 @@ export function useRegisterCallback(
   callback: null | (() => Promise<string>)
   error: string | null
 } {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   const handleRegisterSwapPair = useRegisterSwapPair(account ?? undefined)
 

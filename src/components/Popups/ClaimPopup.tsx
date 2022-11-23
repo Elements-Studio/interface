@@ -14,6 +14,7 @@ import {
   useToggleSelfClaimModal,
   useToggleShowClaimPopup,
 } from '../../state/application/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 
 import { useUserHasAvailableClaim, useUserUnclaimedAmount } from '../../state/claim/hooks'
 import { TYPE } from '../../theme'
@@ -55,7 +56,8 @@ const UniToken = styled.img`
 `
 
 export default function ClaimPopup() {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   // dont store these in persisted state yet
   const showClaimPopup: boolean = useShowClaimPopup()

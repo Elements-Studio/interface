@@ -25,6 +25,8 @@ import NetworkCard from './NetworkCard'
 import UniBalanceContent from './UniBalanceContent'
 import { ChainSelector } from 'components/NavBar/ChainSelector'
 import {useGetType} from 'state/networktype/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
+
 
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
   display: grid;
@@ -308,7 +310,8 @@ export const StyledMenuButton = styled.button`
 `
 
 export default function Header() {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   const userStcBalance = useSTCBalances(account ? [account] : [])?.[account ?? '']
   // const [isDark] = useDarkModeManager()

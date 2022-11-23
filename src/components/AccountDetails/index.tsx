@@ -23,6 +23,7 @@ import { ExternalLink as LinkIcon } from 'react-feather'
 import { ExternalLink, LinkStyledButton, TYPE } from '../../theme'
 import { Trans } from '@lingui/macro'
 import { useAppDispatch } from 'state/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 
 const HeaderRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
@@ -226,7 +227,9 @@ export default function AccountDetails({
   ENSName,
   openOptions,
 }: AccountDetailsProps) {
-  const { chainId, account, connector } = useActiveWeb3React()
+  const { chainId, connector } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+  const account: any = aptosAccount?.address || '';
   const networkType = useGetType()
   const theme = useContext(ThemeContext)
   const dispatch = useAppDispatch()
@@ -302,6 +305,8 @@ export default function AccountDetails({
     if (chainId) dispatch(clearAllTransactions({ chainId }))
   }, [dispatch, chainId])
 
+  const {disconnect} = useWallet();
+
   return (
     <>
       <UpperSection>
@@ -321,7 +326,7 @@ export default function AccountDetails({
                     <WalletAction
                       style={{ fontSize: '.825rem', fontWeight: 400, marginRight: '8px' }}
                       onClick={() => {
-                        ;(connector as any).close()
+                        disconnect();
                       }}
                     >
                       <Trans>Disconnect</Trans>

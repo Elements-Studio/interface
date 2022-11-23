@@ -86,7 +86,8 @@ const StyledTvlContainer = styled.button`
 `
 
 export default function Swap({ history }: RouteComponentProps) {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
   const loadedUrlParams = useDefaultsFromURLSearch()
 
   // token warning stuff

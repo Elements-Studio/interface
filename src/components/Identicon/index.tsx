@@ -4,6 +4,8 @@ import styled from 'styled-components/macro'
 
 import { useActiveWeb3React } from '../../hooks/web3'
 import Jazzicon from '@metamask/jazzicon'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
+
 
 const StyledIdenticonContainer = styled.div`
   height: 1rem;
@@ -15,7 +17,8 @@ const StyledIdenticonContainer = styled.div`
 export default function Identicon() {
   const ref = useRef<HTMLDivElement>()
 
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   useEffect(() => {
     if (account && ref.current) {

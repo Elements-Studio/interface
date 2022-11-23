@@ -7,6 +7,8 @@ import { Version } from '../../hooks/useToggledVersion'
 import { AppState } from '../index'
 import { Field, selectCurrency, switchCurrencies } from './actions'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
+
 
 export function useRegisterState(): AppState['register'] {
   return useAppSelector((state) => state.register)
@@ -44,7 +46,8 @@ export function useDerivedRegisterInfo(toggledVersion: Version): {
   currencies: { [field in Field]?: Currency }
   inputError?: string
 } {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   const {
     [Field.INPUT]: { currencyId: inputCurrencyId },

@@ -12,6 +12,7 @@ import { TransactionResponse } from '@starcoin/providers'
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { t, Trans } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 
 const ContentWrapper = styled(AutoColumn)`
   width: 100%;
@@ -25,7 +26,8 @@ interface StakingModalProps {
 }
 
 export default function ClaimRewardModal({ isOpen, onDismiss, stakingInfo }: StakingModalProps) {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   // monitor call to help UI loading state
   const addTransaction = useTransactionAdder()

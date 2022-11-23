@@ -19,6 +19,7 @@ import { isTransactionRecent, useAllTransactions } from '../../state/transaction
 import { TransactionDetails } from '../../state/transactions/reducer'
 import { shortenAddress } from '../../utils'
 import { ButtonSecondary } from '../Button'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
 
 import Identicon from '../Identicon'
 import Loader from '../Loader'
@@ -165,14 +166,17 @@ function StatusIcon({ connector }: { connector: AbstractConnector }) {
 }
 
 function Web3StatusInner() {
-  const { account, connector, error, deactivate } = useWeb3React()
+  const { connector, error, deactivate } = useWeb3React()
+  const {account: aptosAccount} = useWallet();
+  console.log(aptosAccount, "aptosAccountaptosAccountaptosAccount")
+  const account: any = aptosAccount?.address || '';
   const networkType = useGetType()
-  if (networkType === 'STARCOIN' && account && account.length === 66) {
-    deactivate()
-  }
-  if (networkType === 'APTOS' && account && account.length === 34) {
-    deactivate()
-  }
+  // if (networkType === 'STARCOIN' && account && account.length === 66) {
+  //   deactivate()
+  // }
+  // if (networkType === 'APTOS' && account && account.length === 34) {
+  //   deactivate()
+  // }
 
   const { ENSName } = useENSName(account ?? undefined)
 
@@ -227,7 +231,9 @@ function Web3StatusInner() {
 }
 
 export default function Web3Status() {
-  const { active, account } = useWeb3React()
+  const { active } = useWeb3React()
+  const {account: aptosAccount} = useWallet();
+  const account: any = aptosAccount?.address || '';
   const contextNetwork = useWeb3React(NetworkContextName)
 
   const { ENSName } = useENSName(account ?? undefined)
