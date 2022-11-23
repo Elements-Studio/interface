@@ -74,24 +74,24 @@ function useSwapCallArguments(
       if (!routerContract) return []
       const swapMethods = []
 
-      swapMethods.push(
-        Router.swapCallParameters(trade, {
-          feeOnTransfer: false,
-          allowedSlippage,
-          recipient,
-          deadline: deadline.toNumber(),
-        })
-      )
+      // swapMethods.push(
+      //   Router.swapCallParameters(trade, {
+      //     feeOnTransfer: false,
+      //     allowedSlippage,
+      //     recipient,
+      //     deadline: deadline.toNumber(),
+      //   })
+      // )
 
       if (trade.tradeType === TradeType.EXACT_INPUT) {
-        swapMethods.push(
-          Router.swapCallParameters(trade, {
-            feeOnTransfer: true,
-            allowedSlippage,
-            recipient,
-            deadline: deadline.toNumber(),
-          })
-        )
+        // swapMethods.push(
+        //   Router.swapCallParameters(trade, {
+        //     feeOnTransfer: true,
+        //     allowedSlippage,
+        //     recipient,
+        //     deadline: deadline.toNumber(),
+        //   })
+        // )
       }
       return swapMethods.map(({ methodName, args, value }) => {
         if (argentWalletContract && trade.inputAmount.currency.isToken) {

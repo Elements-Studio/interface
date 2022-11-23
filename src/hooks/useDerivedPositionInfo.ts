@@ -20,7 +20,7 @@ export function useDerivedPositionInfo(positionDetails: PositionDetails | undefi
       liquidity: positionDetails.liquidity.toString(),
       tickLower: positionDetails.tickLower,
       tickUpper: positionDetails.tickUpper,
-    })
+    }) as any
   }
 
   return {

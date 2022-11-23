@@ -166,16 +166,16 @@ class MiniRpcProvider implements AsyncSendable {
     })
   }
 
-  public readonly clearBatch = async () => {
-    const batch = this.batch
-    this.batch = []
-    this.batchTimeoutId = null
-    if (/aptoslabs\.com/.test(this.url)) {
-      await this.handleBatchAptos(batch)
-    } else {
-      await this.handleBatchStarcoin(batch)
-    }
-  }
+  // public readonly clearBatch: = async () => {
+  //   const batch = this.batch
+  //   this.batch = []
+  //   this.batchTimeoutId = null
+  //   if (/aptoslabs\.com/.test(this.url)) {
+  //     await this.handleBatchAptos(batch)
+  //   } else {
+  //     await this.handleBatchStarcoin(batch)
+  //   }
+  // }
   public readonly sendAsync = (
     request: {
       jsonrpc: '2.0'

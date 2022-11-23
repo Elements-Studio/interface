@@ -7,7 +7,7 @@ export { default as Row } from 'antd/lib/row';
 export { default as Select } from 'antd/lib/select';
 export { default as Button } from 'antd/lib/button';
 export { default as Pagination } from 'antd/lib/pagination';
-export { default as PageHeader } from 'antd/lib/page-header';
+// export { default as PageHeader } from 'antd/lib/page-header';
 export { default as Slider } from 'antd/lib/slider';
 export { default as Collapse } from 'antd/lib/collapse';
 export { default as Table } from 'antd/lib/table';

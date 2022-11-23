@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { RootState } from 'modules/rootReducer';
-import { ISwapSettings } from 'pages/Swap/types';
+// import { ISwapSettings } from 'pages/Swap/types';
 import actions from './actions';
 import { RawCoinInfo } from '@manahippo/coin-list';
 
@@ -9,7 +9,7 @@ interface SwapState {
   isFetched: boolean;
   error: any;
   tokenList: RawCoinInfo[];
-  swapSettings: ISwapSettings;
+  swapSettings: any;
 }
 
 export const initState: SwapState = {
@@ -45,10 +45,10 @@ export default createReducer(initState, (builder) => {
       state.isFetching = false;
       state.isFetched = true;
     })
-    .addCase(actions.SET_SWAP_SETTING, (state, { payload }) => {
+    .addCase((actions as any).SET_SWAP_SETTING, (state, { payload }) => {
       state.swapSettings = payload;
     })
-    .addCase(actions.RESET, (state) => {
+    .addCase((actions as any).RESET, (state) => {
       state.swapSettings = initState.swapSettings;
     });
 });

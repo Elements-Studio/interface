@@ -41,7 +41,7 @@ const openNotification = ({
     className: `hippo-notification hippo-notification--${type}`,
     closeIcon: <CloseIcon className="font-icon h5 text-grey-500" />,
     duration,
-    maxCount: 5
+    // maxCount: 5
   });
 };
 

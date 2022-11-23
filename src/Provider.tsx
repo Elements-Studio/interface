@@ -1,7 +1,7 @@
 import { Provider as ReduxProvider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { logger } from 'redux-logger';
-import { ErrorBoundary } from 'components';
+import ErrorBoundary from 'components/ErrorBoundary';
 import reducer from 'modules/rootReducer';
 import { AptosWalletProvider } from 'contexts/AptosWalletProvider';
 import {
