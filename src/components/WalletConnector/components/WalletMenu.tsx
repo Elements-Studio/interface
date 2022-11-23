@@ -1,4 +1,4 @@
-import Button from 'components/Button';
+import Button from 'components/ButtonHip';
 import { useWallet } from '@starcoin/aptos-wallet-adapter';
 import { walletAddressEllipsis } from 'utils/utility';
 import useAptosWallet from 'hooks/useAptosWallet';

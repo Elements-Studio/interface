@@ -119,7 +119,10 @@
     "workbox-strategies": "^6.1.0",
     "@types/node": "18.7.6",
     "@types/react": "18.0.17",
-    "@types/react-dom": "18.0.6"
+    "@types/react-dom": "18.0.6",
+    "classnames": "latest",
+    "node-sass": "latest",
+    "antd": "latest"
   },
   "resolutions": {
     "@walletconnect/web3-provider": "1.4.2-rc.2"

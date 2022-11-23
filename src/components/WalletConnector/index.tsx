@@ -1,4 +1,4 @@
-import Button from 'components/Button';
+import Button from 'components/ButtonHip';
 import useAptosWallet from 'hooks/useAptosWallet';
 import { walletAddressEllipsis } from 'utils/utility';
 import { Drawer, Popover } from 'components/Antd';
@@ -7,7 +7,7 @@ import WalletSelector from './components/WalletSelector';
 import WalletMenu from './components/WalletMenu';
 import { WalletConnectedIcon, WalletNotConnectedIcon } from 'resources/icons';
 import classNames from 'classnames';
-import { useWallet } from '@manahippo/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 
 const WalletModal = ({ className = '' }: { className?: string }) => {

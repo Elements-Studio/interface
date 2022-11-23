@@ -1,4 +1,4 @@
-import Button from 'components/Button';
+import Button from 'components/ButtonHip';
 import { useMemo } from 'react';
 import { useWallet } from '@starcoin/aptos-wallet-adapter';
 

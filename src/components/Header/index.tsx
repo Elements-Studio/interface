@@ -25,6 +25,7 @@ import NetworkCard from './NetworkCard'
 import UniBalanceContent from './UniBalanceContent'
 import { ChainSelector } from 'components/NavBar/ChainSelector'
 import {useGetType} from 'state/networktype/hooks'
+import WalletConnector from 'components/WalletConnector';
 
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
   display: grid;
@@ -422,14 +423,15 @@ export default function Header() {
               <CardNoise />
             </UNIWrapper>
           )}
-          <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
+          {/* <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
             {account && userStcBalance ? (
               <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
                 { userStcBalance?.toSignificant(9) } { networkType === 'STARCOIN' ? 'STC' : 'APT' }
               </BalanceText>
             ) : null}
             <Web3Status />
-          </AccountElement>
+          </AccountElement> */}
+          <WalletConnector />
         </HeaderElement>
         <HeaderElementWrap>
           <StyledMenuButton onClick={() => toggleDarkMode()}>
