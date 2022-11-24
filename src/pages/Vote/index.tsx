@@ -31,6 +31,7 @@ import FormattedCurrencyAmount from '../../components/FormattedCurrencyAmount'
 import { useModalOpen, useToggleDelegateModal } from '../../state/application/hooks'
 import { ApplicationModal } from '../../state/application/actions'
 import { Trans } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 
 const PageWrapper = styled(AutoColumn)``
 
@@ -113,7 +114,9 @@ const EmptyProposals = styled.div`
 `
 
 export default function Vote() {
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
+  const account: any = aptosAccount?.address || '';
   const networkType = useGetType()
 
   // toggle for showing delegation modal

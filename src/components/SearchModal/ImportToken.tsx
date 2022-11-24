@@ -19,6 +19,7 @@ import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
 import { useGetType } from 'state/networktype/hooks'
 import { PaddedColumn } from './styleds'
 import { Plural, Trans } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
 
 const Wrapper = styled.div`
   position: relative;
@@ -51,7 +52,8 @@ interface ImportProps {
 export function ImportToken({ tokens, list, onBack, onDismiss, handleCurrencySelect }: ImportProps) {
   const theme = useTheme()
 
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
   const networkType = useGetType()
 
   const addToken = useAddUserToken()

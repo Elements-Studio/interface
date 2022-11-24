@@ -22,6 +22,7 @@ import { useIsTransactionPending } from '../../state/transactions/hooks'
 import { CurrencyAmount, Token } from '@uniswap/sdk-core'
 import { shortenAddress } from '../../utils'
 import { Trans } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
 
 const ContentWrapper = styled(AutoColumn)`
   width: 100%;
@@ -46,7 +47,8 @@ const ConfirmedIcon = styled(ColumnCenter)`
 `
 
 export default function AddressClaimModal({ isOpen, onDismiss }: { isOpen: boolean; onDismiss: () => void }) {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
   const networkType = useGetType()
 
   // state for smart contract input

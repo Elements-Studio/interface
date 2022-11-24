@@ -224,36 +224,27 @@ export default function WalletModal({
 
       // check for mobile options
       if (isMobile) {
-        if (option.connector === injected && !window.starcoin) {
           return (
             <Option
-              id={`connect-${key}`}
-              key={key}
-              color={'#E8831D'}
-              header={<Trans>Install StarMask</Trans>}
-              subheader={null}
-              link={'https://github.com/starcoinorg/starmask-extension'}
-              icon={StarmaskIcon}
-            />
-          )
-        } else {
-          return (
-            <Option
-              onClick={() => {
-                option.connector !== connector && !option.href && tryActivation(option.connector)
+              onClick={async () => {
+                if (activeWallet) {
+                  setWalletView(account + '')
+                }
+                else {
+                  if (option.readyState !== 'NotDetected') {
+                    await connect(option.name);
+                  }
+                }
               }}
               id={`connect-${key}`}
               key={key}
-              active={option.connector && option.connector === connector}
-              color={option.color}
-              link={option.href}
-              loading={loading}
+              color={'#E8831D'}
+              link={option.readyState === 'NotDetected' ? option.url : null}
               header={option.name}
               subheader={null}
-              icon={option.iconURL}
+              icon={option.icon}
             />
           )
-        }
       }
 
       // return rest of options
@@ -263,9 +254,8 @@ export default function WalletModal({
           <Option
             id={`connect-${key}`}
             onClick={async () => {
-              console.log(activeWallet, wallet, a, 'accccccccccccccc')  
               if (activeWallet) {
-                setWalletView(aptosAccount.address + '')
+                setWalletView(account + '')
               }
               else {
                 if (option.readyState !== 'NotDetected') {
@@ -280,7 +270,7 @@ export default function WalletModal({
             key={key}
             color={"#E8831D"}
             // active={aptosWallet?.adapter && option.name === aptosWallet?.adapter?.name}
-            link={option.readyState === 'NotDetected' && option.url}
+            link={option.readyState === 'NotDetected' ? option.url : null}
             // loading={connecting}
             header={option.name}
             subheader={null} //use option.descriptio to bring back multi-line

@@ -161,7 +161,8 @@ function useDataFromEventLogs():
 
 // get data for all past and active proposals
 export function useAllProposalData(): ProposalData[] {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
   const proposalCount = useLatestProposalCount()
 
   const addresses = useMemo(() => {
@@ -262,7 +263,9 @@ export function useUserDelegatee(): string {
 
 // gets the users current votes
 export function useUserVotes(): CurrencyAmount<Token> | undefined {
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
+  const account: any = aptosAccount?.address || '';
   const uniContract = useUniContract()
 
   // check for available votes
@@ -273,7 +276,9 @@ export function useUserVotes(): CurrencyAmount<Token> | undefined {
 
 // fetch available votes as of block (usually proposal start block)
 export function useUserVotesAsOfBlock(block: number | undefined): CurrencyAmount<Token> | undefined {
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
+  const account: any = aptosAccount?.address || '';
   const uniContract = useUniContract()
 
   // check for available votes
@@ -391,7 +396,8 @@ export function useLatestProposalId(address: string): string | undefined {
 }
 
 export function useProposalThreshold(): CurrencyAmount<Token> | undefined {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
 
   const govContracts = useGovernanceContracts()
   const latestGovernanceContract = govContracts ? govContracts[0] : null

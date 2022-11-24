@@ -20,6 +20,7 @@ import { useWalletModalToggle } from '../../state/application/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
 import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
 import getChainName from 'utils/getChainName'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 30px;
@@ -41,7 +42,9 @@ const FarmRow = styled(RowBetween)`
 
 
 export default function Farm({ history }: RouteComponentProps) {
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
+  const account: any = aptosAccount?.address || '';
   const network = useGetCurrentNetwork(chainId)
   const networkType = useGetType()
 

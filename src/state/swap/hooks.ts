@@ -290,7 +290,8 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, networkType: stri
 export function useDefaultsFromURLSearch():
   | { inputCurrencyId: string | undefined; outputCurrencyId: string | undefined }
   | undefined {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
   const networkType = useGetType()
   const dispatch = useAppDispatch()
   const parsedQs = useParsedQueryString()

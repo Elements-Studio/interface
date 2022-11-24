@@ -43,6 +43,7 @@ import { getContract } from 'utils'
 import { Erc20, ArgentWalletDetector, EnsPublicResolver, EnsRegistrar, Multicall2, Weth } from '../abis/types'
 import { UNI, WETH9_EXTENDED } from '../constants/tokens'
 import { useActiveWeb3React } from './web3'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 
 // returns null on errors
 export function useContract<T extends Contract = Contract>(
@@ -77,7 +78,8 @@ export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: b
 }
 
 export function useWETHContract(withSignerIfPossible?: boolean) {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
   return useContract<Weth>(chainId ? WETH9_EXTENDED[chainId]?.address : undefined, WETH_ABI, withSignerIfPossible)
 }
 
@@ -140,7 +142,8 @@ export function useGovernanceContracts(): (Contract | null)[] {
 }
 
 export function useUniContract() {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
   return useContract(chainId ? UNI[chainId]?.address : undefined, UNI_ABI, true)
 }
 

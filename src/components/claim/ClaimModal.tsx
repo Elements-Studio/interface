@@ -19,6 +19,7 @@ import { AutoColumn, ColumnCenter } from '../Column'
 import Confetti from '../Confetti'
 import { Break, CardBGImage, CardBGImageSmaller, CardNoise, CardSection, DataCard } from '../earn/styled'
 import { Trans } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
 
 import Modal from '../Modal'
 import { RowBetween } from '../Row'
@@ -52,7 +53,9 @@ export default function ClaimModal() {
   const isOpen = useModalOpen(ApplicationModal.SELF_CLAIM)
   const toggleClaimModal = useToggleSelfClaimModal()
 
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
+  const account: any = aptosAccount?.address || '';
   const networkType = useGetType()
 
   // used for UI loading states

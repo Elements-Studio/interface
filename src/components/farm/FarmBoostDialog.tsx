@@ -23,6 +23,7 @@ import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
 import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
 
 const Container = styled.div`
   width: 100%;
@@ -103,7 +104,9 @@ export default function FarmBoostDialog({
   lpStakingData,
 }: FarmBoostDialogProps) {
   const provider = useStarcoinProvider()
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
+  const account: any = aptosAccount?.address || '';
   const networkType = useGetType()
   const theme = useContext(ThemeContext)
   const [starAmount, setStarAmount] = useState('')

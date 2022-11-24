@@ -39,6 +39,7 @@ import BigNumber from 'bignumber.js'
 import { COMMON_BASES_NAME } from '../../constants/routing'
 import { unwrappedToken } from '../../utils/unwrappedToken'
 import getChainName from 'utils/getChainName'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 30px;
@@ -95,7 +96,9 @@ const scalingFactor = 1000000000
 
 export default function Simulator({ history }: RouteComponentProps) {
   let address = ''
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
+  const account: any = aptosAccount?.address || '';
   if (account) {
     address = account.toLowerCase();
   }

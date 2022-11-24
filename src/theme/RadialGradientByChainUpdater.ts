@@ -1,10 +1,12 @@
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 import { useEffect } from 'react'
 import { SupportedChainId } from '../constants/chains'
 import { useActiveWeb3React } from '../hooks/web3'
 
 const backgroundRadialGradientElement = document.getElementById('background-radial-gradient')
 export default function RadialGradientByChainUpdater(): null {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
   // manage background color
   useEffect(() => {
     if (!backgroundRadialGradientElement) {

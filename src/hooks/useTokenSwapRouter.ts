@@ -7,6 +7,7 @@ import { useActiveWeb3React } from './web3'
 import { useStarcoinProvider } from './useStarcoinProvider'
 import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
 import { useLiquidityPools } from '../state/user/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 
 const PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapRouter::`
 
@@ -16,7 +17,8 @@ const PREFIX = `${ V2_FACTORY_ADDRESS }::TokenSwapRouter::`
 export function useUserLiquidity(address?: string, x?: string, y?: string) {
   const provider = useStarcoinProvider()
   const networkType = useGetType()
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
   const network = useGetCurrentNetwork(chainId)
 
   return useSWR(
@@ -42,7 +44,8 @@ export function useUserLiquidity(address?: string, x?: string, y?: string) {
 export function useTotalLiquidity(x?: string, y?: string) {
   const provider = useStarcoinProvider()
   const networkType = useGetType()
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
   const network = useGetCurrentNetwork(chainId)
 
   return useSWR(
@@ -94,7 +97,8 @@ export function useTotalLiquidity(x?: string, y?: string) {
 // }
 
 export function useBatchGetReserves(pairs: ([string, string] | undefined)[]) {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
   const network = useGetCurrentNetwork(chainId)
   const url = `https://swap-api.starcoin.org/${ network }/v1/getTokenPairReservesList`
   return useSWR(
@@ -104,7 +108,8 @@ export function useBatchGetReserves(pairs: ([string, string] | undefined)[]) {
 }
 
 export function useGetLiquidityPools() {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
   const network = useGetCurrentNetwork(chainId)
   const [liquidityPools, setLiquidityPools] = useLiquidityPools()
   useEffect(

@@ -25,6 +25,7 @@ import ImportRow from './ImportRow'
 import { Edit } from 'react-feather'
 import useDebounce from 'hooks/useDebounce'
 import { useGetType } from 'state/networktype/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
 
 const ContentWrapper = styled(Column)`
   width: 100%;
@@ -69,7 +70,8 @@ export function CurrencySearch({
   showImportView,
   setImportToken,
 }: CurrencySearchProps) {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
   const theme = useTheme()
 
   // refs for fixed size lists

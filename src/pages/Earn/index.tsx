@@ -12,6 +12,8 @@ import { useActiveWeb3React } from '../../hooks/web3'
 import { BIG_INT_ZERO } from '../../constants/misc'
 import { OutlineCard } from '../../components/Card'
 import { Trans } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
+
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -39,7 +41,8 @@ flex-direction: column;
 `
 
 export default function Earn() {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
 
   // staking info for connected account
   const stakingInfos = useStakingInfo()

@@ -17,6 +17,8 @@ import BigNumber from 'bignumber.js';
 import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
 import getChainName from 'utils/getChainName'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+
 
 const Container = styled.div`
   width: 100%;
@@ -39,7 +41,8 @@ export default function TokenUnstakeDialog({
   isOpen,
 }: TokenUnstakeDialogProps) {
   const provider = useStarcoinProvider();
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
   const networkType = useGetType()
   const chainName = getChainName(chainId, networkType)
   const token = STAR_NAME[chainName]

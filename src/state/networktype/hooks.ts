@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from 'state/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
 import { AppState } from '../index'
 import { setType } from './actions'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 
 export function useSetType(): (key: string) => void {
     const dispatch = useAppDispatch()
@@ -23,7 +24,8 @@ export function useGetType(): string {
 
 export function useGetV2FactoryAddress(): string {
     const networkType = useGetType()
-    const { chainId } = useActiveWeb3React()
+    const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
     // console.log('useGetV2FactoryAddress', { networkType, chainId })
     if (networkType === 'APTOS' && chainId === 1) {
         return '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca'

@@ -3,9 +3,11 @@ import { FACTORY_ADDRESS_STARCOIN as V2_FACTORY_ADDRESS } from '@starcoin/starsw
 import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from './useStarcoinProvider';
 import { useGetCurrentNetwork } from 'state/networktype/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 
 export default function useGetBuyBackInfo(): number[] {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
   const network = useGetCurrentNetwork(chainId)
   const [info, setInfo] = useState<number[]>([0, 0, 0, 0, 0, 0, 0, 0]);
   const starcoinProvider = useStarcoinProvider()

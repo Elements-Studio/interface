@@ -19,6 +19,7 @@ import FarmCard from '../../components/farm/FarmCard'
 import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import useGetBuyBackInfo from '../../hooks/useGetBuyBackInfo';
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 30px;
@@ -49,7 +50,9 @@ const scalingFactor = 1000000000
 
 export default function BuyBack({ history }: RouteComponentProps) {
   let address = ''
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
+  const account: any = aptosAccount?.address || '';
   if (account) {
     address = account.toLowerCase();
   }

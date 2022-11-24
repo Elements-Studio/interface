@@ -7,6 +7,7 @@ import { useActiveWeb3React } from 'hooks/web3'
 import styled from 'styled-components/macro'
 import { StyledInternalLink, TYPE } from '../../theme'
 import { useGetCurrentNetwork } from 'state/networktype/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
@@ -28,7 +29,8 @@ const TitleTotal = styled.div<{ margin?: string; maxWidth?: string }>`
 `
 
 export default function StakeTitle() {
-    const { chainId } = useActiveWeb3React()
+    const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
     const network = useGetCurrentNetwork(chainId)
 
     const { data, error } = useSWR(

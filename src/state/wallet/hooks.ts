@@ -23,7 +23,8 @@ import { useWallet } from '@starcoin/aptos-wallet-adapter';
 export function useSTCBalances(uncheckedAddresses?: (string | undefined)[]): {
   [address: string]: CurrencyAmount<Currency> | undefined
 } {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
   // const multicallContract = useMulticall2Contract()
 
   const addresses: string[] = useMemo(
@@ -211,7 +212,9 @@ export function useAllTokenBalances(): { [tokenAddress: string]: CurrencyAmount<
 
 // get the total owned, unclaimed, and unharvested UNI for account
 export function useAggregateUniBalance(): CurrencyAmount<Token> | undefined {
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
+  const account: any = aptosAccount?.address || '';
 
   const uni = chainId ? UNI[chainId] : undefined
 

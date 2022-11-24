@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { t } from '@lingui/macro'
-import { Router, Trade as V2Trade } from '@starcoin/starswap-v2-sdk'
+import { Router, SwapParameters, Trade as V2Trade } from '@starcoin/starswap-v2-sdk'
 import { SwapRouter, Trade as V3Trade } from '@uniswap/v3-sdk'
 import { Currency, Percent, TradeType } from '@uniswap/sdk-core'
 import { useMemo } from 'react'
@@ -72,16 +72,14 @@ function useSwapCallArguments(
 
     if (trade instanceof V2Trade) {
       if (!routerContract) return []
-      const swapMethods = []
+      const swapMethods: any[] = []
 
-      swapMethods.push(
-        Router.swapCallParameters(trade, {
-          feeOnTransfer: false,
-          allowedSlippage,
-          recipient,
-          deadline: deadline.toNumber(),
-        })
-      )
+      swapMethods.push(Router.swapCallParameters(trade, {
+        feeOnTransfer: false,
+        allowedSlippage,
+        recipient,
+        deadline: deadline.toNumber(),
+      }))
 
       if (trade.tradeType === TradeType.EXACT_INPUT) {
         swapMethods.push(

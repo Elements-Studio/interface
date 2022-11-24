@@ -13,6 +13,7 @@ import {
   removeMulticallListeners,
   toCallKey,
 } from './actions'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 
 export interface Result extends ReadonlyArray<any> {
   readonly [key: string]: any
@@ -52,7 +53,8 @@ function useCallsData(
   calls: (Call | undefined)[],
   { blocksPerFetch }: ListenerOptions = { blocksPerFetch: 1 }
 ): CallResult[] {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
   const callResults = useAppSelector((state) => state.multicall.callResults)
   const dispatch = useAppDispatch()
 

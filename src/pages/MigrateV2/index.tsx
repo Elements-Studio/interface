@@ -22,6 +22,7 @@ import { getCreate2Address } from '@ethersproject/address'
 import { pack, keccak256 } from '@ethersproject/solidity'
 import { Trans } from '@lingui/macro'
 import { useGetType } from 'state/networktype/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 
 function EmptyState({ message }: { message: ReactNode }) {
   return (
@@ -52,7 +53,9 @@ function toSushiLiquidityToken([tokenA, tokenB]: [Token, Token]): Token {
 
 export default function MigrateV2() {
   const theme = useContext(ThemeContext)
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
+  const account: any = aptosAccount?.address || '';
 
   const v2FactoryAddress = chainId ? V2_FACTORY_ADDRESSES[chainId] : undefined
 

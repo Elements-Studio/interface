@@ -16,6 +16,8 @@ import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import BigNumber from 'bignumber.js'
 import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+
 
 const Container = styled.div`
   border-radius: 20px;
@@ -81,7 +83,9 @@ export default function FarmHarvestDialog({
 }: FarmHarvestDialogProps) {
 
   const starcoinProvider = useStarcoinProvider();
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
+  const account: any = aptosAccount?.address || '';
 
   const theme = useContext(ThemeContext)
   

@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from 'state/hooks'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { addTransaction } from './actions'
 import { TransactionDetails } from './reducer'
+import { useWallet } from '@starcoin/aptos-wallet-adapter';
 
 // helper that can take a ethers library transaction response and add it to the list of transactions
 export function useTransactionAdder(): (
@@ -38,7 +39,8 @@ export function useTransactionAdder(): (
 
 // returns all the transactions for the current chain
 export function useAllTransactions(): { [txHash: string]: TransactionDetails } {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = Number(aptosNetwork?.chainId || 1);
 
   const state = useAppSelector((state) => state.transactions)
 
