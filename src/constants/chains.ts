@@ -19,10 +19,7 @@ export enum SupportedChainId_STARCOIN {
 export enum SupportedChainId_APTOS {
   APTOS_MAIN = 1,
   APTOS_TEST = 2,
-  APTOS_DEV = 34,
-  APTOS_MAIN_OTHER = 1,
-  APTOS_TEST_OTHER = 2,
-  APTOS_DEV_OTHER = 34,
+  APTOS_DEV = 34
 }
 
 export const STARCOIN_ID_NAME: { [chainId: number]: string } = {
@@ -35,10 +32,7 @@ export const STARCOIN_ID_NAME: { [chainId: number]: string } = {
 export const APTOS_ID_NAME: { [chainId: number]: string } = {
   [SupportedChainId_APTOS.APTOS_MAIN]: 'APTOS_MAIN',
   [SupportedChainId_APTOS.APTOS_TEST]: 'APTOS_TEST',
-  [SupportedChainId_APTOS.APTOS_DEV]: 'APTOS_DEV',
-  [SupportedChainId_APTOS.APTOS_MAIN_OTHER]: 'APTOS_MAIN_OTHER',
-  [SupportedChainId_APTOS.APTOS_TEST_OTHER]: 'APTOS_TEST_OTHER',
-  [SupportedChainId_APTOS.APTOS_DEV_OTHER]: 'APTOS_DEV_OTHER',
+  [SupportedChainId_APTOS.APTOS_DEV]: 'APTOS_DEV'
 }
 
 export const SupportedChainId2 = {
@@ -59,10 +53,7 @@ export enum SupportedChainId {
   ARBITRUM_RINKEBY = 421611,
   APTOS_MAIN = 1,
   APTOS_TEST = 2,
-  APTOS_DEV = 34,
-  APTOS_MAIN_OTHER = 1,
-  APTOS_TEST_OTHER = 2,
-  APTOS_DEV_OTHER = 34,
+  APTOS_DEV = 34
 }
 
 export const SupportedChainNameId: { [name: string]: number } = {
@@ -78,10 +69,7 @@ export const SupportedChainNameId: { [name: string]: number } = {
   'ARBITRUM_RINKEBY': 421611,
   'APTOS_MAIN': 1,
   'APTOS_TEST': 2,
-  'APTOS_DEV': 34,
-  'APTOS_MAIN_OTHER': 1,
-  'APTOS_TEST_OTHER': 2,
-  'APTOS_DEV_OTHER': 34,
+  'APTOS_DEV': 34
 }
 
 export const NETWORK_LABELS: { [chainId in SupportedChainId | number]: string } = {
@@ -97,8 +85,5 @@ export const NETWORK_LABELS: { [chainId in SupportedChainId | number]: string } 
   [SupportedChainId.ARBITRUM_RINKEBY]: 'Arbitrum Testnet',
   [SupportedChainId.APTOS_MAIN]: 'mainnet',
   [SupportedChainId.APTOS_DEV]: 'devnet',
-  [SupportedChainId.APTOS_TEST]: 'testnet',
-  [SupportedChainId.APTOS_MAIN_OTHER]: 'Mainnet',
-  [SupportedChainId.APTOS_DEV_OTHER]: 'Devnet',
-  [SupportedChainId.APTOS_TEST_OTHER]: 'Testnet',
+  [SupportedChainId.APTOS_TEST]: 'testnet'
 }

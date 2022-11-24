@@ -87,10 +87,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [SupportedChainId.PROXIMA]: [STC[SupportedChainId.PROXIMA]],
   [SupportedChainId.APTOS_MAIN]: [APT[SupportedChainId.APTOS_MAIN]],
   [SupportedChainId.APTOS_TEST]: [APT[SupportedChainId.APTOS_TEST]],
-  [SupportedChainId.APTOS_DEV]: [APT[SupportedChainId.APTOS_DEV]],
-  [SupportedChainId.APTOS_MAIN_OTHER]: [APT[SupportedChainId.APTOS_MAIN_OTHER]],
-  [SupportedChainId.APTOS_TEST_OTHER]: [APT[SupportedChainId.APTOS_TEST_OTHER]],
-  [SupportedChainId.APTOS_DEV_OTHER]: [APT[SupportedChainId.APTOS_DEV_OTHER]],
+  [SupportedChainId.APTOS_DEV]: [APT[SupportedChainId.APTOS_DEV]]
 }
 export const ADDITIONAL_BASES: { [chainId: number]: { [tokenAddress: string]: Token[] } } = {
   // [1]: {
@@ -138,10 +135,7 @@ export const COMMON_BASES: ChainCurrencyList = {
   ],
   [SupportedChainId.APTOS_MAIN]: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN), STAR[SupportedChainId.APTOS_MAIN], XUSDT[SupportedChainId.APTOS_MAIN]],
   [SupportedChainId.APTOS_TEST]: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST), STAR[SupportedChainId.APTOS_TEST], XUSDT[SupportedChainId.APTOS_TEST]],
-  [SupportedChainId.APTOS_DEV]: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV), STAR[SupportedChainId.APTOS_DEV], XUSDT[SupportedChainId.APTOS_DEV]],
-  [SupportedChainId.APTOS_MAIN_OTHER]: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN_OTHER), STAR[SupportedChainId.APTOS_MAIN_OTHER], XUSDT[SupportedChainId.APTOS_MAIN_OTHER]],
-  [SupportedChainId.APTOS_TEST_OTHER]: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST_OTHER), STAR[SupportedChainId.APTOS_TEST], XUSDT[SupportedChainId.APTOS_TEST_OTHER]],
-  [SupportedChainId.APTOS_DEV_OTHER]: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV_OTHER), STAR[SupportedChainId.APTOS_DEV_OTHER], XUSDT[SupportedChainId.APTOS_DEV_OTHER]],
+  [SupportedChainId.APTOS_DEV]: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV), STAR[SupportedChainId.APTOS_DEV], XUSDT[SupportedChainId.APTOS_DEV]]
 }
 
 export const COMMON_BASES_NAME: ChainNameCurrencyList = {
@@ -159,10 +153,7 @@ export const COMMON_BASES_NAME: ChainNameCurrencyList = {
   ],
   ['APTOS_MAIN']: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN), STAR_NAME['APTOS_MAIN'], XUSDT_NAME['APTOS_MAIN']],
   ['APTOS_TEST']: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST), STAR[SupportedChainId.APTOS_TEST], XUSDT[SupportedChainId.APTOS_TEST]],
-  ['APTOS_DEV']: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV), STAR[SupportedChainId.APTOS_DEV], XUSDT[SupportedChainId.APTOS_DEV]],
-  ['APTOS_MAIN_OTHER']: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN_OTHER), STAR_NAME['APTOS_MAIN_OTHER'], XUSDT_NAME['APTOS_MAIN_OTHER']],
-  ['APTOS_TEST_OTHER']: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST_OTHER), STAR[SupportedChainId.APTOS_TEST_OTHER], XUSDT[SupportedChainId.APTOS_TEST_OTHER]],
-  ['APTOS_DEV_OTHER']: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV_OTHER), STAR[SupportedChainId.APTOS_DEV_OTHER], XUSDT[SupportedChainId.APTOS_DEV_OTHER]],
+  ['APTOS_DEV']: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV), STAR[SupportedChainId.APTOS_DEV], XUSDT[SupportedChainId.APTOS_DEV]]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
@@ -174,10 +165,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   [SupportedChainId.PROXIMA]: [ExtendedStar.onChain(SupportedChainId.PROXIMA).wrapped],
   [SupportedChainId.APTOS_MAIN]: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN).wrapped],
   [SupportedChainId.APTOS_TEST]: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST).wrapped],
-  [SupportedChainId.APTOS_DEV]: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV).wrapped],
-  [SupportedChainId.APTOS_MAIN_OTHER]: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN_OTHER).wrapped],
-  [SupportedChainId.APTOS_TEST_OTHER]: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST_OTHER).wrapped],
-  [SupportedChainId.APTOS_DEV_OTHER]: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV_OTHER).wrapped],
+  [SupportedChainId.APTOS_DEV]: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV).wrapped]
 }
 
 export const BASES_TO_TRACK_LIQUIDITY_FOR_NAME: ChainNameTokenList = {
@@ -186,10 +174,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR_NAME: ChainNameTokenList = {
   ['PROXIMA']: [ExtendedStar.onChain(SupportedChainId.PROXIMA).wrapped],
   ['APTOS_MAIN']: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN).wrapped],
   ['APTOS_TEST']: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST).wrapped],
-  ['APTOS_DEV']: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV).wrapped],
-  ['APTOS_MAIN_OTHER']: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN_OTHER).wrapped],
-  ['APTOS_TEST_OTHER']: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST_OTHER).wrapped],
-  ['APTOS_DEV_OTHER']: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV_OTHER).wrapped],
+  ['APTOS_DEV']: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV).wrapped]
 }
 
 

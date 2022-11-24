@@ -10,10 +10,7 @@ export const STCSCAN_SUFFIXES: { [chainId: number]: string } = {
 export const APTOS_SUFFIXES: { [chainId: number]: string } = {
   [SupportedChainId.APTOS_MAIN]: 'mainnet',
   [SupportedChainId.APTOS_TEST]: 'testnet',
-  [SupportedChainId.APTOS_DEV]: 'devnet',
-  [SupportedChainId.APTOS_MAIN_OTHER]: 'Mainnet',
-  [SupportedChainId.APTOS_TEST_OTHER]: 'Testnet',
-  [SupportedChainId.APTOS_DEV_OTHER]: 'Devnet',
+  [SupportedChainId.APTOS_DEV]: 'devnet'
 }
 
 export enum ExplorerDataType {

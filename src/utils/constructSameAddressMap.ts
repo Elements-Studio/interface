@@ -11,11 +11,7 @@ const MAINNET_AND_TESTNETS = [
   SupportedChainId.KOVAN,
   SupportedChainId.APTOS_MAIN,
   SupportedChainId.APTOS_TEST,
-  SupportedChainId.APTOS_DEV,
-  SupportedChainId.APTOS_MAIN_OTHER,
-  SupportedChainId.APTOS_TEST_OTHER,
-  SupportedChainId.APTOS_DEV_OTHER,
-
+  SupportedChainId.APTOS_DEV
 ]
 
 export function constructSameAddressMap<T extends string>(

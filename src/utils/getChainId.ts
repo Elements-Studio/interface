@@ -6,7 +6,7 @@ export default function getChainId(chainName: string | null | undefined): number
     let chainId: chainIdType = 1;
 
     Object.keys(NETWORK_LABELS).forEach((key: string) => {
-      if (NETWORK_LABELS[key] === chainName) {
+      if (NETWORK_LABELS[key] === chainName?.toLocaleLowerCase()) {
         chainId = key;
       }
     });
