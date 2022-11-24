@@ -451,6 +451,7 @@ msgstr "查看我们的 v3 流动池介绍和迁移指南。"
 msgid "Claim"
 msgstr "领取"
 
+#: src/components/Header/index.tsx
 #: src/components/claim/AddressClaimModal.tsx
 #: src/components/claim/ClaimModal.tsx
 #: src/components/claim/ClaimModal.tsx
@@ -892,9 +893,9 @@ msgstr "在 Uniswap 数据分析中探索较受欢迎的流动池。"
 #~ msgid "Extract"
 #~ msgstr "提取"
 
-#: src/components/farm/FarmHeader.tsx
 #: src/components/Header/index.tsx
 #: src/components/Stake/FarmHeader.tsx
+#: src/components/farm/FarmHeader.tsx
 msgid "Farm"
 msgstr "农场"
 
@@ -2598,6 +2599,14 @@ msgid "{0, plural, one {Import token} other {Import tokens}}"
 msgstr "{0, plural, one {导入代币} other {导入代币}}"
 
 #: src/components/AddressInputPanel/index.tsx
+#: src/components/SearchModal/CurrencySearch.tsx
+#: src/components/SearchModal/ManageLists.tsx
+#: src/components/SearchModal/ManageLists.tsx
+#: src/components/SearchModal/ManageLists.tsx
+#: src/components/Settings/index.tsx
+#: src/components/Settings/index.tsx
+#: src/components/TransactionSettings/index.tsx
+#: src/components/Web3Status/index.tsx
 #: src/components/earn/ClaimRewardModal.tsx
 #: src/components/earn/ClaimRewardModal.tsx
 #: src/components/earn/ClaimRewardModal.tsx
@@ -2606,7 +2615,6 @@ msgstr "{0, plural, one {导入代币} other {导入代币}}"
 #: src/components/earn/UnstakingModal.tsx
 #: src/components/earn/UnstakingModal.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
-#: src/components/SearchModal/CurrencySearch.tsx
 #: src/components/SearchModal/ManageLists.tsx
 #: src/components/SearchModal/ManageLists.tsx
 #: src/components/SearchModal/ManageLists.tsx

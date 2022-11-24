@@ -494,6 +494,7 @@ msgstr "Check out our v3 LP walkthrough and migration guides."
 msgid "Claim"
 msgstr "Claim"
 
+#: src/components/Header/index.tsx
 #: src/components/claim/AddressClaimModal.tsx
 #: src/components/claim/ClaimModal.tsx
 #: src/components/claim/ClaimModal.tsx
@@ -935,9 +936,9 @@ msgstr "Explore popular pools on Starswap Analytics."
 #~ msgid "Extract"
 #~ msgstr "Extract"
 
-#: src/components/farm/FarmHeader.tsx
 #: src/components/Header/index.tsx
 #: src/components/Stake/FarmHeader.tsx
+#: src/components/farm/FarmHeader.tsx
 msgid "Farm"
 msgstr "Farm"
 
