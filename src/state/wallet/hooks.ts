@@ -15,7 +15,8 @@ import { useTotalUniEarned } from '../stake/hooks'
 // import { Erc20Interface } from 'abis/types/Erc20'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import useSWR from 'swr'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 /**
  * Returns a map of the given addresses to their eventually consistent ETH balances.
@@ -24,7 +25,7 @@ export function useSTCBalances(uncheckedAddresses?: (string | undefined)[]): {
   [address: string]: CurrencyAmount<Currency> | undefined
 } {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   // const multicallContract = useMulticall2Contract()
 
   const addresses: string[] = useMemo(
@@ -213,7 +214,7 @@ export function useAllTokenBalances(): { [tokenAddress: string]: CurrencyAmount<
 // get the total owned, unclaimed, and unharvested UNI for account
 export function useAggregateUniBalance(): CurrencyAmount<Token> | undefined {
   const {account: aptosAccount, network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const account: any = aptosAccount?.address || '';
 
   const uni = chainId ? UNI[chainId] : undefined

@@ -2,7 +2,8 @@ import { useActiveWeb3React } from 'hooks/web3'
 import { Redirect, RouteComponentProps } from 'react-router-dom'
 import { WETH9_EXTENDED } from '../../constants/tokens'
 import AddLiquidity from './index'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 export function RedirectDuplicateTokenIds(
   props: RouteComponentProps<{ currencyIdA: string; currencyIdB: string; feeAmount?: string }>
@@ -14,7 +15,7 @@ export function RedirectDuplicateTokenIds(
   } = props
 
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
 
   // prevent weth + eth
   const isETHOrWETHA =

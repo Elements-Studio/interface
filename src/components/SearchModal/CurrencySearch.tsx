@@ -26,6 +26,7 @@ import { Edit } from 'react-feather'
 import useDebounce from 'hooks/useDebounce'
 import { useGetType } from 'state/networktype/hooks'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const ContentWrapper = styled(Column)`
   width: 100%;
@@ -71,7 +72,7 @@ export function CurrencySearch({
   setImportToken,
 }: CurrencySearchProps) {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const theme = useTheme()
 
   // refs for fixed size lists

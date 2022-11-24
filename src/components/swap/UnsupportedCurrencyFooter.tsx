@@ -14,6 +14,7 @@ import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
 import { useGetType } from 'state/networktype/hooks'
 import { Trans } from '@lingui/macro'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 
 const DetailsFooter = styled.div<{ show: boolean }>`
@@ -49,7 +50,7 @@ export default function UnsupportedCurrencyFooter({
   currencies: (Currency | undefined)[]
 }) {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const networkType = useGetType()
   const [showDetails, setShowDetails] = useState(false)
 

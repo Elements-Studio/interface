@@ -20,6 +20,7 @@ import { useGetType } from 'state/networktype/hooks'
 import { PaddedColumn } from './styleds'
 import { Plural, Trans } from '@lingui/macro'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const Wrapper = styled.div`
   position: relative;
@@ -53,7 +54,7 @@ export function ImportToken({ tokens, list, onBack, onDismiss, handleCurrencySel
   const theme = useTheme()
 
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const networkType = useGetType()
 
   const addToken = useAddUserToken()

@@ -18,6 +18,7 @@ import { LoadingView, SubmittedView } from '../ModalViews'
 import { formatCurrencyAmount } from 'utils/formatCurrencyAmount'
 import { Trans } from '@lingui/macro'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 
 const ContentWrapper = styled(AutoColumn)`
@@ -45,7 +46,7 @@ interface VoteModalProps {
 
 export default function DelegateModal({ isOpen, onDismiss, title }: VoteModalProps) {
   const {account: aptosAccount, network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const account: any = aptosAccount?.address || '';
 
   // state for delegate input

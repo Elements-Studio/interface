@@ -9,7 +9,8 @@ import { calculateGasMargin } from '../../utils/calculateGasMargin'
 import { useSingleCallResult } from '../multicall/hooks'
 import { isAddress } from '../../utils'
 import { useTransactionAdder } from '../transactions/hooks'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 interface UserClaimData {
   index: number
@@ -94,7 +95,7 @@ function fetchClaim(account: string): Promise<UserClaimData> {
 // null means we know it does not
 export function useUserClaimData(account: string | null | undefined): UserClaimData | null {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
 
   const [claimInfo, setClaimInfo] = useState<{ [account: string]: UserClaimData | null }>({})
 
@@ -134,7 +135,7 @@ export function useUserHasAvailableClaim(account: string | null | undefined): bo
 
 export function useUserUnclaimedAmount(account: string | null | undefined): CurrencyAmount<Token> | undefined {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const userClaimData = useUserClaimData(account)
   const canClaim = useUserHasAvailableClaim(account)
 

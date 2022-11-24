@@ -9,7 +9,8 @@ import DoubleCurrencyLogo from '../../components/DoubleLogo'
 import { useCurrency } from '../../hooks/Tokens'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { TYPE } from '../../theme'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 
 import { RowBetween } from '../../components/Row'

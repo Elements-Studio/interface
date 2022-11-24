@@ -11,7 +11,8 @@ import { useActiveWeb3React } from './web3'
 import { useEIP2612Contract } from './useContract'
 import useIsArgentWallet from './useIsArgentWallet'
 import useTransactionDeadline from './useTransactionDeadline'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 enum PermitType {
   AMOUNT = 1,
@@ -276,7 +277,7 @@ export function useERC20PermitFromTrade(
   allowedSlippage: Percent
 ) {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const swapRouterAddress = chainId ? SWAP_ROUTER_ADDRESSES[chainId] : undefined
   const amountToApprove = useMemo(
     () => (trade ? trade.maximumAmountIn(allowedSlippage) : undefined),

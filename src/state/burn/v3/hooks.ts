@@ -12,7 +12,8 @@ import { selectPercent } from './actions'
 import { unwrappedToken } from 'utils/unwrappedToken'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import { t } from '@lingui/macro'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 
 export function useBurnV3State(): AppState['burnV3'] {

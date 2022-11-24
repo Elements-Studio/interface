@@ -18,6 +18,7 @@ import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
 import getChainName from 'utils/getChainName'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 
 const Container = styled.div`
@@ -44,7 +45,7 @@ export default function TokenClaimVeStarDialog({
 }: TokenClaimVeStarDialogProps) {
   const provider = useStarcoinProvider();
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const networkType = useGetType()
   const chainName = getChainName(chainId, networkType)
   const token = STAR_NAME[chainName]

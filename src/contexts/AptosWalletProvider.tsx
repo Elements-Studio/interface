@@ -1,5 +1,6 @@
 import { HexString } from 'aptos';
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 import { createContext, FC, ReactNode, useCallback, useEffect, useState } from 'react';
 import { ActiveAptosWallet } from 'types/aptos';
 

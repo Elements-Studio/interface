@@ -32,6 +32,9 @@ export const NETWORK_URLS: {
   [SupportedChainId.APTOS_MAIN]: `https://fullnode.mainnet.aptoslabs.com/v1`,
   [SupportedChainId.APTOS_DEV]: `https://fullnode.devnet.aptoslabs.com/v1`,
   [SupportedChainId.APTOS_TEST]: `https://fullnode.testnet.aptoslabs.com/v1`,
+  [SupportedChainId.APTOS_MAIN_OTHER]: `https://fullnode.mainnet.aptoslabs.com/v1`,
+  [SupportedChainId.APTOS_DEV_OTHER]: `https://fullnode.devnet.aptoslabs.com/v1/`,
+  [SupportedChainId.APTOS_TEST_OTHER]: `https://fullnode.testnet.aptoslabs.com/v1/`
 }
 
 const SUPPORTED_CHAIN_IDS: SupportedChainId[] = [
@@ -48,6 +51,9 @@ const SUPPORTED_CHAIN_IDS: SupportedChainId[] = [
   SupportedChainId.APTOS_MAIN,
   SupportedChainId.APTOS_DEV,
   SupportedChainId.APTOS_TEST,
+  SupportedChainId.APTOS_MAIN_OTHER,
+  SupportedChainId.APTOS_DEV_OTHER,
+  SupportedChainId.APTOS_TEST_OTHER
 ]
 
 export const network = new NetworkConnector({

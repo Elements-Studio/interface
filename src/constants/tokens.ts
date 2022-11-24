@@ -92,6 +92,27 @@ export const STAR: { [chainId: number]: Token } = {
     'STAR',
     'Star'
   ),
+  [SupportedChainId.APTOS_MAIN_OTHER]: new Token(
+    SupportedChainId.APTOS_MAIN_OTHER,
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
+  [SupportedChainId.APTOS_TEST_OTHER]: new Token(
+    SupportedChainId.APTOS_TEST_OTHER,
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
+  [SupportedChainId.APTOS_DEV_OTHER]: new Token(
+    SupportedChainId.APTOS_DEV_OTHER,
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
 }
 export const STAR_NAME: { [chainId: string]: Token } = {
   ['MAINNET']: new Token(
@@ -131,6 +152,27 @@ export const STAR_NAME: { [chainId: string]: Token } = {
   ),
   ['APTOS_DEV']: new Token(
     SupportedChainId.APTOS_DEV,
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
+  ['APTOS_MAIN_OTHER']: new Token(
+    SupportedChainId.APTOS_MAIN_OTHER,
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
+  ['APTOS_TEST_OTHER']: new Token(
+    SupportedChainId.APTOS_TEST_OTHER,
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
+    9,
+    'STAR',
+    'Star'
+  ),
+  ['APTOS_DEV_OTHER']: new Token(
+    SupportedChainId.APTOS_DEV_OTHER,
     '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
     9,
     'STAR',
@@ -181,6 +223,27 @@ export const XUSDT: { [chainId: number]: Token } = {
     'USDT',
     'USDT'
   ),
+  [SupportedChainId.APTOS_MAIN_OTHER]: new Token(
+    SupportedChainId.APTOS_MAIN_OTHER,
+    '0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDT',
+    6,
+    'USDT',
+    'USDT'
+  ),
+  [SupportedChainId.APTOS_TEST_OTHER]: new Token(
+    SupportedChainId.APTOS_TEST_OTHER,
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::asset::USDT',
+    6,
+    'USDT',
+    'USDT'
+  ),
+  [SupportedChainId.APTOS_DEV_OTHER]: new Token(
+    SupportedChainId.APTOS_DEV_OTHER,
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::asset::USDT',
+    6,
+    'USDT',
+    'USDT'
+  ),
 }
 export const XUSDT_NAME: { [chainId: string]: Token } = {
   ['MAINNET']: new Token(
@@ -225,6 +288,27 @@ export const XUSDT_NAME: { [chainId: string]: Token } = {
     'USDT',
     'USDT'
   ),
+  ['APTOS_MAIN_OTHER']: new Token(
+    SupportedChainId.APTOS_MAIN_OTHER,
+    '0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDT',
+    6,
+    'USDT',
+    'USDT'
+  ),
+  ['APTOS_TEST_OTHER']: new Token(
+    SupportedChainId.APTOS_TEST_OTHER,
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::asset::USDT',
+    6,
+    'USDT',
+    'USDT'
+  ),
+  ['APTOS_DEV_OTHER']: new Token(
+    SupportedChainId.APTOS_DEV_OTHER,
+    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::asset::USDT',
+    6,
+    'USDT',
+    'USDT'
+  ),
 }
 export const APT: { [chainId: number]: Token } = {
   [SupportedChainId.APTOS_MAIN]: new Token(
@@ -243,6 +327,27 @@ export const APT: { [chainId: number]: Token } = {
   ),
   [SupportedChainId.APTOS_DEV]: new Token(
     SupportedChainId.APTOS_DEV,
+    '0x1::aptos_coin::AptosCoin',
+    8,
+    'APT',
+    'APT'
+  ),
+  [SupportedChainId.APTOS_MAIN_OTHER]: new Token(
+    SupportedChainId.APTOS_MAIN_OTHER,
+    '0x1::aptos_coin::AptosCoin',
+    8,
+    'APT',
+    'APT'
+  ),
+  [SupportedChainId.APTOS_TEST_OTHER]: new Token(
+    SupportedChainId.APTOS_TEST_OTHER,
+    '0x1::aptos_coin::AptosCoin',
+    8,
+    'APT',
+    'APT'
+  ),
+  [SupportedChainId.APTOS_DEV_OTHER]: new Token(
+    SupportedChainId.APTOS_DEV_OTHER,
     '0x1::aptos_coin::AptosCoin',
     8,
     'APT',
@@ -465,6 +570,9 @@ export const WETH9_EXTENDED: { [chainId: number]: Token } = {
   [SupportedChainId.APTOS_MAIN]: Apt.onChain(SupportedChainId.APTOS_MAIN).wrapped,
   [SupportedChainId.APTOS_TEST]: Apt.onChain(SupportedChainId.APTOS_TEST).wrapped,
   [SupportedChainId.APTOS_DEV]: Apt.onChain(SupportedChainId.APTOS_DEV).wrapped,
+  [SupportedChainId.APTOS_MAIN_OTHER]: Apt.onChain(SupportedChainId.APTOS_MAIN_OTHER).wrapped,
+  [SupportedChainId.APTOS_TEST_OTHER]: Apt.onChain(SupportedChainId.APTOS_TEST_OTHER).wrapped,
+  [SupportedChainId.APTOS_DEV_OTHER]: Apt.onChain(SupportedChainId.APTOS_DEV_OTHER).wrapped,
 }
 
 export const WETH9_EXTENDED_NAME: { [chainId: string]: Token } = {
@@ -474,6 +582,9 @@ export const WETH9_EXTENDED_NAME: { [chainId: string]: Token } = {
   ['APTOS_MAIN']: Apt.onChain(SupportedChainId.APTOS_MAIN).wrapped,
   ['APTOS_TEST']: Apt.onChain(SupportedChainId.APTOS_TEST).wrapped,
   ['APTOS_DEV']: Apt.onChain(SupportedChainId.APTOS_DEV).wrapped,
+  ['APTOS_MAIN_OTHER']: Apt.onChain(SupportedChainId.APTOS_MAIN_OTHER).wrapped,
+  ['APTOS_TEST_OTHER']: Apt.onChain(SupportedChainId.APTOS_TEST_OTHER).wrapped,
+  ['APTOS_DEV_OTHER']: Apt.onChain(SupportedChainId.APTOS_DEV_OTHER).wrapped,
 }
 // export class ExtendedEther extends Ether {
 //   public get wrapped(): Token {

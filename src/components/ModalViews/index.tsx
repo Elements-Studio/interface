@@ -12,6 +12,7 @@ import { Trans } from '@lingui/macro'
 import Circle from '../../assets/images/blue-loader.svg'
 import { ExternalLink } from '../../theme/components'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const ConfirmOrLoadingWrapper = styled.div`
   width: 100%;
@@ -53,7 +54,7 @@ export function SubmittedView({
 }) {
   const theme = useContext(ThemeContext)
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const networkType = useGetType()
 
   return (

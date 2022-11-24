@@ -13,7 +13,8 @@ import {
   removeMulticallListeners,
   toCallKey,
 } from './actions'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 export interface Result extends ReadonlyArray<any> {
   readonly [key: string]: any
@@ -54,7 +55,7 @@ function useCallsData(
   { blocksPerFetch }: ListenerOptions = { blocksPerFetch: 1 }
 ): CallResult[] {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const callResults = useAppSelector((state) => state.multicall.callResults)
   const dispatch = useAppDispatch()
 

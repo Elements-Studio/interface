@@ -17,6 +17,7 @@ import BigNumber from 'bignumber.js'
 import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 
 const Container = styled.div`
@@ -84,7 +85,7 @@ export default function FarmHarvestDialog({
 
   const starcoinProvider = useStarcoinProvider();
   const {account: aptosAccount, network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const account: any = aptosAccount?.address || '';
 
   const theme = useContext(ThemeContext)

@@ -17,7 +17,8 @@ import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
 import { LoadingRows } from './styleds'
 import Toggle from 'components/Toggle'
 import { useUserHideClosedPositions } from 'state/user/hooks'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 
 import CTACards from './CTACards'

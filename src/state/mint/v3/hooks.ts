@@ -23,7 +23,8 @@ import { Field, Bound, typeInput, typeStartPriceInput, typeLeftRangeInput, typeR
 import { tryParseTick } from './utils'
 import { usePool } from 'hooks/usePools'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 
 export function useV3MintState(): AppState['mintV3'] {

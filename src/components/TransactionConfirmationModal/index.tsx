@@ -17,6 +17,7 @@ import { useActiveWeb3React } from '../../hooks/web3'
 import useAddTokenToMetamask from 'hooks/useAddTokenToMetamask'
 import { Trans } from '@lingui/macro'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 
 const Wrapper = styled.div`
@@ -230,7 +231,7 @@ export default function TransactionConfirmationModal({
   currencyToAdd,
 }: ConfirmationModalProps) {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
 
   if (!chainId) return null
 

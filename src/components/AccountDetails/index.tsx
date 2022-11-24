@@ -23,7 +23,8 @@ import { ExternalLink as LinkIcon } from 'react-feather'
 import { ExternalLink, LinkStyledButton, TYPE } from '../../theme'
 import { Trans } from '@lingui/macro'
 import { useAppDispatch } from 'state/hooks'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const HeaderRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
@@ -229,7 +230,9 @@ export default function AccountDetails({
 }: AccountDetailsProps) {
   const { connector } = useActiveWeb3React()
   const {account: aptosAccount, network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+
+  const chainId = getChainId(aptosNetwork?.name);
+  console.log(chainId, '???')
   const account: any = aptosAccount?.address || '';
   const networkType = useGetType()
   const theme = useContext(ThemeContext)

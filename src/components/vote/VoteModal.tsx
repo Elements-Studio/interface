@@ -16,6 +16,7 @@ import { formatCurrencyAmount } from 'utils/formatCurrencyAmount'
 import { CurrencyAmount, Token } from '@uniswap/sdk-core'
 import { Trans } from '@lingui/macro'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 
 const ContentWrapper = styled(AutoColumn)`
@@ -47,7 +48,7 @@ interface VoteModalProps {
 
 export default function VoteModal({ isOpen, onDismiss, proposalId, support }: VoteModalProps) {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const networkType = useGetType()
   const {
     voteCallback,

@@ -103,7 +103,6 @@ ReactDOM.render(
             <Web3ProviderNetwork getLibrary={getLibrary}>
             <WalletProvider
               wallets={wallets}
-              autoConnect={false}
               onError={(error: Error) => {
                 console.log('Handle Error Message', error);
               }}>

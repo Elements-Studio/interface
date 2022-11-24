@@ -22,6 +22,7 @@ import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
 import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const Container = styled.div`
   border-radius: 20px;
@@ -95,7 +96,7 @@ export default function FarmHarvestDialog({
 
   const provider = useStarcoinProvider();
   const {account: aptosAccount, network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const account: any = aptosAccount?.address || '';
   const networkType = useGetType()
 

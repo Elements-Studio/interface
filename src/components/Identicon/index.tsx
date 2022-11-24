@@ -4,7 +4,8 @@ import styled from 'styled-components/macro'
 
 import { useActiveWeb3React } from '../../hooks/web3'
 import Jazzicon from '@metamask/jazzicon'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 
 const StyledIdenticonContainer = styled.div`

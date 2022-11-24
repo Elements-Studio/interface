@@ -4,13 +4,14 @@ import { FACTORY_ADDRESS_APTOS as V2_FACTORY_ADDRESS_APTOS } from '@starcoin/sta
 import { useStarcoinProvider } from './useStarcoinProvider';
 import { useActiveWeb3React } from './web3'
 import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 export default function useGetVestarCount(): number {
   const [vestarCount, setVestarCount] = useState(0);
   const starcoinProvider = useStarcoinProvider()
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const network = useGetCurrentNetwork(chainId)
   const networkType = useGetType()
 

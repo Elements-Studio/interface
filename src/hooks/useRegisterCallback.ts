@@ -2,7 +2,8 @@ import { Currency } from '@starcoin/starswap-sdk-core'
 import { useMemo } from 'react'
 import { useActiveWeb3React } from './web3'
 import { useRegisterSwapPair } from './useTokenSwapScript'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 
 export enum RegisterCallbackState {

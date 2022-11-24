@@ -31,7 +31,8 @@ import {
   updateLiquidityPools,
   updateBoostSignature,
 } from './actions'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 
 function serializeToken(token: Token): SerializedToken {
@@ -226,7 +227,7 @@ export function useRemoveUserAddedToken(): (chainId: number, address: string) =>
 
 export function useUserAddedTokens(): Token[] {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const serializedTokensMap = useAppSelector(({ user: { tokens } }) => tokens)
 
   return useMemo(() => {
@@ -288,7 +289,7 @@ export function toV2LiquidityToken([tokenA, tokenB]: [Token, Token], networkType
  */
 export function useTrackedTokenPairs(): [Token, Token][] {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const tokens = useAllTokens()
   // pinned pairs
   const pinnedPairs = useMemo(() => (chainId ? PINNED_PAIRS[chainId] ?? [] : []), [chainId])
@@ -366,7 +367,7 @@ export function useArbitrumAlphaAlert(): [boolean, (arbitrumAlphaAcknowledged: b
 export function useIsBoost(): boolean {
   let isBoost = false;
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const network = useGetCurrentNetwork(chainId)
   switch (network) {
     // case 'halley':

@@ -3,13 +3,14 @@ import axios from 'axios'
 import { useStarcoinProvider } from './useStarcoinProvider';
 import { useActiveWeb3React } from './web3'
 import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 export default function useMintVestarAmount(token: string, address: string, id: number): number {
   const [ret, setRet] = useState<number>(0)
   const starcoinProvider = useStarcoinProvider()
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const network = useGetCurrentNetwork(chainId)
   const networkType = useGetType()
 

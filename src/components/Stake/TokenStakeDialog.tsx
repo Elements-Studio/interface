@@ -30,6 +30,7 @@ import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import { useGetType, useGetV2FactoryAddress, useGetCurrentNetwork } from 'state/networktype/hooks'
 import getChainName from 'utils/getChainName'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
@@ -117,7 +118,7 @@ export default function TokenStakeDialog({
 
   const provider = useStarcoinProvider();
   const {account: aptosAccount, network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const account: any = aptosAccount?.address || '';
   const network = useGetCurrentNetwork(chainId)
   const networkType = useGetType()

@@ -11,6 +11,9 @@ export const APTOS_SUFFIXES: { [chainId: number]: string } = {
   [SupportedChainId.APTOS_MAIN]: 'mainnet',
   [SupportedChainId.APTOS_TEST]: 'testnet',
   [SupportedChainId.APTOS_DEV]: 'devnet',
+  [SupportedChainId.APTOS_MAIN_OTHER]: 'Mainnet',
+  [SupportedChainId.APTOS_TEST_OTHER]: 'Testnet',
+  [SupportedChainId.APTOS_DEV_OTHER]: 'Devnet',
 }
 
 export enum ExplorerDataType {

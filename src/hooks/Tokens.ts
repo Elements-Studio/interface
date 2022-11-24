@@ -13,12 +13,13 @@ import { TokenAddressMap, useUnsupportedTokenList } from './../state/lists/hooks
 import { useGetType } from 'state/networktype/hooks'
 import { useActiveWeb3React } from './web3'
 import { useBytes32TokenContract, useTokenContract } from './useContract'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 // reduce token map into standard address <-> Token mapping, optionally include user added tokens
 function useTokensFromMap(tokenMap: TokenAddressMap, includeUserAdded: boolean): { [address: string]: Token } {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const userAddedTokens = useUserAddedTokens()
 
   return useMemo(() => {
@@ -67,7 +68,7 @@ export function useSearchInactiveTokenLists(search: string | undefined, minResul
   const lists = useAllLists()
   const inactiveUrls = useInactiveListUrls()
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const activeTokens = useAllTokens()
   return useMemo(() => {
     if (!search || search.trim().length === 0) return []
@@ -130,7 +131,7 @@ function parseStringOrBytes32(str: string | undefined, bytes32: string | undefin
 // otherwise returns the token
 export function useToken(tokenAddress?: string): Token | undefined | null {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const tokens = useAllTokens()
 
   const address = isAddress(tokenAddress)
@@ -181,7 +182,7 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
 
 export function useCurrency(currencyId: string | undefined): Currency | null | undefined {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const networkType = useGetType()
   const isNativeCurrency = ['APT', 'STC'].includes(currencyId?.toUpperCase() || '')
   const token = useToken(isNativeCurrency ? undefined : currencyId)

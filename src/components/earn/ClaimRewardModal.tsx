@@ -12,7 +12,8 @@ import { TransactionResponse } from '@starcoin/providers'
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { t, Trans } from '@lingui/macro'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 const ContentWrapper = styled(AutoColumn)`
   width: 100%;

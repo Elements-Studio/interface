@@ -9,6 +9,7 @@ import { useGetType } from 'state/networktype/hooks'
 import { AutoColumn } from '../Column'
 import { RowBetween } from '../Row'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const InputPanel = styled.div`
   ${({ theme }) => theme.flexColumnNoWrap}
@@ -86,7 +87,7 @@ export default function AddressInputPanel({
   onChange: (value: string) => void
 }) {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const networkType = useGetType()
   const theme = useContext(ThemeContext)
 

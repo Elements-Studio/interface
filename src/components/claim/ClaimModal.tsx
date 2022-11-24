@@ -20,6 +20,7 @@ import Confetti from '../Confetti'
 import { Break, CardBGImage, CardBGImageSmaller, CardNoise, CardSection, DataCard } from '../earn/styled'
 import { Trans } from '@lingui/macro'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 import Modal from '../Modal'
 import { RowBetween } from '../Row'
@@ -54,7 +55,7 @@ export default function ClaimModal() {
   const toggleClaimModal = useToggleSelfClaimModal()
 
   const {account: aptosAccount, network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const account: any = aptosAccount?.address || '';
   const networkType = useGetType()
 

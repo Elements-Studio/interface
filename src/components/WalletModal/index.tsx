@@ -25,6 +25,7 @@ import Option from './Option'
 import PendingView from './PendingView'
 import { LightCard } from '../Card'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 import useAptosWallet from 'hooks/useAptosWallet'
 import { walletAddressEllipsis } from 'utils/utility'
 

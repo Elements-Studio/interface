@@ -7,6 +7,7 @@ import { ExternalLink, TYPE } from '../../theme'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
 import { useGetType } from 'state/networktype/hooks'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const StyledPolling = styled.div`
   position: fixed;
@@ -68,7 +69,7 @@ const Spinner = styled.div`
 
 export default function Polling() {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const networkType = useGetType()
 
   const blockNumber = useBlockNumber()

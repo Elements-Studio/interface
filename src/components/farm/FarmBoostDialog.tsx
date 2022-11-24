@@ -24,6 +24,7 @@ import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const Container = styled.div`
   width: 100%;
@@ -105,7 +106,7 @@ export default function FarmBoostDialog({
 }: FarmBoostDialogProps) {
   const provider = useStarcoinProvider()
   const {account: aptosAccount, network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const account: any = aptosAccount?.address || '';
   const networkType = useGetType()
   const theme = useContext(ThemeContext)

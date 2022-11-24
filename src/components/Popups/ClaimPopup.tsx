@@ -14,7 +14,8 @@ import {
   useToggleSelfClaimModal,
   useToggleShowClaimPopup,
 } from '../../state/application/hooks'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 import { useUserHasAvailableClaim, useUserUnclaimedAmount } from '../../state/claim/hooks'
 import { TYPE } from '../../theme'

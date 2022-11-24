@@ -25,7 +25,8 @@ import { BlueCard } from '../../components/Card'
 import { TYPE } from '../../theme'
 import { useLocation } from 'react-router'
 import { Trans } from '@lingui/macro'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 enum Fields {
   TOKEN0 = 0,
@@ -40,7 +41,7 @@ export default function PoolFinder() {
   const query = useQuery()
 
   const {account: aptosAccount, network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const account: any = aptosAccount?.address || '';
 
   const [showSearch, setShowSearch] = useState<boolean>(false)

@@ -8,6 +8,7 @@ import { useGetCurrentNetwork } from 'state/networktype/hooks'
 import axios from 'axios';
 import useSWR from "swr";
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
@@ -30,7 +31,7 @@ const TitleTotal = styled.div<{ margin?: string; maxWidth?: string }>`
 
 export default function FarmTitle() {
     const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
 
     const network = useGetCurrentNetwork(chainId)
 

@@ -20,6 +20,7 @@ import { AutoColumn } from 'components/Column'
 import { FiatValue } from './FiatValue'
 import { formatCurrencyAmount } from 'utils/formatCurrencyAmount'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const InputPanel = styled.div<{ hideInput?: boolean }>`
   ${({ theme }) => theme.flexColumnNoWrap}
@@ -191,6 +192,7 @@ export default function CurrencyInputPanel({
   const [modalOpen, setModalOpen] = useState(false)
   const {account: aptosAccount} = useWallet();
  const account: any = aptosAccount?.address || '';
+ console.log(account, currency, '???')
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
   const theme = useTheme()
 

@@ -25,7 +25,8 @@ import NetworkCard from './NetworkCard'
 import UniBalanceContent from './UniBalanceContent'
 import { ChainSelector } from 'components/NavBar/ChainSelector'
 import {useGetType} from 'state/networktype/hooks'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 
 const HeaderFrame = styled.div<{ showBackground: boolean }>`

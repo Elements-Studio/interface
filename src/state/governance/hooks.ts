@@ -15,7 +15,8 @@ import { UNI } from '../../constants/tokens'
 import { useMultipleContractMultipleData, useSingleCallResult } from '../multicall/hooks'
 import { useTransactionAdder } from '../transactions/hooks'
 import { t } from '@lingui/macro'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 
 interface ProposalDetail {
@@ -162,7 +163,7 @@ function useDataFromEventLogs():
 // get data for all past and active proposals
 export function useAllProposalData(): ProposalData[] {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const proposalCount = useLatestProposalCount()
 
   const addresses = useMemo(() => {
@@ -264,7 +265,7 @@ export function useUserDelegatee(): string {
 // gets the users current votes
 export function useUserVotes(): CurrencyAmount<Token> | undefined {
   const {account: aptosAccount, network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const account: any = aptosAccount?.address || '';
   const uniContract = useUniContract()
 
@@ -277,7 +278,7 @@ export function useUserVotes(): CurrencyAmount<Token> | undefined {
 // fetch available votes as of block (usually proposal start block)
 export function useUserVotesAsOfBlock(block: number | undefined): CurrencyAmount<Token> | undefined {
   const {account: aptosAccount, network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const account: any = aptosAccount?.address || '';
   const uniContract = useUniContract()
 
@@ -397,7 +398,7 @@ export function useLatestProposalId(address: string): string | undefined {
 
 export function useProposalThreshold(): CurrencyAmount<Token> | undefined {
   const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
 
   const govContracts = useGovernanceContracts()
   const latestGovernanceContract = govContracts ? govContracts[0] : null

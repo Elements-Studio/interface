@@ -1,7 +1,8 @@
 import { ReactNode, useMemo } from 'react'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { Trans } from '@lingui/macro'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 // SDN OFAC addresses
 const BLOCKED_ADDRESSES: string[] = [

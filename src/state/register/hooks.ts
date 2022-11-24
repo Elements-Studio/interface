@@ -7,7 +7,8 @@ import { Version } from '../../hooks/useToggledVersion'
 import { AppState } from '../index'
 import { Field, selectCurrency, switchCurrencies } from './actions'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 
 export function useRegisterState(): AppState['register'] {

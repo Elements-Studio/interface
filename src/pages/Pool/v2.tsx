@@ -25,7 +25,8 @@ import { Trans } from '@lingui/macro'
 import { ExtendedStar } from 'constants/tokens'
 import { CurrencyAmount, Token } from '@starcoin/starswap-sdk-core'
 import { useGetType } from 'state/networktype/hooks'
-import { useWallet } from '@starcoin/aptos-wallet-adapter';
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -83,7 +84,7 @@ const EmptyProposals = styled.div`
 export default function Pool() {
   const theme = useContext(ThemeContext)
   const {account: aptosAccount, network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
   const account: any = aptosAccount?.address || '';
   const networkType = useGetType()
 

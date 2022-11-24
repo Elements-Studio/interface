@@ -8,6 +8,7 @@ import styled from 'styled-components/macro'
 import { StyledInternalLink, TYPE } from '../../theme'
 import { useGetCurrentNetwork } from 'state/networktype/hooks'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
@@ -30,7 +31,7 @@ const TitleTotal = styled.div<{ margin?: string; maxWidth?: string }>`
 
 export default function StakeTitle() {
     const {network: aptosNetwork} = useWallet();
-  const chainId = Number(aptosNetwork?.chainId || 1);
+  const chainId = getChainId(aptosNetwork?.name);
     const network = useGetCurrentNetwork(chainId)
 
     const { data, error } = useSWR(
