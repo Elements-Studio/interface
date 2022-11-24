@@ -56,7 +56,7 @@ const wallets = [
   new NightlyWalletAdapter(),
   new BitkeepWalletAdapter(),
   new TokenPocketWalletAdapter(),
-  new BloctoWalletAdapter({ network: WalletAdapterNetwork.Testnet, bloctoAppId:'6d85f56e-5f2e-46cd-b5f2-5cf9695b4d46' }),
+  new BloctoWalletAdapter({ network: WalletAdapterNetwork.Mainnet, bloctoAppId:'6d85f56e-5f2e-46cd-b5f2-5cf9695b4d46' }),
   new Coin98WalletAdapter(),
   new FoxWalletAdapter()
 ];
