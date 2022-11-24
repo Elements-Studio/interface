@@ -55,7 +55,7 @@ export default function FarmTitle() {
           </Trans>
         </Container>
         <TitleTotal>
-          <Trans>Total value of the funds in this farm’s liquidity pool: {tvlUSD} USDT</Trans>
+          <Trans>Total value of the funds in this farm’s liquidity pool: {tvlUSD} USD</Trans>
         </TitleTotal>
       </>
     )
