@@ -31,6 +31,7 @@ import {
   APT,
   STAR_NAME,
   XUSDT_NAME,
+  XUSDC_NAME,
 } from './tokens'
 
 
@@ -151,9 +152,9 @@ export const COMMON_BASES_NAME: ChainNameCurrencyList = {
     ExtendedStar.onChain(SupportedChainId.ARBITRUM_ONE),
     WETH9_EXTENDED[SupportedChainId.ARBITRUM_ONE],
   ],
-  ['APTOS_MAIN']: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN), STAR_NAME['APTOS_MAIN'], XUSDT_NAME['APTOS_MAIN']],
-  ['APTOS_TEST']: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST), STAR[SupportedChainId.APTOS_TEST], XUSDT[SupportedChainId.APTOS_TEST]],
-  ['APTOS_DEV']: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV), STAR[SupportedChainId.APTOS_DEV], XUSDT[SupportedChainId.APTOS_DEV]]
+  ['APTOS_MAIN']: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN), STAR_NAME['APTOS_MAIN'], XUSDC_NAME['APTOS_MAIN']],
+  ['APTOS_TEST']: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST), STAR[SupportedChainId.APTOS_TEST], XUSDC_NAME[SupportedChainId.APTOS_TEST]],
+  ['APTOS_DEV']: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV), STAR[SupportedChainId.APTOS_DEV], XUSDC_NAME[SupportedChainId.APTOS_DEV]],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
