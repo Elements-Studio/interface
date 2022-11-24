@@ -155,8 +155,8 @@ export const COMMON_BASES_NAME: ChainNameCurrencyList = {
     WETH9_EXTENDED[SupportedChainId.ARBITRUM_ONE],
   ],
   ['APTOS_MAIN']: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN), STAR_NAME['APTOS_MAIN'], XUSDC_NAME['APTOS_MAIN']],
-  ['APTOS_TEST']: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST), STAR[SupportedChainId.APTOS_TEST], XUSDC_NAME[SupportedChainId.APTOS_TEST]],
-  ['APTOS_DEV']: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV), STAR[SupportedChainId.APTOS_DEV], XUSDC_NAME[SupportedChainId.APTOS_DEV]],
+  ['APTOS_TEST']: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST), STAR_NAME['APTOS_TEST'], XUSDC_NAME['APTOS_TEST']],
+  ['APTOS_DEV']: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV), STAR_NAME['APTOS_DEV'], XUSDC_NAME['APTOS_DEV']],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
