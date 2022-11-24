@@ -19,6 +19,8 @@ import useTransactionDeadline from './useTransactionDeadline'
 import useENS from './useENS'
 import { Version } from './useToggledVersion'
 import { useSwapExactTokenForToken, useSwapTokenForExactToken } from './useTokenSwapScript'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 export enum SwapCallbackState {
   INVALID,
@@ -235,8 +237,9 @@ export function useSwapCallback(
   recipientAddressOrName: string | null, // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
   signatureData: SignatureData | undefined | null
 ): { state: SwapCallbackState; callback: null | (() => Promise<string>); error: string | null } {
-  const { account, chainId, library } = useActiveWeb3React()
-
+  const { account: aptosAccount, network: aptosNetwork, connected } = useWallet();
+  const account: any = aptosAccount?.address || '';
+  const chainId = getChainId(aptosNetwork?.name);
   const { address: recipientAddress } = useENS(recipientAddressOrName)
   const recipient = recipientAddressOrName === null ? account : recipientAddress
   const path = trade && (trade instanceof V2Trade ? trade.route.path : trade.route.tokenPath) || []
@@ -245,7 +248,7 @@ export function useSwapCallback(
   const handleSwapTokenForExactToken = useSwapTokenForExactToken(account ?? undefined)
 
   return useMemo(() => {
-    if (!trade || !library || !account || !chainId) {
+    if (!trade || !connected || !account || !chainId) {
       return { state: SwapCallbackState.INVALID, callback: null, error: 'Missing dependencies' }
     }
     if (!recipient) {
@@ -288,7 +291,7 @@ export function useSwapCallback(
     // }, [trade, library, account, chainId, recipient, recipientAddressOrName, swapCalls, addTransaction])
   }, [
     trade,
-    library,
+    connected,
     account,
     chainId,
     recipient,

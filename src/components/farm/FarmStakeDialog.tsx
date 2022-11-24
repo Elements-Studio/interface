@@ -132,7 +132,7 @@ export default function FarmStakeDialog({
     try {
       const MODULE = 'TokenSwapFarmScript'
       const FUNC = 'stake'
-      let transactionHash
+      let transactionHash: string
       if (networkType === 'APTOS') {
         const stakeAmount = new BigNumber(stakeNumber).times('1000000000');
         const payload: Types.TransactionPayload = {
@@ -141,7 +141,8 @@ export default function FarmStakeDialog({
           type_arguments: [tokenX, tokenY],
           arguments: [new BigNumber(stakeAmount).toNumber()]
         };
-        transactionHash = await signAndSubmitTransaction(payload)
+        const transactionRes = await signAndSubmitTransaction(payload);
+        transactionHash = transactionRes?.hash || ''
       } else {
         const functionId = `${ADDRESS}::${MODULE}::${FUNC}`;
         const strTypeArgs = [tokenX, tokenY];
