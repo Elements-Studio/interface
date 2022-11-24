@@ -52,7 +52,7 @@ export default function MyStakeListTitle() {
         </Container>
         {/*
         <TitleTotal>
-          <Trans>Total Value Locked in USDT</Trans>: {tvlUSD}
+          <Trans>Total Value Locked in USD</Trans>: {tvlUSD}
         </TitleTotal>
         */}
       </>

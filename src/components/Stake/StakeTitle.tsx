@@ -51,7 +51,7 @@ export default function StakeTitle() {
           </Trans>
         </Container>
         <TitleTotal>
-          <Trans>Total Value Locked in USDT</Trans>: {tvlUSD}
+          <Trans>Total Value Locked in USD</Trans>: {tvlUSD}
         </TitleTotal>
       </>
     )

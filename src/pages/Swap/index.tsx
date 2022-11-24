@@ -575,11 +575,11 @@ export default function Swap({ history }: RouteComponentProps) {
               <Row style={{ justifyContent: 'right' }} mt={-10}>
               {currencies.INPUT && currencies.OUTPUT ? (
               <RowFixed>
-                <StyledTvlContainer title={`Total value of the funds in this liquidity pool: ${poolTvl} USDT`}>
+                <StyledTvlContainer title={`Total value of the funds in this liquidity pool: ${poolTvl} USD`}>
                   <div style={{ alignItems: 'center', display: 'flex', width: 'fit-content' }}>
                     <Text fontWeight={500} fontSize={12} color={theme.text1}>
                       <Trans>Total value of the funds in this liquidity pool: </Trans>
-                      <span style={{fontSize: '14px'}}> {poolTvl} USDT</span>
+                      <span style={{fontSize: '14px'}}> {poolTvl} USD</span>
                     </Text>
                   </div>
                 </StyledTvlContainer>

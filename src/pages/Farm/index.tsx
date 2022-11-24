@@ -112,7 +112,7 @@ export default function Farm({ history }: RouteComponentProps) {
               <FarmRow style={{ marginTop: '10px' }}>
                 <RowFixed>
                   <TYPE.black fontWeight={400} fontSize={14}>
-                    <Trans>TVL in USDT</Trans>
+                    <Trans>TVL in USD</Trans>
                   </TYPE.black>
                 </RowFixed>
                 <RowFixed>
