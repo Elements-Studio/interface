@@ -39,6 +39,8 @@ import { SwitchLocaleLink } from 'components/SwitchLocaleLink'
 import { t, Trans } from '@lingui/macro'
 import { useAddLiquidity } from 'hooks/useTokenSwapScript'
 import { useGetLiquidityPools } from 'hooks/useTokenSwapRouter'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 
@@ -48,7 +50,10 @@ export default function AddLiquidity({
   },
   history,
 }: RouteComponentProps<{ currencyIdA?: string; currencyIdB?: string }>) {
-  const { account, chainId, library } = useActiveWeb3React()
+  // const { account, chainId, library } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork, connected} = useWallet();
+  const account: any = aptosAccount?.address || '';
+  const chainId = getChainId(aptosNetwork?.name);
   const theme = useContext(ThemeContext)
 
   const currencyA = useCurrency(currencyIdA)
@@ -133,7 +138,7 @@ export default function AddLiquidity({
 
   async function onAdd() {
     // if (!chainId || !library || !account || !router) return
-    if (!chainId || !library || !account) return
+    if (!chainId || !connected || !account) return
 
     const { [Field.CURRENCY_A]: parsedAmountA, [Field.CURRENCY_B]: parsedAmountB } = parsedAmounts
     // if (!parsedAmountA || !parsedAmountB || !currencyA || !currencyB || !deadline) {
