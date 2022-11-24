@@ -17,7 +17,7 @@ import BigNumber from 'bignumber.js';
 import { arrayify, hexlify } from '@ethersproject/bytes';
 import { utils, bcs } from '@starcoin/starcoin';
 import CircularProgress from '@mui/material/CircularProgress'
-import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
+import { TxnBuilderTypes, BCS, Types } from '@starcoin/aptos';
 import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
 import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
@@ -95,7 +95,7 @@ export default function FarmStakeDialog({
 }: FarmStakeDialogProps) {
 
   const provider = useStarcoinProvider();
-  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const {account: aptosAccount, network: aptosNetwork, signAndSubmitTransaction} = useWallet();
   const chainId = getChainId(aptosNetwork?.name);
   const account: any = aptosAccount?.address || '';
   const networkType = useGetType()
@@ -132,24 +132,16 @@ export default function FarmStakeDialog({
     try {
       const MODULE = 'TokenSwapFarmScript'
       const FUNC = 'stake'
-      let payloadHex: string
+      let transactionHash
       if (networkType === 'APTOS') {
-        const tyArgs = [
-          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(tokenX)),
-          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(tokenY)),
-        ]
         const stakeAmount = new BigNumber(stakeNumber).times('1000000000');
-
-        const args = [BCS.bcsSerializeU128(new BigNumber(stakeAmount).toNumber())]
-        const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
-          TxnBuilderTypes.EntryFunction.natural(
-            `${ ADDRESS }::${MODULE}`,
-            FUNC,
-            tyArgs,
-            args,
-          ),
-        );
-        payloadHex = hexlify(BCS.bcsToBytes(entryFunctionPayload))
+        const payload: Types.TransactionPayload = {
+          type: 'entry_function_payload',
+          function: `${ ADDRESS }::${MODULE}::${FUNC}`,
+          type_arguments: [tokenX, tokenY],
+          arguments: [new BigNumber(stakeAmount).toNumber()]
+        };
+        transactionHash = await signAndSubmitTransaction(payload)
       } else {
         const functionId = `${ADDRESS}::${MODULE}::${FUNC}`;
         const strTypeArgs = [tokenX, tokenY];
@@ -171,15 +163,15 @@ export default function FarmStakeDialog({
           structTypeTags,
           args,
         );
-        payloadHex = (function () {
+        const payloadHex = (function () {
           const se = new bcs.BcsSerializer();
           scriptFunction.serialize(se);
           return hexlify(se.getBytes());
         })();
+        transactionHash = await provider.getSigner().sendUncheckedTransaction({
+          data: payloadHex,
+        })
       }
-      const transactionHash = await provider.getSigner().sendUncheckedTransaction({
-        data: payloadHex,
-      })
 
       setLoading(true);
       let id: NodeJS.Timeout
