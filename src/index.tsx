@@ -21,13 +21,8 @@ import UserUpdater from './state/user/updater'
 import ThemeProvider, { ThemedGlobalStyle } from './theme'
 import RadialGradientByChainUpdater from './theme/RadialGradientByChainUpdater'
 import getLibrary from './utils/getLibrary'
-import {
-  WalletProvider,
-  StarcoinWalletAdapter
-} from 'starswap-wallet-adapter';
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
-const wallets = [new StarcoinWalletAdapter()];
 
 const GOOGLE_ANALYTICS_ID: string | undefined = process.env.REACT_APP_GOOGLE_ANALYTICS_ID
 if (typeof GOOGLE_ANALYTICS_ID === 'string') {
@@ -69,12 +64,6 @@ ReactDOM.render(
         <LanguageProvider>
           <Web3ReactProvider getLibrary={getLibrary}>
             <Web3ProviderNetwork getLibrary={getLibrary}>
-            <WalletProvider
-              wallets={wallets}
-              autoConnect={false} /** allow auto wallet connection or not **/
-              onError={(error: Error) => {
-                console.log('Handle Error Message', error);
-              }}>
               <Blocklist>
                 <Updaters />
                 <ThemeProvider>
@@ -82,7 +71,6 @@ ReactDOM.render(
                   <App />
                 </ThemeProvider>
               </Blocklist>
-            </WalletProvider>
             </Web3ProviderNetwork>
           </Web3ReactProvider>
         </LanguageProvider>
