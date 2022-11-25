@@ -12,7 +12,7 @@
   "tokens": [
     {
       "chainId": 1,
-      "address": "0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR",
+      "address": "0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9::STAR::STAR",
       "name": "STAR",
       "symbol": "STAR",
       "decimals": 9,
@@ -28,7 +28,7 @@
     },
     {
       "chainId": 2,
-      "address": "0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR",
+      "address": "0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9::STAR::STAR",
       "name": "STAR",
       "symbol": "STAR",
       "decimals": 9,
@@ -36,7 +36,7 @@
     },
     {
       "chainId": 2,
-      "address": "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDC",
+      "address": "0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9::asset::USDC",
       "name": "Layer Zero • USD Coin",
       "symbol": "USDC",
       "decimals": 6,
@@ -44,7 +44,7 @@
     },
     {
       "chainId": 34,
-      "address": "0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR",
+      "address": "0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9::STAR::STAR",
       "name": "STAR",
       "symbol": "STAR",
       "decimals": 9,
@@ -52,7 +52,7 @@
     },
     {
       "chainId": 34,
-      "address": "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDC",
+      "address": "0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9::asset::USDC",
       "name": "Layer Zero • USD Coin",
       "symbol": "USDC",
       "decimals": 6,

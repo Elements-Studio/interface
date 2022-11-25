@@ -7,6 +7,7 @@ import {
   STAR,
   FAI,
   XUSDT,
+  XUSDC,
   XETH,
   WEN,
   SHARE,
@@ -30,8 +31,6 @@ import {
   WETH9_EXTENDED,
   APT,
   STAR_NAME,
-  FAI_NAME,
-  WEN_NAME,
   XUSDT_NAME,
   XUSDC_NAME,
 } from './tokens'
@@ -136,14 +135,14 @@ export const COMMON_BASES: ChainCurrencyList = {
     ExtendedStar.onChain(SupportedChainId.ARBITRUM_ONE),
     WETH9_EXTENDED[SupportedChainId.ARBITRUM_ONE],
   ],
-  [SupportedChainId.APTOS_MAIN]: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN), STAR[SupportedChainId.APTOS_MAIN], XUSDT[SupportedChainId.APTOS_MAIN]],
-  [SupportedChainId.APTOS_TEST]: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST), STAR[SupportedChainId.APTOS_TEST], XUSDT[SupportedChainId.APTOS_TEST]],
-  [SupportedChainId.APTOS_DEV]: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV), STAR[SupportedChainId.APTOS_DEV], XUSDT[SupportedChainId.APTOS_DEV]]
+  [SupportedChainId.APTOS_MAIN]: [ExtendedApt.onChain(SupportedChainId.APTOS_MAIN), STAR[SupportedChainId.APTOS_MAIN], XUSDC[SupportedChainId.APTOS_MAIN]],
+  [SupportedChainId.APTOS_TEST]: [ExtendedApt.onChain(SupportedChainId.APTOS_TEST), STAR[SupportedChainId.APTOS_TEST], XUSDC[SupportedChainId.APTOS_TEST]],
+  [SupportedChainId.APTOS_DEV]: [ExtendedApt.onChain(SupportedChainId.APTOS_DEV), STAR[SupportedChainId.APTOS_DEV], XUSDC[SupportedChainId.APTOS_DEV]]
 }
 
 export const COMMON_BASES_NAME: ChainNameCurrencyList = {
   // ['MAINNET']: [ExtendedStar.onChain(1), DAI, USDC, USDT, WBTC, WETH9_EXTENDED[1]],
-  ['MAINNET']: [ExtendedStar.onChain(SupportedChainId.MAINNET), STAR_NAME['MAINNET'], FAI_NAME['MAINNET'], WEN_NAME['MAINNET'], XUSDT_NAME['MAINNET']],
+  ['MAINNET']: [ExtendedStar.onChain(SupportedChainId.MAINNET), STAR_NAME['MAINNET'], FAI[SupportedChainId.MAINNET], WEN[SupportedChainId.MAINNET], XUSDT_NAME['MAINNET']],
   ['BARNARD']: [ExtendedStar.onChain(SupportedChainId.BARNARD), STAR[SupportedChainId.BARNARD], FAI[SupportedChainId.BARNARD], WEN[SupportedChainId.BARNARD], SHARE[SupportedChainId.BARNARD], XUSDT[SupportedChainId.BARNARD], XETH[SupportedChainId.BARNARD]],
   ['PROXIMA']: [ExtendedStar.onChain(SupportedChainId.PROXIMA), STAR[SupportedChainId.PROXIMA], FAI[SupportedChainId.PROXIMA], WEN[SupportedChainId.PROXIMA], SHARE[SupportedChainId.PROXIMA], XUSDT[SupportedChainId.PROXIMA], XETH[SupportedChainId.PROXIMA]],
   ['ROPSTEN']: [ExtendedStar.onChain(3), WETH9_EXTENDED[3]],
