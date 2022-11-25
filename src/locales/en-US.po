@@ -1885,14 +1885,15 @@ msgstr "Switch to Ethereum"
 msgid "TBD Earned"
 msgstr "TBD Earned"
 
-#: 
-#~ msgid "TVL in USD"
-#~ msgstr "TVL in USD"
-
 #: src/pages/Farm/index.tsx
 #: src/pages/Stake/index.tsx
-msgid "TVL in USDT"
-msgstr "TVL in USDT"
+msgid "TVL in USD"
+msgstr "TVL in USD"
+
+#: 
+#: 
+#~ msgid "TVL in USDT"
+#~ msgstr "TVL in USDT"
 
 #: src/components/Menu/index.tsx
 msgid "Telegram"
@@ -2074,8 +2075,8 @@ msgid "Total Supply"
 msgstr "Total Supply"
 
 #: 
-#~ msgid "Total Value Locked in USDT"
-#~ msgstr "Total Value Locked in USDT"
+#~ msgid "Total Value Locked in USD"
+#~ msgstr "Total Value Locked in USD"
 
 #: 
 #~ msgid "Total Value Locked is {tvlUSD} USDT"
@@ -2090,8 +2091,8 @@ msgid "Total deposits"
 msgstr "Total deposits"
 
 #: 
-#~ msgid "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USDT"
-#~ msgstr "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USDT"
+#~ msgid "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USD"
+#~ msgstr "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USD"
 
 #: src/pages/Swap/index.tsx
 msgid "Total value of the funds in this liquidity pool:"

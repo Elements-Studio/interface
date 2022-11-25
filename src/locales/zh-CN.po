@@ -1835,8 +1835,13 @@ msgstr "TBD收益"
 
 #: src/pages/Farm/index.tsx
 #: src/pages/Stake/index.tsx
-msgid "TVL in USDT"
-msgstr "锁仓金额(USDT)"
+msgid "TVL in USD"
+msgstr ""
+
+#: 
+#: 
+#~ msgid "TVL in USDT"
+#~ msgstr "锁仓金额(USDT)"
 
 #: src/components/Menu/index.tsx
 msgid "Telegram"
@@ -2010,8 +2015,8 @@ msgid "Total Supply"
 msgstr "总供应量"
 
 #: 
-#~ msgid "Total Value Locked in USDT"
-#~ msgstr "锁仓总额(USDT)"
+#~ msgid "Total Value Locked in USD"
+#~ msgstr "锁仓总额(USD)"
 
 #: src/components/earn/PoolCard.tsx
 msgid "Total deposited"
@@ -2022,8 +2027,8 @@ msgid "Total deposits"
 msgstr "存入总额"
 
 #: 
-#~ msgid "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USDT"
-#~ msgstr "该农场流动资金池中锁仓总额：{tvlUSD} USDT"
+#~ msgid "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USD"
+#~ msgstr "该农场流动资金池中锁仓总额：{tvlUSD} USD"
 
 #: src/pages/Swap/index.tsx
 msgid "Total value of the funds in this liquidity pool:"
