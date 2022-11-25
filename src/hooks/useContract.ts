@@ -124,7 +124,10 @@ export function useMerkleDistributorContract() {
 }
 
 export function useGovernanceContracts(): (Contract | null)[] {
-  const { library, account, chainId } = useActiveWeb3React()
+  const { library } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
 
   return useMemo(() => {
     if (!library || !chainId) {

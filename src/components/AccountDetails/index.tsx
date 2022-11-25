@@ -232,7 +232,6 @@ export default function AccountDetails({
   const {account: aptosAccount, network: aptosNetwork} = useWallet();
 
   const chainId = getChainId(aptosNetwork?.name);
-  console.log(chainId, '???')
   const account: any = aptosAccount?.address || '';
   const networkType = useGetType()
   const theme = useContext(ThemeContext)

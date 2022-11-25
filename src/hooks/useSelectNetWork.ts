@@ -5,12 +5,17 @@ import { useWeb3React } from '@starcoin/starswap-web3-core'
 // import { switchChain } from 'utils/switchChain'
 import { useGetType, useSetType } from 'state/networktype/hooks'
 import { switchToNetwork } from 'utils/switchToNetwork'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 export default function useSelectChain() {
   const dispatch = useAppDispatch()
   const networkType = useGetType();
   const setType = useSetType();
-  const { chainId, library } = useActiveWeb3React()
+  const { library } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   return useCallback(
     async (targetChain: string) => {
       if (!networkType) { return }

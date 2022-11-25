@@ -83,7 +83,10 @@ function useDataFromEventLogs():
     details: { target: string; functionSig: string; callData: string }[]
   }[][]
   | undefined {
-  const { library, chainId } = useActiveWeb3React()
+  const { library } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   const [formattedEvents, setFormattedEvents] =
     useState<{ description: string; details: { target: string; functionSig: string; callData: string }[] }[][]>()
 
@@ -290,7 +293,10 @@ export function useUserVotesAsOfBlock(block: number | undefined): CurrencyAmount
 }
 
 export function useDelegateCallback(): (delegatee: string | undefined) => undefined | Promise<string> {
-  const { account, chainId, library } = useActiveWeb3React()
+  const { library } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   const addTransaction = useTransactionAdder()
 
   const uniContract = useUniContract()

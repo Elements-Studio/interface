@@ -151,7 +151,9 @@ export function useClaimCallback(account: string | null | undefined): {
   claimCallback: () => Promise<string>
 } {
   // get claim data for this account
-  const { library, chainId } = useActiveWeb3React()
+  const { library } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
   const claimData = useUserClaimData(account)
 
   // used for popup summary

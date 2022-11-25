@@ -35,6 +35,8 @@ import { AddRemoveTabs } from 'components/NavigationTabs'
 import RangeBadge from 'components/Badge/RangeBadge'
 import Toggle from 'components/Toggle'
 import { t, Trans } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 export const UINT128MAX = BigNumber.from(2).pow(128).sub(1)
 
@@ -64,7 +66,10 @@ export default function RemoveLiquidityV3({
 function Remove({ tokenId }: { tokenId: BigNumber }) {
   const { position } = useV3PositionFromTokenId(tokenId)
   const theme = useTheme()
-  const { account, chainId, library } = useActiveWeb3React()
+  const { library } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
 
   // flag for receiving WETH
   const [receiveWETH, setReceiveWETH] = useState(false)
