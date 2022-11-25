@@ -14,9 +14,11 @@ import { useTotalUniEarned } from '../stake/hooks'
 // import ERC20ABI from 'abis/erc20.json'
 // import { Erc20Interface } from 'abis/types/Erc20'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
+import { useAptosProvider } from 'hooks/useAptosProvider'
 import useSWR from 'swr'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
 import getChainId from 'utils/getChainId';
+import { MaybeHexString } from '@starcoin/aptos';
 
 /**
  * Returns a map of the given addresses to their eventually consistent ETH balances.
@@ -24,7 +26,7 @@ import getChainId from 'utils/getChainId';
 export function useSTCBalances(uncheckedAddresses?: (string | undefined)[]): {
   [address: string]: CurrencyAmount<Currency> | undefined
 } {
-  const {network: aptosNetwork} = useWallet();
+  const { network: aptosNetwork } = useWallet();
   const chainId = getChainId(aptosNetwork?.name);
   // const multicallContract = useMulticall2Contract()
 
@@ -106,16 +108,17 @@ export function useTokenBalancesWithLoadingIndicator(
   // )
   const networkType = useGetType()
   const provider = useStarcoinProvider()
+  const client = useAptosProvider()
   const { data: balances, isValidating } = useSWR(
     address && validatedTokens.length
-      ? [provider, 'getBalance', address, ...validatedTokens.map((token) => token.address)]
+      ? [networkType, 'getBalance', address, ...validatedTokens.map((token) => token.address)]
       : null,
     () => Promise.all(validatedTokens.map((token) => {
       if (networkType === 'APTOS') {
         return new Promise(async (resolve, reject) => {
           try {
-            const response = await provider!.send('getAccountResource', [address, `0x1::coin::CoinStore<${ token.address }>`])
-            resolve(response.data.coin.value)
+            const response = await client.getAccountResource(address as MaybeHexString, `0x1::coin::CoinStore<${ token.address }>`);
+            resolve(((response.data) as any).coin.value)
           } catch (error: any) {
             console.error(error)
             const tryParseJSONObject = (jsonString: any) => {
@@ -203,8 +206,8 @@ export function useCurrencyBalance(account?: string, currency?: Currency): Curre
 
 // mimics useAllBalances
 export function useAllTokenBalances(): { [tokenAddress: string]: CurrencyAmount<Token> | undefined } {
-  const {account: aptosAccount} = useWallet();
- const account: any = aptosAccount?.address || '';
+  const { account: aptosAccount } = useWallet();
+  const account: any = aptosAccount?.address || '';
   const allTokens = useAllTokens()
   const allTokensArray = useMemo(() => Object.values(allTokens ?? {}), [allTokens])
   const balances = useTokenBalances(account ?? undefined, allTokensArray)
@@ -213,7 +216,7 @@ export function useAllTokenBalances(): { [tokenAddress: string]: CurrencyAmount<
 
 // get the total owned, unclaimed, and unharvested UNI for account
 export function useAggregateUniBalance(): CurrencyAmount<Token> | undefined {
-  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const { account: aptosAccount, network: aptosNetwork } = useWallet();
   const chainId = getChainId(aptosNetwork?.name);
   const account: any = aptosAccount?.address || '';
 
