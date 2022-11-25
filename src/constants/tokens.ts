@@ -73,21 +73,21 @@ export const STAR: { [chainId: number]: Token } = {
   ),
   [SupportedChainId.APTOS_MAIN]: new Token(
     SupportedChainId.APTOS_MAIN,
-    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
+    '0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9::STAR::STAR',
     9,
     'STAR',
     'Star'
   ),
   [SupportedChainId.APTOS_TEST]: new Token(
     SupportedChainId.APTOS_TEST,
-    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
+    '0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9::STAR::STAR',
     9,
     'STAR',
     'Star'
   ),
   [SupportedChainId.APTOS_DEV]: new Token(
     SupportedChainId.APTOS_DEV,
-    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
+    '0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9::STAR::STAR',
     9,
     'STAR',
     'Star'
@@ -117,21 +117,21 @@ export const STAR_NAME: { [chainId: string]: Token } = {
   ),
   ['APTOS_MAIN']: new Token(
     SupportedChainId.APTOS_MAIN,
-    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
+    '0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9::STAR::STAR',
     9,
     'STAR',
     'Star'
   ),
   ['APTOS_TEST']: new Token(
     SupportedChainId.APTOS_TEST,
-    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
+    '0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9::STAR::STAR',
     9,
     'STAR',
     'Star'
   ),
   ['APTOS_DEV']: new Token(
     SupportedChainId.APTOS_DEV,
-    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::STAR::STAR',
+    '0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9::STAR::STAR',
     9,
     'STAR',
     'Star'
@@ -160,27 +160,6 @@ export const XUSDT: { [chainId: number]: Token } = {
     'XUSDT',
     'XUSDT'
   ),
-  [SupportedChainId.APTOS_MAIN]: new Token(
-    SupportedChainId.APTOS_MAIN,
-    '0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDT',
-    6,
-    'USDT',
-    'USDT'
-  ),
-  [SupportedChainId.APTOS_TEST]: new Token(
-    SupportedChainId.APTOS_TEST,
-    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::asset::USDT',
-    6,
-    'USDT',
-    'USDT'
-  ),
-  [SupportedChainId.APTOS_DEV]: new Token(
-    SupportedChainId.APTOS_DEV,
-    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::asset::USDT',
-    6,
-    'USDT',
-    'USDT'
-  ),
 }
 export const XUSDT_NAME: { [chainId: string]: Token } = {
   ['MAINNET']: new Token(
@@ -203,27 +182,6 @@ export const XUSDT_NAME: { [chainId: string]: Token } = {
     6,
     'XUSDT',
     'XUSDT'
-  ),
-  ['APTOS_MAIN']: new Token(
-    SupportedChainId.APTOS_MAIN,
-    '0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDT',
-    6,
-    'USDT',
-    'USDT'
-  ),
-  ['APTOS_TEST']: new Token(
-    SupportedChainId.APTOS_TEST,
-    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::asset::USDT',
-    6,
-    'USDT',
-    'USDT'
-  ),
-  ['APTOS_DEV']: new Token(
-    SupportedChainId.APTOS_DEV,
-    '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca::asset::USDT',
-    6,
-    'USDT',
-    'USDT'
   ),
 }
 export const APT: { [chainId: number]: Token } = {
@@ -282,14 +240,14 @@ export const XUSDC: { [chainId: number]: Token } = {
   ),
   [SupportedChainId.APTOS_TEST]: new Token(
     SupportedChainId.APTOS_TEST,
-    '0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDC',
+    '0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9::asset::USDC',
     6,
     'USDC',
     'Layer Zero • USD Coin'
   ),
   [SupportedChainId.APTOS_DEV]: new Token(
     SupportedChainId.APTOS_DEV,
-    '0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDC',
+    '0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9::asset::USDC',
     6,
     'USDC',
     'Layer Zero • USD Coin'
@@ -305,14 +263,14 @@ export const XUSDC_NAME: { [chainId: string]: Token } = {
   ),
   ['APTOS_TEST']: new Token(
     SupportedChainId.APTOS_TEST,
-    '0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDC',
+    '0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9::asset::USDC',
     6,
     'USDC',
     'Layer Zero • USD Coin'
   ),
   ['APTOS_DEV']: new Token(
     SupportedChainId.APTOS_DEV,
-    '0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDC',
+    '0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9::asset::USDC',
     6,
     'USDC',
     'Layer Zero • USD Coin'
