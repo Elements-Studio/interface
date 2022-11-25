@@ -49,6 +49,29 @@ export const FAI: { [chainId: number]: Token } = {
     'FAI'
   ),
 }
+export const FAI_NAME: { [chainId: string]: Token } = {
+  ['MAINNET']: new Token(
+    SupportedChainId.MAINNET,
+    '0x4ffcc98f43ce74668264a0cf6eebe42b::FAI::FAI',
+    9,
+    'FAI',
+    'FAI'
+  ),
+  ['BARNARD']: new Token(
+    SupportedChainId.BARNARD,
+    '0xfe125d419811297dfab03c61efec0bc9::FAI::FAI',
+    9,
+    'FAI',
+    'FAI'
+  ),
+  ['PROXIMA']: new Token(
+    SupportedChainId.PROXIMA,
+    '0xfe125d419811297dfab03c61efec0bc9::FAI::FAI',
+    9,
+    'FAI',
+    'FAI'
+  ),
+}
 export const STAR: { [chainId: number]: Token } = {
   [SupportedChainId.MAINNET]: new Token(
     SupportedChainId.MAINNET,
@@ -272,6 +295,52 @@ export const XETH: { [chainId: number]: Token } = {
     'XETH'
   ),
 }
+export const XUSDC: { [chainId: number]: Token } = {
+  [SupportedChainId.APTOS_MAIN]: new Token(
+    SupportedChainId.APTOS_MAIN,
+    '0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDC',
+    6,
+    'USDC',
+    'Layer Zero • USD Coin'
+  ),
+  [SupportedChainId.APTOS_TEST]: new Token(
+    SupportedChainId.APTOS_TEST,
+    '0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDC',
+    6,
+    'USDC',
+    'Layer Zero • USD Coin'
+  ),
+  [SupportedChainId.APTOS_DEV]: new Token(
+    SupportedChainId.APTOS_DEV,
+    '0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDC',
+    6,
+    'USDC',
+    'Layer Zero • USD Coin'
+  ),
+}
+export const XUSDC_NAME: { [chainId: string]: Token } = {
+  ['APTOS_MAIN']: new Token(
+    SupportedChainId.APTOS_MAIN,
+    '0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDC',
+    6,
+    'USDC',
+    'Layer Zero • USD Coin'
+  ),
+  ['APTOS_TEST']: new Token(
+    SupportedChainId.APTOS_TEST,
+    '0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDC',
+    6,
+    'USDC',
+    'Layer Zero • USD Coin'
+  ),
+  ['APTOS_DEV']: new Token(
+    SupportedChainId.APTOS_DEV,
+    '0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDC',
+    6,
+    'USDC',
+    'Layer Zero • USD Coin'
+  ),
+}
 // export const BX_USDT: { [chainId: number]: Token } = {
 //   [SupportedChainId.BARNARD]: new Token(
 //     SupportedChainId.BARNARD,
@@ -306,6 +375,30 @@ export const WEN: { [chainId: number]: Token } = {
     'Wen'
   ),
   [SupportedChainId.PROXIMA]: new Token(
+    SupportedChainId.PROXIMA,
+    '0x88e2677b89841cd4ee7c15535798e1c8::WEN::WEN',
+    9,
+    'WEN',
+    'Wen'
+  ),
+}
+
+export const WEN_NAME: { [chainId: string]: Token } = {
+  ['MAINNET']: new Token(
+    SupportedChainId.MAINNET,
+    '0xbf60b00855c92fe725296a436101c8c6::WEN::WEN',
+    9,
+    'WEN',
+    'Wen'
+  ),
+  ['BARNARD']: new Token(
+    SupportedChainId.BARNARD,
+    '0x88e2677b89841cd4ee7c15535798e1c8::WEN::WEN',
+    9,
+    'WEN',
+    'Wen'
+  ),
+  ['PROXIMA']: new Token(
     SupportedChainId.PROXIMA,
     '0x88e2677b89841cd4ee7c15535798e1c8::WEN::WEN',
     9,

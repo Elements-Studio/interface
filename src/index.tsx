@@ -30,7 +30,7 @@ import {
   FewchaWalletAdapter,
   PontemWalletAdapter,
   SpikaWalletAdapter,
-  FletchWalletAdapter,
+  // FletchWalletAdapter,
   AptosSnapAdapter,
   NightlyWalletAdapter,
   BitkeepWalletAdapter,
@@ -51,12 +51,12 @@ const wallets = [
   new FewchaWalletAdapter(),
   new PontemWalletAdapter(),
   new SpikaWalletAdapter(),
-  new FletchWalletAdapter(),
+  // new FletchWalletAdapter(),
   new AptosSnapAdapter(),
   new NightlyWalletAdapter(),
   new BitkeepWalletAdapter(),
   new TokenPocketWalletAdapter(),
-  new BloctoWalletAdapter({ network: WalletAdapterNetwork.Testnet, bloctoAppId:'6d85f56e-5f2e-46cd-b5f2-5cf9695b4d46' }),
+  new BloctoWalletAdapter({ network: WalletAdapterNetwork.Mainnet, bloctoAppId:'6d85f56e-5f2e-46cd-b5f2-5cf9695b4d46' }),
   new Coin98WalletAdapter(),
   new FoxWalletAdapter()
 ];

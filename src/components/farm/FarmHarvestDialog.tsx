@@ -17,7 +17,7 @@ import BigNumber from 'bignumber.js'
 import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
 import CircularProgress from '@mui/material/CircularProgress'
-import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
+import { Types } from '@starcoin/aptos';
 import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
 import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
@@ -127,29 +127,24 @@ export default function FarmHarvestDialog({
   }, [boostFactor])
 
   const ADDRESS = useGetV2FactoryAddress()
-
+  const { signAndSubmitTransaction } = useWallet();
   async function onClickHarvestConfirm() {
     try {
       const MODULE = 'TokenSwapFarmScript'
       const FUNC = 'harvest'
-      let payloadHex: string
+      let transactionHash: string
       if (networkType === 'APTOS') {
-        const tyArgs = [
-          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(tokenX)),
-          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(tokenY)),
-        ]
+        const tyArgs = [tokenX, tokenY]
         const harvestAmount = new BigNumber(harvestNumber).times('1000000000'); // harvestAmount * 1e9
-
-        const args = [BCS.bcsSerializeU128(new BigNumber(harvestAmount).toNumber())]
-        const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
-          TxnBuilderTypes.EntryFunction.natural(
-            `${ ADDRESS }::${MODULE}`,
-            FUNC,
-            tyArgs,
-            args,
-          ),
-        );
-        payloadHex = hexlify(BCS.bcsToBytes(entryFunctionPayload))
+        const args = [new BigNumber(harvestAmount).toNumber()]
+        const payload: Types.TransactionPayload = {
+          type: 'entry_function_payload',
+          function: `${ ADDRESS }::${ MODULE }::${ FUNC }`,
+          type_arguments: tyArgs,
+          arguments: args
+        };
+        const transactionRes = await signAndSubmitTransaction(payload);
+        transactionHash = transactionRes?.hash || ''
       }else{
         const functionId = `${ADDRESS}::${MODULE}::${FUNC}`;
         const strTypeArgs = [tokenX, tokenY];
@@ -171,15 +166,15 @@ export default function FarmHarvestDialog({
           structTypeTags,
           args,
         );
-        payloadHex = (function () {
+        const payloadHex = (function () {
           const se = new bcs.BcsSerializer();
           scriptFunction.serialize(se);
           return hexlify(se.getBytes());
         })();
+        transactionHash = await provider.getSigner().sendUncheckedTransaction({
+          data: payloadHex,
+        })
       }
-      const transactionHash = await provider.getSigner().sendUncheckedTransaction({
-        data: payloadHex,
-      })
 
       setLoading(true);
       let id: NodeJS.Timeout

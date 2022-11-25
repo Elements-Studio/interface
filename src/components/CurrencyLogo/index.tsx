@@ -11,6 +11,7 @@ import FAIBlueLogo from '../../assets/images/fai_token_logo_blue.png'
 import WENLogo from '../../assets/svg/starswap_wen.svg'
 import XUSDTLogo from '../../assets/svg/usdt.svg'
 import XETHLogo from '../../assets/svg/eth.svg'
+import XUSDCLogo from '../../assets/svg/usdc.svg'
 import useHttpLocations from '../../hooks/useHttpLocations'
 import { WrappedTokenInfo } from '../../state/lists/wrappedTokenInfo'
 import Logo from '../Logo'
@@ -98,6 +99,8 @@ export default function CurrencyLogo({
     return <StyledEthereumLogo src={XUSDTLogo} size={size} style={style} {...rest} />
   } else if (currency?.symbol === 'XETH'){
     return <StyledEthereumLogo src={XETHLogo} size={size} style={style} {...rest} />
+  } else if (currency?.symbol === 'XUSDC' || currency?.symbol === 'USDC'){
+    return <StyledEthereumLogo src={XUSDCLogo} size={size} style={style} {...rest} />
   } else {
     return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} {...rest} />
   }
