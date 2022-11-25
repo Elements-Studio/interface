@@ -169,7 +169,6 @@ function StatusIcon({ connector }: { connector: AbstractConnector }) {
 function Web3StatusInner() {
   const { connector, error, deactivate } = useWeb3React()
   const {account: aptosAccount} = useWallet();
-  console.log(aptosAccount, "aptosAccountaptosAccountaptosAccount")
   const account: any = aptosAccount?.address || '';
   const networkType = useGetType()
   // if (networkType === 'STARCOIN' && account && account.length === 66) {

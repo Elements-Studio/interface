@@ -192,7 +192,6 @@ export default function CurrencyInputPanel({
   const [modalOpen, setModalOpen] = useState(false)
   const {account: aptosAccount} = useWallet();
  const account: any = aptosAccount?.address || '';
- console.log(account, currency, '???')
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
   const theme = useTheme()
 

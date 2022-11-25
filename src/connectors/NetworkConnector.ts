@@ -52,7 +52,6 @@ export class MiniRpcProvider implements AsyncSendable {
   }
 
   private readonly handleBatchStarcoin = async (batch: BatchItem[]) => {
-    console.log('handleBatchStarcoin', this.url, { batch })
     let response: Response
     try {
       response = await fetch(this.url, {

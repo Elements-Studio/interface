@@ -105,7 +105,6 @@ export default function Swap({ history }: RouteComponentProps) {
     setDismissTokenWarning(true)
   }, [])
   const {wallets, connect, network, wallet} = useWallet();
-  console.log('wallets', network)
 
   // dismiss warning if all imported tokens are in active lists
   const defaultTokens = useAllTokens()
