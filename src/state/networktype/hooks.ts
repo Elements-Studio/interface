@@ -26,7 +26,7 @@ export function useGetV2FactoryAddress(): string {
     const { chainId } = useActiveWeb3React()
     // console.log('useGetV2FactoryAddress', { networkType, chainId })
     if (networkType === 'APTOS' && chainId === 1) {
-        return '0x9bf32e42c442ae2adbc87bc7923610621469bf183266364503a7a434fe9d50ca'
+        return '0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9'
     }
     return networkType === 'APTOS' ? V2_FACTORY_ADDRESS_APTOS : V2_FACTORY_ADDRESS_STARCOIN
 }
