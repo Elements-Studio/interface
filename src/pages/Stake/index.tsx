@@ -293,11 +293,11 @@ export default function Stake({ history }: RouteComponentProps) {
                 </RowFixed>
               </FarmRow> */}
                 <FixedHeightRow marginBottom={16}>
-                  <Text fontSize={16} fontWeight={500}>
+                  <Text fontSize={14} fontWeight={400}>
                     &nbsp;&nbsp;&nbsp;&nbsp;<Trans>APR</Trans>
                   </Text>
                   <RowFixed>
-                    <Text fontSize={16} fontWeight={500}>
+                    <Text fontSize={15} fontWeight={500}>
                       {aprMin.toFixed(2)}% ~ {aprMax.toFixed(2)}%
                     </Text>
                     <QuestionHelper text={tips(data)} />
