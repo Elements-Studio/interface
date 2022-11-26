@@ -93,6 +93,16 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [SupportedChainId.APTOS_TEST]: [APT[SupportedChainId.APTOS_TEST]],
   [SupportedChainId.APTOS_DEV]: [APT[SupportedChainId.APTOS_DEV]]
 }
+export const BASES_TO_CHECK_TRADES_AGAINST_NAME: ChainNameTokenList = {
+  // ...WETH_ONLY,
+  // [1]: [...WETH_ONLY[1], DAI, USDC, USDT, WBTC],
+  ['MAINNET']: [STC[SupportedChainId.MAINNET]],
+  ['BARNARD']: [STC[SupportedChainId.BARNARD]],
+  ['PROXIMA']: [STC[SupportedChainId.PROXIMA]],
+  ['APTOS_MAIN']: [APT[SupportedChainId.APTOS_MAIN]],
+  ['APTOS_TEST']: [APT[SupportedChainId.APTOS_TEST]],
+  ['APTOS_DEV']: [APT[SupportedChainId.APTOS_DEV]]
+}
 export const ADDITIONAL_BASES: { [chainId: number]: { [tokenAddress: string]: Token[] } } = {
   // [1]: {
   //   ...mAssetsAdditionalBases,
