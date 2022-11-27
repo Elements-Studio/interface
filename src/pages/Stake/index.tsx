@@ -289,7 +289,7 @@ export default function Stake({ history }: RouteComponentProps) {
                 </RowFixed>
               </FarmRow> */}
                 <FixedHeightRow marginBottom={16}>
-                  <Text fontSize={14} fontWeight={400}>
+                  <Text fontSize={14} fontWeight={500}>
                     &nbsp;&nbsp;&nbsp;&nbsp;<Trans>APR</Trans>
                   </Text>
                   <RowFixed>
