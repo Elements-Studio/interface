@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js';
 import axios from 'axios'
-import { useActiveWeb3React } from './web3'
 import { useStarcoinProvider } from './useStarcoinProvider';
 import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
