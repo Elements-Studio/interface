@@ -1,26 +1,17 @@
-import { Currency, Token } from '@uniswap/sdk-core'
-import { FACTORY_ADDRESS_STARCOIN as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
-import { KeyboardEvent, RefObject, useCallback, useEffect, useMemo, useRef, useState, useContext } from 'react'
-import ReactGA from 'react-ga'
-import { t, Trans } from '@lingui/macro'
-import { FixedSizeList } from 'react-window'
-import { Text } from 'rebass'
+import { useEffect, useState, useContext } from 'react'
+import { Trans } from '@lingui/macro'
 import { TYPE } from '../../theme'
 import styled, { ThemeContext } from 'styled-components'
-import Column, { AutoColumn, ColumnCenter, ColumnRight } from '../Column'
-import Row, { RowBetween, AutoRow } from '../Row'
+import { ColumnCenter, ColumnRight } from '../Column'
+import { RowBetween, AutoRow } from '../Row'
 import Modal from '../Modal'
 import { ButtonFarm, ButtonBorder, ButtonText } from 'components/Button'
-import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import BigNumber from 'bignumber.js'
 import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
-import { addHexPrefix } from '@starcoin/stc-util'
 import CircularProgress from '@mui/material/CircularProgress'
-import axios from 'axios'
 import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
-import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
 
@@ -91,6 +82,7 @@ interface FarmBoostDialogProps {
   isOpen: boolean
   onDismiss: () => void
   lpStakingData: any
+  lockedAmount: number
 }
 
 export default function FarmBoostDialog({
@@ -101,18 +93,13 @@ export default function FarmBoostDialog({
   onDismiss,
   isOpen,
   lpStakingData,
+  lockedAmount,
 }: FarmBoostDialogProps) {
   const provider = useStarcoinProvider()
-  const { account, chainId } = useActiveWeb3React()
   const networkType = useGetType()
   const theme = useContext(ThemeContext)
   const [starAmount, setStarAmount] = useState('')
   const [loading, setLoading] = useState(false)
-
-  let address = ''
-  if (account) {
-    address = account.toLowerCase()
-  }
 
   const [predictBoostFactor, setPredictBoostFactor] = useState<number>(100)
   
@@ -195,7 +182,6 @@ export default function FarmBoostDialog({
     return false;
   }
 
-  const lockedAmount = useGetLockedAmount(tokenX, tokenY, address) 
   const boostFactor = useComputeBoostFactor(
     new BigNumber(Number(lockedAmount) + Number(starAmount) * lpTokenScalingFactor),
     lpStakingData?.stakedLiquidity,
