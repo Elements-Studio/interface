@@ -103,17 +103,18 @@ ReactDOM.render(
             <Web3ProviderNetwork getLibrary={getLibrary}>
             <WalletProvider
               wallets={wallets}
+              autoConnect
               onError={(error: Error) => {
                 console.log('Handle Error Message', error);
               }}>
-          <AptosWalletProvider>
-              <Blocklist>
-                <Updaters />
-                <ThemeProvider>
-                  <ThemedGlobalStyle />
-                  <App />
-                </ThemeProvider>
-              </Blocklist>
+              <AptosWalletProvider>
+                <Blocklist>
+                  <Updaters />
+                  <ThemeProvider>
+                    <ThemedGlobalStyle />
+                    <App />
+                  </ThemeProvider>
+                </Blocklist>
               </AptosWalletProvider>
             </WalletProvider>
             </Web3ProviderNetwork>
