@@ -11,7 +11,6 @@ import Column, { AutoColumn, ColumnCenter, ColumnRight } from '../Column'
 import Row, { RowBetween, AutoRow } from '../Row'
 import Modal from '../Modal'
 import { ButtonFarm, ButtonBorder, ButtonText } from 'components/Button'
-import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import BigNumber from 'bignumber.js'
 import { arrayify, hexlify } from '@ethersproject/bytes'
@@ -91,6 +90,7 @@ interface FarmBoostDialogProps {
   isOpen: boolean
   onDismiss: () => void
   lpStakingData: any
+  lockedAmount: number
 }
 
 export default function FarmBoostDialog({
@@ -101,18 +101,13 @@ export default function FarmBoostDialog({
   onDismiss,
   isOpen,
   lpStakingData,
+  lockedAmount
 }: FarmBoostDialogProps) {
   const provider = useStarcoinProvider()
-  const { account, chainId } = useActiveWeb3React()
   const networkType = useGetType()
   const theme = useContext(ThemeContext)
   const [starAmount, setStarAmount] = useState('')
   const [loading, setLoading] = useState(false)
-
-  let address = ''
-  if (account) {
-    address = account.toLowerCase()
-  }
 
   const [predictBoostFactor, setPredictBoostFactor] = useState<number>(100)
   
@@ -195,7 +190,6 @@ export default function FarmBoostDialog({
     return false;
   }
 
-  const lockedAmount = useGetLockedAmount(tokenX, tokenY, address) 
   const boostFactor = useComputeBoostFactor(
     new BigNumber(Number(lockedAmount) + Number(starAmount) * lpTokenScalingFactor),
     lpStakingData?.stakedLiquidity,

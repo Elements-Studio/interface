@@ -11,7 +11,6 @@ import Column, { AutoColumn, ColumnCenter, ColumnRight } from '../Column'
 import Row, { RowBetween, AutoRow } from '../Row'
 import Modal from '../Modal'
 import { ButtonFarm, ButtonBorder, ButtonText } from 'components/Button'
-import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import BigNumber from 'bignumber.js'
 import { arrayify, hexlify } from '@ethersproject/bytes'
@@ -79,7 +78,8 @@ interface FarmHarvestDialogProps {
   tbdScalingFactor: number,
   isOpen: boolean,
   onDismiss: () => void,
-  lpStakingData: any
+  lpStakingData: any,
+  lockedAmount: number
 }
 
 export default function FarmHarvestDialog({
@@ -89,17 +89,12 @@ export default function FarmHarvestDialog({
   tbdScalingFactor,
   onDismiss,
   isOpen,
-  lpStakingData
+  lpStakingData,
+  lockedAmount
 }: FarmHarvestDialogProps) {
 
   const provider = useStarcoinProvider();
-  const { account, chainId } = useActiveWeb3React()
   const networkType = useGetType()
-
-  let address = '';
-  if (account) {
-    address = account.toLowerCase()
-  }
 
   const theme = useContext(ThemeContext)
   
@@ -111,7 +106,6 @@ export default function FarmHarvestDialog({
     setHarvestNumber(value)
   }
 
-  const lockedAmount = useGetLockedAmount(tokenX, tokenY, address);
   const boostFactor = useComputeBoostFactor(
     lockedAmount,
     lpStakingData?.stakedLiquidity,

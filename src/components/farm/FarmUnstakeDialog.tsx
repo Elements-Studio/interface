@@ -11,7 +11,6 @@ import Column, { AutoColumn, ColumnCenter, ColumnRight } from '../Column'
 import Row, { RowBetween, AutoRow } from '../Row'
 import Modal from '../Modal'
 import { ButtonFarm, ButtonBorder, ButtonText } from 'components/Button'
-import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import BigNumber from 'bignumber.js'
 import { arrayify, hexlify } from '@ethersproject/bytes'
@@ -19,7 +18,6 @@ import { utils, bcs } from '@starcoin/starcoin'
 import CircularProgress from '@mui/material/CircularProgress'
 import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
 import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
-import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
 
 const Container = styled.div`
@@ -79,7 +77,8 @@ interface FarmUnstakeDialogProps {
   lpTokenScalingFactor: number,
   isOpen: boolean
   onDismiss: () => void,
-  lpStakingData: any
+  lpStakingData: any,
+  lockedAmount: number
 }
 
 export default function FarmUnstakeDialog({
@@ -89,17 +88,12 @@ export default function FarmUnstakeDialog({
   lpTokenScalingFactor,
   onDismiss,
   isOpen,
-  lpStakingData
+  lpStakingData,
+  lockedAmount
 }: FarmUnstakeDialogProps) {
 
   const provider = useStarcoinProvider();
-  const { account, chainId } = useActiveWeb3React()
   const networkType = useGetType()
-
-  let address = ''
-  if (account) {
-    address = account.toLowerCase()
-  }
 
   const theme = useContext(ThemeContext)
   
@@ -111,7 +105,6 @@ export default function FarmUnstakeDialog({
     setUnstakeNumber(value)
   }
 
-  // const lockedAmount = useGetLockedAmount(tokenX, tokenY, address)
   const boostFactor = useComputeBoostFactor(
     0,
     new BigNumber(Number(lpStakingData?.stakedLiquidity) - Number(unstakeNumber) * lpTokenScalingFactor),
