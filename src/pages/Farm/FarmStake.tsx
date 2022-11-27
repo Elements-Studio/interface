@@ -463,18 +463,22 @@ export default function FarmStake({
                       </TYPE.black>
                     </RowFixed>
                   </FarmRow>
-                  <FarmRow style={{ marginTop: '10px' }}>
-                    <RowFixed>
-                      <TYPE.black fontWeight={400} fontSize={14}>
-                        <Trans>Boost veSTAR amount</Trans>
-                      </TYPE.black>
-                    </RowFixed>
-                    <RowFixed>
-                      <TYPE.black fontSize={14}>
-                        {lockedAmount / lpTokenScalingFactor}
-                      </TYPE.black>
-                    </RowFixed>
-                  </FarmRow>
+                  {
+                    networkType === 'STARCOIN' && (
+                      <FarmRow style={{ marginTop: '10px' }}>
+                        <RowFixed>
+                          <TYPE.black fontWeight={400} fontSize={14}>
+                            <Trans>Boost veSTAR amount</Trans>
+                          </TYPE.black>
+                        </RowFixed>
+                        <RowFixed>
+                          <TYPE.black fontSize={14}>
+                            {lockedAmount / lpTokenScalingFactor}
+                          </TYPE.black>
+                        </RowFixed>
+                      </FarmRow>
+                    )
+                  }
                 </>
               ) : null}
             </AutoColumn>

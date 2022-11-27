@@ -15,7 +15,7 @@ export default function useComputeBoostFactor(
 ): number {
   const [ret, setRet] = useState<number>(100)
   const starcoinProvider = useStarcoinProvider()
-  const {network: aptosNetwork} = useWallet();
+  const { network: aptosNetwork } = useWallet();
   const chainId = getChainId(aptosNetwork?.name);
   const network = useGetCurrentNetwork(chainId)
   const networkType = useGetType()
@@ -23,10 +23,11 @@ export default function useComputeBoostFactor(
   const contractSend = useCallback(async () => {
     if (lockedAmount && lockedFarmAmount && totalFarmAmount) {
       if (networkType === 'APTOS') {
-        const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/computeBoostFactor?userLockedVestarAmount=${ new BigNumber(lockedAmount).toNumber() }&userLockedFarmAmount=${ new BigNumber(lockedFarmAmount).toNumber() }&totalFarmAmount=${ totalFarmAmount }`
-        axios.get(url).then(res => {
-          setRet(res?.data || 0)
-        })
+        // const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/computeBoostFactor?userLockedVestarAmount=${ new BigNumber(lockedAmount).toNumber() }&userLockedFarmAmount=${ new BigNumber(lockedFarmAmount).toNumber() }&totalFarmAmount=${ totalFarmAmount }`
+        // axios.get(url).then(res => {
+        //   setRet(res?.data || 0)
+        // })
+        setRet(0)
       } else {
         const contractMethod = 'contract.call_v2'
         const functionId = '0x8c109349c6bd91411d6bc962e080c4a3::Boost::compute_boost_factor'

@@ -11,17 +11,18 @@ export default function useGetLockedAmount(tokenX: string, tokenY: string, accou
   let _tokenY = tokenY;
   const [ret, setRet] = useState<number>(0)
   const starcoinProvider = useStarcoinProvider()
-  const {network: aptosNetwork} = useWallet();
+  const { network: aptosNetwork } = useWallet();
   const chainId = getChainId(aptosNetwork?.name);
   const network = useGetCurrentNetwork(chainId)
   const networkType = useGetType()
 
   const contractSend = useCallback(async () => {
     if (networkType === 'APTOS') {
-      const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/getBoostLockedVestarAmount?tokenX=${ tokenX }&tokenY=${ tokenY }&accountAddress=${ accountAddress }`
-      axios.get(url).then(res => {
-        setRet(res?.data || 0)
-      })
+      // const url = `https://swap-api.starcoin.org/${ network }/v1/contract-api/getBoostLockedVestarAmount?tokenX=${ tokenX }&tokenY=${ tokenY }&accountAddress=${ accountAddress }`
+      // axios.get(url).then(res => {
+      //   setRet(res?.data || 0)
+      // })
+      setRet(0)
     } else {
       if (_tokenY.indexOf('STC') === -1) {
         const _temp = tokenY

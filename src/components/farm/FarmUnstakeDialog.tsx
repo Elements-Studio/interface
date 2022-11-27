@@ -117,7 +117,7 @@ export default function FarmUnstakeDialog({
   }, [boostFactor])
   
   const ADDRESS = useGetV2FactoryAddress()
-  
+
   const { signAndSubmitTransaction } = useWallet();
 
   async function onClickUnstakeConfirm() {
@@ -276,11 +276,15 @@ export default function FarmUnstakeDialog({
             </ButtonText>
           </ColumnRight>
         </Container>
-        <RowBetween style={{ marginTop: '8px' }}>
-          <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
-            <Trans>Predict the updated Boost Factor value</Trans>：<PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
-          </TYPE.black>
-        </RowBetween>
+        {
+          networkType==='STARCOIN' && (
+            <RowBetween style={{ marginTop: '8px' }}>
+              <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
+                <Trans>Predict the updated Boost Factor value</Trans>：<PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
+              </TYPE.black>
+            </RowBetween>
+          )
+        }
         {loading && (
           <CircularProgress
             size={64}
