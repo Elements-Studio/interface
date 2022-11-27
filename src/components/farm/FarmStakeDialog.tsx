@@ -1,28 +1,20 @@
-import { Currency, Token } from '@uniswap/sdk-core'
-import { FACTORY_ADDRESS_STARCOIN as V2_FACTORY_ADDRESS } from '@starcoin/starswap-v2-sdk'
-import { KeyboardEvent, RefObject, useCallback, useEffect, useMemo, useRef, useState, useContext } from 'react'
-import ReactGA from 'react-ga'
-import { t, Trans } from '@lingui/macro'
-import { FixedSizeList } from 'react-window'
-import { Text } from 'rebass'
+import { useEffect, useState, useContext } from 'react'
+import { Trans } from '@lingui/macro'
 import { TYPE } from '../../theme'
 import styled, { ThemeContext } from 'styled-components'
-import Column, { AutoColumn, ColumnCenter, ColumnRight } from '../Column'
-import Row, { RowBetween, AutoRow } from '../Row'
+import { ColumnCenter, ColumnRight } from '../Column'
+import { RowBetween, AutoRow } from '../Row'
 import Modal from '../Modal'
 import { ButtonFarm, ButtonBorder, ButtonText } from 'components/Button'
-import { useActiveWeb3React } from 'hooks/web3'
 import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import BigNumber from 'bignumber.js';
 import { arrayify, hexlify } from '@ethersproject/bytes';
 import { utils, bcs } from '@starcoin/starcoin';
 import CircularProgress from '@mui/material/CircularProgress'
-import { TxnBuilderTypes, BCS, Types } from '@starcoin/aptos';
+import { Types } from '@starcoin/aptos';
 import useComputeBoostFactor from '../../hooks/useComputeBoostFactor'
-import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
-import getChainId from 'utils/getChainId'
 
 const Container = styled.div`
   border-radius: 20px;
@@ -81,7 +73,8 @@ interface FarmStakeDialogProps {
   lpTokenScalingFactor: number,
   isOpen: boolean
   onDismiss: () => void,
-  lpStakingData: any
+  lpStakingData: any,
+  lockedAmount: number,
 }
 
 export default function FarmStakeDialog({
@@ -91,19 +84,12 @@ export default function FarmStakeDialog({
   lpTokenScalingFactor,
   onDismiss,
   isOpen,
-  lpStakingData
+  lpStakingData,
+  lockedAmount,
 }: FarmStakeDialogProps) {
-
   const provider = useStarcoinProvider();
-  const {account: aptosAccount, network: aptosNetwork, signAndSubmitTransaction} = useWallet();
-  const chainId = getChainId(aptosNetwork?.name);
-  const account: any = aptosAccount?.address || '';
-  const networkType = useGetType()
 
-  let address = '';
-  if (account) {
-    address = account.toLowerCase()
-  }
+  const networkType = useGetType()
 
   const theme = useContext(ThemeContext)
   
@@ -115,7 +101,6 @@ export default function FarmStakeDialog({
     setStakeNumber(value)
   }
 
-  const lockedAmount = useGetLockedAmount(tokenX, tokenY, address);
   const boostFactor = useComputeBoostFactor(
     lockedAmount,
     new BigNumber(Number(lpStakingData?.stakedLiquidity) + Number(stakeNumber) * lpTokenScalingFactor),
@@ -127,6 +112,8 @@ export default function FarmStakeDialog({
   }, [boostFactor])
 
   const ADDRESS = useGetV2FactoryAddress()
+  
+  const { signAndSubmitTransaction } = useWallet();
 
   async function onClickStakeConfirm() {
     try {

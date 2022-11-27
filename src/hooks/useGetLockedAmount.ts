@@ -30,7 +30,7 @@ export default function useGetLockedAmount(tokenX: string, tokenY: string, accou
       }
 
       const contractMethod = 'contract.call_v2'
-      const functionId = '0x8c109349c6bd91411d6bc962e080c4a3::TokenSwapFarmBoost::get_boost_locked_vestar_amount'
+      const functionId = '0x8c109349c6bd91411d6bc962e080c4a3::TokenSwapFarmRouter::get_boost_locked_vestar_amount'
       const tyArgs: any[] = [_tokenY, _tokenX]
       const args: any[] = [accountAddress]
 

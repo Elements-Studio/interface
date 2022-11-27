@@ -33,7 +33,7 @@ import { useIsDarkMode, useIsBoost } from '../../state/user/hooks'
 import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
 import { useActiveLocale } from 'hooks/useActiveLocale'
 import BigNumber from 'bignumber.js';
-import useGetLockedAmountV2 from '../../hooks/useGetLockedAmountV2'
+import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 import getChainName from 'utils/getChainName'
 import { useWallet } from '@starcoin/aptos-wallet-adapter'
 import getChainId from 'utils/getChainId';
@@ -225,8 +225,8 @@ export default function FarmStake({
   }, [setBoostDialogOpen])
 
   const local = useActiveLocale()
-  const lockedAmount = useGetLockedAmountV2(addressX, addressY, address);
-  
+  const lockedAmount = useGetLockedAmount(addressX, addressY, address);
+
   return (
     <>
       <Container style={{ paddingTop: '1rem' }}>
@@ -497,6 +497,7 @@ export default function FarmStake({
         isOpen={harvestDialogOpen}
         onDismiss={handleDismissHarvest}
         lpStakingData={lpStakingData}
+        lockedAmount={lockedAmount}
       />
       <FarmStakeDialog
         lpTokenBalance={userLiquidity}
@@ -506,6 +507,7 @@ export default function FarmStake({
         isOpen={stakeDialogOpen}
         onDismiss={handleDismissStake}
         lpStakingData={lpStakingData}
+        lockedAmount={lockedAmount}
       />
       <FarmUnstakeDialog
         userStaked={userStaked}
@@ -515,6 +517,7 @@ export default function FarmStake({
         isOpen={unstakeDialogOpen}
         onDismiss={handleDismissUnstake}
         lpStakingData={lpStakingData}
+        lockedAmount={lockedAmount}
       />
       <FarmBoostDialog
         veStarAmount={veStarAmount}
@@ -524,6 +527,7 @@ export default function FarmStake({
         isOpen={boostDialogOpen}
         onDismiss={handleDismissBoost}
         lpStakingData={lpStakingData}
+        lockedAmount={lockedAmount}
       />
     </>
   )
