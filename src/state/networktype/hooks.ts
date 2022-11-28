@@ -20,13 +20,14 @@ export function useSetType(): (key: string) => void {
 }
 
 export function useGetType(): string {
-    return useAppSelector((state: AppState) => state.networktype.type)
+    return 'APTOS'
+    // return useAppSelector((state: AppState) => state.networktype.type)
 }
 
 export function useGetV2FactoryAddress(): string {
     const networkType = useGetType()
-    const {network: aptosNetwork} = useWallet();
-  const chainId = getChainId(aptosNetwork?.name);
+    const { network: aptosNetwork } = useWallet();
+    const chainId = getChainId(aptosNetwork?.name);
     // console.log('useGetV2FactoryAddress', { networkType, chainId })
     if (networkType === 'APTOS' && chainId === 1) {
         return '0xc755e4c8d7a6ab6d56f9289d97c43c1c94bde75ec09147c90d35cd1be61c8fb9'
