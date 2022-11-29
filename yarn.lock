@@ -3380,10 +3380,10 @@
     superstruct "^0.14.2"
     tweetnacl "^1.0.3"
 
-"@starcoin/aptos-wallet-adapter@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@starcoin/aptos-wallet-adapter/-/aptos-wallet-adapter-0.1.1.tgz#10f06d70c4af50be4850d0c71874b7fd1b922dc5"
-  integrity sha512-vK7aRuLGik8IQVVWEzSUu+5FTXkZUt447qkOhv3Pd1T5jJgUfJHt9KULHX3uhHHgLoZS2GO/gw8xAjI3On22Vw==
+"@starcoin/aptos-wallet-adapter@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@starcoin/aptos-wallet-adapter/-/aptos-wallet-adapter-0.1.2.tgz#d4c6876504872e16a48b913645620f08a06795ca"
+  integrity sha512-wPjkZDFxhkMVxDQTdFJWvH3azVFcRjAyokFN84xhMqXg2vUmxgi5hBnAv+TBKp1JuUPkLBhLVaga+mj7HDKbrA==
   dependencies:
     "@blocto/sdk" "^0.3.1"
     "@fewcha/web3" "0.1.32"
