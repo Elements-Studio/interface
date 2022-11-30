@@ -3428,10 +3428,10 @@
     bech32 "1.1.4"
     ws "7.2.3"
 
-"@starcoin/starcoin@^2.3.1":
-  version "2.3.5"
-  resolved "https://registry.npmmirror.com/@starcoin/starcoin/-/starcoin-2.3.5.tgz#a50b8b7a7b69532b4f68877e6c2cd0f961f5777e"
-  integrity sha512-8s6Kl2oY92zR74ljcrYzSpXMkjD7oGGcmkn8HXhAmGhGhudkvvd96WJbtjgY9JpeGLYrOSbFFOjDOj0KQBf9pA==
+"@starcoin/starcoin@^2.3.7":
+  version "2.3.7"
+  resolved "https://registry.yarnpkg.com/@starcoin/starcoin/-/starcoin-2.3.7.tgz#bfb26a5494f487e33356585ef416741bc09f3c09"
+  integrity sha512-mVZhrIlqi7IQZ7edEINNvTf+JqV5P8VOjda+G5yoVIXOXqsdO17dpLYIZf6easTY4ZbnJbob3+UPvj0JQVZTGw==
   dependencies:
     "@ethersproject/basex" "^5.0.4"
     "@ethersproject/bignumber" "^5.0"
