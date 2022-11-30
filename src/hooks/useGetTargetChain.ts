@@ -13,11 +13,12 @@ export default function useGetTargetChain(): string {
 
   // https://app.starswap.xyz
   // https://aptos.starswap.xyz
+  // https://test.starswap.xyz
   const subDomains = hostname.split('.')
   if (subDomains.length === 3) {
     if (subDomains[0] === 'app') {
       return 'STARCOIN'
-    } else if (subDomains[0] === 'aptos') {
+    } else if (['aptos', 'test'].includes(subDomains[0])) {
       return 'APTOS'
     }
   }
