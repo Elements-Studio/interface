@@ -120,21 +120,7 @@ export function useTokenBalancesWithLoadingIndicator(
             const response = await client.getAccountResource(address as MaybeHexString, `0x1::coin::CoinStore<${ token.address }>`);
             resolve(((response.data) as any).coin.value)
           } catch (error: any) {
-            console.error(error)
-            const tryParseJSONObject = (jsonString: any) => {
-              try {
-                var o = JSON.parse(jsonString);
-                if (o && typeof o === "object") {
-                  return o;
-                }
-              } catch (e) { }
-              return false;
-            };
-            const errInfo = error.message && tryParseJSONObject(error.message)
-            if (errInfo && errInfo.error_code === 'resource_not_found') {
-              resolve(0)
-            }
-            reject(error)
+            resolve('0')
           }
         })
       } else {
@@ -148,7 +134,9 @@ export function useTokenBalancesWithLoadingIndicator(
         address && validatedTokens.length > 0
           ? validatedTokens.reduce<{ [tokenAddress: string]: CurrencyAmount<Token> | undefined }>((memo, token, i) => {
             const value = balances?.[i]
+            console.log({ value })
             const amount = value ? JSBI.BigInt((value as number).toString()) : undefined
+            console.log({ amount })
             if (amount) {
               memo[token.address] = CurrencyAmount.fromRawAmount(token, amount)
             }
