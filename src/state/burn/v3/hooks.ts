@@ -12,6 +12,9 @@ import { selectPercent } from './actions'
 import { unwrappedToken } from 'utils/unwrappedToken'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import { t } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
+
 
 export function useBurnV3State(): AppState['burnV3'] {
   return useAppSelector((state) => state.burnV3)
@@ -30,7 +33,8 @@ export function useDerivedV3BurnInfo(
   outOfRange: boolean
   error?: string
 } {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
   const { percent } = useBurnV3State()
 
   const token0 = useToken(position?.token0)

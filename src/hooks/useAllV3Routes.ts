@@ -4,6 +4,9 @@ import { useMemo } from 'react'
 import { useUserSingleHopOnly } from '../state/user/hooks'
 import { useActiveWeb3React } from './web3'
 import { useV3SwapPools } from './useV3SwapPools'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
+
 
 function computeAllRoutes(
   currencyIn: Currency,
@@ -51,7 +54,8 @@ export function useAllV3Routes(
   currencyIn?: Currency,
   currencyOut?: Currency
 ): { loading: boolean; routes: Route<Currency, Currency>[] } {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
   const { pools, loading: poolsLoading } = useV3SwapPools(currencyIn, currencyOut)
 
   const [singleHopOnly] = useUserSingleHopOnly()

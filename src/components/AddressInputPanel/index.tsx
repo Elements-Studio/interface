@@ -8,6 +8,8 @@ import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
 import { useGetType } from 'state/networktype/hooks'
 import { AutoColumn } from '../Column'
 import { RowBetween } from '../Row'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const InputPanel = styled.div`
   ${({ theme }) => theme.flexColumnNoWrap}
@@ -84,7 +86,8 @@ export default function AddressInputPanel({
   // triggers whenever the typed value changes
   onChange: (value: string) => void
 }) {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
   const networkType = useGetType()
   const theme = useContext(ThemeContext)
 

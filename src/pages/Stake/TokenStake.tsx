@@ -25,6 +25,8 @@ import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import { useUserStarStaked } from 'hooks/useTokenSwapFarmScript'
 import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
 import getChainName from 'utils/getChainName'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
@@ -74,7 +76,9 @@ export default function TokenStake({
   let isAuthorization = true
   let hasStake = true
 
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   const network = useGetCurrentNetwork(chainId)
 
   if (account) {

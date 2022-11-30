@@ -9,6 +9,8 @@ import { useGetType } from 'state/networktype/hooks'
 import { AutoColumn } from '../Column'
 import { AutoRow } from '../Row'
 import { Trans } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const RowNoFlex = styled(AutoRow)`
   flex-wrap: nowrap;
@@ -23,7 +25,8 @@ export default function TransactionPopup({
   success?: boolean
   summary?: string
 }) {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
   const networkType = useGetType()
 
   const theme = useContext(ThemeContext)

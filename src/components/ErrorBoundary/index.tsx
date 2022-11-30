@@ -46,8 +46,8 @@ type ErrorBoundaryState = {
   error: Error | null
 }
 
-export default class ErrorBoundary extends React.Component<unknown, ErrorBoundaryState> {
-  constructor(props: unknown) {
+export default class ErrorBoundary extends React.Component<any, ErrorBoundaryState> {
+  constructor(props: any) {
     super(props)
     this.state = { error: null }
   }

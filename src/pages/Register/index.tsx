@@ -17,9 +17,13 @@ import { useWalletModalToggle } from '../../state/application/hooks'
 import { Field } from '../../state/register/actions'
 import { useDerivedRegisterInfo, useRegisterActionHandlers } from '../../state/register/hooks'
 import AppBody from '../AppBody'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
+
 
 export default function Register({ history }: RouteComponentProps) {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   const theme = useContext(ThemeContext)
 

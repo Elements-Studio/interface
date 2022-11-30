@@ -6,6 +6,8 @@ import { useTransactionAdder } from '../state/transactions/hooks'
 import { useCurrencyBalance } from '../state/wallet/hooks'
 import { useActiveWeb3React } from './web3'
 import { useWETHContract } from './useContract'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 export enum WrapType {
   NOT_APPLICABLE,
@@ -25,7 +27,9 @@ export default function useWrapCallback(
   outputCurrency: Currency | undefined,
   typedValue: string | undefined
 ): { wrapType: WrapType; execute?: undefined | (() => Promise<void>); inputError?: string } {
-  const { chainId, account } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   const wethContract = useWETHContract()
   const balance = useCurrencyBalance(account ?? undefined, inputCurrency)
   // we can always parse the amount typed as the input currency, since wrapping is 1:1

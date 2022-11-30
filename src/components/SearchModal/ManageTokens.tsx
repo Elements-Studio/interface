@@ -16,6 +16,8 @@ import Card from 'components/Card'
 import ImportRow from './ImportRow'
 import useTheme from '../../hooks/useTheme'
 import { Trans } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 import { CurrencyModalView } from './CurrencySearchModal'
 
@@ -45,7 +47,8 @@ export default function ManageTokens({
   setModalView: (view: CurrencyModalView) => void
   setImportToken: (token: Token) => void
 }) {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
   const networkType = useGetType()
 
   const [searchQuery, setSearchQuery] = useState<string>('')

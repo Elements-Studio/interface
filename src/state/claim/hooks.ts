@@ -9,6 +9,8 @@ import { calculateGasMargin } from '../../utils/calculateGasMargin'
 import { useSingleCallResult } from '../multicall/hooks'
 import { isAddress } from '../../utils'
 import { useTransactionAdder } from '../transactions/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 interface UserClaimData {
   index: number
@@ -92,7 +94,8 @@ function fetchClaim(account: string): Promise<UserClaimData> {
 // parse distributorContract blob and detect if user has claim data
 // null means we know it does not
 export function useUserClaimData(account: string | null | undefined): UserClaimData | null {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
 
   const [claimInfo, setClaimInfo] = useState<{ [account: string]: UserClaimData | null }>({})
 
@@ -131,7 +134,8 @@ export function useUserHasAvailableClaim(account: string | null | undefined): bo
 }
 
 export function useUserUnclaimedAmount(account: string | null | undefined): CurrencyAmount<Token> | undefined {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
   const userClaimData = useUserClaimData(account)
   const canClaim = useUserHasAvailableClaim(account)
 
@@ -147,7 +151,9 @@ export function useClaimCallback(account: string | null | undefined): {
   claimCallback: () => Promise<string>
 } {
   // get claim data for this account
-  const { library, chainId } = useActiveWeb3React()
+  const { library } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
   const claimData = useUserClaimData(account)
 
   // used for popup summary

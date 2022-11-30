@@ -1,9 +1,11 @@
 import { useEffect, useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js';
 import axios from 'axios'
-import { useActiveWeb3React } from './web3'
 import { useStarcoinProvider } from './useStarcoinProvider';
 import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
+
 
 export default function useComputeBoostFactor(
   lockedAmount: BigNumber | number,
@@ -12,7 +14,8 @@ export default function useComputeBoostFactor(
 ): number {
   const [ret, setRet] = useState<number>(100)
   const starcoinProvider = useStarcoinProvider()
-  const { chainId } = useActiveWeb3React()
+  const { network: aptosNetwork } = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
   const network = useGetCurrentNetwork(chainId)
   const networkType = useGetType()
 

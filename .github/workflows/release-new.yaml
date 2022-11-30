@@ -2,7 +2,7 @@ name: Build and Deploy
 
 on:
   push:
-    branches: [new]
+    branches: [aptos_wallets]
 
 jobs:
   deploy:

@@ -45,6 +45,8 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { t, Trans } from '@lingui/macro'
 import { useRemoveLiquidity } from 'hooks/useTokenSwapScript'
 import { useGetLiquidityPools } from 'hooks/useTokenSwapRouter'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(5, 100)
 
@@ -55,7 +57,10 @@ export default function RemoveLiquidity({
   },
 }: RouteComponentProps<{ currencyIdA: string; currencyIdB: string }>) {
   const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
-  const { account, chainId, library } = useActiveWeb3React()
+  const { library } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   const [tokenA, tokenB] = useMemo(() => [currencyA?.wrapped, currencyB?.wrapped], [currencyA, currencyB])
 
   const theme = useContext(ThemeContext)
@@ -115,7 +120,7 @@ export default function RemoveLiquidity({
     if (gatherPermitSignature) {
       try {
         await gatherPermitSignature()
-      } catch (error) {
+      } catch (error: any) {
         // try to approve if gatherPermitSignature failed for any reason other than the user rejecting it
         if (error?.code !== 4001) {
           await approveCallback()

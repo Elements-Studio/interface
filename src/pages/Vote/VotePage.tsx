@@ -41,6 +41,8 @@ import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
 import { useGetType } from 'state/networktype/hooks'
 import { ProposalStatus } from './styled'
 import { t, Trans } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const PageWrapper = styled(AutoColumn)`
   width: 100%;
@@ -125,7 +127,9 @@ export default function VotePage({
     params: { governorIndex, id },
   },
 }: RouteComponentProps<{ governorIndex: string; id: string }>) {
-  const { chainId, account } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   const networkType = useGetType()
 
   // get data for this specific proposal

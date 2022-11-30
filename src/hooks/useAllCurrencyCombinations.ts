@@ -1,16 +1,24 @@
 import { Currency, Token } from '@uniswap/sdk-core'
 import flatMap from 'lodash.flatmap'
 import { useMemo } from 'react'
-import { ADDITIONAL_BASES, BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES } from '../constants/routing'
+import { ADDITIONAL_BASES, BASES_TO_CHECK_TRADES_AGAINST_NAME, CUSTOM_BASES } from '../constants/routing'
 import { useActiveWeb3React } from './web3'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
+import { useGetType } from 'state/networktype/hooks'
+import getChainName from 'utils/getChainName'
 
 export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Currency): [Token, Token][] {
-  const { chainId } = useActiveWeb3React()
+  const { network: aptosNetwork } = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const networkType = useGetType()
+  const chainName = getChainName(chainId, networkType)
+
   const [tokenA, tokenB] = chainId ? [currencyA?.wrapped, currencyB?.wrapped] : [undefined, undefined]
   const bases: Token[] = useMemo(() => {
     if (!chainId) return []
 
-    const common = BASES_TO_CHECK_TRADES_AGAINST[chainId] ?? []
+    const common = BASES_TO_CHECK_TRADES_AGAINST_NAME[chainName] ?? []
     const additionalA = tokenA ? ADDITIONAL_BASES[chainId]?.[tokenA.address] ?? [] : []
     const additionalB = tokenB ? ADDITIONAL_BASES[chainId]?.[tokenB.address] ?? [] : []
 

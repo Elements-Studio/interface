@@ -25,6 +25,8 @@ import { useIsDarkMode } from '../../state/user/hooks'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
 import { useGetType, useGetCurrentNetwork } from 'state/networktype/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 30px;
@@ -60,7 +62,9 @@ const FarmRow = styled(RowBetween)`
 
 
 export default function Stake({ history }: RouteComponentProps) {
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   const network = useGetCurrentNetwork(chainId)
   const networkType = useGetType()
 

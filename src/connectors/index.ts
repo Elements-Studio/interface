@@ -29,9 +29,9 @@ export const NETWORK_URLS: {
   [SupportedChainId.KOVAN]: `https://kovan.infura.io/v3/${ INFURA_KEY }`,
   [SupportedChainId.ARBITRUM_ONE]: `https://arb1.arbitrum.io/rpc`,
   [SupportedChainId.ARBITRUM_RINKEBY]: `https://rinkeby.arbitrum.io/rpc`,
-  [SupportedChainId.APTOS_MAIN]: `https://fullnode.mainnet.aptoslabs.com/v1`,
-  [SupportedChainId.APTOS_DEV]: `https://fullnode.devnet.aptoslabs.com/v1`,
-  [SupportedChainId.APTOS_TEST]: `https://fullnode.testnet.aptoslabs.com/v1`,
+  [SupportedChainId.APTOS_MAIN]: `https://fullnode.mainnet.aptoslabs.com/v1/`,
+  [SupportedChainId.APTOS_DEV]: `https://fullnode.devnet.aptoslabs.com/v1/`,
+  [SupportedChainId.APTOS_TEST]: `https://fullnode.testnet.aptoslabs.com/v1/`,
 }
 
 const SUPPORTED_CHAIN_IDS: SupportedChainId[] = [
@@ -47,7 +47,7 @@ const SUPPORTED_CHAIN_IDS: SupportedChainId[] = [
   SupportedChainId.ARBITRUM_RINKEBY,
   SupportedChainId.APTOS_MAIN,
   SupportedChainId.APTOS_DEV,
-  SupportedChainId.APTOS_TEST,
+  SupportedChainId.APTOS_TEST
 ]
 
 export const network = new NetworkConnector({
@@ -84,7 +84,7 @@ export const walletconnect = new WalletConnectConnector({
   bridge: WALLETCONNECT_BRIDGE_URL,
   qrcode: true,
   pollingInterval: 15000,
-})
+} as any)
 
 // mainnet only
 export const fortmatic = new FortmaticConnector({

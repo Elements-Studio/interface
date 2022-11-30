@@ -30,6 +30,8 @@ import {
   ETH2X_FLI,
   WETH9_EXTENDED,
   APT,
+  FAI_NAME,
+  WEN_NAME,
   STAR_NAME,
   XUSDT_NAME,
   XUSDC_NAME,
@@ -91,6 +93,16 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [SupportedChainId.APTOS_TEST]: [APT[SupportedChainId.APTOS_TEST]],
   [SupportedChainId.APTOS_DEV]: [APT[SupportedChainId.APTOS_DEV]]
 }
+export const BASES_TO_CHECK_TRADES_AGAINST_NAME: ChainNameTokenList = {
+  // ...WETH_ONLY,
+  // [1]: [...WETH_ONLY[1], DAI, USDC, USDT, WBTC],
+  ['MAINNET']: [STC[SupportedChainId.MAINNET]],
+  ['BARNARD']: [STC[SupportedChainId.BARNARD]],
+  ['PROXIMA']: [STC[SupportedChainId.PROXIMA]],
+  ['APTOS_MAIN']: [APT[SupportedChainId.APTOS_MAIN]],
+  ['APTOS_TEST']: [APT[SupportedChainId.APTOS_TEST]],
+  ['APTOS_DEV']: [APT[SupportedChainId.APTOS_DEV]]
+}
 export const ADDITIONAL_BASES: { [chainId: number]: { [tokenAddress: string]: Token[] } } = {
   // [1]: {
   //   ...mAssetsAdditionalBases,
@@ -142,7 +154,7 @@ export const COMMON_BASES: ChainCurrencyList = {
 
 export const COMMON_BASES_NAME: ChainNameCurrencyList = {
   // ['MAINNET']: [ExtendedStar.onChain(1), DAI, USDC, USDT, WBTC, WETH9_EXTENDED[1]],
-  ['MAINNET']: [ExtendedStar.onChain(SupportedChainId.MAINNET), STAR_NAME['MAINNET'], FAI[SupportedChainId.MAINNET], WEN[SupportedChainId.MAINNET], XUSDT_NAME['MAINNET']],
+  ['MAINNET']: [ExtendedStar.onChain(SupportedChainId.MAINNET), STAR_NAME['MAINNET'], FAI_NAME['MAINNET'], WEN_NAME['MAINNET'], XUSDT_NAME['MAINNET']],
   ['BARNARD']: [ExtendedStar.onChain(SupportedChainId.BARNARD), STAR[SupportedChainId.BARNARD], FAI[SupportedChainId.BARNARD], WEN[SupportedChainId.BARNARD], SHARE[SupportedChainId.BARNARD], XUSDT[SupportedChainId.BARNARD], XETH[SupportedChainId.BARNARD]],
   ['PROXIMA']: [ExtendedStar.onChain(SupportedChainId.PROXIMA), STAR[SupportedChainId.PROXIMA], FAI[SupportedChainId.PROXIMA], WEN[SupportedChainId.PROXIMA], SHARE[SupportedChainId.PROXIMA], XUSDT[SupportedChainId.PROXIMA], XETH[SupportedChainId.PROXIMA]],
   ['ROPSTEN']: [ExtendedStar.onChain(3), WETH9_EXTENDED[3]],

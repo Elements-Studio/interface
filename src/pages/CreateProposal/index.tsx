@@ -28,6 +28,8 @@ import {
 import { Trans } from '@lingui/macro'
 import { tryParseAmount } from 'state/swap/hooks'
 import { getAddress } from '@ethersproject/address'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 const CreateProposalButton = ({
   proposalThreshold,
@@ -84,7 +86,9 @@ const AutonomousProposalCTA = styled.div`
 `
 
 export default function CreateProposal() {
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
 
   const latestProposalId = useLatestProposalId(account ?? '0x0000000000000000000000000000000000000000') ?? '0'
   const latestProposalData = useProposalData(0, latestProposalId)

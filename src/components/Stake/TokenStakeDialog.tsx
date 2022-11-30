@@ -26,9 +26,12 @@ import FormLabel from '@mui/material/FormLabel';
 import CircularProgress from '@mui/material/CircularProgress'
 import useSWR from 'swr'
 import axios from 'axios'
-import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
+import { Types } from '@starcoin/aptos';
 import { useGetType, useGetV2FactoryAddress, useGetCurrentNetwork } from 'state/networktype/hooks'
 import getChainName from 'utils/getChainName'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
+
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
@@ -114,11 +117,14 @@ export default function TokenStakeDialog({
 }: TokenStakeDialogProps) {
 
   const provider = useStarcoinProvider();
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   const network = useGetCurrentNetwork(chainId)
   const networkType = useGetType()
   const theme = useContext(ThemeContext)
   const ADDRESS = useGetV2FactoryAddress()
+  const { signAndSubmitTransaction } = useWallet();
 
   const [stakeNumber, setStakeNumber] = useState<any>('')
   const [duration, setDuration] = useState<any>(604800);
@@ -168,23 +174,19 @@ export default function TokenStakeDialog({
     try {
       const MODULE = 'TokenSwapSyrupScript'
       const FUNC = 'stake'
-      let payloadHex: string
+      let transactionHash: string
       if (networkType === 'APTOS') {
-        const tyArgs = [
-          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(starAddress)),
-        ]
+        const tyArgs = [starAddress ]
         const stakeAmount = new BigNumber(parseFloat(stakeNumber)).times(Math.pow(10, token.decimals)); 
-
-        const args = [BCS.bcsSerializeUint64(new BigNumber(duration).toNumber()), BCS.bcsSerializeU128(new BigNumber(stakeAmount).toNumber())]
-        const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
-          TxnBuilderTypes.EntryFunction.natural(
-            `${ ADDRESS }::${MODULE}`,
-            FUNC,
-            tyArgs,
-            args,
-          ),
-        );
-        payloadHex = hexlify(BCS.bcsToBytes(entryFunctionPayload))
+        const args = [new BigNumber(duration).toNumber(), new BigNumber(stakeAmount).toNumber()]
+        const payload: Types.TransactionPayload = {
+          type: 'entry_function_payload',
+          function: `${ ADDRESS }::${ MODULE }::${ FUNC }`,
+          type_arguments: tyArgs,
+          arguments: args
+        };
+        const transactionRes = await signAndSubmitTransaction(payload);
+        transactionHash = transactionRes?.hash || ''
       } else {
         const functionId = `${ADDRESS}::${MODULE}::${FUNC}`;
         const strTypeArgs = [starAddress];
@@ -216,15 +218,15 @@ export default function TokenStakeDialog({
           structTypeTags,
           args,
         );
-        payloadHex = (function () {
+        const payloadHex = (function () {
           const se = new bcs.BcsSerializer();
           scriptFunction.serialize(se);
           return hexlify(se.getBytes());
         })();
+        transactionHash = await provider.getSigner().sendUncheckedTransaction({
+          data: payloadHex,
+        })
       }
-      const transactionHash = await provider.getSigner().sendUncheckedTransaction({
-        data: payloadHex,
-      })
 
       setLoading(true);
       let id: NodeJS.Timeout

@@ -42,6 +42,8 @@ import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
 import useUSDCPrice from 'hooks/useUSDCPrice'
 import Loader from 'components/Loader'
 import Toggle from 'components/Toggle'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const PageWrapper = styled.div`
   min-width: 800px;
@@ -296,7 +298,10 @@ export function PositionPage({
     params: { tokenId: tokenIdFromUrl },
   },
 }: RouteComponentProps<{ tokenId?: string }>) {
-  const { chainId, account, library } = useActiveWeb3React()
+  const { library } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   const networkType = useGetType()
   const theme = useTheme()
 

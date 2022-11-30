@@ -24,6 +24,11 @@ import Modal from '../Modal'
 import Option from './Option'
 import PendingView from './PendingView'
 import { LightCard } from '../Card'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
+import useAptosWallet from 'hooks/useAptosWallet'
+import { walletAddressEllipsis } from 'utils/utility'
+
 
 const CloseIcon = styled.div`
   position: absolute;
@@ -124,7 +129,11 @@ export default function WalletModal({
   ENSName?: string
 }) {
   // important that these are destructed from the account-specific web3-react context
-  const { active, account, connector, activate, error } = useWeb3React()
+  const { active, connector, activate, error } = useWeb3React()
+  const a = useWallet();
+  const {wallet: aptosWallet, wallets, connect, select, account: aptosAccount, connecting} =  a;
+
+  const account: any = aptosAccount?.address || '';
 
   const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT)
 
@@ -138,11 +147,14 @@ export default function WalletModal({
 
   const previousAccount = usePrevious(account)
 
+  const { activeWallet, openModal, open, closeModal, connected} = useAptosWallet();
+
   // close on connection, when logged out before
   useEffect(() => {
     if (account && !previousAccount && walletModalOpen) {
       toggleWalletModal()
     }
+    
   }, [account, previousAccount, toggleWalletModal, walletModalOpen])
 
   // always reset to account view
@@ -180,7 +192,7 @@ export default function WalletModal({
     setWalletView(WALLET_VIEWS.PENDING)
 
     // if the connector is walletconnect and the user has already tried to connect, manually reset the connector
-    if (connector instanceof WalletConnectConnector && connector.walletConnectProvider?.wc?.uri) {
+    if (connector instanceof WalletConnectConnector && (connector as any).walletConnectProvider?.wc?.uri) {
       connector.walletConnectProvider = undefined
     }
 
@@ -208,98 +220,62 @@ export default function WalletModal({
 
   // get wallets user can switch too, depending on device/browser
   function getOptions() {
-    const isStarMask = window.starcoin?.isStarMask || window.obstarcoin?.isStarMask 
-    return Object.keys(SUPPORTED_WALLETS).map((key) => {
-      const option = SUPPORTED_WALLETS[key]
-      if (!option.networkType.includes(networkType)) {
-        return null
-      }
-      let loading = false
-      if (option.connector === openblock ){
-        loading = !window.obstarcoin?.sdkLoaded
-      }
+    return wallets.map((item, key) => {
+      const option = item.adapter;
+
       // check for mobile options
       if (isMobile) {
-        if (option.connector === injected && !window.starcoin) {
           return (
             <Option
-              id={`connect-${key}`}
-              key={key}
-              color={'#E8831D'}
-              header={<Trans>Install StarMask</Trans>}
-              subheader={null}
-              link={'https://github.com/starcoinorg/starmask-extension'}
-              icon={StarmaskIcon}
-            />
-          )
-        } else {
-          return (
-            <Option
-              onClick={() => {
-                option.connector !== connector && !option.href && tryActivation(option.connector)
+              onClick={async () => {
+                if (activeWallet) {
+                  setWalletView(account + '')
+                }
+                else {
+                  if (option.readyState !== 'NotDetected') {
+                    await connect(option.name);
+                  }
+                }
               }}
               id={`connect-${key}`}
               key={key}
-              active={option.connector && option.connector === connector}
-              color={option.color}
-              link={option.href}
-              loading={loading}
+              color={'#E8831D'}
+              link={option.readyState === 'NotDetected' ? option.url : null}
               header={option.name}
               subheader={null}
-              icon={option.iconURL}
+              icon={option.icon}
             />
           )
-        }
-      }
-      // overwrite injected when needed
-      if (option.connector === injected) {
-        // don't show injected if there's no injected provider
-        if (!(window.web3 || window.starcoin)) {
-          if (option.name === 'StarMask') {
-            return (
-              <Option
-                id={`connect-${key}`}
-                key={key}
-                color={'#E8831D'}
-                header={<Trans>Install StarMask</Trans>}
-                subheader={null}
-                link={'https://github.com/starcoinorg/starmask-extension'}
-                icon={StarmaskIcon}
-              />
-            )
-          } else {
-            return null //dont want to return install twice
-          }
-        }
-        // don't return starmask if injected provider isn't starmask
-        else if (option.name === 'StarMask' && !isStarMask) {
-          return null
-        }
-        // likewise for generic
-        else if (option.name === 'Injected' && isStarMask) {
-          return null
-        }
       }
 
       // return rest of options
       return (
         !isMobile &&
-        !option.mobileOnly && (
+        (
           <Option
             id={`connect-${key}`}
-            onClick={() => {
-              option.connector === connector
-                ? setWalletView(WALLET_VIEWS.ACCOUNT)
-                : !option.href && tryActivation(option.connector)
+            onClick={async () => {
+              if (activeWallet) {
+                setWalletView(account + '')
+              }
+              else {
+                if (option.readyState !== 'NotDetected') {
+                  await connect(option.name);
+                }
+              }
+
+              // activeWallet
+              //   ? setWalletView(WALLET_VIEWS.ACCOUNT)
+              //   : !option.href && tryActivation(option.connector)
             }}
             key={key}
-            active={option.connector === connector}
-            color={option.color}
-            link={option.href}
-            loading={loading}
+            color={"#E8831D"}
+            // active={aptosWallet?.adapter && option.name === aptosWallet?.adapter?.name}
+            link={option.readyState === 'NotDetected' ? option.url : null}
+            // loading={connecting}
             header={option.name}
             subheader={null} //use option.descriptio to bring back multi-line
-            icon={option.iconURL}
+            icon={option.icon}
           />
         )
       )
@@ -328,7 +304,7 @@ export default function WalletModal({
         </UpperSection>
       )
     }
-    if (account && walletView === WALLET_VIEWS.ACCOUNT) {
+    if (aptosAccount?.address && walletView === WALLET_VIEWS.ACCOUNT) {
       return (
         <AccountDetails
           toggleWalletModal={toggleWalletModal}

@@ -48,6 +48,8 @@ import useTheme from 'hooks/useTheme'
 import { unwrappedToken } from 'utils/unwrappedToken'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import Badge, { BadgeVariant } from 'components/Badge'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 import { useAppDispatch } from 'state/hooks'
 import SettingsTab from 'components/Settings'
@@ -123,7 +125,9 @@ function V2PairMigration({
   token0: Token
   token1: Token
 }) {
-  const { chainId, account } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   const networkType = useGetType()
   const theme = useTheme()
   const v2FactoryAddress = chainId ? V2_FACTORY_ADDRESSES[chainId] : undefined
@@ -661,7 +665,9 @@ export default function MigrateV2Pair({
     }
   }, [dispatch])
 
-  const { chainId, account } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
 
   // get pair contract
   const validatedAddress = isAddress(address)

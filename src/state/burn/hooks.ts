@@ -12,6 +12,9 @@ import { tryParseAmount } from '../swap/hooks'
 import { useTokenBalances } from '../wallet/hooks'
 import { Field, typeInput } from './actions'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
+
 
 export function useBurnState(): AppState['burn'] {
   return useAppSelector((state) => state.burn)
@@ -30,7 +33,8 @@ export function useDerivedBurnInfo(
   }
   error?: string
 } {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   const { independentField, typedValue } = useBurnState()
 

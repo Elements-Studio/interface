@@ -56,7 +56,7 @@ function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddress
     [SupportedChainId.HALLEY]: { ...map1[SupportedChainId.HALLEY], ...map2[SupportedChainId.HALLEY] },
     [SupportedChainId.APTOS_MAIN]: { ...map1[SupportedChainId.APTOS_MAIN], ...map2[SupportedChainId.APTOS_MAIN] },
     [SupportedChainId.APTOS_TEST]: { ...map1[SupportedChainId.APTOS_TEST], ...map2[SupportedChainId.APTOS_TEST] },
-    [SupportedChainId.APTOS_DEV]: { ...map1[SupportedChainId.APTOS_DEV], ...map2[SupportedChainId.APTOS_DEV] },
+    [SupportedChainId.APTOS_DEV]: { ...map1[SupportedChainId.APTOS_DEV], ...map2[SupportedChainId.APTOS_DEV] }
   }
 }
 

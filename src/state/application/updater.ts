@@ -4,9 +4,15 @@ import useDebounce from '../../hooks/useDebounce'
 import useIsWindowVisible from '../../hooks/useIsWindowVisible'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { updateBlockNumber } from './actions'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
+
 
 export default function Updater(): null {
-  const { library, chainId } = useActiveWeb3React()
+  const { library } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   const dispatch = useAppDispatch()
 
   const windowVisible = useIsWindowVisible()

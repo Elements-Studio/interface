@@ -22,6 +22,9 @@ import { SwapState } from './reducer'
 import { useUserSingleHopOnly } from 'state/user/hooks'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import { useGetType } from 'state/networktype/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
+
 
 
 export function useSwapState(): AppState['swap'] {
@@ -126,7 +129,8 @@ export function useDerivedSwapInfo(toggledVersion: Version): {
   toggledTrade: V2Trade<Currency, Currency, TradeType> | V3Trade<Currency, Currency, TradeType> | undefined
   allowedSlippage: Percent
 } {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   const [singleHopOnly] = useUserSingleHopOnly()
 
@@ -287,7 +291,8 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, networkType: stri
 export function useDefaultsFromURLSearch():
   | { inputCurrencyId: string | undefined; outputCurrencyId: string | undefined }
   | undefined {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
   const networkType = useGetType()
   const dispatch = useAppDispatch()
   const parsedQs = useParsedQueryString()

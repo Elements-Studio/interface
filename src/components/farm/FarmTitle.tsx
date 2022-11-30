@@ -7,6 +7,8 @@ import { StyledInternalLink, TYPE } from '../../theme'
 import { useGetCurrentNetwork } from 'state/networktype/hooks'
 import axios from 'axios';
 import useSWR from "swr";
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
 
@@ -28,7 +30,8 @@ const TitleTotal = styled.div<{ margin?: string; maxWidth?: string }>`
 `
 
 export default function FarmTitle() {
-    const { chainId } = useActiveWeb3React()
+    const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
 
     const network = useGetCurrentNetwork(chainId)
 

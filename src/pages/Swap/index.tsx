@@ -59,6 +59,8 @@ import { warningSeverity } from '../../utils/prices'
 import AppBody from '../AppBody'
 import { useGetLiquidityPools } from 'hooks/useTokenSwapRouter'
 import BigNumber from 'bignumber.js'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 
 const StyledInfo = styled(Info)`
@@ -85,7 +87,8 @@ const StyledTvlContainer = styled.button`
 `
 
 export default function Swap({ history }: RouteComponentProps) {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
   const loadedUrlParams = useDefaultsFromURLSearch()
 
   // token warning stuff
@@ -101,6 +104,7 @@ export default function Swap({ history }: RouteComponentProps) {
   const handleConfirmTokenWarning = useCallback(() => {
     setDismissTokenWarning(true)
   }, [])
+  const {wallets, connect, network, wallet} = useWallet();
 
   // dismiss warning if all imported tokens are in active lists
   const defaultTokens = useAllTokens()

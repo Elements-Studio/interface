@@ -18,6 +18,9 @@ import { unwrappedToken } from '../../utils/unwrappedToken'
 import { ButtonPrimary, ButtonSecondary, ButtonEmpty } from '../Button'
 import { transparentize } from 'polished'
 import { CardNoise } from '../earn/styled'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
+
 
 import { useColor } from '../../hooks/useColor'
 
@@ -56,7 +59,8 @@ interface PositionCardProps {
 }
 
 export function MinimalPositionCard({ liquidityPools, pair, showUnwrapped = false, border }: PositionCardProps) {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   const currency0 = showUnwrapped ? pair.token0 : unwrappedToken(pair.token0)
   const currency1 = showUnwrapped ? pair.token1 : unwrappedToken(pair.token1)
@@ -180,7 +184,8 @@ export function MinimalPositionCard({ liquidityPools, pair, showUnwrapped = fals
 }
 
 export default function FullPositionCard({ pair, border, stakedBalance }: PositionCardProps) {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   const currency0 = unwrappedToken(pair.token0)
   const currency1 = unwrappedToken(pair.token1)

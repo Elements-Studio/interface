@@ -1,6 +1,8 @@
 import { ReactNode, useMemo } from 'react'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { Trans } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 // SDN OFAC addresses
 const BLOCKED_ADDRESSES: string[] = [
@@ -12,7 +14,8 @@ const BLOCKED_ADDRESSES: string[] = [
 ]
 
 export default function Blocklist({ children }: { children: ReactNode }) {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+  const account: any = aptosAccount?.address || '';
   const blocked: boolean = useMemo(() => Boolean(account && BLOCKED_ADDRESSES.indexOf(account) !== -1), [account])
   if (blocked) {
     return (

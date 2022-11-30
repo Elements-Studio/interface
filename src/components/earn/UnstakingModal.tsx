@@ -13,6 +13,8 @@ import { useTransactionAdder } from '../../state/transactions/hooks'
 import FormattedCurrencyAmount from '../FormattedCurrencyAmount'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { t, Trans } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 const ContentWrapper = styled(AutoColumn)`
   width: 100%;
@@ -26,7 +28,8 @@ interface StakingModalProps {
 }
 
 export default function UnstakingModal({ isOpen, onDismiss, stakingInfo }: StakingModalProps) {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   // monitor call to help UI loading state
   const addTransaction = useTransactionAdder()

@@ -12,6 +12,8 @@ import styled, { css } from 'styled-components'
 import { ExternalLink } from 'theme'
 import { switchToNetwork } from 'utils/switchToNetwork'
 import { NETWORK_LABELS, SupportedChainId } from '../../constants/chains'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const BaseWrapper = css`
   position: relative;
@@ -146,7 +148,9 @@ const NetworkInfo = styled.button`
   }
 `
 export default function NetworkCard() {
-  const { chainId, library } = useActiveWeb3React()
+  const { library } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
   const node = useRef<HTMLDivElement>(null)
   const open = useModalOpen(ApplicationModal.ARBITRUM_OPTIONS)
   const toggle = useToggleModal(ApplicationModal.ARBITRUM_OPTIONS)
@@ -167,6 +171,16 @@ export default function NetworkCard() {
 
   if (!chainId || chainId === SupportedChainId.MAINNET || !NETWORK_LABELS[chainId] || !library) {
     return null
+  }
+
+  const titleCase = (str: string) => {
+    let tmp = '';
+    if (str) {
+      tmp = str.toLowerCase()
+      tmp = tmp.substring(0,1).toUpperCase() + tmp.substring(1)
+    }
+  
+    return tmp;
   }
 
   if (chainId === SupportedChainId.ARBITRUM_ONE) {
@@ -215,5 +229,5 @@ export default function NetworkCard() {
     )
   }
 
-  return <FallbackWrapper title={NETWORK_LABELS[chainId]}>{NETWORK_LABELS[chainId]}</FallbackWrapper>
+  return <FallbackWrapper title={titleCase(NETWORK_LABELS[chainId])}>{titleCase(NETWORK_LABELS[chainId])}</FallbackWrapper>
 }

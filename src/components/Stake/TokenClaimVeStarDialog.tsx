@@ -14,9 +14,12 @@ import { useStarcoinProvider } from 'hooks/useStarcoinProvider'
 import { arrayify, hexlify } from '@ethersproject/bytes'
 import { utils, bcs } from '@starcoin/starcoin'
 import BigNumber from 'bignumber.js';
-import { TxnBuilderTypes, BCS } from '@starcoin/aptos';
+import { Types } from '@starcoin/aptos';
 import { useGetType, useGetV2FactoryAddress } from 'state/networktype/hooks'
 import getChainName from 'utils/getChainName'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
+
 
 const Container = styled.div`
   width: 100%;
@@ -41,7 +44,8 @@ export default function TokenClaimVeStarDialog({
   isOpen,
 }: TokenClaimVeStarDialogProps) {
   const provider = useStarcoinProvider();
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
   const networkType = useGetType()
   const chainName = getChainName(chainId, networkType)
   const token = STAR_NAME[chainName]
@@ -51,28 +55,24 @@ export default function TokenClaimVeStarDialog({
 
   const [loading, setLoading] = useState(false);
   const ADDRESS = useGetV2FactoryAddress()
+  const { signAndSubmitTransaction } = useWallet();
 
   async function onClickConfirm() {
     try { 
       const MODULE = 'TokenSwapSyrupScript'
       const FUNC = 'take_vestar_by_stake_id'
-      let payloadHex: string
+      let transactionHash: string
       if (networkType === 'APTOS') {
-        const tyArgs = [
-          new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(starAddress)),
-        ]
-
-        const args = [BCS.bcsSerializeUint64(new BigNumber(parseInt(id)).toNumber())]
-        
-        const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
-          TxnBuilderTypes.EntryFunction.natural(
-            `${ ADDRESS }::${MODULE}`,
-            FUNC,
-            tyArgs,
-            args,
-          ),
-        );
-        payloadHex = hexlify(BCS.bcsToBytes(entryFunctionPayload))
+        const tyArgs = [starAddress]
+        const args = [new BigNumber(parseInt(id)).toNumber()]
+        const payload: Types.TransactionPayload = {
+          type: 'entry_function_payload',
+          function: `${ ADDRESS }::${ MODULE }::${ FUNC }`,
+          type_arguments: tyArgs,
+          arguments: args
+        };
+        const transactionRes = await signAndSubmitTransaction(payload);
+        transactionHash = transactionRes?.hash || ''
       } else {
         const functionId = `${ADDRESS}::${MODULE}::${FUNC}`;
         const strTypeArgs = [starAddress];
@@ -93,15 +93,15 @@ export default function TokenClaimVeStarDialog({
           structTypeTags,
           args,
         );
-        payloadHex = (function () {
+        const payloadHex = (function () {
           const se = new bcs.BcsSerializer();
           scriptFunction.serialize(se);
           return hexlify(se.getBytes());
         })();
+        transactionHash = await provider.getSigner().sendUncheckedTransaction({
+          data: payloadHex,
+        })
       }
-      const transactionHash = await provider.getSigner().sendUncheckedTransaction({
-        data: payloadHex,
-      })
 
       setLoading(true);
       let intervalId: NodeJS.Timeout

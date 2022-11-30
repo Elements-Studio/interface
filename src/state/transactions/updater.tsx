@@ -6,6 +6,8 @@ import { retry, RetryableError, RetryOptions } from '../../utils/retry'
 import { updateBlockNumber } from '../application/actions'
 import { useAddPopup, useBlockNumber } from '../application/hooks'
 import { checkedTransaction, finalizeTransaction } from './actions'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 interface TxInterface {
   addedTime: number
@@ -37,7 +39,9 @@ const RETRY_OPTIONS_BY_CHAIN_ID: { [chainId: number]: RetryOptions } = {
 const DEFAULT_RETRY_OPTIONS: RetryOptions = { n: 3, minWait: 1000, maxWait: 3000 }
 
 export default function Updater(): null {
-  const { chainId, library } = useActiveWeb3React()
+  const { library } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
 
   const lastBlockNumber = useBlockNumber()
 

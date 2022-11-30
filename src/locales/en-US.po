@@ -71,17 +71,17 @@ msgstr "-{feeAmountFormatted}%"
 msgid "0 UNI / week"
 msgstr "0 UNI / week"
 
-#: 
-#~ msgid "0.05% fee"
-#~ msgstr "0.05% fee"
+#: src/components/FeeSelector/index.tsx
+msgid "0.05% fee"
+msgstr "0.05% fee"
 
-#: 
-#~ msgid "0.25% fee"
-#~ msgstr "0.25% fee"
+#: src/components/FeeSelector/index.tsx
+msgid "0.25% fee"
+msgstr "0.25% fee"
 
-#: 
-#~ msgid "1% fee"
-#~ msgstr "1% fee"
+#: src/components/FeeSelector/index.tsx
+msgid "1% fee"
+msgstr "1% fee"
 
 #: 
 #~ msgid "14 Days"
@@ -242,8 +242,8 @@ msgid "Add {0}-{1} liquidity"
 msgstr "Add {0}-{1} liquidity"
 
 #: src/pages/AddLiquidity/index.tsx
-msgid "Add {0}/{1} V3 liquidity"
-msgstr "Add {0}/{1} V3 liquidity"
+#~ msgid "Add {0}/{1} V3 liquidity"
+#~ msgstr "Add {0}/{1} V3 liquidity"
 
 #: 
 #~ msgid "Added {0}"
@@ -282,8 +282,8 @@ msgid "Amount"
 msgstr "Amount"
 
 #: src/hooks/useSwapCallback.ts
-msgid "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
-msgstr "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note: fee on transfer and rebase tokens are incompatible with Starswap."
+#~ msgid "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
+#~ msgstr "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note: fee on transfer and rebase tokens are incompatible with Starswap."
 
 #: 
 #~ msgid "Analytics"
@@ -384,17 +384,17 @@ msgstr "Balance: {0} {1}"
 #~ msgid "Base APR"
 #~ msgstr "Base APR"
 
-#: 
-#~ msgid "Best for exotic pairs."
-#~ msgstr "Best for exotic pairs."
+#: src/components/FeeSelector/index.tsx
+msgid "Best for exotic pairs."
+msgstr "Best for exotic pairs."
 
-#: 
-#~ msgid "Best for most pairs."
-#~ msgstr "Best for most pairs."
+#: src/components/FeeSelector/index.tsx
+msgid "Best for most pairs."
+msgstr "Best for most pairs."
 
-#: 
-#~ msgid "Best for stable pairs."
-#~ msgstr "Best for stable pairs."
+#: src/components/FeeSelector/index.tsx
+msgid "Best for stable pairs."
+msgstr "Best for stable pairs."
 
 #: src/components/Blocklist/index.tsx
 msgid "Blocked address"
@@ -427,17 +427,17 @@ msgstr "Boost My LP Staking"
 msgid "Boost Simulator"
 msgstr "Boost Simulator"
 
-#: 
-#~ msgid "Boost is about to be online"
-#~ msgstr "Boost is about to be online"
+#: src/components/Banner/index.tsx
+msgid "Boost is about to be online"
+msgstr "Boost is about to be online"
 
 #: src/pages/Farm/FarmStake.tsx
 msgid "Boost veSTAR amount"
 msgstr "Boost veSTAR amount"
 
-#: 
-#~ msgid "Bridge"
-#~ msgstr "Bridge"
+#: src/components/Header/index.tsx
+msgid "Bridge"
+msgstr "Bridge"
 
 #: src/pages/Stake/index.tsx
 msgid "Buy Back"
@@ -480,9 +480,9 @@ msgstr "Change"
 msgid "Change your network to go back to L1"
 msgstr "Change your network to go back to L1"
 
-#: 
-#~ msgid "Charts"
-#~ msgstr "Charts"
+#: src/components/Header/index.tsx
+msgid "Charts"
+msgstr "Charts"
 
 #: src/pages/Pool/CTACards.tsx
 msgid "Check out our v3 LP walkthrough and migration guides."
@@ -494,6 +494,7 @@ msgstr "Check out our v3 LP walkthrough and migration guides."
 msgid "Claim"
 msgstr "Claim"
 
+#: src/components/Header/index.tsx
 #: src/components/claim/AddressClaimModal.tsx
 #: src/components/claim/ClaimModal.tsx
 #: src/components/claim/ClaimModal.tsx
@@ -505,8 +506,8 @@ msgid "Claim UNI Token"
 msgstr "Claim UNI Token"
 
 #: src/components/earn/ClaimRewardModal.tsx
-msgid "Claim accumulated UNI rewards"
-msgstr "Claim accumulated UNI rewards"
+#~ msgid "Claim accumulated UNI rewards"
+#~ msgstr "Claim accumulated UNI rewards"
 
 #: src/pages/Pool/PositionPage.tsx
 msgid "Claim fees"
@@ -537,9 +538,9 @@ msgstr "Claimed UNI!"
 msgid "Claiming"
 msgstr "Claiming"
 
-#: 
-#~ msgid "Claiming UNI"
-#~ msgstr "Claiming UNI"
+#: src/components/Header/index.tsx
+msgid "Claiming UNI"
+msgstr "Claiming UNI"
 
 #: src/components/earn/ClaimRewardModal.tsx
 #: src/components/earn/UnstakingModal.tsx
@@ -600,9 +601,9 @@ msgstr "Collecting fees"
 msgid "Collecting fees will withdraw currently available fees for you."
 msgstr "Collecting fees will withdraw currently available fees for you."
 
-#: 
-#~ msgid "Common bases"
-#~ msgstr "Common bases"
+#: src/components/SearchModal/CommonBases.tsx
+msgid "Common bases"
+msgstr "Common bases"
 
 #: src/components/Stake/GetAllStakeDialog.tsx
 #: src/components/Stake/TokenClaimVeStarDialog.tsx
@@ -645,18 +646,9 @@ msgstr "Confirm this transaction in your wallet"
 #: src/pages/Stake/TokenStake.tsx
 #: src/pages/Stake/index.tsx
 #: src/pages/Swap/index.tsx
-#: src/state/burn/hooks.ts
-#: src/state/burn/v3/hooks.ts
-#: src/state/mint/hooks.ts
-#: src/state/mint/v3/hooks.ts
-#: src/state/register/hooks.ts
-#: src/state/stake/hooks.ts
-#: src/state/stake/hooks.ts
-#: src/state/swap/hooks.ts
 msgid "Connect Wallet"
 msgstr "Connect Wallet"
 
-#: src/components/earn/UnstakingModal.tsx
 #: src/pages/Pool/index.tsx
 msgid "Connect a wallet"
 msgstr "Connect a wallet"
@@ -678,7 +670,6 @@ msgstr "Connect to a wallet to view your V2 liquidity."
 msgid "Connect to a wallet to view your liquidity."
 msgstr "Connect to a wallet to view your liquidity."
 
-#: src/components/earn/ClaimRewardModal.tsx
 #: src/pages/AddLiquidity/index.tsx
 msgid "Connect wallet"
 msgstr "Connect wallet"
@@ -713,13 +704,13 @@ msgstr "Create a pair"
 msgid "Create a pool"
 msgstr "Create a pool"
 
-#: 
-#~ msgid "Create an issue on GitHub"
-#~ msgstr "Create an issue on GitHub"
+#: src/components/ErrorBoundary/index.tsx
+msgid "Create an issue on GitHub"
+msgstr "Create an issue on GitHub"
 
 #: src/pages/AddLiquidity/index.tsx
-msgid "Create pool and add {0}/{1} V3 liquidity"
-msgstr "Create pool and add {0}/{1} V3 liquidity"
+#~ msgid "Create pool and add {0}/{1} V3 liquidity"
+#~ msgstr "Create pool and add {0}/{1} V3 liquidity"
 
 #: src/pages/PoolFinder/index.tsx
 msgid "Create pool."
@@ -767,16 +758,16 @@ msgid "Deposit"
 msgstr "Deposit"
 
 #: src/pages/AddLiquidity/index.tsx
-msgid "Deposit Amounts"
-msgstr "Deposit Amounts"
+#~ msgid "Deposit Amounts"
+#~ msgstr "Deposit Amounts"
 
 #: src/pages/Earn/Manage.tsx
 msgid "Deposit UNI-V2 LP Tokens"
 msgstr "Deposit UNI-V2 LP Tokens"
 
 #: src/components/earn/StakingModal.tsx
-msgid "Deposit liquidity"
-msgstr "Deposit liquidity"
+#~ msgid "Deposit liquidity"
+#~ msgstr "Deposit liquidity"
 
 #: src/components/swap/SwapNetworkAlert.tsx
 msgid "Deposit to Arbitrum"
@@ -839,9 +830,9 @@ msgstr "Don’t see one of your v2 positions? <0>Import it.</0>"
 msgid "Duration"
 msgstr "Duration"
 
-#: 
-#~ msgid "Earn STAR by Staking LP Tokens"
-#~ msgstr "Earn STAR by Staking LP Tokens"
+#: src/components/farm/FarmTitle.tsx
+msgid "Earn STAR by Staking LP Tokens"
+msgstr "Earn STAR by Staking LP Tokens"
 
 #: 
 #~ msgid "Earn TBD Tokens by Staking LP Tokens"
@@ -856,12 +847,12 @@ msgid "End"
 msgstr "End"
 
 #: src/state/burn/v3/hooks.ts
-msgid "Enter a percent"
-msgstr "Enter a percent"
+#~ msgid "Enter a percent"
+#~ msgstr "Enter a percent"
 
 #: src/state/swap/hooks.ts
-msgid "Enter a recipient"
-msgstr "Enter a recipient"
+#~ msgid "Enter a recipient"
+#~ msgstr "Enter a recipient"
 
 #: src/components/TransactionSettings/index.tsx
 msgid "Enter a valid slippage percentage"
@@ -879,8 +870,8 @@ msgstr "Enter an address to trigger a UNI claim. If the address has any claimabl
 #: src/state/stake/hooks.ts
 #: src/state/stake/hooks.ts
 #: src/state/swap/hooks.ts
-msgid "Enter an amount"
-msgstr "Enter an amount"
+#~ msgid "Enter an amount"
+#~ msgstr "Enter an amount"
 
 #: src/components/farm/FarmUnstakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
@@ -889,8 +880,8 @@ msgid "Enter number"
 msgstr "Enter number"
 
 #: src/components/SearchModal/ManageLists.tsx
-msgid "Enter valid list location"
-msgstr "Enter valid list location"
+#~ msgid "Enter valid list location"
+#~ msgstr "Enter valid list location"
 
 #: src/components/SearchModal/ManageTokens.tsx
 msgid "Enter valid token address"
@@ -911,8 +902,8 @@ msgid "Error connecting. Try refreshing the page."
 msgstr "Error connecting. Try refreshing the page."
 
 #: src/components/SearchModal/ManageLists.tsx
-msgid "Error importing list"
-msgstr "Error importing list"
+#~ msgid "Error importing list"
+#~ msgstr "Error importing list"
 
 #: 
 #~ msgid "Estimated annualized rate of return:"
@@ -922,9 +913,9 @@ msgstr "Error importing list"
 msgid "Estimated buyback STAR amount"
 msgstr "Estimated buyback STAR amount"
 
-#: 
-#~ msgid "Expanded results from inactive Token Lists"
-#~ msgstr "Expanded results from inactive Token Lists"
+#: src/components/SearchModal/CurrencyList.tsx
+msgid "Expanded results from inactive Token Lists"
+msgstr "Expanded results from inactive Token Lists"
 
 #: src/components/Settings/index.tsx
 msgid "Expert mode turns off the confirm transaction prompt and allows high slippage trades that often result in bad rates and lost funds."
@@ -944,11 +935,11 @@ msgstr "Explore popular pools on Starswap Analytics."
 #~ msgid "Extract"
 #~ msgstr "Extract"
 
-#: 
-#: 
-#: 
-#~ msgid "Farm"
-#~ msgstr "Farm"
+#: src/components/Header/index.tsx
+#: src/components/Stake/FarmHeader.tsx
+#: src/components/farm/FarmHeader.tsx
+msgid "Farm"
+msgstr "Farm"
 
 #: src/pages/Farm/FarmStake.tsx
 msgid "Farm Total Liquidity"
@@ -980,9 +971,9 @@ msgstr "From"
 msgid "From (at most)"
 msgstr "From (at most)"
 
-#: 
-#~ msgid "Get support on Discord"
-#~ msgstr "Get support on Discord"
+#: src/components/ErrorBoundary/index.tsx
+msgid "Get support on Discord"
+msgstr "Get support on Discord"
 
 #: src/pages/Farm/FarmStake.tsx
 msgid "Harvest"
@@ -1008,9 +999,9 @@ msgstr "Hide"
 msgid "High Price Impact"
 msgstr "High Price Impact"
 
-#: 
-#~ msgid "How to qualify in the veSTAR boost whitelist?"
-#~ msgstr "How to qualify in the veSTAR boost whitelist?"
+#: src/components/Banner/index.tsx
+msgid "How to qualify in the veSTAR boost whitelist?"
+msgstr "How to qualify in the veSTAR boost whitelist?"
 
 #: src/components/SearchModal/ImportList.tsx
 msgid "I understand"
@@ -1065,8 +1056,8 @@ msgstr "Input is estimated. You will sell at most <0>{0} {1}</0> or the transact
 
 #: src/components/WalletModal/index.tsx
 #: src/components/WalletModal/index.tsx
-msgid "Install StarMask"
-msgstr "Install StarMask"
+#~ msgid "Install StarMask"
+#~ msgstr "Install StarMask"
 
 #: 
 #~ msgid "Install Starmask"
@@ -1092,8 +1083,8 @@ msgstr "Insufficient liquidity for this trade. Try enabling multi-hop trades."
 #: src/state/mint/v3/hooks.ts
 #: src/state/swap/hooks.ts
 #: src/state/swap/hooks.ts
-msgid "Insufficient {0} balance"
-msgstr "Insufficient {0} balance"
+#~ msgid "Insufficient {0} balance"
+#~ msgstr "Insufficient {0} balance"
 
 #: src/components/Settings/index.tsx
 msgid "Interface Settings"
@@ -1105,16 +1096,16 @@ msgstr "Interval time less than 5 min"
 
 #: src/state/mint/hooks.ts
 #: src/state/mint/v3/hooks.ts
-msgid "Invalid pair"
-msgstr "Invalid pair"
+#~ msgid "Invalid pair"
+#~ msgstr "Invalid pair"
 
 #: src/pages/PoolFinder/index.tsx
 msgid "Invalid pair."
 msgstr "Invalid pair."
 
 #: src/state/mint/v3/hooks.ts
-msgid "Invalid price input"
-msgstr "Invalid price input"
+#~ msgid "Invalid price input"
+#~ msgstr "Invalid price input"
 
 #: src/pages/AddLiquidity/index.tsx
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
@@ -1122,8 +1113,8 @@ msgid "Invalid range selected. The min price must be lower than the max price."
 msgstr "Invalid range selected. The min price must be lower than the max price."
 
 #: src/state/swap/hooks.ts
-msgid "Invalid recipient"
-msgstr "Invalid recipient"
+#~ msgid "Invalid recipient"
+#~ msgstr "Invalid recipient"
 
 #: src/components/farm/FarmUnstakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
@@ -1171,9 +1162,9 @@ msgstr "Liquidity Provider Fee"
 #~ msgid "Liquidity providers earn a 0.25% fee on all trades proportional to their share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
 #~ msgstr "Liquidity providers earn a 0.25% fee on all trades proportional to their share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
 
-#: 
-#~ msgid "Lists"
-#~ msgstr "Lists"
+#: src/components/SearchModal/Manage.tsx
+msgid "Lists"
+msgstr "Lists"
 
 #: src/components/SearchModal/ManageLists.tsx
 msgid "Loaded"
@@ -1211,6 +1202,7 @@ msgstr "Make sure the URL is<0>app.uniswap.org</0>"
 #: src/components/PositionCard/V2.tsx
 #: src/components/PositionCard/index.tsx
 #: src/components/PositionCard/index.tsx
+#: src/components/SearchModal/Manage.tsx
 #: src/components/earn/PoolCard.tsx
 msgid "Manage"
 msgstr "Manage"
@@ -1219,9 +1211,9 @@ msgstr "Manage"
 msgid "Manage Liquidity in Rewards Pool"
 msgstr "Manage Liquidity in Rewards Pool"
 
-#: 
-#~ msgid "Manage Token Lists"
-#~ msgstr "Manage Token Lists"
+#: src/components/SearchModal/CurrencySearch.tsx
+msgid "Manage Token Lists"
+msgstr "Manage Token Lists"
 
 #: src/pages/PoolFinder/index.tsx
 msgid "Manage this pool."
@@ -1309,9 +1301,9 @@ msgstr "More"
 msgid "Multiplier"
 msgstr "Multiplier"
 
-#: 
-#~ msgid "My Stakings"
-#~ msgstr "My Stakings"
+#: src/components/Stake/MyStakeListTitle.tsx
+msgid "My Stakings"
+msgstr "My Stakings"
 
 #: src/pages/Pool/index.tsx
 msgid "New Position"
@@ -1346,9 +1338,9 @@ msgstr "No pool found."
 msgid "No proposals found."
 msgstr "No proposals found."
 
-#: 
-#~ msgid "No results found."
-#~ msgstr "No results found."
+#: src/components/SearchModal/CurrencySearch.tsx
+msgid "No results found."
+msgstr "No results found."
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "Not connected to a wallet"
@@ -1363,13 +1355,13 @@ msgstr "Note: Stake operation will harvest your previously earned STAR automatic
 #~ msgid "Note: Stake operation will harvest your previsously earned STAR automatically."
 #~ msgstr "Note: Stake operation will harvest your previsously earned STAR automatically."
 
-#: 
-#~ msgid "OFF"
-#~ msgstr "OFF"
+#: src/components/Toggle/ListToggle.tsx
+msgid "OFF"
+msgstr "OFF"
 
-#: 
-#~ msgid "ON"
-#~ msgstr "ON"
+#: src/components/Toggle/ListToggle.tsx
+msgid "ON"
+msgstr "ON"
 
 #: src/components/Settings/index.tsx
 msgid "ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING."
@@ -1379,13 +1371,13 @@ msgstr "ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING."
 msgid "Obtain"
 msgstr "Obtain"
 
-#: 
-#~ msgid "Off"
-#~ msgstr "Off"
+#: src/components/Toggle/index.tsx
+msgid "Off"
+msgstr "Off"
 
-#: 
-#~ msgid "On"
-#~ msgstr "On"
+#: src/components/Toggle/index.tsx
+msgid "On"
+msgstr "On"
 
 #: src/pages/AddLiquidityV2/index.tsx
 msgid "Once you are happy with the rate click supply to review."
@@ -1446,13 +1438,14 @@ msgid "Please connect to the appropriate Starcoin/Aptos network."
 msgstr "Please connect to the appropriate Starcoin/Aptos network."
 
 #: src/components/Settings/index.tsx
-msgid "Please type the word \"{confirmWord}\" to enable expert mode."
-msgstr "Please type the word \"{confirmWord}\" to enable expert mode."
+#~ msgid "Please type the word \"{confirmWord}\" to enable expert mode."
+#~ msgstr "Please type the word \"{confirmWord}\" to enable expert mode."
 
 #: 
 #~ msgid "Pledge"
 #~ msgstr "Pledge"
 
+#: src/components/Header/index.tsx
 #: src/components/NavigationTabs/index.tsx
 msgid "Pool"
 msgstr "Pool"
@@ -1525,6 +1518,7 @@ msgstr "Price Impact Too High"
 msgid "Price Updated"
 msgstr "Price Updated"
 
+#: src/components/PositionList/index.tsx
 #: src/pages/Pool/PositionPage.tsx
 msgid "Price range"
 msgstr "Price range"
@@ -1546,8 +1540,8 @@ msgid "Proposal Submitted"
 msgstr "Proposal Submitted"
 
 #: src/pages/CreateProposal/ProposalEditor.tsx
-msgid "Proposal Title"
-msgstr "Proposal Title"
+#~ msgid "Proposal Title"
+#~ msgstr "Proposal Title"
 
 #: src/pages/Vote/index.tsx
 msgid "Proposals"
@@ -1593,6 +1587,8 @@ msgstr "Recent Transactions"
 msgid "Recipient"
 msgstr "Recipient"
 
+#: src/components/Header/index.tsx
+#: src/components/register/RegisterHeader.tsx
 #: src/pages/Register/index.tsx
 msgid "Register"
 msgstr "Register"
@@ -1641,12 +1637,12 @@ msgstr "Remove list"
 #~ msgstr "Remove {0} {1} and {2} {3}"
 
 #: src/pages/RemoveLiquidity/V3.tsx
-msgid "Remove {0}/{1} V3 liquidity"
-msgstr "Remove {0}/{1} V3 liquidity"
+#~ msgid "Remove {0}/{1} V3 liquidity"
+#~ msgstr "Remove {0}/{1} V3 liquidity"
 
 #: src/pages/RemoveLiquidity/index.tsx
-msgid "Removing {0} {1} and {2} {3}"
-msgstr "Removing {0} {1} and {2} {3}"
+#~ msgid "Removing {0} {1} and {2} {3}"
+#~ msgstr "Removing {0} {1} and {2} {3}"
 
 #: src/components/Settings/index.tsx
 msgid "Restricts swaps to direct pairs only."
@@ -1705,19 +1701,18 @@ msgstr "STC Amount per release"
 #~ msgid "Search name or paste address"
 #~ msgstr "Search name or paste address"
 
-#: 
-#~ msgid "Select Pool"
-#~ msgstr "Select Pool"
+#: src/components/FeeSelector/index.tsx
+msgid "Select Pool"
+msgstr "Select Pool"
 
-#: 
-#~ msgid "Select a pool type based on your preferred liquidity provider fee."
-#~ msgstr "Select a pool type based on your preferred liquidity provider fee."
+#: src/components/FeeSelector/index.tsx
+msgid "Select a pool type based on your preferred liquidity provider fee."
+msgstr "Select a pool type based on your preferred liquidity provider fee."
 
 #: src/components/CurrencyInputPanel/index.tsx
+#: src/components/SearchModal/CurrencySearch.tsx
 #: src/pages/PoolFinder/index.tsx
 #: src/pages/PoolFinder/index.tsx
-#: src/state/register/hooks.ts
-#: src/state/swap/hooks.ts
 msgid "Select a token"
 msgstr "Select a token"
 
@@ -1783,10 +1778,11 @@ msgstr "Slippage tolerance"
 msgid "Some assets are not available through this interface because they may not work well with the smart contracts or we are unable to allow trading for legal reasons."
 msgstr "Some assets are not available through this interface because they may not work well with the smart contracts or we are unable to allow trading for legal reasons."
 
-#: 
-#~ msgid "Something went wrong"
-#~ msgstr "Something went wrong"
+#: src/components/ErrorBoundary/index.tsx
+msgid "Something went wrong"
+msgstr "Something went wrong"
 
+#: src/components/Header/index.tsx
 #: src/pages/Farm/FarmStake.tsx
 #: src/pages/Farm/index.tsx
 #: src/pages/Stake/TokenStake.tsx
@@ -1802,9 +1798,9 @@ msgstr "Stake LP Token"
 msgid "Stake Token"
 msgstr "Stake Token"
 
-#: 
-#~ msgid "Stake to Earn"
-#~ msgstr "Stake to Earn"
+#: src/components/Stake/StakeTitle.tsx
+msgid "Stake to Earn"
+msgstr "Stake to Earn"
 
 #: src/pages/Farm/FarmStake.tsx
 msgid "Staked Amount In USD"
@@ -1818,9 +1814,9 @@ msgstr "Staked LP Token"
 msgid "Staked Liquidity"
 msgstr "Staked Liquidity"
 
-#: 
-#~ msgid "Starswap available in: <0>{0}</0>"
-#~ msgstr "Starswap available in: <0>{0}</0>"
+#: src/components/SwitchLocaleLink/index.tsx
+msgid "Starswap available in: <0>{0}</0>"
+msgstr "Starswap available in: <0>{0}</0>"
 
 #: src/components/Stake/FarmCardPerson.tsx
 msgid "Start"
@@ -1839,8 +1835,8 @@ msgid "Stepwise Multiplier"
 msgstr "Stepwise Multiplier"
 
 #: src/state/governance/hooks.ts
-msgid "Submitted new proposal"
-msgstr "Submitted new proposal"
+#~ msgid "Submitted new proposal"
+#~ msgstr "Submitted new proposal"
 
 #: src/pages/CreateProposal/ProposalSubmissionModal.tsx
 msgid "Submitting Proposal"
@@ -1855,10 +1851,12 @@ msgid "Supply"
 msgstr "Supply"
 
 #: src/pages/AddLiquidityV2/index.tsx
-msgid "Supplying {0} {1} and {2} {3}"
-msgstr "Supplying {0} {1} and {2} {3}"
+#~ msgid "Supplying {0} {1} and {2} {3}"
+#~ msgstr "Supplying {0} {1} and {2} {3}"
 
+#: src/components/Header/index.tsx
 #: src/components/NavigationTabs/index.tsx
+#: src/components/swap/SwapHeader.tsx
 #: src/pages/Swap/index.tsx
 #: src/pages/Swap/index.tsx
 msgid "Swap"
@@ -1921,8 +1919,8 @@ msgstr "The Stepwise Multiplier represents the proportion of STAR rewards each f
 #~ msgstr "The Stepwise Multiplier represents the proportion of STAR rewards each farm receives, as a proportion of the STAR produced each block.<0/><1/>For example, if a 1x farm received 1 STAR per block, a 40x farm would receive 40 STAR per block.<2/><3/>This amount is already included in all APR calculations for the farm."
 
 #: src/hooks/useSwapCallback.ts
-msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
-msgstr "The Starswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
+#~ msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
+#~ msgstr "The Starswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 
 #: src/pages/Farm/index.tsx
 #: src/pages/Stake/Simulator.tsx
@@ -1938,20 +1936,20 @@ msgid "The estimated annualized percentage yield of rewards."
 msgstr "The estimated annualized percentage yield of rewards."
 
 #: src/hooks/useSwapCallback.ts
-msgid "The input token cannot be transferred. There may be an issue with the input token."
-msgstr "The input token cannot be transferred. There may be an issue with the input token."
+#~ msgid "The input token cannot be transferred. There may be an issue with the input token."
+#~ msgstr "The input token cannot be transferred. There may be an issue with the input token."
 
 #: src/components/CurrencyInputPanel/index.tsx
 msgid "The market price is outside your specified price range. Single-asset deposit only."
 msgstr "The market price is outside your specified price range. Single-asset deposit only."
 
 #: src/hooks/useSwapCallback.ts
-msgid "The output token cannot be transferred. There may be an issue with the output token."
-msgstr "The output token cannot be transferred. There may be an issue with the output token."
+#~ msgid "The output token cannot be transferred. There may be an issue with the output token."
+#~ msgstr "The output token cannot be transferred. There may be an issue with the output token."
 
 #: src/hooks/useSwapCallback.ts
-msgid "The output token cannot be transferred. There may be an issue with the output token. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
-msgstr "The output token cannot be transferred. There may be an issue with the output token. Note: fee on transfer and rebase tokens are incompatible with Starswap."
+#~ msgid "The output token cannot be transferred. There may be an issue with the output token. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
+#~ msgstr "The output token cannot be transferred. There may be an issue with the output token. Note: fee on transfer and rebase tokens are incompatible with Starswap."
 
 #: src/components/Badge/RangeBadge.tsx
 msgid "The price of this pool is outside of your selected range. Your position is not currently earning fees."
@@ -1966,16 +1964,16 @@ msgid "The ratio of tokens you add will set the price of this pool."
 msgstr "The ratio of tokens you add will set the price of this pool."
 
 #: src/hooks/useSwapCallback.ts
-msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
-msgstr "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
+#~ msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
+#~ msgstr "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
 
 #: src/pages/Stake/TokenStake.tsx
 msgid "The veSTAR balance is not enough."
 msgstr "The veSTAR balance is not enough."
 
-#: 
-#~ msgid "These tokens are commonly paired with other tokens."
-#~ msgstr "These tokens are commonly paired with other tokens."
+#: src/components/SearchModal/CommonBases.tsx
+msgid "These tokens are commonly paired with other tokens."
+msgstr "These tokens are commonly paired with other tokens."
 
 #: src/pages/Farm/index.tsx
 #: src/pages/Stake/Simulator.tsx
@@ -2000,12 +1998,12 @@ msgid "This tool will safely migrate your {0} liquidity to V3. The process is co
 msgstr "This tool will safely migrate your {0} liquidity to V3. The process is completely trustless thanks to the"
 
 #: src/hooks/useSwapCallback.ts
-msgid "This transaction will not succeed due to price movement. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
-msgstr "This transaction will not succeed due to price movement. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Starswap."
+#~ msgid "This transaction will not succeed due to price movement. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
+#~ msgstr "This transaction will not succeed due to price movement. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Starswap."
 
 #: src/hooks/useSwapCallback.ts
-msgid "This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance."
-msgstr "This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance."
+#~ msgid "This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance."
+#~ msgstr "This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance."
 
 #: src/components/SearchModal/ManageTokens.tsx
 msgid "Tip: Custom tokens are stored locally in your browser"
@@ -2050,13 +2048,13 @@ msgstr "Token Y"
 msgid "Token Y Amount"
 msgstr "Token Y Amount"
 
-#: 
-#~ msgid "Tokens"
-#~ msgstr "Tokens"
+#: src/components/SearchModal/Manage.tsx
+msgid "Tokens"
+msgstr "Tokens"
 
-#: 
-#~ msgid "Tokens from inactive lists. Import specific tokens below or click Manage to activate more lists."
-#~ msgstr "Tokens from inactive lists. Import specific tokens below or click Manage to activate more lists."
+#: src/components/SearchModal/CurrencyList.tsx
+msgid "Tokens from inactive lists. Import specific tokens below or click Manage to activate more lists."
+msgstr "Tokens from inactive lists. Import specific tokens below or click Manage to activate more lists."
 
 #: src/pages/Pool/CTACards.tsx
 msgid "Top pools"
@@ -2074,9 +2072,9 @@ msgstr "Total Stake Amount"
 msgid "Total Supply"
 msgstr "Total Supply"
 
-#: 
-#~ msgid "Total Value Locked in USD"
-#~ msgstr "Total Value Locked in USD"
+#: src/components/Stake/StakeTitle.tsx
+msgid "Total Value Locked in USD"
+msgstr "Total Value Locked in USD"
 
 #: 
 #~ msgid "Total Value Locked is {tvlUSD} USDT"
@@ -2090,9 +2088,9 @@ msgstr "Total deposited"
 msgid "Total deposits"
 msgstr "Total deposits"
 
-#: 
-#~ msgid "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USD"
-#~ msgstr "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USD"
+#: src/components/farm/FarmTitle.tsx
+msgid "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USD"
+msgstr "Total value of the funds in this farm’s liquidity pool: {tvlUSD} USD"
 
 #: src/pages/Swap/index.tsx
 msgid "Total value of the funds in this liquidity pool:"
@@ -2219,8 +2217,8 @@ msgid "Unknown Source"
 msgstr "Unknown Source"
 
 #: src/hooks/useSwapCallback.ts
-msgid "Unknown error{0}. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
-msgstr "Unknown error{0}. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Starswap."
+#~ msgid "Unknown error{0}. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
+#~ msgstr "Unknown error{0}. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Starswap."
 
 #: src/pages/Vote/VotePage.tsx
 #: src/pages/Vote/index.tsx
@@ -2372,8 +2370,8 @@ msgid "Waiting For Confirmation"
 msgstr "Waiting For Confirmation"
 
 #: src/components/AddressInputPanel/index.tsx
-msgid "Wallet Address or ENS name"
-msgstr "Wallet Address or ENS name"
+#~ msgid "Wallet Address or ENS name"
+#~ msgstr "Wallet Address or ENS name"
 
 #: src/components/earn/StakingModal.tsx
 msgid "Weekly Rewards"
@@ -2421,8 +2419,8 @@ msgid "Withdraw & Claim"
 msgstr "Withdraw & Claim"
 
 #: src/components/earn/UnstakingModal.tsx
-msgid "Withdraw deposited liquidity"
-msgstr "Withdraw deposited liquidity"
+#~ msgid "Withdraw deposited liquidity"
+#~ msgstr "Withdraw deposited liquidity"
 
 #: src/components/earn/UnstakingModal.tsx
 msgid "Withdrawing {0} UNI-V2"
@@ -2559,10 +2557,10 @@ msgstr "Your position will be 100% {0} at this price."
 msgid "Your position will not earn fees or be used in trades until the market price moves into your range."
 msgstr "Your position will not earn fees or be used in trades until the market price moves into your range."
 
-#: 
-#: 
-#~ msgid "Your positions"
-#~ msgstr "Your positions"
+#: src/components/PositionList/index.tsx
+#: src/components/PositionList/index.tsx
+msgid "Your positions"
+msgstr "Your positions"
 
 #: src/components/earn/PoolCard.tsx
 msgid "Your rate"
@@ -2590,8 +2588,8 @@ msgid "Your transaction may fail"
 msgstr "Your transaction may fail"
 
 #: src/components/TransactionSettings/index.tsx
-msgid "Your transaction will revert if it is pending for more than this period of time."
-msgstr "Your transaction will revert if it is pending for more than this period of time."
+#~ msgid "Your transaction will revert if it is pending for more than this period of time."
+#~ msgstr "Your transaction will revert if it is pending for more than this period of time."
 
 #: src/components/TransactionSettings/index.tsx
 msgid "Your transaction will revert if the price changes unfavorably by more than this percentage."
@@ -2622,20 +2620,20 @@ msgid "Your veSTAR Estimated Tips"
 msgstr "Your veSTAR Estimated = Your Locked STAR * Duration / (365 * 2)"
 
 #: src/components/Settings/index.tsx
-msgid "confirm"
-msgstr "confirm"
+#~ msgid "confirm"
+#~ msgstr "confirm"
 
 #: src/components/claim/AddressClaimModal.tsx
 msgid "for {0}"
 msgstr "for {0}"
 
 #: src/components/Web3Status/index.tsx
-msgid "has socks emoji"
-msgstr "has socks emoji"
+#~ msgid "has socks emoji"
+#~ msgstr "has socks emoji"
 
 #: src/components/SearchModal/ManageLists.tsx
-msgid "https:// or ipfs:// or ENS name"
-msgstr "https:// or ipfs:// or ENS name"
+#~ msgid "https:// or ipfs:// or ENS name"
+#~ msgstr "https:// or ipfs:// or ENS name"
 
 #: src/components/TransactionSettings/index.tsx
 msgid "minutes"
@@ -2668,14 +2666,79 @@ msgstr "x"
 msgid "{0, plural, one {Import token} other {Import tokens}}"
 msgstr "{0, plural, one {Import token} other {Import tokens}}"
 
+#: src/components/AddressInputPanel/index.tsx
+#: src/components/SearchModal/CurrencySearch.tsx
+#: src/components/SearchModal/ManageLists.tsx
+#: src/components/SearchModal/ManageLists.tsx
+#: src/components/SearchModal/ManageLists.tsx
+#: src/components/Settings/index.tsx
+#: src/components/Settings/index.tsx
+#: src/components/TransactionSettings/index.tsx
+#: src/components/Web3Status/index.tsx
+#: src/components/earn/ClaimRewardModal.tsx
+#: src/components/earn/ClaimRewardModal.tsx
+#: src/components/earn/ClaimRewardModal.tsx
+#: src/components/earn/StakingModal.tsx
+#: src/components/earn/UnstakingModal.tsx
+#: src/components/earn/UnstakingModal.tsx
+#: src/components/earn/UnstakingModal.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
+#: src/hooks/useSwapCallback.ts
+#: src/hooks/useSwapCallback.ts
+#: src/hooks/useSwapCallback.ts
+#: src/hooks/useSwapCallback.ts
+#: src/hooks/useSwapCallback.ts
+#: src/hooks/useSwapCallback.ts
+#: src/hooks/useSwapCallback.ts
+#: src/hooks/useSwapCallback.ts
+#: src/hooks/useSwapCallback.ts
+#: src/pages/AddLiquidity/index.tsx
+#: src/pages/AddLiquidity/index.tsx
+#: src/pages/AddLiquidity/index.tsx
+#: src/pages/AddLiquidityV2/index.tsx
+#: src/pages/CreateProposal/ProposalEditor.tsx
+#: src/pages/RemoveLiquidity/V3.tsx
+#: src/pages/RemoveLiquidity/index.tsx
+#: src/pages/Vote/VotePage.tsx
+#: src/pages/Vote/VotePage.tsx
+#: src/state/burn/hooks.ts
+#: src/state/burn/hooks.ts
+#: src/state/burn/v3/hooks.ts
+#: src/state/burn/v3/hooks.ts
+#: src/state/governance/hooks.ts
+#: src/state/mint/hooks.ts
+#: src/state/mint/hooks.ts
+#: src/state/mint/hooks.ts
+#: src/state/mint/hooks.ts
+#: src/state/mint/hooks.ts
+#: src/state/mint/hooks.ts
+#: src/state/mint/hooks.ts
+#: src/state/mint/v3/hooks.ts
+#: src/state/mint/v3/hooks.ts
+#: src/state/mint/v3/hooks.ts
+#: src/state/mint/v3/hooks.ts
+#: src/state/mint/v3/hooks.ts
+#: src/state/mint/v3/hooks.ts
+#: src/state/register/hooks.ts
+#: src/state/register/hooks.ts
+#: src/state/stake/hooks.ts
+#: src/state/stake/hooks.ts
+#: src/state/stake/hooks.ts
+#: src/state/stake/hooks.ts
+#: src/state/swap/hooks.ts
+#: src/state/swap/hooks.ts
+#: src/state/swap/hooks.ts
+#: src/state/swap/hooks.ts
+#: src/state/swap/hooks.ts
+#: src/state/swap/hooks.ts
+#: src/state/swap/hooks.ts
 msgid "{0}"
 msgstr "{0}"
 
 #: src/pages/Vote/VotePage.tsx
 #: src/pages/Vote/VotePage.tsx
-msgid "{0} %"
-msgstr "{0} %"
+#~ msgid "{0} %"
+#~ msgstr "{0} %"
 
 #: src/components/PositionCard/index.tsx
 msgid "{0} %3"
@@ -2774,9 +2837,9 @@ msgstr "{0} tokens"
 msgid "{0} {1} Price:"
 msgstr "{0} {1} Price:"
 
-#: 
-#~ msgid "{0} • Added by user"
-#~ msgstr "{0} • Added by user"
+#: src/components/SearchModal/CurrencyList.tsx
+msgid "{0} • Added by user"
+msgstr "{0} • Added by user"
 
 #: src/components/CurrencyInputPanel/FiatValue.tsx
 #: src/components/PositionListItem/index.tsx

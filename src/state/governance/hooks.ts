@@ -15,6 +15,9 @@ import { UNI } from '../../constants/tokens'
 import { useMultipleContractMultipleData, useSingleCallResult } from '../multicall/hooks'
 import { useTransactionAdder } from '../transactions/hooks'
 import { t } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
+
 
 interface ProposalDetail {
   target: string
@@ -80,7 +83,10 @@ function useDataFromEventLogs():
     details: { target: string; functionSig: string; callData: string }[]
   }[][]
   | undefined {
-  const { library, chainId } = useActiveWeb3React()
+  const { library } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   const [formattedEvents, setFormattedEvents] =
     useState<{ description: string; details: { target: string; functionSig: string; callData: string }[] }[][]>()
 
@@ -159,7 +165,8 @@ function useDataFromEventLogs():
 
 // get data for all past and active proposals
 export function useAllProposalData(): ProposalData[] {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
   const proposalCount = useLatestProposalCount()
 
   const addresses = useMemo(() => {
@@ -251,7 +258,8 @@ export function useProposalData(governorIndex: number, id: string): ProposalData
 
 // get the users delegatee if it exists
 export function useUserDelegatee(): string {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
   const uniContract = useUniContract()
   const { result } = useSingleCallResult(uniContract, 'delegates', [account ?? undefined])
   return result?.[0] ?? undefined
@@ -259,7 +267,9 @@ export function useUserDelegatee(): string {
 
 // gets the users current votes
 export function useUserVotes(): CurrencyAmount<Token> | undefined {
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   const uniContract = useUniContract()
 
   // check for available votes
@@ -270,7 +280,9 @@ export function useUserVotes(): CurrencyAmount<Token> | undefined {
 
 // fetch available votes as of block (usually proposal start block)
 export function useUserVotesAsOfBlock(block: number | undefined): CurrencyAmount<Token> | undefined {
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   const uniContract = useUniContract()
 
   // check for available votes
@@ -281,7 +293,10 @@ export function useUserVotesAsOfBlock(block: number | undefined): CurrencyAmount
 }
 
 export function useDelegateCallback(): (delegatee: string | undefined) => undefined | Promise<string> {
-  const { account, chainId, library } = useActiveWeb3React()
+  const { library } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   const addTransaction = useTransactionAdder()
 
   const uniContract = useUniContract()
@@ -309,7 +324,8 @@ export function useDelegateCallback(): (delegatee: string | undefined) => undefi
 export function useVoteCallback(): {
   voteCallback: (proposalId: string | undefined, support: boolean) => undefined | Promise<string>
 } {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   const govContracts = useGovernanceContracts()
   const latestGovernanceContract = govContracts ? govContracts[0] : null
@@ -338,7 +354,8 @@ export function useVoteCallback(): {
 export function useCreateProposalCallback(): (
   createProposalData: CreateProposalData | undefined
 ) => undefined | Promise<string> {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   const govContracts = useGovernanceContracts()
   const latestGovernanceContract = govContracts ? govContracts[0] : null
@@ -386,7 +403,8 @@ export function useLatestProposalId(address: string): string | undefined {
 }
 
 export function useProposalThreshold(): CurrencyAmount<Token> | undefined {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
 
   const govContracts = useGovernanceContracts()
   const latestGovernanceContract = govContracts ? govContracts[0] : null

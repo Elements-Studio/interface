@@ -17,6 +17,9 @@ import { useTokenBalance } from '../../state/wallet/hooks'
 import { LoadingView, SubmittedView } from '../ModalViews'
 import { formatCurrencyAmount } from 'utils/formatCurrencyAmount'
 import { Trans } from '@lingui/macro'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
+
 
 const ContentWrapper = styled(AutoColumn)`
   width: 100%;
@@ -42,7 +45,9 @@ interface VoteModalProps {
 }
 
 export default function DelegateModal({ isOpen, onDismiss, title }: VoteModalProps) {
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
 
   // state for delegate input
   const [usingDelegate, setUsingDelegate] = useState(false)

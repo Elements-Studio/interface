@@ -8,6 +8,8 @@ import { useGetType } from 'state/networktype/hooks'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
 import { RowFixed } from '../Row'
 import Loader from '../Loader'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
 
 const TransactionWrapper = styled.div``
 
@@ -37,7 +39,8 @@ const IconWrapper = styled.div<{ pending: boolean; success?: boolean }>`
 `
 
 export default function Transaction({ hash }: { hash: string }) {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
   const networkType = useGetType()
   const allTransactions = useAllTransactions()
 

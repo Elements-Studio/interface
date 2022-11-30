@@ -7,6 +7,9 @@ import { ArrowDownCircle, X } from 'react-feather'
 import { useArbitrumAlphaAlert } from 'state/user/hooks'
 import { useSTCBalances } from 'state/wallet/hooks'
 import styled from 'styled-components'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId'
+
 
 const CloseIcon = styled(X)`
   cursor: pointer;
@@ -77,7 +80,9 @@ const LinkOutToBridge = styled.a`
   }
 `
 export function SwapNetworkAlert() {
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
   const [arbitrumAlphaAcknowledged, setArbitrumAlphaAcknowledged] = useArbitrumAlphaAlert()
   const [locallyDismissed, setLocallyDimissed] = useState(false)
   const userEthBalance = useSTCBalances(account ? [account] : [])?.[account ?? '']

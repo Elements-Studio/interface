@@ -9,6 +9,8 @@ import { NEVER_RELOAD, useMultipleContractSingleData } from '../multicall/hooks'
 import { tryParseAmount } from '../swap/hooks'
 import useCurrentBlockTimestamp from 'hooks/useCurrentBlockTimestamp'
 import { Interface } from '@ethersproject/abi'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 import { abi as STAKING_REWARDS_ABI } from '@uniswap/liquidity-staker/build/StakingRewards.json'
 
 export const STAKING_REWARDS_INTERFACE = new Interface(STAKING_REWARDS_ABI)
@@ -73,7 +75,9 @@ export interface StakingInfo {
 
 // gets the staking info from the network for the active chain id
 export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
-  const { chainId, account } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
 
   // detect if staking is ended
   const currentBlockTimestamp = useCurrentBlockTimestamp()
@@ -227,7 +231,8 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
 }
 
 export function useTotalUniEarned(): CurrencyAmount<Token> | undefined {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
   const uni = chainId ? UNI[chainId] : undefined
   const stakingInfos = useStakingInfo()
 
@@ -251,7 +256,8 @@ export function useDerivedStakeInfo(
   parsedAmount?: CurrencyAmount<Token>
   error?: string
 } {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   const parsedInput: CurrencyAmount<Token> | undefined = tryParseAmount(typedValue, stakingToken)
 
@@ -282,7 +288,8 @@ export function useDerivedUnstakeInfo(
   parsedAmount?: CurrencyAmount<Token>
   error?: string
 } {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   const parsedInput: CurrencyAmount<Token> | undefined = tryParseAmount(typedValue, stakingAmount.currency)
 

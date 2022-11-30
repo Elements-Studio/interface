@@ -49,6 +49,29 @@ export const FAI: { [chainId: number]: Token } = {
     'FAI'
   ),
 }
+export const FAI_NAME: { [chainId: string]: Token } = {
+  ['MAINNET']: new Token(
+    SupportedChainId.MAINNET,
+    '0x4ffcc98f43ce74668264a0cf6eebe42b::FAI::FAI',
+    9,
+    'FAI',
+    'FAI'
+  ),
+  ['BARNARD']: new Token(
+    SupportedChainId.BARNARD,
+    '0xfe125d419811297dfab03c61efec0bc9::FAI::FAI',
+    9,
+    'FAI',
+    'FAI'
+  ),
+  ['PROXIMA']: new Token(
+    SupportedChainId.PROXIMA,
+    '0xfe125d419811297dfab03c61efec0bc9::FAI::FAI',
+    9,
+    'FAI',
+    'FAI'
+  ),
+}
 export const STAR: { [chainId: number]: Token } = {
   [SupportedChainId.MAINNET]: new Token(
     SupportedChainId.MAINNET,
@@ -310,6 +333,29 @@ export const WEN: { [chainId: number]: Token } = {
     'Wen'
   ),
   [SupportedChainId.PROXIMA]: new Token(
+    SupportedChainId.PROXIMA,
+    '0x88e2677b89841cd4ee7c15535798e1c8::WEN::WEN',
+    9,
+    'WEN',
+    'Wen'
+  ),
+}
+export const WEN_NAME: { [chainId: string]: Token } = {
+  ['MAINNET']: new Token(
+    SupportedChainId.MAINNET,
+    '0xbf60b00855c92fe725296a436101c8c6::WEN::WEN',
+    9,
+    'WEN',
+    'Wen'
+  ),
+  ['BARNARD']: new Token(
+    SupportedChainId.BARNARD,
+    '0x88e2677b89841cd4ee7c15535798e1c8::WEN::WEN',
+    9,
+    'WEN',
+    'Wen'
+  ),
+  ['PROXIMA']: new Token(
     SupportedChainId.PROXIMA,
     '0x88e2677b89841cd4ee7c15535798e1c8::WEN::WEN',
     9,

@@ -35,6 +35,8 @@ import { useActiveLocale } from 'hooks/useActiveLocale'
 import BigNumber from 'bignumber.js';
 import useGetLockedAmount from '../../hooks/useGetLockedAmount'
 import getChainName from 'utils/getChainName'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 const fetcher = (url:any) => axios.get(url).then(res => res.data)
 const lpTokenScalingFactor = 1000000000;
@@ -99,7 +101,9 @@ export default function FarmStake({
   let isAuthorization = true
   let hasStake = false
 
-  const { account, chainId } = useActiveWeb3React()
+  const {account: aptosAccount, network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
+  const account: any = aptosAccount?.address || '';
 
 
   if (account) {

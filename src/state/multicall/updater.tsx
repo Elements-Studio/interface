@@ -16,6 +16,8 @@ import {
   updateMulticallResults,
 } from './actions'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 /**
  * Fetches a chunk of calls, enforcing a minimum block number constraint
@@ -124,7 +126,8 @@ export default function Updater(): null {
   // wait for listeners to settle before triggering updates
   const debouncedListeners = useDebounce(state.callListeners, 100)
   const latestBlockNumber = useBlockNumber()
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
   const multicall2Contract = useMulticall2Contract()
   const cancellations = useRef<{ blockNumber: number; cancellations: (() => void)[] }>()
 

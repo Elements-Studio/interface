@@ -9,6 +9,8 @@ import { useMultipleContractSingleData } from '../state/multicall/hooks'
 import { Pool, FeeAmount } from '@uniswap/v3-sdk'
 import { abi as IUniswapV3PoolStateABI } from '@uniswap/v3-core/artifacts/contracts/interfaces/pool/IUniswapV3PoolState.sol/IUniswapV3PoolState.json'
 import { Interface } from '@ethersproject/abi'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
 
 const POOL_STATE_INTERFACE = new Interface(IUniswapV3PoolStateABI) as IUniswapV3PoolStateInterface
 
@@ -22,7 +24,8 @@ export enum PoolState {
 export function usePools(
   poolKeys: [Currency | undefined, Currency | undefined, FeeAmount | undefined][]
 ): [PoolState, Pool | null][] {
-  const { chainId } = useActiveWeb3React()
+  const {network: aptosNetwork} = useWallet();
+  const chainId = getChainId(aptosNetwork?.name);
 
   const transformed: ([Token, Token, FeeAmount] | null)[] = useMemo(() => {
     return poolKeys.map(([currencyA, currencyB, feeAmount]) => {

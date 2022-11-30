@@ -23,6 +23,9 @@ import { Field, Bound, typeInput, typeStartPriceInput, typeLeftRangeInput, typeR
 import { tryParseTick } from './utils'
 import { usePool } from 'hooks/usePools'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
+import { useWallet } from '@starcoin/aptos-wallet-adapter'
+import getChainId from 'utils/getChainId';
+
 
 export function useV3MintState(): AppState['mintV3'] {
   return useAppSelector((state) => state.mintV3)
@@ -110,7 +113,8 @@ export function useV3DerivedMintInfo(
   depositBDisabled: boolean
   invertPrice: boolean
 } {
-  const { account } = useActiveWeb3React()
+  const {account: aptosAccount} = useWallet();
+ const account: any = aptosAccount?.address || '';
 
   const { independentField, typedValue, leftRangeTypedValue, rightRangeTypedValue, startPriceTypedValue } =
     useV3MintState()

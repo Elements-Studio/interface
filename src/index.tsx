@@ -21,8 +21,35 @@ import UserUpdater from './state/user/updater'
 import ThemeProvider, { ThemedGlobalStyle } from './theme'
 import RadialGradientByChainUpdater from './theme/RadialGradientByChainUpdater'
 import getLibrary from './utils/getLibrary'
+import {
+  WalletProvider,
+  StarMaskWalletAdapter,
+  MartianWalletAdapter,
+  AptosWalletAdapter,
+  FewchaWalletAdapter,
+  PontemWalletAdapter,
+  SpikaWalletAdapter,
+  NightlyWalletAdapter,
+  BitkeepWalletAdapter,
+  TokenPocketWalletAdapter,
+  WalletAdapterNetwork,
+  Coin98WalletAdapter,
+} from '@starcoin/aptos-wallet-adapter';
+import { AptosWalletProvider } from 'contexts/AptosWalletProvider';
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
+const wallets = [
+  new StarMaskWalletAdapter(),
+  new MartianWalletAdapter(),
+  new AptosWalletAdapter(),
+  new FewchaWalletAdapter(),
+  new PontemWalletAdapter(),
+  new SpikaWalletAdapter(),
+  new NightlyWalletAdapter(),
+  new BitkeepWalletAdapter(),
+  new TokenPocketWalletAdapter(),
+  new Coin98WalletAdapter()
+];
 
 const GOOGLE_ANALYTICS_ID: string | undefined = process.env.REACT_APP_GOOGLE_ANALYTICS_ID
 if (typeof GOOGLE_ANALYTICS_ID === 'string') {
@@ -64,13 +91,22 @@ ReactDOM.render(
         <LanguageProvider>
           <Web3ReactProvider getLibrary={getLibrary}>
             <Web3ProviderNetwork getLibrary={getLibrary}>
-              <Blocklist>
-                <Updaters />
-                <ThemeProvider>
-                  <ThemedGlobalStyle />
-                  <App />
-                </ThemeProvider>
-              </Blocklist>
+            <WalletProvider
+              wallets={wallets}
+              autoConnect
+              onError={(error: Error) => {
+                console.log('Handle Error Message', error);
+              }}>
+              <AptosWalletProvider>
+                <Blocklist>
+                  <Updaters />
+                  <ThemeProvider>
+                    <ThemedGlobalStyle />
+                    <App />
+                  </ThemeProvider>
+                </Blocklist>
+              </AptosWalletProvider>
+            </WalletProvider>
             </Web3ProviderNetwork>
           </Web3ReactProvider>
         </LanguageProvider>
