@@ -256,20 +256,16 @@ export default function Stake({ history }: RouteComponentProps) {
                     <TYPE.black fontSize={14}>{Number(item.dailyReward / starScalingFactor) || 0}</TYPE.black>
                   </RowFixed>
                 </FarmRow>
-                { 
-                  networkType === 'STARCOIN' && (
-                    <FarmRow style={{ marginTop: '10px', marginBottom: '10px' }}>
-                      <RowFixed>
-                        <TYPE.black fontWeight={400} fontSize={14}>
-                          <Trans>Pool Created</Trans>
-                        </TYPE.black>
-                      </RowFixed>
-                      <RowFixed>
-                        <TYPE.black fontSize={14}>{(new Date(item.createdAt) + '').slice(4, 24)}</TYPE.black>
-                      </RowFixed>
-                    </FarmRow>
-                  ) 
-                }
+                <FarmRow style={{ marginTop: '10px', marginBottom: '10px' }}>
+                  <RowFixed>
+                    <TYPE.black fontWeight={400} fontSize={14}>
+                      <Trans>Pool Created</Trans>
+                    </TYPE.black>
+                  </RowFixed>
+                  <RowFixed>
+                    <TYPE.black fontSize={14}>{(new Date(item.createdAt) + '').slice(4, 24)}</TYPE.black>
+                  </RowFixed>
+                </FarmRow>
                 <FarmRow style={{ marginTop: '10px', marginBottom: '20px' }}>
                   <RowFixed>
                     <TYPE.black fontWeight={400} fontSize={14}>
@@ -335,15 +331,11 @@ export default function Stake({ history }: RouteComponentProps) {
                     </ButtonFarm>
                   )
                 }
-                {
-                  networkType === 'STARCOIN' && (
-                    <TYPE.body fontSize={12} style={{ marginTop: '12px', display: 'inline-flex' }}>
-                      <Link to={`/stake/simulator`}>
-                        <Trans>Boost Simulator</Trans>
-                      </Link>
-                    </TYPE.body>
-                  )
-                }
+                <TYPE.body fontSize={12} style={{ marginTop: '12px', display: 'inline-flex' }}>
+                  <Link to={`/stake/simulator`}>
+                    <Trans>Boost Simulator</Trans>
+                  </Link>
+                </TYPE.body>
                 {
                   networkType === 'STARCOIN' && (
                     <TYPE.body fontSize={12} style={{ margin: '12px 0 0 24px', display: 'inline-flex' }}>

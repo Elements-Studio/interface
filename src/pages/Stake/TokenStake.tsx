@@ -261,8 +261,7 @@ export default function TokenStake({
                     )
                   )}
                   {
-                    // only starcoin needs claim veSTAR, aptos does not
-                    networkType==='STARCOIN' && !isVeStarStaked ? (
+                   !isVeStarStaked ? (
                       <RowBetween style={{ marginTop: '16px' }}>
                         <ButtonFarm id={item.id} onClick={() => { handleClaimVeStarId(item.id); handleVeStarReward(veStarReward); setClaimVeStarDialogOpen(true);  }}>
                           <TYPE.main color={'#fff'}>

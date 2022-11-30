@@ -276,15 +276,11 @@ export default function FarmUnstakeDialog({
             </ButtonText>
           </ColumnRight>
         </Container>
-        {
-          networkType==='STARCOIN' && (
-            <RowBetween style={{ marginTop: '8px' }}>
-              <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
-                <Trans>Predict the updated Boost Factor value</Trans>：<PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
-              </TYPE.black>
-            </RowBetween>
-          )
-        }
+        <RowBetween style={{ marginTop: '8px' }}>
+          <TYPE.black fontWeight={500} fontSize={14} style={{ marginTop: '10px', lineHeight: '20px' }}>
+            <Trans>Predict the updated Boost Factor value</Trans>：<PredictBoostFactorSpan>{predictBoostFactor / 100}X</PredictBoostFactorSpan>
+          </TYPE.black>
+        </RowBetween>
         {loading && (
           <CircularProgress
             size={64}
