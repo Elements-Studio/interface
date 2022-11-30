@@ -24,41 +24,31 @@ import getLibrary from './utils/getLibrary'
 import {
   WalletProvider,
   StarMaskWalletAdapter,
-  HippoExtensionWalletAdapter,
   MartianWalletAdapter,
   AptosWalletAdapter,
   FewchaWalletAdapter,
   PontemWalletAdapter,
   SpikaWalletAdapter,
-  // FletchWalletAdapter,
-  AptosSnapAdapter,
   NightlyWalletAdapter,
   BitkeepWalletAdapter,
   TokenPocketWalletAdapter,
-  BloctoWalletAdapter,
   WalletAdapterNetwork,
   Coin98WalletAdapter,
-  FoxWalletAdapter
 } from '@starcoin/aptos-wallet-adapter';
 import { AptosWalletProvider } from 'contexts/AptosWalletProvider';
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
 const wallets = [
   new StarMaskWalletAdapter(),
-  new HippoExtensionWalletAdapter(),
   new MartianWalletAdapter(),
   new AptosWalletAdapter(),
   new FewchaWalletAdapter(),
   new PontemWalletAdapter(),
   new SpikaWalletAdapter(),
-  // new FletchWalletAdapter(),
-  new AptosSnapAdapter(),
   new NightlyWalletAdapter(),
   new BitkeepWalletAdapter(),
   new TokenPocketWalletAdapter(),
-  new BloctoWalletAdapter({ network: WalletAdapterNetwork.Mainnet, bloctoAppId:'6d85f56e-5f2e-46cd-b5f2-5cf9695b4d46' }),
-  new Coin98WalletAdapter(),
-  new FoxWalletAdapter()
+  new Coin98WalletAdapter()
 ];
 
 const GOOGLE_ANALYTICS_ID: string | undefined = process.env.REACT_APP_GOOGLE_ANALYTICS_ID
