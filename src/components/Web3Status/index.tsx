@@ -9,7 +9,7 @@ import CoinbaseWalletIcon from '../../assets/images/coinbaseWalletIcon.svg'
 import FortmaticIcon from '../../assets/images/fortmaticIcon.png'
 import PortisIcon from '../../assets/images/portisIcon.png'
 import WalletConnectIcon from '../../assets/images/walletConnectIcon.svg'
-import { fortmatic, injected, portis, walletconnect, walletlink } from '../../connectors'
+import { fortmatic, starmask, portis, walletconnect, walletlink } from '../../connectors'
 import { NetworkContextName } from '../../constants/misc'
 import useENSName from '../../hooks/useENSName'
 import { useHasSocks } from '../../hooks/useSocksBalance'
@@ -134,7 +134,7 @@ function Sock() {
 
 // eslint-disable-next-line react/prop-types
 function StatusIcon({ connector }: { connector: AbstractConnector }) {
-  if (connector === injected) {
+  if (connector === starmask) {
     return <Identicon />
   } else if (connector === walletconnect) {
     return (

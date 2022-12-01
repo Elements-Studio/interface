@@ -11,7 +11,7 @@ import Copy from './Copy'
 import Transaction from './Transaction'
 
 import { ReactComponent as Close } from '../../assets/images/x.svg'
-import { injected, openblock, walletconnect, walletlink, fortmatic, portis } from '../../connectors'
+import { starmask, openblock, walletconnect, walletlink, fortmatic, portis } from '../../connectors'
 import OpenBlockIcon from '../../assets/images/openblock.png'
 import CoinbaseWalletIcon from '../../assets/images/coinbaseWalletIcon.svg'
 import WalletConnectIcon from '../../assets/images/walletConnectIcon.svg'
@@ -238,7 +238,7 @@ export default function AccountDetails({
     const name = Object.keys(SUPPORTED_WALLETS)
       .filter(
         (k) =>
-          SUPPORTED_WALLETS[k].connector === connector && (connector !== injected || isStarMask === (k === 'STARMASK'))
+          SUPPORTED_WALLETS[k].connector === connector && (connector !== starmask || isStarMask === (k === 'STARMASK'))
       )
       .map((k) => SUPPORTED_WALLETS[k].name)[0]
     return (
@@ -249,7 +249,7 @@ export default function AccountDetails({
   }
 
   function getStatusIcon() {
-    if (connector === injected) {
+    if (connector === starmask) {
       return (
         <IconWrapper size={16}>
           <Identicon />
@@ -317,7 +317,7 @@ export default function AccountDetails({
               <AccountGroupingRow>
                 {formatConnectorName()}
                 <div>
-                  {connector !== injected && connector !== openblock && connector !== walletlink && (
+                  {connector !== starmask && connector !== openblock && connector !== walletlink && (
                     <WalletAction
                       style={{ fontSize: '.825rem', fontWeight: 400, marginRight: '8px' }}
                       onClick={() => {

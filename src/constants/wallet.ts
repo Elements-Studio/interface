@@ -7,7 +7,7 @@ import ONEKEY_ICON_URL from '../assets/images/onekey.png'
 import OPENBLOCK_ICON_URL from '../assets/images/openblock.png'
 // import PORTIS_ICON_URL from '../assets/images/portisIcon.png'
 // import WALLETCONNECT_ICON_URL from '../assets/images/walletConnectIcon.svg'
-import { fortmatic, injected, openblock, portis, walletconnect, walletlink } from '../connectors'
+import { fortmatic, starmask, openblock, portis, walletconnect, walletlink } from '../connectors'
 
 export interface WalletInfo {
   connector?: AbstractConnector
@@ -33,7 +33,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
   //   primary: true,
   // },
   STARMASK: {
-    connector: injected,
+    connector: starmask,
     name: 'StarMask',
     iconURL: STARMASK_ICON_URL,
     description: 'Easy-to-use browser extension.',

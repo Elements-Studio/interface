@@ -8,7 +8,7 @@ import ReactGA from 'react-ga'
 import styled from 'styled-components/macro'
 import StarmaskIcon from '../../assets/images/starmask.png'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
-import { fortmatic, injected, openblock } from '../../connectors'
+import { fortmatic, starmask, openblock } from '../../connectors'
 import { OVERLAY_READY } from '../../connectors/Fortmatic'
 import { SUPPORTED_WALLETS } from '../../constants/wallet'
 import usePrevious from '../../hooks/usePrevious'
@@ -220,7 +220,7 @@ export default function WalletModal({
       }
       // check for mobile options
       if (isMobile) {
-        if (option.connector === injected && !window.starcoin) {
+        if (option.connector === starmask && !window.starcoin) {
           return (
             <Option
               id={`connect-${key}`}
@@ -252,7 +252,7 @@ export default function WalletModal({
         }
       }
       // overwrite injected when needed
-      if (option.connector === injected) {
+      if (option.connector === starmask) {
         // don't show injected if there's no injected provider
         if (!(window.web3 || window.starcoin)) {
           if (option.name === 'StarMask') {

@@ -4,7 +4,7 @@ import { Web3ReactContextInterface } from '@starcoin/starswap-web3-core/dist/typ
 import { deepCopy } from 'ethers/lib/utils'
 import { useEffect, useState } from 'react'
 import { isMobile } from 'react-device-detect'
-import { injected, openblock } from '../connectors'
+import { starmask, openblock } from '../connectors'
 import { NetworkContextName } from '../constants/misc'
 import useInterval from './useInterval'
 import useLocalStorage from './useLocalStorage'
@@ -33,14 +33,14 @@ export function useEagerConnect() {
   )
   useEffect(() => {
     if (wallet === 'StarMask') {
-      injected.isAuthorized().then((isAuthorized) => {
+      starmask.isAuthorized().then((isAuthorized) => {
         if (isAuthorized) {
-          activate(injected, undefined, true).catch(() => {
+          activate(starmask, undefined, true).catch(() => {
             setTried(true)
           })
         } else {
           if (isMobile && window.starcoin) {
-            activate(injected, undefined, true).catch(() => {
+            activate(starmask, undefined, true).catch(() => {
               setTried(true)
             })
           } else {
@@ -80,7 +80,7 @@ export function useInactiveListener(suppress = false) {
     if (wallet === 'StarMask' && starcoin && starcoin.on && !active && !error && !suppress) {
       const handleChainChanged = () => {
         // eat errors
-        activate(injected, undefined, true).catch((error) => {
+        activate(starmask, undefined, true).catch((error) => {
           console.error('Failed to activate after chain changed', error)
         })
       }
@@ -88,7 +88,7 @@ export function useInactiveListener(suppress = false) {
       const handleAccountsChanged = (accounts: string[]) => {
         if (accounts.length > 0) {
           // eat errors
-          activate(injected, undefined, true).catch((error) => {
+          activate(starmask, undefined, true).catch((error) => {
             console.error('Failed to activate after accounts changed', error)
           })
         }

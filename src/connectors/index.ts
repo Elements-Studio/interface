@@ -1,5 +1,5 @@
 import { Web3Provider, ExternalProvider } from '@starcoin/providers'
-import { InjectedConnector } from '@starcoin/starswap-web3-injected-connector'
+import { StarMaskConnector } from '@starcoin/starswap-web3-starmask-connector'
 import { OpenBlockConnector } from '@starcoin/starswap-web3-openblock-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { WalletLinkConnector } from '@web3-react/walletlink-connector'
@@ -61,7 +61,7 @@ export function getNetworkLibrary(): Web3Provider {
 }
 
 export function getStarcoin(connector: any): any {
-  if (connector instanceof InjectedConnector) {
+  if (connector instanceof StarMaskConnector) {
     return window.starcoin
   }
   if (connector instanceof OpenBlockConnector) {
@@ -70,7 +70,7 @@ export function getStarcoin(connector: any): any {
   return undefined
 }
 
-export const injected = new InjectedConnector({
+export const starmask = new StarMaskConnector({
   supportedChainIds: SUPPORTED_CHAIN_IDS,
 })
 
