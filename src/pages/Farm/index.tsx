@@ -171,7 +171,7 @@ export default function Farm({ history }: RouteComponentProps) {
                       <Trans>Boost APR</Trans>
                     </Text>
                     <RowFixed>
-                      <Text fontSize={16} fontWeight={500}>
+                      <Text fontSize={12} fontWeight={500}>
                         {(item.estimatedApy).toFixed(2)}% ~ {(item.estimatedApy * 2.5).toFixed(2)}%
                       </Text>
                       <QuestionHelper
