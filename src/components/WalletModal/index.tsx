@@ -130,8 +130,7 @@ export default function WalletModal({
 }) {
   // important that these are destructed from the account-specific web3-react context
   const { active, connector, activate, error } = useWeb3React()
-  const a = useWallet();
-  const {wallet: aptosWallet, wallets, connect, select, account: aptosAccount, connecting} =  a;
+  const {wallet: aptosWallet, wallets, connect, select, account: aptosAccount, connecting, disconnect} = useWallet();
 
   const account: any = aptosAccount?.address || '';
 
@@ -311,7 +310,9 @@ export default function WalletModal({
           pendingTransactions={pendingTransactions}
           confirmedTransactions={confirmedTransactions}
           ENSName={ENSName}
-          openOptions={() => setWalletView(WALLET_VIEWS.OPTIONS)}
+          openOptions={() => {
+            setWalletView(WALLET_VIEWS.OPTIONS)
+          }}
         />
       )
     }

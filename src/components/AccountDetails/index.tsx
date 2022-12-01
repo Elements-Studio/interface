@@ -308,7 +308,7 @@ export default function AccountDetails({
     if (chainId) dispatch(clearAllTransactions({ chainId }))
   }, [dispatch, chainId])
 
-  const {disconnect} = useWallet();
+  const {disconnect, connected} = useWallet();
 
   return (
     <>
@@ -325,7 +325,7 @@ export default function AccountDetails({
               <AccountGroupingRow>
                 {formatConnectorName()}
                 <div>
-                  {connector !== injected && connector !== openblock && connector !== walletlink && (
+                  {connected && (
                     <WalletAction
                       style={{ fontSize: '.825rem', fontWeight: 400, marginRight: '8px' }}
                       onClick={() => {
@@ -338,6 +338,7 @@ export default function AccountDetails({
                   <WalletAction
                     style={{ fontSize: '.825rem', fontWeight: 400 }}
                     onClick={() => {
+                      disconnect();
                       openOptions()
                     }}
                   >
