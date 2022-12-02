@@ -414,8 +414,8 @@ export default function Swap({ history }: RouteComponentProps) {
   const [poolTvl, setPoolTvl] = useState<null | string>();
 
   useEffect(() => {
-    const tokenXName = currencies?.INPUT?.name || '';
-    const tokenYName = currencies?.OUTPUT?.name || '';
+    const tokenXName = currencies?.INPUT?.symbol || '';
+    const tokenYName = currencies?.OUTPUT?.symbol || '';
 
     liquidityPools && liquidityPools.forEach((pool: Record<any, any>) => {
       const poolTokenXName = `${tokenXName} / ${tokenYName}`;
