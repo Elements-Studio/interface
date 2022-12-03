@@ -30,7 +30,7 @@ import {
   PontemWalletAdapter,
   SpikaWalletAdapter,
   NightlyWalletAdapter,
-  BitkeepWalletAdapter,
+  // BitkeepWalletAdapter,
   TokenPocketWalletAdapter,
   WalletAdapterNetwork,
   Coin98WalletAdapter,
@@ -46,7 +46,7 @@ const wallets = [
   new PontemWalletAdapter(),
   new SpikaWalletAdapter(),
   new NightlyWalletAdapter(),
-  new BitkeepWalletAdapter(),
+  // new BitkeepWalletAdapter(),
   new TokenPocketWalletAdapter(),
   new Coin98WalletAdapter()
 ];
