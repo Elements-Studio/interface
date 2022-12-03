@@ -61,11 +61,11 @@ if (typeof GOOGLE_ANALYTICS_ID === 'string') {
   })
   ReactGA.set({
     anonymizeIp: true,
-    customBrowserType: !isMobile
-      ? 'desktop'
-      : 'web3' in window || 'starcoin' in window
+    customBrowserType: isMobile
+      ? 'web3' in window || 'starcoin' in window
       ? 'mobileWeb3'
-      : 'mobileRegular',
+      : 'mobileRegular'
+      : 'desktop',
   })
 } else {
   ReactGA.initialize('test', { testMode: true, debug: true })
