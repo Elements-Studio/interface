@@ -50,3 +50,5 @@ notes.txt
 
 .vscode/
 *.zip
+
+.package-lock.json
