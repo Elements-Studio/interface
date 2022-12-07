@@ -34,6 +34,7 @@ import {
   TokenPocketWalletAdapter,
   WalletAdapterNetwork,
   Coin98WalletAdapter,
+  OpenBlockWalletAdapter,
 } from '@starcoin/aptos-wallet-adapter';
 import { AptosWalletProvider } from 'contexts/AptosWalletProvider';
 
@@ -48,7 +49,8 @@ const wallets = [
   new NightlyWalletAdapter(),
   // new BitkeepWalletAdapter(),
   new TokenPocketWalletAdapter(),
-  new Coin98WalletAdapter()
+  new Coin98WalletAdapter(),
+  new OpenBlockWalletAdapter()
 ];
 
 const GOOGLE_ANALYTICS_ID: string | undefined = process.env.REACT_APP_GOOGLE_ANALYTICS_ID
