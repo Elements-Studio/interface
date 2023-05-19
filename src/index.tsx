@@ -36,6 +36,7 @@ import {
   Coin98WalletAdapter,
   OpenBlockWalletAdapter,
 } from '@starcoin/aptos-wallet-adapter';
+import {MsafeWalletAdapter} from '@starcoin/aptos-wallet-adapter/dist/WalletAdapters/MsafeWallet'
 import { AptosWalletProvider } from 'contexts/AptosWalletProvider';
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
@@ -48,6 +49,7 @@ const wallets = [
   new SpikaWalletAdapter(),
   new NightlyWalletAdapter(),
   // new BitkeepWalletAdapter(),
+  new MsafeWalletAdapter(),
   new TokenPocketWalletAdapter(),
   new Coin98WalletAdapter(),
   new OpenBlockWalletAdapter()
