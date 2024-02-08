@@ -224,9 +224,9 @@ msgstr "Add Liquidity"
 msgid "Add liquidity."
 msgstr "Add liquidity."
 
-#: src/components/TransactionConfirmationModal/index.tsx
-msgid "Add {0} to Metamask <0/>"
-msgstr "Add {0} to Metamask <0/>"
+#: 
+#~ msgid "Add {0} to Metamask <0/>"
+#~ msgstr "Add {0} to Metamask <0/>"
 
 #: 
 #~ msgid "Add {0} to Starmask <0/>"
@@ -245,9 +245,9 @@ msgstr "Add {0}-{1} liquidity"
 msgid "Add {0}/{1} V3 liquidity"
 msgstr "Add {0}/{1} V3 liquidity"
 
-#: src/components/TransactionConfirmationModal/index.tsx
-msgid "Added {0}"
-msgstr "Added {0}"
+#: 
+#~ msgid "Added {0}"
+#~ msgstr "Added {0}"
 
 #: src/components/claim/AddressClaimModal.tsx
 msgid "Address has no available claim"
@@ -335,6 +335,10 @@ msgstr "Are you sure?"
 msgid "As a member of the Uniswap community you may claim UNI to be used for voting and governance.<0/><1/><2>Read more about UNI</2>"
 msgstr "As a member of the Starswap community you may claim UNI to be used for voting and governance.<0/><1/><2>Read more about UNI</2>"
 
+#: src/pages/Stake/BuyBack.tsx
+msgid "As of next release time"
+msgstr "As of next release time"
+
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
 msgid "At least {0} {1} and {2} {3} will be refunded to your wallet due to selected price range."
 msgstr "At least {0} {1} and {2} {3} will be refunded to your wallet due to selected price range."
@@ -347,6 +351,10 @@ msgstr "Authorization"
 #: src/components/TransactionSettings/index.tsx
 msgid "Auto"
 msgstr "Auto"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Available STC amount"
+msgstr "Available STC amount"
 
 #: src/components/earn/StakingModal.tsx
 msgid "Available to deposit: {0}"
@@ -375,10 +383,6 @@ msgstr "Balance: {0} {1}"
 #: 
 #~ msgid "Base APR"
 #~ msgstr "Base APR"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Start Time"
-msgstr "Start Time"
 
 #: src/components/FeeSelector/index.tsx
 msgid "Best for exotic pairs."
@@ -438,22 +442,6 @@ msgstr "Bridge"
 #: src/pages/Stake/index.tsx
 msgid "Buy Back"
 msgstr "Buy Back"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Trigger buyback"
-msgstr "Trigger buyback"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Transaction is pending"
-msgstr "Transaction is pending"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Not connected to a wallet"
-msgstr "Not connected to a wallet"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Trigger buyback is successed"
-msgstr "Trigger buyback is successed"
 
 #: src/components/PositionCard/index.tsx
 msgid "By adding liquidity you'll earn {feePercent}% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
@@ -626,8 +614,10 @@ msgstr "Common bases"
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/components/farm/FarmStakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
+#: src/components/farm/FarmUnstakeDialog.tsx
 #: src/components/farm/GetAllStakeDialog.tsx
 #: src/pages/RemoveLiquidity/index.tsx
+#: src/pages/Stake/BuyBack.tsx
 msgid "Confirm"
 msgstr "Confirm"
 
@@ -650,9 +640,11 @@ msgstr "Confirm this transaction in your wallet"
 
 #: src/pages/AddLiquidityV2/index.tsx
 #: src/pages/Farm/FarmStake.tsx
+#: src/pages/Farm/index.tsx
 #: src/pages/Register/index.tsx
 #: src/pages/RemoveLiquidity/index.tsx
 #: src/pages/Stake/TokenStake.tsx
+#: src/pages/Stake/index.tsx
 #: src/pages/Swap/index.tsx
 #: src/state/burn/hooks.ts
 #: src/state/burn/v3/hooks.ts
@@ -752,10 +744,6 @@ msgstr "Current {0} Price:"
 msgid "Daily Reward"
 msgstr "Daily Reward"
 
-#: src/pages/Stake/index.tsx
-#: src/pages/Stake/index.tsx
-#: src/pages/Stake/index.tsx
-#: src/pages/Stake/index.tsx
 #: src/pages/Stake/index.tsx
 msgid "Days"
 msgstr "Days"
@@ -895,6 +883,12 @@ msgstr "Enter an address to trigger a UNI claim. If the address has any claimabl
 msgid "Enter an amount"
 msgstr "Enter an amount"
 
+#: src/components/farm/FarmUnstakeDialog.tsx
+#: src/components/farm/FarmUnstakeDialog.tsx
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "Enter number"
+msgstr "Enter number"
+
 #: src/components/SearchModal/ManageLists.tsx
 msgid "Enter valid list location"
 msgstr "Enter valid list location"
@@ -924,6 +918,10 @@ msgstr "Error importing list"
 #: 
 #~ msgid "Estimated annualized rate of return:"
 #~ msgstr "Estimated annualized rate of return:"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Estimated buyback STAR amount"
+msgstr "Estimated buyback STAR amount"
 
 #: src/components/SearchModal/CurrencyList.tsx
 msgid "Expanded results from inactive Token Lists"
@@ -956,6 +954,10 @@ msgstr "Farm"
 #: src/pages/Farm/FarmStake.tsx
 msgid "Farm Total Liquidity"
 msgstr "Farm Total Liquidity"
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "Farm Total Liquidity Weight"
+msgstr "Farm Total Liquidity (After Boost)"
 
 #: src/components/PositionPreview/index.tsx
 msgid "Fee Tier"
@@ -1067,12 +1069,17 @@ msgid "Input is estimated. You will sell at most <0>{0} {1}</0> or the transacti
 msgstr "Input is estimated. You will sell at most <0>{0} {1}</0> or the transaction will revert."
 
 #: src/components/WalletModal/index.tsx
+#: src/components/WalletModal/index.tsx
 msgid "Install StarMask"
 msgstr "Install StarMask"
 
 #: 
 #~ msgid "Install Starmask"
 #~ msgstr "Install Starmask"
+
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "Insufficient amount"
+msgstr "Insufficient amount"
 
 #: src/pages/Swap/index.tsx
 msgid "Insufficient liquidity for this trade."
@@ -1082,6 +1089,8 @@ msgstr "Insufficient liquidity for this trade."
 msgid "Insufficient liquidity for this trade. Try enabling multi-hop trades."
 msgstr "Insufficient liquidity for this trade. Try enabling multi-hop trades."
 
+#: src/state/mint/hooks.ts
+#: src/state/mint/hooks.ts
 #: src/state/mint/hooks.ts
 #: src/state/mint/hooks.ts
 #: src/state/mint/v3/hooks.ts
@@ -1094,10 +1103,6 @@ msgstr "Insufficient {0} balance"
 #: src/components/Settings/index.tsx
 msgid "Interface Settings"
 msgstr "Interface Settings"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Release interval time"
-msgstr "Release interval time"
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "Interval time less than 5 min"
@@ -1124,6 +1129,11 @@ msgstr "Invalid range selected. The min price must be lower than the max price."
 #: src/state/swap/hooks.ts
 msgid "Invalid recipient"
 msgstr "Invalid recipient"
+
+#: src/components/farm/FarmUnstakeDialog.tsx
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "Invalid type"
+msgstr "Invalid type"
 
 #: src/components/farm/FarmStakeDialog.tsx
 msgid "LP Token Balance"
@@ -1313,13 +1323,9 @@ msgstr "My Stakings"
 msgid "New Position"
 msgstr "New Position"
 
-#: src/pages/Stake/BuyBack.tsx
-msgid "Next Release STC Amount"
-msgstr "Next Release STC Amount"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "As of next release time"
-msgstr "As of next release time"
+#: 
+#~ msgid "Next Release STC Amount"
+#~ msgstr "Next Release STC Amount"
 
 #: src/pages/Stake/TokenStake.tsx
 msgid "No Staking"
@@ -1349,6 +1355,10 @@ msgstr "No proposals found."
 #: src/components/SearchModal/CurrencySearch.tsx
 msgid "No results found."
 msgstr "No results found."
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Not connected to a wallet"
+msgstr "Not connected to a wallet"
 
 #: src/components/farm/FarmStakeDialog.tsx
 msgid "Note: Stake operation will harvest your previously earned STAR automatically."
@@ -1429,9 +1439,18 @@ msgstr "Pending Gain"
 msgid "Percentage"
 msgstr "Percentage"
 
+#: 
+#: 
+#~ msgid "Percentage After Boost"
+#~ msgstr "Percentage (After Boost)"
+
 #: src/pages/Stake/Simulator.tsx
 msgid "Percentage Tips"
 msgstr "Percentage = Your veSTAR Estimated / (Your veSTAR Estimated + Total veSTAR)"
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "Percentage Weight"
+msgstr "Percentage Weight"
 
 #: 
 #~ msgid "Please connect to the appropriate Ethereum network."
@@ -1598,8 +1617,8 @@ msgid "Register"
 msgstr "Register"
 
 #: src/pages/Stake/BuyBack.tsx
-msgid "STC Amount per release"
-msgstr "STC Amount per release"
+msgid "Release interval time"
+msgstr "Release interval time"
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "Remaining STC Amount"
@@ -1675,6 +1694,7 @@ msgid "STAR Balance"
 msgstr "STAR Balance"
 
 #: src/pages/Stake/BuyBack.tsx
+#: src/pages/Stake/BuyBack.tsx
 msgid "STAR Buy Back"
 msgstr "STAR Buy Back"
 
@@ -1683,13 +1703,17 @@ msgstr "STAR Buy Back"
 msgid "STAR Earned"
 msgstr "STAR Earned"
 
-#: src/pages/Stake/BuyBack.tsx
-msgid "STAR For Next Buy Back"
-msgstr "STAR For Next Buy Back"
+#: 
+#~ msgid "STAR For Next Buy Back"
+#~ msgstr "STAR For Next Buy Back"
 
-#: src/pages/Stake/index.tsx
-msgid "STAR Stake APR Formula"
-msgstr "Pool APR = (Pool's Release per second  * Pool's Stepwise Multiplier * 365 days * 24 hours * 3600 seconds) / Pool TVL"
+#: 
+#~ msgid "STAR Stake APR Formula"
+#~ msgstr "Pool APR = (Pool's Release per second  * Pool's Stepwise Multiplier * 365 days * 24 hours * 3600 seconds) / Pool TVL"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "STC Amount per release"
+msgstr "STC Amount per release"
 
 #: 
 #: 
@@ -1813,7 +1837,11 @@ msgstr "Staked LP Token"
 
 #: src/pages/Farm/FarmStake.tsx
 msgid "Staked Liquidity"
-msgstr "Staked Liquidity"
+msgstr "Staked Liquidity (Before Boost)"
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "Staked Liquidity After Boost"
+msgstr "Staked Liquidity (After Boost)"
 
 #: src/components/SwitchLocaleLink/index.tsx
 msgid "Starswap available in: <0>{0}</0>"
@@ -1822,6 +1850,10 @@ msgstr "Starswap available in: <0>{0}</0>"
 #: src/components/Stake/FarmCardPerson.tsx
 msgid "Start"
 msgstr "Start"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Start Time"
+msgstr "Start Time"
 
 #: src/pages/Earn/Manage.tsx
 msgid "Step 1. Get UNI-V2 Liquidity tokens"
@@ -2113,9 +2145,23 @@ msgstr "Transaction Submitted"
 msgid "Transaction deadline"
 msgstr "Transaction deadline"
 
+#: src/pages/Stake/BuyBack.tsx
+msgid "Transaction is pending"
+msgstr "Transaction is pending"
+
 #: src/pages/CreateProposal/ProposalActionSelector.tsx
 msgid "Transfer Token"
 msgstr "Transfer Token"
+
+#: src/pages/Stake/BuyBack.tsx
+#: src/pages/Stake/BuyBack.tsx
+#: src/pages/Stake/BuyBack.tsx
+msgid "Trigger buyback"
+msgstr "Trigger buyback"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Trigger buyback is successed"
+msgstr "Trigger buyback is successed"
 
 #: src/components/WalletModal/PendingView.tsx
 msgid "Try Again"
@@ -2597,22 +2643,6 @@ msgstr "Your veSTAR Estimated = Your Locked STAR * Duration / (365 * 2)"
 msgid "confirm"
 msgstr "confirm"
 
-#: src/components/farm/FarmUnstakeDialog.tsx
-msgid "Confirm"
-msgstr "Confirm"
-
-#: src/components/farm/FarmUnstakeDialog.tsx
-msgid "Insufficient amount"
-msgstr "Insufficient amount"
-
-#: src/components/farm/FarmUnstakeDialog.tsx
-msgid "Enter number"
-msgstr "Enter number"
-
-#: src/components/farm/FarmUnstakeDialog.tsx
-msgid "Invalid type"
-msgstr "Invalid type"
-
 #: src/components/claim/AddressClaimModal.tsx
 msgid "for {0}"
 msgstr "for {0}"
@@ -2655,6 +2685,10 @@ msgstr "x"
 #: src/components/SearchModal/ImportToken.tsx
 msgid "{0, plural, one {Import token} other {Import tokens}}"
 msgstr "{0, plural, one {Import token} other {Import tokens}}"
+
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "{0}"
+msgstr "{0}"
 
 #: src/pages/Vote/VotePage.tsx
 #: src/pages/Vote/VotePage.tsx

@@ -356,6 +356,7 @@ export default function FarmStake({
               </TYPE.body>
               {lpStakingData ? (
                 <>
+                  {/*Staked Liquidity*/}
                   <FarmRow style={{ marginTop: '20px' }}>
                     <RowFixed>
                       <TYPE.black fontWeight={400} fontSize={14}>
@@ -364,10 +365,24 @@ export default function FarmStake({
                     </RowFixed>
                     <RowFixed>
                       <TYPE.black fontSize={14}>
-                        {Number(lpStakingData.stakedLiquidity / lpTokenScalingFactor)}
+                        {Number(lpStakingData.stakedLiquidity || 0 / lpTokenScalingFactor)}
                       </TYPE.black>
                     </RowFixed>
                   </FarmRow>
+                  {/*Staked Liquidity Weight*/}
+                  <FarmRow style={{ marginTop: '20px' }}>
+                    <RowFixed>
+                      <TYPE.black fontWeight={400} fontSize={14}>
+                        <Trans>Staked Liquidity After Boost</Trans>
+                      </TYPE.black>
+                    </RowFixed>
+                    <RowFixed>
+                      <TYPE.black fontSize={14}>
+                        {Number(lpStakingData.stakedLiquidityWeight || 0 / lpTokenScalingFactor)}
+                      </TYPE.black>
+                    </RowFixed>
+                  </FarmRow>
+                  {/*Farm Total Liquidity Weight*/}
                   <FarmRow style={{ marginTop: '10px' }}>
                     <RowFixed>
                       <TYPE.black fontWeight={400} fontSize={14}>
@@ -376,7 +391,19 @@ export default function FarmStake({
                     </RowFixed>
                     <RowFixed>
                       <TYPE.black fontSize={14}>
-                        {Number(lpStakingData.farmTotalLiquidity / lpTokenScalingFactor)}
+                        {Number(lpStakingData.farmTotalLiquidity || 0 / lpTokenScalingFactor)}
+                      </TYPE.black>
+                    </RowFixed>
+                  </FarmRow>
+                  <FarmRow style={{ marginTop: '10px' }}>
+                    <RowFixed>
+                      <TYPE.black fontWeight={400} fontSize={14}>
+                        <Trans>Farm Total Liquidity Weight</Trans>
+                      </TYPE.black>
+                    </RowFixed>
+                    <RowFixed>
+                      <TYPE.black fontSize={14}>
+                        {Number(lpStakingData.farmTotalLiquidityWeight || 0 / lpTokenScalingFactor)}
                       </TYPE.black>
                     </RowFixed>
                   </FarmRow>
@@ -388,6 +415,16 @@ export default function FarmStake({
                     </RowFixed>
                     <RowFixed>
                       <TYPE.black fontSize={14}>{Number(lpStakingData.sharePercentage)}</TYPE.black>
+                    </RowFixed>
+                  </FarmRow>
+                  <FarmRow style={{ marginTop: '10px' }}>
+                    <RowFixed>
+                      <TYPE.black fontWeight={400} fontSize={14}>
+                        <Trans>Percentage Weight</Trans>
+                      </TYPE.black>
+                    </RowFixed>
+                    <RowFixed>
+                      <TYPE.black fontSize={14}>{Number(lpStakingData.shareWeightPercentage || 0)}</TYPE.black>
                     </RowFixed>
                   </FarmRow>
                   <FarmRow style={{ marginTop: '10px' }}>

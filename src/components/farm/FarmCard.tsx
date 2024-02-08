@@ -3,8 +3,8 @@ import styled from 'styled-components/macro'
 
 export const CardWrapper = styled.div<{ margin?: string; maxWidth?: string }>`
   position: relative;
-  max-width: ${({ maxWidth }) => maxWidth ?? '340px'};
-  width: 340px;
+  max-width: ${({ maxWidth }) => maxWidth ?? '450px'};
+  width: 450px;
   margin: 20px;
   background: ${({ theme }) => theme.bgCard};
   // box-shadow: 0px 13px 16px 0px rgba(0, 0, 0, 0.72);

@@ -189,9 +189,9 @@ msgstr "注入流动资金"
 msgid "Add liquidity."
 msgstr "添加流动性。"
 
-#: src/components/TransactionConfirmationModal/index.tsx
-msgid "Add {0} to Metamask <0/>"
-msgstr ""
+#: 
+#~ msgid "Add {0} to Metamask <0/>"
+#~ msgstr ""
 
 #: 
 #~ msgid "Add {0} to Starmask <0/>"
@@ -210,9 +210,9 @@ msgstr "注入 {0}-{1} 流动资金"
 msgid "Add {0}/{1} V3 liquidity"
 msgstr "注入 {0}/{1} V3 流动资金"
 
-#: src/components/TransactionConfirmationModal/index.tsx
-msgid "Added {0}"
-msgstr "已添加 {0}"
+#: 
+#~ msgid "Added {0}"
+#~ msgstr "已添加 {0}"
 
 #: src/components/claim/AddressClaimModal.tsx
 msgid "Address has no available claim"
@@ -300,6 +300,10 @@ msgstr "您确定吗？"
 msgid "As a member of the Uniswap community you may claim UNI to be used for voting and governance.<0/><1/><2>Read more about UNI</2>"
 msgstr "作为Uniswap社区的成员，您可以认领 UNI 代币，用于投票和治理。<0/><1/><2>阅读更多关于 UNI 代币信息</2>"
 
+#: src/pages/Stake/BuyBack.tsx
+msgid "As of next release time"
+msgstr "截至下次释放时间"
+
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
 msgid "At least {0} {1} and {2} {3} will be refunded to your wallet due to selected price range."
 msgstr "根据选定的兑换率范围，至少会有 {0} {1} 和 {2} {3} 将退还到您的钱包。"
@@ -312,6 +316,10 @@ msgstr "授权"
 #: src/components/TransactionSettings/index.tsx
 msgid "Auto"
 msgstr "自动"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Available STC amount"
+msgstr "可用于回购的STC"
 
 #: src/components/earn/StakingModal.tsx
 msgid "Available to deposit: {0}"
@@ -336,10 +344,6 @@ msgstr ""
 #: src/components/CurrencyInputPanel/index.tsx
 msgid "Balance: {0} {1}"
 msgstr "余额：{0} {1}"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Start Time"
-msgstr "起始时间"
 
 #: src/components/FeeSelector/index.tsx
 msgid "Best for exotic pairs."
@@ -399,22 +403,6 @@ msgstr "跨链桥"
 #: src/pages/Stake/index.tsx
 msgid "Buy Back"
 msgstr "回购"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Trigger buyback"
-msgstr "触发回购"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Transaction is pending"
-msgstr "交易处理中"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Not connected to a wallet"
-msgstr "没有连接钱包"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Trigger buyback is successed"
-msgstr "触发回购成功"
 
 #: src/components/PositionCard/index.tsx
 msgid "By adding liquidity you'll earn {feePercent}% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
@@ -583,26 +571,12 @@ msgstr "共同基础"
 #: src/components/farm/FarmHarvestDialog.tsx
 #: src/components/farm/FarmStakeDialog.tsx
 #: src/components/farm/FarmUnstakeDialog.tsx
+#: src/components/farm/FarmUnstakeDialog.tsx
 #: src/components/farm/GetAllStakeDialog.tsx
 #: src/pages/RemoveLiquidity/index.tsx
+#: src/pages/Stake/BuyBack.tsx
 msgid "Confirm"
 msgstr "确认"
-
-#: src/components/farm/FarmUnstakeDialog.tsx
-msgid "Confirm"
-msgstr "确认"
-
-#: src/components/farm/FarmUnstakeDialog.tsx
-msgid "Insufficient amount"
-msgstr "余额不足"
-
-#: src/components/farm/FarmUnstakeDialog.tsx
-msgid "Enter number"
-msgstr "输入数额"
-
-#: src/components/farm/FarmUnstakeDialog.tsx
-msgid "Invalid type"
-msgstr "输入错误"
 
 #: src/pages/AddLiquidityV2/ConfirmAddModalBottom.tsx
 msgid "Confirm Supply"
@@ -623,9 +597,11 @@ msgstr "在您的钱包中确认这笔交易"
 
 #: src/pages/AddLiquidityV2/index.tsx
 #: src/pages/Farm/FarmStake.tsx
+#: src/pages/Farm/index.tsx
 #: src/pages/Register/index.tsx
 #: src/pages/RemoveLiquidity/index.tsx
 #: src/pages/Stake/TokenStake.tsx
+#: src/pages/Stake/index.tsx
 #: src/pages/Swap/index.tsx
 #: src/state/burn/hooks.ts
 #: src/state/burn/v3/hooks.ts
@@ -725,10 +701,6 @@ msgstr "当前 {0} 兑换率："
 msgid "Daily Reward"
 msgstr "单日奖励"
 
-#: src/pages/Stake/index.tsx
-#: src/pages/Stake/index.tsx
-#: src/pages/Stake/index.tsx
-#: src/pages/Stake/index.tsx
 #: src/pages/Stake/index.tsx
 msgid "Days"
 msgstr "天"
@@ -868,6 +840,12 @@ msgstr "输入地址来查看领取 UNI 代币的资质。如果地址有任何�
 msgid "Enter an amount"
 msgstr "输入数额"
 
+#: src/components/farm/FarmUnstakeDialog.tsx
+#: src/components/farm/FarmUnstakeDialog.tsx
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "Enter number"
+msgstr "输入数额"
+
 #: src/components/SearchModal/ManageLists.tsx
 msgid "Enter valid list location"
 msgstr "输入有效的代币列表源"
@@ -897,6 +875,10 @@ msgstr "导入列表出错"
 #: 
 #~ msgid "Estimated annualized rate of return:"
 #~ msgstr "预计年化收益率："
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Estimated buyback STAR amount"
+msgstr "预计回购的STAR"
 
 #: src/components/SearchModal/CurrencyList.tsx
 msgid "Expanded results from inactive Token Lists"
@@ -932,7 +914,11 @@ msgstr "农场"
 
 #: src/pages/Farm/FarmStake.tsx
 msgid "Farm Total Liquidity"
-msgstr "农场总流动性"
+msgstr "农场总流动性 （Boost之前）"
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "Farm Total Liquidity Weight"
+msgstr "农场总流动性 （Boost之后）"
 
 #: src/components/PositionPreview/index.tsx
 msgid "Fee Tier"
@@ -1044,12 +1030,17 @@ msgid "Input is estimated. You will sell at most <0>{0} {1}</0> or the transacti
 msgstr "输入数额仅为估值。您最多会售出<0>{0} {1}</0> 否则将还原交易。"
 
 #: src/components/WalletModal/index.tsx
+#: src/components/WalletModal/index.tsx
 msgid "Install StarMask"
 msgstr "安装Starmask"
 
 #: 
 #~ msgid "Install Starmask"
 #~ msgstr "安装Starmask"
+
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "Insufficient amount"
+msgstr "余额不足"
 
 #: src/pages/Swap/index.tsx
 msgid "Insufficient liquidity for this trade."
@@ -1059,6 +1050,8 @@ msgstr "现有流动量不足以支持此交易。"
 msgid "Insufficient liquidity for this trade. Try enabling multi-hop trades."
 msgstr "现有流动量不足以支持此交易。请尝试启用“多节点”（多跳式）交易途径。"
 
+#: src/state/mint/hooks.ts
+#: src/state/mint/hooks.ts
 #: src/state/mint/hooks.ts
 #: src/state/mint/hooks.ts
 #: src/state/mint/v3/hooks.ts
@@ -1071,10 +1064,6 @@ msgstr "{0} 余额不足"
 #: src/components/Settings/index.tsx
 msgid "Interface Settings"
 msgstr "界面设置"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "Release interval time"
-msgstr "间隔时间"
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "Interval time less than 5 min"
@@ -1101,6 +1090,11 @@ msgstr "选择的范围无效。最小兑换率必须低于最大兑换率。"
 #: src/state/swap/hooks.ts
 msgid "Invalid recipient"
 msgstr "无效的接收方"
+
+#: src/components/farm/FarmUnstakeDialog.tsx
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "Invalid type"
+msgstr "输入错误"
 
 #: src/components/farm/FarmStakeDialog.tsx
 msgid "LP Token Balance"
@@ -1290,14 +1284,6 @@ msgstr "我的质押"
 msgid "New Position"
 msgstr "新仓位"
 
-#: src/pages/Stake/BuyBack.tsx
-msgid "Available STC amount"
-msgstr "可用于回购的STC"
-
-#: src/pages/Stake/BuyBack.tsx
-msgid "As of next release time"
-msgstr "截至下次释放时间"
-
 #: src/pages/Stake/TokenStake.tsx
 msgid "No Staking"
 msgstr "暂无质押"
@@ -1326,6 +1312,10 @@ msgstr "未找到提案。"
 #: src/components/SearchModal/CurrencySearch.tsx
 msgid "No results found."
 msgstr "未找到任何结果。"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Not connected to a wallet"
+msgstr "没有连接钱包"
 
 #: src/components/farm/FarmStakeDialog.tsx
 msgid "Note: Stake operation will harvest your previously earned STAR automatically."
@@ -1404,6 +1394,10 @@ msgstr "所占百分比"
 #: src/pages/Stake/Simulator.tsx
 msgid "Percentage Tips"
 msgstr "所占百分比 = 预估获得veStar / （预估获得veStar + veSTAR 总数)"
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "Percentage Weight"
+msgstr "所占百分比（Boost之后）"
 
 #: 
 #~ msgid "Please connect to the appropriate Ethereum network."
@@ -1570,8 +1564,8 @@ msgid "Register"
 msgstr ""
 
 #: src/pages/Stake/BuyBack.tsx
-msgid "STC Amount per release"
-msgstr "每次释放STC"
+msgid "Release interval time"
+msgstr "间隔时间"
 
 #: src/pages/Stake/BuyBack.tsx
 msgid "Remaining STC Amount"
@@ -1647,6 +1641,7 @@ msgid "STAR Balance"
 msgstr "STAR 余额"
 
 #: src/pages/Stake/BuyBack.tsx
+#: src/pages/Stake/BuyBack.tsx
 msgid "STAR Buy Back"
 msgstr "STAR回购"
 
@@ -1655,13 +1650,13 @@ msgstr "STAR回购"
 msgid "STAR Earned"
 msgstr ""
 
-#: src/pages/Stake/BuyBack.tsx
-msgid "Estimated buyback STAR amount"
-msgstr "预计回购的STAR"
+#: 
+#~ msgid "STAR Stake APR Formula"
+#~ msgstr "池子APR = (池子每秒释放量 * 池子阶梯倍率  * 365天 * 24小时 * 3600秒) / 池子TVL"
 
-#: src/pages/Stake/index.tsx
-msgid "STAR Stake APR Formula"
-msgstr "池子APR = (池子每秒释放量 * 池子阶梯倍率  * 365天 * 24小时 * 3600秒) / 池子TVL"
+#: src/pages/Stake/BuyBack.tsx
+msgid "STC Amount per release"
+msgstr "每次释放STC"
 
 #: 
 #: 
@@ -1789,7 +1784,11 @@ msgstr "已质押 LP Token"
 
 #: src/pages/Farm/FarmStake.tsx
 msgid "Staked Liquidity"
-msgstr "已质押流动性"
+msgstr "已质押流动性（Boost之前）"
+
+#: src/pages/Farm/FarmStake.tsx
+msgid "Staked Liquidity After Boost"
+msgstr "已质押流动性（Boost之后）"
 
 #: src/components/SwitchLocaleLink/index.tsx
 msgid "Starswap available in: <0>{0}</0>"
@@ -1798,6 +1797,10 @@ msgstr "Starswap 可选语言: <0>{0}</0>"
 #: src/components/Stake/FarmCardPerson.tsx
 msgid "Start"
 msgstr "起始"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Start Time"
+msgstr "起始时间"
 
 #: src/pages/Earn/Manage.tsx
 msgid "Step 1. Get UNI-V2 Liquidity tokens"
@@ -2069,9 +2072,23 @@ msgstr "已提交交易"
 msgid "Transaction deadline"
 msgstr "交易截止期限"
 
+#: src/pages/Stake/BuyBack.tsx
+msgid "Transaction is pending"
+msgstr "交易处理中"
+
 #: src/pages/CreateProposal/ProposalActionSelector.tsx
 msgid "Transfer Token"
 msgstr "代币转账"
+
+#: src/pages/Stake/BuyBack.tsx
+#: src/pages/Stake/BuyBack.tsx
+#: src/pages/Stake/BuyBack.tsx
+msgid "Trigger buyback"
+msgstr "触发回购"
+
+#: src/pages/Stake/BuyBack.tsx
+msgid "Trigger buyback is successed"
+msgstr "触发回购成功"
 
 #: src/components/WalletModal/PendingView.tsx
 msgid "Try Again"
@@ -2595,6 +2612,10 @@ msgstr ""
 #: src/components/SearchModal/ImportToken.tsx
 msgid "{0, plural, one {Import token} other {Import tokens}}"
 msgstr "{0, plural, one {导入代币} other {导入代币}}"
+
+#: src/components/farm/FarmUnstakeDialog.tsx
+msgid "{0}"
+msgstr ""
 
 #: src/pages/Vote/VotePage.tsx
 #: src/pages/Vote/VotePage.tsx
