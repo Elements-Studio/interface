@@ -140,6 +140,10 @@
     "test": "react-scripts test --env=jsdom",
     "prestart": "touch src/locales/en-US.po"
   },
+  "engines": {
+    "node": "16.x",
+    "npm": "8.x"
+  },
   "eslintConfig": {
     "extends": "react-app",
     "ignorePatterns": [
